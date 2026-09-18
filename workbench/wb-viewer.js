@@ -26,7 +26,7 @@
     { id: 'shelf', name: 'Shelf / rails', detail: 'Four lower rails sit about 6–8 inches off the floor, clear of the casters. A ¾ inch shelf rests on those rails and notches around the posts — it does not float. Flat and Extension get a brace on two opposite faces. Miter gets an X in the lower bay. Brace ends kiss the post inner faces at the rail and apron. Not a cut list.' },
     { id: 'latch', name: 'Snap + latch', detail: 'Same kit on all four sides, mirrored. Two magnets per side, flush or a hair proud of the 36 inch face. North and East carry the latch bodies; South and West carry the strikes. Plates sit on the apron, not hanging in air. First latch 12 inches below the top (about 26 inches off the floor). Second is Design-reserved on the same line (exact offset DRAFT).' },
     { id: 'casters', name: 'Wheels', detail: 'A locking caster under each post. About 3 inches tall as a starting guess. Brand is still open.' },
-    { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS (12 inch compound, it does not slide). Rubber feet sit on a ½ inch nest. Width gets about a ¾–1 inch service gap; front-to-back stays tight — that gap is not faked. Head is shown upright; how far it bevels is still open.' }
+    { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS (12 inch compound, it does not slide). Rubber feet sit on a ½ inch nest. Width gets about a ¾–1 inch service gap; front-to-back stays tight. A rear keep-clear marks a dust path outside the latch strip — bag depth is still open. Fold-off stock wings are out of this Gen-0.1 picture (they stow for dock). Head is shown upright; how far it bevels is still open.' }
   ];
 
   function loadScript(src) {
@@ -243,35 +243,36 @@
     floor.rotation.x = -Math.PI / 2;
     scene.add(floor);
 
-    const matPost = new THREE.MeshStandardMaterial({ color: 0x6b4f2a, roughness: 0.72, metalness: 0.08 });
-    const matApron = new THREE.MeshStandardMaterial({ color: 0x8a6236, roughness: 0.7, metalness: 0.06 });
-    const matRail = new THREE.MeshStandardMaterial({ color: 0x7a542c, roughness: 0.72, metalness: 0.05 });
-    const matTop = new THREE.MeshStandardMaterial({ color: 0xd4b07a, roughness: 0.62, metalness: 0.05 });
-    const matTopLite = new THREE.MeshStandardMaterial({ color: 0xe0c48a, roughness: 0.58, metalness: 0.05 });
-    const matShelf = new THREE.MeshStandardMaterial({ color: 0xb08958, roughness: 0.7, metalness: 0.04 });
-    const matBrace = new THREE.MeshStandardMaterial({ color: 0x8a6a40, roughness: 0.68, metalness: 0.06 });
+    const matPost = new THREE.MeshStandardMaterial({ color: 0x4e351c, roughness: 0.78, metalness: 0.04 });
+    const matApron = new THREE.MeshStandardMaterial({ color: 0x8a5a2c, roughness: 0.7, metalness: 0.05 });
+    const matRail = new THREE.MeshStandardMaterial({ color: 0x6f4524, roughness: 0.74, metalness: 0.04 });
+    const matTop = new THREE.MeshStandardMaterial({ color: 0xc9a66b, roughness: 0.58, metalness: 0.04 });
+    const matTopLite = new THREE.MeshStandardMaterial({ color: 0xd4b57a, roughness: 0.56, metalness: 0.04 });
+    const matShelf = new THREE.MeshStandardMaterial({ color: 0xa67c48, roughness: 0.68, metalness: 0.03 });
+    const matPlyEdge = new THREE.MeshStandardMaterial({ color: 0x3a2a16, roughness: 0.82, metalness: 0.02 });
+    const matBrace = new THREE.MeshStandardMaterial({ color: 0x7a5230, roughness: 0.7, metalness: 0.05 });
     const matPlate = new THREE.MeshStandardMaterial({ color: 0xb8b4aa, roughness: 0.4, metalness: 0.45 });
     const matStrike = new THREE.MeshStandardMaterial({ color: 0x8a8680, roughness: 0.45, metalness: 0.4 });
     const matRubber = new THREE.MeshStandardMaterial({ color: 0x1c1c1c, roughness: 0.92, metalness: 0.02 });
     const matSawTable = new THREE.MeshStandardMaterial({ color: 0x2a2c30, roughness: 0.55, metalness: 0.2 });
     const matMagnet = new THREE.MeshStandardMaterial({
-      color: 0xf5b942, roughness: 0.32, metalness: 0.55, emissive: 0x7a5208, emissiveIntensity: 0.35
+      color: 0x2c2e32, roughness: 0.55, metalness: 0.62, emissive: 0x000000, emissiveIntensity: 0
     });
     const matMech = new THREE.MeshStandardMaterial({ color: 0x4a4e56, roughness: 0.35, metalness: 0.6 });
     const matCaster = new THREE.MeshStandardMaterial({ color: 0x2a2c30, roughness: 0.45, metalness: 0.4 });
     const matWheel = new THREE.MeshStandardMaterial({ color: 0x1a1a1c, roughness: 0.7, metalness: 0.15 });
-    const matLock = new THREE.MeshStandardMaterial({ color: 0xf5b942, roughness: 0.4, metalness: 0.3 });
-    const matGhost = new THREE.MeshStandardMaterial({
-      color: 0xf5b942, roughness: 0.5, metalness: 0.1, transparent: true, opacity: 0.16
-    });
-    const matSawY = new THREE.MeshStandardMaterial({ color: 0xf4c430, roughness: 0.45, metalness: 0.2 });
-    const matSawK = new THREE.MeshStandardMaterial({ color: 0x1c1c1e, roughness: 0.5, metalness: 0.25 });
+    const matLock = new THREE.MeshStandardMaterial({ color: 0x1e1e20, roughness: 0.7, metalness: 0.12 });
+    const matSawY = new THREE.MeshStandardMaterial({ color: 0xb08a22, roughness: 0.5, metalness: 0.18 });
+    const matSawK = new THREE.MeshStandardMaterial({ color: 0x1a1a1c, roughness: 0.55, metalness: 0.22 });
     const matBlade = new THREE.MeshStandardMaterial({ color: 0xc0c6ce, roughness: 0.25, metalness: 0.7 });
     const matWell = new THREE.MeshStandardMaterial({
-      color: 0x6e5a38, roughness: 0.62, metalness: 0.06
+      color: 0x5c4a30, roughness: 0.68, metalness: 0.05
     });
     const matInsert = new THREE.MeshStandardMaterial({
-      color: 0xc4b896, roughness: 0.52, metalness: 0.1
+      color: 0xbba57a, roughness: 0.55, metalness: 0.08
+    });
+    const matKeepClear = new THREE.MeshStandardMaterial({
+      color: 0xc4a056, roughness: 0.6, metalness: 0.05, transparent: true, opacity: 0.2
     });
 
     function box(w, h, d, mat, x, y, z) {
@@ -290,9 +291,10 @@
     const labelSprites = [];
     let highlight = null;
 
+    let pickOn = true;
     function tag(mesh, id) {
       mesh.userData.partId = id;
-      pickables.push(mesh);
+      if (pickOn) pickables.push(mesh);
     }
 
     function makeLabel(text, x, y, z, scale) {
@@ -405,6 +407,33 @@
       const west = box(reach, TOP_THK, SPAN, mat, -(SPAN + reach) / 2, y, 0);
       tag(west, id);
       parent.add(west);
+      addPlyEdges(parent, SPAN, through, y, TOP_THK, id);
+    }
+
+    function addPlyEdges(parent, w, d, y, thk, id) {
+      const e = 0.11;
+      const band = thk * 0.9;
+      [
+        box(w, band, e, matPlyEdge, 0, y, d / 2 - e / 2),
+        box(w, band, e, matPlyEdge, 0, y, -d / 2 + e / 2),
+        box(e, band, d, matPlyEdge, w / 2 - e / 2, y, 0),
+        box(e, band, d, matPlyEdge, -w / 2 + e / 2, y, 0)
+      ].forEach(function (m) {
+        tag(m, id);
+        parent.add(m);
+      });
+    }
+
+    // Rear keep-clear only — path reserved outside the latch strip. Bag depth OPEN.
+    function addDustKeepClear(parent) {
+      const keepHalf = 4.2 / 2 + 1;
+      const portOff = keepHalf + 3.2;
+      const port = box(2.3, 2.0, 0.18, matKeepClear, portOff, APRON_Y, OA / 2 + 0.08);
+      tag(port, 'top');
+      parent.add(port);
+      const clear = box(3.4, 5.5, 1.0, matKeepClear, portOff, APRON_Y - 1.2, OA / 2 + 0.55);
+      tag(clear, 'top');
+      parent.add(clear);
     }
 
     function addCaster(parent, x, z) {
@@ -554,12 +583,14 @@
       g.traverse(function (o) {
         if (o.geometry) doomed.push(o.geometry);
         if (o.material && o.material.map && o.material.map.dispose) doomed.push(o.material.map);
+        if (o.material && o.material.userData && o.material.userData.ghostClone) doomed.push(o.material);
       });
       while (g.children.length) g.remove(g.children[0]);
       doomed.forEach(function (res) { res.dispose(); });
     }
 
-    function buildFrame(parent, kind) {
+    function buildFrame(parent, kind, opts) {
+      const ghost = !!(opts && opts.ghost);
       const corners = [
         [POST_C, POST_C], [POST_C, -POST_C], [-POST_C, POST_C], [-POST_C, -POST_C]
       ];
@@ -574,7 +605,12 @@
       ['+x', '-x', '+z', '-z'].forEach(function (face) { addLatchPad(parent, face); });
 
       const topY = TOP_AFF - TOP_THK / 2;
-      if (kind === 'miter') {
+      if (kind === 'miter' && ghost) {
+        const top = box(OA, TOP_THK, OA, matTop, 0, topY, 0);
+        tag(top, 'top');
+        parent.add(top);
+        addPlyEdges(parent, OA, OA, topY, TOP_THK, 'top');
+      } else if (kind === 'miter') {
         const wingW = (OA - OPEN_W) / 2;
         const lip = (OA - OPEN_D) / 2;
         const left = box(wingW, TOP_THK, OA, matTop, -(OA / 2 - wingW / 2), topY, 0);
@@ -614,10 +650,13 @@
         });
         const saw = addSaw(parent);
         saw.position.set(0, insertTop, 0);
+        addDustKeepClear(parent);
+        addPlyEdges(parent, OA, OA, topY, TOP_THK, 'top');
       } else {
         const top = box(OA, TOP_THK, OA, kind === 'extension' ? matTopLite : matTop, 0, topY, 0);
         tag(top, 'top');
         parent.add(top);
+        addPlyEdges(parent, OA, OA, topY, TOP_THK, 'top');
       }
 
       if (kind === 'flat') {
@@ -654,30 +693,36 @@
         makeLabel('DWS716XPS', 0, TOP_AFF + 12, 0, 18);
         makeLabel('½ in nest', 0, TOP_AFF + 7.4, 0, 14);
         makeLabel('tight depth', 0, TOP_AFF + 4.2, SAW_D / 2 + 2, 13);
+        makeLabel('dust keep-clear', 8.5, APRON_Y + 5, OA / 2 + 4, 13);
+        makeLabel('bag OPEN', 8.5, APRON_Y + 2.2, OA / 2 + 4, 12);
+        makeLabel('wings out of Gen-0.1', 0, TOP_AFF + 2.4, -OA / 2 - 6, 14);
       }
       const tog = document.getElementById('tog-labels');
-      const show = !tog || tog.checked;
+      const show = !!(tog && tog.checked);
       labelSprites.forEach(function (s) { s.visible = show; });
     }
 
-    function buildGhost() {
+    function dimAsGhost(group) {
+      group.traverse(function (o) {
+        if (!o.isMesh || !o.material) return;
+        const m = o.material.clone();
+        m.transparent = true;
+        m.opacity = 0.3;
+        if (m.emissiveIntensity != null) m.emissiveIntensity = 0;
+        if (m.color && m.color.offsetHSL) m.color.offsetHSL(0, -0.18, -0.1);
+        m.userData.ghostClone = true;
+        o.material = m;
+      });
+    }
+
+    function buildGhost(kind) {
       clearGroup(neighbor);
-      const cx = OA + 2 * MAG_PROUD;
-      const ghost = box(OA, TOP_AFF - 2, OA, matGhost, cx, (TOP_AFF - 2) / 2 + 1, 0);
-      neighbor.add(ghost);
-      const faceX = cx - OA / 2;
-      function addGhostMag(y) {
-        const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, MAG_PROUD, 16), matMagnet);
-        mag.rotation.z = Math.PI / 2;
-        mag.position.set(faceX - MAG_PROUD / 2, y, 0);
-        neighbor.add(mag);
-      }
-      addGhostMag(UPPER_MAG_Y);
-      addGhostMag(4);
-      const strike = box(PLATE, LATCH_PAD_H, 4.2, matStrike, faceX + PLATE / 2, LATCH_AFF, 0);
-      neighbor.add(strike);
-      const strike2 = box(PLATE, LATCH_PAD_H, 4.2, matStrike, faceX + PLATE / 2, LATCH2_AFF, 0);
-      neighbor.add(strike2);
+      neighbor.position.set(0, 0, 0);
+      pickOn = false;
+      buildFrame(neighbor, kind, { ghost: true });
+      pickOn = true;
+      dimAsGhost(neighbor);
+      neighbor.position.set(OA + 2 * MAG_PROUD, 0, 0);
     }
 
     function setModule(kind) {
@@ -685,7 +730,7 @@
       clearGroup(root);
       buildFrame(root, kind);
       rebuildLabels(kind);
-      buildGhost();
+      buildGhost(kind);
       highlight = new THREE.Mesh(
         new THREE.TorusGeometry(4, 0.12, 8, 40),
         new THREE.MeshBasicMaterial({ color: 0xf5b942, transparent: true, opacity: 0.9 })
