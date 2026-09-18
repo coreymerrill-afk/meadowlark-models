@@ -21,10 +21,10 @@
   const OC_ESM_SH = 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
   const PARTS = [
-    { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them.' },
+    { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them. Upper aprons run post to post, flush to that outer face, so latches have wood behind them.' },
     { id: 'top', name: 'Top', detail: '¾ inch plywood that holds weight. The top sits 38 inches off the floor — not 36. ½ inch plywood is only for plates the X1 can cut.' },
-    { id: 'shelf', name: 'Shelf / brace', detail: 'A ¾ inch shelf and/or a diagonal brace so the table does not rack. Not a final lumber list.' },
-    { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Two magnets per side snap the tables together; then two latches take the load. The first sits 12 inches below the top (about 26 inches off the floor) — not 18. The second is Design-reserved on the same line, typically 6–8 inches above or below (exact offset DRAFT).' },
+    { id: 'shelf', name: 'Shelf / rails', detail: 'Four lower rails sit about 6–8 inches off the floor, clear of the casters. A ¾ inch shelf rests on those rails and notches around the posts — it does not float. Diagonal braces are a later stiffness sketch, not a cut list.' },
+    { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Two magnets per side snap the tables together; then two latches take the load. Both latch plates sit on the apron face — not hanging in air. The first sits 12 inches below the top (about 26 inches off the floor) — not 18. The second is Design-reserved on the same line, typically 6–8 inches above or below (exact offset DRAFT).' },
     { id: 'casters', name: 'Wheels', detail: 'A locking caster under each post. About 3 inches tall as a starting guess. Brand is still open.' },
     { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS. Base about 27.2 × 22.4 inches — fits the 29 inch opening, tight front-to-back. Removable inserts so a later saw can swap in. How far the head swings is still open.' }
   ];
@@ -152,6 +152,34 @@
     const SAW_W = 22.4;
     const SAW_D = 27.2;
 
+    // Schematic frame stock — not freeze dims, not a cut list.
+    // 2× class thickness; apron depth is derived so both latch pads bear on one face.
+    const STOCK = 1.5;
+    const LATCH_PAD_H = 3.2;
+    const LATCH2_AFF = LATCH_AFF - 7;
+    const APRON_TOP = TOP_AFF - TOP_THK;
+    const APRON_BOT = LATCH2_AFF - LATCH_PAD_H / 2 - 1;
+    const APRON_H = APRON_TOP - APRON_BOT;
+    const APRON_Y = (APRON_TOP + APRON_BOT) / 2;
+    const RAIL_H = 3.5;
+    const LOWER_RAIL_TOP = 7.5;
+    const LOWER_RAIL_BOT = LOWER_RAIL_TOP - RAIL_H;
+    const LOWER_RAIL_Y = (LOWER_RAIL_TOP + LOWER_RAIL_BOT) / 2;
+    const SHELF_Y = LOWER_RAIL_TOP + TOP_THK / 2;
+    const SPAN = OA - 2 * POST;
+    const RAIL_C = OA / 2 - STOCK / 2;
+
+    (function assertFrameContacts() {
+      const padHalf = LATCH_PAD_H / 2;
+      console.assert(OA === 36 && TOP_AFF === 38 && POST === 3.5, 'freeze envelope');
+      console.assert(LATCH_AFF === 26 && TOP_THK === 0.75 && PLATE === 0.5, 'freeze latch/ply');
+      console.assert(LATCH_AFF - padHalf >= APRON_BOT && LATCH_AFF + padHalf <= APRON_TOP, 'primary latch on apron');
+      console.assert(LATCH2_AFF - padHalf >= APRON_BOT && LATCH2_AFF + padHalf <= APRON_TOP, 'second latch on apron');
+      console.assert(LOWER_RAIL_TOP >= 6 && LOWER_RAIL_TOP <= 8, 'lower rail in 6–8 AFF band');
+      console.assert(LOWER_RAIL_BOT >= CASTER_H, 'lower rail clear of caster plate');
+      console.assert(Math.abs(SHELF_Y - (LOWER_RAIL_TOP + TOP_THK / 2)) < 1e-6, 'shelf sits on rails');
+    })();
+
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x16130c);
     scene.fog = new THREE.Fog(0x16130c, 90, 220);
@@ -199,6 +227,8 @@
     scene.add(floor);
 
     const matPost = new THREE.MeshStandardMaterial({ color: 0x6b4f2a, roughness: 0.72, metalness: 0.08 });
+    const matApron = new THREE.MeshStandardMaterial({ color: 0x8a6236, roughness: 0.7, metalness: 0.06 });
+    const matRail = new THREE.MeshStandardMaterial({ color: 0x7a542c, roughness: 0.72, metalness: 0.05 });
     const matTop = new THREE.MeshStandardMaterial({ color: 0xd4b07a, roughness: 0.62, metalness: 0.05 });
     const matTopLite = new THREE.MeshStandardMaterial({ color: 0xe0c48a, roughness: 0.58, metalness: 0.05 });
     const matShelf = new THREE.MeshStandardMaterial({ color: 0xb08958, roughness: 0.7, metalness: 0.04 });
@@ -284,6 +314,37 @@
       return m;
     }
 
+    function addPerimeterBand(parent, y, height, thick, mat, id) {
+      const span = SPAN;
+      const c = OA / 2 - thick / 2;
+      const parts = [
+        box(span, height, thick, mat, 0, y, c),
+        box(span, height, thick, mat, 0, y, -c),
+        box(thick, height, span, mat, c, y, 0),
+        box(thick, height, span, mat, -c, y, 0)
+      ];
+      parts.forEach(function (m) {
+        tag(m, id);
+        parent.add(m);
+      });
+      return parts;
+    }
+
+    // ¾" shelf on the lower-rail tops, notched around the 4×4s so edges bear on the rails.
+    function addNotchedShelf(parent, y, mat, id) {
+      const reach = POST - STOCK / 2;
+      const through = SPAN + 2 * reach;
+      const center = box(SPAN, TOP_THK, through, mat, 0, y, 0);
+      tag(center, id);
+      parent.add(center);
+      const east = box(reach, TOP_THK, SPAN, mat, (SPAN + reach) / 2, y, 0);
+      tag(east, id);
+      parent.add(east);
+      const west = box(reach, TOP_THK, SPAN, mat, -(SPAN + reach) / 2, y, 0);
+      tag(west, id);
+      parent.add(west);
+    }
+
     function addCaster(parent, x, z) {
       const g = new THREE.Group();
       const plate = box(3.4, 0.28, 3.4, matCaster, 0, CASTER_H - 0.14, 0);
@@ -319,14 +380,14 @@
       }
       addMag(upperMagY);
       addMag(lowerMagY);
-      const pad = box(4.2, 3.2, PLATE, matPlate, 0, LATCH_AFF, 0);
+      const pad = box(4.2, LATCH_PAD_H, PLATE, matPlate, 0, LATCH_AFF, 0);
       tag(pad, 'latch');
       g.add(pad);
       const toggle = box(1.6, 0.55, 0.7, matMech, 0, LATCH_AFF - 0.7, PLATE / 2 + 0.25);
       tag(toggle, 'latch');
       g.add(toggle);
-      const reservedY = LATCH_AFF - 7;
-      const pad2 = box(4.2, 3.2, PLATE, matPlate, 0, reservedY, 0);
+      const reservedY = LATCH2_AFF;
+      const pad2 = box(4.2, LATCH_PAD_H, PLATE, matPlate, 0, reservedY, 0);
       tag(pad2, 'latch');
       g.add(pad2);
       const toggle2 = box(1.6, 0.55, 0.7, matMech, 0, reservedY - 0.7, PLATE / 2 + 0.25);
@@ -406,6 +467,8 @@
         parent.add(post);
         addCaster(parent, c[0], c[1]);
       });
+      addPerimeterBand(parent, APRON_Y, APRON_H, STOCK, matApron, 'posts');
+      addPerimeterBand(parent, LOWER_RAIL_Y, RAIL_H, STOCK, matRail, 'shelf');
       ['+x', '-x', '+z', '-z'].forEach(function (face) { addLatchPad(parent, face); });
 
       const topY = TOP_AFF - TOP_THK / 2;
@@ -446,23 +509,23 @@
         }
       }
 
-      const shelfY = 12;
       if (kind === 'flat') {
-        const shelf = box(29, TOP_THK, 29, matShelf, 0, shelfY, 0);
-        tag(shelf, 'shelf');
-        parent.add(shelf);
+        addNotchedShelf(parent, SHELF_Y, matShelf, 'shelf');
         addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
         addBrace(parent, POST_C - 1.2, CASTER_H + 4, -POST_C + 1.9, -POST_C + 1.2, TOP_AFF - 6, -POST_C + 1.9, matBrace, 'shelf');
       } else if (kind === 'extension') {
+        const slatLen = SPAN + 2 * (POST - STOCK / 2);
         [-8, 0, 8].forEach(function (x) {
-          const slat = box(3.2, TOP_THK, 29, matShelf, x, shelfY, 0);
+          const slat = box(3.2, TOP_THK, slatLen, matShelf, x, SHELF_Y, 0);
           tag(slat, 'shelf');
           parent.add(slat);
         });
         addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
       } else if (kind === 'miter') {
         addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
-        const rearShelf = box(22, TOP_THK, 8, matShelf, 0, shelfY, 10);
+        const rearDepth = 8;
+        const rearZ = RAIL_C - rearDepth / 2 + STOCK / 2;
+        const rearShelf = box(22, TOP_THK, rearDepth, matShelf, 0, SHELF_Y, rearZ);
         tag(rearShelf, 'shelf');
         parent.add(rearShelf);
       } else {
@@ -480,7 +543,9 @@
       labelSprites.length = 0;
       makeLabel('36×36 in', 0, TOP_AFF + 3.2, OA / 2 + 2, 16);
       makeLabel('38 in tall', -OA / 2 - 6, TOP_AFF, 0, 14);
+      makeLabel('apron', 0, APRON_Y, -OA / 2 - 5, 12);
       makeLabel('latch', OA / 2 + 6, LATCH_AFF + 3, 0, 12);
+      makeLabel('on rails', 0, SHELF_Y + 3.2, OA / 2 + 4, 12);
       if (kind === 'miter') {
         makeLabel('DWS716XPS', 0, TOP_AFF + 12, 0, 18);
         makeLabel('tight fit', 0, TOP_AFF + 7, SAW_D / 2 + 2, 14);
