@@ -1,37 +1,27 @@
-Biomimetics — Flyer-0 (schematic flying-insect robot)
-=====================================================
+Biomimetics — Flyer-0 v0 (two-wing hover schematic)
+===================================================
 
 Publish target
   https://models.meadowlarkhomecare.com/insect/
 
+Locked architecture (Option A)
+  Two-wing motor + linkage + elastic return + passive aeroelastic pitch
+  LEV-style hover is the primary flight story
+  Clap-and-fling deprioritized; four-wing dragonfly = Phase-2
+  Span freeze: semi-span R = 9 cm · mean chord c = 2.3 cm · mass mid ~15 g
+  Mission: hover-capable education/research, short endurance, indoor first
+  Research/education/environmental flyer — not a weapon
+
 Files
-  index.html                 Primary static page (Three.js viewer + prototype path)
+  index.html                 Primary static page (Three.js viewer + locked copy)
   vendor/three.min.js        Local Three.js UMD (same stack as /x1 and /burrito)
   vendor/OrbitControls.js    Local OrbitControls classic UMD
   README.txt                 This file
 
-What this is
-  A conceptual schematic — body + four flapping wings — not a photoreal insect
-  and not a product claim. Copy is first-principles: nature principles, mimic
-  routes (actuation / materials / power), then bench milestones
-  (tethered flap → controlled hover attempt → free flight).
-
 Open locally
-  1. Keep index.html beside the vendor/ folder.
-  2. Serve the site root (preferred) or this folder:
-       cd /path/to/meadowlark-models
-       python3 -m http.server 8080
-       → http://localhost:8080/insect/
-  3. If vendor/ is missing, the page falls back to CDN (jsDelivr → unpkg → ESM).
+  Serve the repo root:
+    python3 -m http.server 8080
+    → http://localhost:8080/insect/
 
-Controls
-  Orbit: drag / one-finger
-  Zoom: scroll / pinch
-  Pan: right-drag / two-finger
-  Click a labeled part to highlight
-  Flap loop can be paused; prefers-reduced-motion starts paused
-
-Static host (Vercel / any static)
-  Deploy the repo root. /insect/ is a folder with index.html — same as /x1
-  and /burrito. vercel.json cleanUrls + trailingSlash apply; no extra rewrite
-  is required. No build step.
+Static host
+  Vercel cleanUrls + trailingSlash already cover /insect. No build step.

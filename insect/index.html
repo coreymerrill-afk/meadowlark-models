@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Flyer-0 schematic: a large flapping-wing insect robot, nature principles, mimic routes, and a bench path from tethered flap to free flight." />
-<title>Biomimetics — Flyer-0 schematic</title>
+<meta name="description" content="Flyer-0 v0 schematic: two-wing motor + linkage + elastic return, ~15 g, R 9 cm, indoor hover research/education." />
+<title>Biomimetics — Flyer-0 v0</title>
 <style>
   :root {
     --bg: #100e16; --bg2: #1a1624; --bg3: #261f33; --border: #46385a;
@@ -30,14 +30,11 @@
     padding: 7px 16px; font-size: 12px; text-align: center; border-bottom: 1px solid;
   }
   .banner strong { color: #fff; }
-  .banner.nature {
-    background: #12332f; border-color: #1f6b62; color: #b7efe6;
-  }
+  .banner.nature { background: #12332f; border-color: #1f6b62; color: #b7efe6; }
   .banner.nature strong { color: var(--nature); }
-  .banner.eng {
-    background: #2a1840; border-color: #6b3fa0; color: #e9d5ff;
-  }
+  .banner.eng { background: #2a1840; border-color: #6b3fa0; color: #e9d5ff; }
   .banner.eng strong { color: var(--eng); }
+  .banner.note { background: #1a1a22; border-color: #3a3a48; color: var(--muted); }
 
   header.doc-header {
     background: var(--bg2); border-bottom: 1px solid var(--border);
@@ -86,31 +83,26 @@
   p, li { margin-bottom: 8px; }
   ul, ol { padding-left: 1.35em; margin-bottom: 12px; }
   .muted { color: var(--muted); }
-  .warn { color: var(--warn); }
   .ok { color: var(--ok); }
 
   .card {
     background: var(--bg2); border: 1px solid var(--border);
     border-radius: 10px; padding: 16px 18px; margin-bottom: 16px;
   }
-  .card.nature-card { border-color: #1f6b62; background: #142422; }
-  .card.eng-card { border-color: #6b3fa0; background: #221830; }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 720px) { .grid-2 { grid-template-columns: 1fr; } }
-
-  table.data {
-    width: 100%; border-collapse: collapse; font-size: 13px;
-    margin: 8px 0 16px; background: var(--bg2); border-radius: 8px; overflow: hidden;
+  .nt-row {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: start;
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 12px;
   }
-  table.data th, table.data td {
-    padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border);
-    vertical-align: top;
+  .nt-row .from { color: var(--nature); }
+  .nt-row .arrow { color: var(--muted); font-weight: 700; padding-top: 2px; }
+  .nt-row .to { color: var(--eng); }
+  .nt-row strong { display: block; color: #fff; margin-bottom: 4px; }
+  .nt-row p { margin: 0; font-size: 13px; color: var(--muted); }
+  @media (max-width: 720px) {
+    .nt-row { grid-template-columns: 1fr; }
+    .nt-row .arrow { display: none; }
   }
-  table.data th {
-    background: var(--bg3); color: var(--accent); font-weight: 600;
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
-  }
-  table.data tr:last-child td { border-bottom: none; }
 
   .step { margin-bottom: 12px; padding: 12px 14px; border-left: 3px solid var(--border);
     background: var(--bg2); border-radius: 0 8px 8px 0; }
@@ -169,7 +161,7 @@
   #three-loading.hidden { display: none; }
 
   #sidebar-3d {
-    width: 300px; max-width: 42vw; flex-shrink: 0;
+    width: 320px; max-width: 42vw; flex-shrink: 0;
     background: var(--bg2); border-left: 1px solid var(--border);
     overflow: auto; padding: 14px 16px 28px;
   }
@@ -187,7 +179,8 @@
   }
   .part-card {
     background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
-    padding: 8px 10px; margin-top: 6px; cursor: pointer; font-size: 12px;
+    padding: 8px 10px; margin-top: 6px; cursor: pointer; font-size: 12px; text-align: left; width: 100%;
+    color: inherit; font-family: inherit;
   }
   .part-card:hover, .part-card.selected { border-color: var(--accent); }
   .part-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -223,10 +216,13 @@
 
 <div class="banners">
   <div class="banner nature">
-    <strong>From nature:</strong> unsteady lift (leading-edge vortex), four-wing planform, slender abdomen, vein-stiffened membranes — borrowed as principles, not as a species replica.
+    <strong>From nature:</strong> leading-edge vortex + delayed stall, elastic thorax (resilin), passive wing rotation near stroke reversal — principles, not a species replica.
   </div>
   <div class="banner eng">
-    <strong>Engineering choice:</strong> motors + linkage (not muscle), LiPo or a USB tether (not fat), IMU (not halteres), ~40&nbsp;cm wingspan so a bench can hold it. Not a product claim.
+    <strong>Engineering choice:</strong> two wings (four-wing is Phase-2), coreless/BLDC + crank (not muscle), 1S LiPo for average power + elastic for the peak, IMU after the tether gate. Not a product claim.
+  </div>
+  <div class="banner note">
+    Research / education / environmental flyer — not a weapon. Indoor-first hover sketch.
   </div>
 </div>
 
@@ -234,13 +230,12 @@
   <div>
     <a class="home-link" href="/">← Meadowlark Models</a>
     <h1>Biomimetics — Flyer-0</h1>
-    <p class="meta">Schematic large flying-insect robot · first-principles prototype path · models.meadowlarkhomecare.com/insect/</p>
+    <p class="meta">v0 · ~15 g · R 9 cm · hover · large-insect / hawkmoth–dragonfly class · indoor research/education · models.meadowlarkhomecare.com/insect/</p>
   </div>
   <nav class="tabs" role="tablist" aria-label="Flyer-0 sections">
     <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
-    <button type="button" role="tab" id="tab-nature" aria-controls="panel-nature" aria-selected="false" tabindex="-1" data-tab="nature">Nature principles</button>
-    <button type="button" role="tab" id="tab-mimic" aria-controls="panel-mimic" aria-selected="false" tabindex="-1" data-tab="mimic">Mimic routes</button>
-    <button type="button" role="tab" id="tab-bench" aria-controls="panel-bench" aria-selected="false" tabindex="-1" data-tab="bench">Bench milestones</button>
+    <button type="button" role="tab" id="tab-nature" aria-controls="panel-nature" aria-selected="false" tabindex="-1" data-tab="nature">Nature → tech</button>
+    <button type="button" role="tab" id="tab-path" aria-controls="panel-path" aria-selected="false" tabindex="-1" data-tab="path">Prototype path</button>
   </nav>
 </header>
 
@@ -255,7 +250,7 @@
     <button type="button" id="btn-flap" class="active" aria-pressed="true">Pause flap</button>
     <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
     <label class="toggle"><input type="checkbox" id="tog-tether" /> Bench tether</label>
-    <span class="hint">Drag orbit · Scroll zoom · Click a part · Calm camera, visual flap only</span>
+    <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · Visual flap only</span>
   </div>
   <div class="view3d-wrap">
     <div id="canvas-wrap">
@@ -263,18 +258,18 @@
       <div id="three-error" role="alert"></div>
     </div>
     <aside id="sidebar-3d">
-      <h2>Flyer-0 schematic</h2>
-      <p class="muted">A readable machine sketch: thorax bay, four membrane wings, sensor head, landing skids. Wings cycle so the hinge idea is obvious — not a claimed flight frequency.</p>
+      <h2>Option A · two-wing v0</h2>
+      <p class="muted">Motor + linkage + elastic return + passive aeroelastic pitch. LEV-style hover is the flight story. Clap-and-fling is curiosity-only at this scale.</p>
 
-      <h3>Envelope (starting guess)</h3>
-      <div class="stat"><span>Wingspan</span><span>~42 cm</span></div>
-      <div class="stat"><span>Body length</span><span>~18 cm</span></div>
-      <div class="stat"><span>Wing area (all)</span><span>~280 cm²</span></div>
-      <div class="stat"><span>Mass budget</span><span>open · weigh later</span></div>
+      <h3>Span freeze</h3>
+      <div class="stat"><span>Semi-span R</span><span>9 cm</span></div>
+      <div class="stat"><span>Mean chord c</span><span>2.3 cm</span></div>
+      <div class="stat"><span>Mass (mid)</span><span>~15 g</span></div>
+      <div class="stat"><span>Mass band</span><span>~10–20 g</span></div>
+      <div class="stat"><span>Power</span><span>1S LiPo + elastic</span></div>
       <div class="stat"><span>Visual flap</span><span>~2.2 Hz loop</span></div>
-      <div class="stat"><span>Stroke (shown)</span><span>±32°</span></div>
 
-      <h3>Click a part</h3>
+      <h3>Hotspots</h3>
       <div id="part-list"></div>
       <div id="sel-detail">
         <h4 id="sel-title">—</h4>
@@ -282,141 +277,80 @@
       </div>
 
       <h3>Honest limits</h3>
-      <p class="muted">Geometry is schematic. Lift, endurance, and hover are <em>not</em> demonstrated. Next real number is a tethered force-stand reading, not a render.</p>
+      <p class="muted">Geometry is a schematic. Lift and endurance are not demonstrated. Next real number is a tethered bench reading, not this render.</p>
     </aside>
   </div>
 </section>
 
 <section id="panel-nature" class="panel" role="tabpanel" aria-labelledby="tab-nature" aria-hidden="true">
-  <h2>Nature principles</h2>
-  <div class="card nature-card">
-    <p>Insects fly in a Reynolds-number band where <strong>steady airfoil theory under-predicts lift</strong>. Useful ideas are mechanisms, not brand names and not a particular commercial drone.</p>
-  </div>
-  <div class="grid-2">
-    <div class="card">
-      <h3>Unsteady lift</h3>
-      <ul>
-        <li><strong>Leading-edge vortex (LEV)</strong> — during a translational stroke a vortex can sit over the wing and keep suction after a fixed wing would stall.</li>
-        <li><strong>Added mass / wake capture</strong> — starting and reversing the stroke does work on the air; some of that comes back on the next half-stroke.</li>
-        <li><strong>Clap-and-fling</strong> (Weis-Fogh) — an optional high-lift start when wings peel apart. Not assumed for Flyer-0; treat as a later experiment, not a default.</li>
-      </ul>
+  <h2>Nature → tech</h2>
+  <p class="muted">Locked rows from the archetype. Biology on the left; the v0 engineering stand-in on the right.</p>
+  <div class="nt-row">
+    <div>
+      <strong class="from">LEV + delayed stall</strong>
+      <p>High angle-of-attack flapping keeps a leading-edge vortex and makes hover thinkable at this Reynolds band.</p>
     </div>
-    <div class="card">
-      <h3>Structure</h3>
-      <ul>
-        <li><strong>Vein + membrane</strong> — stiffness where bending moments are high (leading edge, root); film elsewhere. We copy the <em>layout</em>, not chitin.</li>
-        <li><strong>Passive twist</strong> — a slightly compliant wing can shed peak torque. That is a materials choice, not a control law.</li>
-        <li><strong>Four-wing planform</strong> — dragonfly-like: independent fore/hind phasing is a later luxury. First bench can lock phase.</li>
-      </ul>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div>
+      <strong class="to">Two-wing motorized flapper</strong>
+      <p>Instrument for lift and power. Hover flapping is the primary story; clap-and-fling is not.</p>
+    </div>
+  </div>
+  <div class="nt-row">
+    <div>
+      <strong class="from">Elastic thorax / resilin</strong>
+      <p>Recover wing inertia so the muscle (here: the motor) does not pay the full start-stop cost each half-stroke.</p>
+    </div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div>
+      <strong class="to">Torsional springs / carbon flexures</strong>
+      <p>Tune near wingbeat. Elastic storage is curriculum-central, not a decoration.</p>
+    </div>
+  </div>
+  <div class="nt-row">
+    <div>
+      <strong class="from">Passive wing rotation near reversal</strong>
+      <p>Compliance sets pitch instead of a dedicated pitch muscle on every stroke.</p>
+    </div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div>
+      <strong class="to">Compliant root + AoA stops</strong>
+      <p>Passive aeroelastic pitch. An active pitch servo is later, not v0.</p>
     </div>
   </div>
   <div class="card">
-    <h3>Mass, muscle, sensing — what does not transfer</h3>
-    <ul>
-      <li>Insect flight muscle is an energy-dense, high-cycle actuator with its own heat and elastic storage. <strong>We do not have an equivalent.</strong></li>
-      <li>Dipteran <strong>halteres</strong> are elegant rate gyros. We will use a cheap IMU because we can buy one, not because it is biologically faithful.</li>
-      <li>Dragonfly flight is vision-heavy. Optical flow is a candidate sensor, not a promise of insect-level closed-loop performance.</li>
-    </ul>
-    <p class="muted">This model’s long abdomen and paired wings are a planform hint (pitch inertia, some yaw authority). They are not a claim that the robot “is” a dragonfly.</p>
+    <h3>Out of v0</h3>
+    <p>Four-wing dragonfly phasing is Phase-2. Piezo, SMA, and “artificial muscle” slides are out of scope. Do not lean on commercial insect-drone copy.</p>
   </div>
 </section>
 
-<section id="panel-mimic" class="panel" role="tabpanel" aria-labelledby="tab-mimic" aria-hidden="true">
-  <h2>Tech mimic routes</h2>
-  <p class="muted">Pick the cheapest path that can fail on the bench. Do not optimize for a brochure.</p>
-  <div class="card eng-card">
-    <strong>First-build bias:</strong> one motor pair + four-bar (or Scotch yoke) driving both sides in phase, carbon spar + PET/Mylar film, USB tether for power. Independence, piezo, and onboard LiPo come after the wing survives a frequency sweep.
-  </div>
-  <h3>Actuation</h3>
-  <table class="data">
-    <thead>
-      <tr><th>Route</th><th>Why consider</th><th>Cost / risk</th><th>Flyer-0 stance</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>BLDC or brushed + linkage</td>
-        <td>Known parts, easy current sensing, replaceable</td>
-        <td>Bearings, backlash, mass at the root</td>
-        <td>Default for M1–M2</td>
-      </tr>
-      <tr>
-        <td>Voice coil / solenoid</td>
-        <td>Direct stroke, few joints</td>
-        <td>Heat, stroke vs force curve, driver mass</td>
-        <td>Alt if linkage binds</td>
-      </tr>
-      <tr>
-        <td>Piezo bimorph</td>
-        <td>High frequency, few moving parts</td>
-        <td>High voltage, tiny stroke, brittle, hard to service</td>
-        <td>Not first article</td>
-      </tr>
-      <tr>
-        <td>“Artificial muscle” / SMA</td>
-        <td>Looks biomimetic on a slide</td>
-        <td>Slow, inefficient, poor cycle life at flap rates</td>
-        <td>Out of scope</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="grid-2">
-    <div class="card">
-      <h3>Materials</h3>
-      <ul>
-        <li><strong>Spars</strong> — pultruded carbon or printed sandwich. Leading edge takes the LEV load path.</li>
-        <li><strong>Membrane</strong> — PET, Mylar, or thin PU. Wrinkles are data: they show where the vein map is wrong.</li>
-        <li><strong>Thorax</strong> — printed bay for motors, ESC, and a dummy mass where the battery will sit. Keep CG marked.</li>
-        <li><strong>Legs / skids</strong> — crash structure. Insects fold; we will break replaceable rods first.</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Power &amp; control</h3>
-      <ul>
-        <li><strong>Tether first</strong> — USB or bench PSU through a thin umbilical. Flight time is not a milestone until lift &gt; weight on a stand.</li>
-        <li><strong>LiPo later</strong> — 1S/2S only after the current waveform is boring. Energy density is the constraint, not a slogan.</li>
-        <li><strong>Open-loop flap</strong> → stroke amplitude / offset → IMU attitude loop. No vision stack until hover-on-a-line is dull.</li>
-        <li><strong>Do not</strong> copy a vendor’s airframe, linkage patent story, or claimed minutes of flight. Measure ours.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="panel-bench" class="panel" role="tabpanel" aria-labelledby="tab-bench" aria-hidden="true">
-  <h2>Bench milestones</h2>
-  <p class="muted">A path, not a calendar. Each gate is a measurement. Skip a gate and the next one lies.</p>
+<section id="panel-path" class="panel" role="tabpanel" aria-labelledby="tab-path" aria-hidden="true">
+  <h2>Prototype path</h2>
+  <p class="muted">Public text is phase + one-line goal + qualitative exit. Numeric droop, thermal limits, cycle counts, and ±% force stay off this page.</p>
   <div class="step now">
-    <h4>M0 — Schematic freeze <span class="muted">· this page</span></h4>
-    <p>Lock the story: four-wing schematic, borrowed vs chosen, and the test order. Pass: someone else can explain the plan from this viewer without extra slides.</p>
-    <p class="gate">Gate: published /insect/ schematic + path copy.</p>
+    <h4>P0 — Concept freeze <span class="muted">· done</span></h4>
+    <p>Lock Option A: two-wing motor + linkage + elastic return + passive pitch. Hover-capable education/research, short endurance, indoor first.</p>
+    <p class="gate">Exit: this viewer matches the locked archetype (two wings, span freeze, nature→tech rows).</p>
   </div>
   <div class="step next">
-    <h4>M1 — Tethered flap</h4>
-    <p>Airframe bolted to a block. Sweep frequency and stroke. Watch spars, film, and bearings. Log motor current vs Hz.</p>
-    <p class="gate">Gate: N continuous minutes at a chosen Hz with no glue/film failure and a repeatable current trace. Lift is not required.</p>
+    <h4>P1 — Bench</h4>
+    <p>Build the drivetrain and elastic on a block. Sweep frequency. Watch backlash, film, and the flexure.</p>
+    <p class="gate">Exit: the mechanism survives a flap session without coming apart.</p>
   </div>
   <div class="step next">
-    <h4>M2 — Force stand / lift attempt</h4>
-    <p>Same fixture, now on a scale or load cell. Cycle-average vertical force vs weight budget. Change amplitude and CG dummy masses.</p>
-    <p class="gate">Gate: cycle-average lift ≥ weight <em>or</em> a written reason (area, Hz, power) and the next cut. Hover is still forbidden.</p>
+    <h4>P2 — Tethered flap</h4>
+    <p>Umbilical power. Same airframe, now on a stand. Look for a lift trace and a current waveform that is boring.</p>
+    <p class="gate">Exit: tethered hover without breaking.</p>
   </div>
   <div class="step later">
-    <h4>M3 — Controlled hover attempt</h4>
-    <p>Safety lines or a sliding gantry. Closed-loop pitch/roll on the IMU. Expect crashes; design skids to be cheap.</p>
-    <p class="gate">Gate: several seconds of attitude-hold without hitting the hard stop, repeated on another day. Not a demo video as the only evidence.</p>
+    <h4>P3 — Free flight (indoor)</h4>
+    <p>1S pack on board only after P2 is dull. IMU rate damping. Soft room, spotter.</p>
+    <p class="gate">Exit: a short indoor hop that was intended, then a landing or a cheap crash.</p>
   </div>
   <div class="step later">
-    <h4>M4 — Free flight (netted bay)</h4>
-    <p>Umbilical off only if M3 is boring. Soft walls, spotter, pack disconnect on the bench checklist.</p>
-    <p class="gate">Gate: a short, intentional hop with a logged attitude trace — then land or crash without a fire. Endurance claims wait.</p>
-  </div>
-  <div class="card">
-    <h3>Still open (do not invent)</h3>
-    <ul>
-      <li>Real mass, wing area after first film cut, and motor Kv.</li>
-      <li>Whether fore/hind phase is worth a second linkage.</li>
-      <li>Whether optical flow is needed before M3 or only after.</li>
-    </ul>
-    <p class="muted">Placeholder numbers on the schematic sidebar are envelopes so the model has a scale. They are not a spec sheet.</p>
+    <h4>P4 — Demo</h4>
+    <p>Repeatable indoor hover for teaching the elastic + LEV story. Endurance stays short on purpose.</p>
+    <p class="gate">Exit: someone else can run the demo from a checklist.</p>
   </div>
 </section>
 
@@ -438,12 +372,12 @@
   const OC_ESM_SH = 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
   const PARTS = [
-    { id: 'head', name: 'Sensor head', detail: 'Two camera/IR discs and simple antennae. Engineering stand-in for insect vision — not compound eyes.' },
-    { id: 'thorax', name: 'Thorax / actuator bay', detail: 'Mass and motors live here. Carbon-look shell. CG mark is a guess until we weigh a real article.' },
-    { id: 'abdomen', name: 'Segmented abdomen', detail: 'Planform borrowed from long-bodied fliers: pitch inertia and a place for dummy mass. Not a fuel tank of fat.' },
-    { id: 'wings', name: 'Membrane wings', detail: 'Vein-stiffened PET/Mylar stand-in. Four surfaces, locked phase in this loop. Visual ±32° at ~2.2 Hz.' },
-    { id: 'skids', name: 'Landing skids', detail: 'Crash structure. Insects fold legs; we will break replaceable rods first.' },
-    { id: 'tether', name: 'Bench tether', detail: 'Power/data umbilical for M1–M2. Hidden until you toggle it. Flight time is not a milestone yet.' }
+    { id: 'wings', name: 'Wings / aero', detail: 'LEV-aware hover flapping with passive pitch. Clap-and-fling is curiosity-only at this scale, not the primary mechanism.' },
+    { id: 'actuation', name: 'Actuation', detail: 'Small coreless/BLDC + gearbox/crank. Minimize backlash. The crank and rods are the v0 stand-in for a thorax.' },
+    { id: 'elastic', name: 'Structure / elastic', detail: 'Spars, membrane, flexure hinges. Elastic return tuned near wingbeat — curriculum-central, not trim.' },
+    { id: 'power', name: 'Power', detail: 'LiPo covers average power; elastic (optional supercap later) buffers the peak. 1S for first free flights.' },
+    { id: 'sense', name: 'Sense / control', detail: 'IMU rate damping only after the tether gate. No vision stack in v0.' },
+    { id: 'tether', name: 'Bench tether', detail: 'USB / bench PSU umbilical for P1–P2. Hidden until toggled. Flight time is not a milestone yet.' }
   ];
 
   function loadScript(src) {
@@ -531,17 +465,14 @@
       '<br/><br/>Prefer opening with local <code>vendor/</code> beside this HTML, or allow CDN (jsdelivr/unpkg).';
   }
 
-  /* ---------- Tabs (keyboard) ---------- */
   const mainEl = document.getElementById('main');
   const tabButtons = Array.prototype.slice.call(document.querySelectorAll('nav.tabs [role="tab"]'));
   const panels = {
     schematic: document.getElementById('panel-schematic'),
     nature: document.getElementById('panel-nature'),
-    mimic: document.getElementById('panel-mimic'),
-    bench: document.getElementById('panel-bench')
+    path: document.getElementById('panel-path')
   };
 
-  let threeReady = false;
   let threeInitStarted = false;
   let api = null;
 
@@ -575,7 +506,7 @@
   }
 
   const tablist = document.querySelector('nav.tabs');
-  function onTabKey(ev) {
+  tablist.addEventListener('keydown', function (ev) {
     const current = document.activeElement;
     const i = tabButtons.indexOf(current);
     if (i < 0) return;
@@ -604,8 +535,7 @@
     ev.preventDefault();
     ev.stopPropagation();
     activateTab(tabButtons[next], { focus: true });
-  }
-  tablist.addEventListener('keydown', onTabKey);
+  });
   tabButtons.forEach(function (btn) {
     btn.addEventListener('click', function () { activateTab(btn, { focus: true }); });
   });
@@ -631,7 +561,6 @@
     threeInitStarted = true;
     loadThreeStack().then(function (stack) {
       api = boot(stack.THREE, stack.OrbitControls, stack.via);
-      threeReady = true;
     }).catch(function (err) {
       showThreeError(err && err.message ? err.message : String(err));
     });
@@ -644,12 +573,15 @@
     const wrap = document.getElementById('canvas-wrap');
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const R = 9;
+    const C = 2.3;
+
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x140f1c);
-    scene.fog = new THREE.Fog(0x140f1c, 90, 220);
+    scene.fog = new THREE.Fog(0x140f1c, 40, 90);
 
-    const camera = new THREE.PerspectiveCamera(40, 1, 0.2, 400);
-    camera.position.set(16, 30, 40);
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
+    camera.position.set(7, 15, 13);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -659,11 +591,11 @@
     wrap.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 6, 0);
+    controls.target.set(0, 3.2, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
-    controls.minDistance = 18;
-    controls.maxDistance = 120;
+    controls.minDistance = 8;
+    controls.maxDistance = 50;
     controls.maxPolarAngle = Math.PI * 0.49;
     if ('enableKeys' in controls) controls.enableKeys = false;
     if (THREE.TOUCH) {
@@ -671,24 +603,23 @@
       controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
     }
 
-    scene.add(new THREE.AmbientLight(0xf0e6ff, 0.42));
+    scene.add(new THREE.AmbientLight(0xf0e6ff, 0.48));
     const key = new THREE.DirectionalLight(0xffffff, 0.85);
-    key.position.set(30, 50, 24);
+    key.position.set(12, 20, 10);
     scene.add(key);
     scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.45));
     const rim = new THREE.DirectionalLight(0xd946ef, 0.4);
-    rim.position.set(-40, 18, -20);
+    rim.position.set(-16, 8, -8);
     scene.add(rim);
-    const back = new THREE.DirectionalLight(0xf5d0fe, 0.35);
-    back.position.set(-30, 22, 10);
+    const back = new THREE.DirectionalLight(0xf5d0fe, 0.3);
+    back.position.set(-12, 10, 4);
     scene.add(back);
 
-    const grid = new THREE.GridHelper(80, 32, 0x5b4578, 0x2a2238);
+    const grid = new THREE.GridHelper(36, 36, 0x5b4578, 0x2a2238);
     grid.position.y = 0.02;
     scene.add(grid);
-
     const floor = new THREE.Mesh(
-      new THREE.CircleGeometry(42, 48),
+      new THREE.CircleGeometry(18, 48),
       new THREE.MeshStandardMaterial({ color: 0x1c1726, roughness: 0.95, metalness: 0.05 })
     );
     floor.rotation.x = -Math.PI / 2;
@@ -700,14 +631,16 @@
     const matHead = new THREE.MeshStandardMaterial({ color: 0x4a3f5c, metalness: 0.5, roughness: 0.38 });
     const matLens = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.85, roughness: 0.12, emissive: 0x155e75, emissiveIntensity: 0.35 });
     const matAb = new THREE.MeshStandardMaterial({ color: 0xb8a4d4, metalness: 0.28, roughness: 0.5 });
-    const matAbRing = new THREE.MeshStandardMaterial({ color: 0xe879f9, metalness: 0.3, roughness: 0.4, emissive: 0x86198f, emissiveIntensity: 0.25 });
+    const matSpring = new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.55, roughness: 0.3, emissive: 0x854d0e, emissiveIntensity: 0.25 });
+    const matPack = new THREE.MeshStandardMaterial({ color: 0x86efac, metalness: 0.3, roughness: 0.45 });
+    const matImu = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.4, roughness: 0.4 });
     const matSkid = new THREE.MeshStandardMaterial({ color: 0xc4b5a0, metalness: 0.25, roughness: 0.55 });
     const matWing = new THREE.MeshStandardMaterial({
       color: 0xf0abfc, metalness: 0.05, roughness: 0.28,
       transparent: true, opacity: 0.62, side: THREE.DoubleSide,
-      emissive: 0xa21caf, emissiveIntensity: 0.22
+      emissive: 0xa21caf, emissiveIntensity: 0.2
     });
-    const matVein = new THREE.MeshStandardMaterial({ color: 0xfce7f3, metalness: 0.2, roughness: 0.35, emissive: 0xf5d0fe, emissiveIntensity: 0.2 });
+    const matVein = new THREE.MeshStandardMaterial({ color: 0xfce7f3, metalness: 0.2, roughness: 0.35 });
     const matTether = new THREE.MeshStandardMaterial({ color: 0xc4b5fd, metalness: 0.2, roughness: 0.6 });
 
     function box(w, h, d, mat, x, y, z) {
@@ -717,16 +650,16 @@
     }
 
     const root = new THREE.Group();
-    root.position.y = 8.2;
+    root.position.y = 3.4;
     scene.add(root);
 
     const pickables = [];
     const groups = {};
     const labelSprites = [];
-    let selectedId = null;
+    const wingHinges = [];
+    const crankParts = [];
     let highlight = null;
     let flapping = !reduceMotion;
-    const wingHinges = [];
     let tetherGroup = null;
     let bobT = 0;
 
@@ -753,210 +686,178 @@
         map: tex, transparent: true, depthTest: false, depthWrite: false
       }));
       spr.position.set(x, y, z);
-      spr.scale.set(scale || 10, (scale || 10) * 0.28, 1);
+      spr.scale.set(scale || 4.5, (scale || 4.5) * 0.28, 1);
       spr.renderOrder = 12;
       labelSprites.push(spr);
       root.add(spr);
       return spr;
     }
 
-    /* Head */
-    const head = new THREE.Group();
-    head.name = 'head';
-    const skull = new THREE.Mesh(new THREE.SphereGeometry(1.55, 24, 18), matHead);
-    skull.scale.set(1.15, 0.95, 1);
-    skull.position.set(7.6, 0.35, 0);
-    tag(skull, 'head');
-    head.add(skull);
+    /* Head / sensors */
+    const sense = new THREE.Group();
+    const skull = new THREE.Mesh(new THREE.SphereGeometry(0.55, 20, 14), matHead);
+    skull.scale.set(1.2, 0.9, 0.95);
+    skull.position.set(2.55, 0.25, 0);
+    tag(skull, 'sense');
+    sense.add(skull);
+    const imu = box(0.55, 0.18, 0.4, matImu, 1.55, 0.85, 0);
+    tag(imu, 'sense');
+    sense.add(imu);
     [-1, 1].forEach(function (s) {
-      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 12), matLens);
-      eye.position.set(8.5, 0.55, s * 0.85);
-      tag(eye, 'head');
-      head.add(eye);
-      const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.05, 3.2, 8), matAccent);
-      ant.position.set(9.1, 1.8, s * 0.45);
-      ant.rotation.z = 0.7;
-      ant.rotation.x = s * 0.25;
-      tag(ant, 'head');
-      head.add(ant);
+      const eye = new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 10), matLens);
+      eye.position.set(2.85, 0.32, s * 0.28);
+      tag(eye, 'sense');
+      sense.add(eye);
     });
-    root.add(head);
-    groups.head = head;
-    makeLabel('sensors', 8.2, 3.4, 0, 8);
+    root.add(sense);
+    groups.sense = sense;
+    makeLabel('IMU later', 1.6, 1.7, 0, 4.2);
 
-    /* Thorax — box bay + motor pods (machine, not a ball) */
-    const thorax = new THREE.Group();
-    const hull = box(5.4, 2.05, 2.55, matCarbon, 1.9, 0.35, 0);
-    tag(hull, 'thorax');
-    thorax.add(hull);
-    const lid = box(4.6, 0.38, 2.15, matCarbonHi, 1.9, 1.45, 0);
-    tag(lid, 'thorax');
-    thorax.add(lid);
-    [-1, 1].forEach(function (s) {
-      const pod = box(1.9, 1.2, 1.15, matAccent, 2.5, 0.95, s * 1.85);
-      tag(pod, 'thorax');
-      thorax.add(pod);
-      const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 1.1, 12), matCarbonHi);
-      motor.rotation.x = Math.PI / 2;
-      motor.position.set(2.5, 0.95, s * 2.55);
-      tag(motor, 'thorax');
-      thorax.add(motor);
-    });
-    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.62, 1.4, 12), matCarbonHi);
-    neck.rotation.z = Math.PI / 2;
-    neck.position.set(5.15, 0.4, 0);
-    tag(neck, 'thorax');
-    thorax.add(neck);
-    root.add(thorax);
-    groups.thorax = thorax;
-    makeLabel('actuator bay', 2.2, 4.4, 0, 11);
+    /* Body / power pack */
+    const power = new THREE.Group();
+    const hull = box(2.6, 0.95, 1.15, matCarbon, 0.35, 0.15, 0);
+    tag(hull, 'power');
+    power.add(hull);
+    const pack = box(1.15, 0.42, 0.7, matPack, -0.15, -0.45, 0);
+    tag(pack, 'power');
+    power.add(pack);
+    root.add(power);
+    groups.power = power;
+    makeLabel('1S pack', -0.1, -1.15, 0, 3.8);
 
-    /* Abdomen segments */
-    const abdomen = new THREE.Group();
-    for (let i = 0; i < 7; i++) {
-      const t = i / 6;
-      const r = 1.05 - t * 0.55;
-      const seg = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), matAb);
-      seg.scale.set(1.25, 0.78, 0.78);
-      seg.position.set(-1.4 - i * 1.65, -0.1 - t * 0.12, 0);
-      seg.scale.x *= (1.05 - t * 0.1);
-      seg.scale.y *= r;
-      seg.scale.z *= r;
-      tag(seg, 'abdomen');
-      abdomen.add(seg);
-      const ring = new THREE.Mesh(new THREE.TorusGeometry(r * 0.82, 0.06, 8, 20), matAbRing);
-      ring.rotation.y = Math.PI / 2;
-      ring.position.copy(seg.position);
-      tag(ring, 'abdomen');
-      abdomen.add(ring);
+    /* Abdomen */
+    for (let i = 0; i < 5; i++) {
+      const t = i / 4;
+      const seg = new THREE.Mesh(new THREE.SphereGeometry(0.38 - t * 0.12, 12, 10), matAb);
+      seg.scale.set(1.15, 0.75, 0.75);
+      seg.position.set(-1.3 - i * 0.55, 0.05 - t * 0.06, 0);
+      tag(seg, 'elastic');
+      root.add(seg);
     }
-    root.add(abdomen);
-    groups.abdomen = abdomen;
-    makeLabel('abdomen', -7.2, 2.8, 0, 9);
 
-    /* Wings */
+    /* Actuation — motor + crank */
+    const actuation = new THREE.Group();
+    const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.7, 16), matAccent);
+    motor.rotation.x = Math.PI / 2;
+    motor.position.set(0.55, 0.55, 0);
+    tag(motor, 'actuation');
+    actuation.add(motor);
+    const crank = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.55, 8), matCarbonHi);
+    crank.position.set(0.55, 0.85, 0);
+    tag(crank, 'actuation');
+    actuation.add(crank);
+    const crankPin = new THREE.Mesh(new THREE.SphereGeometry(0.09, 10, 8), matAccent);
+    crankPin.position.set(0.55, 1.12, 0.22);
+    tag(crankPin, 'actuation');
+    actuation.add(crankPin);
+    crankParts.push({ crank: crank, pin: crankPin });
+    root.add(actuation);
+    groups.actuation = actuation;
+    makeLabel('crank', 0.55, 1.85, 0, 3.6);
+
+    /* Elastic springs at roots */
+    const elastic = new THREE.Group();
+    [-1, 1].forEach(function (s) {
+      const coil = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.06, 8, 16), matSpring);
+      coil.position.set(0.7, 0.55, s * 0.85);
+      coil.rotation.y = Math.PI / 2;
+      tag(coil, 'elastic');
+      elastic.add(coil);
+    });
+    root.add(elastic);
+    groups.elastic = elastic;
+    makeLabel('elastic', 0.9, 1.55, 1.5, 3.8);
+
+    /* Two wings */
     function wingShape(span, chord) {
       const sh = new THREE.Shape();
-      sh.moveTo(0.2, 0);
-      sh.lineTo(span * 0.22, chord * 0.18);
-      sh.quadraticCurveTo(span * 0.62, chord * 0.52, span, chord * 0.08);
-      sh.quadraticCurveTo(span * 0.7, -chord * 0.42, span * 0.18, -chord * 0.2);
-      sh.lineTo(0.15, -0.05);
+      sh.moveTo(0.15, 0);
+      sh.lineTo(span * 0.2, chord * 0.35);
+      sh.quadraticCurveTo(span * 0.62, chord * 0.55, span, chord * 0.08);
+      sh.quadraticCurveTo(span * 0.7, -chord * 0.42, span * 0.2, -chord * 0.22);
+      sh.lineTo(0.12, -0.04);
       sh.closePath();
       return sh;
     }
 
     function makeWing(span, chord) {
       const g = new THREE.Group();
-      const geo = new THREE.ShapeGeometry(wingShape(span, chord), 24);
-      const membrane = new THREE.Mesh(geo, matWing);
+      const membrane = new THREE.Mesh(new THREE.ShapeGeometry(wingShape(span, chord), 20), matWing);
       membrane.rotation.x = -Math.PI / 2;
       tag(membrane, 'wings');
       g.add(membrane);
-
-      function vein(x0, z0, x1, z1, r) {
-        const a = new THREE.Vector3(x0, 0.05, z0);
-        const b = new THREE.Vector3(x1, 0.05, z1);
-        const dir = new THREE.Vector3().subVectors(b, a);
-        const len = dir.length();
-        const rod = new THREE.Mesh(new THREE.CylinderGeometry(r, r * 0.7, len, 6), matVein);
-        rod.position.copy(a).add(b).multiplyScalar(0.5);
-        rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
-        tag(rod, 'wings');
-        g.add(rod);
-      }
-      vein(0.15, 0, span, -chord * 0.04, 0.09);
-      vein(0.25, 0.02, span * 0.78, chord * 0.28, 0.045);
-      vein(0.25, -0.02, span * 0.7, -chord * 0.26, 0.045);
-      vein(span * 0.38, 0, span * 0.42, chord * 0.2, 0.03);
-      vein(span * 0.55, 0, span * 0.52, -chord * 0.18, 0.03);
-
-      const spar = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.07, span, 8), matCarbonHi);
+      const spar = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.04, span, 8), matCarbonHi);
       spar.rotation.z = -Math.PI / 2;
-      spar.position.set(span / 2, 0.08, 0);
+      spar.position.set(span / 2, 0.05, 0);
       tag(spar, 'wings');
       g.add(spar);
+      const vein = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.02, span * 0.72, 6), matVein);
+      vein.rotation.z = -Math.PI / 2;
+      vein.rotation.y = 0.18;
+      vein.position.set(span * 0.4, 0.04, chord * 0.12);
+      tag(vein, 'wings');
+      g.add(vein);
       return g;
     }
 
-    function addWing(side, zOff, span, chord, xOff, yOff) {
-      // Mount: child +X is span (out), +Y up. Flap is rotation.z so the tip rises.
+    function addWing(side) {
       const mount = new THREE.Group();
-      mount.position.set(xOff, yOff, side * zOff);
+      mount.position.set(0.75, 0.55, side * 0.85);
       mount.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2;
       const flap = new THREE.Group();
       mount.add(flap);
-      const wing = makeWing(span, chord);
+      const pitch = new THREE.Group();
+      flap.add(pitch);
+      const wing = makeWing(R, C);
       if (side < 0) wing.scale.z = -1;
-      flap.rotation.z = 0.22;
-      flap.add(wing);
+      flap.rotation.z = 0.2;
+      pitch.add(wing);
       root.add(mount);
-      wingHinges.push({ hinge: flap, phase: zOff > 2.6 ? 0 : 0.32, rest: 0.22 });
+      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 1.1, 8), matCarbonHi);
+      rod.position.set(0.6, 0.85, side * 0.45);
+      rod.rotation.x = side * 0.6;
+      tag(rod, 'actuation');
+      root.add(rod);
+      wingHinges.push({ flap: flap, pitch: pitch, rod: rod, side: side, rest: 0.2 });
       return mount;
     }
-
-    addWing(1, 2.55, 17.5, 5.2, 3.2, 1.25);
-    addWing(-1, 2.55, 17.5, 5.2, 3.2, 1.25);
-    addWing(1, 2.35, 14.2, 4.4, -0.6, 0.85);
-    addWing(-1, 2.35, 14.2, 4.4, -0.6, 0.85);
+    addWing(1);
+    addWing(-1);
     groups.wings = root;
-    makeLabel('forewing', 4.5, 3.6, 14, 9);
-    makeLabel('hindwing', -1.2, 3.2, 12, 9);
+    makeLabel('R = 9 cm', 1.2, 1.4, 6.2, 4.4);
 
     /* Skids */
-    const skids = new THREE.Group();
-    const feet = [
-      [5.5, -1, 1.2], [5.5, -1, -1.2],
-      [1.8, -1, 1.6], [1.8, -1, -1.6],
-      [-4.5, -1.1, 0.9], [-4.5, -1.1, -0.9]
-    ];
-    feet.forEach(function (f) {
-      const hip = new THREE.Vector3(f[0] * 0.35 + 1.4, 0.1, f[2] * 0.25);
-      const mid = new THREE.Vector3((hip.x + f[0]) / 2, -2.1, (hip.z + f[2]) / 2);
-      const toe = new THREE.Vector3(f[0], -5.6, f[2]);
-      [ [hip, mid], [mid, toe] ].forEach(function (pair) {
-        const a = pair[0];
-        const b = pair[1];
-        const dir = new THREE.Vector3().subVectors(b, a);
-        const len = dir.length();
-        const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, len, 8), matSkid);
-        rod.position.copy(a).add(b).multiplyScalar(0.5);
-        rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
-        tag(rod, 'skids');
-        skids.add(rod);
-      });
-      const pad = new THREE.Mesh(new THREE.SphereGeometry(0.22, 10, 8), matSkid);
-      pad.position.set(f[0], -5.7, f[2]);
-      tag(pad, 'skids');
-      skids.add(pad);
+    [[1.4, 0.4], [1.4, -0.4], [-0.6, 0.35], [-0.6, -0.35]].forEach(function (p) {
+      const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.6, 6), matSkid);
+      leg.position.set(p[0], -1.05, p[1]);
+      leg.rotation.z = p[0] > 0 ? 0.2 : -0.15;
+      tag(leg, 'elastic');
+      root.add(leg);
     });
-    root.add(skids);
-    groups.skids = skids;
-    makeLabel('skids', 2.2, -6.6, 3.4, 7);
 
-    /* Tether / gantry */
+    /* Tether */
     tetherGroup = new THREE.Group();
     tetherGroup.visible = false;
-    const post = box(1.2, 28, 1.2, matCarbon, -18, 6, -16);
+    const post = box(0.35, 10, 0.35, matCarbon, -6, 1.6, -5);
     tag(post, 'tether');
     tetherGroup.add(post);
-    const arm = box(22, 0.7, 0.7, matCarbonHi, -8, 20, -16);
+    const arm = box(7, 0.22, 0.22, matCarbonHi, -2.6, 6.5, -5);
     tag(arm, 'tether');
     tetherGroup.add(arm);
-    const linePts = [new THREE.Vector3(2.1, 2.2, 0), new THREE.Vector3(-8, 19.4, -16)];
-    const lineGeo = new THREE.BufferGeometry().setFromPoints(linePts);
-    const umbilical = new THREE.Line(lineGeo, new THREE.LineBasicMaterial({ color: 0xc4b5fd }));
-    tag(umbilical, 'tether');
-    tetherGroup.add(umbilical);
-    const puck = new THREE.Mesh(new THREE.SphereGeometry(0.28, 10, 8), matTether);
-    puck.position.set(2.1, 2.2, 0);
-    tag(puck, 'tether');
-    tetherGroup.add(puck);
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0.4, 0.9, 0),
+        new THREE.Vector3(-2.6, 6.4, -5)
+      ]),
+      new THREE.LineBasicMaterial({ color: 0xc4b5fd })
+    );
+    tag(line, 'tether');
+    tetherGroup.add(line);
     root.add(tetherGroup);
     groups.tether = tetherGroup;
 
     highlight = new THREE.Mesh(
-      new THREE.TorusGeometry(3.4, 0.08, 8, 40),
+      new THREE.TorusGeometry(1.2, 0.04, 8, 36),
       new THREE.MeshBasicMaterial({ color: 0xf0abfc, transparent: true, opacity: 0.9 })
     );
     highlight.rotation.x = Math.PI / 2;
@@ -964,7 +865,6 @@
     root.add(highlight);
 
     function selectPart(id) {
-      selectedId = id;
       document.querySelectorAll('.part-card').forEach(function (el) {
         el.classList.toggle('selected', el.dataset.id === id);
       });
@@ -982,11 +882,13 @@
           const c = box3.getCenter(new THREE.Vector3());
           highlight.position.copy(c);
           const size = box3.getSize(new THREE.Vector3());
-          const r = Math.max(2.2, Math.max(size.x, size.z) * 0.45);
-          highlight.scale.setScalar(r / 3.4);
+          highlight.scale.setScalar(Math.max(0.8, Math.max(size.x, size.z) * 0.55) / 1.2);
         } else if (id === 'wings') {
-          highlight.position.set(2.4, 1.1, 0);
-          highlight.scale.setScalar(2.1);
+          highlight.position.set(0.8, 0.6, 0);
+          highlight.scale.setScalar(1.6);
+        } else if (id === 'elastic') {
+          highlight.position.set(0.7, 0.55, 0);
+          highlight.scale.setScalar(1.1);
         }
       } else {
         detail.classList.remove('visible');
@@ -1015,21 +917,20 @@
       controls.target.set(tgt.x, tgt.y, tgt.z);
       controls.update();
     }
-
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 16, y: 30, z: 40 }, { x: 0, y: 6, z: 0 });
+      setView({ x: 7, y: 15, z: 13 }, { x: 0, y: 3.2, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });
     };
     document.getElementById('btn-iso').onclick = function () {
-      setView({ x: 32, y: 22, z: 38 }, { x: 0, y: 7, z: 0 });
+      setView({ x: 12, y: 10, z: 14 }, { x: 0, y: 3.4, z: 0 });
     };
     document.getElementById('btn-top').onclick = function () {
-      setView({ x: 2, y: 72, z: 0.4 }, { x: 0, y: 8, z: 0 });
+      setView({ x: 0.4, y: 28, z: 0.2 }, { x: 0, y: 3.4, z: 0 });
     };
     document.getElementById('btn-side').onclick = function () {
-      setView({ x: 4, y: 10, z: 52 }, { x: 0, y: 8, z: 0 });
+      setView({ x: 1, y: 4.2, z: 20 }, { x: 0, y: 3.4, z: 0 });
     };
 
     const btnFlap = document.getElementById('btn-flap');
@@ -1039,11 +940,7 @@
       btnFlap.textContent = flapping ? 'Pause flap' : 'Play flap';
     }
     syncFlapButton();
-    btnFlap.onclick = function () {
-      flapping = !flapping;
-      syncFlapButton();
-    };
-
+    btnFlap.onclick = function () { flapping = !flapping; syncFlapButton(); };
     document.getElementById('tog-labels').addEventListener('change', function (e) {
       labelSprites.forEach(function (s) { s.visible = e.target.checked; });
     });
@@ -1066,7 +963,7 @@
       setTimeout(function () { loading.classList.add('hidden'); }, 350);
     }
 
-    const stroke = 32 * Math.PI / 180;
+    const stroke = 28 * Math.PI / 180;
     const flapHz = 2.2;
     let last = performance.now();
 
@@ -1078,20 +975,25 @@
         bobT += dt;
         const s = Math.sin(bobT * flapHz * Math.PI * 2);
         wingHinges.forEach(function (w) {
-          const local = Math.sin(bobT * flapHz * Math.PI * 2 - w.phase);
-          w.hinge.rotation.z = w.rest + local * stroke;
+          w.flap.rotation.z = w.rest + s * stroke;
+          w.pitch.rotation.x = Math.cos(bobT * flapHz * Math.PI * 2) * 0.18;
         });
-        root.position.y = 8.2 + Math.sin(bobT * 1.1) * 0.18;
+        if (crankParts[0]) {
+          crankParts[0].crank.rotation.z = bobT * flapHz * Math.PI * 2;
+          crankParts[0].pin.position.set(
+            0.55 + Math.cos(bobT * flapHz * Math.PI * 2) * 0.22,
+            1.12,
+            Math.sin(bobT * flapHz * Math.PI * 2) * 0.22
+          );
+        }
+        root.position.y = 3.4 + Math.sin(bobT * 1.05) * 0.08;
       }
       controls.update();
       renderer.render(scene, camera);
     }
     requestAnimationFrame(animate);
 
-    return {
-      resize: resize,
-      selectPart: selectPart
-    };
+    return { resize: resize, selectPart: selectPart };
   }
 })();
 </script>
