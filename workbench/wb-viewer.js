@@ -23,7 +23,7 @@
   const PARTS = [
     { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them. Upper aprons run post to post, flush to that outer face, so latches have wood behind them.' },
     { id: 'top', name: 'Top', detail: '¾ inch plywood that holds weight. The top sits 38 inches off the floor — not 36. ½ inch plywood is only for plates the X1 can cut.' },
-    { id: 'shelf', name: 'Shelf / rails', detail: 'Four lower rails sit about 6–8 inches off the floor, clear of the casters. A ¾ inch shelf rests on those rails and notches around the posts — it does not float. Diagonal braces are a later stiffness sketch, not a cut list.' },
+    { id: 'shelf', name: 'Shelf / rails', detail: 'Four lower rails sit about 6–8 inches off the floor, clear of the casters. A ¾ inch shelf rests on those rails and notches around the posts — it does not float. Diagonal braces run in the lower bay from rail to apron, ending on the post inner faces. Not a cut list.' },
     { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Two magnets per side snap the tables together; then two latches take the load. Both latch plates sit on the apron face — not hanging in air. The first sits 12 inches below the top (about 26 inches off the floor) — not 18. The second is Design-reserved on the same line, typically 6–8 inches above or below (exact offset DRAFT).' },
     { id: 'casters', name: 'Wheels', detail: 'A locking caster under each post. About 3 inches tall as a starting guess. Brand is still open.' },
     { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS. Base about 27.2 × 22.4 inches — fits the 29 inch opening, tight front-to-back. Removable inserts so a later saw can swap in. How far the head swings is still open.' }
@@ -153,12 +153,13 @@
     const SAW_D = 27.2;
 
     // Schematic frame stock — not freeze dims, not a cut list.
-    // 2× class thickness; apron depth is derived so both latch pads bear on one face.
+    // 2× class thickness. Second latch sits 6" above primary (Design-allowed
+    // DRAFT offset) so both pads share one upper apron without a full-height skirt.
     const STOCK = 1.5;
     const LATCH_PAD_H = 3.2;
-    const LATCH2_AFF = LATCH_AFF - 7;
+    const LATCH2_AFF = LATCH_AFF + 6;
     const APRON_TOP = TOP_AFF - TOP_THK;
-    const APRON_BOT = LATCH2_AFF - LATCH_PAD_H / 2 - 1;
+    const APRON_BOT = LATCH_AFF - LATCH_PAD_H / 2 - 1;
     const APRON_H = APRON_TOP - APRON_BOT;
     const APRON_Y = (APRON_TOP + APRON_BOT) / 2;
     const RAIL_H = 3.5;
@@ -168,6 +169,8 @@
     const SHELF_Y = LOWER_RAIL_TOP + TOP_THK / 2;
     const SPAN = OA - 2 * POST;
     const RAIL_C = OA / 2 - STOCK / 2;
+    const POST_INNER = OA / 2 - POST;
+    const UPPER_MAG_Y = TOP_AFF - TOP_THK - 2;
 
     (function assertFrameContacts() {
       const padHalf = LATCH_PAD_H / 2;
@@ -175,6 +178,7 @@
       console.assert(LATCH_AFF === 26 && TOP_THK === 0.75 && PLATE === 0.5, 'freeze latch/ply');
       console.assert(LATCH_AFF - padHalf >= APRON_BOT && LATCH_AFF + padHalf <= APRON_TOP, 'primary latch on apron');
       console.assert(LATCH2_AFF - padHalf >= APRON_BOT && LATCH2_AFF + padHalf <= APRON_TOP, 'second latch on apron');
+      console.assert(LATCH2_AFF + padHalf < UPPER_MAG_Y - 0.4, 'second latch clear of upper magnet');
       console.assert(LOWER_RAIL_TOP >= 6 && LOWER_RAIL_TOP <= 8, 'lower rail in 6–8 AFF band');
       console.assert(LOWER_RAIL_BOT >= CASTER_H, 'lower rail clear of caster plate');
       console.assert(Math.abs(SHELF_Y - (LOWER_RAIL_TOP + TOP_THK / 2)) < 1e-6, 'shelf sits on rails');
@@ -305,13 +309,39 @@
       const dy = y1 - y0;
       const dz = z1 - z0;
       const len = Math.sqrt(dx * dx + dy * dy + dz * dz);
-      const m = new THREE.Mesh(new THREE.BoxGeometry(len, 1.5, 3.5), mat);
+      const m = new THREE.Mesh(new THREE.BoxGeometry(len, STOCK, 3.5), mat);
       m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
       const dir = new THREE.Vector3(dx, dy, dz).normalize();
       m.quaternion.setFromUnitVectors(new THREE.Vector3(1, 0, 0), dir);
       tag(m, id);
       parent.add(m);
       return m;
+    }
+
+    // Lower-bay diagonal: ends on post inner faces at rail top and apron bottom.
+    function addLowerBayBrace(parent, face) {
+      const y0 = LOWER_RAIL_TOP;
+      const y1 = APRON_BOT;
+      const inset = STOCK / 2;
+      const p = POST_INNER;
+      switch (face) {
+        case '+z':
+          addBrace(parent, -p, y0, p - inset, p, y1, p - inset, matBrace, 'shelf');
+          break;
+        case '-z':
+          addBrace(parent, p, y0, -(p - inset), -p, y1, -(p - inset), matBrace, 'shelf');
+          break;
+        case '+x':
+          addBrace(parent, p - inset, y0, p, p - inset, y1, -p, matBrace, 'shelf');
+          break;
+        case '-x':
+          addBrace(parent, -(p - inset), y0, -p, -(p - inset), y1, p, matBrace, 'shelf');
+          break;
+        default: {
+          const _exhaustive = face;
+          throw new Error('Unknown brace face: ' + _exhaustive);
+        }
+      }
     }
 
     function addPerimeterBand(parent, y, height, thick, mat, id) {
@@ -347,18 +377,21 @@
 
     function addCaster(parent, x, z) {
       const g = new THREE.Group();
-      const plate = box(3.4, 0.28, 3.4, matCaster, 0, CASTER_H - 0.14, 0);
+      const plateH = 0.22;
+      const plate = box(POST + 0.12, plateH, POST + 0.12, matCaster, 0, CASTER_H - plateH / 2, 0);
       tag(plate, 'casters');
       g.add(plate);
-      const yoke = box(0.35, 1.4, 2.2, matCaster, 0, 1.4, 0);
+      const yokeH = 1.15;
+      const yoke = box(0.38, yokeH, 2.05, matCaster, 0, CASTER_H - plateH - yokeH / 2, 0);
       tag(yoke, 'casters');
       g.add(yoke);
-      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, 1.05, 20), matWheel);
+      const wheelR = 1.45;
+      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(wheelR, wheelR, 1.05, 20), matWheel);
       wheel.rotation.x = Math.PI / 2;
-      wheel.position.set(0, 1.5, 0);
+      wheel.position.set(0, wheelR, 0);
       tag(wheel, 'casters');
       g.add(wheel);
-      const lock = box(0.35, 0.7, 1.4, matLock, 1.15, 1.15, 0);
+      const lock = box(0.35, 0.7, 1.4, matLock, 1.15, 1.05, 0);
       lock.rotation.z = -0.45;
       tag(lock, 'casters');
       g.add(lock);
@@ -369,7 +402,7 @@
 
     function addLatchPad(parent, face) {
       const g = new THREE.Group();
-      const upperMagY = TOP_AFF - TOP_THK - 2;
+      const upperMagY = UPPER_MAG_Y;
       const lowerMagY = 4;
       function addMag(y) {
         const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.22, 16), matMagnet);
@@ -487,45 +520,58 @@
         const front = box(SAW_W, TOP_THK, lip, matTop, 0, topY, -OA / 2 + lip / 2);
         tag(front, 'top');
         parent.add(front);
-        const well = box(SAW_W - 0.2, 4.2, SAW_D - 0.2, matWell, 0, TOP_AFF - 2.4, 0);
+        const insertThk = PLATE;
+        const insertBottom = TOP_AFF - TOP_THK;
+        const insertTop = insertBottom + insertThk;
+        const insertY = insertBottom + insertThk / 2;
+        const wellH = 3.2;
+        const wellW = SAW_W - 0.35;
+        const wellD = SAW_D - 0.35;
+        const well = box(wellW, wellH, wellD, matWell, 0, insertBottom - wellH / 2, 0);
         tag(well, 'top');
         parent.add(well);
-        const insertL = box(0.7, 0.35, SAW_D - 1, matInsert, -SAW_W / 2 + 0.55, TOP_AFF - 0.2, 0);
+        const flangeT = 0.22;
+        const flangeW = 0.7;
+        const flangeY = insertBottom - flangeT / 2;
+        const flanges = [
+          box(SAW_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, SAW_D / 2),
+          box(SAW_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, -SAW_D / 2),
+          box(flangeW, flangeT, SAW_D, matInsert, SAW_W / 2, flangeY, 0),
+          box(flangeW, flangeT, SAW_D, matInsert, -SAW_W / 2, flangeY, 0)
+        ];
+        flanges.forEach(function (f) {
+          tag(f, 'top');
+          parent.add(f);
+        });
+        const ledge = 0.85;
+        const insertL = box(ledge, insertThk, SAW_D - 1, matInsert, -SAW_W / 2 + ledge / 2, insertY, 0);
         tag(insertL, 'top');
         parent.add(insertL);
-        const insertR = box(0.7, 0.35, SAW_D - 1, matInsert, SAW_W / 2 - 0.55, TOP_AFF - 0.2, 0);
+        const insertR = box(ledge, insertThk, SAW_D - 1, matInsert, SAW_W / 2 - ledge / 2, insertY, 0);
         tag(insertR, 'top');
         parent.add(insertR);
         const saw = addSaw(parent);
-        saw.position.set(0, TOP_AFF - 4.6, 0);
+        saw.position.set(0, insertTop, 0);
       } else {
         const top = box(OA, TOP_THK, OA, kind === 'extension' ? matTopLite : matTop, 0, topY, 0);
         tag(top, 'top');
         parent.add(top);
-        if (kind === 'flat') {
-          const drawer = box(18, 4.5, 14, matShelf, 0, TOP_AFF - TOP_THK - 3.2, -6);
-          tag(drawer, 'shelf');
-          parent.add(drawer);
-        }
       }
 
       if (kind === 'flat') {
         addNotchedShelf(parent, SHELF_Y, matShelf, 'shelf');
-        addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
-        addBrace(parent, POST_C - 1.2, CASTER_H + 4, -POST_C + 1.9, -POST_C + 1.2, TOP_AFF - 6, -POST_C + 1.9, matBrace, 'shelf');
+        addLowerBayBrace(parent, '+z');
+        addLowerBayBrace(parent, '-z');
       } else if (kind === 'extension') {
-        const slatLen = SPAN + 2 * (POST - STOCK / 2);
-        [-8, 0, 8].forEach(function (x) {
-          const slat = box(3.2, TOP_THK, slatLen, matShelf, x, SHELF_Y, 0);
-          tag(slat, 'shelf');
-          parent.add(slat);
-        });
-        addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
+        addNotchedShelf(parent, SHELF_Y, matShelf, 'shelf');
+        addLowerBayBrace(parent, '+z');
+        addLowerBayBrace(parent, '-z');
       } else if (kind === 'miter') {
-        addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
-        const rearDepth = 8;
+        addLowerBayBrace(parent, '+x');
+        addLowerBayBrace(parent, '-x');
+        const rearDepth = 7;
         const rearZ = RAIL_C - rearDepth / 2 + STOCK / 2;
-        const rearShelf = box(22, TOP_THK, rearDepth, matShelf, 0, SHELF_Y, rearZ);
+        const rearShelf = box(SPAN, TOP_THK, rearDepth, matShelf, 0, SHELF_Y, rearZ);
         tag(rearShelf, 'shelf');
         parent.add(rearShelf);
       } else {
@@ -557,9 +603,12 @@
 
     function buildGhost() {
       clearGroup(neighbor);
-      const ghost = box(OA, TOP_AFF - 2, OA, matGhost, OA + 0.6, (TOP_AFF - 2) / 2 + 1, 0);
+      const stack = 2 * PLATE;
+      const cx = OA + stack;
+      const ghost = box(OA, TOP_AFF - 2, OA, matGhost, cx, (TOP_AFF - 2) / 2 + 1, 0);
       neighbor.add(ghost);
-      const pad = box(6, 4, 0.4, matMagnet, OA / 2 + 0.4, LATCH_AFF, 0);
+      const padX = cx - OA / 2 - PLATE / 2;
+      const pad = box(4.2, LATCH_PAD_H, PLATE, matPlate, padX, LATCH_AFF, 0);
       neighbor.add(pad);
     }
 
