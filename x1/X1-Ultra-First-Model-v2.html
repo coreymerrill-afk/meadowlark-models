@@ -3924,10 +3924,10 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       const yHigh = apronBottom - T24_H / 2 - 0.25; // near apron underside / upper third of K
       const legZc = legCornerZ;
       const legXc = legCornerX;
-      // Tip: end-grain butt to K inner X-face (small gap, no morph through the post)
-      const tip = LEG_SQ / 2 + 0.05;
-      // Inner Z face of long-side posts — same plane idea as long Q (1.5" face toward K)
-      const zAlong = (sgn) => sgn * (legZc - LEG_SQ / 2 - T / 2 - 0.05);
+      // Tip: end-grain butts K inner X-face (no 0.05" air gap — reads as seated)
+      const tip = LEG_SQ / 2;
+      // 1.5" face against the long-side K inner Z-face (same plane idea as long Q)
+      const zAlong = (sgn) => sgn * (legZc - LEG_SQ / 2 - T / 2);
       const xCornerN = -(legXc - tip);
       const xMidN = -tip;
       const xMidP = tip;
@@ -5121,11 +5121,17 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         m.position.copy(start);
 
         const mats = m.material ? (Array.isArray(m.material) ? m.material : [m.material]) : [];
-        const targetOps = mats.map(mat => (mat.opacity != null ? mat.opacity : 1));
+        const targetOps = mats.map(mat => (c.letter === 'P' ? 1 : (mat.opacity != null ? mat.opacity : 1)));
         mats.forEach(mat => {
-          mat.transparent = true;
-          mat.opacity = 0;
-          mat.depthWrite = false;
+          if (c.letter === 'P') {
+            mat.transparent = false;
+            mat.opacity = 1;
+            mat.depthWrite = true;
+          } else {
+            mat.transparent = true;
+            mat.opacity = 0;
+            mat.depthWrite = false;
+          }
           mat.needsUpdate = true;
         });
         m.visible = true;
@@ -5147,9 +5153,15 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           m.position.lerpVectors(it.from, it.to, e);
           const mats = m.material ? (Array.isArray(m.material) ? m.material : [m.material]) : [];
           mats.forEach((mat, i) => {
-            mat.opacity = it.targetOps[i] * e;
-            mat.transparent = true;
-            mat.depthWrite = false;
+            if (it.letter === 'P') {
+              mat.opacity = 1;
+              mat.transparent = false;
+              mat.depthWrite = true;
+            } else {
+              mat.opacity = it.targetOps[i] * e;
+              mat.transparent = true;
+              mat.depthWrite = false;
+            }
             mat.needsUpdate = true;
           });
         });
@@ -5244,7 +5256,13 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           mat.opacity = letter === 'H' ? 0.88 : 0.62;
           mat.depthWrite = true;
         } else if (mode === 'current') {
-          if (letter === 'Z' && mat.opacity < 1 && !mat.wireframe) {
+          if (letter === 'P') {
+            // S30 current: stay solid so under-apron P does not wash out with dimmed priors
+            mat.transparent = false;
+            mat.opacity = 1;
+            mat.depthWrite = true;
+            mat.depthTest = true;
+          } else if (letter === 'Z' && mat.opacity < 1 && !mat.wireframe) {
             mat.transparent = true;
             mat.opacity = 0.25;
           } else if (letter === 'O' || letter === 'Y') {
@@ -5258,6 +5276,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         }
         mat.needsUpdate = true;
       });
+      if (letter === 'P') m.renderOrder = mode === 'current' ? 3 : 0;
     }
 
     function applyExploreVisibility() {
@@ -6191,7 +6210,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         if (best > 0.5) pTipBad++;
       });
       console.assert(pTipBad === 0, 'P tips must meet K (clearance≤0.5")', pTipBad);
-      const zInner = legCornerZ - LEG_SQ / 2 - T / 2 - 0.05;
+      const zInner = legCornerZ - LEG_SQ / 2 - T / 2;
       let pFlat = 0, pZbad = 0;
       pMeshes.forEach(m => {
         const tips = m.userData.segTips;
