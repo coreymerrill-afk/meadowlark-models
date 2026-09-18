@@ -181,9 +181,22 @@
   }
   .step-bar button:hover { background: #4a4f58; }
   .step-bar button:disabled { opacity: 0.4; cursor: default; }
-  .step-bar #btn-prev, .step-bar #btn-next {
+  .step-bar #btn-prev, .step-bar #btn-next, .step-bar #btn-explore {
     min-width: 72px; min-height: 44px; padding: 10px 14px; font-size: 14px;
   }
+  .step-bar #btn-explore {
+    background: #243428;
+    color: var(--ok);
+    border-color: #4a7a58;
+  }
+  .step-bar #btn-explore:hover { background: #2d4534; }
+  .step-bar #btn-explore.current {
+    background: var(--ok);
+    color: #0d1014;
+    border-color: var(--ok);
+  }
+  .step-bar.explore-on .step-nums { opacity: 0.55; }
+  .step-bar.explore-on .step-title { color: var(--ok); }
   .step-bar .step-nums { display: flex; flex-wrap: wrap; gap: 4px; max-width: 100%; }
   .step-bar .step-nums button {
     min-width: 28px; min-height: 32px; padding: 4px 6px; font-variant-numeric: tabular-nums;
@@ -232,6 +245,7 @@
     font-weight: 700; color: var(--accent); cursor: pointer; font-size: 11px;
   }
   .parts-added .chip:hover { border-color: var(--hi); color: var(--hi); }
+  .parts-added .chip.selected { border-color: var(--hi); color: var(--hi); background: #2a221c; }
   #part-detail {
     background: #1a2433; border: 1px solid #5a7aaa; border-radius: 8px;
     padding: 10px 12px; margin: 10px 0; display: none;
@@ -581,10 +595,11 @@ Stretchers Q + diagonals P under apron bay.</div>
 </section>
 
 <!-- ========== 3D ASSEMBLY (default) ========== -->
-<section id="panel-3d" class="panel active" role="tabpanel">
+<section id="panel-3d" class="panel active" role="tabpanel" data-mode="build">
   <div class="step-bar">
     <button type="button" id="btn-prev" title="Previous step (←)">◀ Prev</button>
     <button type="button" id="btn-next" title="Next step (→)">Next ▶</button>
+    <button type="button" id="btn-explore" title="Explore the full assembled table" aria-pressed="false">Explore</button>
     <div class="step-nums" id="step-nums"></div>
     <div class="step-title" id="step-title-bar">Step 1</div>
     <label class="toggle"><input type="checkbox" id="toggle-labels" checked /> Labels</label>
@@ -603,8 +618,9 @@ Stretchers Q + diagonals P under apron bay.</div>
     <aside id="sidebar-3d">
       <h3 id="sb-step-title">Step</h3>
       <p id="sb-instructions" class="muted"></p>
-      <h3>Parts added this step</h3>
+      <h3 id="sb-parts-heading">Parts added this step</h3>
       <div class="parts-added" id="sb-parts-added"></div>
+      <button type="button" class="full" id="btn-back-build" hidden>Back to build steps</button>
       <div id="part-detail">
         <div class="letter-big" id="pd-letter">—</div>
         <div id="pd-name" style="font-weight:700;margin:4px 0"></div>
@@ -615,7 +631,7 @@ Stretchers Q + diagonals P under apron bay.</div>
           <tr><td>Qty</td><td id="pd-qty"></td></tr>
           <tr><td>Notes</td><td id="pd-notes"></td></tr>
         </table>
-        <p class="hint-3d" style="margin-top:6px">Click any visible part (incl. prior/dimmed) for cut dims.</p>
+        <p class="hint-3d" style="margin-top:6px">Tap a part for cut dims. In Explore the rest of the table stays solid.</p>
       </div>
       <h3>Legend</h3>
       <div class="legend-row"><span class="swatch" style="background:#c49a6c"></span>Torsion / skins</div>
@@ -628,8 +644,8 @@ Stretchers Q + diagonals P under apron bay.</div>
       <div class="legend-row"><span class="swatch" style="background:#3a7bd5"></span>Cooler Z</div>
       <p class="hint-3d">
         Orbit: drag / one-finger · Zoom: pinch or scroll · Pan: two-finger / right-drag<br/>
-        Click any visible part for dimensions · ← → change steps<br/>
-        Current solid · prior dimmed · future hidden
+        Tap a part for dimensions (drag orbits — camera stays put) · ← → change steps<br/>
+        <span id="hint-mode-line">Build: current solid · prior dimmed · future hidden</span>
       </p>
     </aside>
   </div>
@@ -2338,6 +2354,9 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     let stepTweenItems = []; // active enter-tween descriptors
     let currentStep = 0;
     let selectedLetter = null;
+    let exploreMode = false;
+    let pickGesture = null;
+    const PICK_MOVE_PX = 10;
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     const highlightMats = new Map();
@@ -4449,7 +4468,108 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       });
     }
 
+    function applyExploreVisibility() {
+      if (typeof clearAttachPlay === 'function') clearAttachPlay();
+      for (const L of Object.keys(partRegistry)) {
+        const rec = partRegistry[L];
+        (rec.meshes || []).forEach(m => applyMeshMode(m, L, 'current'));
+        updateLeaderVisibility(L, 'hidden');
+      }
+      Object.keys(leadersByLetter).forEach(L => updateLeaderVisibility(L, 'hidden'));
+      dimGroups.forEach(d => { d.group.visible = false; });
+      for (const ent of fastenerMarkerById.values()) {
+        ent.mesh.visible = false;
+        if (ent.label) ent.label.visible = false;
+        if (ent.line) ent.line.visible = false;
+        ent._wantLabel = false;
+      }
+    }
+
+    function autoFrameAssembly() {
+      const box = new THREE.Box3();
+      let any = false;
+      for (const L of Object.keys(partRegistry)) {
+        (partRegistry[L]?.meshes || []).forEach(m => {
+          if (m.visible) { box.expandByObject(m); any = true; }
+        });
+      }
+      if (!any || box.isEmpty()) {
+        camera.position.set(100, 75, 120);
+        controls.target.set(0, 18, 0);
+        controls.update();
+        return;
+      }
+      const center = new THREE.Vector3();
+      const size = new THREE.Vector3();
+      box.getCenter(center);
+      box.getSize(size);
+      const maxDim = Math.max(size.x, size.y, size.z, 20);
+      const dist = maxDim * 2.05;
+      const dirv = new THREE.Vector3(0.7, 0.55, 0.75).normalize();
+      camera.position.copy(center).addScaledVector(dirv, dist);
+      controls.target.copy(center);
+      controls.update();
+    }
+
+    function updateExploreChrome() {
+      const bar = document.querySelector('.step-bar');
+      if (bar) bar.classList.toggle('explore-on', exploreMode);
+      const ex = document.getElementById('btn-explore');
+      if (ex) {
+        ex.classList.toggle('current', exploreMode);
+        ex.setAttribute('aria-pressed', exploreMode ? 'true' : 'false');
+      }
+      const panel = document.getElementById('panel-3d');
+      if (panel) panel.dataset.mode = exploreMode ? 'explore' : 'build';
+      const back = document.getElementById('btn-back-build');
+      if (back) back.hidden = !exploreMode;
+      const replay = document.getElementById('btn-replay-step');
+      if (replay) replay.disabled = exploreMode;
+      const hint = document.getElementById('hint-mode-line');
+      if (hint) {
+        hint.textContent = exploreMode
+          ? 'Explore: full assembly · tap for info · orbit/zoom/pan stay put'
+          : 'Build: current solid · prior dimmed · future hidden';
+      }
+    }
+
+    function updateStepNavChrome() {
+      const next = document.getElementById('btn-next');
+      const prev = document.getElementById('btn-prev');
+      if (exploreMode) {
+        prev.disabled = false;
+        next.disabled = true;
+        next.textContent = 'Next ▶';
+        next.title = 'Next step (→)';
+      } else {
+        prev.disabled = currentStep === 0;
+        const last = currentStep === STEPS.length - 1;
+        next.disabled = false;
+        next.textContent = last ? 'Explore ▶' : 'Next ▶';
+        next.title = last ? 'Explore the full assembled table' : 'Next step (→)';
+      }
+      document.querySelectorAll('#step-nums button').forEach((b, i) => {
+        b.classList.toggle('current', !exploreMode && i === currentStep);
+      });
+    }
+
+    function enterExplore({ frame = true } = {}) {
+      if (exploreMode) return;
+      cancelStepTween(true);
+      exploreMode = true;
+      clearHighlight();
+      applyExploreVisibility();
+      updateExploreChrome();
+      updateSidebar();
+      if (frame) autoFrameAssembly();
+      resize();
+    }
+
     function applyStepVisibility() {
+      if (exploreMode) {
+        applyExploreVisibility();
+        return;
+      }
       const currentLetters = STEPS[currentStep].letters.slice();
       const currentSet = new Set(currentLetters);
       const revealedLetters = new Set();
@@ -4529,10 +4649,29 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     }
 
     function updateSidebar() {
+      updateStepNavChrome();
+      const partsHeading = document.getElementById('sb-parts-heading');
+      const pa = document.getElementById('sb-parts-added');
+      const esc = (t) => String(t || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      if (exploreMode) {
+        document.getElementById('step-title-bar').textContent = 'Explore — full assembly';
+        document.getElementById('sb-step-title').textContent = 'Explore the assembled table';
+        document.getElementById('sb-instructions').innerHTML =
+          '<p class="sb-summary">Orbit, zoom, and pan the finished stand. Tap a part for its label and cut info — nothing else fades, and the camera stays where you left it.</p>' +
+          '<div class="sb-block"><strong>Build steps</strong><p class="sb-detail" style="margin:0">Use Prev, a step number, or Back to build steps to return to the dimmed step-by-step view.</p></div>';
+        if (partsHeading) partsHeading.textContent = 'All parts — tap for info';
+        pa.innerHTML = Object.keys(LEXICON).map(L => {
+          const p = LEXICON[L];
+          return '<span class="chip" data-letter="' + L + '">' + L + ' — ' + p.name + '</span>';
+        }).join('');
+        pa.querySelectorAll('[data-letter]').forEach(el => {
+          el.addEventListener('click', () => highlightLetter(el.dataset.letter));
+        });
+        return;
+      }
       const s = STEPS[currentStep];
       document.getElementById('step-title-bar').textContent = s.id + '. ' + s.title;
       document.getElementById('sb-step-title').textContent = s.id + '. ' + s.title;
-      const esc = (t) => String(t || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
       const bullets = (arr) => (!arr || !arr.length) ? '' :
         '<ul>' + arr.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
       let instr = '<p class="sb-summary">' + esc(s.text) + '</p>';
@@ -4545,7 +4684,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       if (s.tools && s.tools.length) instr += '<div class="sb-block"><strong>Tools</strong>' + bullets(s.tools) + '</div>';
       if (s.checks && s.checks.length) instr += '<div class="sb-block"><strong>Checks</strong>' + bullets(s.checks) + '</div>';
       document.getElementById('sb-instructions').innerHTML = instr;
-      const pa = document.getElementById('sb-parts-added');
+      if (partsHeading) partsHeading.textContent = 'Parts added this step';
       pa.innerHTML = s.letters.map(L => {
         const p = LEXICON[L];
         return '<span class="chip" data-letter="' + L + '">' + L + ' — ' + p.name + '</span>';
@@ -4553,21 +4692,18 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       pa.querySelectorAll('[data-letter]').forEach(el => {
         el.addEventListener('click', () => highlightLetter(el.dataset.letter));
       });
-      document.getElementById('btn-prev').disabled = currentStep === 0;
-      document.getElementById('btn-next').disabled = currentStep === STEPS.length - 1;
-      document.querySelectorAll('#step-nums button').forEach((b, i) => {
-        b.classList.toggle('current', i === currentStep);
-      });
     }
 
     function setStep(i, { frame = true } = {}) {
       const prev = currentStep;
       const next = Math.max(0, Math.min(STEPS.length - 1, i));
       // Interrupt any running enter tween (snap to authored pose+opacity)
+      exploreMode = false;
       cancelStepTween(true);
       currentStep = next;
       clearHighlight();
       applyStepVisibility();
+      updateExploreChrome();
       updateSidebar();
       if (next > prev && stepMotionEnabled) {
         // Forward: enter + attach beat; autoFrame after beat completes
@@ -4594,7 +4730,14 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     });
 
     document.getElementById('btn-prev').onclick = () => setStep(currentStep - 1);
-    document.getElementById('btn-next').onclick = () => setStep(currentStep + 1);
+    document.getElementById('btn-next').onclick = () => {
+      if (!exploreMode && currentStep === STEPS.length - 1) enterExplore({ frame: true });
+      else setStep(currentStep + 1);
+    };
+    const exploreBtn = document.getElementById('btn-explore');
+    if (exploreBtn) exploreBtn.onclick = () => enterExplore({ frame: true });
+    const backBuildBtn = document.getElementById('btn-back-build');
+    if (backBuildBtn) backBuildBtn.onclick = () => setStep(currentStep, { frame: true });
     document.getElementById('toggle-labels').onchange = e => {
       labelsVisible = e.target.checked;
       applyStepVisibility();
@@ -4699,24 +4842,40 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     };
 
     document.getElementById('btn-reset-cam').onclick = () => {
-      camera.position.set(100, 75, 120);
-      controls.target.set(0, 18, 0);
-      controls.update();
+      if (exploreMode) autoFrameAssembly();
+      else {
+        camera.position.set(100, 75, 120);
+        controls.target.set(0, 18, 0);
+        controls.update();
+      }
     };
     document.getElementById('btn-reset-asm').onclick = () => setStep(0);
 
     window.addEventListener('keydown', e => {
       if (e.target.matches('input,textarea,select')) return;
       if (!panels['3d'].classList.contains('active')) return;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); setStep(currentStep + 1); }
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); setStep(currentStep - 1); }
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (exploreMode) return;
+        if (currentStep === STEPS.length - 1) enterExplore({ frame: true });
+        else setStep(currentStep + 1);
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (exploreMode) setStep(currentStep, { frame: true });
+        else setStep(currentStep - 1);
+      }
     });
 
     function clearHighlight() {
       highlightMats.forEach((orig, mesh) => {
         if (mesh.material && orig) {
           if (Array.isArray(mesh.material)) {
-            mesh.material.forEach((m, i) => { if (orig[i]) m.color.copy(orig[i]); });
+            mesh.material.forEach((m, i) => {
+              if (!orig[i]) return;
+              if (orig[i].color) m.color.copy(orig[i].color);
+              if (orig[i].emissive && m.emissive) m.emissive.copy(orig[i].emissive);
+            });
           } else if (orig.color) {
             mesh.material.color.copy(orig.color);
             if (orig.emissive && mesh.material.emissive) mesh.material.emissive.copy(orig.emissive);
@@ -4726,6 +4885,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       highlightMats.clear();
       selectedLetter = null;
       document.getElementById('part-detail').classList.remove('visible');
+      document.querySelectorAll('#sb-parts-added .chip.selected').forEach(el => el.classList.remove('selected'));
     }
 
     function meshWorldSizeInches(mesh) {
@@ -4744,11 +4904,15 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       const rec = partRegistry[letter];
       const info = LEXICON[letter];
       if (!info) return;
-      // Only jump forward for future parts; prior/dimmed stay on current step (click-detail separate from leaders)
-      const si = STEPS.findIndex(s => s.letters.includes(letter));
-      if (si >= 0 && si > currentStep) setStep(si, { frame: false });
-      applyStepVisibility();
+      if (!exploreMode) {
+        // Only jump forward for future parts; prior/dimmed stay on current step (click-detail separate from leaders)
+        const si = STEPS.findIndex(s => s.letters.includes(letter));
+        if (si >= 0 && si > currentStep) setStep(si, { frame: false });
+        applyStepVisibility();
+      }
+      selectedLetter = letter;
 
+      const exploreHi = exploreMode;
       (rec?.meshes || []).forEach(m => {
         if (!m.isMesh || !m.material) return;
         if (!m.visible) return; // only highlight visible (current + prior dimmed)
@@ -4759,8 +4923,13 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         }));
         highlightMats.set(m, Array.isArray(m.material) ? backup : backup[0]);
         mats.forEach(mat => {
-          mat.color.set(0xff6b35);
-          if (mat.emissive) mat.emissive.set(0x331100);
+          if (exploreHi) {
+            if (mat.emissive) mat.emissive.set(0x5a2a10);
+            mat.color.lerp(new THREE.Color(0xffb080), 0.22);
+          } else {
+            mat.color.set(0xff6b35);
+            if (mat.emissive) mat.emissive.set(0x331100);
+          }
           mat.needsUpdate = true;
         });
       });
@@ -4778,6 +4947,10 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         : 'Schedule / non-mesh part — see Spec');
       document.getElementById('pd-qty').textContent = info.qty;
       document.getElementById('pd-notes').textContent = info.notes;
+      document.querySelectorAll('#sb-parts-added .chip').forEach(el => {
+        el.classList.toggle('selected', el.dataset.letter === letter);
+      });
+      if (exploreMode) pd.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
 
     function highlightFastener(mesh) {
@@ -4823,16 +4996,17 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       }
     }
 
-    wrap.addEventListener('pointerdown', ev => {
-      if (ev.button !== 0) return;
+    function pickAtClient(clientX, clientY) {
       const rect = wrap.getBoundingClientRect();
       if (rect.width < 2 || rect.height < 2) return;
-      pointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
-      pointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+      pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(pointer, camera);
       // Parts only in allClickable — fastener markers are separate so family letter never hits LEXICON
       const partHits = raycaster.intersectObjects(allClickable.filter(m => m.visible), false);
-      const fastHits = raycaster.intersectObjects(fastenerMarkerMeshes.filter(m => m.visible), false);
+      const fastHits = exploreMode
+        ? []
+        : raycaster.intersectObjects(fastenerMarkerMeshes.filter(m => m.visible), false);
       const partD = partHits.length ? partHits[0].distance : Infinity;
       const fastD = fastHits.length ? fastHits[0].distance : Infinity;
       if (fastD < partD) {
@@ -4845,7 +5019,27 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       } else {
         clearHighlight();
       }
+    }
+
+    function endPickGesture(ev) {
+      if (!pickGesture || ev.pointerId !== pickGesture.id) return;
+      const dx = ev.clientX - pickGesture.x;
+      const dy = ev.clientY - pickGesture.y;
+      const start = pickGesture;
+      pickGesture = null;
+      if (ev.type === 'pointercancel') return;
+      if (dx * dx + dy * dy > PICK_MOVE_PX * PICK_MOVE_PX) return;
+      pickAtClient(start.x, start.y);
+    }
+
+    wrap.addEventListener('pointerdown', ev => {
+      if (ev.button !== 0) return;
+      pickGesture = { id: ev.pointerId, x: ev.clientX, y: ev.clientY };
     });
+    wrap.addEventListener('pointerup', endPickGesture);
+    wrap.addEventListener('pointercancel', endPickGesture);
+    window.addEventListener('pointerup', endPickGesture);
+    window.addEventListener('pointercancel', endPickGesture);
 
     function resize() {
       const w = wrap.clientWidth, h = wrap.clientHeight;
@@ -5058,7 +5252,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     console.assert(STEPS.length === 51, 'step count', STEPS.length);
     console.info('[X1] STEPS', STEPS.length, 'dims', dimGroups.map(d => d.id + '@' + d.showOnSteps.join(',')));
 
-    api = { setStep, highlightLetter, resize };
+    api = { setStep, highlightLetter, resize, enterExplore };
     setStep(0, { frame: true });
     resize();
     animate();
