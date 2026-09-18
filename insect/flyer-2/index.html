@@ -226,7 +226,7 @@
     scene.fog = new THREE.Fog(0x140f1c, 36, 80);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
-    camera.position.set(6.2, 5.2, 7.2);
+    camera.position.set(7.6, 3.6, 4.4);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -236,7 +236,7 @@
     wrap.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 2.7, 0);
+    controls.target.set(0, 3.1, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
     controls.minDistance = 5;
@@ -332,47 +332,48 @@
     }
 
     const piezo = new THREE.Group();
-    for (let i = 0; i < 8; i++) {
-      const layer = box(0.95, 0.09, 0.55, i % 2 ? matElectrode : matPiezo, 0, 0.22 + i * 0.1, 0);
+    for (let i = 0; i < 10; i++) {
+      const layer = box(1.55, 0.13, 0.72, i % 2 ? matElectrode : matPiezo, 0, 0.18 + i * 0.14, 0);
       tag(layer, 'piezo');
       piezo.add(layer);
     }
     root.add(piezo);
     groups.piezo = piezo;
-    makeLabel('piezo stack', 0, 1.55, 0.85, 3.4);
+    makeLabel('piezo stack', -2.4, 1.05, 0.6, 2.8);
 
     const amp = new THREE.Group();
-    const diamond = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.045, 8, 4), matFlex);
-    diamond.rotation.x = Math.PI / 2;
-    diamond.rotation.z = Math.PI / 4;
-    diamond.position.set(0, 0.95, 0);
-    diamond.scale.set(1.15, 0.7, 1);
-    tag(diamond, 'amp');
-    amp.add(diamond);
-    const leverL = box(1.15, 0.06, 0.08, matFlex, -0.85, 0.95, 0);
-    leverL.rotation.z = 0.22;
+    const yoke = box(0.18, 0.22, 1.35, matFlex, 0, 1.62, 0);
+    tag(yoke, 'amp');
+    amp.add(yoke);
+    const leverL = box(1.55, 0.08, 0.1, matFlex, -1.05, 1.55, 0);
+    leverL.rotation.z = 0.18;
     tag(leverL, 'amp');
     amp.add(leverL);
-    const leverR = box(1.15, 0.06, 0.08, matFlex, 0.85, 0.95, 0);
-    leverR.rotation.z = -0.22;
+    const leverR = box(1.55, 0.08, 0.1, matFlex, 1.05, 1.55, 0);
+    leverR.rotation.z = -0.18;
     tag(leverR, 'amp');
     amp.add(leverR);
-    ampParts.push(diamond, leverL, leverR);
+    [-0.45, 0.45].forEach(function (z) {
+      const strut = box(0.08, 0.7, 0.08, matFlex, 0, 1.25, z);
+      tag(strut, 'amp');
+      amp.add(strut);
+    });
+    ampParts.push(yoke, leverL, leverR);
     root.add(amp);
     groups.amp = amp;
-    makeLabel('flexure amp', 0, 1.85, 0.9, 4.0);
+    makeLabel('flexure amp', 2.4, 1.85, 0.4, 2.8);
 
     const hv = new THREE.Group();
-    const board = box(1.05, 0.1, 0.7, matHv, -0.15, -0.22, 0);
+    const board = box(1.2, 0.12, 0.8, matHv, -0.2, -0.28, 0);
     tag(board, 'hv');
     hv.add(board);
-    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.22, 10), matElectrode);
-    cap.position.set(0.22, -0.02, 0.18);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.26, 10), matElectrode);
+    cap.position.set(0.28, -0.05, 0.22);
     tag(cap, 'hv');
     hv.add(cap);
     root.add(hv);
     groups.hv = hv;
-    makeLabel('HV drive', -1.15, -0.55, 0.7, 3.0);
+    makeLabel('HV drive', -2.1, -0.75, 0.5, 2.6);
 
     const power = new THREE.Group();
     const pack = box(0.7, 0.22, 0.42, matPack, 0.55, -0.38, 0);
@@ -424,7 +425,7 @@
 
     [-1, 1].forEach(function (side) {
       const mount = new THREE.Group();
-      mount.position.set(0.05, 0.95, side * 0.55);
+      mount.position.set(0.05, 1.55, side * 0.62);
       mount.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2;
       const flap = new THREE.Group();
       mount.add(flap);
@@ -441,8 +442,8 @@
       wingHinges.push({ flap: flap, pitch: pitch, rest: 0.12 });
     });
     groups.wings = root;
-    makeLabel('~3 cm class', 0.4, 1.15, 2.6, 3.6);
-    makeLabel('no crank', 1.55, 0.75, 0.2, 3.0);
+    makeLabel('~3 cm class', 0.3, 1.35, 2.8, 2.6);
+    makeLabel('no crank', 2.2, 0.35, 0.15, 2.5);
 
     tetherGroup = new THREE.Group();
     tetherGroup.visible = false;
@@ -523,19 +524,19 @@
       controls.update();
     }
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 6.2, y: 5.2, z: 7.2 }, { x: 0, y: 2.7, z: 0 });
+      setView({ x: 7.6, y: 3.6, z: 4.4 }, { x: 0, y: 3.1, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });
     };
     document.getElementById('btn-iso').onclick = function () {
-      setView({ x: 6.8, y: 4.6, z: 6.4 }, { x: 0, y: 2.7, z: 0 });
+      setView({ x: 6.4, y: 4.8, z: 6.2 }, { x: 0, y: 3.1, z: 0 });
     };
     document.getElementById('btn-top').onclick = function () {
-      setView({ x: 0.15, y: 12, z: 0.12 }, { x: 0, y: 2.7, z: 0 });
+      setView({ x: 0.15, y: 12, z: 0.12 }, { x: 0, y: 3.1, z: 0 });
     };
     document.getElementById('btn-side').onclick = function () {
-      setView({ x: 0.5, y: 2.8, z: 9 }, { x: 0, y: 2.7, z: 0 });
+      setView({ x: 0.4, y: 3.1, z: 9.2 }, { x: 0, y: 3.1, z: 0 });
     };
 
     const btnFlap = document.getElementById('btn-flap');
@@ -583,9 +584,8 @@
           w.flap.rotation.z = w.rest + s * stroke;
           w.pitch.rotation.x = Math.cos(bobT * flapHz * Math.PI * 2) * 0.1;
         });
-        ampParts[0].scale.set(1.15 + s * 0.04, 0.7 - s * 0.05, 1);
-        ampParts[1].rotation.z = 0.22 + s * 0.08;
-        ampParts[2].rotation.z = -0.22 - s * 0.08;
+        ampParts[1].rotation.z = 0.18 + s * 0.08;
+        ampParts[2].rotation.z = -0.18 - s * 0.08;
         piezo.position.y = s * 0.03;
         root.position.y = 2.5 + Math.sin(bobT * 1.2) * 0.04;
       }
