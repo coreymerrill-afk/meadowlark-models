@@ -68,12 +68,16 @@
 
   main { flex: 1; min-height: 0; overflow: auto; }
   main:not(.is-3d) { max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; width: 100%; }
-  main.is-3d { max-width: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  main.is-3d {
+    max-width: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column;
+    overflow: hidden; height: 100%;
+  }
 
-  .panel { display: none; }
-  .panel.active { display: block; }
-  #panel-schematic.active {
-    display: flex; flex-direction: column; flex: 1; min-height: 0; height: 100%;
+  .panel { display: none !important; }
+  .panel.active { display: block !important; }
+  #panel-schematic.panel.active {
+    display: flex !important; flex-direction: column; flex: 1; min-height: 50vh; height: 100%;
   }
 
   h2 { font-size: 1.25rem; margin: 0 0 12px; color: #fff; }
@@ -242,7 +246,7 @@
 
 <main id="main" class="is-3d">
 
-<section id="panel-schematic" class="panel active" role="tabpanel" aria-labelledby="tab-schematic">
+<section id="panel-schematic" class="panel active" role="tabpanel" aria-labelledby="tab-schematic" aria-hidden="false">
   <div class="toolbar">
     <button type="button" id="btn-reset">Reset view</button>
     <button type="button" id="btn-iso">ISO</button>
@@ -283,7 +287,7 @@
   </div>
 </section>
 
-<section id="panel-nature" class="panel" role="tabpanel" aria-labelledby="tab-nature" hidden>
+<section id="panel-nature" class="panel" role="tabpanel" aria-labelledby="tab-nature" aria-hidden="true">
   <h2>Nature principles</h2>
   <div class="card nature-card">
     <p>Insects fly in a Reynolds-number band where <strong>steady airfoil theory under-predicts lift</strong>. Useful ideas are mechanisms, not brand names and not a particular commercial drone.</p>
@@ -317,7 +321,7 @@
   </div>
 </section>
 
-<section id="panel-mimic" class="panel" role="tabpanel" aria-labelledby="tab-mimic" hidden>
+<section id="panel-mimic" class="panel" role="tabpanel" aria-labelledby="tab-mimic" aria-hidden="true">
   <h2>Tech mimic routes</h2>
   <p class="muted">Pick the cheapest path that can fail on the bench. Do not optimize for a brochure.</p>
   <div class="card eng-card">
@@ -377,7 +381,7 @@
   </div>
 </section>
 
-<section id="panel-bench" class="panel" role="tabpanel" aria-labelledby="tab-bench" hidden>
+<section id="panel-bench" class="panel" role="tabpanel" aria-labelledby="tab-bench" aria-hidden="true">
   <h2>Bench milestones</h2>
   <p class="muted">A path, not a calendar. Each gate is a measurement. Skip a gate and the next one lies.</p>
   <div class="step now">
@@ -553,48 +557,57 @@
       const el = panels[key];
       const on = key === id;
       el.classList.toggle('active', on);
-      if (on) el.removeAttribute('hidden');
-      else el.setAttribute('hidden', '');
+      el.setAttribute('aria-hidden', on ? 'false' : 'true');
+      if ('inert' in el) el.inert = !on;
     });
     mainEl.classList.toggle('is-3d', id === 'schematic');
+    mainEl.scrollTop = 0;
     if (id === 'schematic') {
       ensureThreeInit();
+      function relayout() { if (api) api.resize(); }
       requestAnimationFrame(function () {
-        if (api) api.resize();
+        relayout();
+        requestAnimationFrame(relayout);
       });
+      setTimeout(relayout, 80);
     }
     if (opts.focus) tab.focus();
   }
 
-  tabButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () { activateTab(btn); });
-    btn.addEventListener('keydown', function (ev) {
-      const i = tabButtons.indexOf(btn);
-      let next = -1;
-      switch (ev.key) {
-        case 'ArrowRight':
-        case 'ArrowDown':
-          next = (i + 1) % tabButtons.length;
-          break;
-        case 'ArrowLeft':
-        case 'ArrowUp':
-          next = (i - 1 + tabButtons.length) % tabButtons.length;
-          break;
-        case 'Home':
-          next = 0;
-          break;
-        case 'End':
-          next = tabButtons.length - 1;
-          break;
-        default: {
-          const _exhaustive = ev.key;
-          void _exhaustive;
-          return;
-        }
+  const tablist = document.querySelector('nav.tabs');
+  function onTabKey(ev) {
+    const current = document.activeElement;
+    const i = tabButtons.indexOf(current);
+    if (i < 0) return;
+    let next = -1;
+    switch (ev.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        next = (i + 1) % tabButtons.length;
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        next = (i - 1 + tabButtons.length) % tabButtons.length;
+        break;
+      case 'Home':
+        next = 0;
+        break;
+      case 'End':
+        next = tabButtons.length - 1;
+        break;
+      default: {
+        const _exhaustive = ev.key;
+        void _exhaustive;
+        return;
       }
-      ev.preventDefault();
-      activateTab(tabButtons[next], { focus: true });
-    });
+    }
+    ev.preventDefault();
+    ev.stopPropagation();
+    activateTab(tabButtons[next], { focus: true });
+  }
+  tablist.addEventListener('keydown', onTabKey);
+  tabButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () { activateTab(btn, { focus: true }); });
   });
 
   const listEl = document.getElementById('part-list');
@@ -636,7 +649,7 @@
     scene.fog = new THREE.Fog(0x140f1c, 90, 220);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.2, 400);
-    camera.position.set(36, 20, 44);
+    camera.position.set(16, 30, 40);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -652,6 +665,7 @@
     controls.minDistance = 18;
     controls.maxDistance = 120;
     controls.maxPolarAngle = Math.PI * 0.49;
+    if ('enableKeys' in controls) controls.enableKeys = false;
     if (THREE.TOUCH) {
       controls.touches.ONE = THREE.TOUCH.ROTATE;
       controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
@@ -662,9 +676,12 @@
     key.position.set(30, 50, 24);
     scene.add(key);
     scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.45));
-    const rim = new THREE.DirectionalLight(0xd946ef, 0.35);
+    const rim = new THREE.DirectionalLight(0xd946ef, 0.4);
     rim.position.set(-40, 18, -20);
     scene.add(rim);
+    const back = new THREE.DirectionalLight(0xf5d0fe, 0.35);
+    back.position.set(-30, 22, 10);
+    scene.add(back);
 
     const grid = new THREE.GridHelper(80, 32, 0x5b4578, 0x2a2238);
     grid.position.y = 0.02;
@@ -677,18 +694,20 @@
     floor.rotation.x = -Math.PI / 2;
     scene.add(floor);
 
-    const matCarbon = new THREE.MeshStandardMaterial({ color: 0x3a3348, metalness: 0.72, roughness: 0.38 });
-    const matCarbonHi = new THREE.MeshStandardMaterial({ color: 0x5b4d70, metalness: 0.78, roughness: 0.28 });
-    const matAccent = new THREE.MeshStandardMaterial({ color: 0xa855f7, metalness: 0.45, roughness: 0.4 });
-    const matHead = new THREE.MeshStandardMaterial({ color: 0x2a2436, metalness: 0.55, roughness: 0.35 });
-    const matLens = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.85, roughness: 0.15 });
-    const matAb = new THREE.MeshStandardMaterial({ color: 0x4c3d63, metalness: 0.5, roughness: 0.45 });
-    const matSkid = new THREE.MeshStandardMaterial({ color: 0x7c6a55, metalness: 0.35, roughness: 0.55 });
+    const matCarbon = new THREE.MeshStandardMaterial({ color: 0x6b5c82, metalness: 0.55, roughness: 0.42 });
+    const matCarbonHi = new THREE.MeshStandardMaterial({ color: 0x8b7aa3, metalness: 0.6, roughness: 0.32 });
+    const matAccent = new THREE.MeshStandardMaterial({ color: 0xd946ef, metalness: 0.35, roughness: 0.35, emissive: 0x4a044e, emissiveIntensity: 0.45 });
+    const matHead = new THREE.MeshStandardMaterial({ color: 0x4a3f5c, metalness: 0.5, roughness: 0.38 });
+    const matLens = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.85, roughness: 0.12, emissive: 0x155e75, emissiveIntensity: 0.35 });
+    const matAb = new THREE.MeshStandardMaterial({ color: 0xb8a4d4, metalness: 0.28, roughness: 0.5 });
+    const matAbRing = new THREE.MeshStandardMaterial({ color: 0xe879f9, metalness: 0.3, roughness: 0.4, emissive: 0x86198f, emissiveIntensity: 0.25 });
+    const matSkid = new THREE.MeshStandardMaterial({ color: 0xc4b5a0, metalness: 0.25, roughness: 0.55 });
     const matWing = new THREE.MeshStandardMaterial({
-      color: 0xe879f9, metalness: 0.05, roughness: 0.35,
-      transparent: true, opacity: 0.38, side: THREE.DoubleSide, depthWrite: false
+      color: 0xf0abfc, metalness: 0.05, roughness: 0.28,
+      transparent: true, opacity: 0.62, side: THREE.DoubleSide,
+      emissive: 0xa21caf, emissiveIntensity: 0.22
     });
-    const matVein = new THREE.LineBasicMaterial({ color: 0xf5d0fe });
+    const matVein = new THREE.MeshStandardMaterial({ color: 0xfce7f3, metalness: 0.2, roughness: 0.35, emissive: 0xf5d0fe, emissiveIntensity: 0.2 });
     const matTether = new THREE.MeshStandardMaterial({ color: 0xc4b5fd, metalness: 0.2, roughness: 0.6 });
 
     function box(w, h, d, mat, x, y, z) {
@@ -765,47 +784,55 @@
     groups.head = head;
     makeLabel('sensors', 8.2, 3.4, 0, 8);
 
-    /* Thorax */
+    /* Thorax — box bay + motor pods (machine, not a ball) */
     const thorax = new THREE.Group();
-    const thoraxBody = new THREE.Mesh(new THREE.SphereGeometry(2.6, 28, 20), matCarbon);
-    thoraxBody.scale.set(1.35, 1.05, 1.15);
-    thoraxBody.position.set(2.1, 0.2, 0);
-    tag(thoraxBody, 'thorax');
-    thorax.add(thoraxBody);
-    const bay = box(3.4, 1.5, 3.8, matCarbonHi, 2.0, 0.15, 0);
-    tag(bay, 'thorax');
-    thorax.add(bay);
+    const hull = box(5.4, 2.05, 2.55, matCarbon, 1.9, 0.35, 0);
+    tag(hull, 'thorax');
+    thorax.add(hull);
+    const lid = box(4.6, 0.38, 2.15, matCarbonHi, 1.9, 1.45, 0);
+    tag(lid, 'thorax');
+    thorax.add(lid);
     [-1, 1].forEach(function (s) {
-      const pod = box(1.6, 1.2, 1.1, matAccent, 2.3, 0.55, s * 2.15);
+      const pod = box(1.9, 1.2, 1.15, matAccent, 2.5, 0.95, s * 1.85);
       tag(pod, 'thorax');
       thorax.add(pod);
+      const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 1.1, 12), matCarbonHi);
+      motor.rotation.x = Math.PI / 2;
+      motor.position.set(2.5, 0.95, s * 2.55);
+      tag(motor, 'thorax');
+      thorax.add(motor);
     });
-    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.7, 1.4, 12), matCarbonHi);
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.62, 1.4, 12), matCarbonHi);
     neck.rotation.z = Math.PI / 2;
-    neck.position.set(5.5, 0.25, 0);
+    neck.position.set(5.15, 0.4, 0);
     tag(neck, 'thorax');
     thorax.add(neck);
     root.add(thorax);
     groups.thorax = thorax;
-    makeLabel('actuator bay', 2.2, 4.2, 0, 11);
+    makeLabel('actuator bay', 2.2, 4.4, 0, 11);
 
     /* Abdomen segments */
     const abdomen = new THREE.Group();
     for (let i = 0; i < 7; i++) {
       const t = i / 6;
-      const r = 1.15 - t * 0.7;
+      const r = 1.05 - t * 0.55;
       const seg = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 12), matAb);
-      seg.scale.set(1.15, 0.72, 0.72);
-      seg.position.set(-1.6 - i * 1.55, -0.15 - t * 0.15, 0);
-      seg.scale.x *= (1.1 - t * 0.15);
+      seg.scale.set(1.25, 0.78, 0.78);
+      seg.position.set(-1.4 - i * 1.65, -0.1 - t * 0.12, 0);
+      seg.scale.x *= (1.05 - t * 0.1);
       seg.scale.y *= r;
       seg.scale.z *= r;
       tag(seg, 'abdomen');
       abdomen.add(seg);
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(r * 0.82, 0.06, 8, 20), matAbRing);
+      ring.rotation.y = Math.PI / 2;
+      ring.position.copy(seg.position);
+      tag(ring, 'abdomen');
+      abdomen.add(ring);
     }
     root.add(abdomen);
     groups.abdomen = abdomen;
-    makeLabel('abdomen', -7.2, 2.6, 0, 9);
+    makeLabel('abdomen', -7.2, 2.8, 0, 9);
 
     /* Wings */
     function wingShape(span, chord) {
@@ -827,18 +854,26 @@
       tag(membrane, 'wings');
       g.add(membrane);
 
-      const pts = [];
-      pts.push(new THREE.Vector3(0, 0, 0), new THREE.Vector3(span, 0, -chord * 0.05));
-      pts.push(new THREE.Vector3(0.3, 0, 0), new THREE.Vector3(span * 0.72, 0, chord * 0.22));
-      pts.push(new THREE.Vector3(0.3, 0, 0), new THREE.Vector3(span * 0.65, 0, -chord * 0.2));
-      pts.push(new THREE.Vector3(span * 0.35, 0, 0.02), new THREE.Vector3(span * 0.38, 0, chord * 0.16));
-      const line = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), matVein);
-      tag(line, 'wings');
-      g.add(line);
+      function vein(x0, z0, x1, z1, r) {
+        const a = new THREE.Vector3(x0, 0.05, z0);
+        const b = new THREE.Vector3(x1, 0.05, z1);
+        const dir = new THREE.Vector3().subVectors(b, a);
+        const len = dir.length();
+        const rod = new THREE.Mesh(new THREE.CylinderGeometry(r, r * 0.7, len, 6), matVein);
+        rod.position.copy(a).add(b).multiplyScalar(0.5);
+        rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+        tag(rod, 'wings');
+        g.add(rod);
+      }
+      vein(0.15, 0, span, -chord * 0.04, 0.09);
+      vein(0.25, 0.02, span * 0.78, chord * 0.28, 0.045);
+      vein(0.25, -0.02, span * 0.7, -chord * 0.26, 0.045);
+      vein(span * 0.38, 0, span * 0.42, chord * 0.2, 0.03);
+      vein(span * 0.55, 0, span * 0.52, -chord * 0.18, 0.03);
 
-      const spar = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.045, span, 8), matCarbonHi);
+      const spar = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.07, span, 8), matCarbonHi);
       spar.rotation.z = -Math.PI / 2;
-      spar.position.set(span / 2, 0.04, 0);
+      spar.position.set(span / 2, 0.08, 0);
       tag(spar, 'wings');
       g.add(spar);
       return g;
@@ -853,16 +888,17 @@
       mount.add(flap);
       const wing = makeWing(span, chord);
       if (side < 0) wing.scale.z = -1;
+      flap.rotation.z = 0.22;
       flap.add(wing);
       root.add(mount);
-      wingHinges.push({ hinge: flap, phase: zOff > 2.6 ? 0 : 0.32 });
+      wingHinges.push({ hinge: flap, phase: zOff > 2.6 ? 0 : 0.32, rest: 0.22 });
       return mount;
     }
 
-    addWing(1, 2.55, 17.5, 5.2, 3.1, 1.15);
-    addWing(-1, 2.55, 17.5, 5.2, 3.1, 1.15);
-    addWing(1, 2.15, 14.5, 4.6, 0.6, 0.95);
-    addWing(-1, 2.15, 14.5, 4.6, 0.6, 0.95);
+    addWing(1, 2.55, 17.5, 5.2, 3.2, 1.25);
+    addWing(-1, 2.55, 17.5, 5.2, 3.2, 1.25);
+    addWing(1, 2.35, 14.2, 4.4, -0.6, 0.85);
+    addWing(-1, 2.35, 14.2, 4.4, -0.6, 0.85);
     groups.wings = root;
     makeLabel('forewing', 4.5, 3.6, 14, 9);
     makeLabel('hindwing', -1.2, 3.2, 12, 9);
@@ -981,7 +1017,7 @@
     }
 
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 36, y: 20, z: 44 }, { x: 0, y: 6, z: 0 });
+      setView({ x: 16, y: 30, z: 40 }, { x: 0, y: 6, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });
@@ -1043,7 +1079,7 @@
         const s = Math.sin(bobT * flapHz * Math.PI * 2);
         wingHinges.forEach(function (w) {
           const local = Math.sin(bobT * flapHz * Math.PI * 2 - w.phase);
-          w.hinge.rotation.z = local * stroke;
+          w.hinge.rotation.z = w.rest + local * stroke;
         });
         root.position.y = 8.2 + Math.sin(bobT * 1.1) * 0.18;
       }
