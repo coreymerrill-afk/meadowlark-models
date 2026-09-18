@@ -156,6 +156,20 @@
 (function () {
   'use strict';
 
+  if (!window.FlyerPage || !window.MeadowlarkThree) {
+    if (window.FlyerPage) FlyerPage.showMissingStack();
+    else {
+      const loading = document.getElementById('three-loading');
+      const err = document.getElementById('three-error');
+      if (loading) loading.classList.add('hidden');
+      if (err) {
+        err.classList.add('visible');
+        err.innerHTML = '<strong>3D viewer scripts did not load</strong><br/>Need /insect/three-stack.js and /insect/page-chrome.js.';
+      }
+    }
+    return;
+  }
+
   const PARTS = [
     { id: 'fore', name: 'Fore pair', detail: 'One of two wing pairs. Not a decorative plate on a two-wing thorax.' },
     { id: 'hind', name: 'Hind pair', detail: 'Phaseable against the fore pair — the control idea of this start.' },
@@ -511,14 +525,8 @@
     });
 
     function resize() {
-      const w = wrap.clientWidth || 1;
-      const h = wrap.clientHeight || 1;
-      FlyerPage.applyPortraitFov(camera, w, h, 40, 54);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h, false);
+      FlyerPage.sizeCanvas(wrap, camera, renderer, 40, 54);
     }
-    window.addEventListener('resize', resize);
     resize();
 
     if (loading) {
