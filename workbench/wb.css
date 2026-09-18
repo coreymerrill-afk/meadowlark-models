@@ -26,6 +26,21 @@ code {
 }
 
 .banners { flex-shrink: 0; }
+.back-bar {
+  flex-shrink: 0;
+  padding: 5px 16px;
+  font-size: 12px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.back-bar a {
+  color: var(--accent2);
+  text-decoration: none;
+  font-weight: 600;
+}
+.back-bar a:hover, .back-bar a:focus-visible { text-decoration: underline; }
+.back-bar .sep { color: var(--muted); margin: 0 0.45em; }
+.back-bar .sub { color: var(--muted); font-weight: 500; }
 .banner {
   padding: 7px 16px; font-size: 12px; text-align: center; border-bottom: 1px solid;
 }

@@ -3,26 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="DRAFT Workbench Gen-0 Flat schematic — 36×36″ island tile, 38″ AFF, 4-side latch." />
+<meta name="description" content="DRAFT Workbench Gen-0 Flat — plain 36×36 inch rolling table, 38 inches tall." />
 <title>Flat · Workbench Gen-0 — Meadowlark Models</title>
 <link rel="stylesheet" href="../wb.css" />
 </head>
 <body class="is-viewer" data-module="flat" data-vendor="../vendor/">
 <div class="banners">
+  <div class="back-bar">
+    <a href="/">Back to Meadowlark Models</a>
+    <span class="sep">·</span>
+    <a class="sub" href="/workbench/">Workbench Gen-0</a>
+  </div>
   <div class="banner draft">
-    <strong>DRAFT · Gen-0 schematic.</strong>
-    Primary 3D — not a finished product, not a cut list, not a buy package.
+    <strong>DRAFT.</strong>
+    First 3D look — not a finished product, not a cut list, not something to buy from.
   </div>
 </div>
 <header class="doc-header">
-  <p class="crumb"><a href="/">Meadowlark Models</a> · <a href="/workbench/">Workbench</a></p>
   <h1>Flat</h1>
-  <p class="meta">Island tile · 36×36″ OA · 38″ AFF · full 4-side latch</p>
+  <p class="meta">Workbench Gen-0 · plain table · 36×36 inches · 38 inches tall</p>
 </header>
 <div class="toolbar">
-  <nav class="catalog" aria-label="First trio">
-    <a href="/workbench/flat/" aria-current="page"><span class="cat-k">Primary</span>Flat</a>
-    <a href="/workbench/extension/"><span class="cat-k">Sibling</span>Extension</a>
+  <nav class="catalog" aria-label="The three tables">
+    <a href="/workbench/flat/" aria-current="page"><span class="cat-k">Start here</span>Flat</a>
+    <a href="/workbench/extension/"><span class="cat-k">Helper</span>Extension</a>
     <a href="/workbench/miter/"><span class="cat-k">DWS716XPS</span>Miter</a>
   </nav>
   <button type="button" id="btn-reset">Reset view</button>
@@ -30,33 +34,33 @@
   <button type="button" id="btn-top">Top</button>
   <button type="button" id="btn-side">Side</button>
   <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
-  <label class="toggle"><input type="checkbox" id="tog-neighbor" /> Ghost neighbor</label>
-  <span class="hint">Drag orbit · Scroll zoom · Click a part · 1 unit = 1 inch</span>
+  <label class="toggle"><input type="checkbox" id="tog-neighbor" /> Neighbor table</label>
+  <span class="hint">Drag to orbit · Scroll to zoom · Click a part</span>
 </div>
 <div class="view3d-wrap">
   <div id="canvas-wrap">
-    <div id="three-loading">Loading Three.js…</div>
+    <div id="three-loading">Loading 3D…</div>
     <div id="three-error" role="alert"></div>
   </div>
   <aside id="sidebar-3d">
-    <h2>Flat · island tile</h2>
-    <p class="muted">Plain ¾″ top, lower shelf, diagonal hint, full 4-side latch. Default island in the first trio.</p>
-    <h3>Gen-0 locks</h3>
-    <div class="stat"><span>Module OA</span><span>36 × 36″</span></div>
-    <div class="stat"><span>A-clear</span><span>≈29 × 29″</span></div>
-    <div class="stat"><span>Posts</span><span>~3½ × 3½″</span></div>
-    <div class="stat"><span>Top height</span><span>38″ AFF</span></div>
-    <div class="stat"><span>Latch plane</span><span>26″ AFF</span></div>
-    <div class="stat"><span>Ply</span><span>½″ plates / ¾″ load</span></div>
-    <div class="stat"><span>Casters</span><span>3″ class · lock</span></div>
-    <h3>Hotspots</h3>
+    <h2>Flat</h2>
+    <p class="muted">The default island. Plain ¾ inch top, a shelf underneath, a brace for stiffness. All four sides snap together.</p>
+    <h3>Locked sizes</h3>
+    <div class="stat"><span>Outer size</span><span>36 × 36 in</span></div>
+    <div class="stat"><span>Between posts</span><span>about 29 × 29 in</span></div>
+    <div class="stat"><span>Posts</span><span>about 3½ in</span></div>
+    <div class="stat"><span>Height</span><span>38 in tall</span></div>
+    <div class="stat"><span>Latch</span><span>12 in below top</span></div>
+    <div class="stat"><span>Plywood</span><span>½ in plates / ¾ in top</span></div>
+    <div class="stat"><span>Wheels</span><span>lock · brand open</span></div>
+    <h3>Parts</h3>
     <div id="part-list"></div>
     <div id="sel-detail">
       <h4 id="sel-title">—</h4>
       <p id="sel-body">—</p>
     </div>
     <h3>Honest limits</h3>
-    <p class="muted">Geometry is a schematic. Caster and latch brand SKUs are OPEN. No cut list, no shopping. Next real number is a physical Flat, not this render.</p>
+    <p class="muted">This is a sketch. Wheel and latch brands are still open. The next real number comes from building a Flat, not from this picture.</p>
   </aside>
 </div>
 <script src="../wb-viewer.js"></script>

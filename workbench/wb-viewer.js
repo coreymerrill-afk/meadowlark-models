@@ -21,12 +21,12 @@
   const OC_ESM_SH = 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
   const PARTS = [
-    { id: 'posts', name: 'Posts', detail: 'Nominal 4×4 (3½×3½ dressed) at four corners. Outer faces are the 36×36″ OA latch plane. ≈29×29 A-clear between.' },
-    { id: 'top', name: 'Load top', detail: '¾″ ply load top / shelf. Surface at 38″ AFF — not 36. ½″ is X1-cut / non-structural plates only.' },
-    { id: 'shelf', name: 'Shelf / braces', detail: 'Lower ¾″ shelf and/or a diagonal hint for racking stiffness. Not a final stick schedule.' },
-    { id: 'latch', name: 'Latch faces', detail: 'Identical on all four sides. Magnets dock and align; mechanical takes shear. Primary latch 12″ below finished top ≈ 26 AFF — not ~18 AFF. Dual vs single is OPEN.' },
-    { id: 'casters', name: 'Casters', detail: 'Locking casters under each post. 3″ class is a design default. Brand SKU is OPEN / DRAFT.' },
-    { id: 'saw', name: 'DWS716XPS envelope', detail: 'Schematic DeWalt DWS716XPS. Base ~27.2×22.4 fits 29 clear — tight depth. Removable inserts so a later SKU can swap. Bevel swing tape is OPEN. Not a CAD import.' }
+    { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them.' },
+    { id: 'top', name: 'Top', detail: '¾ inch plywood that holds weight. The top sits 38 inches off the floor — not 36. ½ inch plywood is only for plates the X1 can cut.' },
+    { id: 'shelf', name: 'Shelf / brace', detail: 'A ¾ inch shelf and/or a diagonal brace so the table does not rack. Not a final lumber list.' },
+    { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Magnets snap the tables together; then a latch takes the load. The latch sits 12 inches below the top (about 26 inches off the floor) — not 18. Whether we need one latch or two is still open.' },
+    { id: 'casters', name: 'Wheels', detail: 'A locking caster under each post. About 3 inches tall as a starting guess. Brand is still open.' },
+    { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS. Base about 27.2 × 22.4 inches — fits the 29 inch opening, tight front-to-back. Removable inserts so a later saw can swap in. How far the head swings is still open.' }
   ];
 
   function loadScript(src) {
@@ -308,37 +308,38 @@
 
     function addLatchPad(parent, face) {
       const g = new THREE.Group();
-      const pad = box(6, 4, PLATE, matPlate, 0, 0, 0);
+      const upperMagY = TOP_AFF - TOP_THK - 2;
+      const lowerMagY = 4;
+      function addMag(y) {
+        const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.22, 16), matMagnet);
+        mag.rotation.x = Math.PI / 2;
+        mag.position.set(0, y, PLATE / 2 + 0.1);
+        tag(mag, 'latch');
+        g.add(mag);
+      }
+      addMag(upperMagY);
+      addMag(lowerMagY);
+      const pad = box(4.2, 3.2, PLATE, matPlate, 0, LATCH_AFF, 0);
       tag(pad, 'latch');
       g.add(pad);
-      const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.22, 16), matMagnet);
-      mag.rotation.x = Math.PI / 2;
-      mag.position.set(-1.3, 0.4, PLATE / 2 + 0.1);
-      tag(mag, 'latch');
-      g.add(mag);
-      const mag2 = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.22, 16), matMagnet);
-      mag2.rotation.x = Math.PI / 2;
-      mag2.position.set(1.3, 0.4, PLATE / 2 + 0.1);
-      tag(mag2, 'latch');
-      g.add(mag2);
-      const toggle = box(1.6, 0.55, 0.7, matMech, 0, -0.85, PLATE / 2 + 0.25);
+      const toggle = box(1.6, 0.55, 0.7, matMech, 0, LATCH_AFF - 0.7, PLATE / 2 + 0.25);
       tag(toggle, 'latch');
       g.add(toggle);
       const half = OA / 2 + PLATE / 2;
       switch (face) {
         case '+x':
-          g.position.set(half, LATCH_AFF, 0);
+          g.position.set(half, 0, 0);
           g.rotation.y = Math.PI / 2;
           break;
         case '-x':
-          g.position.set(-half, LATCH_AFF, 0);
+          g.position.set(-half, 0, 0);
           g.rotation.y = -Math.PI / 2;
           break;
         case '+z':
-          g.position.set(0, LATCH_AFF, half);
+          g.position.set(0, 0, half);
           break;
         case '-z':
-          g.position.set(0, LATCH_AFF, -half);
+          g.position.set(0, 0, -half);
           g.rotation.y = Math.PI;
           break;
         default: {
@@ -470,12 +471,12 @@
         if (s.material) s.material.dispose();
       });
       labelSprites.length = 0;
-      makeLabel('36 OA', 0, TOP_AFF + 3.2, OA / 2 + 2, 16);
-      makeLabel('38 AFF', -OA / 2 - 6, TOP_AFF, 0, 14);
-      makeLabel('latch 26', OA / 2 + 6, LATCH_AFF + 3, 0, 14);
+      makeLabel('36×36 in', 0, TOP_AFF + 3.2, OA / 2 + 2, 16);
+      makeLabel('38 in tall', -OA / 2 - 6, TOP_AFF, 0, 14);
+      makeLabel('latch', OA / 2 + 6, LATCH_AFF + 3, 0, 12);
       if (kind === 'miter') {
         makeLabel('DWS716XPS', 0, TOP_AFF + 12, 0, 18);
-        makeLabel('27.2 deep · tight', 0, TOP_AFF + 7, SAW_D / 2 + 2, 16);
+        makeLabel('tight fit', 0, TOP_AFF + 7, SAW_D / 2 + 2, 14);
       }
       const tog = document.getElementById('tog-labels');
       const show = !tog || tog.checked;

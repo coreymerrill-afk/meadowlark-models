@@ -3,26 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="DRAFT Workbench Gen-0 Extension schematic — same 36×36″ latch, lighter utility tile." />
+<meta name="description" content="DRAFT Workbench Gen-0 Extension — same 36×36 inch snap-together helper table." />
 <title>Extension · Workbench Gen-0 — Meadowlark Models</title>
 <link rel="stylesheet" href="../wb.css" />
 </head>
 <body class="is-viewer" data-module="extension" data-vendor="../vendor/">
 <div class="banners">
+  <div class="back-bar">
+    <a href="/">Back to Meadowlark Models</a>
+    <span class="sep">·</span>
+    <a class="sub" href="/workbench/">Workbench Gen-0</a>
+  </div>
   <div class="banner draft">
-    <strong>DRAFT · Gen-0 schematic.</strong>
-    Sibling tile — not a finished product, not a cut list, not a buy package.
+    <strong>DRAFT.</strong>
+    Helper table — not a finished product, not a cut list, not something to buy from.
   </div>
 </div>
 <header class="doc-header">
-  <p class="crumb"><a href="/">Meadowlark Models</a> · <a href="/workbench/">Workbench</a></p>
   <h1>Extension</h1>
-  <p class="meta">Lighter utility · same 36×36″ OA and latch · docks to Flat or Miter</p>
+  <p class="meta">Workbench Gen-0 · lighter helper · same 36×36 inch size</p>
 </header>
 <div class="toolbar">
-  <nav class="catalog" aria-label="First trio">
-    <a href="/workbench/flat/"><span class="cat-k">Primary</span>Flat</a>
-    <a href="/workbench/extension/" aria-current="page"><span class="cat-k">Sibling</span>Extension</a>
+  <nav class="catalog" aria-label="The three tables">
+    <a href="/workbench/flat/"><span class="cat-k">Start here</span>Flat</a>
+    <a href="/workbench/extension/" aria-current="page"><span class="cat-k">Helper</span>Extension</a>
     <a href="/workbench/miter/"><span class="cat-k">DWS716XPS</span>Miter</a>
   </nav>
   <button type="button" id="btn-reset">Reset view</button>
@@ -30,33 +34,33 @@
   <button type="button" id="btn-top">Top</button>
   <button type="button" id="btn-side">Side</button>
   <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
-  <label class="toggle"><input type="checkbox" id="tog-neighbor" /> Ghost neighbor</label>
-  <span class="hint">Drag orbit · Scroll zoom · Click a part · 1 unit = 1 inch</span>
+  <label class="toggle"><input type="checkbox" id="tog-neighbor" /> Neighbor table</label>
+  <span class="hint">Drag to orbit · Scroll to zoom · Click a part</span>
 </div>
 <div class="view3d-wrap">
   <div id="canvas-wrap">
-    <div id="three-loading">Loading Three.js…</div>
+    <div id="three-loading">Loading 3D…</div>
     <div id="three-error" role="alert"></div>
   </div>
   <aside id="sidebar-3d">
-    <h2>Extension · lighter utility</h2>
-    <p class="muted">Same 36×36″ OA and latch faces. Lighter: slatted shelf, fewer braces. Docks to Flat or Miter to grow flats or infeed/outfeed.</p>
-    <h3>Gen-0 locks</h3>
-    <div class="stat"><span>Module OA</span><span>36 × 36″</span></div>
-    <div class="stat"><span>A-clear</span><span>≈29 × 29″</span></div>
-    <div class="stat"><span>Posts</span><span>~3½ × 3½″</span></div>
-    <div class="stat"><span>Top height</span><span>38″ AFF</span></div>
-    <div class="stat"><span>Latch plane</span><span>26″ AFF</span></div>
-    <div class="stat"><span>Ply</span><span>½″ plates / ¾″ load</span></div>
-    <div class="stat"><span>Casters</span><span>3″ class · lock</span></div>
-    <h3>Hotspots</h3>
+    <h2>Extension</h2>
+    <p class="muted">Same outer size and snap-together faces as Flat. Lighter — slatted shelf, fewer braces. Use it to grow a bigger top or as infeed/outfeed.</p>
+    <h3>Locked sizes</h3>
+    <div class="stat"><span>Outer size</span><span>36 × 36 in</span></div>
+    <div class="stat"><span>Between posts</span><span>about 29 × 29 in</span></div>
+    <div class="stat"><span>Posts</span><span>about 3½ in</span></div>
+    <div class="stat"><span>Height</span><span>38 in tall</span></div>
+    <div class="stat"><span>Latch</span><span>12 in below top</span></div>
+    <div class="stat"><span>Plywood</span><span>½ in plates / ¾ in top</span></div>
+    <div class="stat"><span>Wheels</span><span>lock · brand open</span></div>
+    <h3>Parts</h3>
     <div id="part-list"></div>
     <div id="sel-detail">
       <h4 id="sel-title">—</h4>
       <p id="sel-body">—</p>
     </div>
     <h3>Honest limits</h3>
-    <p class="muted">Not a second island. Utility tile only. Same locks — do not invent a different grid. SKUs stay OPEN.</p>
+    <p class="muted">Not a second island — a helper only. Same locked sizes. Do not invent a different grid. Brands still open.</p>
   </aside>
 </div>
 <script src="../wb-viewer.js"></script>
