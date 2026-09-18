@@ -6186,7 +6186,27 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       }
       return { total, dimmed, solid, hidden, sample, exploreMode };
     }
-    api = { setStep, highlightLetter, resize, applyPbrAppearance, enterExplore, snapshotCamera, sampleMeshModes };
+    function dumpLetter(letter) {
+      const rec = partRegistry[letter] || { meshes: [] };
+      return rec.meshes.filter(m => m.isMesh).map(m => ({
+        pos: [+m.position.x.toFixed(3), +m.position.y.toFixed(3), +m.position.z.toFixed(3)],
+        rotY: +m.rotation.y.toFixed(4),
+        size: m.geometry && m.geometry.parameters ? {
+          w: m.geometry.parameters.width,
+          h: m.geometry.parameters.height,
+          d: m.geometry.parameters.depth
+        } : null,
+        tips: m.userData.segTips || null,
+        step: m.userData.stepIndex
+      }));
+    }
+    function setCameraLook(px, py, pz, tx, ty, tz) {
+      camera.position.set(px, py, pz);
+      controls.target.set(tx, ty, tz);
+      camera.updateProjectionMatrix();
+      controls.update();
+    }
+    api = { setStep, highlightLetter, resize, applyPbrAppearance, enterExplore, snapshotCamera, sampleMeshModes, dumpLetter, setCameraLook };
     try { window.__x1Api = api; } catch (e) { /* ignore */ }
     setStep(0, { frame: true });
     applyPbrAppearance().catch(err => console.warn('[X1] PBR appearance failed', err));
