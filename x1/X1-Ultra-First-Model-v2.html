@@ -799,11 +799,11 @@
   </div>
   <div class="card">
     <h3>Why it does not rack</h3>
-    <p>A heavy box on six legs wants to parallelogram when you bump it — the top stays a rectangle while the feet walk. That lean is racking. This stand stops it with ordinary lumber, not steel:</p>
+    <p>The torsion box is a stiff, flat top — two skins glued to a ribbed core, so the deck stays true when you lean on it. Six legs under the apron carry that load into the floor. A heavy box on six legs still wants to parallelogram when you bump it — the top stays a rectangle while the feet walk. That lean is racking. This stand stops it with ordinary lumber, not steel:</p>
     <ul>
       <li><strong>End panels (O)</strong> — Full-height plywood on both short ends. They act like walls, so the stand cannot lean across its width.</li>
       <li><strong>Lower stretchers (Q)</strong> — 2×4s face-mounted near the floor, tying all six posts so the feet cannot spread.</li>
-      <li><strong>Diagonals (P)</strong> — Four 2×4s, two on each long side, each running corner post to mid post just above the stretchers. Each tip bears on a post face. That locks the long bays so the stand cannot walk down its length.</li>
+      <li><strong>Diagonals (P)</strong> — Four 2×4s, two on each long side, corner post to mid post. Each brace slopes: one tip high near the apron, the other just above the stretcher. That triangulates the long bays so the stand cannot walk down its length.</li>
     </ul>
     <p class="muted">Apron and torsion deck stiffen the top. Together this is a 900&nbsp;lb platform, not a wobbly workbench. After both O panels and all four P braces, the stand should feel planted — then level and jam-nut the feet.</p>
   </div>
@@ -2195,7 +2195,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     },
     {
       id: "S30", title: "Install diagonals on the long sides", letters: ["P", "K"],
-      text: "Add four diagonal braces — corner to mid on each long side. Tips land on the posts above the stretchers.",
+      text: "Add four diagonal braces — corner to mid on each long side. Tips land on the posts above the stretchers. Those braces triangulate the long bays so the stand doesn’t rack.",
       detail: [
         "1. Cut four 2×4s to fit each long bay (~48–50\" tip-to-tip).",
         "2. Install two per long side: corner post ↔ mid post.",
@@ -3914,35 +3914,43 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       boxMesh('Q', si, T, T24_H, qShortLen, LEXICON.Q.color, -qShortX, qY, 0);
       boxMesh('Q', si, T, T24_H, qShortLen, LEXICON.Q.color, qShortX, qY, 0);
     })();
-    // 16: P — 4 braces corner↔mid on each long side; tips on K inner X-faces; above Q
-    // Cross-section 3.5 × 1.5 (not T×T square). Do not place on Q's inboard Z —
-    // that left a floating rail that never met the posts (ATTACH S30 is z=±legCornerZ).
+    // 16: P — 4 braces corner↔mid on each long side; tips on K inner Z faces; above Q
+    // Cross-section 3.5 × 1.5 (not T×T square). Face-mount on the same inner-Z plane as
+    // long Q; elevation slope so they read as shop diagonals, not rails parallel to Q.
     (function () {
       const si = 29;
       const qY = LEVELER_H + PLATE_H + 3.5;
-      const pY = qY + T24_H; // just above on-edge stretchers (ATTACH S30 y=10.25)
+      const yLow = qY + T24_H + 0.75; // just above on-edge stretcher Q
+      const yHigh = apronBottom - T24_H / 2 - 0.25; // near apron underside / upper third of K
       const legZc = legCornerZ;
       const legXc = legCornerX;
-      // Tip: end-grain butt to K inner X-face (small gap, no morph through the post)
-      const tip = LEG_SQ / 2 + 0.05;
-      // Long-side post plane — same Z as K centers / ATTACH S30 P→K (not Q's inner-face Z)
-      const zPlane = (sgn) => sgn * legZc;
+      // Tip: end-grain butts K inner X-face (no 0.05" air gap — reads as seated)
+      const tip = LEG_SQ / 2;
+      // 1.5" face against the long-side K inner Z-face (same plane idea as long Q)
+      const zAlong = (sgn) => sgn * (legZc - LEG_SQ / 2 - T / 2);
+      const xCornerN = -(legXc - tip);
+      const xMidN = -tip;
+      const xMidP = tip;
+      const xCornerP = (legXc - tip);
       // Two per long side: corner −X ↔ mid, mid ↔ corner +X (continuous K–P–K)
+      // Opposing slopes: high-at-corner/low-at-mid, then high-at-mid/low-at-corner
       const diags = [
-        [-(legXc - tip), zPlane(-1), -tip, zPlane(-1)],
-        [tip, zPlane(-1), (legXc - tip), zPlane(-1)],
-        [-(legXc - tip), zPlane(1), -tip, zPlane(1)],
-        [tip, zPlane(1), (legXc - tip), zPlane(1)],
+        [xCornerN, yHigh, zAlong(-1), xMidN, yLow, zAlong(-1)],
+        [xMidP, yHigh, zAlong(-1), xCornerP, yLow, zAlong(-1)],
+        [xCornerN, yHigh, zAlong(1), xMidN, yLow, zAlong(1)],
+        [xMidP, yHigh, zAlong(1), xCornerP, yLow, zAlong(1)],
       ];
-      diags.forEach(([x1, z1, x2, z2]) => {
-        const dx = x2 - x1, dz = z2 - z1;
-        const len = Math.hypot(dx, dz);
+      const pAlong = new THREE.Vector3(1, 0, 0);
+      const pDir = new THREE.Vector3();
+      diags.forEach(([x1, y1, z1, x2, y2, z2]) => {
+        const dx = x2 - x1, dy = y2 - y1, dz = z2 - z1;
+        const len = Math.hypot(dx, dy, dz);
         const m = new THREE.Mesh(new THREE.BoxGeometry(len, T24_H, T), makeMat(LEXICON.P.color));
-        m.position.set((x1 + x2) / 2, pY, (z1 + z2) / 2);
-        // Long axis is BoxGeometry +X; yaw lines it up with tip-to-tip (dz=0 here)
-        m.rotation.y = -Math.atan2(dz, dx);
+        m.position.set((x1 + x2) / 2, (y1 + y2) / 2, (z1 + z2) / 2);
+        pDir.set(dx, dy, dz).normalize();
+        m.quaternion.setFromUnitVectors(pAlong, pDir);
         m.userData.isRotated = true;
-        m.userData.segTips = [[x1, pY, z1], [x2, pY, z2]];
+        m.userData.segTips = [[x1, y1, z1], [x2, y2, z2]];
         addMesh('P', m, si);
       });
     })();
@@ -5113,11 +5121,17 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         m.position.copy(start);
 
         const mats = m.material ? (Array.isArray(m.material) ? m.material : [m.material]) : [];
-        const targetOps = mats.map(mat => (mat.opacity != null ? mat.opacity : 1));
+        const targetOps = mats.map(mat => (c.letter === 'P' ? 1 : (mat.opacity != null ? mat.opacity : 1)));
         mats.forEach(mat => {
-          mat.transparent = true;
-          mat.opacity = 0;
-          mat.depthWrite = false;
+          if (c.letter === 'P') {
+            mat.transparent = false;
+            mat.opacity = 1;
+            mat.depthWrite = true;
+          } else {
+            mat.transparent = true;
+            mat.opacity = 0;
+            mat.depthWrite = false;
+          }
           mat.needsUpdate = true;
         });
         m.visible = true;
@@ -5139,9 +5153,15 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           m.position.lerpVectors(it.from, it.to, e);
           const mats = m.material ? (Array.isArray(m.material) ? m.material : [m.material]) : [];
           mats.forEach((mat, i) => {
-            mat.opacity = it.targetOps[i] * e;
-            mat.transparent = true;
-            mat.depthWrite = false;
+            if (it.letter === 'P') {
+              mat.opacity = 1;
+              mat.transparent = false;
+              mat.depthWrite = true;
+            } else {
+              mat.opacity = it.targetOps[i] * e;
+              mat.transparent = true;
+              mat.depthWrite = false;
+            }
             mat.needsUpdate = true;
           });
         });
@@ -5236,7 +5256,13 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           mat.opacity = letter === 'H' ? 0.88 : 0.62;
           mat.depthWrite = true;
         } else if (mode === 'current') {
-          if (letter === 'Z' && mat.opacity < 1 && !mat.wireframe) {
+          if (letter === 'P') {
+            // S30 current: stay solid so under-apron P does not wash out with dimmed priors
+            mat.transparent = false;
+            mat.opacity = 1;
+            mat.depthWrite = true;
+            mat.depthTest = true;
+          } else if (letter === 'Z' && mat.opacity < 1 && !mat.wireframe) {
             mat.transparent = true;
             mat.opacity = 0.25;
           } else if (letter === 'O' || letter === 'Y') {
@@ -5250,6 +5276,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         }
         mat.needsUpdate = true;
       });
+      if (letter === 'P') m.renderOrder = mode === 'current' ? 3 : 0;
     }
 
     function applyExploreVisibility() {
@@ -6183,17 +6210,20 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         if (best > 0.5) pTipBad++;
       });
       console.assert(pTipBad === 0, 'P tips must meet K (clearance≤0.5")', pTipBad);
-      const pAttachY = LEVELER_H + PLATE_H + 3.5 + T24_H;
-      let pPlaneBad = 0;
+      const zInner = legCornerZ - LEG_SQ / 2 - T / 2;
+      let pFlat = 0, pZbad = 0;
       pMeshes.forEach(m => {
         const tips = m.userData.segTips;
-        if (!tips) { pPlaneBad++; return; }
+        if (!tips || tips.length < 2) { pFlat++; return; }
+        if (Math.abs(tips[0][1] - tips[1][1]) < 2) pFlat++;
         tips.forEach(p => {
-          if (Math.abs(p[1] - pAttachY) > 0.15) pPlaneBad++;
-          if (Math.abs(Math.abs(p[2]) - legCornerZ) > 0.15) pPlaneBad++;
+          if (Math.abs(Math.abs(p[2]) - zInner) > 0.15) pZbad++;
         });
       });
-      console.assert(pPlaneBad === 0, 'P tips must sit in K long-side plane just above Q (ATTACH S30)', pPlaneBad);
+      console.assert(pMeshes.length === 4, 'exactly 4 P diagonals', pMeshes.length);
+      console.assert(pFlat === 0, 'P must slope in elevation (not rails parallel to Q)', pFlat);
+      console.assert(pZbad === 0, 'P tips must sit on K inner Z faces (same plane idea as long Q)', pZbad);
+      console.info('[X1] P tips', pMeshes.map(m => m.userData.segTips));
       console.info('[X1] leg XY after fix', Ks.map(k => [+k.m.position.x.toFixed(2), +k.m.position.z.toFixed(2)]));
     })();
     console.assert(STEPS.length === 51, 'step count', STEPS.length);
