@@ -8,7 +8,8 @@ Locked architecture (Option A) — Lead 2026-09-17
   Two-wing motor + linkage + deliberate elastic return + passive aeroelastic pitch
   LEV-dominated hover is the primary flight story
   Clap-and-fling = curiosity bench; four-wing dragonfly = Phase-2
-  Span freeze: semi-span R = 9 cm · mean chord c = 2.3 cm · mass mid ~15 g (~10–20 g band)
+  Span freeze (public nominals): R = 9 cm · c = 2.3 cm · mass mid 15 g
+  Working band ~10–20 g is background context, not the primary chip
   Mission: hover-capable education/research, short endurance, indoor / netted first
   Research/education/environmental flyer — not a weapon
   Copy source: LEAD-ARCHETYPE-LOCK + MODELS-PAGE-CONTENT-LOCK

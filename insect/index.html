@@ -230,7 +230,7 @@
   <div>
     <a class="home-link" href="/">← Meadowlark Models</a>
     <h1>Flying insect robot</h1>
-    <p class="meta">Nature → tech · ~10–20 g hover · large-insect / hawkmoth–dragonfly class · indoor first</p>
+    <p class="meta">Nature → tech · ~10–20 g · R = 9 cm · indoor first</p>
   </div>
   <nav class="tabs" role="tablist" aria-label="Flyer-0 sections">
     <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
@@ -262,12 +262,12 @@
       <p class="muted">Motor + linkage + deliberate elastic return + passive aeroelastic pitch. LEV-dominated hover is the flight story. Clap-and-fling is curiosity-bench only. Four-wing is Phase-2.</p>
 
       <h3>Scale chip</h3>
-      <div class="stat"><span>Mass band</span><span>~10–20 g</span></div>
-      <div class="stat"><span>Class</span><span>hawkmoth–dragonfly</span></div>
-      <div class="stat"><span>Mission</span><span>hover · indoor first</span></div>
       <div class="stat"><span>Semi-span R</span><span>9 cm</span></div>
       <div class="stat"><span>Mean chord c</span><span>2.3 cm</span></div>
-      <div class="stat"><span>Mass (mid)</span><span>~15 g</span></div>
+      <div class="stat"><span>Mass (mid)</span><span>15 g</span></div>
+      <div class="stat"><span>Class</span><span>hawkmoth–dragonfly</span></div>
+      <div class="stat"><span>Mission</span><span>hover · indoor first</span></div>
+      <div class="stat"><span>Working band</span><span>~10–20 g</span></div>
 
       <h3>Hotspots</h3>
       <div id="part-list"></div>
@@ -843,6 +843,8 @@
     addWing(-1);
     groups.wings = root;
     makeLabel('R = 9 cm', 1.2, 1.4, 6.2, 4.4);
+    makeLabel('c = 2.3 cm', 2.4, 0.15, 4.6, 4.2);
+    makeLabel('15 g', -1.6, 1.45, 0, 3.6);
 
     /* Skids */
     [[1.4, 0.4], [1.4, -0.4], [-0.6, 0.35], [-0.6, -0.35]].forEach(function (p) {
