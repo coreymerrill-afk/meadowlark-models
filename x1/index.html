@@ -36,6 +36,32 @@
     padding: 12px 20px 0; flex-shrink: 0; z-index: 100;
   }
   header.doc-header h1 { font-size: 1.2rem; font-weight: 700; color: #fff; }
+
+  .hub-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--accent); text-decoration: none;
+    font-size: 13px; font-weight: 700;
+    min-height: 36px; margin: 0 0 6px;
+    border-radius: 6px;
+  }
+  .hub-back:hover { text-decoration: underline; color: #fff; }
+  .hub-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  header.doc-header .hub-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  #sb-step-expand {
+    margin: 8px 0 12px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); overflow: hidden;
+  }
+  #sb-step-expand > summary {
+    min-height: 44px; padding: 10px 12px; cursor: pointer; user-select: none;
+    font-size: 13px; font-weight: 700; color: var(--accent);
+    list-style: none;
+  }
+  #sb-step-expand > summary::-webkit-details-marker { display: none; }
+  #sb-step-expand > summary::after { content: " ▾"; color: var(--muted); font-weight: 600; }
+  #sb-step-expand:not([open]) > summary::after { content: " ▸"; }
+  #sb-step-expand[open] > summary { border-bottom: 1px solid var(--border); }
+  #sb-step-expand #sb-instructions { padding: 10px 12px 12px; }
+  #sb-step-title { cursor: pointer; }
   header.doc-header .meta { color: var(--muted); font-size: 11px; margin-top: 2px; }
   nav.tabs {
     display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;
@@ -58,7 +84,7 @@
 
   .panel { display: none; }
   .panel.active { display: block; }
-  #panel-3d.active {
+  #panel-build.active {
     display: flex; flex-direction: column; flex: 1; min-height: 0; height: 100%;
   }
 
@@ -147,6 +173,60 @@
     cursor: pointer; min-height: 44px;
   }
   .explore-chip:hover { background: #2d4534; }
+  .explore-chip.current {
+    background: var(--ok);
+    color: #0d1014;
+    border-color: var(--ok);
+  }
+  /* Day separators — Build steps + All-steps drawer (warm garage pace) */
+  .day-sep {
+    display: block;
+    margin: 18px 0 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, #2a3340 0%, #1a2433 100%);
+    border: 1px solid #3d4a5c;
+    border-left: 4px solid var(--accent2, #fdd663);
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.35;
+  }
+  .day-sep .day-focus {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .day-sep .day-range {
+    color: var(--accent2, #fdd663);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .step-nums .day-sep-row {
+    flex: 1 0 100%;
+    margin: 6px 0 2px;
+    padding: 6px 8px;
+    background: #232830;
+    border: 1px solid #3d4a5c;
+    border-left: 3px solid var(--accent2, #fdd663);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #e8eaed;
+    letter-spacing: 0.02em;
+    pointer-events: none;
+    user-select: none;
+  }
+  .step-nums .day-sep-row .day-focus {
+    font-weight: 500;
+    color: var(--muted);
+  }
+  @media (max-width: 700px) {
+    .day-sep { font-size: 14px; padding: 9px 12px; margin: 14px 0 8px; }
+    .day-sep .day-focus { font-size: 11px; }
+  }
 
   /* 3D Assembly layout */
   .view3d-wrap {
@@ -276,52 +356,367 @@
   .checklist li::before { content: "☐ "; color: var(--muted); }
   .dim-table td:first-child { color: var(--muted); width: 45%; }
 
-  /* Narrow / phone: stack canvas on top with large dedicated height; sidebar below */
+  /* Step-bar chrome helpers (desktop ≥901: rows/details flatten via display:contents) */
+  .step-bar-row { display: contents; }
+  .step-nums-wrap {
+    display: contents; /* desktop: summary+nums participate in .step-bar flex */
+  }
+  .step-nums-wrap > summary {
+    display: none;
+    list-style: none;
+  }
+  .step-nums-wrap > summary::-webkit-details-marker { display: none; }
+  .step-nums-wrap .step-nums {
+    display: flex; flex-wrap: wrap; gap: 4px; max-width: 100%;
+  }
+  /* Keep details open on wide screens so UA does not hide #step-nums */
+  @media (min-width: 901px) {
+    .step-nums-wrap { display: contents; }
+    .step-nums-wrap > summary { display: none; }
+  }
+
+  /* Narrow / phone: canvas gets remaining viewport; sidebar capped; step chrome stacked */
   @media (max-width: 767px) {
-    header.doc-header { padding: 8px 12px 0; }
-    header.doc-header h1 { font-size: 1.05rem; }
-    nav.tabs button { padding: 8px 10px; font-size: 12px; min-height: 44px; }
-    .copy-note { font-size: 11px; padding: 6px 10px; }
-    #panel-3d.active { min-height: 0; }
-    .step-bar { padding: 6px 8px; gap: 6px; }
-    .step-bar .step-title { font-size: 12px; min-width: 0; flex: 1 1 100%; order: 3; }
-    .step-bar .step-nums { order: 4; flex: 1 1 100%; max-height: 72px; overflow-y: auto; }
+    .copy-note { display: none; }
+    header.doc-header { padding: 6px 10px 0; }
+    header.doc-header h1 { font-size: 1rem; }
+    header.doc-header .meta { font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    nav.tabs {
+      flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      gap: 2px; margin-top: 6px; scrollbar-width: thin;
+    }
+    nav.tabs button {
+      padding: 8px 12px; font-size: 12px; min-height: 44px;
+      flex: 0 0 auto; white-space: nowrap;
+    }
+    body { overflow-x: hidden; }
+    body:has(main.is-3d), body.mode-3d { overflow: hidden; height: 100dvh; max-height: 100dvh; overscroll-behavior: none; }
+    main.is-3d { overflow: hidden; flex: 1; min-height: 0; }
+    #panel-build.active {
+      flex: 1; min-height: 0; height: auto; overflow: hidden;
+    }
+    .step-bar {
+      padding: 6px 8px; gap: 6px;
+      flex-direction: column; align-items: stretch;
+    }
+    .step-bar-row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    }
+    .step-bar-nav .step-title {
+      flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 600;
+      line-height: 1.25;
+    }
+    .step-bar #btn-prev, .step-bar #btn-next {
+      min-width: 72px; min-height: 44px; padding: 10px 14px; font-size: 14px;
+    }
+    .step-bar-tools button,
+    .step-bar-tools label.toggle {
+      min-height: 44px;
+    }
+    .step-nums-wrap {
+      display: block; flex: 1 1 100%; width: 100%;
+      border: 1px solid var(--border); border-radius: 6px;
+      background: var(--bg); padding: 0;
+    }
+    .step-nums-wrap > summary {
+      display: flex; align-items: center; gap: 6px;
+      min-height: 44px; padding: 8px 10px; cursor: pointer;
+      font-size: 12px; font-weight: 600; color: var(--muted); user-select: none;
+    }
+    .step-nums-wrap[open] > summary { border-bottom: 1px solid var(--border); color: var(--text); }
+    .step-nums-wrap .step-nums {
+      padding: 6px 8px 8px; max-height: 28dvh; overflow-y: auto;
+    }
+    .step-nums-wrap:not([open]) .step-nums { display: none; }
     .view3d-wrap {
       flex-direction: column;
       flex: 1;
       min-height: 0;
+      overflow: hidden;
     }
     #canvas-wrap {
-      flex: 0 0 auto;
+      flex: 1 1 auto;
       width: 100%;
-      height: 60vh;
-      height: 60dvh;
-      min-height: 55vh;
-      min-height: 55dvh;
-      max-height: 70dvh;
+      min-height: 52dvh;
+      height: auto;
+      max-height: none;
     }
     #sidebar-3d {
       width: 100%;
-      flex: 1 1 auto;
-      max-height: none;
-      min-height: 160px;
+      flex: 0 1 auto;
+      max-height: 32dvh;
+      min-height: 0;
       border-left: none;
       border-top: 1px solid var(--border);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
   }
   @media (max-width: 767px) and (orientation: landscape) {
+    .view3d-wrap { flex-direction: row; }
     #canvas-wrap {
-      height: 55vh;
-      height: 55dvh;
-      min-height: 45vh;
-      min-height: 45dvh;
+      flex: 1 1 auto;
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+    }
+    #sidebar-3d {
+      width: min(38vw, 260px);
+      flex: 0 0 auto;
+      max-height: none;
+      height: 100%;
+      border-top: none;
+      border-left: 1px solid var(--border);
     }
   }
   @media (min-width: 768px) and (max-width: 900px) {
-    .view3d-wrap { flex-direction: column; }
-    #canvas-wrap { min-height: 50vh; min-height: 50dvh; }
-    #sidebar-3d { width: 100%; max-height: 240px; border-left: none; border-top: 1px solid var(--border); }
+    .copy-note { display: none; }
+    nav.tabs {
+      flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    nav.tabs button { min-height: 44px; flex: 0 0 auto; white-space: nowrap; }
+    body:has(main.is-3d), body.mode-3d { overflow: hidden; height: 100dvh; max-height: 100dvh; overscroll-behavior: none; }
+    main.is-3d { overflow: hidden; }
+    #panel-build.active { overflow: hidden; }
+    .view3d-wrap { flex-direction: column; overflow: hidden; }
+    #canvas-wrap { flex: 1 1 auto; min-height: 52dvh; }
+    #sidebar-3d {
+      width: 100%; max-height: 32dvh; min-height: 0;
+      border-left: none; border-top: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    .step-bar { flex-direction: column; align-items: stretch; }
+    .step-bar-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .step-nums-wrap {
+      display: block; width: 100%;
+      border: 1px solid var(--border); border-radius: 6px; background: var(--bg);
+    }
+    .step-nums-wrap > summary {
+      display: flex; align-items: center; min-height: 44px; padding: 8px 10px;
+      cursor: pointer; font-size: 12px; font-weight: 600; color: var(--muted);
+    }
+    .step-nums-wrap:not([open]) .step-nums { display: none; }
+    .step-nums-wrap[open] .step-nums { padding: 6px 8px 8px; max-height: 28dvh; overflow-y: auto; }
   }
+
+  /* Expand / fullscreen 3D + instructions overlay */
+  #btn-instr, #btn-expand {
+    min-height: 36px; font-weight: 700;
+  }
+  #fs-hud { display: none; }
+  #instr-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--bg);
+    flex-direction: column;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  #instr-overlay.open { display: flex; }
+  #instr-overlay .instr-head {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 8px 12px; background: var(--bg2); border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  #instr-overlay .instr-head .hub-back { margin: 0; }
+  #instr-overlay .instr-head button {
+    min-height: 44px; min-width: 72px; padding: 8px 12px;
+    background: var(--bg3); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; font-weight: 700; cursor: pointer;
+  }
+  #instr-overlay .instr-head #btn-instr-close {
+    margin-left: auto; min-width: 52px; font-size: 18px;
+  }
+  #instr-overlay .instr-scroll {
+    flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 16px 16px 40px; max-width: 720px; width: 100%; margin: 0 auto;
+    font-size: 16px; line-height: 1.55;
+  }
+  #instr-overlay .instr-scroll h2 { font-size: 1.25rem; margin: 0 0 12px; }
+  #instr-overlay .sb-block { margin: 12px 0; }
+  #instr-overlay .chip {
+    display: inline-block; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 10px; margin: 4px 6px 4px 0;
+    font-weight: 700; color: var(--accent); text-decoration: none; min-height: 44px;
+    line-height: 28px;
+  }
+  body.fs-3d { padding: 0; overflow: hidden; }
+  body.fs-3d .copy-note,
+  body.fs-3d header.doc-header { display: none !important; }
+  body.fs-3d #sidebar-3d,
+  body.fs-3d .step-bar { display: none !important; }
+  body.fs-3d main.is-3d,
+  body.fs-3d #panel-build.active,
+  body.fs-3d .view3d-wrap,
+  body.fs-3d #canvas-wrap {
+    position: fixed; inset: 0;
+    width: 100%; height: 100dvh; max-height: none; min-height: 0;
+    z-index: 50; border: none;
+  }
+  body.fs-3d #fs-hud { display: block; z-index: 60; pointer-events: none; }
+  #fs-hud .fs-top {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
+    background: linear-gradient(to bottom, rgba(18,21,26,0.92), rgba(18,21,26,0.2));
+    pointer-events: auto;
+  }
+  #fs-hud .fs-top .hub-back { margin: 0; color: #fff; min-height: 44px; }
+  #fs-hud .fs-top-right { display: flex; gap: 8px; }
+  #fs-hud .fs-top-right button,
+  #fs-hud .fs-stack button {
+    min-height: 44px; padding: 8px 12px; font-weight: 700; cursor: pointer;
+    background: var(--bg2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; pointer-events: auto;
+  }
+  #fs-hud .fs-step-title {
+    position: fixed; top: calc(56px + env(safe-area-inset-top)); left: 10px; right: 10px;
+    text-align: center; font-weight: 700; font-size: 14px;
+    text-shadow: 0 1px 4px #000; pointer-events: none;
+  }
+  #fs-hud .fs-stack {
+    position: fixed; left: calc(8px + env(safe-area-inset-left));
+    top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 10px;
+    pointer-events: auto;
+  }
+  #fs-hud .fs-stack button { min-width: 76px; }
+  @media (max-width: 767px) {
+    #btn-instr, #btn-expand { min-height: 44px; flex: 1 1 auto; }
+  }
+
+  /* Combined Build tab: collapsible day-banded step list under 3D */
+  .build-step-list-wrap {
+    flex-shrink: 0;
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    max-height: none;
+  }
+  .build-step-list-wrap > summary {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .build-step-list-wrap > summary::-webkit-details-marker { display: none; }
+  .build-step-list-wrap > summary::after {
+    content: "▸";
+    color: var(--muted);
+    margin-left: auto;
+  }
+  .build-step-list-wrap[open] > summary::after { content: "▾"; }
+  .build-step-list-wrap[open] > summary {
+    border-bottom: 1px solid var(--border);
+  }
+  .build-step-list-wrap .build-steps-scroll {
+    max-height: min(42dvh, 420px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 14px 16px;
+  }
+  .build-step-list-wrap .build-steps-scroll > .muted { margin: 0 0 10px; font-size: 12px; }
+  body.fs-3d .build-step-list-wrap { display: none !important; }
+
+  /* Phone: park Labels/Motion/Replay/Reset under View disclosure */
+  .view-tools-wrap { display: contents; }
+  .view-tools-wrap > summary { display: none; }
+  .view-tools-inner { display: contents; }
+
+  /* Overview day plan — phone cards (Day / Focus / Done when) */
+  .day-plan-cards { display: none; }
+  @media (max-width: 767px) {
+    table.day-plan-table { display: none; }
+    .day-plan-cards {
+      display: grid;
+      gap: 10px;
+      margin: 8px 0 16px;
+    }
+    .day-plan-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent2, #fdd663);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .day-plan-card .dpc-day {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent2, #fdd663);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .day-plan-card .dpc-focus {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .day-plan-card .dpc-steps {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .day-plan-card .dpc-done-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+    .day-plan-card .dpc-done {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .view-tools-wrap {
+      display: block;
+      flex: 1 1 100%;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      padding: 0;
+    }
+    .view-tools-wrap > summary {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      user-select: none;
+      list-style: none;
+    }
+    .view-tools-wrap > summary::-webkit-details-marker { display: none; }
+    .view-tools-wrap[open] > summary {
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .view-tools-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 8px 8px;
+    }
+    .view-tools-inner button,
+    .view-tools-inner label.toggle {
+      min-height: 44px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -333,14 +728,16 @@
 </div>
 
 <header class="doc-header">
+  <div class="hub-row">
+    <a class="hub-back" href="/" title="Back to models">← Models</a>
+  </div>
   <h1>ACMER X1 Ultra — First Model</h1>
   <p class="meta">FIRST MODEL V2 · One buy · One build · Laser-ready 8× HC + CNC spoil swap · published 2026-09-11 MT · Concrete slab · Personal shop build guide</p>
   <nav class="tabs" role="tablist">
     <button type="button" data-tab="overview">Overview</button>
     <button type="button" data-tab="design">Design</button>
     <button type="button" data-tab="parts">Parts &amp; cut list</button>
-    <button type="button" data-tab="build">Build steps</button>
-    <button type="button" class="active" data-tab="3d">3D Assembly</button>
+    <button type="button" class="active" data-tab="build">Build</button>
   </nav>
 </header>
 
@@ -472,27 +869,114 @@
         <tr><td>8 HC + 8 spoil + inserts + clamps</td><td class="num">~$785–1,065</td></tr>
         <tr class="total"><td class="subtotal">FIRST MODEL TOTAL</td><td class="num subtotal">≈ $2,800–3,500</td></tr>
       </table>
-      <p class="muted">DIY time: stand 2–4 weekends; cassette 1–2; Z + spoil about a day.</p>
+      <p class="muted"><strong>Build goal:</strong> shoot for <strong>4 shop days</strong> · hard cap <strong>6 days max</strong>. Warm garage, football on the TV — steady weekend cadence, not a heroic slog.</p>
     </div>
   </div>
   <div class="card">
-    <h3>Build phases</h3>
-    <table class="data">
-      <thead><tr><th>Phase</th><th>Steps</th><th>What you get</th></tr></thead>
+    <h3>Day-by-day build goal</h3>
+    <p class="muted">Same locked FIRST MODEL — just paced for a warm garage with the game on. <strong>Shoot for 4 days</strong>; use the 6-day split if a day runs long. Hard cap <strong>6 days max</strong>.</p>
+    <h4 style="margin:12px 0 6px;font-size:13px;color:var(--accent2,#fdd663)">4-day shoot-for</h4>
+    <table class="data day-plan-table">
+      <thead><tr><th>Day</th><th>Focus</th><th>Steps / phases</th><th>Done when</th></tr></thead>
       <tbody>
-        <tr><td><strong>A — Torsion deck</strong></td><td>S01–S10</td><td>Closed 111×61 box ~5" thick</td></tr>
-        <tr><td><strong>B — Stand under the box</strong></td><td>S11–S19</td><td>Apron, six legs, stretchers, braces, end panels, leveled deck</td></tr>
-        <tr><td><strong>C — Cassette + fire + exhaust</strong></td><td>S20–S26</td><td>Drop-in bed frame, pan, wear, Path A</td></tr>
-        <tr><td><strong>D — Z gate</strong></td><td>(inside S29)</td><td>Measured stack height — cut spoil after real Z</td></tr>
-        <tr><td><strong>E — Tiles</strong></td><td>S27–S29</td><td>8 HC in + 8 spoil cut beside</td></tr>
-        <tr><td><strong>F — Machine</strong></td><td>S30</td><td>Enclosure on stand; cooler beside</td></tr>
+        <tr><td><strong>1</strong></td><td>Close the torsion deck</td><td>S01–S19</td><td>111×61 box closed ~5" thick, skins on</td></tr>
+        <tr><td><strong>2</strong></td><td>Stand under the box</td><td>S20–S32</td><td>Apron, six legs, braces, end panels, deck leveled 32–34" AFF</td></tr>
+        <tr><td><strong>3</strong></td><td>Cassette + fire + Path A</td><td>S33–S46</td><td>Drop-in frame, pan, wear, plenum; smoke-test if ready</td></tr>
+        <tr><td><strong>4</strong></td><td>Z, tiles, machine</td><td>S47–S51</td><td>Z measured, spoil cut after Z, 8 HC in, enclosure seated, cooler beside</td></tr>
       </tbody>
     </table>
-    <p class="muted" style="margin-top:8px"><strong>Hard gates:</strong> (1) Dry-stack legs to 33" AFF before final 4×4 cuts.
-    (2) Confirm apron fasteners bite ribs / spine / blocks — not skin alone — before hanging legs.
+    <div class="day-plan-cards" aria-label="4-day shoot-for">
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 1</div>
+        <div class="dpc-focus">Close the torsion deck</div>
+        <div class="dpc-steps">S01–S19</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">111×61 box closed ~5" thick, skins on</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 2</div>
+        <div class="dpc-focus">Stand under the box</div>
+        <div class="dpc-steps">S20–S32</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">Apron, six legs, braces, end panels, deck leveled 32–34" AFF</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 3</div>
+        <div class="dpc-focus">Cassette + fire + Path A</div>
+        <div class="dpc-steps">S33–S46</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">Drop-in frame, pan, wear, plenum; smoke-test if ready</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 4</div>
+        <div class="dpc-focus">Z, tiles, machine</div>
+        <div class="dpc-steps">S47–S51</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">Z measured, spoil cut after Z, 8 HC in, enclosure seated, cooler beside</div>
+      </div>
+    </div>
+    <h4 style="margin:14px 0 6px;font-size:13px;color:var(--accent2,#fdd663)">6-day max (if you need more air)</h4>
+    <table class="data day-plan-table">
+      <thead><tr><th>Day</th><th>Focus</th><th>Steps / phases</th><th>Done when</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Bottom skin + core framing</td><td>A early</td><td>G + H + A/B/C/D/E seated and fastened</td></tr>
+        <tr><td><strong>2</strong></td><td>Top skin close</td><td>A late</td><td>F closed; torsion box done</td></tr>
+        <tr><td><strong>3</strong></td><td>Apron + legs</td><td>B early</td><td>Dry-stack to 33" AFF; apron lagged into ribs; legs hung</td></tr>
+        <tr><td><strong>4</strong></td><td>Brace + level</td><td>B late</td><td>Stretchers, diagonals, end panels, jam nuts locked</td></tr>
+        <tr><td><strong>5</strong></td><td>Cassette + Path A</td><td>C</td><td>Frame/pan/wear/plenum; Path A smoke-tested</td></tr>
+        <tr><td><strong>6</strong></td><td>Z + tiles + machine</td><td>D–F</td><td>Spoil after Z, 8 HC, enclosure + cooler</td></tr>
+      </tbody>
+    </table>
+    <div class="day-plan-cards" aria-label="6-day max">
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 1</div>
+        <div class="dpc-focus">Bottom skin + core framing</div>
+        <div class="dpc-steps">A early</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">G + H + A/B/C/D/E seated and fastened</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 2</div>
+        <div class="dpc-focus">Top skin close</div>
+        <div class="dpc-steps">A late</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">F closed; torsion box done</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 3</div>
+        <div class="dpc-focus">Apron + legs</div>
+        <div class="dpc-steps">B early</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">Dry-stack to 33" AFF; apron lagged into ribs; legs hung</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 4</div>
+        <div class="dpc-focus">Brace + level</div>
+        <div class="dpc-steps">B late</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">Stretchers, diagonals, end panels, jam nuts locked</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 5</div>
+        <div class="dpc-focus">Cassette + Path A</div>
+        <div class="dpc-steps">C</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">Frame/pan/wear/plenum; Path A smoke-tested</div>
+      </div>
+      <div class="day-plan-card">
+        <div class="dpc-day">Day 6</div>
+        <div class="dpc-focus">Z + tiles + machine</div>
+        <div class="dpc-steps">D–F</div>
+        <div class="dpc-done-label">Done when</div>
+        <div class="dpc-done">Spoil after Z, 8 HC, enclosure + cooler</div>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:10px"><strong>Still the same hard gates:</strong> (1) Dry-stack legs to 33" AFF before final 4×4 cuts.
+    (2) Apron fasteners bite ribs / spine / blocks — not skin alone — before hanging legs.
     (3) Measure Z before cutting spoil.
     (4) Smoke-test Path A before first laser job.
     (5) Concrete slab only unless Lead re-reviews.</p>
+    <p class="muted" style="margin-top:6px"><strong>Phase map (V2 micro-steps):</strong> A torsion S01–S19 · B stand S20–S32 · C cassette S33–S46 · D–F Z / tiles / machine S47–S51.</p>
   </div>
   <div class="card">
     <pre class="stack-diagram" style="white-space:pre-wrap;font-size:12px">┌─────────────────────────────────────────────────────────────┐
@@ -603,27 +1087,34 @@ Stretchers Q + diagonals P under apron bay.</div>
   </div>
 </section>
 
-<!-- ========== BUILD STEPS ========== -->
-<section id="panel-build" class="panel" role="tabpanel">
-  <h2>Build steps</h2>
-  <p class="muted">Same letters as 3D Assembly. Click a letter chip to highlight in 3D. After the last band, <strong>Explore</strong> opens the finished table.</p>
-  <div id="build-steps-mount"></div>
-</section>
-
-<!-- ========== 3D ASSEMBLY (default) ========== -->
-<section id="panel-3d" class="panel active" role="tabpanel" data-mode="build">
+<!-- ========== BUILD (3D + step list, default) ========== -->
+<section id="panel-build" class="panel active" role="tabpanel" data-mode="build">
   <div class="step-bar">
-    <button type="button" id="btn-prev" title="Previous step (←)">◀ Prev</button>
-    <button type="button" id="btn-next" title="Next step (→)">Next ▶</button>
-    <div class="step-nums" id="step-nums"></div>
-    <div class="step-title" id="step-title-bar">Step 1</div>
-    <label class="toggle"><input type="checkbox" id="toggle-labels" checked /> Labels</label>
-    <label class="toggle"><input type="checkbox" id="toggle-motion" checked /> Motion</label>
-    <label class="toggle"><input type="checkbox" id="toggle-fasteners" checked /> Fasteners</label>
-    <label class="toggle"><input type="checkbox" id="toggle-hw-labels" checked /> Hardware labels</label>
-    <button type="button" id="btn-replay-step" title="Replay step enter+attach beat">Replay</button>
-    <button type="button" id="btn-reset-cam">Reset camera</button>
-    <button type="button" id="btn-reset-asm">Reset assembly</button>
+    <div class="step-bar-row step-bar-nav">
+      <button type="button" id="btn-prev" title="Previous step (←)">◀ Prev</button>
+      <button type="button" id="btn-next" title="Next step (→)">Next ▶</button>
+      <div class="step-title" id="step-title-bar">Step 1</div>
+    </div>
+    <div class="step-bar-row step-bar-tools">
+      <details class="view-tools-wrap">
+        <summary>View</summary>
+        <div class="view-tools-inner">
+          <label class="toggle"><input type="checkbox" id="toggle-labels" checked /> Labels</label>
+          <label class="toggle"><input type="checkbox" id="toggle-motion" checked /> Motion</label>
+          <label class="toggle"><input type="checkbox" id="toggle-fasteners" checked /> Fasteners</label>
+          <label class="toggle"><input type="checkbox" id="toggle-hw-labels" checked /> Hardware labels</label>
+          <button type="button" id="btn-replay-step" title="Replay step enter+attach beat">Replay</button>
+          <button type="button" id="btn-reset-cam">Reset camera</button>
+          <button type="button" id="btn-reset-asm">Reset assembly</button>
+        </div>
+      </details>
+      <button type="button" id="btn-instr" title="Full step instructions">Instructions</button>
+      <button type="button" id="btn-expand" title="Fullscreen 3D">Expand</button>
+    </div>
+    <details class="step-nums-wrap">
+      <summary>All steps</summary>
+      <div class="step-nums" id="step-nums"></div>
+    </details>
   </div>
   <div class="view3d-wrap">
     <div id="canvas-wrap">
@@ -632,7 +1123,10 @@ Stretchers Q + diagonals P under apron bay.</div>
     </div>
     <aside id="sidebar-3d">
       <h3 id="sb-step-title">Step</h3>
-      <p id="sb-instructions" class="muted"></p>
+      <details id="sb-step-expand">
+        <summary>Full instructions</summary>
+        <div id="sb-instructions" class="muted"></div>
+      </details>
       <button type="button" class="full" id="btn-back-build" hidden>Back to build steps</button>
       <h3 id="sb-parts-heading">Parts added this step</h3>
       <div class="parts-added" id="sb-parts-added"></div>
@@ -664,7 +1158,46 @@ Stretchers Q + diagonals P under apron bay.</div>
       </p>
     </aside>
   </div>
+  <details class="build-step-list-wrap">
+    <summary>Step list</summary>
+    <div class="build-steps-scroll">
+      <p class="muted">Day-banded steps · click a letter chip to highlight in the viewer. After the last day band, <strong>Explore</strong> opens the finished table.</p>
+      <div id="build-steps-mount"></div>
+    </div>
+  </details>
 </section>
+
+
+<div id="fs-hud" hidden>
+  <div class="fs-top">
+    <a class="hub-back" href="/" title="Back to models">← Models</a>
+    <div class="fs-top-right">
+      <button type="button" id="btn-fs-instr">Instructions</button>
+      <button type="button" id="btn-fs-close">✕ Close</button>
+    </div>
+  </div>
+  <div class="fs-step-title" id="fs-step-title">Step</div>
+  <div class="fs-stack">
+    <button type="button" id="btn-fs-prev">◀ Prev</button>
+    <button type="button" id="btn-fs-next">Next ▶</button>
+  </div>
+</div>
+
+<div id="instr-overlay">
+  <div class="instr-head">
+    <a class="hub-back" href="/" title="Back to models">← Models</a>
+    <button type="button" id="btn-instr-prev">◀ Prev</button>
+    <button type="button" id="btn-instr-next">Next ▶</button>
+    <button type="button" id="btn-instr-close" aria-label="Close instructions">✕</button>
+  </div>
+  <div class="instr-scroll">
+    <h2 id="instr-overlay-title">Step</h2>
+    <div id="instr-overlay-body"></div>
+    <h3 style="margin:16px 0 8px">Parts this step</h3>
+    <div id="instr-overlay-parts" class="parts-added"></div>
+    <p class="muted" style="margin-top:12px">Tap a letter for in-viewer detail. Dedicated part pages (<code>/x1/parts/A</code>) are coming — for now use <code>#part-A</code> anchors on the Parts tab.</p>
+  </div>
+</div>
 
 </main>
 
@@ -679,11 +1212,15 @@ Stretchers Q + diagonals P under apron bay.</div>
   // Relative to this HTML (Desktop / file:/ / phone share)
   const THREE_LOCAL = 'vendor/three.min.js';
   const OC_LOCAL = 'vendor/OrbitControls.js';
+  const GLTF_LOCAL = 'vendor/GLTFLoader.js';
+  const PBR_GLB_URLS = ['assets/x1-first-model-pbr.glb', '/x1/assets/x1-first-model-pbr.glb'];
   // CDN classic UMD (jsDelivr first, then unpkg). three@0.149; OrbitControls classic UMD from r128 (0.149 examples/js removed from npm).
   const THREE_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js';
   const THREE_UMD_UNPKG = 'https://unpkg.com/three@0.149.0/build/three.min.js';
   const OC_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js';
   const OC_UMD_UNPKG = 'https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js';
+  const GLTF_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js';
+  const GLTF_UMD_UNPKG = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/loaders/GLTFLoader.js';
   // ESM (never bare "three" without import map or esm.sh rewrite)
   const THREE_ESM_MAP = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
   const OC_ESM_MAP = 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
@@ -713,6 +1250,26 @@ Stretchers Q + diagonals P under apron bay.</div>
     if (!window.THREE) return null;
     if (window.THREE.OrbitControls) return window.THREE.OrbitControls;
     if (typeof window.OrbitControls === 'function') return window.OrbitControls;
+    return null;
+  }
+
+  function resolveGLTFLoader() {
+    if (!window.THREE) return null;
+    if (window.THREE.GLTFLoader) return window.THREE.GLTFLoader;
+    if (typeof window.GLTFLoader === 'function') return window.GLTFLoader;
+    return null;
+  }
+
+  async function loadGltfLoaderOptional() {
+    if (resolveGLTFLoader()) return resolveGLTFLoader();
+    const urls = [GLTF_LOCAL, GLTF_UMD_JSDELIVR, GLTF_UMD_UNPKG];
+    for (let i = 0; i < urls.length; i++) {
+      try {
+        await loadScript(urls[i]);
+        const L = resolveGLTFLoader();
+        if (L) return L;
+      } catch (e) { /* keep trying */ }
+    }
     return null;
   }
 
@@ -2135,7 +2692,6 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     design: document.getElementById('panel-design'),
     parts: document.getElementById('panel-parts'),
     build: document.getElementById('panel-build'),
-    '3d': document.getElementById('panel-3d'),
   };
 
   let threeReady = false;
@@ -2144,13 +2700,35 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
   let pendingExplore = false;
   let api = null; // filled after init: { setStep, highlightLetter, resize, enterExplore, ... }
 
+  // Phone: collapse "All steps"; desktop: keep open so #step-nums stays visible
+  (function syncStepNumsWrap() {
+    const d = document.querySelector('details.step-nums-wrap');
+    if (!d) return;
+    const mq = window.matchMedia('(max-width: 900px)');
+    const apply = () => {
+      if (mq.matches) d.removeAttribute('open');
+      else d.setAttribute('open', '');
+    };
+    apply();
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else if (mq.addListener) mq.addListener(apply);
+  })();
+
   document.querySelectorAll('nav.tabs button').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
       document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('active', b === btn));
       Object.entries(panels).forEach(([k, el]) => el.classList.toggle('active', k === tab));
-      mainEl.classList.toggle('is-3d', tab === '3d');
-      if (tab === '3d') {
+      mainEl.classList.toggle('is-3d', tab === 'build');
+      document.body.classList.toggle('mode-3d', tab === 'build');
+      if (tab !== 'build') {
+        document.body.classList.remove('fs-3d');
+        const o = document.getElementById('instr-overlay');
+        if (o) o.classList.remove('open');
+        const hud = document.getElementById('fs-hud');
+        if (hud) hud.hidden = true;
+      }
+      if (tab === 'build') {
         ensureThreeInit();
         requestAnimationFrame(() => {
           if (api) {
@@ -2169,9 +2747,34 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     });
   });
 
-  function goTo3dAndExplore() {
+  if (panels.build && panels.build.classList.contains('active')) {
+    document.body.classList.add('mode-3d');
+  }
+
+  function goToPartAnchor(letter) {
+    const btn = document.querySelector('nav.tabs button[data-tab="parts"]');
+    if (btn) btn.click();
+    requestAnimationFrame(() => {
+      const el = document.getElementById('part-' + letter);
+      if (el) {
+        el.scrollIntoView({ block: 'center' });
+        el.style.outline = '2px solid var(--accent)';
+        setTimeout(() => { el.style.outline = ''; }, 1600);
+      }
+    });
+  }
+  window.addEventListener('hashchange', () => {
+    const m = (location.hash || '').match(/^#part-([A-Z0-9]+)$/i);
+    if (m) goToPartAnchor(m[1].toUpperCase());
+  });
+  if (/^#part-[A-Z0-9]+$/i.test(location.hash || '')) {
+    const L = location.hash.slice(6).toUpperCase();
+    setTimeout(() => goToPartAnchor(L), 0);
+  }
+
+  function goToBuildAndExplore() {
     pendingExplore = true;
-    document.querySelector('nav.tabs button[data-tab="3d"]').click();
+    document.querySelector('nav.tabs button[data-tab="build"]').click();
     if (api && api.enterExplore) {
       api.enterExplore({ frame: true });
       pendingExplore = false;
@@ -2180,7 +2783,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
 
   function goTo3dAndHighlight(letter) {
     pendingHighlight = letter;
-    document.querySelector('nav.tabs button[data-tab="3d"]').click();
+    document.querySelector('nav.tabs button[data-tab="build"]').click();
     if (api) {
       const si = STEPS.findIndex(s => s.letters.includes(letter));
       if (si >= 0) api.setStep(si, { frame: true });
@@ -2195,7 +2798,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       <th>Letter</th><th>Part</th><th>Spec / cut</th><th class="num">Qty</th><th>Notes</th>
     </tr></thead><tbody>`;
     for (const [L, p] of Object.entries(LEXICON)) {
-      html += `<tr>
+      html += `<tr id="part-${L}">
         <td><span class="letter" data-letter="${L}">${L}</span></td>
         <td>${p.name}</td><td>${p.spec}</td>
         <td class="num">${p.qty}</td><td class="muted">${p.notes}</td>
@@ -2217,6 +2820,26 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       el.addEventListener('click', () => goTo3dAndHighlight(el.dataset.letter));
     });
   })();
+
+  /** Locked 4-day shoot-for over 51 V2 micro-steps (garage pace). */
+  const DAY_PLAN = [
+    { day: 1, label: 'Day 1', focus: 'Close the torsion deck', lo: 0, hi: 18 },
+    { day: 2, label: 'Day 2', focus: 'Stand under the box', lo: 19, hi: 31 },
+    { day: 3, label: 'Day 3', focus: 'Cassette + fire + Path A', lo: 32, hi: 45 },
+    { day: 4, label: 'Day 4', focus: 'Z, tiles, machine', lo: 46, hi: 50 }
+  ];
+  function dayForStepIndex(i) {
+    for (const d of DAY_PLAN) { if (i >= d.lo && i <= d.hi) return d; }
+    return DAY_PLAN[DAY_PLAN.length - 1];
+  }
+  function dayRangeLabel(d) {
+    return STEPS[d.lo].id + '–' + STEPS[d.hi].id;
+  }
+  function formatStepChrome(si) {
+    const s = STEPS[si];
+    const d = dayForStepIndex(si);
+    return d.label + ' · ' + s.id + '. ' + s.title;
+  }
 
   (function buildBuildPanel() {
     const mount = document.getElementById('build-steps-mount');
@@ -2251,7 +2874,14 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     }
     let html = '';
     let listed = 0;
+    let lastDay = null;
     for (const ph of phases) {
+      const first = ph.steps[0];
+      const d = dayForStepIndex(first);
+      if (!lastDay || lastDay.day !== d.day) {
+        html += `<div class="day-sep" role="heading" aria-level="3">${esc(d.label)} — ${esc(d.focus)} <span class="day-range">${esc(dayRangeLabel(d))}</span><span class="day-focus">Shoot-for pace · warm garage, football on</span></div>`;
+        lastDay = d;
+      }
       html += `<span class="phase-label">${ph.label}</span>`;
       for (const i of ph.steps) {
         const s = STEPS[i];
@@ -2283,7 +2913,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       el.addEventListener('click', () => goTo3dAndHighlight(el.dataset.letter));
     });
     const buildExplore = document.getElementById('build-explore-chip');
-    if (buildExplore) buildExplore.addEventListener('click', () => goTo3dAndExplore());
+    if (buildExplore) buildExplore.addEventListener('click', () => goToBuildAndExplore());
   })();
 
   function ensureThreeInit() {
@@ -2295,8 +2925,8 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     });
   }
 
-  // Default tab is 3D — start load soon; also on first paint
-  if (panels['3d'] && panels['3d'].classList.contains('active')) {
+  // Default tab is Build (3D + step list) — start load soon; also on first paint
+  if (panels.build && panels.build.classList.contains('active')) {
     // defer so layout has sizes
     setTimeout(ensureThreeInit, 0);
   }
@@ -2343,28 +2973,33 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     camera.position.set(100, 75, 120);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    const coarsePtr = (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+      (Math.min(window.innerWidth, window.innerHeight) < 500);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarsePtr ? 1.75 : 2));
     renderer.shadowMap.enabled = true;
+    if (renderer.outputEncoding != null && THREE.sRGBEncoding != null) renderer.outputEncoding = THREE.sRGBEncoding;
+    if (renderer.outputColorSpace != null && THREE.SRGBColorSpace != null) renderer.outputColorSpace = THREE.SRGBColorSpace;
     wrap.appendChild(renderer.domElement);
     renderer.domElement.style.touchAction = 'none';
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 18, 0);
     controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
     controls.enableRotate = true;
     controls.enableZoom = true;
     controls.enablePan = true;
-    // Touch: one-finger rotate, two-finger pan/zoom (OrbitControls defaults)
-    if ('touches' in controls || true) {
+    controls.screenSpacePanning = true;
+    // Touch: one-finger rotate, two-finger pan/zoom
+    if (THREE.TOUCH) {
       controls.touches = controls.touches || {};
-      if (THREE.TOUCH) {
-        controls.touches.ONE = THREE.TOUCH.ROTATE;
-        controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
-      }
+      controls.touches.ONE = THREE.TOUCH.ROTATE;
+      controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
     }
     controls.maxPolarAngle = Math.PI * 0.49;
-    controls.minDistance = 35;
-    controls.maxDistance = 320;
+    const isPhoneUi = () => window.matchMedia('(max-width: 767px)').matches;
+    controls.minDistance = isPhoneUi() ? 18 : 35;
+    controls.maxDistance = isPhoneUi() ? 420 : 360;
 
     scene.add(new THREE.AmbientLight(0xffffff, 0.42));
     const dir = new THREE.DirectionalLight(0xffffff, 0.9);
@@ -4272,7 +4907,9 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           if (t < 1) {
             attachPlayRafs.push(requestAnimationFrame(tick));
           } else {
-            mat.opacity = 0.2;
+            // Drop play mesh — never leave amber ghost ribbons in open bays
+            if (mesh.parent) mesh.parent.remove(mesh);
+            try { mesh.geometry?.dispose?.(); mat.dispose?.(); } catch (e) {}
             notifyFastenerPlayState(fid, 'idle');
             resolve(true);
           }
@@ -4320,12 +4957,17 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           if (t < 1) {
             attachPlayRafs.push(requestAnimationFrame(tick));
           } else {
-            mesh.position.copy(tip);
-            if (mat) { mat.opacity = 1; mat.depthWrite = true; }
-            if (spin) {
-              mesh.quaternion.copy(baseQuat);
-              mesh.rotateOnAxis(Y_UP, spin);
-            }
+            // Drop play mesh — static Design markers remain the shop SoT
+            if (mesh.parent) mesh.parent.remove(mesh);
+            try {
+              mesh.traverse(o => {
+                if (o.geometry) o.geometry.dispose();
+                if (o.material) {
+                  if (Array.isArray(o.material)) o.material.forEach(m => m.dispose());
+                  else o.material.dispose();
+                }
+              });
+            } catch (e) {}
             notifyFastenerPlayState(fid, 'idle');
             resolve(true);
           }
@@ -4482,15 +5124,67 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       return true;
     }
 
+
+    function applyPbrAppearance() {
+      const Loader = (typeof resolveGLTFLoader === 'function') ? resolveGLTFLoader() : null;
+      if (!Loader) {
+        console.warn('[X1] PBR skip — no GLTFLoader');
+        return Promise.resolve(false);
+      }
+      const loader = new Loader();
+      const tryUrl = (url) => new Promise((resolve, reject) => {
+        loader.load(url, resolve, undefined, reject);
+      });
+      const urls = (typeof PBR_GLB_URLS !== 'undefined') ? PBR_GLB_URLS : ['assets/x1-first-model-pbr.glb'];
+      return (async () => {
+        let gltf = null;
+        let used = null;
+        for (let i = 0; i < urls.length; i++) {
+          try {
+            gltf = await tryUrl(urls[i]);
+            used = urls[i];
+            break;
+          } catch (e) {
+            console.warn('[X1] PBR GLB miss', urls[i]);
+          }
+        }
+        if (!gltf || !gltf.scene) {
+          console.warn('[X1] PBR GLB not found — keeping procedural materials');
+          return false;
+        }
+        let swapped = 0;
+        Object.keys(partRegistry).forEach(L => {
+          const group = gltf.scene.getObjectByName(L);
+          if (!group) return;
+          const src = [];
+          group.traverse(o => { if (o.isMesh) src.push(o); });
+          src.sort((a, b) => String(a.name || '').localeCompare(String(b.name || '')));
+          const dst = (partRegistry[L].meshes || []).filter(m => m.isMesh);
+          const n = Math.min(src.length, dst.length);
+          for (let i = 0; i < n; i++) {
+            const mat = src[i].material;
+            dst[i].material = Array.isArray(mat) ? mat.map(x => x.clone()) : mat.clone();
+            dst[i].userData.pbr = true;
+            swapped++;
+          }
+        });
+        console.info('[X1] PBR appearance applied', swapped, 'from', used);
+        applyStepVisibility();
+        return swapped > 0;
+      })();
+    }
+
     function applyMeshMode(m, letter, mode) {
       m.visible = mode !== 'hidden';
       if (!m.isMesh || !m.material) return;
       const mats = Array.isArray(m.material) ? m.material : [m.material];
       mats.forEach(mat => {
         if (mode === 'prior') {
+          // Keep prior lumber readable — 0.28 + depthWrite:false made thin H bay
+          // strips look like unlabeled reddish/hatched ghost polygons over the grid.
           mat.transparent = true;
-          mat.opacity = 0.28;
-          mat.depthWrite = false;
+          mat.opacity = letter === 'H' ? 0.88 : 0.62;
+          mat.depthWrite = true;
         } else if (mode === 'current') {
           if (letter === 'Z' && mat.opacity < 1 && !mat.wireframe) {
             mat.transparent = true;
@@ -4525,41 +5219,10 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       }
     }
 
-    function autoFrameAssembly() {
-      const box = new THREE.Box3();
-      let any = false;
-      for (const L of Object.keys(partRegistry)) {
-        (partRegistry[L]?.meshes || []).forEach(m => {
-          if (m.visible) { box.expandByObject(m); any = true; }
-        });
-      }
-      if (!any || box.isEmpty()) {
-        camera.position.set(100, 75, 120);
-        controls.target.set(0, 18, 0);
-        controls.update();
-        return;
-      }
-      const center = new THREE.Vector3();
-      const size = new THREE.Vector3();
-      box.getCenter(center);
-      box.getSize(size);
-      const maxDim = Math.max(size.x, size.y, size.z, 20);
-      const dist = maxDim * 2.05;
-      const dirv = new THREE.Vector3(0.7, 0.55, 0.75).normalize();
-      camera.position.copy(center).addScaledVector(dirv, dist);
-      controls.target.copy(center);
-      controls.update();
-    }
-
     function updateExploreChrome() {
       const bar = document.querySelector('.step-bar');
       if (bar) bar.classList.toggle('explore-on', exploreMode);
-      const ex = document.getElementById('btn-explore');
-      if (ex) {
-        ex.classList.toggle('current', exploreMode);
-        ex.setAttribute('aria-pressed', exploreMode ? 'true' : 'false');
-      }
-      const panel = document.getElementById('panel-3d');
+      const panel = document.getElementById('panel-build');
       if (panel) panel.dataset.mode = exploreMode ? 'explore' : 'build';
       const back = document.getElementById('btn-back-build');
       if (back) back.hidden = !exploreMode;
@@ -4571,31 +5234,48 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           ? 'Explore: full assembly · tap for info · orbit/zoom/pan stay put'
           : 'Build: current solid · prior dimmed · future hidden';
       }
+      document.querySelectorAll('.explore-chip').forEach(el => {
+        el.classList.toggle('current', exploreMode);
+        el.setAttribute('aria-pressed', exploreMode ? 'true' : 'false');
+      });
     }
 
     function updateStepNavChrome() {
-      const next = document.getElementById('btn-next');
-      const prev = document.getElementById('btn-prev');
-      if (exploreMode) {
-        prev.disabled = false;
-        next.disabled = true;
-        next.textContent = 'Next ▶';
-        next.title = 'Next step (→)';
-      } else {
-        prev.disabled = currentStep === 0;
-        const last = currentStep === STEPS.length - 1;
-        next.disabled = false;
-        next.textContent = last ? 'Explore ▶' : 'Next ▶';
-        next.title = last ? 'Explore the full assembled table' : 'Next step (→)';
-      }
-      document.querySelectorAll('#step-nums button[data-step]').forEach(b => {
-        b.classList.toggle('current', !exploreMode && Number(b.dataset.step) === currentStep);
+      const last = currentStep === STEPS.length - 1;
+      const nextLabel = (!exploreMode && last) ? 'Explore ▶' : 'Next ▶';
+      const nextTitle = (!exploreMode && last) ? 'Explore the full assembled table' : 'Next step (→)';
+      ['btn-prev', 'btn-fs-prev', 'btn-instr-prev'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.disabled = exploreMode ? false : currentStep === 0;
+      });
+      ['btn-next', 'btn-fs-next', 'btn-instr-next'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.disabled = !!exploreMode;
+        el.textContent = nextLabel;
+        el.title = nextTitle;
+      });
+      document.querySelectorAll('#step-nums button[data-step-index]').forEach((b) => {
+        const i = +b.dataset.stepIndex;
+        b.classList.toggle('current', !exploreMode && i === currentStep);
       });
       const exChip = document.getElementById('btn-explore');
       if (exChip) {
         exChip.classList.toggle('current', exploreMode);
         exChip.setAttribute('aria-pressed', exploreMode ? 'true' : 'false');
       }
+    }
+
+    function goNextStep() {
+      if (exploreMode) return;
+      if (currentStep === STEPS.length - 1) enterExplore({ frame: true });
+      else setStep(currentStep + 1);
+    }
+
+    function goPrevStep() {
+      if (exploreMode) setStep(currentStep, { frame: false });
+      else setStep(currentStep - 1);
     }
 
     function enterExplore({ frame = true } = {}) {
@@ -4606,7 +5286,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       applyExploreVisibility();
       updateExploreChrome();
       updateSidebar();
-      if (frame) autoFrameAssembly();
+      if (frame) frameVisibleMeshes({ padding: 1.2 });
       resize();
     }
 
@@ -4671,33 +5351,160 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       applyFastenerMarkerVisibility();
     }
 
-    function autoFrameNewParts() {
-      const letters = STEPS[currentStep].letters;
+    function frameVisibleMeshes({ padding = 1.2, letters = null } = {}) {
       const box = new THREE.Box3();
       let any = false;
-      letters.forEach(L => {
+      const expandLetter = (L, requireVisible) => {
         (partRegistry[L]?.meshes || []).forEach(m => {
-          if (m.visible) { box.expandByObject(m); any = true; }
+          if (!m || !m.isObject3D) return;
+          if (requireVisible && !m.visible) return;
+          box.expandByObject(m);
+          any = true;
         });
-      });
-      if (!any || box.isEmpty()) return;
+      };
+      const letterList = letters && letters.length ? letters : null;
+      if (letterList) {
+        letterList.forEach(L => expandLetter(L, true));
+      } else {
+        Object.keys(partRegistry).forEach(L => expandLetter(L, true));
+      }
+      // Fallback: current step letters (even if not yet visible) so first load isn't empty fog
+      if (!any || box.isEmpty()) {
+        const fb = (STEPS[currentStep] && STEPS[currentStep].letters) || [];
+        fb.forEach(L => expandLetter(L, false));
+      }
+      if (!any || box.isEmpty()) return false;
       const center = new THREE.Vector3();
       const size = new THREE.Vector3();
       box.getCenter(center);
       box.getSize(size);
-      const maxDim = Math.max(size.x, size.y, size.z, 20);
-      const dist = maxDim * 1.8;
+      // Pad tiny early-step clusters so the camera isn't glued to a single stick
+      size.x = Math.max(size.x, 20);
+      size.y = Math.max(size.y, 14);
+      size.z = Math.max(size.z, 20);
+      const aspect = Math.max((wrap.clientWidth || 1) / Math.max(1, wrap.clientHeight || 1), 0.05);
+      camera.aspect = aspect;
+      // Wider FOV on portrait so the 111" deck fits without extreme pull-back
+      camera.fov = aspect < 0.85 ? 52 : 45;
+      camera.updateProjectionMatrix();
+      const halfWidth = Math.max(size.x, size.z, 1) * 0.5;
+      const halfHeight = Math.max(size.y, 1) * 0.5;
+      const vfov = (camera.fov * Math.PI) / 180;
+      const hfov = 2 * Math.atan(Math.tan(vfov / 2) * aspect);
+      const pad = padding * (isPhoneUi() ? 1.08 : 1);
+      let dist = pad * Math.max(
+        halfWidth / Math.tan(hfov / 2),
+        halfHeight / Math.tan(vfov / 2)
+      );
+      if (!isFinite(dist) || dist <= 0) dist = 80;
+      controls.maxDistance = isPhoneUi() ? 420 : 360;
+      dist = Math.max(controls.minDistance, Math.min(controls.maxDistance, dist));
       const dirv = new THREE.Vector3(0.7, 0.55, 0.75).normalize();
       camera.position.copy(center).addScaledVector(dirv, dist);
       controls.target.copy(center);
       controls.update();
+      return true;
+    }
+
+    function autoFrameNewParts() {
+      // Opt-in only (Reset camera / first load / #part- deep link). Not used on Next/Prev.
+      frameVisibleMeshes({ padding: 1.2, letters: STEPS[currentStep].letters });
+    }
+
+
+    function expandStepInstructions() {
+      if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) return;
+      if (document.body.classList.contains('fs-3d')) return;
+      const d = document.getElementById('sb-step-expand');
+      if (!d) return;
+      d.open = true;
+      try { d.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) { d.scrollIntoView(); }
+    }
+
+    function stepInstructionHtml(s) {
+      const esc = (x) => String(x || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const bullets = (arr) => (!arr || !arr.length) ? '' :
+        '<ul>' + arr.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+      let instr = '<p class="sb-summary">' + esc(s.text) + '</p>';
+      if (s.detail) {
+        if (Array.isArray(s.detail) && s.detail.length) instr += '<div class="sb-block"><strong>Detail</strong>' + bullets(s.detail) + '</div>';
+        else if (!Array.isArray(s.detail)) instr += '<p class="sb-detail">' + esc(s.detail) + '</p>';
+      }
+      if (s.tips && s.tips.length) instr += '<div class="sb-block"><strong>Tips</strong>' + bullets(s.tips) + '</div>';
+      if (s.fasteners && s.fasteners.length) instr += '<div class="sb-block"><strong>Hardware</strong>' + bullets(s.fasteners) + '</div>';
+      if (s.tools && s.tools.length) instr += '<div class="sb-block"><strong>Tools</strong>' + bullets(s.tools) + '</div>';
+      if (s.checks && s.checks.length) instr += '<div class="sb-block"><strong>Checks</strong>' + bullets(s.checks) + '</div>';
+      return instr;
+    }
+
+    function fillInstrOverlay() {
+      const tEl = document.getElementById('instr-overlay-title');
+      const bEl = document.getElementById('instr-overlay-body');
+      const pEl = document.getElementById('instr-overlay-parts');
+      const fsTitle = document.getElementById('fs-step-title');
+      const bindPartChips = (mount, letters) => {
+        if (!mount) return;
+        mount.innerHTML = letters.map(L => {
+          const part = LEXICON[L];
+          const name = part ? part.name : L;
+          return '<a class="chip" href="#part-' + L + '" data-letter="' + L + '">' + L + ' — ' + name + '</a>';
+        }).join('');
+        mount.querySelectorAll('[data-letter]').forEach(el => {
+          el.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            highlightLetter(el.dataset.letter);
+          });
+        });
+      };
+      if (exploreMode) {
+        if (tEl) tEl.textContent = 'Explore — full assembly';
+        if (fsTitle) fsTitle.textContent = 'Explore — full assembly';
+        if (bEl) {
+          bEl.innerHTML =
+            '<p class="sb-summary">End of the build. Orbit, zoom, and pan the finished stand. Tap a part for its label and cut info — nothing else fades, and the camera stays where you left it.</p>' +
+            '<div class="sb-block"><strong>Build steps</strong><p class="sb-detail" style="margin:0">Use Prev, a step number, or Back to build steps to return to the dimmed step-by-step view.</p></div>';
+        }
+        bindPartChips(pEl, Object.keys(LEXICON));
+        updateStepNavChrome();
+        return;
+      }
+      const s = STEPS[currentStep];
+      const title = formatStepChrome(currentStep);
+      if (tEl) tEl.textContent = title;
+      if (fsTitle) fsTitle.textContent = title;
+      if (bEl) bEl.innerHTML = stepInstructionHtml(s);
+      bindPartChips(pEl, s.letters);
+      updateStepNavChrome();
+    }
+
+    function openInstrOverlay() {
+      fillInstrOverlay();
+      const o = document.getElementById('instr-overlay');
+      if (o) o.classList.add('open');
+    }
+    function closeInstrOverlay() {
+      const o = document.getElementById('instr-overlay');
+      if (o) o.classList.remove('open');
+    }
+    function enterFs3d() {
+      document.body.classList.add('fs-3d');
+      const hud = document.getElementById('fs-hud');
+      if (hud) hud.hidden = false;
+      fillInstrOverlay();
+      requestAnimationFrame(() => { resize(); setTimeout(resize, 80); });
+    }
+    function exitFs3d() {
+      closeInstrOverlay();
+      document.body.classList.remove('fs-3d');
+      const hud = document.getElementById('fs-hud');
+      if (hud) hud.hidden = true;
+      requestAnimationFrame(() => { resize(); setTimeout(resize, 80); });
     }
 
     function updateSidebar() {
       updateStepNavChrome();
       const partsHeading = document.getElementById('sb-parts-heading');
       const pa = document.getElementById('sb-parts-added');
-      const esc = (t) => String(t || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
       if (exploreMode) {
         document.getElementById('step-title-bar').textContent = 'Explore — full assembly';
         document.getElementById('sb-step-title').textContent = 'Explore the assembled table';
@@ -4712,24 +5519,17 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         pa.querySelectorAll('[data-letter]').forEach(el => {
           el.addEventListener('click', () => highlightLetter(el.dataset.letter));
         });
+        fillInstrOverlay();
+        updateExploreChrome();
         return;
       }
       const s = STEPS[currentStep];
-      document.getElementById('step-title-bar').textContent = s.id + '. ' + s.title;
-      document.getElementById('sb-step-title').textContent = s.id + '. ' + s.title;
-      const bullets = (arr) => (!arr || !arr.length) ? '' :
-        '<ul>' + arr.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
-      let instr = '<p class="sb-summary">' + esc(s.text) + '</p>';
-      if (s.detail) {
-        if (Array.isArray(s.detail) && s.detail.length) instr += '<div class="sb-block"><strong>Detail</strong>' + bullets(s.detail) + '</div>';
-        else if (!Array.isArray(s.detail)) instr += '<p class="sb-detail">' + esc(s.detail) + '</p>';
-      }
-      if (s.tips && s.tips.length) instr += '<div class="sb-block"><strong>Tips</strong>' + bullets(s.tips) + '</div>';
-      if (s.fasteners && s.fasteners.length) instr += '<div class="sb-block"><strong>Hardware</strong>' + bullets(s.fasteners) + '</div>';
-      if (s.tools && s.tools.length) instr += '<div class="sb-block"><strong>Tools</strong>' + bullets(s.tools) + '</div>';
-      if (s.checks && s.checks.length) instr += '<div class="sb-block"><strong>Checks</strong>' + bullets(s.checks) + '</div>';
-      document.getElementById('sb-instructions').innerHTML = instr;
+      const chrome = formatStepChrome(currentStep);
+      document.getElementById('step-title-bar').textContent = chrome;
+      document.getElementById('sb-step-title').textContent = chrome;
+      document.getElementById('sb-instructions').innerHTML = stepInstructionHtml(s);
       if (partsHeading) partsHeading.textContent = 'Parts added this step';
+      fillInstrOverlay();
       pa.innerHTML = s.letters.map(L => {
         const p = LEXICON[L];
         return '<span class="chip" data-letter="' + L + '">' + L + ' — ' + p.name + '</span>';
@@ -4739,7 +5539,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       });
     }
 
-    function setStep(i, { frame = true } = {}) {
+    function setStep(i, { frame = false } = {}) {
       const prev = currentStep;
       const next = Math.max(0, Math.min(STEPS.length - 1, i));
       // Interrupt any running enter tween (snap to authored pose+opacity)
@@ -4750,14 +5550,15 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       applyStepVisibility();
       updateExploreChrome();
       updateSidebar();
+      expandStepInstructions();
       if (next > prev && stepMotionEnabled) {
-        // Forward: enter + attach beat; autoFrame after beat completes
+        // Forward: enter + attach beat. Do NOT auto-frame — camera stays put on Next/Prev.
         // Leaders hidden inside playStepEnter only when a tween actually starts
         playStepBeat(next, {
           onComplete: () => { if (frame) autoFrameNewParts(); }
         });
       } else {
-        // Prev / same / motion off: snap only (already canceled); keep current autoFrame behavior
+        // Prev / same / motion off: snap only. Frame only when caller opts in (Reset cam / first load / #part-).
         if (frame) autoFrameNewParts();
       }
       resize();
@@ -4765,12 +5566,22 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
 
     const stepNums = document.getElementById('step-nums');
     stepNums.innerHTML = '';
+    let lastDayNum = null;
     STEPS.forEach((s, i) => {
+      const d = dayForStepIndex(i);
+      if (lastDayNum !== d.day) {
+        const hdr = document.createElement('div');
+        hdr.className = 'day-sep-row';
+        hdr.setAttribute('role', 'presentation');
+        hdr.innerHTML = d.label + ' — ' + d.focus + ' <span class="day-focus">(' + dayRangeLabel(d) + ')</span>';
+        stepNums.appendChild(hdr);
+        lastDayNum = d.day;
+      }
       const b = document.createElement('button');
       b.type = 'button';
-      b.dataset.step = String(i);
       b.textContent = s.id;
-      b.title = s.title;
+      b.title = d.label + ' · ' + s.title;
+      b.dataset.stepIndex = String(i);
       b.addEventListener('click', () => setStep(i));
       stepNums.appendChild(b);
     });
@@ -4784,13 +5595,31 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     exploreChip.addEventListener('click', () => enterExplore({ frame: true }));
     stepNums.appendChild(exploreChip);
 
-    document.getElementById('btn-prev').onclick = () => setStep(currentStep - 1);
-    document.getElementById('btn-next').onclick = () => {
-      if (!exploreMode && currentStep === STEPS.length - 1) enterExplore({ frame: true });
-      else setStep(currentStep + 1);
-    };
+
+      document.getElementById('sb-step-title').addEventListener('click', () => {
+        const d = document.getElementById('sb-step-expand');
+        if (d) d.open = !d.open;
+      });
+    document.getElementById('btn-prev').onclick = () => goPrevStep();
+    document.getElementById('btn-next').onclick = () => goNextStep();
     const backBuildBtn = document.getElementById('btn-back-build');
-    if (backBuildBtn) backBuildBtn.onclick = () => setStep(currentStep, { frame: true });
+    if (backBuildBtn) backBuildBtn.onclick = () => setStep(currentStep, { frame: false });
+    const bind = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+    bind('btn-instr', openInstrOverlay);
+    bind('btn-fs-instr', openInstrOverlay);
+    bind('btn-instr-close', closeInstrOverlay);
+    bind('btn-expand', enterFs3d);
+    bind('btn-fs-close', exitFs3d);
+    bind('btn-fs-prev', () => goPrevStep());
+    bind('btn-fs-next', () => goNextStep());
+    bind('btn-instr-prev', () => goPrevStep());
+    bind('btn-instr-next', () => goNextStep());
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'Escape') return;
+      const o = document.getElementById('instr-overlay');
+      if (o && o.classList.contains('open')) { closeInstrOverlay(); ev.preventDefault(); return; }
+      if (document.body.classList.contains('fs-3d')) { exitFs3d(); ev.preventDefault(); }
+    });
     document.getElementById('toggle-labels').onchange = e => {
       labelsVisible = e.target.checked;
       applyStepVisibility();
@@ -4895,28 +5724,21 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     };
 
     document.getElementById('btn-reset-cam').onclick = () => {
-      if (exploreMode) autoFrameAssembly();
-      else {
-        camera.position.set(100, 75, 120);
-        controls.target.set(0, 18, 0);
-        controls.update();
-      }
+      controls.minDistance = isPhoneUi() ? 18 : 35;
+      frameVisibleMeshes({ padding: 1.2 });
     };
     document.getElementById('btn-reset-asm').onclick = () => setStep(0);
 
     window.addEventListener('keydown', e => {
       if (e.target.matches('input,textarea,select')) return;
-      if (!panels['3d'].classList.contains('active')) return;
+      if (!panels.build.classList.contains('active')) return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault();
-        if (exploreMode) return;
-        if (currentStep === STEPS.length - 1) enterExplore({ frame: true });
-        else setStep(currentStep + 1);
+        goNextStep();
       }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
-        if (exploreMode) setStep(currentStep, { frame: true });
-        else setStep(currentStep - 1);
+        goPrevStep();
       }
     });
 
@@ -4957,13 +5779,8 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       const rec = partRegistry[letter];
       const info = LEXICON[letter];
       if (!info) return;
-      if (!exploreMode) {
-        // Only jump forward for future parts; prior/dimmed stay on current step (click-detail separate from leaders)
-        const si = STEPS.findIndex(s => s.letters.includes(letter));
-        if (si >= 0 && si > currentStep) setStep(si, { frame: false });
-        applyStepVisibility();
-      }
-      selectedLetter = letter;
+      // Part click is highlight/select only — never change the current step or reframe
+      if (!exploreMode) applyStepVisibility();
 
       const exploreHi = exploreMode;
       (rec?.meshes || []).forEach(m => {
@@ -5098,8 +5915,12 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       const w = wrap.clientWidth, h = wrap.clientHeight;
       if (w < 2 || h < 2) return;
       camera.aspect = w / h;
+      const wantFov = (w / h) < 0.85 ? 52 : 45;
+      if (Math.abs(camera.fov - wantFov) > 0.1) camera.fov = wantFov;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h, false);
+      controls.minDistance = isPhoneUi() ? 18 : 35;
+      controls.maxDistance = isPhoneUi() ? 420 : 360;
     }
     window.addEventListener('resize', () => {
       resize();
@@ -5115,6 +5936,10 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       setTimeout(resize, 100);
       setTimeout(resize, 400);
     });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => resize());
+      window.visualViewport.addEventListener('scroll', () => resize());
+    }
     const ro = new ResizeObserver(() => resize());
     ro.observe(wrap);
 
@@ -5329,9 +6154,29 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       }
       return { total, dimmed, solid, hidden, sample, exploreMode };
     }
-    api = { setStep, highlightLetter, resize, enterExplore, snapshotCamera, sampleMeshModes };
+    api = { setStep, highlightLetter, resize, applyPbrAppearance, enterExplore, snapshotCamera, sampleMeshModes };
     try { window.__x1Api = api; } catch (e) { /* ignore */ }
     setStep(0, { frame: true });
+    applyPbrAppearance().catch(err => console.warn('[X1] PBR appearance failed', err));
+    // Portrait first-load: hardcoded cam looks empty until wrap has real aspect — retry frame
+    (function scheduleInitialFrame() {
+      let tries = 0;
+      const attempt = () => {
+        tries++;
+        resize();
+        if (wrap.clientWidth > 2 && wrap.clientHeight > 2) {
+          frameVisibleMeshes({ padding: 1.2 });
+          return;
+        }
+        if (tries < 8) {
+          if (tries <= 2) requestAnimationFrame(attempt);
+          else setTimeout(attempt, tries < 5 ? 100 : 300);
+        }
+      };
+      requestAnimationFrame(attempt);
+      setTimeout(attempt, 100);
+      setTimeout(attempt, 300);
+    })();
     resize();
     animate();
     threeReady = true;
