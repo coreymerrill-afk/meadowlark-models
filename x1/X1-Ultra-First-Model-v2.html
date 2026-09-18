@@ -139,6 +139,14 @@
     font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
     margin: 14px 0 6px; letter-spacing: 0.05em;
   }
+  .phase-label.explore { background: #243428; color: var(--ok); }
+  .step.explore-end { border-left-color: var(--ok); }
+  .explore-chip {
+    background: #243428; color: var(--ok); border: 1px solid #4a7a58;
+    border-radius: 6px; padding: 8px 14px; font-size: 13px; font-weight: 700;
+    cursor: pointer; min-height: 44px;
+  }
+  .explore-chip:hover { background: #2d4534; }
 
   /* 3D Assembly layout */
   .view3d-wrap {
@@ -181,21 +189,22 @@
   }
   .step-bar button:hover { background: #4a4f58; }
   .step-bar button:disabled { opacity: 0.4; cursor: default; }
-  .step-bar #btn-prev, .step-bar #btn-next, .step-bar #btn-explore {
+  .step-bar #btn-prev, .step-bar #btn-next {
     min-width: 72px; min-height: 44px; padding: 10px 14px; font-size: 14px;
   }
-  .step-bar #btn-explore {
+  .step-bar .step-nums #btn-explore {
     background: #243428;
     color: var(--ok);
     border-color: #4a7a58;
+    min-width: 64px;
+    font-variant-numeric: normal;
   }
-  .step-bar #btn-explore:hover { background: #2d4534; }
-  .step-bar #btn-explore.current {
+  .step-bar .step-nums #btn-explore:hover { background: #2d4534; }
+  .step-bar .step-nums #btn-explore.current {
     background: var(--ok);
     color: #0d1014;
     border-color: var(--ok);
   }
-  .step-bar.explore-on .step-nums { opacity: 0.55; }
   .step-bar.explore-on .step-title { color: var(--ok); }
   .step-bar .step-nums { display: flex; flex-wrap: wrap; gap: 4px; max-width: 100%; }
   .step-bar .step-nums button {
@@ -597,7 +606,7 @@ Stretchers Q + diagonals P under apron bay.</div>
 <!-- ========== BUILD STEPS ========== -->
 <section id="panel-build" class="panel" role="tabpanel">
   <h2>Build steps</h2>
-  <p class="muted">Same letters as 3D Assembly. Click a letter chip to highlight in 3D.</p>
+  <p class="muted">Same letters as 3D Assembly. Click a letter chip to highlight in 3D. After the last band, <strong>Explore</strong> opens the finished table.</p>
   <div id="build-steps-mount"></div>
 </section>
 
@@ -606,7 +615,6 @@ Stretchers Q + diagonals P under apron bay.</div>
   <div class="step-bar">
     <button type="button" id="btn-prev" title="Previous step (←)">◀ Prev</button>
     <button type="button" id="btn-next" title="Next step (→)">Next ▶</button>
-    <button type="button" id="btn-explore" title="Explore the full assembled table" aria-pressed="false">Explore</button>
     <div class="step-nums" id="step-nums"></div>
     <div class="step-title" id="step-title-bar">Step 1</div>
     <label class="toggle"><input type="checkbox" id="toggle-labels" checked /> Labels</label>
@@ -2133,7 +2141,8 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
   let threeReady = false;
   let threeInitStarted = false;
   let pendingHighlight = null;
-  let api = null; // filled after init: { setStep, highlightLetter, resize, ... }
+  let pendingExplore = false;
+  let api = null; // filled after init: { setStep, highlightLetter, resize, enterExplore, ... }
 
   document.querySelectorAll('nav.tabs button').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -2146,12 +2155,28 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         requestAnimationFrame(() => {
           if (api) {
             api.resize();
-            if (pendingHighlight) { api.highlightLetter(pendingHighlight); pendingHighlight = null; }
+            if (pendingExplore) {
+              api.enterExplore({ frame: true });
+              pendingExplore = false;
+              pendingHighlight = null;
+            } else if (pendingHighlight) {
+              api.highlightLetter(pendingHighlight);
+              pendingHighlight = null;
+            }
           }
         });
       }
     });
   });
+
+  function goTo3dAndExplore() {
+    pendingExplore = true;
+    document.querySelector('nav.tabs button[data-tab="3d"]').click();
+    if (api && api.enterExplore) {
+      api.enterExplore({ frame: true });
+      pendingExplore = false;
+    }
+  }
 
   function goTo3dAndHighlight(letter) {
     pendingHighlight = letter;
@@ -2245,12 +2270,20 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         </div>`;
       }
     }
+    html += `<span class="phase-label explore">Explore</span>
+      <div class="step explore-end">
+        <h4>Explore the assembled table</h4>
+        <p>End of the build — full stand, all parts solid. Orbit, zoom, and pan freely. Tap a part for info only; nothing fades and the camera stays put.</p>
+        <p><button type="button" class="explore-chip" id="build-explore-chip">Explore</button></p>
+      </div>`;
     mount.innerHTML = html;
     console.info('[X1] Build tab steps listed', listed, 'STEPS.length', STEPS.length);
     if (listed !== STEPS.length) console.warn('[X1] Build tab / STEPS mismatch');
     mount.querySelectorAll('[data-letter]').forEach(el => {
       el.addEventListener('click', () => goTo3dAndHighlight(el.dataset.letter));
     });
+    const buildExplore = document.getElementById('build-explore-chip');
+    if (buildExplore) buildExplore.addEventListener('click', () => goTo3dAndExplore());
   })();
 
   function ensureThreeInit() {
@@ -4555,9 +4588,14 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         next.textContent = last ? 'Explore ▶' : 'Next ▶';
         next.title = last ? 'Explore the full assembled table' : 'Next step (→)';
       }
-      document.querySelectorAll('#step-nums button').forEach((b, i) => {
-        b.classList.toggle('current', !exploreMode && i === currentStep);
+      document.querySelectorAll('#step-nums button[data-step]').forEach(b => {
+        b.classList.toggle('current', !exploreMode && Number(b.dataset.step) === currentStep);
       });
+      const exChip = document.getElementById('btn-explore');
+      if (exChip) {
+        exChip.classList.toggle('current', exploreMode);
+        exChip.setAttribute('aria-pressed', exploreMode ? 'true' : 'false');
+      }
     }
 
     function enterExplore({ frame = true } = {}) {
@@ -4664,7 +4702,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         document.getElementById('step-title-bar').textContent = 'Explore — full assembly';
         document.getElementById('sb-step-title').textContent = 'Explore the assembled table';
         document.getElementById('sb-instructions').innerHTML =
-          '<p class="sb-summary">Orbit, zoom, and pan the finished stand. Tap a part for its label and cut info — nothing else fades, and the camera stays where you left it.</p>' +
+          '<p class="sb-summary">End of the build. Orbit, zoom, and pan the finished stand. Tap a part for its label and cut info — nothing else fades, and the camera stays where you left it.</p>' +
           '<div class="sb-block"><strong>Build steps</strong><p class="sb-detail" style="margin:0">Use Prev, a step number, or Back to build steps to return to the dimmed step-by-step view.</p></div>';
         if (partsHeading) partsHeading.textContent = 'All parts — tap for info';
         pa.innerHTML = Object.keys(LEXICON).map(L => {
@@ -4730,19 +4768,27 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     STEPS.forEach((s, i) => {
       const b = document.createElement('button');
       b.type = 'button';
+      b.dataset.step = String(i);
       b.textContent = s.id;
       b.title = s.title;
       b.addEventListener('click', () => setStep(i));
       stepNums.appendChild(b);
     });
+    const exploreChip = document.createElement('button');
+    exploreChip.type = 'button';
+    exploreChip.id = 'btn-explore';
+    exploreChip.className = 'explore-chip';
+    exploreChip.textContent = 'Explore';
+    exploreChip.title = 'End of build — explore the full assembled table';
+    exploreChip.setAttribute('aria-pressed', 'false');
+    exploreChip.addEventListener('click', () => enterExplore({ frame: true }));
+    stepNums.appendChild(exploreChip);
 
     document.getElementById('btn-prev').onclick = () => setStep(currentStep - 1);
     document.getElementById('btn-next').onclick = () => {
       if (!exploreMode && currentStep === STEPS.length - 1) enterExplore({ frame: true });
       else setStep(currentStep + 1);
     };
-    const exploreBtn = document.getElementById('btn-explore');
-    if (exploreBtn) exploreBtn.onclick = () => enterExplore({ frame: true });
     const backBuildBtn = document.getElementById('btn-back-build');
     if (backBuildBtn) backBuildBtn.onclick = () => setStep(currentStep, { frame: true });
     document.getElementById('toggle-labels').onchange = e => {
@@ -5290,7 +5336,11 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     animate();
     threeReady = true;
     if (loading) loading.classList.add('hidden');
-    if (pendingHighlight) {
+    if (pendingExplore) {
+      enterExplore({ frame: true });
+      pendingExplore = false;
+      pendingHighlight = null;
+    } else if (pendingHighlight) {
       highlightLetter(pendingHighlight);
       pendingHighlight = null;
     }
