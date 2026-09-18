@@ -469,6 +469,38 @@
       border-left: 1px solid var(--border);
     }
   }
+
+  /* Short landscape: hide chrome so the 3D canvas can take over */
+  .land-hud { display: none; }
+  @media (orientation: landscape) and (max-height: 520px) {
+    body:has(main.is-3d), body.mode-3d {
+      overflow: hidden; height: 100dvh; max-height: 100dvh; padding: 0;
+    }
+    body:has(main.is-3d) .copy-note,
+    body:has(main.is-3d) header.doc-header,
+    body:has(main.is-3d) .step-bar,
+    body:has(main.is-3d) #sidebar-3d,
+    body:has(main.is-3d) .build-step-list-wrap { display: none !important; }
+    body:has(main.is-3d) main.is-3d,
+    body:has(main.is-3d) #panel-build.active,
+    body:has(main.is-3d) .view3d-wrap,
+    body:has(main.is-3d) #canvas-wrap {
+      position: fixed; inset: 0;
+      width: 100%; height: 100dvh; max-height: none; min-height: 0;
+      z-index: 50; border: none;
+    }
+    body:has(main.is-3d) .land-hud {
+      display: flex; align-items: center;
+      position: fixed; top: 0; left: 0; z-index: 70;
+      padding: calc(6px + env(safe-area-inset-top)) 10px 6px;
+      pointer-events: auto;
+    }
+    body:has(main.is-3d) .land-hud .hub-back {
+      margin: 0; color: #fff; min-height: 36px;
+      text-shadow: 0 1px 4px #000;
+    }
+  }
+  body.fs-3d .land-hud { display: none !important; }
   @media (min-width: 768px) and (max-width: 900px) {
     .copy-note { display: none; }
     nav.tabs {
@@ -1168,6 +1200,10 @@ Stretchers Q + diagonals P under apron bay.</div>
   </details>
 </section>
 
+
+<div class="land-hud" aria-label="Hub">
+  <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+</div>
 
 <div id="fs-hud" hidden>
   <div class="fs-top">
