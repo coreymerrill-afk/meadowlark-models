@@ -23,8 +23,10 @@ Locked (do not invent past this)
   Between posts      about 29 × 29 inches
   Posts              4×4 (about 3½ inches)
   Height             38 inches tall (not 36; 40 later is optional)
-  Join               magnets snap, then a latch
-                     latch 12 inches below the top (~26 in off the floor)
+  Join               magnets snap, then two latches per side
+                     first latch 12 inches below the top (~26 in off the floor)
+                     second reserved on the same line, typically 6–8 in away
+                     (exact offset DRAFT)
   Plywood            ½ in X1-cut plates · ¾ in tops/shelves
   First saw          DeWalt DWS716XPS
                      base ~27.2 × 22.4 in — tight in the 29 in opening
@@ -32,7 +34,7 @@ Locked (do not invent past this)
 
 OPEN — do not invent numbers
   Magnet strength/size · latch brand · caster brand
-  One latch or two · DWS716XPS head swing · shopping lists
+  Second-latch exact offset · DWS716XPS head swing · shopping lists
 
 Open locally
   python3 -m http.server 8080

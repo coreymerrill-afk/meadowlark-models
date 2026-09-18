@@ -24,7 +24,7 @@
     { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them.' },
     { id: 'top', name: 'Top', detail: '¾ inch plywood that holds weight. The top sits 38 inches off the floor — not 36. ½ inch plywood is only for plates the X1 can cut.' },
     { id: 'shelf', name: 'Shelf / brace', detail: 'A ¾ inch shelf and/or a diagonal brace so the table does not rack. Not a final lumber list.' },
-    { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Magnets snap the tables together; then a latch takes the load. The latch sits 12 inches below the top (about 26 inches off the floor) — not 18. Whether we need one latch or two is still open.' },
+    { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Magnets snap the tables together; then two latches per side take the load. The first sits 12 inches below the top (about 26 inches off the floor) — not 18. The second is reserved on the same line, typically 6–8 inches above or below (exact offset still a draft).' },
     { id: 'casters', name: 'Wheels', detail: 'A locking caster under each post. About 3 inches tall as a starting guess. Brand is still open.' },
     { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS. Base about 27.2 × 22.4 inches — fits the 29 inch opening, tight front-to-back. Removable inserts so a later saw can swap in. How far the head swings is still open.' }
   ];
@@ -325,6 +325,13 @@
       const toggle = box(1.6, 0.55, 0.7, matMech, 0, LATCH_AFF - 0.7, PLATE / 2 + 0.25);
       tag(toggle, 'latch');
       g.add(toggle);
+      const reservedY = LATCH_AFF - 7;
+      const pad2 = box(4.2, 3.2, PLATE, matPlate, 0, reservedY, 0);
+      tag(pad2, 'latch');
+      g.add(pad2);
+      const toggle2 = box(1.6, 0.55, 0.7, matMech, 0, reservedY - 0.7, PLATE / 2 + 0.25);
+      tag(toggle2, 'latch');
+      g.add(toggle2);
       const half = OA / 2 + PLATE / 2;
       switch (face) {
         case '+x':
