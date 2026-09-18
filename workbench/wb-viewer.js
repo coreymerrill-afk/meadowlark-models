@@ -168,9 +168,10 @@
     const LOWER_RAIL_Y = (LOWER_RAIL_TOP + LOWER_RAIL_BOT) / 2;
     const SHELF_Y = LOWER_RAIL_TOP + TOP_THK / 2;
     const SPAN = OA - 2 * POST;
-    const RAIL_C = OA / 2 - STOCK / 2;
     const POST_INNER = OA / 2 - POST;
     const UPPER_MAG_Y = TOP_AFF - TOP_THK - 2;
+    const BRACE_FACE = 3.5;
+    const BRACE_THK = STOCK;
 
     (function assertFrameContacts() {
       const padHalf = LATCH_PAD_H / 2;
@@ -182,6 +183,7 @@
       console.assert(LOWER_RAIL_TOP >= 6 && LOWER_RAIL_TOP <= 8, 'lower rail in 6–8 AFF band');
       console.assert(LOWER_RAIL_BOT >= CASTER_H, 'lower rail clear of caster plate');
       console.assert(Math.abs(SHELF_Y - (LOWER_RAIL_TOP + TOP_THK / 2)) < 1e-6, 'shelf sits on rails');
+      console.assert(Math.abs((POST_INNER - BRACE_THK / 2) + BRACE_THK / 2 - POST_INNER) < 1e-9, 'brace kisses post inner face');
     })();
 
     const scene = new THREE.Scene();
@@ -304,44 +306,60 @@
       return spr;
     }
 
-    function addBrace(parent, x0, y0, z0, x1, y1, z1, mat, id) {
+    // 2×4-class brace: length along the diagonal, 3.5" in the face plane,
+    // 1.5" thickness along the outward face normal so the outer face kisses the post.
+    function addBrace(parent, x0, y0, z0, x1, y1, z1, nx, ny, nz, mat, id) {
       const dx = x1 - x0;
       const dy = y1 - y0;
       const dz = z1 - z0;
       const len = Math.sqrt(dx * dx + dy * dy + dz * dz);
-      const m = new THREE.Mesh(new THREE.BoxGeometry(len, STOCK, 3.5), mat);
+      const m = new THREE.Mesh(new THREE.BoxGeometry(len, BRACE_FACE, BRACE_THK), mat);
       m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
-      const dir = new THREE.Vector3(dx, dy, dz).normalize();
-      m.quaternion.setFromUnitVectors(new THREE.Vector3(1, 0, 0), dir);
+      const xAxis = new THREE.Vector3(dx, dy, dz).normalize();
+      const zAxis = new THREE.Vector3(nx, ny, nz).normalize();
+      const yAxis = new THREE.Vector3().crossVectors(zAxis, xAxis).normalize();
+      zAxis.crossVectors(xAxis, yAxis).normalize();
+      m.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(xAxis, yAxis, zAxis));
       tag(m, id);
       parent.add(m);
       return m;
     }
 
-    // Lower-bay diagonal: ends on post inner faces at rail top and apron bottom.
-    function addLowerBayBrace(parent, face) {
+    // End centers land on post inner-face nodes (closes Frame ~0.15″ miss).
+    function addFaceDiagonal(parent, face, flip) {
       const y0 = LOWER_RAIL_TOP;
       const y1 = APRON_BOT;
-      const inset = STOCK / 2;
       const p = POST_INNER;
+      const c = POST_INNER - BRACE_THK / 2;
+      const a = flip ? p : -p;
+      const b = flip ? -p : p;
       switch (face) {
         case '+z':
-          addBrace(parent, -p, y0, p - inset, p, y1, p - inset, matBrace, 'shelf');
+          addBrace(parent, a, y0, c, b, y1, c, 0, 0, 1, matBrace, 'shelf');
           break;
         case '-z':
-          addBrace(parent, p, y0, -(p - inset), -p, y1, -(p - inset), matBrace, 'shelf');
+          addBrace(parent, b, y0, -c, a, y1, -c, 0, 0, -1, matBrace, 'shelf');
           break;
         case '+x':
-          addBrace(parent, p - inset, y0, p, p - inset, y1, -p, matBrace, 'shelf');
+          addBrace(parent, c, y0, a, c, y1, b, 1, 0, 0, matBrace, 'shelf');
           break;
         case '-x':
-          addBrace(parent, -(p - inset), y0, -p, -(p - inset), y1, p, matBrace, 'shelf');
+          addBrace(parent, -c, y0, b, -c, y1, a, -1, 0, 0, matBrace, 'shelf');
           break;
         default: {
           const _exhaustive = face;
           throw new Error('Unknown brace face: ' + _exhaustive);
         }
       }
+    }
+
+    function addLowerBayBrace(parent, face) {
+      addFaceDiagonal(parent, face, false);
+    }
+
+    function addLowerBayX(parent, face) {
+      addFaceDiagonal(parent, face, false);
+      addFaceDiagonal(parent, face, true);
     }
 
     function addPerimeterBand(parent, y, height, thick, mat, id) {
@@ -567,13 +585,9 @@
         addLowerBayBrace(parent, '+z');
         addLowerBayBrace(parent, '-z');
       } else if (kind === 'miter') {
-        addLowerBayBrace(parent, '+x');
-        addLowerBayBrace(parent, '-x');
-        const rearDepth = 7;
-        const rearZ = RAIL_C - rearDepth / 2 + STOCK / 2;
-        const rearShelf = box(SPAN, TOP_THK, rearDepth, matShelf, 0, SHELF_Y, rearZ);
-        tag(rearShelf, 'shelf');
-        parent.add(rearShelf);
+        addNotchedShelf(parent, SHELF_Y, matShelf, 'shelf');
+        addLowerBayX(parent, '+z');
+        addLowerBayX(parent, '-z');
       } else {
         const _exhaustive = kind;
         throw new Error('Unknown module: ' + _exhaustive);
