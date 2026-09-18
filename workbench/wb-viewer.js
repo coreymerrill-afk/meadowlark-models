@@ -21,12 +21,12 @@
   const OC_ESM_SH = 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
   const PARTS = [
-    { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them.' },
+    { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them. Upper aprons run post to post, flush to that outer face, so latches have wood behind them.' },
     { id: 'top', name: 'Top', detail: '¾ inch plywood that holds weight. The top sits 38 inches off the floor — not 36. ½ inch plywood is only for plates the X1 can cut.' },
-    { id: 'shelf', name: 'Shelf / brace', detail: 'A ¾ inch shelf and/or a diagonal brace so the table does not rack. Not a final lumber list.' },
-    { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Two magnets per side snap the tables together; then two latches take the load. The first sits 12 inches below the top (about 26 inches off the floor) — not 18. The second is Design-reserved on the same line, typically 6–8 inches above or below (exact offset DRAFT).' },
+    { id: 'shelf', name: 'Shelf / rails', detail: 'Four lower rails sit about 6–8 inches off the floor, clear of the casters. A ¾ inch shelf rests on those rails and notches around the posts — it does not float. Flat and Extension get a brace on two opposite faces. Miter gets an X in the lower bay. Brace ends kiss the post inner faces at the rail and apron. Not a cut list.' },
+    { id: 'latch', name: 'Snap + latch', detail: 'Same kit on all four sides, mirrored. Two magnets per side, flush or a hair proud of the 36 inch face. North and East carry the latch bodies; South and West carry the strikes. Plates sit on the apron, not hanging in air. First latch 12 inches below the top (about 26 inches off the floor). Second is Design-reserved on the same line (exact offset DRAFT).' },
     { id: 'casters', name: 'Wheels', detail: 'A locking caster under each post. About 3 inches tall as a starting guess. Brand is still open.' },
-    { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS. Base about 27.2 × 22.4 inches — fits the 29 inch opening, tight front-to-back. Removable inserts so a later saw can swap in. How far the head swings is still open.' }
+    { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS (12 inch compound, it does not slide). Rubber feet sit on a ½ inch nest. Width gets about a ¾–1 inch service gap; front-to-back stays tight. A rear keep-clear marks a dust path outside the latch strip — bag depth is still open. Fold-off stock wings are out of this Gen-0.1 picture (they stow for dock). Head is shown upright; how far it bevels is still open.' }
   ];
 
   function loadScript(src) {
@@ -151,6 +151,51 @@
     const POST_H = TOP_AFF - TOP_THK - CASTER_H;
     const SAW_W = 22.4;
     const SAW_D = 27.2;
+    const SERVICE_W = 0.875;
+    const OPEN_W = SAW_W + 2 * SERVICE_W;
+    const OPEN_D = SAW_D;
+    const NEST_W = 22.5;
+    const NEST_D = SAW_D;
+    const MAG_PROUD = 1 / 16;
+    const FOOT_H = 0.35;
+
+    // Schematic frame stock — not freeze dims, not a cut list.
+    // 2× class thickness. Second latch sits 6" above primary (Design-allowed
+    // DRAFT offset) so both pads share one upper apron without a full-height skirt.
+    const STOCK = 1.5;
+    const LATCH_PAD_H = 3.2;
+    const LATCH2_AFF = LATCH_AFF + 6;
+    const APRON_TOP = TOP_AFF - TOP_THK;
+    const APRON_BOT = LATCH_AFF - LATCH_PAD_H / 2 - 1;
+    const APRON_H = APRON_TOP - APRON_BOT;
+    const APRON_Y = (APRON_TOP + APRON_BOT) / 2;
+    const RAIL_H = 3.5;
+    const LOWER_RAIL_TOP = 7.5;
+    const LOWER_RAIL_BOT = LOWER_RAIL_TOP - RAIL_H;
+    const LOWER_RAIL_Y = (LOWER_RAIL_TOP + LOWER_RAIL_BOT) / 2;
+    const SHELF_Y = LOWER_RAIL_TOP + TOP_THK / 2;
+    const SPAN = OA - 2 * POST;
+    const POST_INNER = OA / 2 - POST;
+    const UPPER_MAG_Y = TOP_AFF - TOP_THK - 2;
+    const BRACE_FACE = 3.5;
+    const BRACE_THK = STOCK;
+
+    (function assertFrameContacts() {
+      const padHalf = LATCH_PAD_H / 2;
+      console.assert(OA === 36 && TOP_AFF === 38 && POST === 3.5, 'freeze envelope');
+      console.assert(LATCH_AFF === 26 && TOP_THK === 0.75 && PLATE === 0.5, 'freeze latch/ply');
+      console.assert(LATCH_AFF - padHalf >= APRON_BOT && LATCH_AFF + padHalf <= APRON_TOP, 'primary latch on apron');
+      console.assert(LATCH2_AFF - padHalf >= APRON_BOT && LATCH2_AFF + padHalf <= APRON_TOP, 'second latch on apron');
+      console.assert(LATCH2_AFF + padHalf < UPPER_MAG_Y - 0.4, 'second latch clear of upper magnet');
+      console.assert(LOWER_RAIL_TOP >= 6 && LOWER_RAIL_TOP <= 8, 'lower rail in 6–8 AFF band');
+      console.assert(LOWER_RAIL_BOT >= CASTER_H, 'lower rail clear of caster plate');
+      console.assert(Math.abs(SHELF_Y - (LOWER_RAIL_TOP + TOP_THK / 2)) < 1e-6, 'shelf sits on rails');
+      console.assert(Math.abs((POST_INNER - BRACE_THK / 2) + BRACE_THK / 2 - POST_INNER) < 1e-9, 'brace kisses post inner face');
+      console.assert(OPEN_W < SPAN && OPEN_D <= SPAN, 'nest inside A-clear');
+      console.assert(NEST_W <= OPEN_W && NEST_D <= OPEN_D, 'insert fits opening');
+      console.assert(SERVICE_W >= 0.75 && SERVICE_W <= 1, 'width-only service gap');
+      console.assert(OPEN_D === SAW_D, 'no faked depth gap');
+    })();
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x16130c);
@@ -198,30 +243,36 @@
     floor.rotation.x = -Math.PI / 2;
     scene.add(floor);
 
-    const matPost = new THREE.MeshStandardMaterial({ color: 0x6b4f2a, roughness: 0.72, metalness: 0.08 });
-    const matTop = new THREE.MeshStandardMaterial({ color: 0xd4b07a, roughness: 0.62, metalness: 0.05 });
-    const matTopLite = new THREE.MeshStandardMaterial({ color: 0xe0c48a, roughness: 0.58, metalness: 0.05 });
-    const matShelf = new THREE.MeshStandardMaterial({ color: 0xb08958, roughness: 0.7, metalness: 0.04 });
-    const matBrace = new THREE.MeshStandardMaterial({ color: 0x8a6a40, roughness: 0.68, metalness: 0.06 });
+    const matPost = new THREE.MeshStandardMaterial({ color: 0x4e351c, roughness: 0.78, metalness: 0.04 });
+    const matApron = new THREE.MeshStandardMaterial({ color: 0x8a5a2c, roughness: 0.7, metalness: 0.05 });
+    const matRail = new THREE.MeshStandardMaterial({ color: 0x6f4524, roughness: 0.74, metalness: 0.04 });
+    const matTop = new THREE.MeshStandardMaterial({ color: 0xc9a66b, roughness: 0.58, metalness: 0.04 });
+    const matTopLite = new THREE.MeshStandardMaterial({ color: 0xd4b57a, roughness: 0.56, metalness: 0.04 });
+    const matShelf = new THREE.MeshStandardMaterial({ color: 0xa67c48, roughness: 0.68, metalness: 0.03 });
+    const matPlyEdge = new THREE.MeshStandardMaterial({ color: 0x3a2a16, roughness: 0.82, metalness: 0.02 });
+    const matBrace = new THREE.MeshStandardMaterial({ color: 0x7a5230, roughness: 0.7, metalness: 0.05 });
     const matPlate = new THREE.MeshStandardMaterial({ color: 0xb8b4aa, roughness: 0.4, metalness: 0.45 });
+    const matStrike = new THREE.MeshStandardMaterial({ color: 0x8a8680, roughness: 0.45, metalness: 0.4 });
+    const matRubber = new THREE.MeshStandardMaterial({ color: 0x1c1c1c, roughness: 0.92, metalness: 0.02 });
+    const matSawTable = new THREE.MeshStandardMaterial({ color: 0x2a2c30, roughness: 0.55, metalness: 0.2 });
     const matMagnet = new THREE.MeshStandardMaterial({
-      color: 0xf5b942, roughness: 0.32, metalness: 0.55, emissive: 0x7a5208, emissiveIntensity: 0.35
+      color: 0x2c2e32, roughness: 0.55, metalness: 0.62, emissive: 0x000000, emissiveIntensity: 0
     });
     const matMech = new THREE.MeshStandardMaterial({ color: 0x4a4e56, roughness: 0.35, metalness: 0.6 });
     const matCaster = new THREE.MeshStandardMaterial({ color: 0x2a2c30, roughness: 0.45, metalness: 0.4 });
     const matWheel = new THREE.MeshStandardMaterial({ color: 0x1a1a1c, roughness: 0.7, metalness: 0.15 });
-    const matLock = new THREE.MeshStandardMaterial({ color: 0xf5b942, roughness: 0.4, metalness: 0.3 });
-    const matGhost = new THREE.MeshStandardMaterial({
-      color: 0xf5b942, roughness: 0.5, metalness: 0.1, transparent: true, opacity: 0.16
-    });
-    const matSawY = new THREE.MeshStandardMaterial({ color: 0xf4c430, roughness: 0.45, metalness: 0.2 });
-    const matSawK = new THREE.MeshStandardMaterial({ color: 0x1c1c1e, roughness: 0.5, metalness: 0.25 });
+    const matLock = new THREE.MeshStandardMaterial({ color: 0x1e1e20, roughness: 0.7, metalness: 0.12 });
+    const matSawY = new THREE.MeshStandardMaterial({ color: 0xb08a22, roughness: 0.5, metalness: 0.18 });
+    const matSawK = new THREE.MeshStandardMaterial({ color: 0x1a1a1c, roughness: 0.55, metalness: 0.22 });
     const matBlade = new THREE.MeshStandardMaterial({ color: 0xc0c6ce, roughness: 0.25, metalness: 0.7 });
     const matWell = new THREE.MeshStandardMaterial({
-      color: 0x8a7348, roughness: 0.55, metalness: 0.08, transparent: true, opacity: 0.5
+      color: 0x5c4a30, roughness: 0.68, metalness: 0.05
     });
     const matInsert = new THREE.MeshStandardMaterial({
-      color: 0xc4b896, roughness: 0.5, metalness: 0.12, transparent: true, opacity: 0.85
+      color: 0xbba57a, roughness: 0.55, metalness: 0.08
+    });
+    const matKeepClear = new THREE.MeshStandardMaterial({
+      color: 0xc4a056, roughness: 0.6, metalness: 0.05, transparent: true, opacity: 0.2
     });
 
     function box(w, h, d, mat, x, y, z) {
@@ -240,9 +291,10 @@
     const labelSprites = [];
     let highlight = null;
 
+    let pickOn = true;
     function tag(mesh, id) {
       mesh.userData.partId = id;
-      pickables.push(mesh);
+      if (pickOn) pickables.push(mesh);
     }
 
     function makeLabel(text, x, y, z, scale) {
@@ -270,34 +322,137 @@
       return spr;
     }
 
-    function addBrace(parent, x0, y0, z0, x1, y1, z1, mat, id) {
+    // 2×4-class brace: length along the diagonal, 3.5" in the face plane,
+    // 1.5" thickness along the outward face normal so the outer face kisses the post.
+    function addBrace(parent, x0, y0, z0, x1, y1, z1, nx, ny, nz, mat, id) {
       const dx = x1 - x0;
       const dy = y1 - y0;
       const dz = z1 - z0;
       const len = Math.sqrt(dx * dx + dy * dy + dz * dz);
-      const m = new THREE.Mesh(new THREE.BoxGeometry(len, 1.5, 3.5), mat);
+      const m = new THREE.Mesh(new THREE.BoxGeometry(len, BRACE_FACE, BRACE_THK), mat);
       m.position.set((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2);
-      const dir = new THREE.Vector3(dx, dy, dz).normalize();
-      m.quaternion.setFromUnitVectors(new THREE.Vector3(1, 0, 0), dir);
+      const xAxis = new THREE.Vector3(dx, dy, dz).normalize();
+      const zAxis = new THREE.Vector3(nx, ny, nz).normalize();
+      const yAxis = new THREE.Vector3().crossVectors(zAxis, xAxis).normalize();
+      zAxis.crossVectors(xAxis, yAxis).normalize();
+      m.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(xAxis, yAxis, zAxis));
       tag(m, id);
       parent.add(m);
       return m;
     }
 
+    // End centers land on post inner-face nodes (closes Frame ~0.15″ miss).
+    function addFaceDiagonal(parent, face, flip) {
+      const y0 = LOWER_RAIL_TOP;
+      const y1 = APRON_BOT;
+      const p = POST_INNER;
+      const c = POST_INNER - BRACE_THK / 2;
+      const a = flip ? p : -p;
+      const b = flip ? -p : p;
+      switch (face) {
+        case '+z':
+          addBrace(parent, a, y0, c, b, y1, c, 0, 0, 1, matBrace, 'shelf');
+          break;
+        case '-z':
+          addBrace(parent, b, y0, -c, a, y1, -c, 0, 0, -1, matBrace, 'shelf');
+          break;
+        case '+x':
+          addBrace(parent, c, y0, a, c, y1, b, 1, 0, 0, matBrace, 'shelf');
+          break;
+        case '-x':
+          addBrace(parent, -c, y0, b, -c, y1, a, -1, 0, 0, matBrace, 'shelf');
+          break;
+        default: {
+          const _exhaustive = face;
+          throw new Error('Unknown brace face: ' + _exhaustive);
+        }
+      }
+    }
+
+    function addLowerBayBrace(parent, face) {
+      addFaceDiagonal(parent, face, false);
+    }
+
+    function addLowerBayX(parent, face) {
+      addFaceDiagonal(parent, face, false);
+      addFaceDiagonal(parent, face, true);
+    }
+
+    function addPerimeterBand(parent, y, height, thick, mat, id) {
+      const span = SPAN;
+      const c = OA / 2 - thick / 2;
+      const parts = [
+        box(span, height, thick, mat, 0, y, c),
+        box(span, height, thick, mat, 0, y, -c),
+        box(thick, height, span, mat, c, y, 0),
+        box(thick, height, span, mat, -c, y, 0)
+      ];
+      parts.forEach(function (m) {
+        tag(m, id);
+        parent.add(m);
+      });
+      return parts;
+    }
+
+    // ¾" shelf on the lower-rail tops, notched around the 4×4s so edges bear on the rails.
+    function addNotchedShelf(parent, y, mat, id) {
+      const reach = POST - STOCK / 2;
+      const through = SPAN + 2 * reach;
+      const center = box(SPAN, TOP_THK, through, mat, 0, y, 0);
+      tag(center, id);
+      parent.add(center);
+      const east = box(reach, TOP_THK, SPAN, mat, (SPAN + reach) / 2, y, 0);
+      tag(east, id);
+      parent.add(east);
+      const west = box(reach, TOP_THK, SPAN, mat, -(SPAN + reach) / 2, y, 0);
+      tag(west, id);
+      parent.add(west);
+      addPlyEdges(parent, SPAN, through, y, TOP_THK, id);
+    }
+
+    function addPlyEdges(parent, w, d, y, thk, id) {
+      const e = 0.11;
+      const band = thk * 0.9;
+      [
+        box(w, band, e, matPlyEdge, 0, y, d / 2 - e / 2),
+        box(w, band, e, matPlyEdge, 0, y, -d / 2 + e / 2),
+        box(e, band, d, matPlyEdge, w / 2 - e / 2, y, 0),
+        box(e, band, d, matPlyEdge, -w / 2 + e / 2, y, 0)
+      ].forEach(function (m) {
+        tag(m, id);
+        parent.add(m);
+      });
+    }
+
+    // Rear keep-clear only — path reserved outside the latch strip. Bag depth OPEN.
+    function addDustKeepClear(parent) {
+      const keepHalf = 4.2 / 2 + 1;
+      const portOff = keepHalf + 3.2;
+      const port = box(2.3, 2.0, 0.18, matKeepClear, portOff, APRON_Y, OA / 2 + 0.08);
+      tag(port, 'top');
+      parent.add(port);
+      const clear = box(3.4, 5.5, 1.0, matKeepClear, portOff, APRON_Y - 1.2, OA / 2 + 0.55);
+      tag(clear, 'top');
+      parent.add(clear);
+    }
+
     function addCaster(parent, x, z) {
       const g = new THREE.Group();
-      const plate = box(3.4, 0.28, 3.4, matCaster, 0, CASTER_H - 0.14, 0);
+      const plateH = 0.22;
+      const plate = box(POST + 0.12, plateH, POST + 0.12, matCaster, 0, CASTER_H - plateH / 2, 0);
       tag(plate, 'casters');
       g.add(plate);
-      const yoke = box(0.35, 1.4, 2.2, matCaster, 0, 1.4, 0);
+      const yokeH = 1.15;
+      const yoke = box(0.38, yokeH, 2.05, matCaster, 0, CASTER_H - plateH - yokeH / 2, 0);
       tag(yoke, 'casters');
       g.add(yoke);
-      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(1.5, 1.5, 1.05, 20), matWheel);
+      const wheelR = 1.45;
+      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(wheelR, wheelR, 1.05, 20), matWheel);
       wheel.rotation.x = Math.PI / 2;
-      wheel.position.set(0, 1.5, 0);
+      wheel.position.set(0, wheelR, 0);
       tag(wheel, 'casters');
       g.add(wheel);
-      const lock = box(0.35, 0.7, 1.4, matLock, 1.15, 1.15, 0);
+      const lock = box(0.35, 0.7, 1.4, matLock, 1.15, 1.05, 0);
       lock.rotation.z = -0.45;
       tag(lock, 'casters');
       g.add(lock);
@@ -308,31 +463,49 @@
 
     function addLatchPad(parent, face) {
       const g = new THREE.Group();
-      const upperMagY = TOP_AFF - TOP_THK - 2;
-      const lowerMagY = 4;
+      let role;
+      switch (face) {
+        case '+x':
+        case '+z':
+          role = 'latch';
+          break;
+        case '-x':
+        case '-z':
+          role = 'strike';
+          break;
+        default: {
+          const _exhaustive = face;
+          throw new Error('Unknown latch face: ' + _exhaustive);
+        }
+      }
+      const isLatch = role === 'latch';
+      const padMat = isLatch ? matPlate : matStrike;
       function addMag(y) {
-        const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.22, 16), matMagnet);
+        const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, MAG_PROUD, 16), matMagnet);
         mag.rotation.x = Math.PI / 2;
-        mag.position.set(0, y, PLATE / 2 + 0.1);
+        mag.position.set(0, y, MAG_PROUD / 2);
         tag(mag, 'latch');
         g.add(mag);
       }
-      addMag(upperMagY);
-      addMag(lowerMagY);
-      const pad = box(4.2, 3.2, PLATE, matPlate, 0, LATCH_AFF, 0);
-      tag(pad, 'latch');
-      g.add(pad);
-      const toggle = box(1.6, 0.55, 0.7, matMech, 0, LATCH_AFF - 0.7, PLATE / 2 + 0.25);
-      tag(toggle, 'latch');
-      g.add(toggle);
-      const reservedY = LATCH_AFF - 7;
-      const pad2 = box(4.2, 3.2, PLATE, matPlate, 0, reservedY, 0);
-      tag(pad2, 'latch');
-      g.add(pad2);
-      const toggle2 = box(1.6, 0.55, 0.7, matMech, 0, reservedY - 0.7, PLATE / 2 + 0.25);
-      tag(toggle2, 'latch');
-      g.add(toggle2);
-      const half = OA / 2 + PLATE / 2;
+      addMag(UPPER_MAG_Y);
+      addMag(4);
+      function addStation(y) {
+        const pad = box(4.2, LATCH_PAD_H, PLATE, padMat, 0, y, -PLATE / 2);
+        tag(pad, 'latch');
+        g.add(pad);
+        if (isLatch) {
+          const toggle = box(1.6, 0.55, 0.7, matMech, 0, y - 0.7, 0.28);
+          tag(toggle, 'latch');
+          g.add(toggle);
+        } else {
+          const slot = box(2.4, 0.7, 0.16, matMech, 0, y, 0.08);
+          tag(slot, 'latch');
+          g.add(slot);
+        }
+      }
+      addStation(LATCH_AFF);
+      addStation(LATCH2_AFF);
+      const half = OA / 2;
       switch (face) {
         case '+x':
           g.position.set(half, 0, 0);
@@ -350,8 +523,8 @@
           g.rotation.y = Math.PI;
           break;
         default: {
-          const _exhaustive = face;
-          throw new Error('Unknown latch face: ' + _exhaustive);
+          const _exhaustivePos = face;
+          throw new Error('Unknown latch face: ' + _exhaustivePos);
         }
       }
       parent.add(g);
@@ -360,26 +533,45 @@
 
     function addSaw(parent) {
       const g = new THREE.Group();
-      const base = box(SAW_W, 2.2, SAW_D, matSawK, 0, 1.1, 0);
+      const baseH = 1.65;
+      const feet = [
+        [SAW_W / 2 - 1.4, SAW_D / 2 - 1.4],
+        [SAW_W / 2 - 1.4, -SAW_D / 2 + 1.4],
+        [-SAW_W / 2 + 1.4, SAW_D / 2 - 1.4],
+        [-SAW_W / 2 + 1.4, -SAW_D / 2 + 1.4]
+      ];
+      feet.forEach(function (c) {
+        const pad = box(1.35, FOOT_H, 1.35, matRubber, c[0], FOOT_H / 2, c[1]);
+        tag(pad, 'saw');
+        g.add(pad);
+      });
+      const base = box(SAW_W, baseH, SAW_D, matSawK, 0, FOOT_H + baseH / 2, 0);
       tag(base, 'saw');
       g.add(base);
-      const fence = box(SAW_W - 1, 3.2, 0.6, matSawK, 0, 3.6, -SAW_D / 2 + 5);
+      const table = box(SAW_W - 0.7, 0.22, SAW_D - 1.4, matSawTable, 0, FOOT_H + baseH + 0.11, -0.15);
+      tag(table, 'saw');
+      g.add(table);
+      const fenceZ = SAW_D / 2 - 4.2;
+      const fence = box(SAW_W - 1.3, 3.3, 0.55, matSawK, 0, FOOT_H + baseH + 1.85, fenceZ);
       tag(fence, 'saw');
       g.add(fence);
-      const arm = box(3.2, 10, 3.6, matSawY, 0, 8.2, -1.2);
+      const pivot = box(4.0, 3.4, 3.1, matSawY, 0, FOOT_H + baseH + 3.2, fenceZ + 1.7);
+      tag(pivot, 'saw');
+      g.add(pivot);
+      const arm = box(2.5, 8.8, 2.6, matSawY, 0, FOOT_H + baseH + 8.8, fenceZ + 0.2);
       tag(arm, 'saw');
       g.add(arm);
-      const motor = new THREE.Mesh(new THREE.CylinderGeometry(2.4, 2.4, 4.2, 18), matSawY);
+      const motor = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 4.0, 18), matSawY);
       motor.rotation.z = Math.PI / 2;
-      motor.position.set(2.6, 10.2, 1.4);
+      motor.position.set(2.7, FOOT_H + baseH + 9.6, fenceZ - 2.1);
       tag(motor, 'saw');
       g.add(motor);
       const blade = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, 0.12, 32), matBlade);
       blade.rotation.z = Math.PI / 2;
-      blade.position.set(-0.4, 8.4, 2.6);
+      blade.position.set(0, FOOT_H + baseH + 7.6, fenceZ - 3.4);
       tag(blade, 'saw');
       g.add(blade);
-      const handle = box(1.4, 1.1, 4.5, matSawK, 0, 13.4, -0.4);
+      const handle = box(1.3, 1.05, 4.2, matSawK, 0, FOOT_H + baseH + 13.2, fenceZ - 0.6);
       tag(handle, 'saw');
       g.add(handle);
       parent.add(g);
@@ -391,12 +583,14 @@
       g.traverse(function (o) {
         if (o.geometry) doomed.push(o.geometry);
         if (o.material && o.material.map && o.material.map.dispose) doomed.push(o.material.map);
+        if (o.material && o.material.userData && o.material.userData.ghostClone) doomed.push(o.material);
       });
       while (g.children.length) g.remove(g.children[0]);
       doomed.forEach(function (res) { res.dispose(); });
     }
 
-    function buildFrame(parent, kind) {
+    function buildFrame(parent, kind, opts) {
+      const ghost = !!(opts && opts.ghost);
       const corners = [
         [POST_C, POST_C], [POST_C, -POST_C], [-POST_C, POST_C], [-POST_C, -POST_C]
       ];
@@ -406,65 +600,77 @@
         parent.add(post);
         addCaster(parent, c[0], c[1]);
       });
+      addPerimeterBand(parent, APRON_Y, APRON_H, STOCK, matApron, 'posts');
+      addPerimeterBand(parent, LOWER_RAIL_Y, RAIL_H, STOCK, matRail, 'shelf');
       ['+x', '-x', '+z', '-z'].forEach(function (face) { addLatchPad(parent, face); });
 
       const topY = TOP_AFF - TOP_THK / 2;
-      if (kind === 'miter') {
-        const wingW = (OA - SAW_W) / 2;
-        const lip = (OA - SAW_D) / 2;
+      if (kind === 'miter' && ghost) {
+        const top = box(OA, TOP_THK, OA, matTop, 0, topY, 0);
+        tag(top, 'top');
+        parent.add(top);
+        addPlyEdges(parent, OA, OA, topY, TOP_THK, 'top');
+      } else if (kind === 'miter') {
+        const wingW = (OA - OPEN_W) / 2;
+        const lip = (OA - OPEN_D) / 2;
         const left = box(wingW, TOP_THK, OA, matTop, -(OA / 2 - wingW / 2), topY, 0);
         tag(left, 'top');
         parent.add(left);
         const right = box(wingW, TOP_THK, OA, matTop, OA / 2 - wingW / 2, topY, 0);
         tag(right, 'top');
         parent.add(right);
-        const back = box(SAW_W, TOP_THK, lip, matTop, 0, topY, OA / 2 - lip / 2);
+        const back = box(OPEN_W, TOP_THK, lip, matTop, 0, topY, OA / 2 - lip / 2);
         tag(back, 'top');
         parent.add(back);
-        const front = box(SAW_W, TOP_THK, lip, matTop, 0, topY, -OA / 2 + lip / 2);
+        const front = box(OPEN_W, TOP_THK, lip, matTop, 0, topY, -OA / 2 + lip / 2);
         tag(front, 'top');
         parent.add(front);
-        const well = box(SAW_W - 0.2, 4.2, SAW_D - 0.2, matWell, 0, TOP_AFF - 2.4, 0);
+        const insertBottom = TOP_AFF - TOP_THK;
+        const insertTop = insertBottom + PLATE;
+        const insertY = insertBottom + PLATE / 2;
+        const nest = box(NEST_W, PLATE, NEST_D, matInsert, 0, insertY, 0);
+        tag(nest, 'top');
+        parent.add(nest);
+        const wellH = 3.0;
+        const well = box(OPEN_W - 0.4, wellH, OPEN_D - 0.4, matWell, 0, insertBottom - wellH / 2, 0);
         tag(well, 'top');
         parent.add(well);
-        const insertL = box(0.7, 0.35, SAW_D - 1, matInsert, -SAW_W / 2 + 0.55, TOP_AFF - 0.2, 0);
-        tag(insertL, 'top');
-        parent.add(insertL);
-        const insertR = box(0.7, 0.35, SAW_D - 1, matInsert, SAW_W / 2 - 0.55, TOP_AFF - 0.2, 0);
-        tag(insertR, 'top');
-        parent.add(insertR);
+        const flangeT = 0.22;
+        const flangeW = 0.65;
+        const flangeY = insertBottom - flangeT / 2;
+        const flanges = [
+          box(OPEN_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, OPEN_D / 2),
+          box(OPEN_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, -OPEN_D / 2),
+          box(flangeW, flangeT, OPEN_D, matInsert, OPEN_W / 2, flangeY, 0),
+          box(flangeW, flangeT, OPEN_D, matInsert, -OPEN_W / 2, flangeY, 0)
+        ];
+        flanges.forEach(function (f) {
+          tag(f, 'top');
+          parent.add(f);
+        });
         const saw = addSaw(parent);
-        saw.position.set(0, TOP_AFF - 4.6, 0);
+        saw.position.set(0, insertTop, 0);
+        addDustKeepClear(parent);
+        addPlyEdges(parent, OA, OA, topY, TOP_THK, 'top');
       } else {
         const top = box(OA, TOP_THK, OA, kind === 'extension' ? matTopLite : matTop, 0, topY, 0);
         tag(top, 'top');
         parent.add(top);
-        if (kind === 'flat') {
-          const drawer = box(18, 4.5, 14, matShelf, 0, TOP_AFF - TOP_THK - 3.2, -6);
-          tag(drawer, 'shelf');
-          parent.add(drawer);
-        }
+        addPlyEdges(parent, OA, OA, topY, TOP_THK, 'top');
       }
 
-      const shelfY = 12;
       if (kind === 'flat') {
-        const shelf = box(29, TOP_THK, 29, matShelf, 0, shelfY, 0);
-        tag(shelf, 'shelf');
-        parent.add(shelf);
-        addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
-        addBrace(parent, POST_C - 1.2, CASTER_H + 4, -POST_C + 1.9, -POST_C + 1.2, TOP_AFF - 6, -POST_C + 1.9, matBrace, 'shelf');
+        addNotchedShelf(parent, SHELF_Y, matShelf, 'shelf');
+        addLowerBayBrace(parent, '+z');
+        addLowerBayBrace(parent, '-z');
       } else if (kind === 'extension') {
-        [-8, 0, 8].forEach(function (x) {
-          const slat = box(3.2, TOP_THK, 29, matShelf, x, shelfY, 0);
-          tag(slat, 'shelf');
-          parent.add(slat);
-        });
-        addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
+        addNotchedShelf(parent, SHELF_Y, matShelf, 'shelf');
+        addLowerBayBrace(parent, '+z');
+        addLowerBayBrace(parent, '-z');
       } else if (kind === 'miter') {
-        addBrace(parent, -POST_C + 1.2, CASTER_H + 4, POST_C - 1.9, POST_C - 1.2, TOP_AFF - 6, POST_C - 1.9, matBrace, 'shelf');
-        const rearShelf = box(22, TOP_THK, 8, matShelf, 0, shelfY, 10);
-        tag(rearShelf, 'shelf');
-        parent.add(rearShelf);
+        addNotchedShelf(parent, SHELF_Y, matShelf, 'shelf');
+        addLowerBayX(parent, '+z');
+        addLowerBayX(parent, '-z');
       } else {
         const _exhaustive = kind;
         throw new Error('Unknown module: ' + _exhaustive);
@@ -480,22 +686,43 @@
       labelSprites.length = 0;
       makeLabel('36×36 in', 0, TOP_AFF + 3.2, OA / 2 + 2, 16);
       makeLabel('38 in tall', -OA / 2 - 6, TOP_AFF, 0, 14);
+      makeLabel('apron', 0, APRON_Y, -OA / 2 - 5, 12);
       makeLabel('latch', OA / 2 + 6, LATCH_AFF + 3, 0, 12);
+      makeLabel('on rails', 0, SHELF_Y + 3.2, OA / 2 + 4, 12);
       if (kind === 'miter') {
         makeLabel('DWS716XPS', 0, TOP_AFF + 12, 0, 18);
-        makeLabel('tight fit', 0, TOP_AFF + 7, SAW_D / 2 + 2, 14);
+        makeLabel('½ in nest', 0, TOP_AFF + 7.4, 0, 14);
+        makeLabel('tight depth', 0, TOP_AFF + 4.2, SAW_D / 2 + 2, 13);
+        makeLabel('dust keep-clear', 8.5, APRON_Y + 5, OA / 2 + 4, 13);
+        makeLabel('bag OPEN', 8.5, APRON_Y + 2.2, OA / 2 + 4, 12);
+        makeLabel('wings out of Gen-0.1', 0, TOP_AFF + 2.4, -OA / 2 - 6, 14);
       }
       const tog = document.getElementById('tog-labels');
-      const show = !tog || tog.checked;
+      const show = !!(tog && tog.checked);
       labelSprites.forEach(function (s) { s.visible = show; });
     }
 
-    function buildGhost() {
+    function dimAsGhost(group) {
+      group.traverse(function (o) {
+        if (!o.isMesh || !o.material) return;
+        const m = o.material.clone();
+        m.transparent = true;
+        m.opacity = 0.3;
+        if (m.emissiveIntensity != null) m.emissiveIntensity = 0;
+        if (m.color && m.color.offsetHSL) m.color.offsetHSL(0, -0.18, -0.1);
+        m.userData.ghostClone = true;
+        o.material = m;
+      });
+    }
+
+    function buildGhost(kind) {
       clearGroup(neighbor);
-      const ghost = box(OA, TOP_AFF - 2, OA, matGhost, OA + 0.6, (TOP_AFF - 2) / 2 + 1, 0);
-      neighbor.add(ghost);
-      const pad = box(6, 4, 0.4, matMagnet, OA / 2 + 0.4, LATCH_AFF, 0);
-      neighbor.add(pad);
+      neighbor.position.set(0, 0, 0);
+      pickOn = false;
+      buildFrame(neighbor, kind, { ghost: true });
+      pickOn = true;
+      dimAsGhost(neighbor);
+      neighbor.position.set(OA + 2 * MAG_PROUD, 0, 0);
     }
 
     function setModule(kind) {
@@ -503,7 +730,7 @@
       clearGroup(root);
       buildFrame(root, kind);
       rebuildLabels(kind);
-      buildGhost();
+      buildGhost(kind);
       highlight = new THREE.Mesh(
         new THREE.TorusGeometry(4, 0.12, 8, 40),
         new THREE.MeshBasicMaterial({ color: 0xf5b942, transparent: true, opacity: 0.9 })
