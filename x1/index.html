@@ -6161,6 +6161,21 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         tx: controls.target.x, ty: controls.target.y, tz: controls.target.z,
       };
     }
+    function setCamera(pos, target) {
+      if (pos) camera.position.set(pos.x ?? pos[0], pos.y ?? pos[1], pos.z ?? pos[2]);
+      if (target) controls.target.set(target.x ?? target[0], target.y ?? target[1], target.z ?? target[2]);
+      camera.updateMatrixWorld();
+      controls.update();
+    }
+    function dumpLetter(letter) {
+      const rec = partRegistry[letter];
+      return (rec?.meshes || []).filter(m => m.isMesh).map(m => ({
+        pos: [+m.position.x.toFixed(3), +m.position.y.toFixed(3), +m.position.z.toFixed(3)],
+        tips: m.userData.segTips || null,
+        size: m.geometry.parameters ? [m.geometry.parameters.width, m.geometry.parameters.height, m.geometry.parameters.depth] : null,
+        quat: [+m.quaternion.x.toFixed(4), +m.quaternion.y.toFixed(4), +m.quaternion.z.toFixed(4), +m.quaternion.w.toFixed(4)],
+      }));
+    }
     function sampleMeshModes() {
       let dimmed = 0, solid = 0, hidden = 0, total = 0;
       const sample = [];
@@ -6179,7 +6194,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       }
       return { total, dimmed, solid, hidden, sample, exploreMode };
     }
-    api = { setStep, highlightLetter, resize, applyPbrAppearance, enterExplore, snapshotCamera, sampleMeshModes };
+    api = { setStep, highlightLetter, resize, applyPbrAppearance, enterExplore, snapshotCamera, setCamera, dumpLetter, sampleMeshModes };
     try { window.__x1Api = api; } catch (e) { /* ignore */ }
     setStep(0, { frame: true });
     applyPbrAppearance().catch(err => console.warn('[X1] PBR appearance failed', err));
