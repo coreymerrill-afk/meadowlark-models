@@ -216,13 +216,13 @@
 
 <div class="banners">
   <div class="banner nature">
-    <strong>From nature:</strong> leading-edge vortex + delayed stall, elastic thorax (resilin), passive wing rotation near stroke reversal — principles, not a species replica.
+    <strong>From nature:</strong> unsteady LEV hover, elastic energy return, passive pitch near reversal.
   </div>
   <div class="banner eng">
-    <strong>Engineering choice:</strong> two wings (four-wing is Phase-2), coreless/BLDC + crank (not muscle), 1S LiPo for average power + elastic for the peak, IMU after the tether gate. Not a product claim.
+    <strong>Engineering choice:</strong> motor+linkage (not piezo-first), two wings (not four), LiPo + elastic peak buffer, indoor netted first.
   </div>
   <div class="banner note">
-    Research / education / environmental flyer — not a weapon. Indoor-first hover sketch.
+    Research / education / environmental flyer · not a weapons program
   </div>
 </div>
 
@@ -230,7 +230,7 @@
   <div>
     <a class="home-link" href="/">← Meadowlark Models</a>
     <h1>Flying insect robot</h1>
-    <p class="meta">Nature → tech · prototype path · Option A locked · v0 · ~15 g · R 9 cm · hover · hawkmoth–dragonfly class · indoor first</p>
+    <p class="meta">Nature → tech · ~10–20 g hover · large-insect / hawkmoth–dragonfly class · indoor first</p>
   </div>
   <nav class="tabs" role="tablist" aria-label="Flyer-0 sections">
     <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
@@ -261,13 +261,13 @@
       <h2>Option A · two-wing flapper</h2>
       <p class="muted">Motor + linkage + deliberate elastic return + passive aeroelastic pitch. LEV-dominated hover is the flight story. Clap-and-fling is curiosity-bench only. Four-wing is Phase-2.</p>
 
-      <h3>Span freeze</h3>
+      <h3>Scale chip</h3>
+      <div class="stat"><span>Mass band</span><span>~10–20 g</span></div>
+      <div class="stat"><span>Class</span><span>hawkmoth–dragonfly</span></div>
+      <div class="stat"><span>Mission</span><span>hover · indoor first</span></div>
       <div class="stat"><span>Semi-span R</span><span>9 cm</span></div>
       <div class="stat"><span>Mean chord c</span><span>2.3 cm</span></div>
       <div class="stat"><span>Mass (mid)</span><span>~15 g</span></div>
-      <div class="stat"><span>Mass band</span><span>~10–20 g</span></div>
-      <div class="stat"><span>Power</span><span>1S LiPo + elastic</span></div>
-      <div class="stat"><span>Visual flap</span><span>~2.2 Hz loop</span></div>
 
       <h3>Hotspots</h3>
       <div id="part-list"></div>
@@ -284,56 +284,56 @@
 
 <section id="panel-nature" class="panel" role="tabpanel" aria-labelledby="tab-nature" aria-hidden="true">
   <h2>Nature → tech</h2>
-  <p class="muted">Lead lock strip. Steal mechanisms, not a species and not a commercial insect-drone story.</p>
+  <p class="muted">Lead lock strip. Mechanisms, not a species and not a commercial insect-drone story.</p>
   <div class="nt-row">
     <div class="from">
       <div class="k">Nature</div>
       <strong>Leading-edge vortex + delayed stall</strong>
-      <p>In hovering insects, high angle of attack can hold an LEV and augment lift over part of the stroke.</p>
+      <p>In hovering insects.</p>
     </div>
     <div class="idea">
       <div class="k">Idea</div>
       <strong>High-AoA flapping</strong>
-      <p>Controlled kinematics — not clap-and-fling as the primary mechanism at this scale.</p>
+      <p>Controlled kinematics.</p>
     </div>
     <div class="to">
       <div class="k">Tech</div>
       <strong>Two-wing motorized flapper</strong>
-      <p>Instrumented for lift and power. Hover flapping is the v0 flight story.</p>
+      <p>Instrumented for lift and power.</p>
     </div>
   </div>
   <div class="nt-row">
     <div class="from">
       <div class="k">Nature</div>
       <strong>Elastic thorax / resilin</strong>
-      <p>Energy return so the actuator does not pay the full inertial start-stop cost each half-stroke.</p>
+      <p>Energy return.</p>
     </div>
     <div class="idea">
       <div class="k">Idea</div>
       <strong>Recover wing inertia</strong>
-      <p>Curriculum-central from day one. Tune and measure; do not assume an ideal spring.</p>
+      <p>Each half-stroke.</p>
     </div>
     <div class="to">
       <div class="k">Tech</div>
       <strong>Torsional springs / carbon flexures</strong>
-      <p>Tuned near wingbeat. Music-wire or carbon flexure first; rubber bands are not resilin.</p>
+      <p>Tuned near wingbeat.</p>
     </div>
   </div>
   <div class="nt-row">
     <div class="from">
       <div class="k">Nature</div>
       <strong>Passive wing rotation near reversal</strong>
-      <p>Compliance sets pitch instead of a dedicated pitch muscle on every stroke.</p>
+      <p>Near stroke reversal.</p>
     </div>
     <div class="idea">
       <div class="k">Idea</div>
       <strong>Compliance replaces a pitch servo</strong>
-      <p>Every added DOF costs mass and failure points. Active pitch only after tethered hover is boring.</p>
+      <p>No extra pitch DOF on v0.</p>
     </div>
     <div class="to">
       <div class="k">Tech</div>
       <strong>Compliant root + AoA stops</strong>
-      <p>Passive / aeroelastic first. An active pitch servo is later, not v0.</p>
+      <p>Active pitch later.</p>
     </div>
   </div>
   <div class="card">
@@ -343,31 +343,31 @@
 </section>
 
 <section id="panel-path" class="panel" role="tabpanel" aria-labelledby="tab-path" aria-hidden="true">
-  <h2>Prototype path</h2>
-  <p class="muted">Aligned with the Lead lock. Public cards stay qualitative — no invented exit numbers.</p>
+  <h2>Path to prototype</h2>
+  <p class="muted">Public cards: phase + one-line goal + qualitative exit. Lab numbers stay off this page.</p>
   <div class="step now">
     <h4>P0 — Concept freeze <span class="muted">· done</span></h4>
-    <p>Archetype + scale locked: Option A, ~10–20 g, indoor hover-capable research/education flyer.</p>
-    <p class="gate">Exit: this page matches the lock (two wings, elastic central, LEV hover story).</p>
+    <p>Archetype + ~10–20 g scale locked.</p>
+    <p class="gate">Exit: shared language for the first flyer.</p>
   </div>
   <div class="step next">
     <h4>P1 — Bench</h4>
-    <p>Drive, surrogate wing, coupons, power path. Prove stroke and a flap session that does not come apart.</p>
-    <p class="gate">Exit: bench drive + wing survive; ready for a force stand.</p>
+    <p>Drive, surrogate wing, coupons, power path.</p>
+    <p class="gate">Exit: mechanism pieces work without needing lift.</p>
   </div>
-  <div class="step next">
+  <div class="step later">
     <h4>P2 — Tethered flap</h4>
-    <p>Soft tether → leash → endurance. Lift on a stand before anyone talks free flight.</p>
+    <p>Soft tether → leash → endurance.</p>
     <p class="gate">Exit: tethered hover without breaking.</p>
   </div>
   <div class="step later">
     <h4>P3 — Free flight</h4>
-    <p>Hop → station-keep. Indoor / netted first. 1S on board only after P2 is dull. IMU rate damping.</p>
+    <p>Indoor/netted hops → station-keep.</p>
     <p class="gate">Exit: a short indoor hop that was intended.</p>
   </div>
   <div class="step later">
     <h4>P4 — Demo ready</h4>
-    <p>Repeatable education/research demo of the elastic + LEV story. Short endurance on purpose.</p>
+    <p>Repeatable education/research demo.</p>
     <p class="gate">Exit: someone else can run it from a checklist.</p>
   </div>
 </section>
@@ -390,12 +390,12 @@
   const OC_ESM_SH = 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 
   const PARTS = [
-    { id: 'wings', name: 'Wings / aero', detail: 'LEV-aware hover flapping; passive pitch. Clap-and-fling is curiosity-bench only — not the primary lift story.' },
-    { id: 'actuation', name: 'Actuation', detail: 'Motor + linkage (small BLDC or coreless) + gearbox/crank. Minimize backlash. Workshop-repairable.' },
-    { id: 'elastic', name: 'Structure / materials', detail: 'Spars, membrane, flexure hinges, elastic return. Curriculum-central: tune near wingbeat and measure Q.' },
-    { id: 'power', name: 'Power', detail: 'LiPo for average aerodynamic + loss power; elastic (± small supercap later) for the peak. 1S for first free flights; bench on a supply first.' },
-    { id: 'sense', name: 'Sense / control', detail: 'IMU rate damping after the tether gate. Optical flow and autonomy stay later.' },
-    { id: 'tether', name: 'Bench tether', detail: 'Soft tether / supply umbilical for P1–P2. Hidden until toggled.' }
+    { id: 'wings', name: 'Wings / aero', detail: 'LEV-aware hover flapping; passive pitch (aeroelastic first). Clap-and-fling is curiosity-bench only, not primary.' },
+    { id: 'actuation', name: 'Actuation', detail: 'Small coreless DC or BLDC + gearbox/crank; minimize backlash. Motor + linkage.' },
+    { id: 'elastic', name: 'Structure / materials', detail: 'Spars, membrane, flexure hinges; deliberate elastic return (springs/flexures) tuned near wingbeat.' },
+    { id: 'power', name: 'Power', detail: 'LiPo for average aero + loss power; elastic (preferred) ± small supercap for peak stroke/reversal. 1S LiPo for first free flights.' },
+    { id: 'sense', name: 'Sense / control', detail: 'IMU rate damping after the tether gate; keep open-loop stable first.' },
+    { id: 'tether', name: 'Bench tether', detail: 'Soft tether / supply umbilical for bench and tethered flap. Hidden until toggled.' }
   ];
 
   function loadScript(src) {
