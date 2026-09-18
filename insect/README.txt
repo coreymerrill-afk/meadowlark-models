@@ -4,13 +4,14 @@ Biomimetics — Flyer-0 v0 (two-wing hover schematic)
 Publish target
   https://models.meadowlarkhomecare.com/insect/
 
-Locked architecture (Option A)
-  Two-wing motor + linkage + elastic return + passive aeroelastic pitch
-  LEV-style hover is the primary flight story
-  Clap-and-fling deprioritized; four-wing dragonfly = Phase-2
-  Span freeze: semi-span R = 9 cm · mean chord c = 2.3 cm · mass mid ~15 g
-  Mission: hover-capable education/research, short endurance, indoor first
+Locked architecture (Option A) — Lead 2026-09-17
+  Two-wing motor + linkage + deliberate elastic return + passive aeroelastic pitch
+  LEV-dominated hover is the primary flight story
+  Clap-and-fling = curiosity bench; four-wing dragonfly = Phase-2
+  Span freeze: semi-span R = 9 cm · mean chord c = 2.3 cm · mass mid ~15 g (~10–20 g band)
+  Mission: hover-capable education/research, short endurance, indoor / netted first
   Research/education/environmental flyer — not a weapon
+  Copy source: LEAD-ARCHETYPE-LOCK + MODELS-PAGE-CONTENT-LOCK
 
 Files
   index.html                 Primary static page (Three.js viewer + locked copy)
