@@ -227,6 +227,13 @@
     min-height: 44px;
   }
   #sidebar-3d button.full:hover { background: #4a4f58; }
+  #sidebar-3d #btn-back-build {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--bg2);
+    margin-bottom: 10px;
+  }
   .hint-3d { margin-top: 12px; padding: 8px; background: var(--bg); border-radius: 6px; color: var(--muted); font-size: 11px; }
   #sb-instructions { white-space: normal; }
   #sb-instructions .sb-summary { margin: 0 0 8px; color: var(--text); }
@@ -618,9 +625,9 @@ Stretchers Q + diagonals P under apron bay.</div>
     <aside id="sidebar-3d">
       <h3 id="sb-step-title">Step</h3>
       <p id="sb-instructions" class="muted"></p>
+      <button type="button" class="full" id="btn-back-build" hidden>Back to build steps</button>
       <h3 id="sb-parts-heading">Parts added this step</h3>
       <div class="parts-added" id="sb-parts-added"></div>
-      <button type="button" class="full" id="btn-back-build" hidden>Back to build steps</button>
       <div id="part-detail">
         <div class="letter-big" id="pd-letter">—</div>
         <div id="pd-name" style="font-weight:700;margin:4px 0"></div>
