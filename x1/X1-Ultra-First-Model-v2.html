@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ACMER X1 Ultra — FIRST MODEL V2 (interactive assembly)</title>
+<title>X1 Ultra — First Model</title>
 <style>
   :root {
     --bg: #12151a; --bg2: #1a1f27; --bg3: #242a34; --border: #3a4250;
@@ -469,6 +469,38 @@
       border-left: 1px solid var(--border);
     }
   }
+
+  /* Short landscape: hide chrome so the 3D canvas can take over */
+  .land-hud { display: none; }
+  @media (orientation: landscape) and (max-height: 520px) {
+    body:has(main.is-3d), body.mode-3d {
+      overflow: hidden; height: 100dvh; max-height: 100dvh; padding: 0;
+    }
+    body:has(main.is-3d) .copy-note,
+    body:has(main.is-3d) header.doc-header,
+    body:has(main.is-3d) .step-bar,
+    body:has(main.is-3d) #sidebar-3d,
+    body:has(main.is-3d) .build-step-list-wrap { display: none !important; }
+    body:has(main.is-3d) main.is-3d,
+    body:has(main.is-3d) #panel-build.active,
+    body:has(main.is-3d) .view3d-wrap,
+    body:has(main.is-3d) #canvas-wrap {
+      position: fixed; inset: 0;
+      width: 100%; height: 100dvh; max-height: none; min-height: 0;
+      z-index: 50; border: none;
+    }
+    body:has(main.is-3d) .land-hud {
+      display: flex; align-items: center;
+      position: fixed; top: 0; left: 0; z-index: 70;
+      padding: calc(6px + env(safe-area-inset-top)) 10px 6px;
+      pointer-events: auto;
+    }
+    body:has(main.is-3d) .land-hud .hub-back {
+      margin: 0; color: #fff; min-height: 36px;
+      text-shadow: 0 1px 4px #000;
+    }
+  }
+  body.fs-3d .land-hud { display: none !important; }
   @media (min-width: 768px) and (max-width: 900px) {
     .copy-note { display: none; }
     nav.tabs {
@@ -722,17 +754,18 @@
 <body>
 
 <div class="copy-note">
-  <p class="meta" style="margin:0 0 6px">Personal shop build guide — ACMER X1 Ultra FIRST MODEL V2 · public mirror may lag Desktop SoT</p>
-  <strong>Copy-ready:</strong> Keep <code>X1-Ultra-First-Model-v2.html</code> <em>and</em> sibling folder <code>vendor/</code> (<code>three.min.js</code> + <code>OrbitControls.js</code>) together — not a lone HTML · Desktop: <code>X1-Ultra-Build\</code> with this <strong>V2</strong> file (symlink <code>vendor/</code> already in <code>v2/</code>)
-  · Letters from locked PARTS-LEXICON · Deck <strong>111×61</strong> · Six legs under apron · Two full-height end panels
+  <p class="meta" style="margin:0 0 6px">Shop build guide — X1 Ultra first model · wood stand and drop-in cutting bed</p>
+  <strong>Finished table — look around</strong>
+  · Deck <strong>111×61 in</strong> · six legs under the apron · two full-height end panels
+  · Fire pan and under-bed exhaust are required
 </div>
 
 <header class="doc-header">
   <div class="hub-row">
-    <a class="hub-back" href="/">Back to Meadowlark Models</a>
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
   </div>
-  <h1>ACMER X1 Ultra — First Model</h1>
-  <p class="meta">FIRST MODEL V2 · One buy · One build · Laser-ready 8× HC + CNC spoil swap · published 2026-09-11 MT · Concrete slab · Personal shop build guide</p>
+  <h1>X1 Ultra — First Model</h1>
+  <p class="meta">One buy · one build · laser honeycomb + CNC spoil swap · deck 111×61 in · 33 in tall · concrete slab</p>
   <nav class="tabs" role="tablist">
     <button type="button" data-tab="overview">Overview</button>
     <button type="button" data-tab="design">Design</button>
@@ -747,21 +780,21 @@
 <section id="panel-overview" class="panel" role="tabpanel">
   <h2>Overview</h2>
   <div class="card highlight">
-    <p><strong>What you are building:</strong> A lumber <strong>stand</strong> with a drop-in <strong>cutting-bed cassette</strong>.
-    Out of the box the bed holds <strong>8 aluminum honeycomb tiles</strong> (laser-ready across the full work area).
-    You also get a full <strong>8-tile MDF spoil set with ¼-20 inserts</strong> to swap in for CNC.
-    Fire pan, wear sheet, and under-bed exhaust (<strong>Path A</strong>) are <strong>required</strong> — not upgrades.</p>
-    <p class="muted" style="margin-top:8px">Not in this first model: perimeter T-track, starter fillers, staged tile buys. Cooler sits <strong>beside</strong> the stand (reserve extra width). Keep a sheet aisle on one long side if you can.</p>
+    <p><strong>Finished table — look around.</strong> A lumber <strong>stand</strong> with a drop-in <strong>cutting bed</strong> for the X1 Ultra.
+    The bed ships with <strong>8 aluminum honeycomb tiles</strong> so the full work area is laser-ready.
+    A matching <strong>8-tile MDF spoil set with ¼-20 inserts</strong> swaps in for CNC.
+    Fire pan, wear sheet, and under-bed exhaust are <strong>required</strong> — not upgrades.</p>
+    <p class="muted" style="margin-top:8px">Not in this first model: perimeter T-track, starter fillers, or buying tiles in stages. Cooler sits <strong>beside</strong> the stand (leave extra width). Keep a sheet aisle on one long side if you can.</p>
   </div>
   <div class="card">
     <h3>Why this design</h3>
     <ul>
       <li><strong>Torsion-box deck</strong> — Two ¾" skins sandwich a 2×4-on-edge core for a stiff, flat table without steel. Feet and pads land on ribs, spine, and blocking — never mid-skin over empty air.</li>
       <li><strong>Apron + short legs</strong> — 2×6 apron takes the leg bolts; six 4×4s stop under the apron so the deck skin stays clean. End panels, stretchers, and long-side diagonals keep the stand from walking.</li>
-      <li><strong>Butt-to-spine ribs</strong> — Cross ribs meet a continuous center spine for a solid pad land down the length; ordinary butts and glue — no half-laps required for FIRST MODEL.</li>
+      <li><strong>Butt-to-spine ribs</strong> — Cross ribs meet a continuous center spine for a solid pad land down the length; ordinary butts and glue — no half-laps required for this first model.</li>
       <li><strong>Seam strips in bays only</strong> — Skin backing strips sit only in open bays, clear of rims/ribs/spine, so framing still bears on the skin.</li>
       <li><strong>Drop-in cassette</strong> — Aluminum frame with ledgers, pan, wear, and exhaust pads onto stand ribs so you can service fire/exhaust without rebuilding the lumber deck.</li>
-      <li><strong>Path A required</strong> — See <em>Why Path A</em> below. Sealed pan with nowhere for smoke to go is a fail.</li>
+      <li><strong>Under-bed exhaust required</strong> — See below. A sealed pan with nowhere for smoke to go is a fail.</li>
     </ul>
   </div>
   <div class="card">
@@ -775,15 +808,15 @@
     <p class="muted">Apron and torsion deck stiffen the top. Together this is a 900&nbsp;lb platform, not a wobbly workbench. After both O panels and all four P braces, the stand should feel planted — then level and jam-nut the feet.</p>
   </div>
   <div class="card highlight">
-    <h3>Why Path A</h3>
-    <p><strong>Why Path A:</strong> Laser cuts drop ash and smoke under the tiles. The fire pan catches them; the plenum (side/front channel outside the tile field) pulls that air out. A sealed pan with nowhere to go is a fail — Path A is required, not an upgrade.</p>
-    <p class="muted" style="margin-top:8px"><strong>Path A</strong> is the under-bed exhaust path: slots in/near the fire pan that open into a <strong>plenum</strong> (a shallow metal channel on the side and/or front of the cassette), then out toward the enclosure exhaust takeoff.</p>
+    <h3>Why under-bed exhaust</h3>
+    <p>Laser cuts drop ash and smoke under the tiles. The fire pan catches them; a shallow side/front channel pulls that air out. A sealed pan with nowhere to go is a fail — this exhaust path is required, not an upgrade.</p>
+    <p class="muted" style="margin-top:8px">Shop name <strong>Path A</strong>: slots in or near the fire pan open into a <strong>plenum</strong> (a shallow metal channel on the side and/or front of the cassette), then out toward the enclosure exhaust takeoff.</p>
     <table class="data">
       <thead><tr><th>Piece</th><th>Shop name</th><th>Job</th></tr></thead>
       <tbody>
         <tr><td><strong>S</strong></td><td>Fire pan (0.063" Al)</td><td>Catches sparks/ash under the full 49×100" field</td></tr>
         <tr><td><strong>T</strong></td><td>Wear sheet</td><td>Sacrificial layer over the pan; leave <strong>gaps at the plenum edge</strong> so air can enter the channel</td></tr>
-        <tr><td><strong>U</strong></td><td>Plenum (Path A)</td><td>Side/front channel <strong>outside</strong> the tile field — slots above ash level, duct toward exhaust</td></tr>
+        <tr><td><strong>U</strong></td><td>Plenum (exhaust channel)</td><td>Side/front channel <strong>outside</strong> the tile field — slots above ash level, duct toward exhaust</td></tr>
       </tbody>
     </table>
     <p style="margin-top:10px"><strong>Build rules</strong></p>
@@ -859,7 +892,7 @@
     <div class="card">
       <h3>Locked dimensions</h3>
       <table class="data dim-table">
-        <tr><td>Stand deck</td><td><strong>111" L × 61" W</strong>; top <strong>33" AFF</strong></td></tr>
+        <tr><td>Stand deck</td><td><strong>111" L × 61" W</strong>; top <strong>33" high</strong></td></tr>
         <tr><td>Short cuts between longs</td><td><strong>58"</strong> (= 61 − 2×1.5). Never 57 / 60</td></tr>
         <tr><td>Work area</td><td><strong>49" × 100"</strong></td></tr>
         <tr><td>Tiles</td><td><strong>24.5" × 25"</strong> · <strong>2×4</strong> grid · <strong>8 HC + 8 spoil</strong></td></tr>
@@ -877,14 +910,14 @@
         <tr><td>Stand</td><td class="num">~$1,285</td></tr>
         <tr><td>Cassette + fire + Path A</td><td class="num">~$750–780</td></tr>
         <tr><td>8 HC + 8 spoil + inserts + clamps</td><td class="num">~$785–1,065</td></tr>
-        <tr class="total"><td class="subtotal">FIRST MODEL TOTAL</td><td class="num subtotal">≈ $2,800–3,500</td></tr>
+        <tr class="total"><td class="subtotal">First model total</td><td class="num subtotal">≈ $2,800–3,500</td></tr>
       </table>
       <p class="muted"><strong>Build goal:</strong> shoot for <strong>4 shop days</strong> · hard cap <strong>6 days max</strong>. Warm garage, football on the TV — steady weekend cadence, not a heroic slog.</p>
     </div>
   </div>
   <div class="card">
     <h3>Day-by-day build goal</h3>
-    <p class="muted">Same locked FIRST MODEL — just paced for a warm garage with the game on. <strong>Shoot for 4 days</strong>; use the 6-day split if a day runs long. Hard cap <strong>6 days max</strong>.</p>
+    <p class="muted">Same first-model stand — just paced for a warm garage with the game on. <strong>Shoot for 4 days</strong>; use the 6-day split if a day runs long. Hard cap <strong>6 days max</strong>.</p>
     <h4 style="margin:12px 0 6px;font-size:13px;color:var(--accent2,#fdd663)">4-day shoot-for</h4>
     <table class="data day-plan-table">
       <thead><tr><th>Day</th><th>Focus</th><th>Steps / phases</th><th>Done when</th></tr></thead>
@@ -1092,7 +1125,7 @@ Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (c
   <p class="muted">Every lettered row matches locked <code>PARTS-LEXICON.md</code>. Click a letter to jump to 3D and highlight that part.</p>
   <div id="parts-table-mount"></div>
   <div class="total-banner">
-    <div class="muted">FIRST MODEL grand total (approx)</div>
+    <div class="muted">First model total (approx)</div>
     <div class="big">$2,800 – $3,500</div>
   </div>
 </section>
@@ -1171,16 +1204,20 @@ Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (c
   <details class="build-step-list-wrap">
     <summary>Step list</summary>
     <div class="build-steps-scroll">
-      <p class="muted">Day-banded steps · click a letter chip to highlight in the viewer. After the last day band, <strong>Explore</strong> opens the finished table.</p>
+      <p class="muted">Day-banded steps · click a letter chip to highlight in the viewer. After the last day band, <strong>Explore</strong> opens the finished table — look around.</p>
       <div id="build-steps-mount"></div>
     </div>
   </details>
 </section>
 
 
+<div class="land-hud" aria-label="Hub">
+  <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+</div>
+
 <div id="fs-hud" hidden>
   <div class="fs-top">
-    <a class="hub-back" href="/">Back to Meadowlark Models</a>
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
     <div class="fs-top-right">
       <button type="button" id="btn-fs-instr">Instructions</button>
       <button type="button" id="btn-fs-close">✕ Close</button>
@@ -1195,7 +1232,7 @@ Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (c
 
 <div id="instr-overlay">
   <div class="instr-head">
-    <a class="hub-back" href="/">Back to Meadowlark Models</a>
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
     <button type="button" id="btn-instr-prev">◀ Prev</button>
     <button type="button" id="btn-instr-next">Next ▶</button>
     <button type="button" id="btn-instr-close" aria-label="Close instructions">✕</button>
@@ -2912,7 +2949,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     }
     html += `<span class="phase-label explore">Explore</span>
       <div class="step explore-end">
-        <h4>Explore the assembled table</h4>
+        <h4>Finished table — look around</h4>
         <p>End of the build — full stand, all parts solid. Orbit, zoom, and pan freely. Tap a part for info only; nothing fades and the camera stays put.</p>
         <p><button type="button" class="explore-chip" id="build-explore-chip">Explore</button></p>
       </div>`;
@@ -5244,7 +5281,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       const hint = document.getElementById('hint-mode-line');
       if (hint) {
         hint.textContent = exploreMode
-          ? 'Explore: full assembly · tap for info · orbit/zoom/pan stay put'
+          ? 'Finished table — look around · tap for info · orbit/zoom/pan stay put'
           : 'Build: current solid · prior dimmed · future hidden';
       }
       document.querySelectorAll('.explore-chip').forEach(el => {
@@ -5256,7 +5293,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     function updateStepNavChrome() {
       const last = currentStep === STEPS.length - 1;
       const nextLabel = (!exploreMode && last) ? 'Explore ▶' : 'Next ▶';
-      const nextTitle = (!exploreMode && last) ? 'Explore the full assembled table' : 'Next step (→)';
+      const nextTitle = (!exploreMode && last) ? 'Finished table — look around' : 'Next step (→)';
       ['btn-prev', 'btn-fs-prev', 'btn-instr-prev'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -5470,8 +5507,8 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         });
       };
       if (exploreMode) {
-        if (tEl) tEl.textContent = 'Explore — full assembly';
-        if (fsTitle) fsTitle.textContent = 'Explore — full assembly';
+        if (tEl) tEl.textContent = 'Finished table — look around';
+        if (fsTitle) fsTitle.textContent = 'Finished table — look around';
         if (bEl) {
           bEl.innerHTML =
             '<p class="sb-summary">End of the build. Orbit, zoom, and pan the finished stand. Tap a part for its label and cut info — nothing else fades, and the camera stays where you left it.</p>' +
@@ -5519,8 +5556,8 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       const partsHeading = document.getElementById('sb-parts-heading');
       const pa = document.getElementById('sb-parts-added');
       if (exploreMode) {
-        document.getElementById('step-title-bar').textContent = 'Explore — full assembly';
-        document.getElementById('sb-step-title').textContent = 'Explore the assembled table';
+        document.getElementById('step-title-bar').textContent = 'Finished table — look around';
+        document.getElementById('sb-step-title').textContent = 'Finished table — look around';
         document.getElementById('sb-instructions').innerHTML =
           '<p class="sb-summary">End of the build. Orbit, zoom, and pan the finished stand. Tap a part for its label and cut info — nothing else fades, and the camera stays where you left it.</p>' +
           '<div class="sb-block"><strong>Build steps</strong><p class="sb-detail" style="margin:0">Use Prev, a step number, or Back to build steps to return to the dimmed step-by-step view.</p></div>';
@@ -5603,7 +5640,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     exploreChip.id = 'btn-explore';
     exploreChip.className = 'explore-chip';
     exploreChip.textContent = 'Explore';
-    exploreChip.title = 'End of build — explore the full assembled table';
+    exploreChip.title = 'Finished table — look around';
     exploreChip.setAttribute('aria-pressed', 'false');
     exploreChip.addEventListener('click', () => enterExplore({ frame: true }));
     stepNums.appendChild(exploreChip);

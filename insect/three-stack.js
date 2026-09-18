@@ -32,7 +32,10 @@
   function resolveOrbitControls() {
     if (!window.THREE) return null;
     if (window.THREE.OrbitControls) return window.THREE.OrbitControls;
-    if (typeof window.OrbitControls === 'function') return window.OrbitControls;
+    if (typeof window.OrbitControls === 'function') {
+      window.THREE.OrbitControls = window.OrbitControls;
+      return window.OrbitControls;
+    }
     return null;
   }
 
@@ -59,16 +62,39 @@
   }
 
   function joinVendor(base, file) {
-    return String(base || 'vendor').replace(/\/$/, '') + '/' + file;
+    const cleaned = String(base || '/insect/vendor').replace(/\/$/, '');
+    return cleaned + '/' + file;
+  }
+
+  function localVendorBases(opts) {
+    const requested = String((opts && opts.vendorBase) || '/insect/vendor').replace(/\/$/, '');
+    const bases = ['/insect/vendor'];
+    if (requested && bases.indexOf(requested) === -1) bases.push(requested);
+    // Last-ditch relative paths if someone opened the HTML from disk.
+    if (bases.indexOf('vendor') === -1) bases.push('vendor');
+    if (bases.indexOf('../vendor') === -1) bases.push('../vendor');
+    return bases;
   }
 
   async function load(opts) {
     opts = opts || {};
-    const vendor = opts.vendorBase || 'vendor';
     const label = opts.label || 'Flyer';
     const errors = [];
-    try { return await tryUmdPair(joinVendor(vendor, 'three.min.js'), joinVendor(vendor, 'OrbitControls.js'), 'local-umd'); }
-    catch (e) { errors.push(e); console.warn('[' + label + '] local UMD failed', e); }
+    const bases = localVendorBases(opts);
+    let i;
+    for (i = 0; i < bases.length; i++) {
+      const base = bases[i];
+      try {
+        return await tryUmdPair(
+          joinVendor(base, 'three.min.js'),
+          joinVendor(base, 'OrbitControls.js'),
+          'local-umd:' + base
+        );
+      } catch (e) {
+        errors.push(e);
+        console.warn('[' + label + '] local UMD failed (' + base + ')', e);
+      }
+    }
     try { return await tryUmdPair(THREE_UMD_JSDELIVR, OC_UMD_JSDELIVR, 'cdn-jsdelivr-umd'); }
     catch (e) { errors.push(e); console.warn('[' + label + '] jsDelivr UMD failed', e); }
     try { return await tryUmdPair(THREE_UMD_UNPKG, OC_UMD_UNPKG, 'cdn-unpkg-umd'); }
@@ -99,7 +125,7 @@
     el.classList.add('visible');
     el.innerHTML = '<strong>3D viewer failed to load</strong><br/>' +
       String(msg).replace(/</g, '&lt;') +
-      '<br/><br/>Prefer opening with local <code>vendor/</code> beside this HTML, or allow CDN (jsdelivr/unpkg).';
+      '<br/><br/>Prefer opening with local <code>/insect/vendor/</code>, or allow CDN (jsdelivr/unpkg).';
   }
 
   global.MeadowlarkThree = { load: load, showError: showError };

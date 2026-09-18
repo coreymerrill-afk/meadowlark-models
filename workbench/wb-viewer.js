@@ -7,7 +7,7 @@
 
   const body = document.body;
   const KIND = body.getAttribute('data-module') || 'flat';
-  const VENDOR = (body.getAttribute('data-vendor') || '../vendor/').replace(/\/?$/, '/');
+  const VENDOR = (body.getAttribute('data-vendor') || '/workbench/vendor/').replace(/\/?$/, '/');
 
   const THREE_LOCAL = VENDOR + 'three.min.js';
   const OC_LOCAL = VENDOR + 'OrbitControls.js';
@@ -110,7 +110,7 @@
     el.classList.add('visible');
     el.innerHTML = '<strong>3D viewer failed to load</strong><br/>' +
       String(msg).replace(/</g, '&lt;') +
-      '<br/><br/>Prefer opening with local <code>vendor/</code> beside this HTML, or allow CDN (jsdelivr/unpkg).';
+      '<br/><br/>Prefer opening with local <code>/workbench/vendor/</code>, or allow CDN (jsdelivr/unpkg).';
   }
 
   const listEl = document.getElementById('part-list');
@@ -589,7 +589,47 @@
       renderer.setSize(w, h, false);
     }
     window.addEventListener('resize', resize);
+    window.addEventListener('orientationchange', function () {
+      setTimeout(resize, 80);
+      setTimeout(resize, 250);
+    });
+    if (typeof ResizeObserver === 'function') {
+      const ro = new ResizeObserver(function () { resize(); });
+      ro.observe(wrap);
+    }
     resize();
+
+    function enterFs3d() {
+      document.body.classList.add('fs-3d');
+      const hud = document.getElementById('fs-hud');
+      if (hud) hud.hidden = false;
+      requestAnimationFrame(function () {
+        resize();
+        requestAnimationFrame(resize);
+      });
+      setTimeout(resize, 80);
+    }
+    function exitFs3d() {
+      document.body.classList.remove('fs-3d');
+      const hud = document.getElementById('fs-hud');
+      if (hud) hud.hidden = true;
+      requestAnimationFrame(function () {
+        resize();
+        requestAnimationFrame(resize);
+      });
+      setTimeout(resize, 80);
+    }
+    const btnExpand = document.getElementById('btn-expand');
+    if (btnExpand) btnExpand.addEventListener('click', enterFs3d);
+    const btnFsClose = document.getElementById('btn-fs-close');
+    if (btnFsClose) btnFsClose.addEventListener('click', exitFs3d);
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key !== 'Escape') return;
+      if (document.body.classList.contains('fs-3d')) {
+        exitFs3d();
+        ev.preventDefault();
+      }
+    });
 
     if (loading) {
       loading.textContent = 'Ready · Three via ' + via;

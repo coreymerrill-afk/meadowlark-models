@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="description" content="Flyer-2 Resonant piezo — solid-state resonant flexure, no rotary crank. Honest HV / micro start. Schematic only — no frozen lab path." />
 <title>Flyer-2 Resonant piezo — Meadowlark Models</title>
-<link rel="stylesheet" href="../shared.css" />
+<link rel="stylesheet" href="/insect/shared.css" />
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 
 <header class="doc-header">
   <div class="header-top">
-    <a class="home-link" href="/">Back to Meadowlark Models</a>
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
   </div>
   <nav class="catalog" aria-label="Flyer catalog">
     <a href="/insect/">
@@ -62,6 +62,7 @@
     <button type="button" id="btn-flap" class="active" aria-pressed="true">Pause flap</button>
     <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
     <label class="toggle"><input type="checkbox" id="tog-tether" /> Bench tether</label>
+    <button type="button" id="btn-expand" title="Fullscreen 3D">Expand</button>
     <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · Visual flap only</span>
   </div>
   <div class="view3d-wrap">
@@ -138,8 +139,19 @@
 
 </main>
 
-<script src="../three-stack.js"></script>
-<script src="../page-chrome.js"></script>
+<div class="land-hud" aria-label="Hub">
+  <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+</div>
+
+<div id="fs-hud" hidden>
+  <div class="fs-top">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+    <button type="button" id="btn-fs-close">✕ Close</button>
+  </div>
+</div>
+
+<script src="/insect/three-stack.js"></script>
+<script src="/insect/page-chrome.js"></script>
 <script>
 (function () {
   'use strict';
@@ -153,7 +165,7 @@
   ];
 
   FlyerPage.wireSchematicInit({
-    vendorBase: '../vendor',
+    vendorBase: '/insect/vendor',
     label: 'Flyer-2',
     parts: PARTS,
     boot: boot

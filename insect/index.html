@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Flying insect robot — Flyer-0 two-wing schematic: rotary motor + linkage + deliberate thorax spring, R 9 cm · c 2.3 cm · ~15 g. Indoor hover research/education." />
-<title>Flying insect robot — Meadowlark Models</title>
-<link rel="stylesheet" href="shared.css" />
+<meta name="description" content="Flying insect — Flyer-0: two-wing research flyer, about 15 g, 9 cm wing, indoor hover first. Catalog also has Flyer-1 Dual-pair and Flyer-2 Resonant piezo." />
+<title>Flying insect — Flyer-0</title>
+<link rel="stylesheet" href="/insect/shared.css" />
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 
 <header class="doc-header">
   <div class="header-top">
-    <a class="home-link" href="/">Back to Meadowlark Models</a>
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
   </div>
   <nav class="catalog" aria-label="Flyer catalog">
     <a href="/insect/" aria-current="page">
@@ -42,7 +42,7 @@
       <span class="status live">live</span>
     </a>
   </nav>
-  <h1>Flying insect robot</h1>
+  <h1>Flying insect — Flyer-0</h1>
   <p class="meta">Nature → tech · ~10–20 g · hawkmoth-class / odonate Re band · R = 9 cm · indoor first</p>
   <nav class="tabs" role="tablist" aria-label="Flyer-0 sections">
     <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
@@ -62,6 +62,7 @@
     <button type="button" id="btn-flap" class="active" aria-pressed="true">Pause flap</button>
     <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
     <label class="toggle"><input type="checkbox" id="tog-tether" /> Bench tether</label>
+    <button type="button" id="btn-expand" title="Fullscreen 3D">Expand</button>
     <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · schematic motion only</span>
   </div>
   <div class="view3d-wrap">
@@ -74,7 +75,7 @@
       </div>
     </div>
     <aside id="sidebar-3d">
-      <h2>Option A · two-wing flapper</h2>
+      <h2>Two-wing flapper</h2>
       <p class="muted">Rotary motor + linkage + deliberate thorax spring + passive aeroelastic pitch. LEV-dominated hover is the flight story. Clap-and-fling is curiosity-bench only.</p>
 
       <h3>Scale chip</h3>
@@ -168,27 +169,27 @@
   <h2>Path to prototype</h2>
   <p class="muted">Public cards: phase + one-line goal + qualitative exit. Lab numbers stay off this page.</p>
   <div class="step now">
-    <h4>P0 — Concept freeze <span class="muted">· done</span></h4>
+    <h4>Concept freeze <span class="muted">· done</span></h4>
     <p>Archetype + ~10–20 g scale locked.</p>
     <p class="gate">Exit: shared language for the first flyer.</p>
   </div>
   <div class="step next">
-    <h4>P1 — Bench</h4>
+    <h4>Bench</h4>
     <p>Drive, surrogate wing, coupons, power path.</p>
     <p class="gate">Exit: mechanism pieces work without needing lift.</p>
   </div>
   <div class="step later">
-    <h4>P2 — Tethered flap</h4>
+    <h4>Tethered flap</h4>
     <p>Soft tether → leash → endurance.</p>
     <p class="gate">Exit: tethered hover without breaking.</p>
   </div>
   <div class="step later">
-    <h4>P3 — Free flight</h4>
+    <h4>Free flight</h4>
     <p>Indoor/netted hops → station-keep.</p>
     <p class="gate">Exit: a short indoor hop that was intended.</p>
   </div>
   <div class="step later">
-    <h4>P4 — Demo ready</h4>
+    <h4>Demo ready</h4>
     <p>Repeatable education/research demo.</p>
     <p class="gate">Exit: someone else can run it from a checklist.</p>
   </div>
@@ -196,8 +197,19 @@
 
 </main>
 
-<script src="three-stack.js"></script>
-<script src="page-chrome.js"></script>
+<div class="land-hud" aria-label="Hub">
+  <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+</div>
+
+<div id="fs-hud" hidden>
+  <div class="fs-top">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+    <button type="button" id="btn-fs-close">✕ Close</button>
+  </div>
+</div>
+
+<script src="/insect/three-stack.js"></script>
+<script src="/insect/page-chrome.js"></script>
 <script>
 (function () {
   'use strict';
@@ -212,7 +224,7 @@
   ];
 
   FlyerPage.wireSchematicInit({
-    vendorBase: 'vendor',
+    vendorBase: '/insect/vendor',
     label: 'Flyer-0',
     parts: PARTS,
     boot: boot
