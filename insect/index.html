@@ -231,7 +231,8 @@
     scene.fog = new THREE.Fog(0x140f1c, 40, 90);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
-    camera.position.set(14, 9, 16);
+    // High 3/4 so both membranes read as a pair, not one edge-on spike.
+    camera.position.set(12, 14, 14);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     FlyerPage.tuneRenderer(renderer);
@@ -306,7 +307,7 @@
     let highlight = null;
     let flapping = !reduceMotion;
     let tetherGroup = null;
-    let bobT = 0;
+    let bobT = 0.12;
 
     function tag(mesh, id) {
       mesh.userData.partId = id;
@@ -576,13 +577,13 @@
       controls.update();
     }
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 14, y: 9, z: 16 }, { x: 0, y: 3.4, z: 0 });
+      setView({ x: 12, y: 14, z: 14 }, { x: 0, y: 3.4, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });
     };
     document.getElementById('btn-iso').onclick = function () {
-      setView({ x: 12, y: 10, z: 14 }, { x: 0, y: 3.4, z: 0 });
+      setView({ x: 11, y: 15, z: 13 }, { x: 0, y: 3.4, z: 0 });
     };
     document.getElementById('btn-top').onclick = function () {
       setView({ x: 0.4, y: 28, z: 0.2 }, { x: 0, y: 3.4, z: 0 });
