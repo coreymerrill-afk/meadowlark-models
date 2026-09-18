@@ -3,324 +3,47 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Flying insect — Flyer-0: two-wing research flyer, about 15 g, 9 cm wing, indoor hover first." />
+<meta name="description" content="Flying insect — Flyer-0: two-wing research flyer, about 15 g, 9 cm wing, indoor hover first. Catalog also has Flyer-1 Dual-pair and Flyer-2 Resonant piezo." />
 <title>Flying insect — Flyer-0</title>
-<style>
-  :root {
-    --bg: #100e16; --bg2: #1a1624; --bg3: #261f33; --border: #46385a;
-    --text: #eee8f4; --muted: #a89bb8; --accent: #d946ef; --accent2: #c4b5fd;
-    --nature: #2dd4bf; --eng: #c084fc; --warn: #fdd663; --ok: #86efac;
-    --hi: #f0abfc;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; height: 100dvh; }
-  body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg); color: var(--text);
-    line-height: 1.5; font-size: 15px; display: flex; flex-direction: column;
-    min-height: 100vh; min-height: 100dvh;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  }
-  a { color: var(--accent2); }
-  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.9em;
-    background: var(--bg3); padding: 1px 5px; border-radius: 3px; }
-
-  .banners { flex-shrink: 0; }
-  .banner {
-    padding: 7px 16px; font-size: 12px; text-align: center; border-bottom: 1px solid;
-  }
-  .banner strong { color: #fff; }
-  .banner.nature { background: #12332f; border-color: #1f6b62; color: #b7efe6; }
-  .banner.nature strong { color: var(--nature); }
-  .banner.eng { background: #2a1840; border-color: #6b3fa0; color: #e9d5ff; }
-  .banner.eng strong { color: var(--eng); }
-  .banner.note { background: #1a1a22; border-color: #3a3a48; color: var(--muted); }
-
-  header.doc-header {
-    background: var(--bg2); border-bottom: 1px solid var(--border);
-    padding: 12px 20px 0; flex-shrink: 0; z-index: 100;
-  }
-  header.doc-header h1 { font-size: 1.2rem; font-weight: 700; color: #fff; }
-  header.doc-header .meta { color: var(--muted); font-size: 11px; margin-top: 2px; }
-  .hub-back {
-    display: inline-flex; align-items: center;
-    color: var(--accent2); text-decoration: none;
-    font-size: 13px; font-weight: 700;
-    min-height: 36px; margin: 0 0 6px; border-radius: 6px;
-  }
-  .hub-back:hover, .hub-back:focus-visible { text-decoration: underline; color: #fff; }
-  .hub-back:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  nav.tabs {
-    display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;
-    border-bottom: 1px solid var(--border);
-  }
-  nav.tabs button {
-    background: transparent; border: none; color: var(--muted);
-    padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
-    border-bottom: 2px solid transparent; margin-bottom: -1px;
-    border-radius: 6px 6px 0 0;
-  }
-  nav.tabs button:hover { color: var(--text); background: var(--bg3); }
-  nav.tabs button:focus-visible {
-    outline: 2px solid var(--accent); outline-offset: 2px; color: var(--text);
-  }
-  nav.tabs button[aria-selected="true"] {
-    color: var(--accent); border-bottom-color: var(--accent); background: var(--bg3);
-  }
-
-  main { flex: 1; min-height: 0; overflow: auto; }
-  main:not(.is-3d) { max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; width: 100%; }
-  main.is-3d {
-    max-width: none; margin: 0; padding: 0;
-    display: flex; flex-direction: column;
-    overflow: hidden; height: 100%;
-  }
-
-  .panel { display: none !important; }
-  .panel.active { display: block !important; }
-  #panel-schematic.panel.active {
-    display: flex !important; flex-direction: column; flex: 1; min-height: 50vh; height: 100%;
-  }
-
-  h2 { font-size: 1.25rem; margin: 0 0 12px; color: #fff; }
-  h3 { font-size: 0.85rem; margin: 22px 0 8px; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 0.04em; }
-  p, li { margin-bottom: 8px; }
-  ul, ol { padding-left: 1.35em; margin-bottom: 12px; }
-  .muted { color: var(--muted); }
-  .ok { color: var(--ok); }
-
-  .card {
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 10px; padding: 16px 18px; margin-bottom: 16px;
-  }
-  .nt-row {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; align-items: start;
-    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px 16px; margin-bottom: 12px;
-  }
-  .nt-row .k { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
-  .nt-row .from .k { color: var(--nature); }
-  .nt-row .idea .k { color: var(--warn); }
-  .nt-row .to .k { color: var(--eng); }
-  .nt-row strong { display: block; color: #fff; margin-bottom: 4px; font-size: 14px; }
-  .nt-row p { margin: 0; font-size: 13px; color: var(--muted); }
-  @media (max-width: 720px) {
-    .nt-row { grid-template-columns: 1fr; }
-  }
-
-  .step { margin-bottom: 12px; padding: 12px 14px; border-left: 3px solid var(--border);
-    background: var(--bg2); border-radius: 0 8px 8px 0; }
-  .step.now { border-left-color: var(--accent); }
-  .step.next { border-left-color: var(--warn); }
-  .step.later { border-left-color: #56486a; }
-  .step h4 { font-size: 14px; color: #fff; margin-bottom: 4px; }
-  .gate { font-size: 12px; color: var(--ok); }
-
-  .toolbar {
-    flex-shrink: 0; background: var(--bg2); border-bottom: 1px solid var(--border);
-    padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-  }
-  .toolbar button {
-    background: #3c3348; color: var(--text); border: 1px solid #6b5a80;
-    border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600;
-    cursor: pointer; min-height: 36px;
-  }
-  .toolbar button:hover { background: #4d425e; }
-  .toolbar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .toolbar button.active {
-    background: var(--accent); color: #1a0a22; border-color: var(--accent);
-  }
-  .toolbar label.toggle {
-    font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px;
-    cursor: pointer; user-select: none; min-height: 36px;
-  }
-  .hint { font-size: 11px; color: var(--muted); margin-left: auto; }
-
-  .view3d-wrap {
-    flex: 1; display: flex; position: relative; min-height: 0;
-    background:
-      radial-gradient(ellipse at 40% 35%, rgba(168, 85, 247, 0.16), transparent 55%),
-      #140f1c;
-  }
-  #canvas-wrap {
-    flex: 1; position: relative; min-width: 0; min-height: 0; height: 100%;
-  }
-  #canvas-wrap canvas {
-    display: block; width: 100% !important; height: 100% !important;
-    touch-action: none; -webkit-user-select: none; user-select: none;
-  }
-  #three-error {
-    display: none; position: absolute; inset: 12px; z-index: 20;
-    background: #3a1a1a; border: 1px solid #c44; border-radius: 10px;
-    padding: 16px 18px; color: #ffc9c9; font-size: 14px; line-height: 1.45;
-    overflow: auto; max-height: calc(100% - 24px);
-  }
-  #three-error.visible { display: block; }
-  #three-error strong { color: #fff; }
-  #three-loading {
-    position: absolute; inset: 0; z-index: 15;
-    display: flex; align-items: center; justify-content: center;
-    background: #140f1c; color: var(--muted); font-size: 14px;
-  }
-  #three-loading.hidden { display: none; }
-
-  #sidebar-3d {
-    width: 320px; max-width: 42vw; flex-shrink: 0;
-    background: var(--bg2); border-left: 1px solid var(--border);
-    overflow: auto; padding: 14px 16px 28px;
-  }
-  #sidebar-3d h2 { font-size: 0.95rem; }
-  #sidebar-3d h3 {
-    font-size: 0.72rem; margin: 16px 0 6px; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 0.05em;
-  }
-  #sidebar-3d .stat {
-    display: flex; justify-content: space-between; gap: 8px;
-    padding: 4px 0; border-bottom: 1px solid #2e2538; font-size: 12px;
-  }
-  #sidebar-3d .stat span:last-child {
-    color: var(--accent2); font-variant-numeric: tabular-nums; font-weight: 600;
-  }
-  .part-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
-    padding: 8px 10px; margin-top: 6px; cursor: pointer; font-size: 12px; text-align: left; width: 100%;
-    color: inherit; font-family: inherit;
-  }
-  .part-card:hover, .part-card.selected { border-color: var(--accent); }
-  .part-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .part-card strong { color: #fff; display: block; }
-  .part-card .muted { display: block; margin-top: 2px; font-size: 11px; }
-  #sel-detail {
-    margin-top: 12px; padding: 10px 12px; border-radius: 8px;
-    background: #2a1840; border: 1px solid #6b3fa0; display: none;
-  }
-  #sel-detail.visible { display: block; }
-  #sel-detail h4 { color: #fff; font-size: 13px; margin-bottom: 4px; }
-  #sel-detail p { font-size: 12px; color: var(--muted); }
-
-  @media (max-width: 820px) {
-    header.doc-header { padding: 8px 12px 0; }
-    header.doc-header h1 { font-size: 1.05rem; }
-    nav.tabs button { padding: 8px 10px; font-size: 12px; min-height: 44px; }
-    .banner { font-size: 11px; padding: 6px 10px; }
-    .view3d-wrap { flex-direction: column; }
-    #canvas-wrap {
-      flex: 0 0 auto; width: 100%;
-      height: 58vh; height: 58dvh; min-height: 50vh; min-height: 50dvh;
-    }
-    #sidebar-3d {
-      width: 100%; max-width: none; max-height: 38vh;
-      border-left: none; border-top: 1px solid var(--border);
-    }
-    .hint { display: none; }
-  }
-
-  /* Landscape 3D takeover: collapse banners, keep slim header + canvas */
-  @media (max-width: 820px) and (orientation: landscape) {
-    body:has(main.is-3d) { overflow: hidden; height: 100dvh; max-height: 100dvh; }
-    .banners { display: none; }
-    header.doc-header { padding: 2px 8px 0; }
-    header.doc-header h1,
-    header.doc-header .meta { display: none; }
-    header.doc-header .hub-back { margin: 0; min-height: 32px; }
-    nav.tabs { margin-top: 2px; }
-    nav.tabs button { min-height: 32px; padding: 4px 8px; font-size: 12px; }
-    .toolbar { padding: 4px 8px; }
-    .view3d-wrap { flex-direction: row; }
-    #canvas-wrap {
-      flex: 1 1 auto; width: auto; height: 100%;
-      min-height: 0; min-width: 0;
-    }
-    #sidebar-3d {
-      width: min(36vw, 260px); max-width: none; max-height: none;
-      height: 100%;
-      border-left: 1px solid var(--border); border-top: none;
-    }
-  }
-
-  #btn-expand { min-height: 36px; font-weight: 700; }
-  #fs-hud { display: none; }
-  body.fs-3d { padding: 0; overflow: hidden; }
-  body.fs-3d .banners,
-  body.fs-3d header.doc-header,
-  body.fs-3d .toolbar,
-  body.fs-3d #sidebar-3d { display: none !important; }
-  body.fs-3d main.is-3d,
-  body.fs-3d #panel-schematic.panel.active,
-  body.fs-3d .view3d-wrap,
-  body.fs-3d #canvas-wrap {
-    position: fixed; inset: 0;
-    width: 100%; height: 100dvh; max-height: none; min-height: 0;
-    z-index: 50; border: none;
-  }
-  body.fs-3d #fs-hud { display: block; z-index: 60; pointer-events: none; }
-  #fs-hud .fs-top {
-    position: fixed; top: 0; left: 0; right: 0;
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    padding: calc(8px + env(safe-area-inset-top)) 10px 8px;
-    background: linear-gradient(to bottom, rgba(16,14,22,0.92), rgba(16,14,22,0.15));
-    pointer-events: auto;
-  }
-  #fs-hud .fs-top .hub-back { margin: 0; color: #fff; min-height: 44px; }
-  #fs-hud .fs-top button {
-    min-height: 44px; padding: 8px 12px; font-weight: 700; cursor: pointer;
-    background: var(--bg2); color: var(--text); border: 1px solid var(--border);
-    border-radius: 8px;
-  }
-  @media (max-width: 820px) {
-    #btn-expand { min-height: 44px; }
-  }
-
-  .land-hud { display: none; }
-  @media (orientation: landscape) and (max-height: 520px) {
-    body:has(main.is-3d) { overflow: hidden; height: 100dvh; max-height: 100dvh; padding: 0; }
-    body:has(main.is-3d) .banners,
-    body:has(main.is-3d) header.doc-header,
-    body:has(main.is-3d) .toolbar,
-    body:has(main.is-3d) #sidebar-3d { display: none !important; }
-    body:has(main.is-3d) main.is-3d,
-    body:has(main.is-3d) #panel-schematic.panel.active,
-    body:has(main.is-3d) .view3d-wrap,
-    body:has(main.is-3d) #canvas-wrap {
-      position: fixed; inset: 0;
-      width: 100%; height: 100dvh; max-height: none; min-height: 0;
-      z-index: 50; border: none;
-    }
-    body:has(main.is-3d) .land-hud {
-      display: flex; align-items: center;
-      position: fixed; top: 0; left: 0; z-index: 70;
-      padding: calc(6px + env(safe-area-inset-top)) 10px 6px;
-    }
-    body:has(main.is-3d) .land-hud .hub-back {
-      margin: 0; color: #fff; min-height: 36px;
-      text-shadow: 0 1px 4px #000;
-    }
-  }
-  body.fs-3d .land-hud { display: none !important; }
-</style>
+<link rel="stylesheet" href="/insect/shared.css" />
 </head>
 <body>
 
 <div class="banners">
   <div class="banner nature">
-    <strong>From nature:</strong> insects hover with a vortex on the wing's leading edge, a springy thorax that returns energy, and wing pitch that happens on its own near the end of each stroke.
+    <strong>From nature:</strong> unsteady LEV hover, elastic energy return, passive pitch near reversal.
   </div>
   <div class="banner eng">
-    <strong>How this one is built:</strong> motor and linkage (not a piezo first try), two wings (not four), a small battery plus a spring for peak loads, indoor and netted first.
+    <strong>Engineering choice:</strong> rotary motor + linkage + thorax spring (not piezo-first), two wings (not four), LiPo + elastic peak buffer, indoor netted first.
+  </div>
+  <div class="banner why-chip">
+    Rotary motor + linkage + thorax spring · two wings · indoor first
   </div>
   <div class="banner note">
-    Research / education flyer — not a weapons program
+    Research / education / environmental flyer · not a weapons program
   </div>
 </div>
 
 <header class="doc-header">
-  <div>
+  <div class="header-top">
     <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
-    <h1>Flying insect — Flyer-0</h1>
-    <p class="meta">Two-wing research flyer · about 15 g · 9 cm wing · indoor hover first</p>
   </div>
+  <nav class="catalog" aria-label="Flyer catalog">
+    <a href="/insect/" aria-current="page">
+      <span class="id">Flyer-0</span>
+      <span class="status live">live</span>
+    </a>
+    <a href="/insect/flyer-1/">
+      <span class="id">Flyer-1 Dual-pair</span>
+      <span class="status live">live</span>
+    </a>
+    <a href="/insect/flyer-2/">
+      <span class="id">Flyer-2 Resonant piezo</span>
+      <span class="status live">live</span>
+    </a>
+  </nav>
+  <h1>Flying insect — Flyer-0</h1>
+  <p class="meta">Nature → tech · ~10–20 g · hawkmoth-class / odonate Re band · R = 9 cm · indoor first</p>
   <nav class="tabs" role="tablist" aria-label="Flyer-0 sections">
     <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
     <button type="button" role="tab" id="tab-nature" aria-controls="panel-nature" aria-selected="false" tabindex="-1" data-tab="nature">Nature → tech</button>
@@ -340,24 +63,34 @@
     <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
     <label class="toggle"><input type="checkbox" id="tog-tether" /> Bench tether</label>
     <button type="button" id="btn-expand" title="Fullscreen 3D">Expand</button>
-    <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · Visual flap only</span>
+    <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · schematic motion only</span>
   </div>
   <div class="view3d-wrap">
     <div id="canvas-wrap">
       <div id="three-loading">Loading Three.js…</div>
       <div id="three-error" role="alert"></div>
+      <div class="hud-lock">
+        <strong>R = 9 cm · c = 2.3 cm · 15 g</strong>
+        schematic motion only
+      </div>
     </div>
     <aside id="sidebar-3d">
-      <h2>Two-wing research flyer</h2>
-      <p class="muted">Motor and linkage, a spring that returns energy each stroke, and wings that pitch on their own. Built to hover indoors first. Four-wing comes later, after this one can lift and stay together.</p>
+      <h2>Two-wing flapper</h2>
+      <p class="muted">Rotary motor + linkage + deliberate thorax spring + passive aeroelastic pitch. LEV-dominated hover is the flight story. Clap-and-fling is curiosity-bench only.</p>
 
-      <h3>Size</h3>
-      <div class="stat"><span>Wing length</span><span>9 cm</span></div>
-      <div class="stat"><span>Wing width (mean)</span><span>2.3 cm</span></div>
-      <div class="stat"><span>Mass</span><span>15 g</span></div>
-      <div class="stat"><span>About the size of</span><span>hawkmoth / dragonfly</span></div>
-      <div class="stat"><span>Job</span><span>hover, indoor first</span></div>
+      <h3>Scale chip</h3>
+      <div class="stat"><span>Semi-span R</span><span>9 cm</span></div>
+      <div class="stat"><span>Chord c</span><span>2.3 cm</span></div>
+      <div class="stat"><span>Mass (mid)</span><span>15 g</span></div>
+      <div class="stat"><span>Class</span><span>hawkmoth-class / odonate Re band</span></div>
+      <div class="stat"><span>Mission</span><span>hover · indoor first</span></div>
       <div class="stat"><span>Working band</span><span>~10–20 g</span></div>
+
+      <h3>Kinematics</h3>
+      <p class="muted">Large stroke, high midstroke AoA, rotation at reversal. Schematic motion only — no lab Hz on this page.</p>
+
+      <h3>Mass honesty</h3>
+      <p class="muted">Battery and actuator fractions are the first hard bench fights. No published grams on this line — only that those two eat the envelope first.</p>
 
       <h3>Hotspots</h3>
       <div id="part-list"></div>
@@ -367,18 +100,14 @@
       </div>
 
       <h3>Honest limits</h3>
-      <p class="muted">This is a schematic, not a flown vehicle. Lift and endurance are not demonstrated. The next real number comes from a bench tether, not this picture.</p>
-      <details class="card" style="margin-top:12px;padding:10px 12px">
-        <summary style="cursor:pointer;font-weight:700;font-size:12px;color:var(--accent2)">Technical notes</summary>
-        <p class="muted" style="margin-top:8px">Lead lock: motor + linkage + deliberate elastic return + passive aeroelastic pitch. Hover story is a leading-edge vortex (LEV). Clap-and-fling is curiosity-bench only.</p>
-      </details>
+      <p class="muted">Geometry is a schematic. Lift and endurance are not demonstrated. Next real number is a tethered bench reading, not this render.</p>
     </aside>
   </div>
 </section>
 
 <section id="panel-nature" class="panel" role="tabpanel" aria-labelledby="tab-nature" aria-hidden="true">
   <h2>Nature → tech</h2>
-  <p class="muted">What we are borrowing from insects — mechanisms, not a species name and not a store-bought drone story.</p>
+  <p class="muted">Flyer-0 lock strip. Mechanisms, not a species and not a commercial insect-drone story.</p>
   <div class="nt-row">
     <div class="from">
       <div class="k">Nature</div>
@@ -387,8 +116,8 @@
     </div>
     <div class="idea">
       <div class="k">Idea</div>
-      <strong>Steep-angle flapping</strong>
-      <p>Controlled wing motion.</p>
+      <strong>High-AoA flapping</strong>
+      <p>Controlled kinematics.</p>
     </div>
     <div class="to">
       <div class="k">Tech</div>
@@ -410,7 +139,7 @@
     <div class="to">
       <div class="k">Tech</div>
       <strong>Torsional springs / carbon flexures</strong>
-      <p>Tuned near wingbeat.</p>
+      <p>Tuned near wingbeat — the thorax resonator, not the pitch hinge.</p>
     </div>
   </div>
   <div class="nt-row">
@@ -422,47 +151,47 @@
     <div class="idea">
       <div class="k">Idea</div>
       <strong>Compliance replaces a pitch servo</strong>
-      <p>No extra pitch motor on Flyer-0.</p>
+      <p>No extra pitch DOF on v0.</p>
     </div>
     <div class="to">
       <div class="k">Tech</div>
-      <strong>Flexible root + angle stops</strong>
-      <p>Active pitch later.</p>
+      <strong>Compliant root + AoA stops</strong>
+      <p>Living-hinge pitch is separate from the thorax resonator. Active pitch later.</p>
     </div>
   </div>
   <div class="card">
-    <h3>Later, not this flyer</h3>
-    <p>Four wings only after two-wing lift and control are reliable. A piezo / flexure drive is a later or parallel micro track. Clap-and-fling stays a curiosity bench. A small prop assist is a backup only if flap lift cannot carry the battery. This is not a copy of a commercial insect drone.</p>
+    <h3>Alternate starts (not Phase-2 footnotes)</h3>
+    <p><a href="/insect/flyer-1/">Flyer-1 Dual-pair</a> and <a href="/insect/flyer-2/">Flyer-2 Resonant piezo</a> are first-principles forks in the catalog. Clap-and-fling stays a curiosity bench. Hybrid prop assist is a backup branch only if pure flap lift fails under battery mass.</p>
   </div>
 </section>
 
 <section id="panel-path" class="panel" role="tabpanel" aria-labelledby="tab-path" aria-hidden="true">
-  <h2>Path to a flying demo</h2>
-  <p class="muted">What has to happen next. Lab numbers stay off this page.</p>
+  <h2>Path to prototype</h2>
+  <p class="muted">Public cards: phase + one-line goal + qualitative exit. Lab numbers stay off this page.</p>
   <div class="step now">
-    <h4>Locked the first flyer <span class="muted">· done</span></h4>
-    <p>Two-wing layout and the ~10–20 g size are set.</p>
-    <p class="gate">Done when: we share one language for Flyer-0.</p>
+    <h4>Concept freeze <span class="muted">· done</span></h4>
+    <p>Archetype + ~10–20 g scale locked.</p>
+    <p class="gate">Exit: shared language for the first flyer.</p>
   </div>
   <div class="step next">
     <h4>Bench</h4>
-    <p>Drive, practice wing, material coupons, power path.</p>
-    <p class="gate">Done when: the mechanism runs without needing lift.</p>
+    <p>Drive, surrogate wing, coupons, power path.</p>
+    <p class="gate">Exit: mechanism pieces work without needing lift.</p>
   </div>
   <div class="step later">
     <h4>Tethered flap</h4>
-    <p>Soft tether → leash → longer runs.</p>
-    <p class="gate">Done when: it can hover on a tether without breaking.</p>
+    <p>Soft tether → leash → endurance.</p>
+    <p class="gate">Exit: tethered hover without breaking.</p>
   </div>
   <div class="step later">
-    <h4>Indoor hops</h4>
-    <p>Netted room hops, then hold a spot.</p>
-    <p class="gate">Done when: a short indoor hop was on purpose.</p>
+    <h4>Free flight</h4>
+    <p>Indoor/netted hops → station-keep.</p>
+    <p class="gate">Exit: a short indoor hop that was intended.</p>
   </div>
   <div class="step later">
     <h4>Demo ready</h4>
-    <p>A repeatable education / research demo.</p>
-    <p class="gate">Done when: someone else can run it from a checklist.</p>
+    <p>Repeatable education/research demo.</p>
+    <p class="gate">Exit: someone else can run it from a checklist.</p>
   </div>
 </section>
 
@@ -479,258 +208,27 @@
   </div>
 </div>
 
+<script src="/insect/three-stack.js"></script>
+<script src="/insect/page-chrome.js"></script>
 <script>
 (function () {
   'use strict';
 
-  const THREE_LOCAL = 'vendor/three.min.js';
-  const OC_LOCAL = 'vendor/OrbitControls.js';
-  const THREE_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js';
-  const THREE_UMD_UNPKG = 'https://unpkg.com/three@0.149.0/build/three.min.js';
-  const OC_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js';
-  const OC_UMD_UNPKG = 'https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js';
-  const THREE_ESM_MAP = 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-  const OC_ESM_MAP = 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-  const THREE_ESM_SH = 'https://esm.sh/three@0.160.0';
-  const OC_ESM_SH = 'https://esm.sh/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-
   const PARTS = [
     { id: 'wings', name: 'Wings / aero', detail: 'LEV-aware hover flapping; passive pitch (aeroelastic first). Clap-and-fling is curiosity-bench only, not primary.' },
-    { id: 'actuation', name: 'Actuation', detail: 'Small coreless DC or BLDC + gearbox/crank; minimize backlash. Motor + linkage.' },
-    { id: 'elastic', name: 'Structure / materials', detail: 'Spars, membrane, flexure hinges; deliberate elastic return (springs/flexures) tuned near wingbeat.' },
+    { id: 'actuation', name: 'Actuation', detail: 'Rotary motor + linkage + deliberate thorax spring (not motor alone). Small coreless/BLDC + gearbox/crank; minimize backlash.' },
+    { id: 'elastic', name: 'Structure / materials', detail: 'Spars, membrane. Thorax spring/flexure = resonator (energy return). Living-hinge pitch flexure is separate (+ AoA stops).' },
     { id: 'power', name: 'Power', detail: 'LiPo for average aero + loss power; elastic (preferred) ± small supercap for peak stroke/reversal. 1S LiPo for first free flights.' },
     { id: 'sense', name: 'Sense / control', detail: 'IMU rate damping after the tether gate; keep open-loop stable first.' },
     { id: 'tether', name: 'Bench tether', detail: 'Soft tether / supply umbilical for bench and tethered flap. Hidden until toggled.' }
   ];
 
-  function loadScript(src) {
-    return new Promise(function (resolve, reject) {
-      const existing = document.querySelector('script[data-fly-src="' + src + '"]');
-      if (existing) {
-        if (existing.dataset.loaded === '1') return resolve();
-        existing.addEventListener('load', function () { resolve(); });
-        existing.addEventListener('error', function () { reject(new Error('Failed: ' + src)); });
-        return;
-      }
-      const s = document.createElement('script');
-      s.src = src;
-      s.async = false;
-      s.dataset.flySrc = src;
-      s.onload = function () { s.dataset.loaded = '1'; resolve(); };
-      s.onerror = function () { reject(new Error('Failed to load ' + src)); };
-      document.head.appendChild(s);
-    });
-  }
-
-  function resolveOrbitControls() {
-    if (!window.THREE) return null;
-    if (window.THREE.OrbitControls) return window.THREE.OrbitControls;
-    if (typeof window.OrbitControls === 'function') return window.OrbitControls;
-    return null;
-  }
-
-  function umdSuccess(via) {
-    const OC = resolveOrbitControls();
-    if (window.THREE && OC) return { THREE: window.THREE, OrbitControls: OC, via: via };
-    return null;
-  }
-
-  async function tryUmdPair(threeSrc, ocSrc, via) {
-    await loadScript(threeSrc);
-    await loadScript(ocSrc);
-    const hit = umdSuccess(via);
-    if (hit) return hit;
-    throw new Error('UMD loaded but OrbitControls missing (' + via + ')');
-  }
-
-  function ensureThreeImportMap() {
-    if (document.querySelector('script[type="importmap"]')) return;
-    const s = document.createElement('script');
-    s.type = 'importmap';
-    s.textContent = JSON.stringify({ imports: { three: THREE_ESM_MAP } });
-    document.head.appendChild(s);
-  }
-
-  async function loadThreeStack() {
-    const errors = [];
-    try { return await tryUmdPair(THREE_LOCAL, OC_LOCAL, 'local-umd'); }
-    catch (e) { errors.push(e); console.warn('[Flyer-0] local UMD failed', e); }
-    try { return await tryUmdPair(THREE_UMD_JSDELIVR, OC_UMD_JSDELIVR, 'cdn-jsdelivr-umd'); }
-    catch (e) { errors.push(e); console.warn('[Flyer-0] jsDelivr UMD failed', e); }
-    try { return await tryUmdPair(THREE_UMD_UNPKG, OC_UMD_UNPKG, 'cdn-unpkg-umd'); }
-    catch (e) { errors.push(e); console.warn('[Flyer-0] unpkg UMD failed', e); }
-    try {
-      // Dynamic import is the CDN ESM fallback (same as /x1 and /burrito); not a module graph import.
-      ensureThreeImportMap();
-      const THREE = await import(THREE_ESM_MAP);
-      const mod = await import(OC_ESM_MAP);
-      return { THREE: THREE, OrbitControls: mod.OrbitControls, via: 'esm-importmap-0.160' };
-    } catch (e) { errors.push(e); console.warn('[Flyer-0] importmap ESM failed', e); }
-    try {
-      const THREE = await import(THREE_ESM_SH);
-      const mod = await import(OC_ESM_SH);
-      return { THREE: THREE, OrbitControls: mod.OrbitControls, via: 'esm-sh-0.160' };
-    } catch (esmErr) {
-      errors.push(esmErr);
-      const msg = errors.map(function (x) { return (x && x.message) ? x.message : String(x); }).join(' | ');
-      throw new Error('Three.js failed (UMD + ESM): ' + msg);
-    }
-  }
-
-  function showThreeError(msg) {
-    const el = document.getElementById('three-error');
-    const loading = document.getElementById('three-loading');
-    if (loading) loading.classList.add('hidden');
-    if (!el) { console.error(msg); return; }
-    el.classList.add('visible');
-    el.innerHTML = '<strong>3D viewer failed to load</strong><br/>' +
-      String(msg).replace(/</g, '&lt;') +
-      '<br/><br/>Prefer opening with local <code>vendor/</code> beside this HTML, or allow CDN (jsdelivr/unpkg).';
-  }
-
-  const mainEl = document.getElementById('main');
-  const tabButtons = Array.prototype.slice.call(document.querySelectorAll('nav.tabs [role="tab"]'));
-  const panels = {
-    schematic: document.getElementById('panel-schematic'),
-    nature: document.getElementById('panel-nature'),
-    path: document.getElementById('panel-path')
-  };
-
-  let threeInitStarted = false;
-  let api = null;
-
-  function activateTab(tab, opts) {
-    opts = opts || {};
-    const id = tab.dataset.tab;
-    tabButtons.forEach(function (btn) {
-      const on = btn === tab;
-      btn.setAttribute('aria-selected', on ? 'true' : 'false');
-      btn.tabIndex = on ? 0 : -1;
-    });
-    Object.keys(panels).forEach(function (key) {
-      const el = panels[key];
-      const on = key === id;
-      el.classList.toggle('active', on);
-      el.setAttribute('aria-hidden', on ? 'false' : 'true');
-      if ('inert' in el) el.inert = !on;
-    });
-    mainEl.classList.toggle('is-3d', id === 'schematic');
-    mainEl.scrollTop = 0;
-    if (id !== 'schematic' && document.body.classList.contains('fs-3d')) {
-      exitFs3d();
-    }
-    if (id === 'schematic') {
-      ensureThreeInit();
-      function relayout() { if (api) api.resize(); }
-      requestAnimationFrame(function () {
-        relayout();
-        requestAnimationFrame(relayout);
-      });
-      setTimeout(relayout, 80);
-    }
-    if (opts.focus) tab.focus();
-  }
-
-  const tablist = document.querySelector('nav.tabs');
-  tablist.addEventListener('keydown', function (ev) {
-    const current = document.activeElement;
-    const i = tabButtons.indexOf(current);
-    if (i < 0) return;
-    let next = -1;
-    switch (ev.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        next = (i + 1) % tabButtons.length;
-        break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        next = (i - 1 + tabButtons.length) % tabButtons.length;
-        break;
-      case 'Home':
-        next = 0;
-        break;
-      case 'End':
-        next = tabButtons.length - 1;
-        break;
-      default: {
-        const _exhaustive = ev.key;
-        void _exhaustive;
-        return;
-      }
-    }
-    ev.preventDefault();
-    ev.stopPropagation();
-    activateTab(tabButtons[next], { focus: true });
+  FlyerPage.wireSchematicInit({
+    vendorBase: '/insect/vendor',
+    label: 'Flyer-0',
+    parts: PARTS,
+    boot: boot
   });
-  tabButtons.forEach(function (btn) {
-    btn.addEventListener('click', function () { activateTab(btn, { focus: true }); });
-  });
-
-  function enterFs3d() {
-    if (!mainEl.classList.contains('is-3d')) return;
-    document.body.classList.add('fs-3d');
-    const hud = document.getElementById('fs-hud');
-    if (hud) hud.hidden = false;
-    function relayout() { if (api) api.resize(); }
-    requestAnimationFrame(function () {
-      relayout();
-      requestAnimationFrame(relayout);
-    });
-    setTimeout(relayout, 80);
-  }
-  function exitFs3d() {
-    document.body.classList.remove('fs-3d');
-    const hud = document.getElementById('fs-hud');
-    if (hud) hud.hidden = true;
-    function relayout() { if (api) api.resize(); }
-    requestAnimationFrame(function () {
-      relayout();
-      requestAnimationFrame(relayout);
-    });
-    setTimeout(relayout, 80);
-  }
-  const btnExpand = document.getElementById('btn-expand');
-  if (btnExpand) btnExpand.addEventListener('click', enterFs3d);
-  const btnFsClose = document.getElementById('btn-fs-close');
-  if (btnFsClose) btnFsClose.addEventListener('click', exitFs3d);
-  document.addEventListener('keydown', function (ev) {
-    if (ev.key !== 'Escape') return;
-    if (document.body.classList.contains('fs-3d')) {
-      exitFs3d();
-      ev.preventDefault();
-    }
-  });
-  window.addEventListener('orientationchange', function () {
-    setTimeout(function () { if (api) api.resize(); }, 120);
-  });
-
-  const listEl = document.getElementById('part-list');
-  PARTS.forEach(function (p) {
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.className = 'part-card';
-    card.dataset.id = p.id;
-    card.innerHTML = '<strong>' + p.name + '</strong><span class="muted">' + p.detail.split('.')[0] + '.</span>';
-    listEl.appendChild(card);
-    card.addEventListener('click', function () {
-      if (api) api.selectPart(p.id);
-    });
-  });
-
-  function ensureThreeInit() {
-    if (threeInitStarted) {
-      if (api) api.resize();
-      return;
-    }
-    threeInitStarted = true;
-    loadThreeStack().then(function (stack) {
-      api = boot(stack.THREE, stack.OrbitControls, stack.via);
-    }).catch(function (err) {
-      showThreeError(err && err.message ? err.message : String(err));
-    });
-  }
-
-  ensureThreeInit();
 
   function boot(THREE, OrbitControls, via) {
     const loading = document.getElementById('three-loading');
@@ -745,39 +243,34 @@
     scene.fog = new THREE.Fog(0x140f1c, 40, 90);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
-    camera.position.set(7, 15, 13);
+    // High 3/4 so both membranes read as a pair, not one edge-on spike.
+    camera.position.set(12, 14, 14);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    FlyerPage.tuneRenderer(renderer);
     if (renderer.outputColorSpace !== undefined && THREE.SRGBColorSpace) {
       renderer.outputColorSpace = THREE.SRGBColorSpace;
     }
     wrap.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 3.2, 0);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.1;
+    controls.target.set(0, 3.4, 0);
     controls.minDistance = 8;
     controls.maxDistance = 50;
     controls.maxPolarAngle = Math.PI * 0.49;
-    if ('enableKeys' in controls) controls.enableKeys = false;
-    if (THREE.TOUCH) {
-      controls.touches.ONE = THREE.TOUCH.ROTATE;
-      controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
-    }
+    FlyerPage.tuneControls(THREE, controls);
 
     scene.add(new THREE.AmbientLight(0xf0e6ff, 0.48));
     const key = new THREE.DirectionalLight(0xffffff, 0.85);
     key.position.set(12, 20, 10);
     scene.add(key);
-    scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.45));
-    const rim = new THREE.DirectionalLight(0xd946ef, 0.4);
+    scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.5));
+    const rim = new THREE.DirectionalLight(0xd946ef, 0.45);
     rim.position.set(-16, 8, -8);
     scene.add(rim);
-    const back = new THREE.DirectionalLight(0xf5d0fe, 0.3);
-    back.position.set(-12, 10, 4);
-    scene.add(back);
+    const fill = new THREE.DirectionalLight(0xf5d0fe, 0.35);
+    fill.position.set(-10, 12, 14);
+    scene.add(fill);
 
     const grid = new THREE.GridHelper(36, 36, 0x5b4578, 0x2a2238);
     grid.position.y = 0.02;
@@ -796,16 +289,17 @@
     const matLens = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.85, roughness: 0.12, emissive: 0x155e75, emissiveIntensity: 0.35 });
     const matAb = new THREE.MeshStandardMaterial({ color: 0xb8a4d4, metalness: 0.28, roughness: 0.5 });
     const matSpring = new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.55, roughness: 0.3, emissive: 0x854d0e, emissiveIntensity: 0.25 });
+    const matPitch = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.45, roughness: 0.28, emissive: 0x155e75, emissiveIntensity: 0.3 });
     const matPack = new THREE.MeshStandardMaterial({ color: 0x86efac, metalness: 0.3, roughness: 0.45 });
     const matImu = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.4, roughness: 0.4 });
     const matSkid = new THREE.MeshStandardMaterial({ color: 0xc4b5a0, metalness: 0.25, roughness: 0.55 });
     const matWing = new THREE.MeshStandardMaterial({
-      color: 0xf0abfc, metalness: 0.05, roughness: 0.28,
-      transparent: true, opacity: 0.62, side: THREE.DoubleSide,
-      emissive: 0xa21caf, emissiveIntensity: 0.2
+      color: 0xf0abfc, metalness: 0.05, roughness: 0.32,
+      transparent: true, opacity: 0.72, side: THREE.DoubleSide,
+      emissive: 0xc026d3, emissiveIntensity: 0.28
     });
     const matVein = new THREE.MeshStandardMaterial({ color: 0xfce7f3, metalness: 0.2, roughness: 0.35 });
-    const matTether = new THREE.MeshStandardMaterial({ color: 0xc4b5fd, metalness: 0.2, roughness: 0.6 });
+    const matTick = new THREE.MeshStandardMaterial({ color: 0xf5d0fe, metalness: 0.1, roughness: 0.4 });
 
     function box(w, h, d, mat, x, y, z) {
       const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
@@ -825,7 +319,7 @@
     let highlight = null;
     let flapping = !reduceMotion;
     let tetherGroup = null;
-    let bobT = 0;
+    let bobT = 0.12;
 
     function tag(mesh, id) {
       mesh.userData.partId = id;
@@ -857,7 +351,6 @@
       return spr;
     }
 
-    /* Head / sensors */
     const sense = new THREE.Group();
     const skull = new THREE.Mesh(new THREE.SphereGeometry(0.55, 20, 14), matHead);
     skull.scale.set(1.2, 0.9, 0.95);
@@ -877,7 +370,6 @@
     groups.sense = sense;
     makeLabel('IMU later', 1.6, 1.7, 0, 4.2);
 
-    /* Body / power pack */
     const power = new THREE.Group();
     const hull = box(2.6, 0.95, 1.15, matCarbon, 0.35, 0.15, 0);
     tag(hull, 'power');
@@ -889,7 +381,6 @@
     groups.power = power;
     makeLabel('1S pack', -0.1, -1.15, 0, 3.8);
 
-    /* Abdomen */
     for (let i = 0; i < 5; i++) {
       const t = i / 4;
       const seg = new THREE.Mesh(new THREE.SphereGeometry(0.38 - t * 0.12, 12, 10), matAb);
@@ -899,7 +390,6 @@
       root.add(seg);
     }
 
-    /* Actuation — motor + crank */
     const actuation = new THREE.Group();
     const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.7, 16), matAccent);
     motor.rotation.x = Math.PI / 2;
@@ -917,36 +407,40 @@
     crankParts.push({ crank: crank, pin: crankPin });
     root.add(actuation);
     groups.actuation = actuation;
-    makeLabel('crank', 0.55, 1.85, 0, 3.6);
+    makeLabel('rotary + spring', 0.55, 2.05, 0, 5.2);
+    makeLabel('schematic motion only', 0.2, 2.55, -1.6, 5.6);
 
-    /* Elastic springs at roots */
-    const elastic = new THREE.Group();
+    const resonator = new THREE.Group();
+    const leaf = box(0.18, 0.72, 1.55, matSpring, 0.15, 0.72, 0);
+    tag(leaf, 'elastic');
+    resonator.add(leaf);
     [-1, 1].forEach(function (s) {
-      const coil = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.06, 8, 16), matSpring);
-      coil.position.set(0.7, 0.55, s * 0.85);
+      const coil = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.045, 8, 16), matSpring);
+      coil.position.set(0.15, 0.72, s * 0.62);
       coil.rotation.y = Math.PI / 2;
       tag(coil, 'elastic');
-      elastic.add(coil);
+      resonator.add(coil);
     });
-    root.add(elastic);
-    groups.elastic = elastic;
-    makeLabel('elastic', 0.9, 1.55, 1.5, 3.8);
+    root.add(resonator);
+    groups.elastic = resonator;
+    makeLabel('thorax resonator', 0.2, 1.75, 1.85, 5.0);
 
-    /* Two wings */
     function wingShape(span, chord) {
       const sh = new THREE.Shape();
-      sh.moveTo(0.15, 0);
-      sh.lineTo(span * 0.2, chord * 0.35);
-      sh.quadraticCurveTo(span * 0.62, chord * 0.55, span, chord * 0.08);
-      sh.quadraticCurveTo(span * 0.7, -chord * 0.42, span * 0.2, -chord * 0.22);
-      sh.lineTo(0.12, -0.04);
+      const half = chord / 2;
+      sh.moveTo(0.16, -half * 0.2);
+      sh.lineTo(0.16, half * 0.35);
+      sh.quadraticCurveTo(span * 0.42, half * 0.92, span * 0.78, half * 0.88);
+      sh.lineTo(span, half * 0.15);
+      sh.quadraticCurveTo(span * 0.72, -half * 0.95, span * 0.28, -half * 0.82);
+      sh.lineTo(0.16, -half * 0.28);
       sh.closePath();
       return sh;
     }
 
     function makeWing(span, chord) {
       const g = new THREE.Group();
-      const membrane = new THREE.Mesh(new THREE.ShapeGeometry(wingShape(span, chord), 20), matWing);
+      const membrane = new THREE.Mesh(new THREE.ShapeGeometry(wingShape(span, chord), 24), matWing);
       membrane.rotation.x = -Math.PI / 2;
       tag(membrane, 'wings');
       g.add(membrane);
@@ -955,26 +449,27 @@
       spar.position.set(span / 2, 0.05, 0);
       tag(spar, 'wings');
       g.add(spar);
-      const vein = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.02, span * 0.72, 6), matVein);
-      vein.rotation.z = -Math.PI / 2;
-      vein.rotation.y = 0.18;
-      vein.position.set(span * 0.4, 0.04, chord * 0.12);
-      tag(vein, 'wings');
-      g.add(vein);
+      const chordBar = box(0.045, 0.03, chord, matTick, span * 0.55, 0.07, 0);
+      tag(chordBar, 'wings');
+      g.add(chordBar);
       return g;
     }
 
+    const pitchGroup = new THREE.Group();
     function addWing(side) {
       const mount = new THREE.Group();
       mount.position.set(0.75, 0.55, side * 0.85);
       mount.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2;
       const flap = new THREE.Group();
       mount.add(flap);
+      const flex = box(0.28, 0.1, 0.42, matPitch, 0.2, 0, 0);
+      tag(flex, 'elastic');
+      flap.add(flex);
       const pitch = new THREE.Group();
       flap.add(pitch);
       const wing = makeWing(R, C);
       if (side < 0) wing.scale.z = -1;
-      flap.rotation.z = 0.2;
+      flap.rotation.z = 0.18;
       pitch.add(wing);
       root.add(mount);
       const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 1.1, 8), matCarbonHi);
@@ -982,17 +477,28 @@
       rod.rotation.x = side * 0.6;
       tag(rod, 'actuation');
       root.add(rod);
-      wingHinges.push({ flap: flap, pitch: pitch, rod: rod, side: side, rest: 0.2 });
+      wingHinges.push({ flap: flap, pitch: pitch, rod: rod, side: side, rest: 0.18 });
       return mount;
     }
     addWing(1);
     addWing(-1);
     groups.wings = root;
-    makeLabel('R = 9 cm', 1.2, 1.4, 6.2, 4.4);
-    makeLabel('c = 2.3 cm', 2.4, 0.15, 4.6, 4.2);
+    makeLabel('R = 9 cm', 1.2, 1.35, 6.4, 4.4);
+    makeLabel('c = 2.3 cm', 2.55, 0.2, 4.7, 4.2);
     makeLabel('15 g', -1.6, 1.45, 0, 3.6);
+    makeLabel('pitch living-hinge', 1.15, 1.15, 1.55, 4.8);
 
-    /* Skids */
+    const bar = box(5, 0.06, 0.06, matTick, 4.2, 0.06, -8);
+    scene.add(bar);
+    [[1.7, -8], [6.7, -8]].forEach(function (p) {
+      const tick = box(0.06, 0.28, 0.06, matTick, p[0], 0.16, p[1]);
+      scene.add(tick);
+    });
+    const scaleLbl = makeLabel('5 cm', 4.2, -2.85, -8, 3.6);
+    scene.add(scaleLbl);
+    root.remove(scaleLbl);
+    scaleLbl.position.set(4.2, 0.55, -8);
+
     [[1.4, 0.4], [1.4, -0.4], [-0.6, 0.35], [-0.6, -0.35]].forEach(function (p) {
       const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.6, 6), matSkid);
       leg.position.set(p[0], -1.05, p[1]);
@@ -1001,7 +507,6 @@
       root.add(leg);
     });
 
-    /* Tether */
     tetherGroup = new THREE.Group();
     tetherGroup.visible = false;
     const post = box(0.35, 10, 0.35, matCarbon, -6, 1.6, -5);
@@ -1053,8 +558,8 @@
           highlight.position.set(0.8, 0.6, 0);
           highlight.scale.setScalar(1.6);
         } else if (id === 'elastic') {
-          highlight.position.set(0.7, 0.55, 0);
-          highlight.scale.setScalar(1.1);
+          highlight.position.set(0.4, 0.6, 0);
+          highlight.scale.setScalar(1.15);
         }
       } else {
         detail.classList.remove('visible');
@@ -1084,13 +589,13 @@
       controls.update();
     }
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 7, y: 15, z: 13 }, { x: 0, y: 3.2, z: 0 });
+      setView({ x: 12, y: 14, z: 14 }, { x: 0, y: 3.4, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });
     };
     document.getElementById('btn-iso').onclick = function () {
-      setView({ x: 12, y: 10, z: 14 }, { x: 0, y: 3.4, z: 0 });
+      setView({ x: 11, y: 15, z: 13 }, { x: 0, y: 3.4, z: 0 });
     };
     document.getElementById('btn-top').onclick = function () {
       setView({ x: 0.4, y: 28, z: 0.2 }, { x: 0, y: 3.4, z: 0 });
@@ -1117,6 +622,7 @@
     function resize() {
       const w = wrap.clientWidth || 1;
       const h = wrap.clientHeight || 1;
+      FlyerPage.applyPortraitFov(camera, w, h, 40, 54);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h, false);
@@ -1129,8 +635,8 @@
       setTimeout(function () { loading.classList.add('hidden'); }, 350);
     }
 
-    const stroke = 28 * Math.PI / 180;
-    const flapHz = 2.2;
+    const stroke = 57.5 * Math.PI / 180;
+    const flapHz = 1.35;
     let last = performance.now();
 
     function animate(now) {
@@ -1142,7 +648,7 @@
         const s = Math.sin(bobT * flapHz * Math.PI * 2);
         wingHinges.forEach(function (w) {
           w.flap.rotation.z = w.rest + s * stroke;
-          w.pitch.rotation.x = Math.cos(bobT * flapHz * Math.PI * 2) * 0.18;
+          w.pitch.rotation.x = Math.cos(bobT * flapHz * Math.PI * 2) * 0.45;
         });
         if (crankParts[0]) {
           crankParts[0].crank.rotation.z = bobT * flapHz * Math.PI * 2;

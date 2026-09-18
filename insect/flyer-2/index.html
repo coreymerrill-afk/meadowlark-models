@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Flyer-2 Resonant piezo — solid-state resonant flexure, no rotary crank. Honest HV / micro start. Schematic only — no frozen lab path." />
+<title>Flyer-2 Resonant piezo — Meadowlark Models</title>
+<link rel="stylesheet" href="/insect/shared.css" />
+</head>
+<body>
+
+<div class="banners">
+  <div class="banner nature">
+    <strong>From nature:</strong> Elastic thorax as primary energy pathway; muscle-like solid-state drive analogy (honest: piezo ≠ muscle).
+  </div>
+  <div class="banner eng">
+    <strong>Engineering choice:</strong> piezo / resonant flexure — no crank motor. HV electronics; typically micro-leaning.
+  </div>
+  <div class="banner why-chip">
+    Flyer-2 Resonant piezo · no crank · live start
+  </div>
+  <div class="banner note">
+    Research / education / environmental flyer · not a weapons program
+  </div>
+</div>
+
+<header class="doc-header">
+  <div class="header-top">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+  </div>
+  <nav class="catalog" aria-label="Flyer catalog">
+    <a href="/insect/">
+      <span class="id">Flyer-0</span>
+      <span class="status live">live</span>
+    </a>
+    <a href="/insect/flyer-1/">
+      <span class="id">Flyer-1 Dual-pair</span>
+      <span class="status live">live</span>
+    </a>
+    <a href="/insect/flyer-2/" aria-current="page">
+      <span class="id">Flyer-2 Resonant piezo</span>
+      <span class="status live">live</span>
+    </a>
+  </nav>
+  <h1>Flyer-2 · Resonant piezo</h1>
+  <p class="meta">No rotary crank · HV / micro honesty · schematic only</p>
+  <nav class="tabs" role="tablist" aria-label="Flyer-2 sections">
+    <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
+    <button type="button" role="tab" id="tab-nature" aria-controls="panel-nature" aria-selected="false" tabindex="-1" data-tab="nature">Nature → tech</button>
+    <button type="button" role="tab" id="tab-path" aria-controls="panel-path" aria-selected="false" tabindex="-1" data-tab="path">Prototype path</button>
+  </nav>
+</header>
+
+<main id="main" class="is-3d">
+
+<section id="panel-schematic" class="panel active" role="tabpanel" aria-labelledby="tab-schematic" aria-hidden="false">
+  <div class="toolbar">
+    <button type="button" id="btn-reset">Reset view</button>
+    <button type="button" id="btn-iso">ISO</button>
+    <button type="button" id="btn-top">Top</button>
+    <button type="button" id="btn-side">Side</button>
+    <button type="button" id="btn-flap" class="active" aria-pressed="true">Pause flap</button>
+    <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
+    <label class="toggle"><input type="checkbox" id="tog-tether" /> Bench tether</label>
+    <button type="button" id="btn-expand" title="Fullscreen 3D">Expand</button>
+    <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · Visual flap only</span>
+  </div>
+  <div class="view3d-wrap">
+    <div id="canvas-wrap">
+      <div id="three-loading">Loading Three.js…</div>
+      <div id="three-error" role="alert"></div>
+      <div class="hud-lock">
+        <strong>Resonant piezo schematic</strong>
+        no crank · schematic motion only
+      </div>
+    </div>
+    <aside id="sidebar-3d">
+      <h2>Flyer-2 · Resonant piezo</h2>
+      <p class="muted">Piezo / solid-state resonant flexure — no crank. Flexure resonance is the drive. Typically lighter / micro-leaning than Flyer-0 — labeled honestly if micro.</p>
+
+      <h3>First-principles axis</h3>
+      <div class="stat"><span>Wings</span><span>two (count may match Flyer-0)</span></div>
+      <div class="stat"><span>Actuation</span><span>piezo / resonant flexure</span></div>
+      <div class="stat"><span>Elastic</span><span>resonance is the drive</span></div>
+      <div class="stat"><span>Scale</span><span>micro-leaning · HV</span></div>
+      <div class="stat"><span>Teaching</span><span>HV drive + microfab + Q</span></div>
+
+      <h3>Honesty</h3>
+      <p class="muted">Piezo ≠ muscle. Must not hide a rotary crank under a piezo label. HV electronics and a typically lighter band than Flyer-0.</p>
+
+      <h3>Hotspots</h3>
+      <div id="part-list"></div>
+      <div id="sel-detail">
+        <h4 id="sel-title">—</h4>
+        <p id="sel-body">—</p>
+      </div>
+
+      <h3>Honest limits</h3>
+      <p class="muted">Schematic only. No lift, no endurance, no “piezo beats motor” claim. Next real number is a resonant bench sweep.</p>
+    </aside>
+  </div>
+</section>
+
+<section id="panel-nature" class="panel" role="tabpanel" aria-labelledby="tab-nature" aria-hidden="true">
+  <h2>Nature → tech</h2>
+  <p class="muted">Lock strip only. No invented biology beyond this row.</p>
+  <div class="nt-row">
+    <div class="from">
+      <div class="k">Nature cue</div>
+      <strong>Elastic thorax as primary energy pathway</strong>
+      <p>Muscle-like solid-state drive analogy (honest: piezo ≠ muscle).</p>
+    </div>
+    <div class="idea">
+      <div class="k">Convergent idea</div>
+      <strong>High-frequency resonant flexure</strong>
+      <p>Bearings minimized.</p>
+    </div>
+    <div class="to">
+      <div class="k">Tech route</div>
+      <strong>Piezo bimorph / flextensional + flexures</strong>
+      <p>Carbon/polymer flexures; HV electronics. Typically lighter / micro-leaning than Flyer-0 — label honestly if micro.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Must not be</h3>
+    <p>A motor crank hidden under a “piezo” label. Neighbor starts: <a href="/insect/">Flyer-0</a> (rotary + linkage + thorax spring) and <a href="/insect/flyer-1/">Flyer-1 Dual-pair</a>.</p>
+  </div>
+</section>
+
+<section id="panel-path" class="panel" role="tabpanel" aria-labelledby="tab-path" aria-hidden="true">
+  <h2>Path</h2>
+  <p class="muted">Teaching axis only — no frozen lab path and no invented Hz on this page.</p>
+  <div class="step now">
+    <h4>Alternate start <span class="muted">· schematic only</span></h4>
+    <p>Hard teaching lesson: HV drive + microfab + Q. Flexure resonance is the drive.</p>
+    <p class="gate">This page is a first-principles fork, not a hidden crank. Next real number is a resonant bench sweep.</p>
+  </div>
+</section>
+
+</main>
+
+<div class="land-hud" aria-label="Hub">
+  <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+</div>
+
+<div id="fs-hud" hidden>
+  <div class="fs-top">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+    <button type="button" id="btn-fs-close">✕ Close</button>
+  </div>
+</div>
+
+<script src="/insect/three-stack.js"></script>
+<script src="/insect/page-chrome.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  const PARTS = [
+    { id: 'piezo', name: 'Piezo drive', detail: 'Piezo bimorph / flextensional. There is no rotary motor and no crank pin on this flyer.' },
+    { id: 'amp', name: 'Resonant flexure', detail: 'Flexure resonance is the drive. Bearings minimized. Carbon/polymer flexures.' },
+    { id: 'wings', name: 'Wings', detail: 'Two-wing count is allowed. Kinematics follow the resonance — not an arbitrary crank envelope.' },
+    { id: 'hv', name: 'HV electronics', detail: 'High-voltage drive is part of the start. Typically micro-leaning vs Flyer-0 — label honestly if micro.' },
+    { id: 'tether', name: 'Bench tether', detail: 'Umbilical for HV on the resonant bench. Hidden until toggled.' }
+  ];
+
+  FlyerPage.wireSchematicInit({
+    vendorBase: '/insect/vendor',
+    label: 'Flyer-2',
+    parts: PARTS,
+    boot: boot
+  });
+
+  function boot(THREE, OrbitControls, via) {
+    const loading = document.getElementById('three-loading');
+    const wrap = document.getElementById('canvas-wrap');
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const R = 3;
+    const C = 0.85;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x140f1c);
+    scene.fog = new THREE.Fog(0x140f1c, 36, 80);
+
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
+    camera.position.set(7.6, 3.6, 4.4);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    FlyerPage.tuneRenderer(renderer);
+    if (renderer.outputColorSpace !== undefined && THREE.SRGBColorSpace) {
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+    }
+    wrap.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 3.1, 0);
+    controls.minDistance = 5;
+    controls.maxDistance = 36;
+    controls.maxPolarAngle = Math.PI * 0.49;
+    FlyerPage.tuneControls(THREE, controls);
+
+    scene.add(new THREE.AmbientLight(0xf0e6ff, 0.62));
+    const key = new THREE.DirectionalLight(0xffffff, 0.95);
+    key.position.set(6, 8, 5);
+    scene.add(key);
+    scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.55));
+    const rim = new THREE.DirectionalLight(0xfbbf24, 0.28);
+    rim.position.set(-12, 7, -6);
+    scene.add(rim);
+
+    const grid = new THREE.GridHelper(28, 28, 0x5b4578, 0x2a2238);
+    grid.position.y = 0.02;
+    scene.add(grid);
+    const floor = new THREE.Mesh(
+      new THREE.CircleGeometry(14, 48),
+      new THREE.MeshStandardMaterial({ color: 0x1c1726, roughness: 0.95, metalness: 0.05 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    scene.add(floor);
+
+    const matCarbon = new THREE.MeshStandardMaterial({ color: 0x6b5c82, metalness: 0.55, roughness: 0.42 });
+    const matCarbonHi = new THREE.MeshStandardMaterial({ color: 0x8b7aa3, metalness: 0.6, roughness: 0.32 });
+    const matPiezo = new THREE.MeshStandardMaterial({ color: 0xfff1c9, metalness: 0.12, roughness: 0.32, emissive: 0x854d0e, emissiveIntensity: 0.12 });
+    const matElectrode = new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.65, roughness: 0.22, emissive: 0xb45309, emissiveIntensity: 0.35 });
+    const matFlex = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.4, roughness: 0.3, emissive: 0x155e75, emissiveIntensity: 0.28 });
+    const matHv = new THREE.MeshStandardMaterial({ color: 0xf97316, metalness: 0.35, roughness: 0.4, emissive: 0x7c2d12, emissiveIntensity: 0.25 });
+    const matPack = new THREE.MeshStandardMaterial({ color: 0x86efac, metalness: 0.3, roughness: 0.45 });
+    const matImu = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.4, roughness: 0.4 });
+    const matHead = new THREE.MeshStandardMaterial({ color: 0x4a3f5c, metalness: 0.5, roughness: 0.38 });
+    const matWing = new THREE.MeshStandardMaterial({
+      color: 0xf0abfc, metalness: 0.05, roughness: 0.28,
+      transparent: true, opacity: 0.62, side: THREE.DoubleSide, emissive: 0xa21caf, emissiveIntensity: 0.2
+    });
+
+    function box(w, h, d, mat, x, y, z) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+      m.position.set(x || 0, y || 0, z || 0);
+      return m;
+    }
+
+    const root = new THREE.Group();
+    root.position.y = 2.5;
+    scene.add(root);
+
+    const pickables = [];
+    const groups = {};
+    const labelSprites = [];
+    const wingHinges = [];
+    const ampParts = [];
+    let highlight = null;
+    let flapping = !reduceMotion;
+    let tetherGroup = null;
+    let bobT = 0;
+
+    function tag(mesh, id) {
+      mesh.userData.partId = id;
+      pickables.push(mesh);
+    }
+
+    function makeLabel(text, x, y, z, scale) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 768;
+      canvas.height = 192;
+      ctx.fillStyle = 'rgba(26, 12, 40, 0.78)';
+      ctx.fillRect(16, 16, 736, 160);
+      ctx.font = '700 54px system-ui,sans-serif';
+      ctx.fillStyle = '#f5d0fe';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, 384, 96);
+      const tex = new THREE.CanvasTexture(canvas);
+      if (tex.colorSpace !== undefined && THREE.SRGBColorSpace) tex.colorSpace = THREE.SRGBColorSpace;
+      const spr = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: tex, transparent: true, depthTest: false, depthWrite: false
+      }));
+      spr.position.set(x, y, z);
+      spr.scale.set(scale || 3.6, (scale || 3.6) * 0.28, 1);
+      spr.renderOrder = 12;
+      labelSprites.push(spr);
+      root.add(spr);
+      return spr;
+    }
+
+    const piezo = new THREE.Group();
+    for (let i = 0; i < 10; i++) {
+      const layer = box(1.55, 0.13, 0.72, i % 2 ? matElectrode : matPiezo, 0, 0.18 + i * 0.14, 0);
+      tag(layer, 'piezo');
+      piezo.add(layer);
+    }
+    root.add(piezo);
+    groups.piezo = piezo;
+    makeLabel('piezo stack', -2.4, 1.05, 0.6, 2.8);
+
+    const amp = new THREE.Group();
+    const yoke = box(0.18, 0.22, 1.35, matFlex, 0, 1.62, 0);
+    tag(yoke, 'amp');
+    amp.add(yoke);
+    const leverL = box(1.55, 0.08, 0.1, matFlex, -1.05, 1.55, 0);
+    leverL.rotation.z = 0.18;
+    tag(leverL, 'amp');
+    amp.add(leverL);
+    const leverR = box(1.55, 0.08, 0.1, matFlex, 1.05, 1.55, 0);
+    leverR.rotation.z = -0.18;
+    tag(leverR, 'amp');
+    amp.add(leverR);
+    [-0.45, 0.45].forEach(function (z) {
+      const strut = box(0.08, 0.7, 0.08, matFlex, 0, 1.25, z);
+      tag(strut, 'amp');
+      amp.add(strut);
+    });
+    ampParts.push(yoke, leverL, leverR);
+    root.add(amp);
+    groups.amp = amp;
+    makeLabel('flexure amp', 2.4, 1.85, 0.4, 2.8);
+
+    const hv = new THREE.Group();
+    const board = box(1.2, 0.12, 0.8, matHv, -0.2, -0.28, 0);
+    tag(board, 'hv');
+    hv.add(board);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.14, 0.26, 10), matElectrode);
+    cap.position.set(0.28, -0.05, 0.22);
+    tag(cap, 'hv');
+    hv.add(cap);
+    root.add(hv);
+    groups.hv = hv;
+    makeLabel('HV drive', -2.1, -0.75, 0.5, 2.6);
+
+    const power = new THREE.Group();
+    const pack = box(0.7, 0.22, 0.42, matPack, 0.55, -0.38, 0);
+    tag(pack, 'power');
+    power.add(pack);
+    const hull = box(1.7, 0.28, 0.55, matCarbon, 0.1, 0.02, 0);
+    tag(hull, 'power');
+    power.add(hull);
+    root.add(power);
+    groups.power = power;
+
+    const sense = new THREE.Group();
+    const nose = new THREE.Mesh(new THREE.SphereGeometry(0.22, 12, 10), matHead);
+    nose.scale.set(1.3, 0.7, 0.7);
+    nose.position.set(1.15, 0.18, 0);
+    tag(nose, 'sense');
+    sense.add(nose);
+    const imu = box(0.32, 0.08, 0.22, matImu, 0.55, 0.32, 0);
+    tag(imu, 'sense');
+    sense.add(imu);
+    root.add(sense);
+    groups.sense = sense;
+
+    function wingShape(span, chord) {
+      const sh = new THREE.Shape();
+      sh.moveTo(0.08, -chord * 0.15);
+      sh.lineTo(0.08, chord * 0.25);
+      sh.lineTo(span * 0.9, chord * 0.45);
+      sh.lineTo(span, chord * 0.1);
+      sh.lineTo(span * 0.88, -chord * 0.5);
+      sh.lineTo(0.08, -chord * 0.22);
+      sh.closePath();
+      return sh;
+    }
+
+    function makeWing(span, chord) {
+      const g = new THREE.Group();
+      const membrane = new THREE.Mesh(new THREE.ShapeGeometry(wingShape(span, chord), 16), matWing);
+      membrane.rotation.x = -Math.PI / 2;
+      tag(membrane, 'wings');
+      g.add(membrane);
+      const spar = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.02, span, 8), matCarbonHi);
+      spar.rotation.z = -Math.PI / 2;
+      spar.position.set(span / 2, 0.03, 0);
+      tag(spar, 'wings');
+      g.add(spar);
+      return g;
+    }
+
+    [-1, 1].forEach(function (side) {
+      const mount = new THREE.Group();
+      mount.position.set(0.05, 1.55, side * 0.62);
+      mount.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2;
+      const flap = new THREE.Group();
+      mount.add(flap);
+      const hinge = box(0.18, 0.06, 0.16, matFlex, 0.12, 0, 0);
+      tag(hinge, 'amp');
+      flap.add(hinge);
+      const pitch = new THREE.Group();
+      flap.add(pitch);
+      const wing = makeWing(R, C);
+      if (side < 0) wing.scale.z = -1;
+      flap.rotation.z = 0.12;
+      pitch.add(wing);
+      root.add(mount);
+      wingHinges.push({ flap: flap, pitch: pitch, rest: 0.12 });
+    });
+    groups.wings = root;
+    makeLabel('micro-leaning', 0.3, 1.35, 2.8, 2.6);
+    makeLabel('no crank', 2.2, 0.35, 0.15, 2.5);
+
+    tetherGroup = new THREE.Group();
+    tetherGroup.visible = false;
+    const post = box(0.28, 7.5, 0.28, matCarbon, -4.2, 1.2, -3.5);
+    tag(post, 'tether');
+    tetherGroup.add(post);
+    const arm = box(4.6, 0.16, 0.16, matCarbonHi, -1.9, 4.8, -3.5);
+    tag(arm, 'tether');
+    tetherGroup.add(arm);
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0.2, 0.4, 0),
+        new THREE.Vector3(-1.9, 4.7, -3.5)
+      ]),
+      new THREE.LineBasicMaterial({ color: 0xc4b5fd })
+    );
+    tag(line, 'tether');
+    tetherGroup.add(line);
+    root.add(tetherGroup);
+    groups.tether = tetherGroup;
+
+    highlight = new THREE.Mesh(
+      new THREE.TorusGeometry(0.9, 0.035, 8, 36),
+      new THREE.MeshBasicMaterial({ color: 0xf0abfc, transparent: true, opacity: 0.9 })
+    );
+    highlight.rotation.x = Math.PI / 2;
+    highlight.visible = false;
+    root.add(highlight);
+
+    function selectPart(id) {
+      document.querySelectorAll('.part-card').forEach(function (el) {
+        el.classList.toggle('selected', el.dataset.id === id);
+      });
+      const p = PARTS.find(function (x) { return x.id === id; });
+      const detail = document.getElementById('sel-detail');
+      if (p) {
+        detail.classList.add('visible');
+        document.getElementById('sel-title').textContent = p.name;
+        document.getElementById('sel-body').textContent = p.detail;
+        highlight.visible = true;
+        if (id === 'tether') tetherGroup.visible = true;
+        const g = groups[id];
+        if (g && g !== root) {
+          const box3 = new THREE.Box3().setFromObject(g);
+          const c = box3.getCenter(new THREE.Vector3());
+          highlight.position.copy(c);
+          const size = box3.getSize(new THREE.Vector3());
+          highlight.scale.setScalar(Math.max(0.7, Math.max(size.x, size.z) * 0.55) / 0.9);
+        } else if (id === 'wings') {
+          highlight.position.set(0.2, 0.95, 0);
+          highlight.scale.setScalar(1.3);
+        }
+      } else {
+        detail.classList.remove('visible');
+        highlight.visible = false;
+      }
+    }
+
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    wrap.addEventListener('pointerdown', function (ev) {
+      if (ev.button !== 0) return;
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hits = raycaster.intersectObjects(pickables, true);
+      if (hits.length) {
+        let o = hits[0].object;
+        while (o && o.userData.partId == null) o = o.parent;
+        if (o && o.userData.partId) selectPart(o.userData.partId);
+      }
+    });
+
+    function setView(pos, tgt) {
+      camera.position.set(pos.x, pos.y, pos.z);
+      controls.target.set(tgt.x, tgt.y, tgt.z);
+      controls.update();
+    }
+    document.getElementById('btn-reset').onclick = function () {
+      setView({ x: 7.6, y: 3.6, z: 4.4 }, { x: 0, y: 3.1, z: 0 });
+      selectPart(null);
+      document.getElementById('sel-detail').classList.remove('visible');
+      document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });
+    };
+    document.getElementById('btn-iso').onclick = function () {
+      setView({ x: 6.4, y: 4.8, z: 6.2 }, { x: 0, y: 3.1, z: 0 });
+    };
+    document.getElementById('btn-top').onclick = function () {
+      setView({ x: 0.15, y: 12, z: 0.12 }, { x: 0, y: 3.1, z: 0 });
+    };
+    document.getElementById('btn-side').onclick = function () {
+      setView({ x: 0.4, y: 3.1, z: 9.2 }, { x: 0, y: 3.1, z: 0 });
+    };
+
+    const btnFlap = document.getElementById('btn-flap');
+    function syncFlapButton() {
+      btnFlap.classList.toggle('active', flapping);
+      btnFlap.setAttribute('aria-pressed', flapping ? 'true' : 'false');
+      btnFlap.textContent = flapping ? 'Pause flap' : 'Play flap';
+    }
+    syncFlapButton();
+    btnFlap.onclick = function () { flapping = !flapping; syncFlapButton(); };
+    document.getElementById('tog-labels').addEventListener('change', function (e) {
+      labelSprites.forEach(function (s) { s.visible = e.target.checked; });
+    });
+    document.getElementById('tog-tether').addEventListener('change', function (e) {
+      tetherGroup.visible = e.target.checked;
+    });
+
+    function resize() {
+      const w = wrap.clientWidth || 1;
+      const h = wrap.clientHeight || 1;
+      FlyerPage.applyPortraitFov(camera, w, h, 40, 54);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h, false);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    if (loading) {
+      loading.textContent = 'Ready · Three via ' + via;
+      setTimeout(function () { loading.classList.add('hidden'); }, 350);
+    }
+
+    const stroke = 22 * Math.PI / 180;
+    const flapHz = 4.4;
+    let last = performance.now();
+
+    function animate(now) {
+      requestAnimationFrame(animate);
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      if (flapping) {
+        bobT += dt;
+        const s = Math.sin(bobT * flapHz * Math.PI * 2);
+        wingHinges.forEach(function (w) {
+          w.flap.rotation.z = w.rest + s * stroke;
+          w.pitch.rotation.x = Math.cos(bobT * flapHz * Math.PI * 2) * 0.1;
+        });
+        ampParts[1].rotation.z = 0.18 + s * 0.08;
+        ampParts[2].rotation.z = -0.18 - s * 0.08;
+        piezo.position.y = s * 0.03;
+        root.position.y = 2.5 + Math.sin(bobT * 1.2) * 0.04;
+      }
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    requestAnimationFrame(animate);
+
+    return { resize: resize, selectPart: selectPart };
+  }
+})();
+</script>
+</body>
+</html>

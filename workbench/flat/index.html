@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Draft Workbench — Gen-0 Flat: plain 36×36 inch rolling table, 38 inches tall." />
+<title>Flat · Workbench — Gen-0</title>
+<link rel="stylesheet" href="/workbench/wb.css" />
+</head>
+<body class="is-viewer" data-module="flat" data-vendor="/workbench/vendor/">
+<div class="banners">
+  <div class="back-bar">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+    <span class="sep">·</span>
+    <a class="sub" href="/workbench/">Workbench — Gen-0</a>
+  </div>
+  <div class="banner draft">
+    <strong>Draft.</strong>
+    First 3D look — not a finished product, not a cut list, not something to buy from.
+  </div>
+</div>
+<header class="doc-header">
+  <h1>Flat</h1>
+  <p class="meta">Workbench — Gen-0 · plain table · 36×36 inches · 38 inches tall</p>
+</header>
+<div class="toolbar">
+  <nav class="catalog" aria-label="The three tables">
+    <a href="/workbench/flat/" aria-current="page"><span class="cat-k">Start here</span>Flat</a>
+    <a href="/workbench/extension/"><span class="cat-k">Helper</span>Extension</a>
+    <a href="/workbench/miter/"><span class="cat-k">DWS716XPS</span>Miter</a>
+  </nav>
+  <button type="button" id="btn-reset">Reset view</button>
+  <button type="button" id="btn-iso">ISO</button>
+  <button type="button" id="btn-top">Top</button>
+  <button type="button" id="btn-side">Side</button>
+  <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
+  <label class="toggle"><input type="checkbox" id="tog-neighbor" /> Neighbor table</label>
+  <button type="button" id="btn-expand" title="Fullscreen 3D">Expand</button>
+  <span class="hint">Drag to orbit · Scroll to zoom · Click a part</span>
+</div>
+<div class="view3d-wrap">
+  <div id="canvas-wrap">
+    <div id="three-loading">Loading 3D…</div>
+    <div id="three-error" role="alert"></div>
+  </div>
+  <aside id="sidebar-3d">
+    <h2>Flat</h2>
+    <p class="muted">The default island. Plain ¾ inch top, a shelf underneath, a brace for stiffness. All four sides snap together.</p>
+    <h3>Locked sizes</h3>
+    <div class="stat"><span>Outer size</span><span>36 × 36 in</span></div>
+    <div class="stat"><span>Between posts</span><span>about 29 × 29 in</span></div>
+    <div class="stat"><span>Posts</span><span>about 3½ in</span></div>
+    <div class="stat"><span>Height</span><span>38 in tall</span></div>
+    <div class="stat"><span>Latches</span><span>2 / side · 1st 12 in below top</span></div>
+    <div class="stat"><span>Plywood</span><span>½ in plates / ¾ in top</span></div>
+    <div class="stat"><span>Wheels</span><span>lock · brand open</span></div>
+    <h3>Parts</h3>
+    <div id="part-list"></div>
+    <div id="sel-detail">
+      <h4 id="sel-title">—</h4>
+      <p id="sel-body">—</p>
+    </div>
+    <h3>Honest limits</h3>
+    <p class="muted">This is a sketch. Wheel and latch brands are still open. The next real number comes from building a Flat, not from this picture.</p>
+  </aside>
+</div>
+<div class="land-hud" aria-label="Hub">
+  <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+</div>
+<div id="fs-hud" hidden>
+  <div class="fs-top">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+    <button type="button" id="btn-fs-close">✕ Close</button>
+  </div>
+</div>
+<script src="/workbench/wb-viewer.js"></script>
+</body>
+</html>
