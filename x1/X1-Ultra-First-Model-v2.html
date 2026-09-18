@@ -764,6 +764,10 @@
       <li><strong>Path A required</strong> — See <em>Why Path A</em> below. Sealed pan with nowhere for smoke to go is a fail.</li>
     </ul>
   </div>
+  <div class="card">
+    <h3>Why the stand stays square</h3>
+    <p>The torsion box is a stiff, flat top — two skins glued to a ribbed core, so the deck stays true when you lean on it. Six legs under the apron carry that load into the floor. Stretchers <strong>Q</strong> tie the posts together down low. The four diagonal braces <strong>P</strong> triangulate the long bays so the stand can’t rack into a parallelogram. Full-height end panels <strong>O</strong> kill racking on the short ends. That’s the whole trick: lumber, glued and braced, stays square.</p>
+  </div>
   <div class="card highlight">
     <h3>Why Path A</h3>
     <p><strong>Why Path A:</strong> Laser cuts drop ash and smoke under the tiles. The fire pan catches them; the plenum (side/front channel outside the tile field) pulls that air out. A sealed pan with nowhere to go is a fail — Path A is required, not an upgrade.</p>
@@ -2148,7 +2152,7 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     },
     {
       id: "S30", title: "Install diagonals on the long sides", letters: ["P", "K"],
-      text: "Add four diagonal braces — corner to mid on each long side. Tips land on the posts above the stretchers.",
+      text: "Add four diagonal braces — corner to mid on each long side. Tips land on the posts above the stretchers. Those braces triangulate the long bays so the stand doesn’t rack.",
       detail: [
         "1. Cut four 2×4s to fit each long bay (~48–50\" tip-to-tip).",
         "2. Install two per long side: corner post ↔ mid post.",
@@ -3868,31 +3872,40 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       boxMesh('Q', si, T, T24_H, qShortLen, LEXICON.Q.color, qShortX, qY, 0);
     })();
     // 16: P — 4 braces corner↔mid on each long side; tips on K inner faces; above Q
-    // Cross-section 3.5 × 1.5 (not T×T square)
+    // Cross-section 3.5 × 1.5 (not T×T square). Elevation slope: shop diagonals, not rails.
     (function () {
       const si = 29;
       const qY = LEVELER_H + PLATE_H + 3.5;
-      const pY = qY + T24_H + 0.75; // stacked above on-edge stretchers
+      const yLow = qY + T24_H + 0.75; // just above on-edge stretcher Q
+      const yHigh = apronBottom - T24_H / 2 - 0.25; // near apron underside / upper third of K
       const legZc = legCornerZ;
       const legXc = legCornerX;
       // Tip offset from leg center to brace centerline just outside the post face
       const tip = LEG_SQ / 2 + 0.05; // end-grain butt to K X-face (small gap, no morph)
       const zAlong = (sgn) => sgn * (legZc - LEG_SQ / 2 - T / 2 - 0.05); // along inner Z face of long-side posts
+      const xCornerN = -(legXc - tip);
+      const xMidN = -tip;
+      const xMidP = tip;
+      const xCornerP = (legXc - tip);
       // Two per long side: corner −X ↔ mid, mid ↔ corner +X (continuous K–P–K)
+      // Opposing slopes: high-at-corner/low-at-mid, then high-at-mid/low-at-corner
       const diags = [
-        [-(legXc - tip), zAlong(-1), -tip, zAlong(-1)],
-        [tip, zAlong(-1), (legXc - tip), zAlong(-1)],
-        [-(legXc - tip), zAlong(1), -tip, zAlong(1)],
-        [tip, zAlong(1), (legXc - tip), zAlong(1)],
+        [xCornerN, yHigh, zAlong(-1), xMidN, yLow, zAlong(-1)],
+        [xMidP, yHigh, zAlong(-1), xCornerP, yLow, zAlong(-1)],
+        [xCornerN, yHigh, zAlong(1), xMidN, yLow, zAlong(1)],
+        [xMidP, yHigh, zAlong(1), xCornerP, yLow, zAlong(1)],
       ];
-      diags.forEach(([x1, z1, x2, z2]) => {
-        const dx = x2 - x1, dz = z2 - z1;
-        const len = Math.hypot(dx, dz);
+      const pAlong = new THREE.Vector3(1, 0, 0);
+      const pDir = new THREE.Vector3();
+      diags.forEach(([x1, y1, z1, x2, y2, z2]) => {
+        const dx = x2 - x1, dy = y2 - y1, dz = z2 - z1;
+        const len = Math.hypot(dx, dy, dz);
         const m = new THREE.Mesh(new THREE.BoxGeometry(len, T24_H, T), makeMat(LEXICON.P.color));
-        m.position.set((x1 + x2) / 2, pY, (z1 + z2) / 2);
-        m.rotation.y = -Math.atan2(dz, dx);
+        m.position.set((x1 + x2) / 2, (y1 + y2) / 2, (z1 + z2) / 2);
+        pDir.set(dx, dy, dz).normalize();
+        m.quaternion.setFromUnitVectors(pAlong, pDir);
         m.userData.isRotated = true;
-        m.userData.segTips = [[x1, pY, z1], [x2, pY, z2]];
+        m.userData.segTips = [[x1, y1, z1], [x2, y2, z2]];
         addMesh('P', m, si);
       });
     })();
@@ -6019,10 +6032,13 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         return maxPen;
       }
       function rotatedEndpoints(m) {
+        if (m.userData && Array.isArray(m.userData.segTips) && m.userData.segTips.length >= 2) {
+          return m.userData.segTips;
+        }
         const p = m.geometry.parameters;
         const half = p.width / 2;
         const c = Math.cos(m.rotation.y), s = Math.sin(m.rotation.y);
-        // local ±X ends → world
+        // local ±X ends → world (Y-only fallback)
         return [
           [m.position.x - half * c, m.position.y, m.position.z + half * s],
           [m.position.x + half * c, m.position.y, m.position.z - half * s]
@@ -6125,6 +6141,15 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         if (best > 0.5) pTipBad++;
       });
       console.assert(pTipBad === 0, 'P tips must meet K (clearance≤0.5")', pTipBad);
+      let pFlat = 0;
+      pMeshes.forEach(m => {
+        const tips = m.userData.segTips;
+        if (!tips || tips.length < 2) { pFlat++; return; }
+        if (Math.abs(tips[0][1] - tips[1][1]) < 2) pFlat++;
+      });
+      console.assert(pMeshes.length === 4, 'exactly 4 P diagonals', pMeshes.length);
+      console.assert(pFlat === 0, 'P must slope in elevation (not rails parallel to Q)', pFlat);
+      console.info('[X1] P tips', pMeshes.map(m => m.userData.segTips));
       console.info('[X1] leg XY after fix', Ks.map(k => [+k.m.position.x.toFixed(2), +k.m.position.z.toFixed(2)]));
     })();
     console.assert(STEPS.length === 51, 'step count', STEPS.length);
