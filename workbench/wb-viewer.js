@@ -24,9 +24,9 @@
     { id: 'posts', name: 'Posts', detail: '4×4 lumber (about 3½ inches) at the four corners. Outer faces set the 36×36 inch size. About 29 inches of space between them. Upper aprons run post to post, flush to that outer face, so latches have wood behind them.' },
     { id: 'top', name: 'Top', detail: '¾ inch plywood that holds weight. The top sits 38 inches off the floor — not 36. ½ inch plywood is only for plates the X1 can cut.' },
     { id: 'shelf', name: 'Shelf / rails', detail: 'Four lower rails sit about 6–8 inches off the floor, clear of the casters. A ¾ inch shelf rests on those rails and notches around the posts — it does not float. Flat and Extension get a brace on two opposite faces. Miter gets an X in the lower bay. Brace ends kiss the post inner faces at the rail and apron. Not a cut list.' },
-    { id: 'latch', name: 'Snap + latch', detail: 'Same on all four sides. Two magnets per side snap the tables together; then two latches take the load. Both latch plates sit on the apron face — not hanging in air. The first sits 12 inches below the top (about 26 inches off the floor) — not 18. The second is Design-reserved on the same line, typically 6–8 inches above or below (exact offset DRAFT).' },
+    { id: 'latch', name: 'Snap + latch', detail: 'Same kit on all four sides, mirrored. Two magnets per side, flush or a hair proud of the 36 inch face. North and East carry the latch bodies; South and West carry the strikes. Plates sit on the apron, not hanging in air. First latch 12 inches below the top (about 26 inches off the floor). Second is Design-reserved on the same line (exact offset DRAFT).' },
     { id: 'casters', name: 'Wheels', detail: 'A locking caster under each post. About 3 inches tall as a starting guess. Brand is still open.' },
-    { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS. Base about 27.2 × 22.4 inches — fits the 29 inch opening, tight front-to-back. Removable inserts so a later saw can swap in. How far the head swings is still open.' }
+    { id: 'saw', name: 'DWS716XPS', detail: 'Stand-in for a DeWalt DWS716XPS (12 inch compound, it does not slide). Rubber feet sit on a ½ inch nest. Width gets about a ¾–1 inch service gap; front-to-back stays tight — that gap is not faked. Head is shown upright; how far it bevels is still open.' }
   ];
 
   function loadScript(src) {
@@ -151,6 +151,13 @@
     const POST_H = TOP_AFF - TOP_THK - CASTER_H;
     const SAW_W = 22.4;
     const SAW_D = 27.2;
+    const SERVICE_W = 0.875;
+    const OPEN_W = SAW_W + 2 * SERVICE_W;
+    const OPEN_D = SAW_D;
+    const NEST_W = 22.5;
+    const NEST_D = SAW_D;
+    const MAG_PROUD = 1 / 16;
+    const FOOT_H = 0.35;
 
     // Schematic frame stock — not freeze dims, not a cut list.
     // 2× class thickness. Second latch sits 6" above primary (Design-allowed
@@ -184,6 +191,10 @@
       console.assert(LOWER_RAIL_BOT >= CASTER_H, 'lower rail clear of caster plate');
       console.assert(Math.abs(SHELF_Y - (LOWER_RAIL_TOP + TOP_THK / 2)) < 1e-6, 'shelf sits on rails');
       console.assert(Math.abs((POST_INNER - BRACE_THK / 2) + BRACE_THK / 2 - POST_INNER) < 1e-9, 'brace kisses post inner face');
+      console.assert(OPEN_W < SPAN && OPEN_D <= SPAN, 'nest inside A-clear');
+      console.assert(NEST_W <= OPEN_W && NEST_D <= OPEN_D, 'insert fits opening');
+      console.assert(SERVICE_W >= 0.75 && SERVICE_W <= 1, 'width-only service gap');
+      console.assert(OPEN_D === SAW_D, 'no faked depth gap');
     })();
 
     const scene = new THREE.Scene();
@@ -240,6 +251,9 @@
     const matShelf = new THREE.MeshStandardMaterial({ color: 0xb08958, roughness: 0.7, metalness: 0.04 });
     const matBrace = new THREE.MeshStandardMaterial({ color: 0x8a6a40, roughness: 0.68, metalness: 0.06 });
     const matPlate = new THREE.MeshStandardMaterial({ color: 0xb8b4aa, roughness: 0.4, metalness: 0.45 });
+    const matStrike = new THREE.MeshStandardMaterial({ color: 0x8a8680, roughness: 0.45, metalness: 0.4 });
+    const matRubber = new THREE.MeshStandardMaterial({ color: 0x1c1c1c, roughness: 0.92, metalness: 0.02 });
+    const matSawTable = new THREE.MeshStandardMaterial({ color: 0x2a2c30, roughness: 0.55, metalness: 0.2 });
     const matMagnet = new THREE.MeshStandardMaterial({
       color: 0xf5b942, roughness: 0.32, metalness: 0.55, emissive: 0x7a5208, emissiveIntensity: 0.35
     });
@@ -254,10 +268,10 @@
     const matSawK = new THREE.MeshStandardMaterial({ color: 0x1c1c1e, roughness: 0.5, metalness: 0.25 });
     const matBlade = new THREE.MeshStandardMaterial({ color: 0xc0c6ce, roughness: 0.25, metalness: 0.7 });
     const matWell = new THREE.MeshStandardMaterial({
-      color: 0x8a7348, roughness: 0.55, metalness: 0.08, transparent: true, opacity: 0.5
+      color: 0x6e5a38, roughness: 0.62, metalness: 0.06
     });
     const matInsert = new THREE.MeshStandardMaterial({
-      color: 0xc4b896, roughness: 0.5, metalness: 0.12, transparent: true, opacity: 0.85
+      color: 0xc4b896, roughness: 0.52, metalness: 0.1
     });
 
     function box(w, h, d, mat, x, y, z) {
@@ -420,31 +434,49 @@
 
     function addLatchPad(parent, face) {
       const g = new THREE.Group();
-      const upperMagY = UPPER_MAG_Y;
-      const lowerMagY = 4;
+      let role;
+      switch (face) {
+        case '+x':
+        case '+z':
+          role = 'latch';
+          break;
+        case '-x':
+        case '-z':
+          role = 'strike';
+          break;
+        default: {
+          const _exhaustive = face;
+          throw new Error('Unknown latch face: ' + _exhaustive);
+        }
+      }
+      const isLatch = role === 'latch';
+      const padMat = isLatch ? matPlate : matStrike;
       function addMag(y) {
-        const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.22, 16), matMagnet);
+        const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, MAG_PROUD, 16), matMagnet);
         mag.rotation.x = Math.PI / 2;
-        mag.position.set(0, y, PLATE / 2 + 0.1);
+        mag.position.set(0, y, MAG_PROUD / 2);
         tag(mag, 'latch');
         g.add(mag);
       }
-      addMag(upperMagY);
-      addMag(lowerMagY);
-      const pad = box(4.2, LATCH_PAD_H, PLATE, matPlate, 0, LATCH_AFF, 0);
-      tag(pad, 'latch');
-      g.add(pad);
-      const toggle = box(1.6, 0.55, 0.7, matMech, 0, LATCH_AFF - 0.7, PLATE / 2 + 0.25);
-      tag(toggle, 'latch');
-      g.add(toggle);
-      const reservedY = LATCH2_AFF;
-      const pad2 = box(4.2, LATCH_PAD_H, PLATE, matPlate, 0, reservedY, 0);
-      tag(pad2, 'latch');
-      g.add(pad2);
-      const toggle2 = box(1.6, 0.55, 0.7, matMech, 0, reservedY - 0.7, PLATE / 2 + 0.25);
-      tag(toggle2, 'latch');
-      g.add(toggle2);
-      const half = OA / 2 + PLATE / 2;
+      addMag(UPPER_MAG_Y);
+      addMag(4);
+      function addStation(y) {
+        const pad = box(4.2, LATCH_PAD_H, PLATE, padMat, 0, y, -PLATE / 2);
+        tag(pad, 'latch');
+        g.add(pad);
+        if (isLatch) {
+          const toggle = box(1.6, 0.55, 0.7, matMech, 0, y - 0.7, 0.28);
+          tag(toggle, 'latch');
+          g.add(toggle);
+        } else {
+          const slot = box(2.4, 0.7, 0.16, matMech, 0, y, 0.08);
+          tag(slot, 'latch');
+          g.add(slot);
+        }
+      }
+      addStation(LATCH_AFF);
+      addStation(LATCH2_AFF);
+      const half = OA / 2;
       switch (face) {
         case '+x':
           g.position.set(half, 0, 0);
@@ -462,8 +494,8 @@
           g.rotation.y = Math.PI;
           break;
         default: {
-          const _exhaustive = face;
-          throw new Error('Unknown latch face: ' + _exhaustive);
+          const _exhaustivePos = face;
+          throw new Error('Unknown latch face: ' + _exhaustivePos);
         }
       }
       parent.add(g);
@@ -472,26 +504,45 @@
 
     function addSaw(parent) {
       const g = new THREE.Group();
-      const base = box(SAW_W, 2.2, SAW_D, matSawK, 0, 1.1, 0);
+      const baseH = 1.65;
+      const feet = [
+        [SAW_W / 2 - 1.4, SAW_D / 2 - 1.4],
+        [SAW_W / 2 - 1.4, -SAW_D / 2 + 1.4],
+        [-SAW_W / 2 + 1.4, SAW_D / 2 - 1.4],
+        [-SAW_W / 2 + 1.4, -SAW_D / 2 + 1.4]
+      ];
+      feet.forEach(function (c) {
+        const pad = box(1.35, FOOT_H, 1.35, matRubber, c[0], FOOT_H / 2, c[1]);
+        tag(pad, 'saw');
+        g.add(pad);
+      });
+      const base = box(SAW_W, baseH, SAW_D, matSawK, 0, FOOT_H + baseH / 2, 0);
       tag(base, 'saw');
       g.add(base);
-      const fence = box(SAW_W - 1, 3.2, 0.6, matSawK, 0, 3.6, -SAW_D / 2 + 5);
+      const table = box(SAW_W - 0.7, 0.22, SAW_D - 1.4, matSawTable, 0, FOOT_H + baseH + 0.11, -0.15);
+      tag(table, 'saw');
+      g.add(table);
+      const fenceZ = SAW_D / 2 - 4.2;
+      const fence = box(SAW_W - 1.3, 3.3, 0.55, matSawK, 0, FOOT_H + baseH + 1.85, fenceZ);
       tag(fence, 'saw');
       g.add(fence);
-      const arm = box(3.2, 10, 3.6, matSawY, 0, 8.2, -1.2);
+      const pivot = box(4.0, 3.4, 3.1, matSawY, 0, FOOT_H + baseH + 3.2, fenceZ + 1.7);
+      tag(pivot, 'saw');
+      g.add(pivot);
+      const arm = box(2.5, 8.8, 2.6, matSawY, 0, FOOT_H + baseH + 8.8, fenceZ + 0.2);
       tag(arm, 'saw');
       g.add(arm);
-      const motor = new THREE.Mesh(new THREE.CylinderGeometry(2.4, 2.4, 4.2, 18), matSawY);
+      const motor = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 4.0, 18), matSawY);
       motor.rotation.z = Math.PI / 2;
-      motor.position.set(2.6, 10.2, 1.4);
+      motor.position.set(2.7, FOOT_H + baseH + 9.6, fenceZ - 2.1);
       tag(motor, 'saw');
       g.add(motor);
       const blade = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, 0.12, 32), matBlade);
       blade.rotation.z = Math.PI / 2;
-      blade.position.set(-0.4, 8.4, 2.6);
+      blade.position.set(0, FOOT_H + baseH + 7.6, fenceZ - 3.4);
       tag(blade, 'saw');
       g.add(blade);
-      const handle = box(1.4, 1.1, 4.5, matSawK, 0, 13.4, -0.4);
+      const handle = box(1.3, 1.05, 4.2, matSawK, 0, FOOT_H + baseH + 13.2, fenceZ - 0.6);
       tag(handle, 'saw');
       g.add(handle);
       parent.add(g);
@@ -524,50 +575,43 @@
 
       const topY = TOP_AFF - TOP_THK / 2;
       if (kind === 'miter') {
-        const wingW = (OA - SAW_W) / 2;
-        const lip = (OA - SAW_D) / 2;
+        const wingW = (OA - OPEN_W) / 2;
+        const lip = (OA - OPEN_D) / 2;
         const left = box(wingW, TOP_THK, OA, matTop, -(OA / 2 - wingW / 2), topY, 0);
         tag(left, 'top');
         parent.add(left);
         const right = box(wingW, TOP_THK, OA, matTop, OA / 2 - wingW / 2, topY, 0);
         tag(right, 'top');
         parent.add(right);
-        const back = box(SAW_W, TOP_THK, lip, matTop, 0, topY, OA / 2 - lip / 2);
+        const back = box(OPEN_W, TOP_THK, lip, matTop, 0, topY, OA / 2 - lip / 2);
         tag(back, 'top');
         parent.add(back);
-        const front = box(SAW_W, TOP_THK, lip, matTop, 0, topY, -OA / 2 + lip / 2);
+        const front = box(OPEN_W, TOP_THK, lip, matTop, 0, topY, -OA / 2 + lip / 2);
         tag(front, 'top');
         parent.add(front);
-        const insertThk = PLATE;
         const insertBottom = TOP_AFF - TOP_THK;
-        const insertTop = insertBottom + insertThk;
-        const insertY = insertBottom + insertThk / 2;
-        const wellH = 3.2;
-        const wellW = SAW_W - 0.35;
-        const wellD = SAW_D - 0.35;
-        const well = box(wellW, wellH, wellD, matWell, 0, insertBottom - wellH / 2, 0);
+        const insertTop = insertBottom + PLATE;
+        const insertY = insertBottom + PLATE / 2;
+        const nest = box(NEST_W, PLATE, NEST_D, matInsert, 0, insertY, 0);
+        tag(nest, 'top');
+        parent.add(nest);
+        const wellH = 3.0;
+        const well = box(OPEN_W - 0.4, wellH, OPEN_D - 0.4, matWell, 0, insertBottom - wellH / 2, 0);
         tag(well, 'top');
         parent.add(well);
         const flangeT = 0.22;
-        const flangeW = 0.7;
+        const flangeW = 0.65;
         const flangeY = insertBottom - flangeT / 2;
         const flanges = [
-          box(SAW_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, SAW_D / 2),
-          box(SAW_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, -SAW_D / 2),
-          box(flangeW, flangeT, SAW_D, matInsert, SAW_W / 2, flangeY, 0),
-          box(flangeW, flangeT, SAW_D, matInsert, -SAW_W / 2, flangeY, 0)
+          box(OPEN_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, OPEN_D / 2),
+          box(OPEN_W + flangeW, flangeT, flangeW, matInsert, 0, flangeY, -OPEN_D / 2),
+          box(flangeW, flangeT, OPEN_D, matInsert, OPEN_W / 2, flangeY, 0),
+          box(flangeW, flangeT, OPEN_D, matInsert, -OPEN_W / 2, flangeY, 0)
         ];
         flanges.forEach(function (f) {
           tag(f, 'top');
           parent.add(f);
         });
-        const ledge = 0.85;
-        const insertL = box(ledge, insertThk, SAW_D - 1, matInsert, -SAW_W / 2 + ledge / 2, insertY, 0);
-        tag(insertL, 'top');
-        parent.add(insertL);
-        const insertR = box(ledge, insertThk, SAW_D - 1, matInsert, SAW_W / 2 - ledge / 2, insertY, 0);
-        tag(insertR, 'top');
-        parent.add(insertR);
         const saw = addSaw(parent);
         saw.position.set(0, insertTop, 0);
       } else {
@@ -608,7 +652,8 @@
       makeLabel('on rails', 0, SHELF_Y + 3.2, OA / 2 + 4, 12);
       if (kind === 'miter') {
         makeLabel('DWS716XPS', 0, TOP_AFF + 12, 0, 18);
-        makeLabel('tight fit', 0, TOP_AFF + 7, SAW_D / 2 + 2, 14);
+        makeLabel('½ in nest', 0, TOP_AFF + 7.4, 0, 14);
+        makeLabel('tight depth', 0, TOP_AFF + 4.2, SAW_D / 2 + 2, 13);
       }
       const tog = document.getElementById('tog-labels');
       const show = !tog || tog.checked;
@@ -617,13 +662,22 @@
 
     function buildGhost() {
       clearGroup(neighbor);
-      const stack = 2 * PLATE;
-      const cx = OA + stack;
+      const cx = OA + 2 * MAG_PROUD;
       const ghost = box(OA, TOP_AFF - 2, OA, matGhost, cx, (TOP_AFF - 2) / 2 + 1, 0);
       neighbor.add(ghost);
-      const padX = cx - OA / 2 - PLATE / 2;
-      const pad = box(4.2, LATCH_PAD_H, PLATE, matPlate, padX, LATCH_AFF, 0);
-      neighbor.add(pad);
+      const faceX = cx - OA / 2;
+      function addGhostMag(y) {
+        const mag = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, MAG_PROUD, 16), matMagnet);
+        mag.rotation.z = Math.PI / 2;
+        mag.position.set(faceX - MAG_PROUD / 2, y, 0);
+        neighbor.add(mag);
+      }
+      addGhostMag(UPPER_MAG_Y);
+      addGhostMag(4);
+      const strike = box(PLATE, LATCH_PAD_H, 4.2, matStrike, faceX + PLATE / 2, LATCH_AFF, 0);
+      neighbor.add(strike);
+      const strike2 = box(PLATE, LATCH_PAD_H, 4.2, matStrike, faceX + PLATE / 2, LATCH2_AFF, 0);
+      neighbor.add(strike2);
     }
 
     function setModule(kind) {
