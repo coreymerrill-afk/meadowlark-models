@@ -757,12 +757,22 @@
     <h3>Why this design</h3>
     <ul>
       <li><strong>Torsion-box deck</strong> — Two ¾" skins sandwich a 2×4-on-edge core for a stiff, flat table without steel. Feet and pads land on ribs, spine, and blocking — never mid-skin over empty air.</li>
-      <li><strong>Apron + short legs</strong> — 2×6 apron takes the leg bolts; six 4×4s stop under the apron so the deck skin stays clean. Two full-height end panels kill racking.</li>
+      <li><strong>Apron + short legs</strong> — 2×6 apron takes the leg bolts; six 4×4s stop under the apron so the deck skin stays clean. End panels, stretchers, and long-side diagonals keep the stand from walking.</li>
       <li><strong>Butt-to-spine ribs</strong> — Cross ribs meet a continuous center spine for a solid pad land down the length; ordinary butts and glue — no half-laps required for FIRST MODEL.</li>
       <li><strong>Seam strips in bays only</strong> — Skin backing strips sit only in open bays, clear of rims/ribs/spine, so framing still bears on the skin.</li>
       <li><strong>Drop-in cassette</strong> — Aluminum frame with ledgers, pan, wear, and exhaust pads onto stand ribs so you can service fire/exhaust without rebuilding the lumber deck.</li>
       <li><strong>Path A required</strong> — See <em>Why Path A</em> below. Sealed pan with nowhere for smoke to go is a fail.</li>
     </ul>
+  </div>
+  <div class="card">
+    <h3>Why it does not rack</h3>
+    <p>A heavy box on six legs wants to parallelogram when you bump it — the top stays a rectangle while the feet walk. That lean is racking. This stand stops it with ordinary lumber, not steel:</p>
+    <ul>
+      <li><strong>End panels (O)</strong> — Full-height plywood on both short ends. They act like walls, so the stand cannot lean across its width.</li>
+      <li><strong>Lower stretchers (Q)</strong> — 2×4s face-mounted near the floor, tying all six posts so the feet cannot spread.</li>
+      <li><strong>Diagonals (P)</strong> — Four 2×4s, two on each long side, each running corner post to mid post just above the stretchers. Each tip bears on a post face. That locks the long bays so the stand cannot walk down its length.</li>
+    </ul>
+    <p class="muted">Apron and torsion deck stiffen the top. Together this is a 900&nbsp;lb platform, not a wobbly workbench. After both O panels and all four P braces, the stand should feel planted — then level and jam-nut the feet.</p>
   </div>
   <div class="card highlight">
     <h3>Why Path A</h3>
@@ -1045,8 +1055,8 @@
 [HC tiles W ×8 in pockets Y]     spoil set X ×8 beside
 [machine Z dashed]  cooler Z beside
 
-<span class="note">End panels O (~33×61" flush) span FULL HEIGHT both short ends — racking.</span>
-Stretchers Q + diagonals P under apron bay.</div>
+<span class="note">End panels O (~33×61" flush) span FULL HEIGHT both short ends — stop lean across the width.</span>
+Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (corner↔mid, tips on K above Q).</div>
 
   <h3>Leg stack-up → 33" AFF</h3>
   <div class="card">
@@ -3867,29 +3877,32 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
       boxMesh('Q', si, T, T24_H, qShortLen, LEXICON.Q.color, -qShortX, qY, 0);
       boxMesh('Q', si, T, T24_H, qShortLen, LEXICON.Q.color, qShortX, qY, 0);
     })();
-    // 16: P — 4 braces corner↔mid on each long side; tips on K inner faces; above Q
-    // Cross-section 3.5 × 1.5 (not T×T square)
+    // 16: P — 4 braces corner↔mid on each long side; tips on K inner X-faces; above Q
+    // Cross-section 3.5 × 1.5 (not T×T square). Do not place on Q's inboard Z —
+    // that left a floating rail that never met the posts (ATTACH S30 is z=±legCornerZ).
     (function () {
       const si = 29;
       const qY = LEVELER_H + PLATE_H + 3.5;
-      const pY = qY + T24_H + 0.75; // stacked above on-edge stretchers
+      const pY = qY + T24_H; // just above on-edge stretchers (ATTACH S30 y=10.25)
       const legZc = legCornerZ;
       const legXc = legCornerX;
-      // Tip offset from leg center to brace centerline just outside the post face
-      const tip = LEG_SQ / 2 + 0.05; // end-grain butt to K X-face (small gap, no morph)
-      const zAlong = (sgn) => sgn * (legZc - LEG_SQ / 2 - T / 2 - 0.05); // along inner Z face of long-side posts
+      // Tip: end-grain butt to K inner X-face (small gap, no morph through the post)
+      const tip = LEG_SQ / 2 + 0.05;
+      // Long-side post plane — same Z as K centers / ATTACH S30 P→K (not Q's inner-face Z)
+      const zPlane = (sgn) => sgn * legZc;
       // Two per long side: corner −X ↔ mid, mid ↔ corner +X (continuous K–P–K)
       const diags = [
-        [-(legXc - tip), zAlong(-1), -tip, zAlong(-1)],
-        [tip, zAlong(-1), (legXc - tip), zAlong(-1)],
-        [-(legXc - tip), zAlong(1), -tip, zAlong(1)],
-        [tip, zAlong(1), (legXc - tip), zAlong(1)],
+        [-(legXc - tip), zPlane(-1), -tip, zPlane(-1)],
+        [tip, zPlane(-1), (legXc - tip), zPlane(-1)],
+        [-(legXc - tip), zPlane(1), -tip, zPlane(1)],
+        [tip, zPlane(1), (legXc - tip), zPlane(1)],
       ];
       diags.forEach(([x1, z1, x2, z2]) => {
         const dx = x2 - x1, dz = z2 - z1;
         const len = Math.hypot(dx, dz);
         const m = new THREE.Mesh(new THREE.BoxGeometry(len, T24_H, T), makeMat(LEXICON.P.color));
         m.position.set((x1 + x2) / 2, pY, (z1 + z2) / 2);
+        // Long axis is BoxGeometry +X; yaw lines it up with tip-to-tip (dz=0 here)
         m.rotation.y = -Math.atan2(dz, dx);
         m.userData.isRotated = true;
         m.userData.segTips = [[x1, pY, z1], [x2, pY, z2]];
@@ -6019,6 +6032,9 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         return maxPen;
       }
       function rotatedEndpoints(m) {
+        if (m.userData && m.userData.segTips && m.userData.segTips.length === 2) {
+          return m.userData.segTips;
+        }
         const p = m.geometry.parameters;
         const half = p.width / 2;
         const c = Math.cos(m.rotation.y), s = Math.sin(m.rotation.y);
@@ -6028,11 +6044,16 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
           [m.position.x + half * c, m.position.y, m.position.z - half * s]
         ];
       }
+      function isPKBearing(A, B) {
+        return (A.L === 'P' && B.L === 'K') || (A.L === 'K' && B.L === 'P');
+      }
       const hits = [];
       for (let i = 0; i < solid.length; i++) {
         for (let j = i + 1; j < solid.length; j++) {
           if (solid[i].L === solid[j].L) continue;
           const A = solid[i], B = solid[j];
+          // P tips are supposed to meet K — sausage radius would flag that bearing as a morph
+          if (isPKBearing(A, B)) continue;
           const aRot = A.m.userData && A.m.userData.isRotated;
           const bRot = B.m.userData && B.m.userData.isRotated;
           let d;
@@ -6125,6 +6146,17 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
         if (best > 0.5) pTipBad++;
       });
       console.assert(pTipBad === 0, 'P tips must meet K (clearance≤0.5")', pTipBad);
+      const pAttachY = LEVELER_H + PLATE_H + 3.5 + T24_H;
+      let pPlaneBad = 0;
+      pMeshes.forEach(m => {
+        const tips = m.userData.segTips;
+        if (!tips) { pPlaneBad++; return; }
+        tips.forEach(p => {
+          if (Math.abs(p[1] - pAttachY) > 0.15) pPlaneBad++;
+          if (Math.abs(Math.abs(p[2]) - legCornerZ) > 0.15) pPlaneBad++;
+        });
+      });
+      console.assert(pPlaneBad === 0, 'P tips must sit in K long-side plane just above Q (ATTACH S30)', pPlaneBad);
       console.info('[X1] leg XY after fix', Ks.map(k => [+k.m.position.x.toFixed(2), +k.m.position.z.toFixed(2)]));
     })();
     console.assert(STEPS.length === 51, 'step count', STEPS.length);
