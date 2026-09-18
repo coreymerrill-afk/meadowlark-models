@@ -5252,7 +5252,32 @@ const ATTACH={"S03":[{"id":"S03-m1-a000","kind":"glue","family":"G1","from":"H",
     console.assert(STEPS.length === 51, 'step count', STEPS.length);
     console.info('[X1] STEPS', STEPS.length, 'dims', dimGroups.map(d => d.id + '@' + d.showOnSteps.join(',')));
 
-    api = { setStep, highlightLetter, resize, enterExplore };
+    function snapshotCamera() {
+      return {
+        px: camera.position.x, py: camera.position.y, pz: camera.position.z,
+        tx: controls.target.x, ty: controls.target.y, tz: controls.target.z,
+      };
+    }
+    function sampleMeshModes() {
+      let dimmed = 0, solid = 0, hidden = 0, total = 0;
+      const sample = [];
+      for (const L of Object.keys(partRegistry)) {
+        (partRegistry[L].meshes || []).forEach(m => {
+          if (!m.isMesh || !m.material) return;
+          total++;
+          if (!m.visible) { hidden++; return; }
+          const mat = Array.isArray(m.material) ? m.material[0] : m.material;
+          const op = mat.opacity == null ? 1 : mat.opacity;
+          // Y/Z/O keep authored translucency even when "current"
+          if (op <= 0.3 && L !== 'Y' && L !== 'Z') dimmed++;
+          else solid++;
+          if (sample.length < 10) sample.push({ L, visible: m.visible, opacity: +op.toFixed(2) });
+        });
+      }
+      return { total, dimmed, solid, hidden, sample, exploreMode };
+    }
+    api = { setStep, highlightLetter, resize, enterExplore, snapshotCamera, sampleMeshModes };
+    try { window.__x1Api = api; } catch (e) { /* ignore */ }
     setStep(0, { frame: true });
     resize();
     animate();
