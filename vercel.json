@@ -1,4 +1,9 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/shared.css", "destination": "/insect/shared.css" },
+    { "source": "/three-stack.js", "destination": "/insect/three-stack.js" },
+    { "source": "/page-chrome.js", "destination": "/insect/page-chrome.js" }
+  ]
 }

@@ -14,7 +14,8 @@ Source for the Insect column: Critic Models `CRITIQUE-FLYER0-MODELS-v0.md` via `
 - **Canvas:** `min-height` ~48–52dvh; sidebar ≤30–32dvh stacked below.
 - **Camera:** portrait FOV bump when aspect < ~0.85; frame whole two-wing schematic on load / Reset.
 - **Touch:** OrbitControls damping + screenSpacePanning + explicit TOUCH rotate/dolly-pan; `touch-action: none`; DPR cap ~1.75 on coarse pointers.
-- **Catalog chrome:** Flyer-0 / Flyer-1 Dual-pair / Flyer-2 Resonant piezo stay a compact 3-cell control — do not stack three fat cards above the canvas.
+- **Catalog chrome:** Flyer-0 / Flyer-1 Dual-pair / Flyer-2 Resonant piezo stay a compact 3-cell control — do not stack three fat cards above the canvas. All three chips are live links (no “coming” badge).
+- **Asset paths:** insect CSS/JS/vendor are root-absolute (`/insect/…`) so Vercel `trailingSlash: false` cannot 404 them.
 
 ## Success criteria checklist
 
