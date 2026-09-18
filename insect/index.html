@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Flyer-0: two-wing rotary motor + deliberate spring/elastic return, locked envelope R 9 cm · c 2.3 cm · ~15 g. Indoor hover research/education." />
-<title>Flyer-0 — two-wing rotary · Meadowlark Models</title>
+<meta name="description" content="Flying insect robot — Flyer-0 two-wing schematic: rotary motor + linkage + deliberate thorax spring, R 9 cm · c 2.3 cm · ~15 g. Indoor hover research/education." />
+<title>Flying insect robot — Meadowlark Models</title>
 <link rel="stylesheet" href="shared.css" />
 </head>
 <body>
@@ -14,7 +14,10 @@
     <strong>From nature:</strong> unsteady LEV hover, elastic energy return, passive pitch near reversal.
   </div>
   <div class="banner eng">
-    <strong>Engineering choice:</strong> rotary motor + deliberate spring/elastic return; two wings; LiPo + elastic peak buffer; indoor netted first.
+    <strong>Engineering choice:</strong> rotary motor + linkage + thorax spring (not piezo-first), two wings (not four), LiPo + elastic peak buffer, indoor netted first.
+  </div>
+  <div class="banner why-chip">
+    Rotary motor + linkage + thorax spring · two wings · indoor first
   </div>
   <div class="banner note">
     Research / education / environmental flyer · not a weapons program
@@ -28,19 +31,19 @@
   <nav class="catalog" aria-label="Flyer catalog">
     <a href="/insect/" aria-current="page">
       <span class="id">Flyer-0</span>
-      <span class="sub">Two-wing rotary</span>
+      <span class="status live">live</span>
     </a>
     <a href="/insect/flyer-1/">
-      <span class="id">Flyer-1</span>
-      <span class="sub">Four-wing pairs</span>
+      <span class="id">Flyer-1 Dual-pair</span>
+      <span class="status coming">coming</span>
     </a>
     <a href="/insect/flyer-2/">
-      <span class="id">Flyer-2</span>
-      <span class="sub">Piezo flexure</span>
+      <span class="id">Flyer-2 Resonant piezo</span>
+      <span class="status coming">coming</span>
     </a>
   </nav>
-  <h1>Flyer-0 · two-wing rotary</h1>
-  <p class="meta">Locked envelope · R = 9 cm · c = 2.3 cm · ~15 g · indoor first</p>
+  <h1>Flying insect robot</h1>
+  <p class="meta">Nature → tech · ~10–20 g · hawkmoth-class / odonate Re band · R = 9 cm · indoor first</p>
   <nav class="tabs" role="tablist" aria-label="Flyer-0 sections">
     <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
     <button type="button" role="tab" id="tab-nature" aria-controls="panel-nature" aria-selected="false" tabindex="-1" data-tab="nature">Nature → tech</button>
@@ -59,31 +62,34 @@
     <button type="button" id="btn-flap" class="active" aria-pressed="true">Pause flap</button>
     <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
     <label class="toggle"><input type="checkbox" id="tog-tether" /> Bench tether</label>
-    <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · Visual flap only</span>
+    <span class="hint">Drag orbit · Scroll zoom · Click a hotspot · schematic motion only</span>
   </div>
   <div class="view3d-wrap">
     <div id="canvas-wrap">
       <div id="three-loading">Loading Three.js…</div>
       <div id="three-error" role="alert"></div>
       <div class="hud-lock">
-        <strong>Locked envelope</strong>
-        R 9 cm · c 2.3 cm · ~15 g
+        <strong>R = 9 cm · c = 2.3 cm · 15 g</strong>
+        schematic motion only
       </div>
     </div>
     <aside id="sidebar-3d">
       <h2>Option A · two-wing flapper</h2>
-      <p class="muted">Rotary motor + deliberate spring/elastic return + passive aeroelastic pitch. LEV-dominated hover is the flight story. Clap-and-fling is curiosity-bench only.</p>
+      <p class="muted">Rotary motor + linkage + deliberate thorax spring + passive aeroelastic pitch. LEV-dominated hover is the flight story. Clap-and-fling is curiosity-bench only.</p>
 
       <h3>Scale chip</h3>
       <div class="stat"><span>Semi-span R</span><span>9 cm</span></div>
       <div class="stat"><span>Chord c</span><span>2.3 cm</span></div>
       <div class="stat"><span>Mass (mid)</span><span>15 g</span></div>
-      <div class="stat"><span>Envelope</span><span>locked · not a species</span></div>
+      <div class="stat"><span>Class</span><span>hawkmoth-class / odonate Re band</span></div>
       <div class="stat"><span>Mission</span><span>hover · indoor first</span></div>
       <div class="stat"><span>Working band</span><span>~10–20 g</span></div>
 
+      <h3>Kinematics</h3>
+      <p class="muted">Large stroke, high midstroke AoA, rotation at reversal. Schematic motion only — no lab Hz on this page.</p>
+
       <h3>Mass honesty</h3>
-      <p class="muted">At ~15 g, battery and actuator fractions are the first bench fights. This page does not claim a mass budget — only that those two will eat the envelope first.</p>
+      <p class="muted">Battery and actuator fractions are the first hard bench fights. No published grams on this line — only that those two eat the envelope first.</p>
 
       <h3>Hotspots</h3>
       <div id="part-list"></div>
@@ -114,7 +120,7 @@
     </div>
     <div class="to">
       <div class="k">Tech</div>
-      <strong>Two-wing rotary flapper</strong>
+      <strong>Two-wing motorized flapper</strong>
       <p>Instrumented for lift and power.</p>
     </div>
   </div>
@@ -122,17 +128,17 @@
     <div class="from">
       <div class="k">Nature</div>
       <strong>Elastic thorax / resilin</strong>
-      <p>Energy return each half-stroke.</p>
+      <p>Energy return.</p>
     </div>
     <div class="idea">
       <div class="k">Idea</div>
-      <strong>Thorax spring as resonator</strong>
-      <p>Recover wing inertia near wingbeat.</p>
+      <strong>Recover wing inertia</strong>
+      <p>Each half-stroke.</p>
     </div>
     <div class="to">
       <div class="k">Tech</div>
-      <strong>Torsional spring / carbon flexure</strong>
-      <p>Tuned near flap frequency — not the pitch hinge.</p>
+      <strong>Torsional springs / carbon flexures</strong>
+      <p>Tuned near wingbeat — the thorax resonator, not the pitch hinge.</p>
     </div>
   </div>
   <div class="nt-row">
@@ -143,18 +149,18 @@
     </div>
     <div class="idea">
       <div class="k">Idea</div>
-      <strong>Pitch flexure is a separate part</strong>
-      <p>Compliance replaces a pitch servo on v0.</p>
+      <strong>Compliance replaces a pitch servo</strong>
+      <p>No extra pitch DOF on v0.</p>
     </div>
     <div class="to">
       <div class="k">Tech</div>
-      <strong>Root flexure + AoA stops</strong>
-      <p>Not the thorax resonator. Active pitch later.</p>
+      <strong>Compliant root + AoA stops</strong>
+      <p>Living-hinge pitch is separate from the thorax resonator. Active pitch later.</p>
     </div>
   </div>
   <div class="card">
-    <h3>Other starts live in the catalog</h3>
-    <p>Flyer-1 (four-wing / dual-pair) and Flyer-2 (piezo / resonant flexure) are first-principles alternates — not leftovers from this page. Clap-and-fling stays a curiosity bench. Hybrid prop assist is a backup branch only if pure flap lift fails under battery mass.</p>
+    <h3>Alternate starts (not Phase-2 footnotes)</h3>
+    <p><a href="/insect/flyer-1/">Flyer-1 Dual-pair</a> and <a href="/insect/flyer-2/">Flyer-2 Resonant piezo</a> are first-principles forks in the catalog. Clap-and-fling stays a curiosity bench. Hybrid prop assist is a backup branch only if pure flap lift fails under battery mass.</p>
   </div>
 </section>
 
@@ -163,12 +169,12 @@
   <p class="muted">Public cards: phase + one-line goal + qualitative exit. Lab numbers stay off this page.</p>
   <div class="step now">
     <h4>P0 — Concept freeze <span class="muted">· done</span></h4>
-    <p>Archetype + locked envelope (R 9 cm · c 2.3 cm · ~15 g).</p>
+    <p>Archetype + ~10–20 g scale locked.</p>
     <p class="gate">Exit: shared language for the first flyer.</p>
   </div>
   <div class="step next">
     <h4>P1 — Bench</h4>
-    <p>Rotary drive, surrogate wing, coupons, power path. First fights: battery and actuator mass fractions.</p>
+    <p>Drive, surrogate wing, coupons, power path.</p>
     <p class="gate">Exit: mechanism pieces work without needing lift.</p>
   </div>
   <div class="step later">
@@ -197,11 +203,10 @@
   'use strict';
 
   const PARTS = [
-    { id: 'wings', name: 'Wings / aero', detail: 'Locked envelope plate: R 9 cm, chord c 2.3 cm. LEV-aware hover flapping; clap-and-fling is curiosity-bench only.' },
-    { id: 'actuation', name: 'Actuation', detail: 'Rotary motor (coreless DC or BLDC) + gearbox/crank, plus a deliberate spring/elastic return. Not a bare motor+linkage.' },
-    { id: 'resonator', name: 'Thorax spring', detail: 'Resonator: torsional spring or carbon flexure tuned near wingbeat to recover inertia. Separate from the pitch hinge.' },
-    { id: 'pitch', name: 'Pitch flexure', detail: 'Passive aeroelastic pitch at the root, with AoA stops. A different part from the thorax resonator. No pitch servo on v0.' },
-    { id: 'power', name: 'Power', detail: 'At ~15 g, battery and actuator fractions are the first bench fights. 1S LiPo for average; elastic for peak. No mass budget claimed.' },
+    { id: 'wings', name: 'Wings / aero', detail: 'LEV-aware hover flapping; passive pitch (aeroelastic first). Clap-and-fling is curiosity-bench only, not primary.' },
+    { id: 'actuation', name: 'Actuation', detail: 'Rotary motor + linkage + deliberate thorax spring (not motor alone). Small coreless/BLDC + gearbox/crank; minimize backlash.' },
+    { id: 'elastic', name: 'Structure / materials', detail: 'Spars, membrane. Thorax spring/flexure = resonator (energy return). Living-hinge pitch flexure is separate (+ AoA stops).' },
+    { id: 'power', name: 'Power', detail: 'LiPo for average aero + loss power; elastic (preferred) ± small supercap for peak stroke/reversal. 1S LiPo for first free flights.' },
     { id: 'sense', name: 'Sense / control', detail: 'IMU rate damping after the tether gate; keep open-loop stable first.' },
     { id: 'tether', name: 'Bench tether', detail: 'Soft tether / supply umbilical for bench and tethered flap. Hidden until toggled.' }
   ];
@@ -229,7 +234,7 @@
     camera.position.set(14, 9, 16);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    FlyerPage.tuneRenderer(renderer);
     if (renderer.outputColorSpace !== undefined && THREE.SRGBColorSpace) {
       renderer.outputColorSpace = THREE.SRGBColorSpace;
     }
@@ -237,16 +242,10 @@
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 3.4, 0);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.1;
     controls.minDistance = 8;
     controls.maxDistance = 50;
     controls.maxPolarAngle = Math.PI * 0.49;
-    if ('enableKeys' in controls) controls.enableKeys = false;
-    if (THREE.TOUCH) {
-      controls.touches.ONE = THREE.TOUCH.ROTATE;
-      controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
-    }
+    FlyerPage.tuneControls(THREE, controls);
 
     scene.add(new THREE.AmbientLight(0xf0e6ff, 0.48));
     const key = new THREE.DirectionalLight(0xffffff, 0.85);
@@ -374,7 +373,7 @@
       const seg = new THREE.Mesh(new THREE.SphereGeometry(0.38 - t * 0.12, 12, 10), matAb);
       seg.scale.set(1.15, 0.75, 0.75);
       seg.position.set(-1.3 - i * 0.55, 0.05 - t * 0.06, 0);
-      tag(seg, 'resonator');
+      tag(seg, 'elastic');
       root.add(seg);
     }
 
@@ -396,20 +395,21 @@
     root.add(actuation);
     groups.actuation = actuation;
     makeLabel('rotary + spring', 0.55, 2.05, 0, 5.2);
+    makeLabel('schematic motion only', 0.2, 2.55, -1.6, 5.6);
 
     const resonator = new THREE.Group();
     const leaf = box(0.18, 0.72, 1.55, matSpring, 0.15, 0.72, 0);
-    tag(leaf, 'resonator');
+    tag(leaf, 'elastic');
     resonator.add(leaf);
     [-1, 1].forEach(function (s) {
       const coil = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.045, 8, 16), matSpring);
       coil.position.set(0.15, 0.72, s * 0.62);
       coil.rotation.y = Math.PI / 2;
-      tag(coil, 'resonator');
+      tag(coil, 'elastic');
       resonator.add(coil);
     });
     root.add(resonator);
-    groups.resonator = resonator;
+    groups.elastic = resonator;
     makeLabel('thorax resonator', 0.2, 1.75, 1.85, 5.0);
 
     function wingShape(span, chord) {
@@ -450,7 +450,7 @@
       const flap = new THREE.Group();
       mount.add(flap);
       const flex = box(0.28, 0.1, 0.42, matPitch, 0.2, 0, 0);
-      tag(flex, 'pitch');
+      tag(flex, 'elastic');
       flap.add(flex);
       const pitch = new THREE.Group();
       flap.add(pitch);
@@ -470,11 +470,10 @@
     addWing(1);
     addWing(-1);
     groups.wings = root;
-    groups.pitch = pitchGroup;
     makeLabel('R = 9 cm', 1.2, 1.35, 6.4, 4.4);
     makeLabel('c = 2.3 cm', 2.55, 0.2, 4.7, 4.2);
     makeLabel('15 g', -1.6, 1.45, 0, 3.6);
-    makeLabel('pitch flexure', 1.15, 1.15, 1.55, 4.6);
+    makeLabel('pitch living-hinge', 1.15, 1.15, 1.55, 4.8);
 
     const bar = box(5, 0.06, 0.06, matTick, 4.2, 0.06, -8);
     scene.add(bar);
@@ -491,7 +490,7 @@
       const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.6, 6), matSkid);
       leg.position.set(p[0], -1.05, p[1]);
       leg.rotation.z = p[0] > 0 ? 0.2 : -0.15;
-      tag(leg, 'resonator');
+      tag(leg, 'elastic');
       root.add(leg);
     });
 
@@ -545,9 +544,9 @@
         } else if (id === 'wings') {
           highlight.position.set(0.8, 0.6, 0);
           highlight.scale.setScalar(1.6);
-        } else if (id === 'pitch') {
-          highlight.position.set(0.75, 0.55, 0);
-          highlight.scale.setScalar(1.05);
+        } else if (id === 'elastic') {
+          highlight.position.set(0.4, 0.6, 0);
+          highlight.scale.setScalar(1.15);
         }
       } else {
         detail.classList.remove('visible');
@@ -610,6 +609,7 @@
     function resize() {
       const w = wrap.clientWidth || 1;
       const h = wrap.clientHeight || 1;
+      FlyerPage.applyPortraitFov(camera, w, h, 40, 54);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h, false);
@@ -622,8 +622,8 @@
       setTimeout(function () { loading.classList.add('hidden'); }, 350);
     }
 
-    const stroke = 36 * Math.PI / 180;
-    const flapHz = 2.0;
+    const stroke = 57.5 * Math.PI / 180;
+    const flapHz = 1.35;
     let last = performance.now();
 
     function animate(now) {
@@ -635,7 +635,7 @@
         const s = Math.sin(bobT * flapHz * Math.PI * 2);
         wingHinges.forEach(function (w) {
           w.flap.rotation.z = w.rest + s * stroke;
-          w.pitch.rotation.x = Math.cos(bobT * flapHz * Math.PI * 2) * 0.16;
+          w.pitch.rotation.x = Math.cos(bobT * flapHz * Math.PI * 2) * 0.45;
         });
         if (crankParts[0]) {
           crankParts[0].crank.rotation.z = bobT * flapHz * Math.PI * 2;

@@ -3,18 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Flyer-2: piezo + resonant flexure flapping — no rotary crank. Honest micro / high-voltage / resonant start, not a free win over Flyer-0." />
-<title>Flyer-2 — piezo flexure · Meadowlark Models</title>
+<meta name="description" content="Flyer-2 Resonant piezo stub — solid-state resonant flexure, no rotary crank. Honest HV / micro start." />
+<title>Flyer-2 Resonant piezo — Meadowlark Models</title>
 <link rel="stylesheet" href="../shared.css" />
 </head>
 <body>
 
 <div class="banners">
   <div class="banner nature">
-    <strong>From nature:</strong> resonant thorax, tiny stroke amplifiers, high-frequency hover at micro scale.
+    <strong>From nature:</strong> Elastic thorax as primary energy pathway; muscle-like solid-state drive analogy (honest: piezo ≠ muscle).
   </div>
   <div class="banner eng">
-    <strong>Engineering choice:</strong> piezo stack + flexure amplifier — no rotary crank. High voltage, resonant lock-in, small payload.
+    <strong>Engineering choice:</strong> piezo / resonant flexure — no crank motor. HV electronics; typically micro-leaning.
+  </div>
+  <div class="banner why-chip">
+    Flyer-2 Resonant piezo · no crank · coming
   </div>
   <div class="banner note">
     Research / education / environmental flyer · not a weapons program
@@ -28,19 +31,19 @@
   <nav class="catalog" aria-label="Flyer catalog">
     <a href="/insect/">
       <span class="id">Flyer-0</span>
-      <span class="sub">Two-wing rotary</span>
+      <span class="status live">live</span>
     </a>
     <a href="/insect/flyer-1/">
-      <span class="id">Flyer-1</span>
-      <span class="sub">Four-wing pairs</span>
+      <span class="id">Flyer-1 Dual-pair</span>
+      <span class="status coming">coming</span>
     </a>
     <a href="/insect/flyer-2/" aria-current="page">
-      <span class="id">Flyer-2</span>
-      <span class="sub">Piezo flexure</span>
+      <span class="id">Flyer-2 Resonant piezo</span>
+      <span class="status coming">coming</span>
     </a>
   </nav>
-  <h1>Flyer-2 · piezo / resonant flexure</h1>
-  <p class="meta">No rotary crank · high-voltage · resonant lock-in · not a free win over Flyer-0</p>
+  <h1>Flyer-2 · Resonant piezo</h1>
+  <p class="meta">No rotary crank · HV / micro honesty · stub</p>
   <nav class="tabs" role="tablist" aria-label="Flyer-2 sections">
     <button type="button" role="tab" id="tab-schematic" aria-controls="panel-schematic" aria-selected="true" tabindex="0" data-tab="schematic">Schematic</button>
     <button type="button" role="tab" id="tab-nature" aria-controls="panel-nature" aria-selected="false" tabindex="-1" data-tab="nature">Nature → tech</button>
@@ -66,24 +69,23 @@
       <div id="three-loading">Loading Three.js…</div>
       <div id="three-error" role="alert"></div>
       <div class="hud-lock">
-        <strong>No rotary crank</strong>
-        Piezo stack · flexure amp · HV drive
+        <strong>Resonant piezo stub</strong>
+        no crank · schematic motion only
       </div>
     </div>
     <aside id="sidebar-3d">
-      <h2>Piezo / resonant flexure</h2>
-      <p class="muted">A different start: ceramic stack, amplifying flexure, resonant wing. There is no crank to hide. Piezo is not a free efficiency win over rotary + spring at 15 g.</p>
+      <h2>Flyer-2 · Resonant piezo</h2>
+      <p class="muted">Piezo / solid-state resonant flexure — no crank. Flexure resonance is the drive. Typically lighter / micro-leaning than Flyer-0 — labeled honestly if micro.</p>
 
-      <h3>Scale chip</h3>
-      <div class="stat"><span>Drive</span><span>piezo stack</span></div>
-      <div class="stat"><span>Transmission</span><span>flexure amp</span></div>
-      <div class="stat"><span>Semi-span</span><span>~3 cm class</span></div>
-      <div class="stat"><span>Mass class</span><span>mg → few g</span></div>
-      <div class="stat"><span>Electronics</span><span>high voltage</span></div>
-      <div class="stat"><span>Kinematics</span><span>resonant lock-in</span></div>
+      <h3>First-principles axis</h3>
+      <div class="stat"><span>Wings</span><span>two (count may match Flyer-0)</span></div>
+      <div class="stat"><span>Actuation</span><span>piezo / resonant flexure</span></div>
+      <div class="stat"><span>Elastic</span><span>resonance is the drive</span></div>
+      <div class="stat"><span>Scale</span><span>micro-leaning · HV</span></div>
+      <div class="stat"><span>Teaching</span><span>HV drive + microfab + Q</span></div>
 
       <h3>Honesty</h3>
-      <p class="muted">HV conversion, tiny payload, and a structure you tune rather than command. At Flyer-0’s 15 g envelope, a crank + spring is still the blunt tool. This page does not claim otherwise.</p>
+      <p class="muted">Piezo ≠ muscle. Must not hide a rotary crank under a piezo label. HV electronics and a typically lighter band than Flyer-0.</p>
 
       <h3>Hotspots</h3>
       <div id="part-list"></div>
@@ -100,91 +102,37 @@
 
 <section id="panel-nature" class="panel" role="tabpanel" aria-labelledby="tab-nature" aria-hidden="true">
   <h2>Nature → tech</h2>
-  <p class="muted">Flyer-2 is a resonant-flexure start. Insect thorax is the metaphor. Piezo is the actuator you pick when you refuse a rotary crank — and accept the HV / micro bill.</p>
+  <p class="muted">Lock strip only. No invented biology beyond this row.</p>
   <div class="nt-row">
     <div class="from">
-      <div class="k">Nature</div>
-      <strong>Resonant thorax</strong>
-      <p>Energy stored in the structure, not a gearbox.</p>
+      <div class="k">Nature cue</div>
+      <strong>Elastic thorax as primary energy pathway</strong>
+      <p>Muscle-like solid-state drive analogy (honest: piezo ≠ muscle).</p>
     </div>
     <div class="idea">
-      <div class="k">Idea</div>
-      <strong>Drive the resonance</strong>
-      <p>You tune a frequency; you do not draw an arbitrary stroke.</p>
+      <div class="k">Convergent idea</div>
+      <strong>High-frequency resonant flexure</strong>
+      <p>Bearings minimized.</p>
     </div>
     <div class="to">
-      <div class="k">Tech</div>
-      <strong>Piezo stack + flexure amp</strong>
-      <p>Small ceramic stroke, geometrically amplified. No crank.</p>
-    </div>
-  </div>
-  <div class="nt-row">
-    <div class="from">
-      <div class="k">Nature</div>
-      <strong>Micro hover</strong>
-      <p>Useful work at insect-milligram to gram scale.</p>
-    </div>
-    <div class="idea">
-      <div class="k">Idea</div>
-      <strong>Stay on the scale piezo likes</strong>
-      <p>Do not pretend this is a drop-in 15 g rotary replacement.</p>
-    </div>
-    <div class="to">
-      <div class="k">Tech</div>
-      <strong>~3 cm class plates</strong>
-      <p>Mass in the milligram-to-few-gram fight, not Flyer-0’s 15 g chip.</p>
-    </div>
-  </div>
-  <div class="nt-row">
-    <div class="from">
-      <div class="k">Nature</div>
-      <strong>Fast, small muscle analog</strong>
-      <p>High force density, tiny displacement.</p>
-    </div>
-    <div class="idea">
-      <div class="k">Idea</div>
-      <strong>Pay for voltage, not gears</strong>
-      <p>The bill moves from backlash to HV electronics.</p>
-    </div>
-    <div class="to">
-      <div class="k">Tech</div>
-      <strong>Boost / HV drive board</strong>
-      <p>Tens to hundreds of volts. That converter has mass and loss.</p>
+      <div class="k">Tech route</div>
+      <strong>Piezo bimorph / flextensional + flexures</strong>
+      <p>Carbon/polymer flexures; HV electronics. Typically lighter / micro-leaning than Flyer-0 — label honestly if micro.</p>
     </div>
   </div>
   <div class="card">
-    <h3>Not a free win</h3>
-    <p>Piezo does not automatically beat rotary + spring. Resonant lock-in fights you when you want kinematics. HV conversion fights you on mass and heat. Payload is small. Neighbor starts: Flyer-0 (rotary + deliberate elastic return at ~15 g) and Flyer-1 (independent wing pairs).</p>
+    <h3>Must not be</h3>
+    <p>A motor crank hidden under a “piezo” label. Neighbor starts: <a href="/insect/">Flyer-0</a> (rotary + linkage + thorax spring) and <a href="/insect/flyer-1/">Flyer-1 Dual-pair</a>.</p>
   </div>
 </section>
 
 <section id="panel-path" class="panel" role="tabpanel" aria-labelledby="tab-path" aria-hidden="true">
-  <h2>Path to prototype</h2>
-  <p class="muted">A resonant-flexure path. Public cards only. No invented Hz or lift numbers.</p>
+  <h2>Path</h2>
+  <p class="muted">Stub. Teaching axis only — no frozen lab path and no invented Hz on this page.</p>
   <div class="step now">
-    <h4>P0 — Resonant architecture <span class="muted">· open</span></h4>
-    <p>Stack, amplifier geometry, and wing as one tuned structure. No crank in the sketch.</p>
-    <p class="gate">Exit: the flexure amp is specified, and everyone agrees there is no rotary fallback hiding in the drawing.</p>
-  </div>
-  <div class="step next">
-    <h4>P1 — Coupon + HV bench</h4>
-    <p>Drive a dummy flexure on the bench. Learn voltage, stroke, and heat before a wing exists.</p>
-    <p class="gate">Exit: the stack moves the amp without cracking, and the HV path is boring.</p>
-  </div>
-  <div class="step later">
-    <h4>P2 — Resonant sweep</h4>
-    <p>Wing on the amp. Sweep drive frequency. Find the peak — and how narrow it is.</p>
-    <p class="gate">Exit: a repeatable resonance, not a one-off lucky flap.</p>
-  </div>
-  <div class="step later">
-    <h4>P3 — Tethered micro</h4>
-    <p>Soft tether / umbilical. First question is survive-the-resonance, not free flight.</p>
-    <p class="gate">Exit: tethered flap that stays on resonance without cooking the stack.</p>
-  </div>
-  <div class="step later">
-    <h4>P4 — Demo ready</h4>
-    <p>Repeatable micro/resonant research demo.</p>
-    <p class="gate">Exit: someone else can run the HV + sweep checklist.</p>
+    <h4>Alternate start <span class="muted">· coming</span></h4>
+    <p>Hard teaching lesson: HV drive + microfab + Q. Flexure resonance is the drive.</p>
+    <p class="gate">This page is a first-principles fork, not a hidden crank.</p>
   </div>
 </section>
 
@@ -197,13 +145,11 @@
   'use strict';
 
   const PARTS = [
-    { id: 'piezo', name: 'Piezo stack', detail: 'Layered ceramic. Tiny displacement, high force. There is no rotary motor and no crank pin on this flyer.' },
-    { id: 'amp', name: 'Flexure amplifier', detail: 'Diamond / lever flexure that turns stack stroke into wing stroke. The structure is the transmission.' },
-    { id: 'wings', name: 'Resonant wings', detail: '~3 cm class plates. You flap at the tuned frequency; you do not command an arbitrary envelope.' },
-    { id: 'hv', name: 'HV drive', detail: 'Boost / high-voltage board. Tens to hundreds of volts. Converter mass and loss are part of the start, not a footnote.' },
-    { id: 'power', name: 'Power / payload', detail: 'Micro/meso mass fight. Piezo is not a free win over a 15 g rotary + spring pack.' },
-    { id: 'sense', name: 'Sense / control', detail: 'Frequency lock and amplitude first. IMU story comes after the resonance is boring.' },
-    { id: 'tether', name: 'Bench tether', detail: 'Umbilical for HV and sense on the resonant bench. Hidden until toggled.' }
+    { id: 'piezo', name: 'Piezo drive', detail: 'Piezo bimorph / flextensional. There is no rotary motor and no crank pin on this flyer.' },
+    { id: 'amp', name: 'Resonant flexure', detail: 'Flexure resonance is the drive. Bearings minimized. Carbon/polymer flexures.' },
+    { id: 'wings', name: 'Wings', detail: 'Two-wing count is allowed. Kinematics follow the resonance — not an arbitrary crank envelope.' },
+    { id: 'hv', name: 'HV electronics', detail: 'High-voltage drive is part of the start. Typically micro-leaning vs Flyer-0 — label honestly if micro.' },
+    { id: 'tether', name: 'Bench tether', detail: 'Umbilical for HV on the resonant bench. Hidden until toggled.' }
   ];
 
   FlyerPage.wireSchematicInit({
@@ -229,7 +175,7 @@
     camera.position.set(7.6, 3.6, 4.4);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    FlyerPage.tuneRenderer(renderer);
     if (renderer.outputColorSpace !== undefined && THREE.SRGBColorSpace) {
       renderer.outputColorSpace = THREE.SRGBColorSpace;
     }
@@ -237,16 +183,10 @@
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 3.1, 0);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.1;
     controls.minDistance = 5;
     controls.maxDistance = 36;
     controls.maxPolarAngle = Math.PI * 0.49;
-    if ('enableKeys' in controls) controls.enableKeys = false;
-    if (THREE.TOUCH) {
-      controls.touches.ONE = THREE.TOUCH.ROTATE;
-      controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
-    }
+    FlyerPage.tuneControls(THREE, controls);
 
     scene.add(new THREE.AmbientLight(0xf0e6ff, 0.62));
     const key = new THREE.DirectionalLight(0xffffff, 0.95);
@@ -442,7 +382,7 @@
       wingHinges.push({ flap: flap, pitch: pitch, rest: 0.12 });
     });
     groups.wings = root;
-    makeLabel('~3 cm class', 0.3, 1.35, 2.8, 2.6);
+    makeLabel('micro-leaning', 0.3, 1.35, 2.8, 2.6);
     makeLabel('no crank', 2.2, 0.35, 0.15, 2.5);
 
     tetherGroup = new THREE.Group();
@@ -557,6 +497,7 @@
     function resize() {
       const w = wrap.clientWidth || 1;
       const h = wrap.clientHeight || 1;
+      FlyerPage.applyPortraitFov(camera, w, h, 40, 54);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h, false);

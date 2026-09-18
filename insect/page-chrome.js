@@ -120,9 +120,32 @@
     return function () { return api; };
   }
 
+  function tuneRenderer(renderer) {
+    const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarse ? 1.75 : 2));
+  }
+
+  function tuneControls(THREE, controls) {
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+    if ('screenSpacePanning' in controls) controls.screenSpacePanning = true;
+    if ('enableKeys' in controls) controls.enableKeys = false;
+    if (THREE.TOUCH) {
+      controls.touches.ONE = THREE.TOUCH.ROTATE;
+      controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
+    }
+  }
+
+  function applyPortraitFov(camera, width, height, deskFov, phoneFov) {
+    camera.fov = (width / height < 0.85) ? (phoneFov || 54) : (deskFov || 40);
+  }
+
   global.FlyerPage = {
     initTabs: initTabs,
     renderParts: renderParts,
-    wireSchematicInit: wireSchematicInit
+    wireSchematicInit: wireSchematicInit,
+    tuneRenderer: tuneRenderer,
+    tuneControls: tuneControls,
+    applyPortraitFov: applyPortraitFov
   };
 })(window);
