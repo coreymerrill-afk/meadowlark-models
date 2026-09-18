@@ -19,19 +19,22 @@ Flyer-0  /insect/           LIVE — two-wing rotary motor + linkage + deliberat
                             Thorax spring/flexure = resonator; pitch living-hinge separate
                             Schematic motion only; Φ ~110–120° intent (no fake Hz)
 
-Flyer-1  /insect/flyer-1/   COMING stub — Dual-pair (four-wing / phaseable pairs)
-                            Lock strip only. Must not be Flyer-0 + decorative plates.
+Flyer-1  /insect/flyer-1/   LIVE — Dual-pair (four-wing / phaseable pairs)
+                            Schematic only. Must not be Flyer-0 + decorative plates.
+                            No frozen lab path; no lift number on the page.
 
-Flyer-2  /insect/flyer-2/   COMING stub — Resonant piezo (no rotary crank)
-                            Lock strip only. Honest HV / micro. Must not hide a crank.
+Flyer-2  /insect/flyer-2/   LIVE — Resonant piezo (no rotary crank)
+                            Schematic only. Honest HV / micro. Must not hide a crank.
+                            No frozen lab path; no invented Hz.
 
 Catalog chrome
-  Flyer-0 live · Flyer-1 Dual-pair coming · Flyer-2 Resonant piezo coming
+  Flyer-0 live · Flyer-1 Dual-pair live · Flyer-2 Resonant piezo live
+  Flyer-0 stays the primary /insect/ start. Alternates are live starts, not Phase-2 footnotes.
 
 Files
   index.html                 Flyer-0
-  flyer-1/index.html         Flyer-1 stub
-  flyer-2/index.html         Flyer-2 stub
+  flyer-1/index.html         Flyer-1 Dual-pair
+  flyer-2/index.html         Flyer-2 Resonant piezo
   shared.css                 Catalog, tabs, mobile chrome diet
   three-stack.js             Local UMD + CDN fallback
   page-chrome.js             Tabs + hotspots + portrait FOV / touch
