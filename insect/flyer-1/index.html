@@ -227,7 +227,7 @@
     scene.fog = new THREE.Fog(0x140f1c, 42, 95);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
-    camera.position.set(8, 14, 16);
+    camera.position.set(15, 8.5, 13);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -345,7 +345,7 @@
     boom.add(keel);
     root.add(boom);
     groups.boom = boom;
-    makeLabel('boom + stations', -0.2, 1.55, 0, 5.2);
+    makeLabel('boom + stations', -2.4, 1.35, 0.8, 4.6);
 
     const sense = new THREE.Group();
     const head = new THREE.Mesh(new THREE.SphereGeometry(0.38, 16, 12), matHead);
@@ -528,7 +528,7 @@
       controls.update();
     }
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 8, y: 14, z: 16 }, { x: 0, y: 3.3, z: 0 });
+      setView({ x: 15, y: 8.5, z: 13 }, { x: 0, y: 3.3, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });

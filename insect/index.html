@@ -226,7 +226,7 @@
     scene.fog = new THREE.Fog(0x140f1c, 40, 90);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
-    camera.position.set(7, 15, 13);
+    camera.position.set(14, 9, 16);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -236,7 +236,7 @@
     wrap.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 3.2, 0);
+    controls.target.set(0, 3.4, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
     controls.minDistance = 8;
@@ -252,10 +252,13 @@
     const key = new THREE.DirectionalLight(0xffffff, 0.85);
     key.position.set(12, 20, 10);
     scene.add(key);
-    scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.45));
-    const rim = new THREE.DirectionalLight(0xd946ef, 0.4);
+    scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.5));
+    const rim = new THREE.DirectionalLight(0xd946ef, 0.45);
     rim.position.set(-16, 8, -8);
     scene.add(rim);
+    const fill = new THREE.DirectionalLight(0xf5d0fe, 0.35);
+    fill.position.set(-10, 12, 14);
+    scene.add(fill);
 
     const grid = new THREE.GridHelper(36, 36, 0x5b4578, 0x2a2238);
     grid.position.y = 0.02;
@@ -279,9 +282,9 @@
     const matImu = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.4, roughness: 0.4 });
     const matSkid = new THREE.MeshStandardMaterial({ color: 0xc4b5a0, metalness: 0.25, roughness: 0.55 });
     const matWing = new THREE.MeshStandardMaterial({
-      color: 0xf0abfc, metalness: 0.05, roughness: 0.28,
-      transparent: true, opacity: 0.62, side: THREE.DoubleSide,
-      emissive: 0xa21caf, emissiveIntensity: 0.2
+      color: 0xf0abfc, metalness: 0.05, roughness: 0.32,
+      transparent: true, opacity: 0.72, side: THREE.DoubleSide,
+      emissive: 0xc026d3, emissiveIntensity: 0.28
     });
     const matVein = new THREE.MeshStandardMaterial({ color: 0xfce7f3, metalness: 0.2, roughness: 0.35 });
     const matTick = new THREE.MeshStandardMaterial({ color: 0xf5d0fe, metalness: 0.1, roughness: 0.4 });
@@ -411,14 +414,13 @@
 
     function wingShape(span, chord) {
       const sh = new THREE.Shape();
-      const le = chord * 0.42;
-      const te = chord * 0.58;
-      sh.moveTo(0.14, -te * 0.12);
-      sh.lineTo(0.14, le * 0.28);
-      sh.lineTo(span * 0.88, le);
-      sh.lineTo(span, le * 0.2);
-      sh.lineTo(span * 0.9, -te);
-      sh.lineTo(0.14, -te * 0.22);
+      const half = chord / 2;
+      sh.moveTo(0.16, -half * 0.2);
+      sh.lineTo(0.16, half * 0.35);
+      sh.quadraticCurveTo(span * 0.42, half * 0.92, span * 0.78, half * 0.88);
+      sh.lineTo(span, half * 0.15);
+      sh.quadraticCurveTo(span * 0.72, -half * 0.95, span * 0.28, -half * 0.82);
+      sh.lineTo(0.16, -half * 0.28);
       sh.closePath();
       return sh;
     }
@@ -575,7 +577,7 @@
       controls.update();
     }
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 7, y: 15, z: 13 }, { x: 0, y: 3.2, z: 0 });
+      setView({ x: 14, y: 9, z: 16 }, { x: 0, y: 3.4, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });

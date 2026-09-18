@@ -226,7 +226,7 @@
     scene.fog = new THREE.Fog(0x140f1c, 36, 80);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
-    camera.position.set(5.5, 9, 8.5);
+    camera.position.set(4.2, 3.8, 5.6);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -236,7 +236,7 @@
     wrap.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 2.4, 0);
+    controls.target.set(0, 0.7, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
     controls.minDistance = 5;
@@ -248,11 +248,11 @@
       controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
     }
 
-    scene.add(new THREE.AmbientLight(0xf0e6ff, 0.5));
-    const key = new THREE.DirectionalLight(0xffffff, 0.85);
-    key.position.set(10, 16, 8);
+    scene.add(new THREE.AmbientLight(0xf0e6ff, 0.62));
+    const key = new THREE.DirectionalLight(0xffffff, 0.95);
+    key.position.set(6, 8, 5);
     scene.add(key);
-    scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.45));
+    scene.add(new THREE.HemisphereLight(0xc4b5fd, 0x2a1840, 0.55));
     const rim = new THREE.DirectionalLight(0xfbbf24, 0.28);
     rim.position.set(-12, 7, -6);
     scene.add(rim);
@@ -269,8 +269,8 @@
 
     const matCarbon = new THREE.MeshStandardMaterial({ color: 0x6b5c82, metalness: 0.55, roughness: 0.42 });
     const matCarbonHi = new THREE.MeshStandardMaterial({ color: 0x8b7aa3, metalness: 0.6, roughness: 0.32 });
-    const matPiezo = new THREE.MeshStandardMaterial({ color: 0xf5e6c8, metalness: 0.15, roughness: 0.35 });
-    const matElectrode = new THREE.MeshStandardMaterial({ color: 0xd4a017, metalness: 0.7, roughness: 0.25, emissive: 0x713f12, emissiveIntensity: 0.2 });
+    const matPiezo = new THREE.MeshStandardMaterial({ color: 0xfff1c9, metalness: 0.12, roughness: 0.32, emissive: 0x854d0e, emissiveIntensity: 0.12 });
+    const matElectrode = new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.65, roughness: 0.22, emissive: 0xb45309, emissiveIntensity: 0.35 });
     const matFlex = new THREE.MeshStandardMaterial({ color: 0x67e8f9, metalness: 0.4, roughness: 0.3, emissive: 0x155e75, emissiveIntensity: 0.28 });
     const matHv = new THREE.MeshStandardMaterial({ color: 0xf97316, metalness: 0.35, roughness: 0.4, emissive: 0x7c2d12, emissiveIntensity: 0.25 });
     const matPack = new THREE.MeshStandardMaterial({ color: 0x86efac, metalness: 0.3, roughness: 0.45 });
@@ -523,19 +523,19 @@
       controls.update();
     }
     document.getElementById('btn-reset').onclick = function () {
-      setView({ x: 5.5, y: 9, z: 8.5 }, { x: 0, y: 2.4, z: 0 });
+      setView({ x: 4.2, y: 3.8, z: 5.6 }, { x: 0, y: 0.7, z: 0 });
       selectPart(null);
       document.getElementById('sel-detail').classList.remove('visible');
       document.querySelectorAll('.part-card').forEach(function (el) { el.classList.remove('selected'); });
     };
     document.getElementById('btn-iso').onclick = function () {
-      setView({ x: 8, y: 6.5, z: 8 }, { x: 0, y: 2.5, z: 0 });
+      setView({ x: 5.2, y: 3.4, z: 5.4 }, { x: 0, y: 0.7, z: 0 });
     };
     document.getElementById('btn-top').onclick = function () {
-      setView({ x: 0.2, y: 16, z: 0.15 }, { x: 0, y: 2.5, z: 0 });
+      setView({ x: 0.15, y: 9, z: 0.12 }, { x: 0, y: 0.7, z: 0 });
     };
     document.getElementById('btn-side').onclick = function () {
-      setView({ x: 0.6, y: 2.8, z: 12 }, { x: 0, y: 2.5, z: 0 });
+      setView({ x: 0.4, y: 1.1, z: 7.2 }, { x: 0, y: 0.7, z: 0 });
     };
 
     const btnFlap = document.getElementById('btn-flap');
