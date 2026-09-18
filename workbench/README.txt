@@ -25,7 +25,7 @@ Locked (do not invent past this)
   Height             38 inches tall (not 36; 40 later is optional)
   Join               magnets snap, then two latches per side
                      first latch 12 inches below the top (~26 in off the floor)
-                     second reserved on the same line, typically 6–8 in away
+                     second Design-reserved on the same line, typically 6–8 in away
                      (exact offset DRAFT)
   Plywood            ½ in X1-cut plates · ¾ in tops/shelves
   First saw          DeWalt DWS716XPS
