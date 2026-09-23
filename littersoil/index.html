@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="LitterSoil draft action plan: crush bagged trash, run Path A Cascade, cure to a germination index of at least 80% and carbon-to-nitrogen near 10–20. Plastics are a separate research track. Purchase HOLD." />
+<title>LitterSoil — Path A action plan</title>
+<link rel="stylesheet" href="/littersoil/ls.css" />
+</head>
+<body>
+
+<div class="banners">
+  <div class="banner note">
+    Environmental composting and soil amendment. Not pathogen work, not a weapons program, and not a shopping list.
+  </div>
+  <div class="banner draft">
+    <strong>Draft · Path A locked · Purchase HOLD.</strong>
+    Food and paper can become a plant-useful amendment. Plastics, glass, and metal are a separate research track — not the scoreboard for “did we make soil?”
+  </div>
+</div>
+
+<header class="doc-header">
+  <div class="header-top">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+  </div>
+  <h1>LitterSoil — Path A action plan</h1>
+  <p class="status-row">
+    <span class="badge draft">draft</span>
+    <span class="badge lock">Path A locked</span>
+    <span class="badge hold">Purchase HOLD</span>
+  </p>
+  <p class="meta">Wave 1 default is Path A Cascade. Crush, inoculate, heat, cool, cure, screen. Track 2 stays beside the line.</p>
+  <nav class="tabs" role="tablist" aria-label="LitterSoil sections">
+    <button type="button" role="tab" id="tab-action" aria-controls="panel-action" aria-selected="true" tabindex="0" data-tab="action">Action plan (3D)</button>
+    <button type="button" role="tab" id="tab-honesty" aria-controls="panel-honesty" aria-selected="false" tabindex="-1" data-tab="honesty">Why / honesty</button>
+    <button type="button" role="tab" id="tab-wave" aria-controls="panel-wave" aria-selected="false" tabindex="-1" data-tab="wave">Wave 1 plan</button>
+    <button type="button" role="tab" id="tab-score" aria-controls="panel-score" aria-selected="false" tabindex="-1" data-tab="score">Scoreboard rules</button>
+  </nav>
+</header>
+
+<main id="main" class="is-3d">
+
+<section id="panel-action" class="panel active" role="tabpanel" aria-labelledby="tab-action" aria-hidden="false">
+  <div class="toolbar">
+    <button type="button" id="btn-reset">Reset view</button>
+    <button type="button" id="btn-iso">ISO</button>
+    <button type="button" id="btn-cut">Cutaway</button>
+    <label class="toggle"><input type="checkbox" id="tog-labels" checked /> Labels</label>
+    <button type="button" id="btn-expand" title="Fullscreen 3D">Expand</button>
+    <span class="hint">Drag to orbit · Scroll to zoom · Click a station, chip, or phase</span>
+  </div>
+  <nav class="phases" aria-label="Trial phases">
+    <button type="button" data-hotspot="s0a" aria-pressed="false">
+      <span class="ph-id">S0a · Knives</span>
+      <span class="ph-q">Does the fiber coupon beat the zero pile?</span>
+    </button>
+    <span class="ph-arrow" aria-hidden="true">→</span>
+    <button type="button" data-hotspot="s0b" aria-pressed="false">
+      <span class="ph-id">S0b · Path A draft</span>
+      <span class="ph-q">Does the full crew beat native compost?</span>
+    </button>
+    <span class="ph-arrow" aria-hidden="true">→</span>
+    <button type="button" data-hotspot="s0c" aria-pressed="false">
+      <span class="ph-id">S0c · Freeze</span>
+      <span class="ph-q">Two rounds on the finish line?</span>
+    </button>
+    <span class="ph-arrow" aria-hidden="true">→</span>
+    <button type="button" data-hotspot="t0" aria-pressed="false">
+      <span class="ph-id">T0 · Unsorted pad</span>
+      <span class="ph-q">Only after the freeze. Screen 10–15 mm.</span>
+    </button>
+    <span class="ph-arrow parallel" aria-hidden="true">∥</span>
+    <button type="button" data-hotspot="t2phase" aria-pressed="false">
+      <span class="ph-id">Track 2 · Parallel</span>
+      <span class="ph-q">Plastics research. Not a soil score.</span>
+    </button>
+  </nav>
+  <div class="view3d-wrap">
+    <div id="canvas-wrap">
+      <div id="three-loading">Loading Three.js…</div>
+      <div id="three-error" role="alert"></div>
+      <div class="hud-lock">
+        <strong>Path A locked · Purchase HOLD</strong>
+        Food and paper can finish as amendment. Plastics stay in the side bay.
+      </div>
+    </div>
+    <aside id="sidebar-3d">
+      <div class="legend" aria-label="Honesty legend">
+        <span class="tag proven">Proven</span>
+        <span class="legend-copy">Food and paper can become mature compost.</span>
+        <span class="tag speculative">Speculative</span>
+        <span class="legend-copy">Plastics, glass, and metal are not the soil score.</span>
+      </div>
+      <div id="story">
+        <h2>From trash bags to a soil amendment</h2>
+        <p>Most bagged household trash is food and paper trapped in plastic. Biology already turns food and paper into plant-useful compost when air, moisture, heat, and finish tests are managed.</p>
+        <p>The near-term line is crush, then a staged Path A crew, then heat, cool, cure, and a screen. Plastics, glass, and metal leave that line for a thinner research bay.</p>
+      </div>
+      <article id="detail" aria-live="polite">
+        <div id="detail-tags"></div>
+        <h2 id="detail-title">Click any piece</h2>
+        <p id="detail-summary">Stations, crew chips, feedstock chips, and the phase strip open the same card: a short note, then Deeper for gates and planning numbers. Purchase stays on hold.</p>
+        <button type="button" class="deeper-btn" id="btn-deeper" hidden aria-expanded="false" aria-controls="detail-deeper">Deeper</button>
+        <ul id="detail-deeper" hidden></ul>
+      </article>
+      <div id="chip-mount"></div>
+    </aside>
+  </div>
+</section>
+
+<section id="panel-honesty" class="panel" role="tabpanel" aria-labelledby="tab-honesty" aria-hidden="true">
+  <h2>Why this plan, said plainly</h2>
+  <p class="pull">Ship what we can already prove. Keep researching the hard stuff without lying about it.</p>
+  <div class="card">
+    <h3>One minute</h3>
+    <p>Most household trash arrives in bags: food scraps, paper, cardboard, and a mess of plastic, glass, and metal. Biology is already good at turning food and unwaxed paper into something like mature compost, if you give it air, moisture, time, and honest quality checks. Biology is not, on the evidence this plan trusts, good at making everyday plastic bags, glass shards, or metal cans become soil in an open pile.</p>
+    <p>So the near-term plan is four steps. Crush or shred so the organic fraction is reachable. Add a staged team of ordinary compost microbes, the kinds already studied in composting, not a mystery potion. Let the pile heat, cool, and cure until seeds grow well in tests and the chemistry looks mature. Treat plastics, glass, and metal as a separate long-shot track.</p>
+  </div>
+  <div class="card">
+    <h3>The middle of the evidence</h3>
+    <p>Landfills are easy. Perfect sorting is hard. Two extreme stories both miss the record: “microbes will eat the bags and leave dirt,” and “nothing works unless every bottle is hand-sorted first.”</p>
+    <p>Kitchen scraps and unwaxed paper or cardboard can become plant-useful compost under real process control. Common plastics such as polyethylene and polypropylene mostly break into smaller pieces and hang around. Glass and cans stay physical junk. A serious program has to say that out loud.</p>
+  </div>
+  <div class="split">
+    <div class="card">
+      <h3><span class="tag proven">Proven</span> enough to build on</h3>
+      <ul>
+        <li>Food plus paper and cardboard can become mature compost when air, moisture, and heat are managed.</li>
+        <li>The right roles at the right time can speed fiber breakdown, when you measure real mass or fiber loss and plant-safety tests.</li>
+        <li>Physical plastics left in compost are a documented way microplastics reach soil if dirty product is land-applied. Screening matters.</li>
+        <li>Metals do not rot away. As organics shrink, metals can become more concentrated. Feedstock gates and finished-product limits matter.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="tag speculative">Speculative</span> keep off the bag</h3>
+      <ul>
+        <li>Everyday plastic bags and films turning into plant-ready soil in an open trash pile, at a useful speed.</li>
+        <li>Glass or cans being eaten into soil by pile biology alone.</li>
+        <li>Treating a lab win on polyester (PET) as proof that polyethylene grocery bags will vanish. Those are different chemistries.</li>
+        <li>Mixing aggressive wood-rot fungi with Trichoderma as a default recipe. They often fight.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <h3>What has to go right that is not “a microbe”</h3>
+    <ul>
+      <li><strong>Moisture</strong> like a wrung-out sponge. The planning band is about 50–60% water after the inoculum water goes in. Too wet and the pile goes sour. Too dry and it stalls.</li>
+      <li><strong>Air.</strong> Without oxygen the pile turns into a pickle jar. Fix airflow before you add more microbes.</li>
+      <li><strong>Carbon-to-nitrogen.</strong> Paper is extremely carbon-heavy. Food brings nitrogen. The mixed start aims near 25–40, about 30. The finish band is tighter, near 10–20.</li>
+      <li><strong>Salt.</strong> Weathered oyster-mushroom leftovers can help soil. Raw salty lots can hurt plants. Check before you load them.</li>
+      <li><strong>A screen.</strong> Biology is not a filter. Plastic, glass, and metal bits that survive have to be screened out of anything meant for land.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>What a win looks like</h3>
+    <p>Two bins, same crushed feedstock, same water, same turning. One gets the staged team. One gets nothing. Another twin gets only ordinary mature compost, the “nature already does this” control.</p>
+    <p>The staged team wins only if it beats those twins on early loss of wet organics, on real paper and fiber breakdown, and, after curing, on seed-safe chemistry. Plastic disappearing does not count. If a mixed team kills a win that a solo role had, you do not average the scores. You change timing or dose and try again.</p>
+  </div>
+  <div class="card">
+    <h3>What this page is not claiming</h3>
+    <ul>
+      <li>That unsorted trash becomes soil, plastics and all.</li>
+      <li>That there is a home-pile solution today for polyethylene or polypropylene disappearing.</li>
+      <li>That a warm pile automatically meets farm or city sanitation paperwork. Federal composting definitions and industry seals are context for later compliance, not a garage kill recipe.</li>
+      <li>That anyone is cleared to buy strains or gear. Purchase HOLD stands.</li>
+      <li>That LitterSoil is pathogen-weapon work, a do-it-yourself virus project, or a program to enhance pathogens. The scope is environmental composting and soil amendment.</li>
+    </ul>
+  </div>
+  <details class="footnotes">
+    <summary>Notes the layman brief is willing to stand on</summary>
+    <ol>
+      <li>Kitchen-waste Bacillus inoculation and compost thermozyme reviews support the early heat-to-fiber handoff (Chang et al., 2023; Finore et al., 2023).</li>
+      <li>Co-inoculation studies show Bacillus with actinobacteria or Trichoderma can improve lignocellulose loss when the process is controlled (Zhang et al., 2024; Wang et al., 2024).</li>
+      <li>Spent oyster-mushroom substrate can help soils when it is weathered and the dose is checked. Salty or raw lots are a known risk (Yagüe et al., 2025).</li>
+      <li>Major reviews still find no truly efficient open-environment degraders for common polyolefins. Polyester enzymes are a different story (MMBR 2025 plastic-degradation review).</li>
+      <li>U.S. compost pathogen rules are indicator process and product standards (EPA 40 CFR Part 503 composting definitions; industry STA testing). That is compliance context, not a backyard recipe.</li>
+    </ol>
+  </details>
+</section>
+
+<section id="panel-wave" class="panel" role="tabpanel" aria-labelledby="tab-wave" aria-hidden="true">
+  <h2>Wave 1 plan</h2>
+  <div class="callout">
+    <div class="k">Lock</div>
+    <strong>Default pack is Path A Cascade. Purchase is on hold. Unsorted pad work waits on a freeze.</strong>
+    <p>Controlled bins come first. Track 2 plastics run beside this plan and do not have to finish before a pad test. The pad test itself stays closed until S0c passes.</p>
+  </div>
+  <div class="card">
+    <h3>Ops in one line</h3>
+    <p>At the start: rank 1 plus ranks 2, 3, and 4, with optional rank 5 Trichoderma at no more than 20% of the fiber crew, as a dry pack at 0.5% by weight of wet feedstock. Moisture 50–60%. Mixed carbon-to-nitrogen starts around 25–40, aiming near 30.</p>
+    <p>After the core drops below about 40°C: optional rank 6a (Trichoderma at 0.2% by weight) or rank 6b (weathered mushroom substrate at 5% by volume). Never both. Never wood-rot fungi in this field pack.</p>
+    <p>Cure with rank 7 finish fines if germination or carbon-to-nitrogen lags. That finish step is mandatory if the hotter Path B slurry was used. The pack has to beat native compost at 10% by volume and a crush-only twin.</p>
+  </div>
+
+  <h3>Phase ladder</h3>
+  <div class="step now">
+    <h4>S0a · Do the knives cut?</h4>
+    <p>Solo roles on base food, paper, yard, and mixed recipes, each beside a twin with no inoculum. The paper fiber coupon has to beat that twin before Path A is allowed to move on.</p>
+    <p class="gate">Gate: G-S0a-G2. Fiber coupon versus the zero pile. Heat alone fails the food knife.</p>
+  </div>
+  <div class="step next">
+    <h4>S0b · Path A draft on the mixed recipe</h4>
+    <p>The full Cascade has to live together. It must beat native compost and the zero pile on the maturity bundle, and keep at least one food or paper function it already won.</p>
+    <p class="gate">Gate: G-S0b-A. If the community kills a solo win, restage. Do not average a food win with a paper win.</p>
+  </div>
+  <div class="step later">
+    <h4>S0c · Freeze</h4>
+    <p>Two rounds in a row on a clean food, paper, and yard mix. Frozen Path A, or Path B plus mandatory finish fines, beats native compost and the empty twin on the finish line.</p>
+    <p class="gate">Gate: germination index ≥ 80% and carbon-to-nitrogen ~ 10–20. Miss it and you tweak a few levers, then redesign.</p>
+  </div>
+  <div class="step later">
+    <h4>T0 · Unsorted pad, only after the freeze</h4>
+    <p>Bagged unsorted trash, a pad shredder, frozen Path A versus native compost versus crush-only. A final screen starts around 10–15 mm. Glass and metal go to the overs.</p>
+    <p class="gate">The inoculum has to earn the messier feedstock. This page does not start that pad.</p>
+  </div>
+  <div class="step later">
+    <h4>Track 2 · Parallel, contained</h4>
+    <p>Plastics first (polyethylene and polypropylene), then glass and metal only as hypotheses. Success is a carbon-13 result or a mass balance against a no-biology twin.</p>
+    <p class="gate">Never a Track 1 land-apply score. Wood-rot fungi stay in this bay, not in the Wave 1 field pack.</p>
+  </div>
+
+  <div class="card">
+    <h3>Paths on the same crushed bags</h3>
+    <ul>
+      <li><strong>A Cascade</strong> is the default field inoculum. Staged handoff on the organics the crush freed, then a plant-safe finish.</li>
+      <li><strong>B Hot-core</strong> is the honesty and speed arm. A water-only slurry, no fungi in the slurry, and finish fines are mandatory afterward. Not the default pack.</li>
+      <li><strong>D Native compost</strong> is the control that must be beaten. It is shovel compost plus the same crush, not an engineered win.</li>
+      <li><strong>C, the fungal edge,</strong> is optional after cool-down. It is not the engine for unsorted trash.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Wave 1 base recipes</h3>
+    <p>Locked as starting points, not forever formulas. Wet mass. Meat and dairy stay out of food version 1. Waxed, glossy, and plastic-coated paper stay out of the paper base. Woody stems thicker than about 5 mm stay out of yard.</p>
+    <ul>
+      <li><strong>Food:</strong> about 50% produce, 25% cooled cooked starch, 10% coffee or tea, 15% soft greens. Chop to about 30 mm. Drain free liquid.</li>
+      <li><strong>Paper:</strong> about 70% unwaxed cardboard and 30% plain paper, shredded to about 50 mm. It starts dry. Wet it up at inoculation. Fine for a fiber test. Not a land-apply mix on its own.</li>
+      <li><strong>Yard:</strong> about 60% leaves and 40% grass, fresh mixed with wilted so it does not mat.</li>
+      <li><strong>Mixed:</strong> about 40% food, 40% paper, 20% yard, then trim paper until carbon-to-nitrogen sits near 25–40.</li>
+    </ul>
+    <p class="muted">Variants wait until the matching base recipe advances, and they are capped (about 12 bins) so they do not eat the first block. Peak concurrent bins: 48 by default, 60 at the ceiling. Not every planned bin on day zero.</p>
+  </div>
+
+  <h3>Start checklist</h3>
+  <p class="muted">Every box is open. Lead can call the wave ready only when the buy line and the team line are done. They are not. Purchase HOLD stands, so this is a plan viewer.</p>
+  <p class="group-label">Corey buy / decide</p>
+  <ul class="check">
+    <li>Purchases for the role classes. Not started. This page is not the buy list.</li>
+    <li>A send-out lab account for carbon-to-nitrogen.</li>
+    <li>Who receives parcels, and where.</li>
+  </ul>
+  <p class="group-label">Team</p>
+  <ul class="check">
+    <li>First-block material prepared for the pioneer crew, the fiber crew, the hot-core arm, native compost, and finish fines.</li>
+    <li>Bin IDs, a layout, and log sheets.</li>
+    <li>Bins labeled, scales checked, a photo rail set.</li>
+    <li>A preferred carbon-to-nitrogen lab and a sample-prep note.</li>
+  </ul>
+  <p class="group-label">Day 0, not started</p>
+  <ul class="check">
+    <li>Block feedstock mixed and weighed to the stagger, not one mega-batch.</li>
+    <li>Inoculate on the schedule. Moisture 50–60%.</li>
+    <li>First temperature, moisture, and photo logged.</li>
+    <li>A scoreboard folder, once a place for it is chosen.</li>
+  </ul>
+
+  <div class="card">
+    <h3>Choices that can wait</h3>
+    <ul>
+      <li>Cool-down assist: Trichoderma, weathered mushroom leftover, or neither.</li>
+      <li>Whether rank 5 sits inside the 20% cap, or the fiber crew stays bacterial for the first block.</li>
+      <li>How many bins run at once, inside the 48 / 60 cap.</li>
+      <li>When, if ever, to lift purchase HOLD.</li>
+      <li>How much year-one effort goes to plastics versus sticking to organics.</li>
+      <li>Mobile shredder versus a pad shredder, and whether the 10–15 mm screen start holds.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="panel-score" class="panel" role="tabpanel" aria-labelledby="tab-score" aria-hidden="true">
+  <h2>Scoreboard rules</h2>
+  <div class="callout">
+    <div class="k">Finish line</div>
+    <strong>Germination index (GI) at least 80%, and carbon-to-nitrogen (C/N) near 10–20.</strong>
+    <p>Both. The plan does not use a 90% germination bar. Days on a calendar, a hot thermometer, a microbe count, or an enzyme kit do not pass the pile. Handheld gas readings are supporting only. Cameras, oxygen, and carbon dioxide never gate a decision.</p>
+  </div>
+  <div class="card">
+    <h3>How a bin is scored</h3>
+    <p class="formula">0.35 · hit + 0.30 · maturity + 0.20 · coexist − 0.10 · antagonism − 0.05 · salt</p>
+    <ul>
+      <li><strong>Hit (35%).</strong> Did the target material actually shrink? Food mass, or a paper fiber coupon, against a matched pile with no inoculum.</li>
+      <li><strong>Maturity (30%).</strong> After curing, germination index and carbon-to-nitrogen. Never carbon-to-nitrogen alone.</li>
+      <li><strong>Coexist (20%).</strong> Do the roles still do their jobs in the same pile?</li>
+      <li><strong>Antagonism (minus).</strong> One role wrecking another is a penalty, not a rounding error.</li>
+      <li><strong>Salt (minus).</strong> Electrical conductivity. High-salt fines can burn seedlings. That lot fails.</li>
+    </ul>
+    <p>Speed and heat are diagnostics. Time above 55°C can matter later as compost-standard context. It is not a maturity claim, and a mini-bin is not a regulatory sanitation filing.</p>
+  </div>
+  <h3>Decisions</h3>
+  <div class="pills" aria-label="Scoreboard decisions">
+    <span class="pill">ADVANCE</span>
+    <span class="pill">ITERATE</span>
+    <span class="pill">KILL</span>
+    <span class="pill">CONTROL</span>
+    <span class="pill">REVISIT_SOLO</span>
+  </div>
+  <ul>
+    <li><strong>ADVANCE</strong> means the primary assay cleared the bar against the matched zero pile. Carry that role forward.</li>
+    <li><strong>ITERATE</strong> means one lever changes: dose, carbon-to-nitrogen, or moisture. Not a shopping trip.</li>
+    <li><strong>KILL</strong> means that pairing is cut. It does not get smuggled into a community on hope.</li>
+    <li><strong>CONTROL</strong> means native compost or the crush-only twin. They are the bar. They are never scored as an engineered win.</li>
+    <li><strong>REVISIT_SOLO</strong> means the mix killed a solo function. Restage timing or dose. Never average a food win with a paper win into a fake Cascade.</li>
+  </ul>
+
+  <h3>What unlocks the next phase</h3>
+  <div class="wrap">
+  <table class="data">
+    <thead>
+      <tr><th>Gate</th><th>Pass</th><th>If it fails</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Solo knife</td>
+        <td>The role beats its matched zero pile on the primary assay.</td>
+        <td>Cut that role on that feedstock.</td>
+      </tr>
+      <tr>
+        <td>Food, rank 1</td>
+        <td>Real food-mass loss. Heat by itself is a fail.</td>
+        <td>Restage, or cut rank 1 from the start pack.</td>
+      </tr>
+      <tr>
+        <td>Fiber, G-S0a-G2</td>
+        <td>Paper coupon clearly beats the zero pile.</td>
+        <td>Path A stays blocked.</td>
+      </tr>
+      <tr>
+        <td>Finish fines</td>
+        <td>Germination index ≥ 80% and carbon-to-nitrogen ~ 10–20.</td>
+        <td>Reformulate the fines. No freeze talk.</td>
+      </tr>
+      <tr>
+        <td>Cool-down, 6a and 6b separate</td>
+        <td>A real gain versus the staged parent, germination not worse.</td>
+        <td>Drop that series. The other can stay.</td>
+      </tr>
+      <tr>
+        <td>Any mix</td>
+        <td>Keeps at least about 80% of the better parent’s result. No antagonism kill.</td>
+        <td>Restage or kill. Do not average wins.</td>
+      </tr>
+      <tr>
+        <td>S0b Path A draft</td>
+        <td>Beats native compost and the zero pile on maturity, and keeps a food or paper function.</td>
+        <td>A few single-lever tries, then kill the draft.</td>
+      </tr>
+      <tr>
+        <td>S0c freeze</td>
+        <td>Two rounds. Frozen A, or B plus finish fines, beats native compost and the empty twin on the finish line.</td>
+        <td>A few tweaks, else redesign.</td>
+      </tr>
+      <tr>
+        <td>T0 pad</td>
+        <td>Only after the freeze. Unsorted plus crush: A versus native versus crush-only, on maturity.</td>
+        <td>The specialty pack does not get the field.</td>
+      </tr>
+      <tr>
+        <td>Track 2</td>
+        <td>Carbon-13, or a mass balance plus products, beats a no-biology twin.</td>
+        <td>Stays research. Never a land-apply score.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card">
+    <h3>Automatic flags</h3>
+    <ul>
+      <li>A fungal add-on drops the fiber coupon by about 30% or more versus the fiber crew alone. Kill that series in combination.</li>
+      <li>Path B claims maturity without finish fines. Invalid.</li>
+      <li>Trichoderma packed with wood-rot fungi. Forbidden in this wave.</li>
+      <li>Sour, airless stink for more than about 72 hours after an aeration fix. That is a process failure. Do not blame the crew first.</li>
+      <li>The community kills the solo food result. Restage. Do not average.</li>
+      <li>Rank 5 never carries the fiber knife alone. The parent fiber coupon still has to pass.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>What gets logged</h3>
+    <p>Identity of the bin, which block, which feedstock, which ranks, and which twin it matches. Live: core temperature, edge temperature, moisture, a simple odor score, optional carbon dioxide. End: mass or coupon, pH, electrical conductivity, carbon-to-nitrogen, germination index percent, and a decision.</p>
+    <p>Track 1 endpoints are organic mass loss, carbon-to-nitrogen, germination, soil chemistry, temperature, and the physical contaminant share after cure. Track 2, on a side plot only, is plastic mass and surface change under honest assays. Glass and metal stay exploratory. None of that plastic data is allowed to pad the compost score.</p>
+  </div>
+</section>
+
+</main>
+
+<div id="fs-hud" hidden>
+  <div class="fs-top">
+    <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+    <button type="button" id="btn-fs-close">Close</button>
+  </div>
+  <div class="fs-detail" id="fs-detail">
+    <strong id="fs-title">Click a station</strong>
+    <p id="fs-body">Bags, the crusher, the pile, the screen, or the research bay.</p>
+  </div>
+</div>
+
+<script src="/insect/three-stack.js"></script>
+<script src="/littersoil/ls-viewer.js"></script>
+</body>
+</html>
