@@ -36,9 +36,9 @@ Files
   flyer-1/index.html         Flyer-1 Dual-pair
   flyer-2/index.html         Flyer-2 Resonant piezo
   shared.css                 Catalog, tabs, mobile chrome diet
-  three-stack.js             Local UMD + CDN fallback
+  three-stack.js             Local UMD + CDN fallback (loads /vendor)
   page-chrome.js             Tabs + hotspots + portrait FOV / touch
-  vendor/                    Same Three.js stack as /x1 and /burrito
+  ../vendor/                 Shared Three.js UMD + OrbitControls (repo root)
   README.txt                 This file
 
 Repo

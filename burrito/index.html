@@ -304,8 +304,9 @@
 (function () {
   'use strict';
 
-  const THREE_LOCAL = 'vendor/three.min.js';
-  const OC_LOCAL = 'vendor/OrbitControls.js';
+  // Root-absolute /vendor survives Vercel trailingSlash:false.
+  // ../vendor and vendor cover opening burrito/index.html from disk.
+  const LOCAL_VENDOR_BASES = ['/vendor', '../vendor', 'vendor'];
   const THREE_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js';
   const THREE_UMD_UNPKG = 'https://unpkg.com/three@0.149.0/build/three.min.js';
   const OC_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js';
@@ -365,8 +366,19 @@
 
   async function loadThreeStack() {
     const errors = [];
-    try { return await tryUmdPair(THREE_LOCAL, OC_LOCAL, 'local-umd'); }
-    catch (e) { errors.push(e); console.warn('[ABM] local UMD failed', e); }
+    for (let i = 0; i < LOCAL_VENDOR_BASES.length; i++) {
+      const base = LOCAL_VENDOR_BASES[i];
+      try {
+        return await tryUmdPair(
+          base + '/three.min.js',
+          base + '/OrbitControls.js',
+          'local-umd:' + base
+        );
+      } catch (e) {
+        errors.push(e);
+        console.warn('[ABM] local UMD failed (' + base + ')', e);
+      }
+    }
     try { return await tryUmdPair(THREE_UMD_JSDELIVR, OC_UMD_JSDELIVR, 'cdn-jsdelivr-umd'); }
     catch (e) { errors.push(e); console.warn('[ABM] jsDelivr UMD failed', e); }
     try { return await tryUmdPair(THREE_UMD_UNPKG, OC_UMD_UNPKG, 'cdn-unpkg-umd'); }
@@ -396,7 +408,7 @@
     el.classList.add('visible');
     el.innerHTML = '<strong>3D viewer failed to load</strong><br/>' +
       String(msg).replace(/</g, '&lt;') +
-      '<br/><br/>Prefer opening with local <code>vendor/</code> beside this HTML, or allow CDN (jsdelivr/unpkg).';
+      '<br/><br/>Prefer the shared <code>/vendor/</code> folder (or <code>../vendor/</code> when opening this file from disk), or allow CDN (jsdelivr/unpkg).';
   }
 
   /* ========== LOCKED PASS-3 GEOMETRY (inches) ========== */

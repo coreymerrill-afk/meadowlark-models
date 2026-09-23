@@ -62,17 +62,18 @@
   }
 
   function joinVendor(base, file) {
-    const cleaned = String(base || '/insect/vendor').replace(/\/$/, '');
+    const cleaned = String(base || '/vendor').replace(/\/$/, '');
     return cleaned + '/' + file;
   }
 
   function localVendorBases(opts) {
-    const requested = String((opts && opts.vendorBase) || '/insect/vendor').replace(/\/$/, '');
-    const bases = ['/insect/vendor'];
+    const requested = String((opts && opts.vendorBase) || '/vendor').replace(/\/$/, '');
+    const bases = ['/vendor'];
     if (requested && bases.indexOf(requested) === -1) bases.push(requested);
-    // Last-ditch relative paths if someone opened the HTML from disk.
-    if (bases.indexOf('vendor') === -1) bases.push('vendor');
-    if (bases.indexOf('../vendor') === -1) bases.push('../vendor');
+    // Disk fallbacks: flyer pages are two levels down, /insect is one level down.
+    ['../../vendor', '../vendor', 'vendor'].forEach(function (base) {
+      if (bases.indexOf(base) === -1) bases.push(base);
+    });
     return bases;
   }
 
@@ -125,7 +126,7 @@
     el.classList.add('visible');
     el.innerHTML = '<strong>3D viewer failed to load</strong><br/>' +
       String(msg).replace(/</g, '&lt;') +
-      '<br/><br/>Prefer opening with local <code>/insect/vendor/</code>, or allow CDN (jsdelivr/unpkg).';
+      '<br/><br/>Prefer opening with local <code>/vendor/</code>, or allow CDN (jsdelivr/unpkg).';
   }
 
   global.MeadowlarkThree = { load: load, showError: showError };

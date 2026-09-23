@@ -6,20 +6,14 @@ Publish target
 
 Files
   index.html                 Primary static page (Three.js viewer)
-  Burrito-Line-Pass3.html    Same content (named alias)
-  vendor/three.min.js        Local Three.js UMD (r149-class)
-  vendor/OrbitControls.js    Local OrbitControls classic UMD
   README.txt                 This file
+  ../vendor/                 Shared Three.js UMD + OrbitControls (repo root)
 
 Open locally
-  1. Keep index.html (or Burrito-Line-Pass3.html) beside the vendor/ folder.
-  2. Double-open the HTML in a current browser (Chrome / Edge / Firefox / Safari),
-     or serve the folder:
-       cd /path/to/burrito-blueprints/web
+  1. Serve the repo root so /vendor and /burrito resolve together:
        python3 -m http.server 8080
-       → http://localhost:8080/
-  3. If vendor/ is missing, the page falls back to CDN (jsDelivr → unpkg → ESM).
-     Local vendor/ is preferred for file:// and offline use.
+       → http://localhost:8080/burrito/
+  2. Opening index.html from disk falls back to ../vendor/, then CDN (jsDelivr → unpkg → ESM).
 
 Controls
   Orbit: drag / one-finger
@@ -42,5 +36,5 @@ Design note
   marketing claim.
 
 Static host (Vercel / any static)
-  Deploy the contents of this web/ folder (HTML + vendor/). Root should serve
-  index.html. No build step required.
+  Deploy the repo. /burrito/ serves index.html. Three.js lives in /vendor/.
+  No build step required.

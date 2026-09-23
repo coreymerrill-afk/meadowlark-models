@@ -7,10 +7,11 @@
 
   const body = document.body;
   const KIND = body.getAttribute('data-module') || 'flat';
-  const VENDOR = (body.getAttribute('data-vendor') || '/workbench/vendor/').replace(/\/?$/, '/');
-
-  const THREE_LOCAL = VENDOR + 'three.min.js';
-  const OC_LOCAL = VENDOR + 'OrbitControls.js';
+  const requestedVendor = (body.getAttribute('data-vendor') || '/vendor').replace(/\/$/, '');
+  const LOCAL_VENDOR_BASES = [requestedVendor];
+  ['/vendor', '../../vendor', '../vendor', 'vendor'].forEach(function (base) {
+    if (LOCAL_VENDOR_BASES.indexOf(base) === -1) LOCAL_VENDOR_BASES.push(base);
+  });
   const THREE_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js';
   const THREE_UMD_UNPKG = 'https://unpkg.com/three@0.149.0/build/three.min.js';
   const OC_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js';
@@ -79,8 +80,19 @@
 
   async function loadThreeStack() {
     const errors = [];
-    try { return await tryUmdPair(THREE_LOCAL, OC_LOCAL, 'local-umd'); }
-    catch (e) { errors.push(e); console.warn('[Workbench] local UMD failed', e); }
+    for (let i = 0; i < LOCAL_VENDOR_BASES.length; i++) {
+      const base = LOCAL_VENDOR_BASES[i];
+      try {
+        return await tryUmdPair(
+          base + '/three.min.js',
+          base + '/OrbitControls.js',
+          'local-umd:' + base
+        );
+      } catch (e) {
+        errors.push(e);
+        console.warn('[Workbench] local UMD failed (' + base + ')', e);
+      }
+    }
     try { return await tryUmdPair(THREE_UMD_JSDELIVR, OC_UMD_JSDELIVR, 'cdn-jsdelivr-umd'); }
     catch (e) { errors.push(e); console.warn('[Workbench] jsDelivr UMD failed', e); }
     try { return await tryUmdPair(THREE_UMD_UNPKG, OC_UMD_UNPKG, 'cdn-unpkg-umd'); }
@@ -110,7 +122,7 @@
     el.classList.add('visible');
     el.innerHTML = '<strong>3D viewer failed to load</strong><br/>' +
       String(msg).replace(/</g, '&lt;') +
-      '<br/><br/>Prefer opening with local <code>/workbench/vendor/</code>, or allow CDN (jsdelivr/unpkg).';
+      '<br/><br/>Prefer the shared <code>/vendor/</code> folder, or allow CDN (jsdelivr/unpkg).';
   }
 
   const listEl = document.getElementById('part-list');
