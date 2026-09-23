@@ -192,7 +192,7 @@
       }
       threeInitStarted = true;
       MeadowlarkThree.load({
-        vendorBase: opts.vendorBase || '/insect/vendor',
+        vendorBase: opts.vendorBase || '/vendor',
         label: opts.label || 'Flyer'
       }).then(function (stack) {
         api = opts.boot(stack.THREE, stack.OrbitControls, stack.via);

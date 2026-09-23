@@ -4,6 +4,14 @@
   "rewrites": [
     { "source": "/shared.css", "destination": "/insect/shared.css" },
     { "source": "/three-stack.js", "destination": "/insect/three-stack.js" },
-    { "source": "/page-chrome.js", "destination": "/insect/page-chrome.js" }
+    { "source": "/page-chrome.js", "destination": "/insect/page-chrome.js" },
+    { "source": "/x1/vendor/:file", "destination": "/vendor/:file" },
+    { "source": "/burrito/vendor/:file", "destination": "/vendor/:file" },
+    { "source": "/insect/vendor/:file", "destination": "/vendor/:file" },
+    { "source": "/workbench/vendor/:file", "destination": "/vendor/:file" },
+    { "source": "/x1/X1-Ultra-First-Model-v2", "destination": "/x1/index.html" },
+    { "source": "/x1/X1-Ultra-First-Model-v2.html", "destination": "/x1/index.html" },
+    { "source": "/burrito/Burrito-Line-Pass3", "destination": "/burrito/index.html" },
+    { "source": "/burrito/Burrito-Line-Pass3.html", "destination": "/burrito/index.html" }
   ]
 }

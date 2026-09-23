@@ -37,5 +37,6 @@ OPEN — do not invent numbers
   Second-latch exact offset · DWS716XPS head swing · shopping lists
 
 Open locally
+  From the repo root (Three.js lives in /vendor/):
   python3 -m http.server 8080
   → http://localhost:8080/workbench/

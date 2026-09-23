@@ -1256,10 +1256,9 @@ Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (c
 (function () {
   'use strict';
 
-  // Relative to this HTML (Desktop / file:/ / phone share)
-  const THREE_LOCAL = 'vendor/three.min.js';
-  const OC_LOCAL = 'vendor/OrbitControls.js';
-  const GLTF_LOCAL = 'vendor/GLTFLoader.js';
+  // Root-absolute /vendor survives Vercel trailingSlash:false.
+  // ../vendor and vendor cover opening x1/index.html from disk.
+  const LOCAL_VENDOR_BASES = ['/vendor', '../vendor', 'vendor'];
   const PBR_GLB_URLS = ['assets/x1-first-model-pbr.glb', '/x1/assets/x1-first-model-pbr.glb'];
   // CDN classic UMD (jsDelivr first, then unpkg). three@0.149; OrbitControls classic UMD from r128 (0.149 examples/js removed from npm).
   const THREE_UMD_JSDELIVR = 'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js';
@@ -1309,7 +1308,9 @@ Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (c
 
   async function loadGltfLoaderOptional() {
     if (resolveGLTFLoader()) return resolveGLTFLoader();
-    const urls = [GLTF_LOCAL, GLTF_UMD_JSDELIVR, GLTF_UMD_UNPKG];
+    const urls = LOCAL_VENDOR_BASES.map(function (base) {
+      return base + '/GLTFLoader.js';
+    }).concat([GLTF_UMD_JSDELIVR, GLTF_UMD_UNPKG]);
     for (let i = 0; i < urls.length; i++) {
       try {
         await loadScript(urls[i]);
@@ -1351,13 +1352,19 @@ Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (c
   async function loadThreeStack() {
     const errors = [];
 
-    // 1) Local vendor UMD (file:// / Desktop / phone share)
-    try {
-      const hit = await tryUmdPair(THREE_LOCAL, OC_LOCAL, 'local-umd');
-      return hit;
-    } catch (e) {
-      errors.push(e);
-      console.warn('[X1] local UMD failed', e);
+    // 1) Shared /vendor UMD (deployed), then paths beside this HTML on disk
+    for (let i = 0; i < LOCAL_VENDOR_BASES.length; i++) {
+      const base = LOCAL_VENDOR_BASES[i];
+      try {
+        return await tryUmdPair(
+          base + '/three.min.js',
+          base + '/OrbitControls.js',
+          'local-umd:' + base
+        );
+      } catch (e) {
+        errors.push(e);
+        console.warn('[X1] local UMD failed (' + base + ')', e);
+      }
     }
 
     // 2) CDN UMD — jsDelivr 0.149 / classic OC
@@ -1409,7 +1416,7 @@ Stretchers Q tie the six posts near the floor. Diagonals P lock each long bay (c
     el.classList.add('visible');
     el.innerHTML = '<strong>3D viewer failed to load</strong><br/>' +
       String(msg).replace(/</g, '&lt;') +
-      '<br/><br/>Try a current browser with WebGL. Prefer opening with the local vendor/ folder beside this HTML (file:// / Desktop). Else check network for jsdelivr/unpkg, then reload.';
+      '<br/><br/>Try a current browser with WebGL. Prefer the shared <code>/vendor/</code> folder (or <code>../vendor/</code> when opening this file from disk). Else check network for jsdelivr/unpkg, then reload.';
   }
 
   /* ============================================================
