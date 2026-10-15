@@ -106,6 +106,7 @@
   #btn-prev, #btn-next, #btn-explore, #btn-reset-cam { min-width: 64px; }
   .cam-short { display: none; }
   #btn-explore, .explore-chip { background: #243428; color: var(--ok); border-color: #4a7a58; }
+  #btn-explore[hidden] { display: none !important; }
   #btn-explore.current, .explore-chip.current { background: var(--ok); color: var(--ink); }
   .step-nums { display: flex; flex-wrap: wrap; gap: 4px; }
   .step-nums button { min-width: 44px; padding: 8px; }
@@ -452,7 +453,7 @@
     { piece: 'Lower long rail', qty: 2, size: '111 in', stock: '2×4 × 10 ft', stockQty: 4, per: '1 per board', notes: 'On edge, on the outside face of the legs, in line with the top rail. Bottom edge ' + LOWER_OFF + ' in off the floor.' },
     { piece: 'Lower end rail', qty: 2, size: '58 in', stock: '2×4 × 10 ft', stockQty: 4, per: '2 per board', notes: 'Both from one board. Between the lower long rails. The fourth 2×4 is a spare.' },
     { piece: 'End panel', qty: 2, size: M.panelW + ' × ' + M.panelH + ' in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 from sheet 2, 1 from sheet 3', notes: 'The 16.5 in strip left after each end top. Inside the end rails, between the corner legs.' },
-    { piece: 'Top center', qty: 1, size: '48 × 61 in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 on sheet 1', notes: 'Crosscut 61 in from a full sheet. Both long edges land on the joists 24 in from center.' },
+    { piece: 'Top center', qty: 1, size: '48 × 61 in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 on sheet 1', notes: 'Cut 61 in from a full sheet. Both long edges land on the joists 24 in from center.' },
     { piece: 'Top end', qty: 2, size: '31.5 × 61 in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 on sheet 2, 1 on sheet 3', notes: 'Inner edge on the 24 in joist. Outer edge on the end rail.' },
     { piece: 'Carriage bolt', qty: 28, size: '⅜ × 6 in', stock: 'Hardware', stockQty: 28, per: '26 used, 2 spare', notes: 'Washer and nut on the inside face of the leg. 6 in leaves thread past the 1.5 in rail and the 3.5 in leg.' }
   ];
@@ -625,7 +626,7 @@
       { day: 2, title: 'Lay the center top',
         goal: 'The middle 48 × 61 in of plywood is on, and both edges sit on joists.',
         actions: [
-          'From sheet 1, crosscut a 48 × 61 piece.',
+          'From sheet 1, cut a 48 × 61 piece.',
           'Spread glue on the joists 24 in each side of center, and on the rails between them.',
           'Set the sheet so each long edge lands on a joist center.',
           'Screw it with #8 × 2 in screws into those joists and the rails.'
@@ -785,15 +786,17 @@
     const s = STEPS[current];
     document.getElementById('step-title-bar').textContent = explore ? 'Finished table — look around' : ('Step ' + (current + 1) + ' · ' + s.title);
     document.getElementById('hint-mode-line').textContent = explore
-      ? 'Finished table. Tap a row or a part. Joists and rails under the top show through the plywood. Reset camera is in this bar.'
+      ? 'Finished table. Tap a row or a part. Joists and rails show through the top, the plates, and the tiles. Reset camera is in this bar.'
       : 'This step is highlighted. Earlier parts stay solid. Later parts are hidden. The side frames are drawn standing.';
     const sb = document.getElementById('sb-step');
     sb.innerHTML = explore
       ? '<p class="goal">Finished table.</p><p>Open Where each piece goes. Reset camera puts the whole stand back in view.</p>'
       : stepHtml(s, current);
     const next = document.getElementById('btn-next');
+    const lastStep = !explore && current === STEPS.length - 1;
     next.disabled = explore;
-    next.textContent = (!explore && current === STEPS.length - 1) ? 'Explore' : 'Next';
+    next.textContent = lastStep ? 'Explore finished table' : 'Next';
+    document.getElementById('btn-explore').hidden = lastStep;
     document.getElementById('btn-prev').disabled = !explore && current === 0;
     document.getElementById('btn-back-build').hidden = !explore;
     document.getElementById('piece-sheet').hidden = !explore;
@@ -1316,8 +1319,9 @@
     });
     requestRender();
   }
+  const FADE_WITH_TOP = ['top-center', 'top-end', 'fire-break', 'honeycomb', 'doubler', 'waste'];
   function fadeTop(on) {
-    ['top-center', 'top-end'].forEach(function (id) {
+    FADE_WITH_TOP.forEach(function (id) {
       (registry[id] ? registry[id].meshes : []).forEach(function (m) {
         if (!m.isMesh || !m.material) return;
         m.userData.faded = !!on && m.visible;
@@ -1399,10 +1403,10 @@
         obj.material.color.set(0xff7a3c);
       }
     });
-    const topOn = ['top-center', 'top-end'].some(function (pid) {
+    const coverOn = FADE_WITH_TOP.some(function (pid) {
       return registry[pid] && registry[pid].meshes.some(function (m) { return m.visible; });
     });
-    if (HIDDEN_UNDER[id] && topOn) fadeTop(true);
+    if (HIDDEN_UNDER[id] && coverOn) fadeTop(true);
     if (visible[0]) showDetail(visible[0]);
     placeTags();
     requestRender();
@@ -1446,30 +1450,49 @@
     if (explore) setStep(current, { frame: false });
     else if (current > 0) setStep(current - 1);
   }
+  function frameDir() {
+    return new THREE.Vector3(0.9, 0.55, 0.78).normalize();
+  }
+  function standCorners() {
+    const top = TOP_H + FIRE_T + HONEY_T + MACHINE_H;
+    const pts = [];
+    [-DECK_L / 2, DECK_L / 2].forEach(function (x) {
+      [0, top].forEach(function (y) {
+        [-DECK_W / 2, DECK_W / 2].forEach(function (z) {
+          pts.push(new THREE.Vector3(x, y, z));
+        });
+      });
+    });
+    return pts;
+  }
+  function cornersFit(dist, center) {
+    camera.position.copy(center).addScaledVector(frameDir(), dist);
+    camera.lookAt(center);
+    camera.updateMatrixWorld();
+    const pts = standCorners();
+    for (let i = 0; i < pts.length; i++) {
+      const p = pts[i].clone().project(camera);
+      if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 0.86 || Math.abs(p.y) > 0.86) return false;
+    }
+    return true;
+  }
   function frameStand() {
     if (!wrap || wrap.clientWidth < 2 || wrap.clientHeight < 2) return false;
-    const box = new THREE.Box3();
-    pickables.forEach(function (m) {
-      if (m.userData.later || !m.geometry) return;
-      if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
-      const b = m.geometry.boundingBox.clone();
-      m.updateWorldMatrix(true, false);
-      b.applyMatrix4(m.matrixWorld);
-      box.union(b);
-    });
-    if (box.isEmpty()) return false;
-    const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3());
     const aspect = Math.max(wrap.clientWidth / Math.max(wrap.clientHeight, 1), 0.05);
     camera.aspect = aspect;
     camera.fov = aspect < 0.85 ? 48 : 40;
     camera.updateProjectionMatrix();
-    const vfov = (camera.fov * Math.PI) / 180;
-    const hfov = 2 * Math.atan(Math.tan(vfov / 2) * aspect);
-    let dist = 1.35 * Math.max(size.x * 0.5 / Math.tan(hfov / 2), size.y * 0.55 / Math.tan(vfov / 2), size.z * 0.5 / Math.tan(hfov / 2));
-    if (!isFinite(dist) || dist <= 0) dist = 160;
-    dist = Math.max(controls.minDistance, Math.min(controls.maxDistance, dist));
-    camera.position.copy(center).addScaledVector(new THREE.Vector3(0.9, 0.55, 0.78).normalize(), dist);
+    const top = TOP_H + FIRE_T + HONEY_T + MACHINE_H;
+    const center = new THREE.Vector3(0, top / 2, 0);
+    let lo = 30;
+    let hi = controls.maxDistance;
+    if (!cornersFit(hi, center)) hi = controls.maxDistance;
+    for (let i = 0; i < 18; i++) {
+      const mid = (lo + hi) / 2;
+      if (cornersFit(mid, center)) hi = mid;
+      else lo = mid;
+    }
+    camera.position.copy(center).addScaledVector(frameDir(), hi);
     controls.target.copy(center);
     controls.update();
     initialFrameDone = true;
@@ -1538,9 +1561,15 @@
       return registry[id].meshes.some(function (m) { return m.visible; });
     }).sort();
   }
+  function deckFit() {
+    return standCorners().map(function (v) {
+      const p = v.clone().project(camera);
+      return { x: p.x, y: p.y, z: p.z };
+    });
+  }
   function topFade() {
     const out = [];
-    ['top-center', 'top-end'].forEach(function (id) {
+    FADE_WITH_TOP.forEach(function (id) {
       (registry[id] ? registry[id].meshes : []).forEach(function (m) {
         out.push({
           id: id, visible: !!m.visible, faded: !!m.userData.faded,
@@ -1660,6 +1689,7 @@
       projectPart: projectPart,
       highlight: highlightPart,
       topFade: topFade,
+      deckFit: deckFit,
       selectedPart: function () { return selectedPart; },
       audit: audit,
       PICK_MOVE_PX: PICK_MOVE_PX,
