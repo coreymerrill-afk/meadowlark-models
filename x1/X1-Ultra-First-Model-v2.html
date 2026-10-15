@@ -197,11 +197,14 @@
     .view-tools-wrap[open] .view-tools-inner { display: flex; flex-wrap: wrap; gap: 8px; }
     .step-nums-wrap:not([open]) .step-nums { display: none; }
     .step-nums-wrap[open] .step-nums { padding: 8px; max-height: 30dvh; overflow: auto; }
-    .view3d-wrap { flex-direction: column; }
-    #canvas-wrap { min-height: 42dvh; }
+    .view3d-wrap { flex-direction: column; min-height: 0; overflow: hidden; }
+    #canvas-wrap { min-height: 0; flex: 1 1 42%; }
     #sidebar-3d {
-      width: 100%; max-height: 36dvh; border-left: none; border-top: 1px solid var(--border);
+      width: 100%; max-height: none; flex: 1 1 58%; min-height: 0;
+      border-left: none; border-top: 1px solid var(--border);
+      padding-bottom: calc(96px + env(safe-area-inset-bottom));
     }
+    body.mode-3d #panel-build { padding-bottom: 0; }
     .day-view:not([open]) .day-steps { display: none; }
   }
   @media (min-width: 768px) {
