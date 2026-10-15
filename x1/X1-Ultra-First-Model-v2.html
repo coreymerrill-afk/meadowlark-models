@@ -261,7 +261,7 @@
     <p>A single panel the size of the work area, 1250 × 2450 mm, is not a realistic buy. Use two tiles, about 4 × 4 ft each, meeting at the center. Together the plates and the tiles are about 96 × 48 in, slightly smaller than ACMER's 1250 × 2450 mm work area; confirmed once ACMER replies. The tiles are made to order, so order them before Day 1. Order the plates before Day 1 too.</p>
     <p>The six levelers level the deck. After the tiles are on, check the head height at the corners and the middle, and shim a tile corner until the spread is about 1 mm.</p>
     <p>The CNC waste board is later: two pieces of ¾ in MDF, about 48 × 48 in, screwed along the joist lines. The tiles and the plates lift out for CNC and for cleaning. Buy the MDF on CNC day.</p>
-    <p>ACMER’s own bed, feet, and weight are still unknown. The outline, the doublers, and the tile thickness in the picture are provisional.</p>
+    <p>The machine frame, from the manual, is 111.8 × 64.4 × 13.4 in. This deck is 111 × 61 in, so the frame overhangs about 1.7 in on each long side. Tape-measure the real machine before the top is cut. The deck may need to grow. Feet and contact points are still unknown. The doublers and the tile thickness in the picture are provisional.</p>
   </div>
   <p class="meta" style="margin-top:12px">Tools: a circular saw and a straightedge, a drill with a long ⅜ bit and a Torx bit, a wrench, a level, clamps, and sawhorses. A table saw is not required.</p>
 </section>
@@ -362,13 +362,14 @@
   <div class="table-wrap"><table class="data">
     <thead><tr><th></th><th>Item</th><th>What we have</th></tr></thead>
     <tbody>
-      <tr><td>Confirmed</td><td>Work area</td><td>1250 × 2450 mm (49.2 × 96.5 in)</td></tr>
-      <tr><td>Confirmed</td><td>Cooling</td><td>Compressor cooling is built into the machine</td></tr>
-      <tr><td>Confirmed</td><td>CNC spindle</td><td>200 W</td></tr>
-      <tr><td>Confirmed</td><td>Exhaust fans</td><td>Built-in dual exhaust fans</td></tr>
+      <tr><td>Confirmed</td><td>Work area</td><td>1250 × 2450 mm (49.2 × 96.5 in), 80 mm of Z travel</td></tr>
+      <tr><td>Confirmed</td><td>Machine size</td><td>2840 × 1635 × 341 mm (111.8 × 64.4 × 13.4 in). Wider than this 61 in deck.</td></tr>
+      <tr><td>Confirmed</td><td>Cooling</td><td>Separate water-chiller cabinet. Compressor, tank, screen, and E-stop are on that cabinet.</td></tr>
+      <tr><td>Confirmed</td><td>CNC spindle</td><td>200 W, 52 mm body</td></tr>
+      <tr><td>Confirmed</td><td>Exhaust</td><td>One air outlet, centered on the rear end</td></tr>
       <tr><td>Unknown, asked of ACMER</td><td>Weight and how to lift it</td><td>Not published</td></tr>
       <tr><td>Unknown, asked of ACMER</td><td>Foot pattern</td><td>Not published. Doublers in the picture are a placeholder over the legs.</td></tr>
-      <tr><td>Unknown, asked of ACMER</td><td>Bed, legs, or a stand in the box</td><td>Not published</td></tr>
+      <tr><td>Confirmed</td><td>Bed, legs, or a stand</td><td>Not in the manual parts list. The frame is an open ring. The workpiece sits on this table.</td></tr>
       <tr><td>Unknown, asked of ACMER</td><td>Bed height and stack height</td><td>Not published. Deck is 36 in until that answer arrives.</td></tr>
       <tr><td>Unknown, asked of ACMER</td><td>Power, exhaust port, bottom vents</td><td>Not published. Long sides stay open until vents are known.</td></tr>
     </tbody>
@@ -398,9 +399,15 @@
   const DECK_W = 61;
   const WORK_L = 96.5;
   const WORK_W = 49.2;
-  const MACHINE_L = 109.4;
-  const MACHINE_W = 59.8;
-  const MACHINE_H = 12.6;
+  const MACHINE_L = 111.8;
+  const MACHINE_W = 64.4;
+  const MACHINE_H = 13.4;
+  const WALL_T = 3.15;
+  const END_D = 5.91;
+  const CHILLER_X = 11.81;
+  const CHILLER_Z = 13.78;
+  const CHILLER_H = 15.75;
+  const CHILLER_GAP = 1.5;
   const FIRE_T = 0.06;
   const HONEY_T = 0.87;
   const MDF_T = 0.75;
@@ -674,11 +681,11 @@
         goal: 'You can see where the machine and its feet are meant to land.',
         actions: [
           'Mark the work area, ' + WORK_W + ' × ' + WORK_L + ' in, centered. That is 1250 × 2450 mm.',
-          'Mark the machine outline, about ' + MACHINE_L + ' × ' + MACHINE_W + ' in, and write provisional beside it.',
+          'Mark the machine outline, ' + MACHINE_L + ' × ' + MACHINE_W + ' in, centered. It is wider than this 61 in deck.',
           'Glue and screw a 6 × 6 in plywood doubler on the deck over each leg. Shift them when the real foot pattern arrives.'
         ],
         done: 'Both rectangles are on the sheet, and six doublers are down over the legs.',
-        details: 'The doublers are a placeholder. Feet, weight, and the real outline are still unknown. Keep each foot over a joist or a rail.',
+        details: 'Manual size is 2840 × 1635 mm. Tape-measure the real machine before the top is cut. The doublers are a placeholder until the contact points are known.',
         focus: ['doubler', 'machine-mark', 'work-mark'] },
       { day: 3, title: 'Lay the fire-break plates',
         goal: 'Two loose metal plates protect the plywood under the honeycomb.',
@@ -701,16 +708,17 @@
         details: 'A steel grid is magnetic. Cells are about 5.5, 7.5, or 9.5 mm, and the tile is usually about 22 mm thick, often with a frame. The thickness in the picture is a placeholder.',
         focus: ['honeycomb'] },
       { day: 3, title: 'Set the machine and level again',
-        goal: 'The machine sits level, with its feet over the frame.',
+        goal: 'The frame sits centered on the plywood, and the deck is level under it.',
         actions: [
-          'With a helper, set the machine on the outline. Lift it. Do not drag it on the coated slab.',
-          'Keep each foot over a doubler, a joist, or a rail.',
+          'With a helper, set the frame on the plywood top, centered. Lift it. Do not drag it on the coated slab.',
+          'The machine is 64.4 in wide and the deck is 61 in wide, so each long side overhangs about 1.7 in. Keep the sides over the rails and joists as far as that overhang allows.',
+          'Tape-measure the real machine before the top is cut. The deck may need to grow.',
           'Level the deck again with the weight on it, and tighten the leveler nuts.',
-          'Check the pads, the seams, the bolts, and the seal.'
+          'Set the water chiller on the floor beside the left end, not on the plywood.'
         ],
-        done: 'The machine is level, and you have a note to check it again in a month.',
-        details: 'Weight, feet, and how the machine arrives are still unknown. The box in the picture is only an outline. Lumber moves as it dries.',
-        focus: ['machine', 'machine-mark'] }
+        done: 'The frame is centered, the overhang is even on both long sides, and the deck is level.',
+        details: 'Foot and contact points are confirmed once ACMER replies. The bed stays inside the frame opening. How much room is left above the honeycomb is still unknown. Lumber moves as it dries.',
+        focus: ['machine-frame', 'machine-lid', 'machine-gantry', 'machine-head', 'machine-chiller'] }
     ];
   }
 
@@ -735,7 +743,11 @@
     { id: 'doubler', name: 'Foot doubler', qty: 6, where: 'Provisional 6 × 6 plates over the legs' },
     { id: 'fire-break', name: 'Fire-break plate', qty: 2, where: 'Loose plates, about 96 × 48 in together, meeting at the center' },
     { id: 'honeycomb', name: 'Honeycomb tile', qty: 2, where: 'On the plates, about 96 × 48 in together, meeting at the center' },
-    { id: 'machine', name: 'Machine outline', qty: 1, where: 'Provisional box, about 109 × 60 in' }
+    { id: 'machine-frame', name: 'ACMER X1 Ultra (machine)', qty: 1, where: 'On the plywood, centered. 64.4 in wide, so it overhangs the 61 in deck' },
+    { id: 'machine-lid', name: 'Sliding doors', qty: 2, where: 'Pleated panels in the top of the frame' },
+    { id: 'machine-gantry', name: 'Gantry and beam', qty: 1, where: 'Across the frame, on the long-wall rails' },
+    { id: 'machine-head', name: 'Tool head', qty: 1, where: 'On the beam, over the bed' },
+    { id: 'machine-chiller', name: 'Water chiller', qty: 1, where: 'On the floor beside the left end, off the plywood' }
   ];
 
   let current = 0, explore = false, exploreApplied = false, sceneReady = false;
@@ -1057,6 +1069,393 @@
     return line;
   }
 
+  function acmerDecal() {
+    const c = document.createElement('canvas');
+    c.width = 2048;
+    c.height = 280;
+    const g = c.getContext('2d');
+    g.fillStyle = '#141211';
+    g.fillRect(0, 0, 2048, 280);
+    g.strokeStyle = '#e8501c';
+    g.lineWidth = 16;
+    g.lineJoin = 'miter';
+    g.lineCap = 'butt';
+    function rail(y, dy) {
+      g.beginPath();
+      g.moveTo(48, y);
+      g.lineTo(210, y);
+      g.lineTo(300, y + dy);
+      g.lineTo(720, y + dy);
+      g.stroke();
+      g.beginPath();
+      g.moveTo(1328, y + dy);
+      g.lineTo(1748, y + dy);
+      g.lineTo(1838, y);
+      g.lineTo(2000, y);
+      g.stroke();
+    }
+    rail(112, -48);
+    rail(168, 48);
+    g.fillStyle = '#e8501c';
+    g.font = '800 86px Arial, sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillText('ACMER', 1024, 142);
+    const tex = new THREE.CanvasTexture(c);
+    tex.needsUpdate = true;
+    if (THREE.sRGBEncoding) tex.encoding = THREE.sRGBEncoding;
+    tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    return tex;
+  }
+  function pleatTex() {
+    const c = document.createElement('canvas');
+    c.width = 128;
+    c.height = 32;
+    const g = c.getContext('2d');
+    for (let x = 0; x < 128; x++) {
+      const t = (x % 8) / 8;
+      const v = t < 0.18 ? 168 : (t < 0.45 ? 214 : 196);
+      g.fillStyle = 'rgb(' + v + ',' + (v - 4) + ',' + (v - 12) + ')';
+      g.fillRect(x, 0, 1, 32);
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(28, 3);
+    tex.needsUpdate = true;
+    if (THREE.sRGBEncoding) tex.encoding = THREE.sRGBEncoding;
+    tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    return tex;
+  }
+  function headDecal() {
+    const c = document.createElement('canvas');
+    c.width = 256;
+    c.height = 320;
+    const g = c.getContext('2d');
+    g.fillStyle = '#363a3d';
+    g.fillRect(0, 0, 256, 320);
+    g.strokeStyle = '#e8501c';
+    g.lineWidth = 10;
+    g.beginPath();
+    g.moveTo(28, 250);
+    g.lineTo(78, 70);
+    g.lineTo(128, 190);
+    g.lineTo(178, 48);
+    g.lineTo(228, 230);
+    g.stroke();
+    g.fillStyle = '#101114';
+    g.fillRect(24, 262, 208, 46);
+    g.fillStyle = '#e8501c';
+    g.font = '700 22px Arial, sans-serif';
+    g.textAlign = 'center';
+    g.fillText('ACMER', 128, 292);
+    const tex = new THREE.CanvasTexture(c);
+    tex.needsUpdate = true;
+    if (THREE.sRGBEncoding) tex.encoding = THREE.sRGBEncoding;
+    return tex;
+  }
+  function chillerDecal() {
+    const c = document.createElement('canvas');
+    c.width = 512;
+    c.height = 680;
+    const g = c.getContext('2d');
+    g.fillStyle = '#1a1816';
+    g.fillRect(0, 0, 512, 680);
+    g.strokeStyle = '#e8501c';
+    g.lineWidth = 10;
+    g.beginPath();
+    g.moveTo(300, 80);
+    g.lineTo(340, 200);
+    g.lineTo(300, 320);
+    g.lineTo(340, 440);
+    g.lineTo(300, 600);
+    g.stroke();
+    g.beginPath();
+    g.moveTo(360, 80);
+    g.lineTo(400, 200);
+    g.lineTo(360, 320);
+    g.lineTo(400, 440);
+    g.lineTo(360, 600);
+    g.stroke();
+    g.save();
+    g.translate(455, 340);
+    g.rotate(-Math.PI / 2);
+    g.fillStyle = '#e8501c';
+    g.font = '800 64px Arial, sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillText('ACMER', 0, 0);
+    g.restore();
+    const tex = new THREE.CanvasTexture(c);
+    tex.needsUpdate = true;
+    if (THREE.sRGBEncoding) tex.encoding = THREE.sRGBEncoding;
+    return tex;
+  }
+
+  function buildMachine() {
+    const black = new THREE.MeshStandardMaterial({ color: 0x141211, roughness: 0.74, metalness: 0.28 });
+    const blackSoft = new THREE.MeshStandardMaterial({ color: 0x1c1916, roughness: 0.8, metalness: 0.18 });
+    const gun = new THREE.MeshStandardMaterial({ color: 0x363a3d, roughness: 0.42, metalness: 0.55 });
+    const orange = new THREE.MeshStandardMaterial({ color: 0xe8501c, roughness: 0.48, metalness: 0.22 });
+    const logoMat = new THREE.MeshStandardMaterial({ map: acmerDecal(), color: 0xffffff, roughness: 0.62, metalness: 0.16 });
+    const pleatMat = new THREE.MeshStandardMaterial({ map: pleatTex(), color: 0xffffff, roughness: 0.9, metalness: 0.02 });
+    const headMat = new THREE.MeshStandardMaterial({ map: headDecal(), color: 0xffffff, roughness: 0.45, metalness: 0.4 });
+    const chillMat = new THREE.MeshStandardMaterial({ map: chillerDecal(), color: 0xffffff, roughness: 0.7, metalness: 0.2 });
+    const windowMat = new THREE.MeshStandardMaterial({ color: 0x6a221c, roughness: 0.22, metalness: 0.08 });
+    const ledMat = new THREE.MeshStandardMaterial({ color: 0xfff1d6, emissive: 0xffe2b0, emissiveIntensity: 0.85, roughness: 0.4, metalness: 0 });
+    const blue = new THREE.MeshStandardMaterial({ color: 0x2f6fd6, roughness: 0.35, metalness: 0.4 });
+    const screenMat = new THREE.MeshStandardMaterial({ color: 0x1a3a5c, emissive: 0x1d4e89, emissiveIntensity: 0.55, roughness: 0.3, metalness: 0.1 });
+    const red = new THREE.MeshStandardMaterial({ color: 0xc42222, roughness: 0.4, metalness: 0.3 });
+    const halfL = MACHINE_L / 2;
+    const halfW = MACHINE_W / 2;
+    const y0 = TOP_H;
+    const y1 = TOP_H + MACHINE_H;
+    const skirtH = PLY_T;
+    const capH = 0.32;
+    const bodyH = MACHINE_H - skirtH - capH;
+    const innerZ = halfW - WALL_T;
+    const innerX = halfL - END_D;
+    const bodyCY = y0 + skirtH + bodyH / 2;
+    const skirtCY = y0 + skirtH / 2;
+    const capCY = y1 - capH / 2;
+    const deckNote = 'The machine is 64.4 in wide and the deck is 61 in wide, so each long side overhangs about 1.7 in. Tape-measure the real machine before the top is cut. The deck may need to grow. Wall thickness and end depth are estimated. Foot and contact points are confirmed once ACMER replies.';
+
+    function addM(partId, geo, x, y, z, material, info, rot) {
+      const mesh = new THREE.Mesh(geo, material.clone());
+      mesh.position.set(x, y, z);
+      if (rot) mesh.rotation.set(rot[0] || 0, rot[1] || 0, rot[2] || 0);
+      mesh.name = partId;
+      mesh.userData = Object.assign({ partId: partId, step: 12, kind: 'machine' }, info || {});
+      if (info && info.glow) {
+        mesh.userData.keepEmissive = true;
+        mesh.userData.glow = info.glow;
+        mesh.userData.glowI = info.glowI == null ? 0.7 : info.glowI;
+      }
+      scene.add(mesh);
+      if (!registry[partId]) registry[partId] = { meshes: [] };
+      registry[partId].meshes.push(mesh);
+      pickables.push(mesh);
+      return mesh;
+    }
+    function box(w, h, d) { return new THREE.BoxGeometry(w, h, d); }
+
+    [-1, 1].forEach(function (sign) {
+      const zc = sign * (halfW - WALL_T / 2);
+      addM('machine-frame', box(MACHINE_L, bodyH, WALL_T), 0, bodyCY, zc, black, {
+        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
+        notes: deckNote
+      });
+      const zOuter = sign * halfW;
+      const zInner = sign * (M.legZ + 3 + 0.1);
+      const skirtD = Math.abs(zOuter - zInner);
+      addM('machine-frame', box(MACHINE_L, skirtH, skirtD), 0, skirtCY, (zOuter + zInner) / 2, black, {
+        role: 'skirt', label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
+        notes: deckNote
+      });
+      addM('machine-frame', box(MACHINE_L, capH, WALL_T + 0.14), 0, capCY, zc, blackSoft, {
+        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
+        notes: deckNote
+      });
+      const faceZ = sign * (halfW + 0.16);
+      addM('machine-frame', box(MACHINE_L - 0.4, MACHINE_H - 0.7, 0.06), 0, y0 + MACHINE_H / 2, faceZ, logoMat, {
+        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
+        notes: deckNote + ' Orange trace and the ACMER wordmark are drawn on both long faces.'
+      });
+      addM('machine-frame', box(MACHINE_L - 2 * END_D - 1.2, bodyH - 1.6, 0.08), 0, bodyCY, sign * (innerZ - 0.12), windowMat, {
+        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: 'Inner window, estimated placement',
+        estimated: true,
+        notes: 'Tinted inner panel. Thickness and the exact window opening are estimated.'
+      });
+    });
+
+    const endZ = (innerZ - 0.1) * 2;
+    [-1, 1].forEach(function (sign) {
+      const xc = sign * (halfL - END_D / 2);
+      addM('machine-frame', box(END_D, bodyH, endZ), xc, bodyCY, 0, black, {
+        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
+        notes: deckNote
+      });
+      const zLim = M.legZ - 3 - 0.12;
+      addM('machine-frame', box(END_D, skirtH, zLim * 2), xc, skirtCY, 0, black, {
+        role: 'skirt', label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
+        notes: deckNote
+      });
+      addM('machine-frame', box(END_D + 0.12, capH, endZ - 0.16), sign * (halfL - END_D / 2 + sign * 0.04), capCY, 0, blackSoft, {
+        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
+        notes: deckNote
+      });
+    });
+
+    addM('machine-frame', box(0.08, 3.4, 8), -halfL - 0.14, y0 + 6.2, -6, blackSoft, {
+      estimated: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
+      spec: 'Front air inlet, estimated',
+      notes: 'Hinged door and air inlet are on the front end. Exact size and position are estimated.'
+    });
+    [[-16, 0x222222], [-13, 0x333333], [-10, 0xc81e1e], [8, 0x222222], [11, 0x888888]].forEach(function (p) {
+      const mat = new THREE.MeshStandardMaterial({ color: p[1], roughness: 0.5, metalness: 0.3 });
+      addM('machine-frame', box(0.12, 0.55, 0.55), -halfL - 0.28, y0 + 2.6, p[0], mat, {
+        estimated: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
+        spec: 'Front ports, estimated',
+        notes: '24 V, 36 V, power switch, data, and tube ports are on the front end. Positions are estimated.'
+      });
+    });
+    addM('machine-frame', box(0.22, 0.22, 0.22), halfL - 8, y0 + 7.2, halfW + 0.46, new THREE.MeshStandardMaterial({ color: 0xf4f4f2, roughness: 0.4, metalness: 0.1 }), {
+      estimated: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
+      spec: 'Status dot, estimated',
+      notes: 'Small light on the long face, near the right end. Position is estimated.'
+    });
+    addM('machine-frame', box(MACHINE_L - 2 * END_D - 2, 0.18, 0.22), 0, y0 + bodyH * 0.72, -(innerZ - 0.28), ledMat, {
+      glow: 0xffe2b0, glowI: 0.9, label: 'ACMER X1 Ultra (machine)', qty: '1',
+      spec: 'Interior light strip',
+      notes: 'Warm strip along the inside of the back wall.'
+    });
+    addM('machine-frame', box(7, 0.32, 0.32), -innerX + 5.2, y1 - 1.5, -(innerZ - 1.5), blackSoft, {
+      estimated: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
+      spec: 'Camera bar, estimated',
+      notes: 'Camera near the front-left corner. Position is estimated.'
+    });
+
+    const fanR = 100 / 25.4 / 2;
+    addM('machine-frame', new THREE.CylinderGeometry(fanR, fanR, 0.22, 28), halfL + 0.2, y0 + MACHINE_H * 0.52, 0, blackSoft, {
+      estimated: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
+      spec: 'Rear air outlet, about 4 in across, estimated',
+      notes: 'One fan, centered on the rear end. Diameter is estimated. A short duct stub leaves that face.'
+    }, [0, 0, Math.PI / 2]);
+    const stubLen = 1.7;
+    addM('machine-frame', new THREE.CylinderGeometry(fanR * 0.72, fanR * 0.72, stubLen, 20), halfL + 0.28 + stubLen / 2, y0 + MACHINE_H * 0.52, 0, black, {
+      estimated: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
+      spec: 'Exhaust stub, estimated',
+      notes: 'Stub length and diameter are estimated.'
+    }, [0, 0, Math.PI / 2]);
+    addM('machine-frame', new THREE.CylinderGeometry(fanR * 0.72, fanR * 0.72, 2.2, 16), halfL + 0.28 + stubLen + fanR * 0.72 - 0.04, y0 + MACHINE_H * 0.52 + 1.35, 0, blackSoft, {
+      estimated: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
+      spec: 'Exhaust duct, estimated',
+      notes: 'Short riser for the hose. The real duct is a flexible tube.'
+    });
+
+    const railH = 0.55;
+    const railTop = y1 - 0.55;
+    const railCY = railTop - railH / 2;
+    const railZc = innerZ - 0.42;
+    [-1, 1].forEach(function (sign) {
+      addM('machine-gantry', box((innerX - 0.45) * 2, railH, 0.58), 0, railCY, sign * railZc, gun, {
+        estimated: true, label: 'Gantry and beam', qty: '1',
+        spec: 'Y rails about 0.6 in, estimated',
+        notes: 'One rail in each long wall. Section is estimated.'
+      });
+    });
+    const beamH = 2.05;
+    const beamCY = railCY - 1.35;
+    const beamX = 6;
+    const beamZ = (railZc - 0.89) * 2;
+    addM('machine-gantry', box(1.65, beamH, beamZ), beamX, beamCY, 0, black, {
+      estimated: true, label: 'Gantry and beam', qty: '1',
+      spec: 'Beam about 1.6 × 2.1 in in section, estimated',
+      notes: 'X-axis beam across the frame. Section is estimated. Shown near the middle of the length.'
+    });
+    [-1, 1].forEach(function (sign) {
+      const cz = sign * (railZc - 0.59);
+      addM('machine-gantry', box(5.4, 2.4, 0.7), beamX, (beamCY + railCY) / 2, cz, gun, {
+        estimated: true, label: 'Gantry and beam', qty: '2',
+        spec: 'End carriage about 5.4 in long, estimated',
+        notes: 'Carriage at each end of the beam. Size is estimated.'
+      });
+    });
+    addM('machine-gantry', box(14, 0.42, 0.7), beamX + 12, railCY - 0.7, railZc - 0.7, new THREE.MeshStandardMaterial({ color: 0x3a2e24, roughness: 0.7, metalness: 0.15 }), {
+      estimated: true, label: 'Gantry and beam', qty: '1',
+      spec: 'Cable chain, estimated',
+      notes: 'Drag chain along the back wall, from the beam toward the rear. Length is estimated.'
+    });
+
+    const headH = 4.6;
+    const headTop = beamCY - beamH / 2 - 0.1;
+    const headCY = headTop - headH / 2;
+    const headD = 2.7;
+    const headW = 5.7;
+    addM('machine-head', box(headW, headH, headD), beamX, headCY, 0, gun, {
+      estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Housing about 5.7 × 2.7 × 4.6 in, estimated',
+      notes: 'This view shows the 120 W diode module. The 200 W spindle body is 52 mm in diameter. Housing size is estimated.'
+    });
+    addM('machine-head', box(headW - 0.3, headH - 0.5, 0.06), beamX, headCY, headD / 2 + 0.06, headMat, {
+      estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Orange face graphic, estimated',
+      notes: 'Angled ACMER trace on the module face.'
+    });
+    const nozH = 1.15;
+    const nozTop = headCY - headH / 2 - 0.05;
+    const nozCY = nozTop - nozH / 2;
+    addM('machine-head', new THREE.CylinderGeometry(0.32, 0.26, nozH, 16), beamX, nozCY, 0.15, blue, {
+      estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Nozzle, estimated',
+      notes: 'Blue nozzle on the diode module. Drawn tip is about ' + r2((nozCY - nozH / 2) - (TOP_H + FIRE_T + HONEY_T)) + ' in above the honeycomb. Real clearance is unknown. Z travel is 80 mm (3.1 in).'
+    });
+    [-2.05, -1.35, 2.05].forEach(function (dx) {
+      addM('machine-head', new THREE.CylinderGeometry(0.16, 0.16, 0.45, 12), beamX + dx, headCY + headH / 2 + 0.26, 0.2, black, {
+        estimated: true, label: 'Tool head', qty: '1',
+        spec: 'Couplers, estimated',
+        notes: 'Water and air stubs on top of the module. Size is estimated.'
+      });
+    });
+
+    const lidLen = 18;
+    const lidZ = (innerZ - 0.35) * 2;
+    const lidH = 0.4;
+    const lidCY = y1 - 0.08 - lidH / 2;
+    [-1, 1].forEach(function (sign) {
+      const xc = sign * (innerX - lidLen / 2 - 0.3);
+      addM('machine-lid', box(lidLen, lidH, lidZ), xc, lidCY, 0, pleatMat, {
+        estimated: true, label: 'Sliding doors', qty: '2',
+        spec: 'Two panels, about 0.4 in thick, estimated',
+        notes: 'Light-grey pleated doors. Drawn slid toward the ends so the beam stays visible. How far they travel is estimated.'
+      });
+    });
+
+    const chillCX = -(halfL + CHILLER_GAP + CHILLER_X / 2);
+    const chillCZ = -2;
+    const chillCY = CHILLER_H / 2 + 0.06;
+    const chillSpec = 'About ' + r2(CHILLER_Z) + ' × ' + r2(CHILLER_X) + ' × ' + r2(CHILLER_H) + ' in (350 × 300 × 400 mm), estimated';
+    const chillNotes = 'Separate cabinet: compressor, tank, screen, and E-stop. Size is not published. Sits on the floor beside the left end, off the plywood.';
+    addM('machine-chiller', box(CHILLER_X, CHILLER_H, CHILLER_Z), chillCX, chillCY, chillCZ, black, {
+      estimated: true, label: 'Water chiller', qty: '1', spec: chillSpec, notes: chillNotes
+    });
+    addM('machine-chiller', box(0.06, CHILLER_H - 0.8, CHILLER_Z - 0.4), chillCX + CHILLER_X / 2 + 0.06, chillCY, chillCZ, chillMat, {
+      estimated: true, label: 'Water chiller', qty: '1', spec: chillSpec, notes: chillNotes
+    });
+    addM('machine-chiller', box(0.08, 1.5, 1.7), chillCX + CHILLER_X / 2 + 0.22, chillCY + 3.2, chillCZ - 2.2, screenMat, {
+      glow: 0x1d4e89, glowI: 0.55, estimated: true, label: 'Water chiller', qty: '1',
+      spec: 'Display, estimated', notes: 'Small screen on the cabinet front.'
+    });
+    addM('machine-chiller', box(0.08, 3.2, 0.35), chillCX + CHILLER_X / 2 + 0.08, chillCY - 0.4, chillCZ + 3.4, new THREE.MeshStandardMaterial({ color: 0xd6c36a, roughness: 0.35, metalness: 0.05 }), {
+      estimated: true, label: 'Water chiller', qty: '1', spec: 'Sight glass, estimated', notes: 'Water-level window. Position is estimated.'
+    });
+    for (let i = 0; i < 4; i++) {
+      addM('machine-chiller', box(CHILLER_X - 1.2, 0.28, 0.08), chillCX, chillCY - 2 + i * 0.7, chillCZ + CHILLER_Z / 2 + 0.06, blackSoft, {
+        estimated: true, label: 'Water chiller', qty: '1', spec: 'Side vents, estimated', notes: 'Louvres on the side. Count and size are estimated.'
+      });
+    }
+    addM('machine-chiller', new THREE.CylinderGeometry(0.55, 0.55, 0.4, 16), chillCX - CHILLER_X / 2 - 0.22, chillCY + 2.4, chillCZ, red, {
+      estimated: true, label: 'Water chiller', qty: '1',
+      spec: 'E-stop, on the cabinet',
+      notes: 'The emergency stop is on the chiller, not on the frame. Shown on the back face.'
+    }, [0, 0, Math.PI / 2]);
+    addM('machine-chiller', new THREE.CylinderGeometry(0.35, 0.35, 0.45, 14), chillCX + 1.2, chillCY + CHILLER_H / 2 + 0.26, chillCZ - 1, orange, {
+      estimated: true, label: 'Water chiller', qty: '1', spec: 'Fill port, estimated', notes: 'Orange cap on top. Position is estimated.'
+    });
+    const hoseX0 = chillCX + CHILLER_X / 2 + 0.15;
+    const hoseX1 = -halfL - 0.2;
+    addM('machine-chiller', box(hoseX1 - hoseX0, 0.28, 0.28), (hoseX0 + hoseX1) / 2, 8, chillCZ, blackSoft, {
+      estimated: true, label: 'Water chiller', qty: '1', spec: 'Hose run, estimated',
+      notes: 'Water hose from the cabinet to the front end. Path is estimated.'
+    });
+  }
   function buildStand() {
     const wood26 = matWood('#c4925a', 11);
     const wood24 = matWood('#b5814a', 29);
@@ -1150,8 +1549,8 @@
       notes: '1250 × 2450 mm, centered.'
     });
     addLine('machine-mark', MACHINE_L, MACHINE_W, TOP_H + 0.08, 0xffb25a, {
-      step: 9, provisional: true, label: 'Machine outline', spec: 'About ' + MACHINE_L + ' × ' + MACHINE_W + ' in', qty: '1',
-      notes: 'PROVISIONAL. Foot pattern and weight are still unknown.'
+      step: 9, provisional: true, label: 'Machine outline', spec: MACHINE_L + ' × ' + MACHINE_W + ' in (2840 × 1635 mm)', qty: '1',
+      notes: 'Manual outline, 2840 × 1635 mm. It overhangs this deck. Foot pattern is still unknown.'
     });
     [-24, 24].forEach(function (x) {
       addBox('fire-break', [48, FIRE_T, 48], [x, TOP_H + FIRE_T / 2, 0], fireMat, {
@@ -1167,18 +1566,7 @@
         notes: 'LATER. Buy it on CNC day. Screws go along the joist lines. Tiles and plates lift out first.'
       });
     });
-    const boxGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(MACHINE_L, MACHINE_H, MACHINE_W));
-    const machine = new THREE.LineSegments(boxGeo, new THREE.LineBasicMaterial({ color: 0xffb25a }));
-    machine.position.set(0, TOP_H + FIRE_T + HONEY_T + MACHINE_H / 2, 0);
-    machine.name = 'machine';
-    machine.userData = {
-      partId: 'machine', step: 12, baseColor: 0xffb25a, provisional: true,
-      label: 'Machine', spec: 'About ' + MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in', qty: '1',
-      notes: 'PROVISIONAL. A box for the outline only. Weight and feet are still unknown.'
-    };
-    scene.add(machine);
-    registry.machine = { meshes: [machine] };
-    pickables.push(machine);
+    buildMachine();
 
     const ground = new THREE.Mesh(
       new THREE.BoxGeometry(220, 0.4, 160),
@@ -1197,6 +1585,10 @@
   }
   function aabb(mesh) {
     const p = mesh.geometry.parameters;
+    if (mesh.rotation && (mesh.rotation.x || mesh.rotation.y || mesh.rotation.z)) {
+      const box = new THREE.Box3().setFromObject(mesh);
+      return { min: [box.min.x, box.min.y, box.min.z], max: [box.max.x, box.max.y, box.max.z] };
+    }
     const x = mesh.position.x, y = mesh.position.y, z = mesh.position.z;
     if (p && p.width != null) {
       return { min: [x - p.width / 2, y - p.height / 2, z - p.depth / 2], max: [x + p.width / 2, y + p.height / 2, z + p.depth / 2] };
@@ -1280,6 +1672,7 @@
     }
     if (M.pieceCount !== 25) fails.push('pieces ' + M.pieceCount);
     if (STEPS.length !== 13) fails.push('steps');
+    if (!registry['machine-frame'] || registry['machine-frame'].meshes.length < 8) fails.push('machine');
     if (registry.joist.meshes.length !== 6) fails.push('joist count');
     const xs = registry.joist.meshes.map(function (m) { return m.position.x; }).sort(function (a, b) { return a - b; });
     [-40, -24, -8, 8, 24, 40].forEach(function (x, i) { if (Math.abs(xs[i] - x) > 0.02) fails.push('joist x'); });
@@ -1302,8 +1695,16 @@
         mat.depthWrite = true;
       }
       if (mat.emissive) {
-        mat.emissive.set(mode === 'current' ? 0xb85a20 : 0x000000);
-        mat.emissiveIntensity = mode === 'current' ? 0.55 : 0;
+        if (mode === 'current') {
+          mat.emissive.set(0xb85a20);
+          mat.emissiveIntensity = 0.55;
+        } else if (obj.userData.keepEmissive) {
+          mat.emissive.set(obj.userData.glow || 0xffe2b0);
+          mat.emissiveIntensity = obj.userData.glowI == null ? 0.7 : obj.userData.glowI;
+        } else {
+          mat.emissive.set(0x000000);
+          mat.emissiveIntensity = 0;
+        }
       }
     } else if (obj.isLine || obj.isLineSegments) {
       mat.color.set(mode === 'current' ? 0xffe7b0 : (obj.userData.baseColor || 0xffb25a));
@@ -1318,6 +1719,7 @@
       const born = obj.userData.step;
       let vis = explore || born <= current;
       if (id === 'work-mark') vis = !explore && current === 9;
+      if (id === 'machine-mark') vis = !explore && current >= 9 && current < 12;
       if (id === 'waste') vis = !!wasteOn && (explore || current >= 5);
       if (wasteOn && (id === 'fire-break' || id === 'honeycomb')) vis = false;
       obj.userData.faded = false;
@@ -1397,9 +1799,10 @@
     const el = document.getElementById('part-detail');
     el.hidden = false;
     el.innerHTML =
+      (d.estimated ? '<div class="tag">ESTIMATED</div>' : '') +
       (d.provisional || d.later ? '<div class="tag">' + (d.later ? 'LATER' : 'PROVISIONAL') + '</div>' : '') +
       '<h3>' + esc(meta ? meta.name : (d.label || d.partId)) + '</h3>' +
-      '<p><strong>Cut.</strong> ' + esc(d.spec || '') + '</p>' +
+      '<p><strong>' + (d.kind === 'machine' ? 'Size.' : 'Cut.') + '</strong> ' + esc(d.spec || '') + '</p>' +
       '<p><strong>Qty.</strong> ' + esc(meta ? ('Qty ' + meta.qty) : (d.qty || '')) + '</p>' +
       (meta ? '<p><strong>Where.</strong> ' + esc(meta.where) + '</p>' : '') +
       '<p>' + esc(d.notes || '') + '</p>';
@@ -1468,12 +1871,22 @@
   function frameDir() {
     return new THREE.Vector3(0.9, 0.55, 0.78).normalize();
   }
+  function sceneFrame() {
+    const pad = 0.8;
+    return {
+      x0: -(MACHINE_L / 2 + CHILLER_GAP + CHILLER_X) - pad,
+      x1: MACHINE_L / 2 + 5,
+      y0: 0,
+      y1: TOP_H + MACHINE_H + 0.4,
+      z: MACHINE_W / 2 + 0.6
+    };
+  }
   function standCorners() {
-    const top = TOP_H + FIRE_T + HONEY_T + MACHINE_H;
+    const b = sceneFrame();
     const pts = [];
-    [-DECK_L / 2, DECK_L / 2].forEach(function (x) {
-      [0, top].forEach(function (y) {
-        [-DECK_W / 2, DECK_W / 2].forEach(function (z) {
+    [b.x0, b.x1].forEach(function (x) {
+      [b.y0, b.y1].forEach(function (y) {
+        [-b.z, b.z].forEach(function (z) {
           pts.push(new THREE.Vector3(x, y, z));
         });
       });
@@ -1497,8 +1910,8 @@
     camera.aspect = aspect;
     camera.fov = aspect < 0.85 ? 48 : 40;
     camera.updateProjectionMatrix();
-    const top = TOP_H + FIRE_T + HONEY_T + MACHINE_H;
-    const center = new THREE.Vector3(0, top / 2, 0);
+    const b = sceneFrame();
+    const center = new THREE.Vector3((b.x0 + b.x1) / 2, b.y1 / 2, 0);
     let lo = 30;
     let hi = controls.maxDistance;
     if (!cornersFit(hi, center)) hi = controls.maxDistance;
@@ -1663,6 +2076,9 @@
     const sun = new THREE.DirectionalLight(0xfff6ea, 1.15);
     sun.position.set(50, 90, 36);
     scene.add(sun);
+    const bay = new THREE.PointLight(0xfff6ea, 1.35, 90, 1.6);
+    bay.position.set(0, TOP_H + 7, 0);
+    scene.add(bay);
     buildStand();
     const fails = audit();
     if (fails.length) console.error('[X1] joint check failed', fails);
