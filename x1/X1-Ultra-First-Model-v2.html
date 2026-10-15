@@ -714,7 +714,7 @@
           'The machine is 64.4 in wide and the deck is 61 in wide, so each long side overhangs about 1.7 in. Keep the sides over the rails and joists as far as that overhang allows.',
           'Tape-measure the real machine before the top is cut. The deck may need to grow.',
           'Level the deck again with the weight on it, and tighten the leveler nuts.',
-          'Set the water chiller on the floor beside the left end, not on the plywood.'
+          'Set the water chiller on the floor beside the left end, on the near side, not on the plywood.'
         ],
         done: 'The frame is centered, the overhang is even on both long sides, and the deck is level.',
         details: 'Foot and contact points are confirmed once ACMER replies. The bed stays inside the frame opening. How much room is left above the honeycomb is still unknown. Lumber moves as it dries.',
@@ -744,10 +744,10 @@
     { id: 'fire-break', name: 'Fire-break plate', qty: 2, where: 'Loose plates, about 96 × 48 in together, meeting at the center' },
     { id: 'honeycomb', name: 'Honeycomb tile', qty: 2, where: 'On the plates, about 96 × 48 in together, meeting at the center' },
     { id: 'machine-frame', name: 'ACMER X1 Ultra (machine)', qty: 1, where: 'On the plywood, centered. 64.4 in wide, so it overhangs the 61 in deck' },
-    { id: 'machine-lid', name: 'Sliding doors', qty: 2, where: 'Pleated panels in the top of the frame' },
-    { id: 'machine-gantry', name: 'Gantry and beam', qty: 1, where: 'Across the frame, on the long-wall rails' },
+    { id: 'machine-lid', name: 'Sliding doors', qty: 2, where: 'Dark-grey ribbed panels in the top, parted at the center seam' },
+    { id: 'machine-gantry', name: 'Gantry and beam', qty: 1, where: 'Across the frame at mid-length, end cars on the long-wall rails' },
     { id: 'machine-head', name: 'Tool head', qty: 1, where: 'On the beam, over the bed' },
-    { id: 'machine-chiller', name: 'Water chiller', qty: 1, where: 'On the floor beside the left end, off the plywood' }
+    { id: 'machine-chiller', name: 'Water chiller', qty: 1, where: 'On the floor beside the left end, on the near side, off the plywood' }
   ];
 
   let current = 0, explore = false, exploreApplied = false, sceneReady = false;
@@ -1110,17 +1110,21 @@
   function pleatTex() {
     const c = document.createElement('canvas');
     c.width = 128;
-    c.height = 32;
+    c.height = 8;
     const g = c.getContext('2d');
+    const period = 16;
     for (let x = 0; x < 128; x++) {
-      const t = (x % 8) / 8;
-      const v = t < 0.18 ? 168 : (t < 0.45 ? 214 : 196);
-      g.fillStyle = 'rgb(' + v + ',' + (v - 4) + ',' + (v - 12) + ')';
-      g.fillRect(x, 0, 1, 32);
+      const t = x % period;
+      const v = t < 5 ? 6 : (t < 8 ? 54 : 18);
+      g.fillStyle = 'rgb(' + v + ',' + (v + 1) + ',' + (v + 1) + ')';
+      g.fillRect(x, 0, 1, 8);
     }
     const tex = new THREE.CanvasTexture(c);
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    tex.repeat.set(28, 3);
+    tex.generateMipmaps = false;
+    tex.minFilter = THREE.LinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    tex.repeat.set(1, 1);
     tex.needsUpdate = true;
     if (THREE.sRGBEncoding) tex.encoding = THREE.sRGBEncoding;
     tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
@@ -1197,7 +1201,7 @@
     const gun = new THREE.MeshStandardMaterial({ color: 0x363a3d, roughness: 0.42, metalness: 0.55 });
     const orange = new THREE.MeshStandardMaterial({ color: 0xe8501c, roughness: 0.48, metalness: 0.22 });
     const logoMat = new THREE.MeshStandardMaterial({ map: acmerDecal(), color: 0xffffff, roughness: 0.62, metalness: 0.16 });
-    const pleatMat = new THREE.MeshStandardMaterial({ map: pleatTex(), color: 0xffffff, roughness: 0.9, metalness: 0.02 });
+    const pleatMat = new THREE.MeshStandardMaterial({ map: pleatTex(), color: 0xffffff, roughness: 0.94, metalness: 0.04 });
     const headMat = new THREE.MeshStandardMaterial({ map: headDecal(), color: 0xffffff, roughness: 0.45, metalness: 0.4 });
     const chillMat = new THREE.MeshStandardMaterial({ map: chillerDecal(), color: 0xffffff, roughness: 0.7, metalness: 0.2 });
     const windowMat = new THREE.MeshStandardMaterial({ color: 0x6a221c, roughness: 0.22, metalness: 0.08 });
@@ -1234,6 +1238,23 @@
       if (!registry[partId]) registry[partId] = { meshes: [] };
       registry[partId].meshes.push(mesh);
       pickables.push(mesh);
+      if (info && info.rim) {
+        mesh.material.polygonOffset = true;
+        mesh.material.polygonOffsetFactor = 1;
+        mesh.material.polygonOffsetUnits = 1;
+        const rim = new THREE.LineSegments(
+          new THREE.EdgesGeometry(geo, 28),
+          new THREE.LineBasicMaterial({ color: 0x1a1614 })
+        );
+        rim.position.copy(mesh.position);
+        rim.rotation.copy(mesh.rotation);
+        rim.name = partId;
+        rim.userData = { partId: partId, step: 12, kind: 'machine', baseColor: 0x1a1614, rim: true };
+        rim.raycast = function () {};
+        scene.add(rim);
+        registry[partId].meshes.push(rim);
+        pickables.push(rim);
+      }
       return mesh;
     }
     function box(w, h, d) { return new THREE.BoxGeometry(w, h, d); }
@@ -1241,7 +1262,7 @@
     [-1, 1].forEach(function (sign) {
       const zc = sign * (halfW - WALL_T / 2);
       addM('machine-frame', box(MACHINE_L, bodyH, WALL_T), 0, bodyCY, zc, black, {
-        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        rim: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
         spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
         notes: deckNote
       });
@@ -1276,7 +1297,7 @@
     [-1, 1].forEach(function (sign) {
       const xc = sign * (halfL - END_D / 2);
       addM('machine-frame', box(END_D, bodyH, endZ), xc, bodyCY, 0, black, {
-        label: 'ACMER X1 Ultra (machine)', qty: '1',
+        rim: true, label: 'ACMER X1 Ultra (machine)', qty: '1',
         spec: MACHINE_L + ' × ' + MACHINE_W + ' × ' + MACHINE_H + ' in (2840 × 1635 × 341 mm)',
         notes: deckNote
       });
@@ -1351,109 +1372,142 @@
         notes: 'One rail in each long wall. Section is estimated.'
       });
     });
-    const beamH = 2.05;
-    const beamCY = railCY - 1.35;
-    const beamX = 6;
+    const beamW = 2.4;
+    const beamH = 2.55;
+    const beamTop = railCY - railH / 2 - 0.12;
+    const beamCY = beamTop - beamH / 2;
+    const beamX = 0;
     const beamZ = (railZc - 0.89) * 2;
-    addM('machine-gantry', box(1.65, beamH, beamZ), beamX, beamCY, 0, black, {
-      estimated: true, label: 'Gantry and beam', qty: '1',
-      spec: 'Beam about 1.6 × 2.1 in in section, estimated',
-      notes: 'X-axis beam across the frame. Section is estimated. Shown near the middle of the length.'
+    addM('machine-gantry', box(beamW, beamH, beamZ), beamX, beamCY, 0, black, {
+      rim: true, estimated: true, label: 'Gantry and beam', qty: '1',
+      spec: 'Beam about 2.4 × 2.6 in in section, estimated',
+      notes: 'Spans the opening front to back at mid-length, square to the rails. Section is estimated. End cars sit on the rails.'
     });
     [-1, 1].forEach(function (sign) {
       const cz = sign * (railZc - 0.59);
-      addM('machine-gantry', box(5.4, 2.4, 0.7), beamX, (beamCY + railCY) / 2, cz, gun, {
+      addM('machine-gantry', box(4.6, 2.7, 0.7), beamX, (beamCY + railCY) / 2, cz, gun, {
         estimated: true, label: 'Gantry and beam', qty: '2',
-        spec: 'End carriage about 5.4 in long, estimated',
-        notes: 'Carriage at each end of the beam. Size is estimated.'
+        spec: 'End carriage about 4.6 in long, estimated',
+        notes: 'Carriage at each end of the beam, on the long-wall rail. Size is estimated.'
       });
     });
-    addM('machine-gantry', box(14, 0.42, 0.7), beamX + 12, railCY - 0.7, railZc - 0.7, new THREE.MeshStandardMaterial({ color: 0x3a2e24, roughness: 0.7, metalness: 0.15 }), {
+    addM('machine-gantry', box(14, 0.42, 0.7), 14, railCY - 0.7, railZc - 0.7, new THREE.MeshStandardMaterial({ color: 0x3a2e24, roughness: 0.7, metalness: 0.15 }), {
       estimated: true, label: 'Gantry and beam', qty: '1',
       spec: 'Cable chain, estimated',
       notes: 'Drag chain along the back wall, from the beam toward the rear. Length is estimated.'
     });
 
-    const headH = 4.6;
-    const headTop = beamCY - beamH / 2 - 0.1;
-    const headCY = headTop - headH / 2;
-    const headD = 2.7;
-    const headW = 5.7;
-    addM('machine-head', box(headW, headH, headD), beamX, headCY, 0, gun, {
-      estimated: true, label: 'Tool head', qty: '1',
-      spec: 'Housing about 5.7 × 2.7 × 4.6 in, estimated',
-      notes: 'This view shows the 120 W diode module. The 200 W spindle body is 52 mm in diameter. Housing size is estimated.'
+    const zModW = 3.6;
+    const zModD = 1.6;
+    const zModH = 2.35;
+    const zModTop = beamCY - beamH / 2 + 0.05;
+    const zModCY = zModTop - zModH / 2;
+    addM('machine-head', box(zModW, zModH, zModD), beamX, zModCY, 0, gun, {
+      rim: true, estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Z module about 3.6 × 1.6 × 2.4 in, estimated',
+      notes: 'Gunmetal module under the beam. Size is estimated.'
     });
-    addM('machine-head', box(headW - 0.3, headH - 0.5, 0.06), beamX, headCY, headD / 2 + 0.06, headMat, {
+    addM('machine-head', box(zModW - 0.5, 0.32, 0.06), beamX, zModCY + 0.28, zModD / 2 + 0.02, orange, {
+      estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Orange accent, estimated',
+      notes: 'Orange band on the Z module face.'
+    });
+    const headW = 8;
+    const headD = 4.4;
+    const headH = 4.7;
+    const headTop = zModCY - zModH / 2 - 0.1;
+    const headCY = headTop - headH / 2;
+    addM('machine-head', box(headW, headH, headD), beamX, headCY, 0, gun, {
+      rim: true, estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Housing about 8 × 4.4 × 4.7 in, estimated',
+      notes: 'This view shows the diode module: a gunmetal box with an orange face. The 200 W spindle body is 52 mm in diameter. Housing size is estimated.'
+    });
+    addM('machine-head', box(headW - 0.7, headH - 0.9, 0.06), beamX, headCY + 0.15, headD / 2 + 0.02, headMat, {
       estimated: true, label: 'Tool head', qty: '1',
       spec: 'Orange face graphic, estimated',
       notes: 'Angled ACMER trace on the module face.'
     });
-    const nozH = 1.15;
-    const nozTop = headCY - headH / 2 - 0.05;
-    const nozCY = nozTop - nozH / 2;
-    addM('machine-head', new THREE.CylinderGeometry(0.32, 0.26, nozH, 16), beamX, nozCY, 0.15, blue, {
+    addM('machine-head', box(headW - 0.9, 0.28, 0.06), beamX, headCY - headH / 2 + 0.24, headD / 2 + 0.02, orange, {
       estimated: true, label: 'Tool head', qty: '1',
-      spec: 'Nozzle, estimated',
+      spec: 'Orange accent, estimated',
+      notes: 'Orange band along the bottom of the module face.'
+    });
+    const nozH = 0.9;
+    const collarH = 0.18;
+    const headBottom = headCY - headH / 2;
+    const collarCY = headBottom - 0.1 - collarH / 2;
+    const nozCY = collarCY - collarH / 2 - 0.08 - nozH / 2;
+    addM('machine-head', new THREE.CylinderGeometry(0.55, 0.55, collarH, 16), beamX, collarCY, 0.35, orange, {
+      estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Nozzle collar, estimated',
+      notes: 'Orange collar above the nozzle. Size is estimated.'
+    });
+    addM('machine-head', new THREE.CylinderGeometry(0.46, 0.3, nozH, 18), beamX, nozCY, 0.35, blue, {
+      estimated: true, label: 'Tool head', qty: '1',
+      spec: 'Laser nozzle, estimated',
       notes: 'Blue nozzle on the diode module. Drawn tip is about ' + r2((nozCY - nozH / 2) - (TOP_H + FIRE_T + HONEY_T)) + ' in above the honeycomb. Real clearance is unknown. Z travel is 80 mm (3.1 in).'
     });
-    [-2.05, -1.35, 2.05].forEach(function (dx) {
-      addM('machine-head', new THREE.CylinderGeometry(0.16, 0.16, 0.45, 12), beamX + dx, headCY + headH / 2 + 0.26, 0.2, black, {
+    [-2.7, 2.7].forEach(function (dx) {
+      addM('machine-head', new THREE.CylinderGeometry(0.22, 0.22, 0.55, 12), beamX + dx, headTop + 0.22, 0.55, black, {
         estimated: true, label: 'Tool head', qty: '1',
         spec: 'Couplers, estimated',
-        notes: 'Water and air stubs on top of the module. Size is estimated.'
+        notes: 'Water and air stubs beside the Z module. Size is estimated.'
       });
     });
 
-    const lidLen = 18;
-    const lidZ = (innerZ - 0.35) * 2;
-    const lidH = 0.4;
-    const lidCY = y1 - 0.08 - lidH / 2;
+    const lidH = 0.42;
+    const lidBottom = railTop + 0.14;
+    const lidCY = lidBottom + lidH / 2;
+    const lidZ = (innerZ - 0.4) * 2;
+    const xOuter = innerX - 0.55;
+    const xGap = 5.5;
     [-1, 1].forEach(function (sign) {
-      const xc = sign * (innerX - lidLen / 2 - 0.3);
+      const xIn = sign * xGap;
+      const xOut = sign * xOuter;
+      const lidLen = Math.abs(xOut - xIn);
+      const xc = (xOut + xIn) / 2;
       addM('machine-lid', box(lidLen, lidH, lidZ), xc, lidCY, 0, pleatMat, {
-        estimated: true, label: 'Sliding doors', qty: '2',
+        rim: true, estimated: true, label: 'Sliding doors', qty: '2',
         spec: 'Two panels, about 0.4 in thick, estimated',
-        notes: 'Light-grey pleated doors. Drawn slid toward the ends so the beam stays visible. How far they travel is estimated.'
+        notes: 'Matte dark-grey ribbed sliding panels. They meet at a seam in the middle. Drawn parted over the gantry so the beam and head stay visible. How far they travel is estimated.'
       });
     });
 
-    const chillCX = -(halfL + CHILLER_GAP + CHILLER_X / 2);
-    const chillCZ = -2;
-    const chillCY = CHILLER_H / 2 + 0.06;
-    const chillSpec = 'About ' + r2(CHILLER_Z) + ' × ' + r2(CHILLER_X) + ' × ' + r2(CHILLER_H) + ' in (350 × 300 × 400 mm), estimated';
-    const chillNotes = 'Separate cabinet: compressor, tank, screen, and E-stop. Size is not published. Sits on the floor beside the left end, off the plywood.';
-    addM('machine-chiller', box(CHILLER_X, CHILLER_H, CHILLER_Z), chillCX, chillCY, chillCZ, black, {
+    const cW = CHILLER_Z;
+    const cD = CHILLER_X;
+    const cH = CHILLER_H;
+    const chillCX = -halfL + cW / 2 + 2.5;
+    const chillCZ = halfW + CHILLER_GAP + cD / 2;
+    const chillCY = cH / 2 + 0.06;
+    const faceZ = chillCZ + cD / 2;
+    const chillSpec = 'About ' + r2(cW) + ' × ' + r2(cD) + ' × ' + r2(cH) + ' in (350 × 300 × 400 mm), estimated';
+    const chillNotes = 'Separate cabinet: compressor, tank, screen, and E-stop. Size is not published. Sits on the floor beside the left end, on the near side, outside the legs and off the plywood.';
+    addM('machine-chiller', box(cW, cH, cD), chillCX, chillCY, chillCZ, black, {
+      rim: true, estimated: true, label: 'Water chiller', qty: '1', spec: chillSpec, notes: chillNotes
+    });
+    addM('machine-chiller', box(cW - 0.7, cH - 1.4, 0.06), chillCX, chillCY, faceZ + 0.04, chillMat, {
       estimated: true, label: 'Water chiller', qty: '1', spec: chillSpec, notes: chillNotes
     });
-    addM('machine-chiller', box(0.06, CHILLER_H - 0.8, CHILLER_Z - 0.4), chillCX + CHILLER_X / 2 + 0.06, chillCY, chillCZ, chillMat, {
-      estimated: true, label: 'Water chiller', qty: '1', spec: chillSpec, notes: chillNotes
-    });
-    addM('machine-chiller', box(0.08, 1.5, 1.7), chillCX + CHILLER_X / 2 + 0.22, chillCY + 3.2, chillCZ - 2.2, screenMat, {
+    addM('machine-chiller', box(2.6, 1.55, 0.08), chillCX - 3.1, chillCY + 3.4, faceZ + 0.2, screenMat, {
       glow: 0x1d4e89, glowI: 0.55, estimated: true, label: 'Water chiller', qty: '1',
-      spec: 'Display, estimated', notes: 'Small screen on the cabinet front.'
+      spec: 'Display, estimated', notes: 'Small screen on the cabinet face toward the near side.'
     });
-    addM('machine-chiller', box(0.08, 3.2, 0.35), chillCX + CHILLER_X / 2 + 0.08, chillCY - 0.4, chillCZ + 3.4, new THREE.MeshStandardMaterial({ color: 0xd6c36a, roughness: 0.35, metalness: 0.05 }), {
-      estimated: true, label: 'Water chiller', qty: '1', spec: 'Sight glass, estimated', notes: 'Water-level window. Position is estimated.'
+    addM('machine-chiller', new THREE.CylinderGeometry(0.48, 0.48, 0.32, 16), chillCX + 3.5, chillCY - 3.1, faceZ + 0.22, red, {
+      estimated: true, label: 'Water chiller', qty: '1',
+      spec: 'E-stop, on the cabinet',
+      notes: 'The emergency stop is on the chiller, not on the frame. Shown on the near face.'
+    }, [Math.PI / 2, 0, 0]);
+    addM('machine-chiller', new THREE.CylinderGeometry(0.32, 0.32, 0.36, 14), chillCX + 2.2, chillCY + cH / 2 + 0.16, chillCZ - 1.4, orange, {
+      estimated: true, label: 'Water chiller', qty: '1', spec: 'Fill port, estimated', notes: 'Orange cap on top. Position is estimated.'
     });
-    for (let i = 0; i < 4; i++) {
-      addM('machine-chiller', box(CHILLER_X - 1.2, 0.28, 0.08), chillCX, chillCY - 2 + i * 0.7, chillCZ + CHILLER_Z / 2 + 0.06, blackSoft, {
+    for (let i = 0; i < 3; i++) {
+      addM('machine-chiller', box(0.06, 0.22, cD - 2.4), chillCX + cW / 2 + 0.04, chillCY + 1.6 - i * 0.7, chillCZ, blackSoft, {
         estimated: true, label: 'Water chiller', qty: '1', spec: 'Side vents, estimated', notes: 'Louvres on the side. Count and size are estimated.'
       });
     }
-    addM('machine-chiller', new THREE.CylinderGeometry(0.55, 0.55, 0.4, 16), chillCX - CHILLER_X / 2 - 0.22, chillCY + 2.4, chillCZ, red, {
-      estimated: true, label: 'Water chiller', qty: '1',
-      spec: 'E-stop, on the cabinet',
-      notes: 'The emergency stop is on the chiller, not on the frame. Shown on the back face.'
-    }, [0, 0, Math.PI / 2]);
-    addM('machine-chiller', new THREE.CylinderGeometry(0.35, 0.35, 0.45, 14), chillCX + 1.2, chillCY + CHILLER_H / 2 + 0.26, chillCZ - 1, orange, {
-      estimated: true, label: 'Water chiller', qty: '1', spec: 'Fill port, estimated', notes: 'Orange cap on top. Position is estimated.'
-    });
-    const hoseX0 = chillCX + CHILLER_X / 2 + 0.15;
-    const hoseX1 = -halfL - 0.2;
-    addM('machine-chiller', box(hoseX1 - hoseX0, 0.28, 0.28), (hoseX0 + hoseX1) / 2, 8, chillCZ, blackSoft, {
-      estimated: true, label: 'Water chiller', qty: '1', spec: 'Hose run, estimated',
-      notes: 'Water hose from the cabinet to the front end. Path is estimated.'
+    addM('machine-chiller', box(0.7, 0.28, 0.28), chillCX + cW / 2 + 0.4, chillCY - 2.2, chillCZ - 1.2, blackSoft, {
+      estimated: true, label: 'Water chiller', qty: '1', spec: 'Hose stub, estimated',
+      notes: 'Short water stub on the cabinet. The run to the machine is estimated and not drawn through the frame.'
     });
   }
   function buildStand() {
@@ -1695,19 +1749,26 @@
         mat.depthWrite = true;
       }
       if (mat.emissive) {
-        if (mode === 'current') {
-          mat.emissive.set(0xb85a20);
-          mat.emissiveIntensity = 0.55;
-        } else if (obj.userData.keepEmissive) {
+        if (obj.userData.keepEmissive) {
           mat.emissive.set(obj.userData.glow || 0xffe2b0);
           mat.emissiveIntensity = obj.userData.glowI == null ? 0.7 : obj.userData.glowI;
+        } else if (mode === 'current' && obj.userData.kind === 'machine') {
+          mat.emissive.set(0xe8501c);
+          mat.emissiveIntensity = 0.07;
+        } else if (mode === 'current') {
+          mat.emissive.set(0xb85a20);
+          mat.emissiveIntensity = 0.55;
         } else {
           mat.emissive.set(0x000000);
           mat.emissiveIntensity = 0;
         }
       }
     } else if (obj.isLine || obj.isLineSegments) {
-      mat.color.set(mode === 'current' ? 0xffe7b0 : (obj.userData.baseColor || 0xffb25a));
+      if (obj.userData.rim) {
+        mat.color.set(mode === 'current' ? 0xe8501c : (obj.userData.baseColor || 0x1a1614));
+      } else {
+        mat.color.set(mode === 'current' ? 0xffe7b0 : (obj.userData.baseColor || 0xffb25a));
+      }
     }
     mat.needsUpdate = true;
   }
@@ -1814,11 +1875,17 @@
     applyVisibility();
     const visible = registry[id].meshes.filter(function (m) { return m.visible; });
     visible.forEach(function (obj) {
-      if (obj.isMesh && obj.material && obj.material.emissive) {
-        obj.material.emissive.set(0xff7a3c);
-        obj.material.emissiveIntensity = 0.75;
+      const machine = obj.userData.kind === 'machine';
+      if (obj.isMesh && obj.material && obj.material.emissive && !obj.userData.keepEmissive) {
+        if (machine) {
+          obj.material.emissive.set(0xe8501c);
+          obj.material.emissiveIntensity = 0.1;
+        } else {
+          obj.material.emissive.set(0xff7a3c);
+          obj.material.emissiveIntensity = 0.75;
+        }
       } else if ((obj.isLine || obj.isLineSegments) && obj.material) {
-        obj.material.color.set(0xff7a3c);
+        obj.material.color.set(obj.userData.rim ? 0xe8501c : 0xff7a3c);
       }
     });
     const coverOn = FADE_WITH_TOP.some(function (pid) {
@@ -1874,11 +1941,11 @@
   function sceneFrame() {
     const pad = 0.8;
     return {
-      x0: -(MACHINE_L / 2 + CHILLER_GAP + CHILLER_X) - pad,
+      x0: -MACHINE_L / 2 - pad,
       x1: MACHINE_L / 2 + 5,
       y0: 0,
       y1: TOP_H + MACHINE_H + 0.4,
-      z: MACHINE_W / 2 + 0.6
+      z: MACHINE_W / 2 + CHILLER_GAP + CHILLER_X + pad
     };
   }
   function standCorners() {
