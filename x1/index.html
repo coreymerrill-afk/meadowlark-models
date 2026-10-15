@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#1c1712" />
+<link rel="icon" href="data:," />
 <title>X1 Ultra stand</title>
 <style>
   :root {
@@ -397,9 +398,10 @@
     const panelZ0 = legZFront + LEG / 2;
     const panelZ1 = legZBack - LEG / 2;
     const panelW = r2(panelZ1 - panelZ0);
-    const stops = [[x0, x0 + T26]];
+    // End blocks stop at the shear panel, which sits just inside the end rail.
+    const stops = [[x0, x0 + T26 + PLY_T]];
     joistXs.forEach(function (x) { stops.push([x - T26 / 2, x + T26 / 2]); });
-    stops.push([x1 - T26, x1]);
+    stops.push([x1 - T26 - PLY_T, x1]);
     const blocks = [];
     for (let i = 0; i < stops.length - 1; i++) {
       const a = stops[i][1], b = stops[i + 1][0];
@@ -1166,6 +1168,8 @@
     someTouch(joists, longR, 2, 'joist to long rail');
     someTouch(endR, longR, 2, 'end rail to long rail');
     someTouch(blocks, joists.concat(endR), 0, 'block to framing');
+    const endBlocks = registry['seam-block'].meshes.filter(function (m) { return Math.abs(m.position.x) > 40; }).map(aabb);
+    someTouch(endBlocks, panels, 0, 'end block to panel');
     someTouch(crosses, legs, 2, 'cross rail to leg');
     someTouch(panels, legs, 2, 'panel to leg');
     someTouch(panels, endR, 0, 'panel to end rail');
