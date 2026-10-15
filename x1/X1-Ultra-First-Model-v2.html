@@ -104,6 +104,7 @@
   .step-bar-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; width: 100%; }
   .step-title { flex: 1; font-weight: 700; min-width: 120px; }
   #btn-prev, #btn-next, #btn-explore, #btn-reset-cam { min-width: 64px; }
+  .cam-short { display: none; }
   #btn-explore, .explore-chip { background: #243428; color: var(--ok); border-color: #4a7a58; }
   #btn-explore.current, .explore-chip.current { background: var(--ok); color: var(--ink); }
   .step-nums { display: flex; flex-wrap: wrap; gap: 4px; }
@@ -159,16 +160,19 @@
   }
   @media (max-width: 767px) {
     .step-bar { flex-direction: column; align-items: stretch; }
+    .cam-long { display: none; }
+    .cam-short { display: inline; }
+    body.mode-3d .step-bar { display: contents; }
+    body.mode-3d .step-nums-wrap { order: 1; }
+    body.mode-3d .view3d-wrap { order: 2; }
     body.mode-3d .step-bar-nav {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      order: 3; position: static; flex-shrink: 0; flex-wrap: wrap;
       box-sizing: border-box; width: 100%;
       padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
-      background: var(--bg2); border-top: 1px solid var(--border);
+      background: var(--bg2); border-top: 1px solid var(--border); border-bottom: none;
     }
     body.mode-3d .step-bar-nav .step-title { order: -1; flex: 1 0 100%; min-width: 0; }
-    body.mode-3d #panel-build { padding-bottom: 0; }
-    #btn-prev, #btn-next, #btn-explore, #btn-reset-cam { flex: 1; }
+    #btn-prev, #btn-next, #btn-explore, #btn-reset-cam { flex: 1 1 0; min-width: 0; padding-left: 6px; padding-right: 6px; }
     .step-nums-wrap { display: block; width: 100%; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); }
     .step-nums-wrap > summary { display: flex; align-items: center; min-height: 44px; padding: 0 12px; cursor: pointer; font-weight: 700; }
     .step-nums-wrap:not([open]) .step-nums { display: none; }
@@ -178,9 +182,10 @@
     #sidebar-3d {
       width: 100%; max-height: none; flex: 1 1 58%; min-height: 0;
       border-left: none; border-top: 1px solid var(--border);
-      padding-bottom: calc(108px + env(safe-area-inset-bottom));
+      padding-bottom: 12px;
     }
     .day-view:not([open]) .day-steps { display: none; }
+    #piece-list { max-height: 120px; }
   }
   @media (min-width: 768px) {
     .step-nums-wrap { display: contents; }
@@ -313,7 +318,7 @@
       <button type="button" id="btn-prev">Prev</button>
       <button type="button" id="btn-next">Next</button>
       <button type="button" id="btn-explore" class="explore-chip" aria-pressed="false">Explore</button>
-      <button type="button" id="btn-reset-cam">Reset camera</button>
+      <button type="button" id="btn-reset-cam" aria-label="Reset camera"><span class="cam-long">Reset camera</span><span class="cam-short">Reset</span></button>
       <div class="step-title" id="step-title-bar">Step 1</div>
     </div>
     <details class="step-nums-wrap">
@@ -973,27 +978,31 @@
   }
   function honeyTex() {
     const c = document.createElement('canvas');
-    c.width = 96; c.height = 96;
+    c.width = 128; c.height = 128;
     const g = c.getContext('2d');
-    g.fillStyle = '#d7a24a'; g.fillRect(0, 0, 96, 96);
-    g.strokeStyle = '#6e4510'; g.lineWidth = 3;
-    const s = 16;
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const x = col * s * 1.5 + (row % 2) * s * 0.75;
-        const y = row * s * 0.86;
+    g.fillStyle = '#6b4218';
+    g.fillRect(0, 0, 128, 128);
+    g.strokeStyle = '#f6e7c4';
+    g.lineWidth = 5;
+    const s = 36;
+    for (let row = 0; row < 5; row++) {
+      for (let col = 0; col < 4; col++) {
+        const x = col * s * 1.5 + (row % 2) * s * 0.75 + 8;
+        const y = row * s * 0.86 + 6;
         g.beginPath();
         for (let k = 0; k < 6; k++) {
           const a = Math.PI / 6 + k * Math.PI / 3;
-          const px = x + s * 0.48 * Math.cos(a), py = y + s * 0.48 * Math.sin(a);
+          const px = x + s * 0.46 * Math.cos(a), py = y + s * 0.46 * Math.sin(a);
           if (k === 0) g.moveTo(px, py); else g.lineTo(px, py);
         }
-        g.closePath(); g.stroke();
+        g.closePath();
+        g.stroke();
       }
     }
     const tex = new THREE.CanvasTexture(c);
     tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    tex.repeat.set(8, 8);
+    tex.repeat.set(4, 4);
+    tex.needsUpdate = true;
     if (THREE.sRGBEncoding) tex.encoding = THREE.sRGBEncoding;
     return tex;
   }
@@ -1038,7 +1047,9 @@
     const metal = new THREE.MeshStandardMaterial({ color: 0x8e969c, roughness: 0.35, metalness: 0.72 });
     const padMat = new THREE.MeshStandardMaterial({ color: 0x242424, roughness: 0.92, metalness: 0 });
     const fireMat = new THREE.MeshStandardMaterial({ color: 0xc5c9ce, roughness: 0.32, metalness: 0.78 });
-    const honeyMat = new THREE.MeshStandardMaterial({ map: honeyTex(), color: 0xffffff, roughness: 0.45, metalness: 0.35 });
+    const honeyMap = honeyTex();
+    honeyMap.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    const honeyMat = new THREE.MeshStandardMaterial({ map: honeyMap, color: 0xffffff, roughness: 0.72, metalness: 0.08 });
     const mdf = new THREE.MeshStandardMaterial({ color: 0x8d7048, roughness: 0.86, metalness: 0 });
     const railZ = M.outerZ - M.T26 / 2;
     const endX = M.outerX - M.T26 / 2;
@@ -1160,6 +1171,12 @@
     scene.add(ground);
   }
 
+  function isSolid(mesh) {
+    const p = mesh.geometry && mesh.geometry.parameters;
+    if (!mesh.isMesh || !p) return false;
+    if (p.width != null) return true;
+    return p.height != null && (p.radiusTop != null || p.radiusBottom != null);
+  }
   function aabb(mesh) {
     const p = mesh.geometry.parameters;
     const x = mesh.position.x, y = mesh.position.y, z = mesh.position.z;
@@ -1186,7 +1203,7 @@
     const fails = [];
     function boxes(id, pred) {
       return (registry[id] ? registry[id].meshes : []).filter(function (m) {
-        return m.isMesh && m.geometry.parameters && m.geometry.parameters.width != null && (!pred || pred(m));
+        return isSolid(m) && (!pred || pred(m));
       }).map(aabb);
     }
     function someTouch(listA, listB, axis, label) {
@@ -1234,9 +1251,7 @@
     Object.keys(registry).forEach(function (id) {
       registry[id].meshes.forEach(function (m) {
         if (m.userData.later) return;
-        if (m.isMesh && m.geometry.parameters && m.geometry.parameters.width != null) {
-          solids.push({ name: id + '@' + m.position.x.toFixed(1), b: aabb(m) });
-        }
+        if (isSolid(m)) solids.push({ name: id + '@' + m.position.x.toFixed(1) + ',' + m.position.z.toFixed(1), b: aabb(m) });
       });
     });
     for (let i = 0; i < solids.length; i++) {
@@ -1523,6 +1538,19 @@
       return registry[id].meshes.some(function (m) { return m.visible; });
     }).sort();
   }
+  function topFade() {
+    const out = [];
+    ['top-center', 'top-end'].forEach(function (id) {
+      (registry[id] ? registry[id].meshes : []).forEach(function (m) {
+        out.push({
+          id: id, visible: !!m.visible, faded: !!m.userData.faded,
+          opacity: m.material && m.material.opacity != null ? m.material.opacity : 1,
+          transparent: !!(m.material && m.material.transparent)
+        });
+      });
+    });
+    return out;
+  }
   function meshSig() {
     const parts = pickables.filter(function (m) { return m.visible && !m.userData.later; }).map(function (m) {
       return m.userData.partId + ':' + (m.userData.side || '') + ':' + m.position.x.toFixed(1);
@@ -1631,6 +1659,7 @@
       meshSig: meshSig,
       projectPart: projectPart,
       highlight: highlightPart,
+      topFade: topFade,
       selectedPart: function () { return selectedPart; },
       audit: audit,
       PICK_MOVE_PX: PICK_MOVE_PX,
