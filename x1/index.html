@@ -13,7 +13,7 @@
     --warn: #f0c36a; --hi: #ff8a3d; --ink: #1c1712;
   }
   * { box-sizing: border-box; }
-  html, body { height: 100%; }
+  html, body { height: 100%; overflow-x: clip; }
   body {
     margin: 0; min-height: 100dvh; display: flex; flex-direction: column;
     background: var(--bg); color: var(--text);
@@ -79,8 +79,17 @@
   button.solid { background: var(--accent); color: var(--ink); border-color: var(--accent); }
   .board { margin: 10px 0 14px; }
   .board figcaption { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .qty-badge {
+    display: inline-block; font-weight: 800; color: var(--ink); background: var(--accent);
+    border-radius: 4px; padding: 0 6px; margin: 0 2px; white-space: nowrap;
+  }
   .board svg { width: 100%; height: auto; background: #241c16; border-radius: 8px; }
   .sheet-grid { display: grid; gap: 10px; }
+  .shop-cards { display: none; }
+  .shop-card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+  }
+  .shop-card p { margin: 4px 0 0; }
   @media (min-width: 720px) {
     .facts { grid-template-columns: 1fr 1fr; }
     .sheet-grid { grid-template-columns: 1fr 1fr 1fr; }
@@ -113,10 +122,17 @@
   #canvas-wrap { position: relative; flex: 1; min-width: 0; min-height: 240px; }
   #canvas-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
   #three-loading, #three-error {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    padding: 16px; text-align: center; color: var(--muted);
+    position: absolute; inset: 0; z-index: 4; display: flex; align-items: center; justify-content: center;
+    padding: 16px; text-align: center; color: var(--muted); background: rgba(28, 23, 18, 0.92);
   }
+  #three-loading[hidden], #three-error[hidden], #piece-sheet[hidden] { display: none !important; }
   #three-error { color: #ffd0d0; }
+  #part-tags { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+  .part-tag {
+    position: absolute; transform: translate(-50%, -130%); max-width: 70%;
+    background: #3a2a1c; color: var(--text); border: 1px solid var(--warn);
+    border-radius: 6px; padding: 2px 6px; font-size: 12px; font-weight: 800; white-space: nowrap;
+  }
   #sidebar-3d {
     width: 340px; flex-shrink: 0; overflow: auto; background: var(--bg2);
     border-left: 1px solid var(--border); padding: 10px 12px 20px; font-size: 14px;
@@ -135,13 +151,42 @@
     background: #3a2a1c; border: 1px solid var(--warn); border-radius: 10px; padding: 10px 12px; margin: 0 0 10px;
   }
   #part-detail h3 { margin: 0 0 6px; color: var(--text); }
+  #piece-sheet {
+    margin: 0 0 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg);
+  }
+  #piece-sheet > summary {
+    min-height: 44px; display: flex; align-items: center; padding: 0 12px;
+    cursor: pointer; font-weight: 800;
+  }
+  #piece-list { list-style: none; margin: 0; padding: 6px; max-height: 32dvh; overflow: auto; }
+  #piece-list button {
+    display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline;
+    width: 100%; text-align: left; margin: 2px 0;
+  }
+  #piece-list button small { flex: 1 0 100%; font-weight: 500; color: var(--muted); font-size: 12px; }
+  #piece-list button.current { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+  #piece-list button.current small { color: var(--ink); }
   .tag {
     display: inline-block; background: var(--warn); color: var(--ink); font-size: 11px; font-weight: 800;
     border-radius: 4px; padding: 2px 6px; margin-bottom: 6px;
   }
   @media (max-width: 767px) {
+    nav.tabs { overflow-x: hidden; }
+    nav.tabs button { padding: 8px 8px; }
+    #shop-list .table-wrap { display: none; }
+    .shop-cards { display: grid; gap: 8px; }
     .step-bar { flex-direction: column; align-items: stretch; }
     .step-bar-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    body.mode-3d .step-bar-nav {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      box-sizing: border-box; width: 100%;
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      background: var(--bg2); border-top: 1px solid var(--border);
+    }
+    body.mode-3d .step-bar-nav .step-title { order: -1; flex: 1 0 100%; min-width: 0; }
+    body.mode-3d #panel-build { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+    #btn-prev, #btn-next, #btn-explore { flex: 1; }
     .view-tools-wrap, .step-nums-wrap {
       display: block; width: 100%; border: 1px solid var(--border); border-radius: 8px; background: var(--bg);
     }
@@ -152,11 +197,14 @@
     .view-tools-wrap[open] .view-tools-inner { display: flex; flex-wrap: wrap; gap: 8px; }
     .step-nums-wrap:not([open]) .step-nums { display: none; }
     .step-nums-wrap[open] .step-nums { padding: 8px; max-height: 30dvh; overflow: auto; }
-    .view3d-wrap { flex-direction: column; }
-    #canvas-wrap { min-height: 42dvh; }
+    .view3d-wrap { flex-direction: column; min-height: 0; overflow: hidden; }
+    #canvas-wrap { min-height: 0; flex: 1 1 42%; }
     #sidebar-3d {
-      width: 100%; max-height: 36dvh; border-left: none; border-top: 1px solid var(--border);
+      width: 100%; max-height: none; flex: 1 1 58%; min-height: 0;
+      border-left: none; border-top: 1px solid var(--border);
+      padding-bottom: calc(96px + env(safe-area-inset-bottom));
     }
+    body.mode-3d #panel-build { padding-bottom: 0; }
     .day-view:not([open]) .day-steps { display: none; }
   }
   @media (min-width: 768px) {
@@ -167,8 +215,11 @@
     body, main { display: block !important; height: auto !important; overflow: visible !important; background: #fff !important; color: #111 !important; max-width: none !important; }
     header, #panel-overview, #panel-build, #panel-faq, .noprint, #three-loading, #three-error { display: none !important; }
     #panel-shop { display: block !important; }
+    .shop-cards { display: none !important; }
+    #shop-list .table-wrap { display: block !important; }
     .table-wrap, table.data, .board { break-inside: avoid; background: #fff; color: #111; }
-    table.data th { color: #111; background: #eee; }
+    table.data th, .board figcaption { color: #111; background: #eee; }
+    .qty-badge { background: #111; color: #fff; }
     a { color: #111; text-decoration: none; }
   }
 </style>
@@ -180,9 +231,9 @@
   <p class="meta">A simple frame table for the laser. The CNC spoil board can wait.</p>
   <nav class="tabs" aria-label="Guide">
     <button type="button" data-tab="overview" class="active">Overview</button>
-    <button type="button" data-tab="shop">Shop &amp; cut list</button>
+    <button type="button" data-tab="shop">Shop &amp; cuts</button>
     <button type="button" data-tab="build">Build</button>
-    <button type="button" data-tab="faq">FAQ &amp; specs</button>
+    <button type="button" data-tab="faq">FAQ</button>
   </nav>
 </header>
 <main id="main">
@@ -205,23 +256,23 @@
   <table class="data day-plan-table">
     <thead><tr><th>Day</th><th>Work</th><th>Done when</th></tr></thead>
     <tbody>
-      <tr><td class="num">1</td><td>Cull and cut. Frame upside down, bolt the legs, add the lower loop. Steps 1–5.</td><td>Frame, legs, and lower loop are together, still upside down.</td></tr>
+      <tr><td class="num">1</td><td>Pick the straightest boards and cut. Frame upside down, bolt the legs, add the lower loop. Steps 1–5.</td><td>Frame, legs, and lower loop are together, still upside down.</td></tr>
       <tr><td class="num">2</td><td>Levelers, flip, level to 36 in, end panels, push test, top sheets, seal. Steps 6–10.</td><td>It is rigid, level, and the top is on.</td></tr>
       <tr><td class="num">3</td><td>Fire break, honeycomb, then the machine. Steps 11–12.</td><td>The machine sits level, feet over a joist or a rail.</td></tr>
-      <tr><td class="num">4</td><td>Buffer. Re-level, tighten bolts, fix anything the push test found.</td><td>You are happy to leave it for the night.</td></tr>
+      <tr><td class="num">4</td><td>Buffer. Re-level, tighten bolts, smoke test.</td><td>You are happy to leave it for the night.</td></tr>
     </tbody>
   </table>
   <div class="day-plan-cards">
-    <article class="day-plan-card"><div class="k">Day 1 · steps 1–5</div><strong>Cut and frame, still upside down</strong><p>Cull, cut, screw the top frame, bolt the legs, add the lower loop.</p><p>Done when the frame, legs, and lower loop are together.</p></article>
+    <article class="day-plan-card"><div class="k">Day 1 · steps 1–5</div><strong>Cut and frame, still upside down</strong><p>Pick the straightest boards and cut, screw the top frame, bolt the legs, add the lower loop.</p><p>Done when the frame, legs, and lower loop are together.</p></article>
     <article class="day-plan-card"><div class="k">Day 2 · steps 6–10</div><strong>Stand it up and skin it</strong><p>Flip with a helper, level to 36 in, end panels, push test, top, seal.</p><p>Done when it is rigid, level, and the top is on.</p></article>
     <article class="day-plan-card"><div class="k">Day 3 · steps 11–12</div><strong>Bed and machine</strong><p>Fire break and honeycomb, then set the machine.</p><p>Done when the machine sits level.</p></article>
-    <article class="day-plan-card"><div class="k">Day 4 · buffer</div><strong>Fix what the shop taught you</strong><p>Re-level, tighten bolts, add a brace only if the push test said so.</p><p>Done when you can leave it.</p></article>
+    <article class="day-plan-card"><div class="k">Day 4 · buffer</div><strong>Re-level and smoke test</strong><p>Re-level, tighten bolts, and run a short smoke test. Add a brace only if the push test said so.</p><p>Done when you can leave it.</p></article>
   </div>
   <h3>Why it does not rack or sag</h3>
   <div class="why">
-    <p>The machine, the bed, and the sheet sit on the plywood, the plywood sits on 2×6 joists every 16 inches, the joists sit in two long rails, and those rails sit on six 4×4 legs that run straight down to the levelers and the slab. The rails are on edge, and the long sheet seam lands on a joist, so the plywood is not asked to bridge a wide gap by itself. The plywood top ties the frame into one stiff sheet, the lower rail loop ties all six legs, and the end panels keep the ends from leaning. When it is standing, push the top sideways with about 50 lb; add a plywood panel on the back or two diagonals only if it moves.</p>
+    <p>The machine, the bed, and the sheet sit on the plywood, the plywood sits on 2×6 joists every 16 inches, the joists sit in two long rails, and those rails sit on six 4×4 legs that run straight down to the levelers and the slab. The rails are on edge, the 96 in seam lands on a joist, and the 48 in seam sits on the blocks, so the plywood is not asked to bridge a wide gap by itself. The plywood top ties the frame into one stiff sheet, the lower rail loop ties all six legs, and the end panels keep the ends from leaning. When it is standing, push the top sideways with about 50 lb; add a plywood panel on the back or two diagonals only if it moves.</p>
   </div>
-  <p class="meta" style="margin-top:12px">Tools: a circular saw and a straightedge, a drill, a socket, a level, clamps, and sawhorses. A table saw is not required. The full list is on Shop &amp; cut list.</p>
+  <p class="meta" style="margin-top:12px">Tools: a circular saw and a straightedge, a drill with a long ⅜ bit and a Torx bit, a wrench, a level, clamps, and sawhorses. A table saw is not required. The full list is on Shop &amp; cuts.</p>
 </section>
 
 <section id="panel-shop" class="panel">
@@ -247,7 +298,7 @@
     <tbody>
       <tr><td>3½ in structural screws</td><td class="num">2 one-pound boxes</td><td>Frame, joists, lower rails, seam blocks</td></tr>
       <tr><td>#8 × 2 in construction screws</td><td class="num">3 boxes</td><td>Plywood to the frame. 2 in still has bite after the sheet.</td></tr>
-      <tr><td>⅜ × 5 in carriage bolts, washers, nuts</td><td class="num">24</td><td>4 per leg: 2 into the top rail, 2 into the lower rail</td></tr>
+      <tr><td>⅜ × 6 in carriage bolts, washers, nuts</td><td class="num">24</td><td>4 per leg: 2 into the top rail, 2 into the lower 2×4. 6 in leaves thread for the washer and nut.</td></tr>
       <tr><td>Swivel levelers, about 1000 lb, ½ in thread, with T-nuts or a flange</td><td class="num">6</td><td>One per leg. Measure mid-travel before you cut.</td></tr>
       <tr><td>Felt or rubber pads</td><td class="num">6</td><td>Under every foot, on the coated slab</td></tr>
       <tr><td>Wood glue</td><td class="num">1 bottle</td><td>Frame and top</td></tr>
@@ -260,8 +311,8 @@
   <ul>
     <li>Circular saw and a straightedge or a track saw. A table saw is not required.</li>
     <li>Speed square, framing square, tape, pencil.</li>
-    <li>Drill/driver, plus an impact driver if you have one. Bits: ⅛ in pilot, ⅜ in for the bolts, countersink.</li>
-    <li>Socket for the nuts (9/16 in for a ⅜ nut).</li>
+    <li>Drill/driver, plus an impact driver if you have one. Bits: ⅛ in pilot, a ⅜ in bit at least 6 in long (or an extension), a Torx or star bit for the structural screws, and a countersink.</li>
+    <li>A wrench or socket for the nuts (9/16 in for a ⅜ nut) and for the leveler nuts.</li>
     <li>A 4 ft level and a 2 ft level. Four clamps. Two or three sawhorses.</li>
     <li>Caulk gun if you use the adhesive. Safety glasses, hearing protection, dust mask.</li>
     <li>Optional: miter saw, orbital sander, a few shims.</li>
@@ -307,8 +358,13 @@
     <div id="canvas-wrap">
       <div id="three-loading" hidden>Loading the 3D view…</div>
       <div id="three-error" hidden role="alert"></div>
+      <div id="part-tags"></div>
     </div>
     <aside id="sidebar-3d">
+      <details id="piece-sheet" hidden>
+        <summary>Where each piece goes</summary>
+        <ul id="piece-list"></ul>
+      </details>
       <button type="button" id="btn-back-build" hidden>Back to build steps</button>
       <p class="hint-3d" id="hint-mode-line"></p>
       <div id="part-detail" hidden></div>
@@ -444,37 +500,43 @@
   })();
 
   const cutRows = [
-    ['Long top rail', 2, '111 in', '2×6 × 10 ft', 'On edge. One rail per board.'],
-    ['End top rail', 2, '58 in', '2×6 × 10 ft', 'Two per board. They sit between the long rails.'],
-    ['Cross joist', 6, '58 in', '2×6 × 10 ft', 'Two per board. Centers at 16, 32, 48, 64, 80, 96 in from one end.'],
-    ['Leg', 6, M.legH + ' in', '4×4 × 8 ft', 'Two per post, so buy ' + M.posts + '. Dry-stack your real leveler before cutting. Formula: ' + TOP_H + ' − 0.72 − leveler height.'],
-    ['Lower long rail', 2, '111 in', '2×4 × 10 ft', 'On edge. Bottom edge ' + LOWER_OFF + ' in off the floor.'],
-    ['Lower cross rail', 3, M.panelW + ' in', '2×4 × 10 ft', 'Clear between the front and back legs. Trim at dry-fit.'],
-    ['Seam block', 7, blockNote, '2×4 × 8 ft', 'Flat, under the seam that is 48 in from the front edge.'],
-    ['End panel', 2, M.panelW + ' × ' + M.panelH + ' in', '¾ plywood', 'Measure the opening. Between the end legs, from the lower cross rail up to the underside of the plywood.'],
-    ['Top sheet', 1, '96 × 48 in', '¾ plywood', 'Full sheet. Seam at 96 in lands on a joist.'],
-    ['Top strip', 1, '96 × 13 in', '¾ plywood', 'Rip. Seam at 48 in lands on the blocks.'],
-    ['Top end', 1, '15 × 48 in', '¾ plywood', 'Closes the length next to the 96 in sheet.'],
-    ['Top end piece', 1, '15 × 13 in', '¾ plywood', 'The last corner.']
+    { piece: 'Long top rail', qty: 2, size: '111 in', stock: '2×6 × 10 ft', stockQty: 6, per: '1 per board', notes: 'On edge. One rail per board. Two boards of the six.' },
+    { piece: 'End top rail', qty: 2, size: '58 in', stock: '2×6 × 10 ft', stockQty: 6, per: '2 per board', notes: 'Two per board, on one board. They sit between the long rails.' },
+    { piece: 'Cross joist', qty: 6, size: '58 in', stock: '2×6 × 10 ft', stockQty: 6, per: '2 per board', notes: 'Two per board, on three boards. Centers at 16, 32, 48, 64, 80, 96 in from one end. The 96 in seam lands on a joist.' },
+    { piece: 'Leg', qty: 6, size: M.legH + ' in', stock: '4×4 × 8 ft', stockQty: M.posts, per: '2 per board', notes: 'Two per post, so buy ' + M.posts + '. Dry-stack your real leveler before cutting. Formula: ' + TOP_H + ' − 0.72 − leveler height.' },
+    { piece: 'Lower long rail', qty: 2, size: '111 in', stock: '2×4 × 10 ft', stockQty: 4, per: '1 per board', notes: '2×4 on edge, on the outside face of the legs, in line with the top rail. Bottom edge ' + LOWER_OFF + ' in off the floor.' },
+    { piece: 'Lower cross rail', qty: 3, size: M.panelW + ' in', stock: '2×4 × 10 ft', stockQty: 4, per: '2 on one board, 1 on the next', notes: '2×4s. Clear between the front and back legs. Trim at dry-fit.' },
+    { piece: 'Seam block', qty: 7, size: blockNote, stock: '2×4 × 8 ft', stockQty: 2, per: '6 on one board, 1 on the next', notes: 'Flat 2×4s under the seam 48 in from the front edge.' },
+    { piece: 'End panel', qty: 2, size: M.panelW + ' × ' + M.panelH + ' in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 per sheet', notes: 'One from each of two sheets. Between the end legs, from the lower cross rail up to the underside of the plywood.' },
+    { piece: 'Top sheet', qty: 1, size: '96 × 48 in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 on sheet 1', notes: 'Full sheet. The 96 in seam lands on a joist.' },
+    { piece: 'Top strip', qty: 1, size: '96 × 13 in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 on sheet 2', notes: 'Rip. The 48 in seam sits on the blocks.' },
+    { piece: 'Top end', qty: 1, size: '15 × 48 in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 on sheet 3', notes: 'Closes the length next to the 96 in sheet.' },
+    { piece: 'Top end piece', qty: 1, size: '15 × 13 in', stock: '¾ plywood 4×8', stockQty: 3, per: '1 on sheet 3', notes: 'The last corner.' },
+    { piece: 'Carriage bolt', qty: 24, size: '⅜ × 6 in', stock: 'Hardware', stockQty: 24, per: '4 per leg', notes: 'Washer and nut. 6 in leaves thread past the 1.5 in rail and the 3.5 in leg.' }
   ];
 
   function cutCsv() {
-    const lines = ['piece,qty,size,stock,notes'];
-    cutRows.forEach(function (r) { lines.push(r.map(csvCell).join(',')); });
+    const lines = ['piece,qty,size,stock,stock_qty,per_board,notes'];
+    cutRows.forEach(function (r) {
+      lines.push([r.piece, 'Qty ' + r.qty, r.size, r.stock, 'Qty ' + r.stockQty, r.per, r.notes].map(csvCell).join(','));
+    });
     return lines.join('\n') + '\n';
   }
 
   function renderLists() {
     const shop = [
-      ['2×6 × 10 ft', 6, 'Two long rails, two end rails, six joists'],
-      ['2×4 × 10 ft', 4, 'Two lower long rails, three lower cross rails'],
-      ['2×4 × 8 ft', 2, 'Seven seam blocks, and one board to spare'],
-      ['4×4 × 8 ft', M.posts, 'Six legs. A ' + M.legH + ' in leg fits ' + M.perPost + ' times in 8 ft.'],
-      ['¾ in (23/32) sheathing, 4×8', 3, 'Top, plus the two end panels from the offcuts']
+      ['2×6 × 10 ft', 'Qty 6', 'Long rails, end rails, joists'],
+      ['2×4 × 10 ft', 'Qty 4', 'Lower 2×4 rails'],
+      ['2×4 × 8 ft', 'Qty 2', 'Seam blocks'],
+      ['4×4 × 8 ft', 'Qty ' + M.posts, 'Six legs, two per post'],
+      ['¾ in (23/32) sheathing, 4×8', 'Qty 3', 'Top sheets and end panels']
     ];
-    document.getElementById('shop-list').innerHTML = tableHtml(['Stock', 'Qty', 'Use'], shop);
+    const cards = shop.map(function (r) {
+      return '<article class="shop-card"><div><strong>' + esc(r[0]) + '</strong> <span class="qty-badge">' + esc(r[1]) + '</span></div><p>' + esc(r[2]) + '</p></article>';
+    }).join('');
+    document.getElementById('shop-list').innerHTML = tableHtml(['Stock', 'Qty', 'Use'], shop) + '<div class="shop-cards">' + cards + '</div>';
     const body = cutRows.map(function (r, i) {
-      return '<tr><td class="num">' + (i + 1) + '</td><td>' + esc(r[0]) + '</td><td class="num">' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td><td>' + esc(r[3]) + '</td><td>' + esc(r[4]) + '</td></tr>';
+      return '<tr><td class="num">' + (i + 1) + '</td><td>' + esc(r.piece) + ' <span class="qty-badge">×' + r.qty + '</span></td><td class="num">Qty ' + r.qty + '</td><td>' + esc(r.size) + '</td><td>' + esc(r.stock) + ' <span class="qty-badge">Qty ' + r.stockQty + '</span></td><td>' + esc(r.per) + '. ' + esc(r.notes) + '</td></tr>';
     }).join('');
     document.getElementById('cut-list').innerHTML =
       '<div class="table-wrap"><table class="data"><thead><tr><th>#</th><th>Piece</th><th>Qty</th><th>Size</th><th>Stock</th><th>Notes</th></tr></thead><tbody>' +
@@ -493,7 +555,13 @@
       }).join('') + '</tbody></table></div>';
   }
 
-  function barSvg(title, total, segs) {
+  function capLine(stock, stockQty, piece, pieceQty, per, boards) {
+    return esc(stock) + ' · stock <span class="qty-badge">Qty ' + stockQty + '</span> · ' +
+      esc(piece) + ' <span class="qty-badge">×' + pieceQty + '</span> · ' + esc(per) +
+      (boards ? ' · ' + esc(boards) : '');
+  }
+
+  function barSvg(caption, total, segs) {
     const W = 640;
     let x = 8;
     const inner = W - 16;
@@ -501,13 +569,14 @@
     segs.forEach(function (s) {
       const w = Math.max(0.8, (s.len / total) * inner);
       const fill = s.scrap ? '#e6d3bc' : '#c4925a';
-      shapes += '<rect x="' + x.toFixed(1) + '" y="8" width="' + w.toFixed(1) + '" height="28" fill="' + fill + '" stroke="#3a2a1c"/>';
-      if (w > 46) {
-        shapes += '<text x="' + (x + w / 2).toFixed(1) + '" y="26" text-anchor="middle" font-size="11" fill="#1c1712">' + esc(s.label) + '</text>';
+      shapes += '<rect x="' + x.toFixed(1) + '" y="10" width="' + w.toFixed(1) + '" height="36" fill="' + fill + '" stroke="#3a2a1c"/>';
+      if (w > 90 && s.label) {
+        shapes += '<text x="' + (x + w / 2).toFixed(1) + '" y="34" text-anchor="middle" font-size="22" fill="#1c1712">' + esc(s.label) + '</text>';
       }
       x += w;
     });
-    return '<figure class="board"><figcaption>' + esc(title) + '</figcaption><svg viewBox="0 0 ' + W + ' 44" role="img" aria-label="' + esc(title) + '">' + shapes + '</svg></figure>';
+    const plain = caption.replace(/<[^>]+>/g, '');
+    return '<figure class="board"><figcaption>' + caption + '</figcaption><svg viewBox="0 0 ' + W + ' 56" role="img" aria-label="' + esc(plain) + '">' + shapes + '</svg></figure>';
   }
 
   function diagramHtml() {
@@ -515,58 +584,60 @@
     const endBlocks = M.blocks.filter(function (b) { return b.len !== 14.5; });
     const midCount = M.blocks.filter(function (b) { return b.len === 14.5; }).length;
     let html = '';
-    html += barSvg('2×6 × 10 ft — two boards, one long rail each', 120, [
-      { len: 111, label: '111 long rail' }, { len: 9, label: '', scrap: true }
+    html += barSvg(capLine('2×6 × 10 ft', 6, 'Long top rail', 2, '1 per board', '2 boards'), 120, [
+      { len: 111, label: '111 ×1' }, { len: 9, label: '', scrap: true }
     ]);
-    html += barSvg('2×6 × 10 ft — one board, both end rails', 120, [
-      { len: 58, label: '58 end' }, { len: 58, label: '58 end' }, { len: 4, label: '', scrap: true }
+    html += barSvg(capLine('2×6 × 10 ft', 6, 'End top rail', 2, '2 per board', '1 board'), 120, [
+      { len: 58, label: '58 ×1' }, { len: 58, label: '58 ×1' }, { len: 4, label: '', scrap: true }
     ]);
-    html += barSvg('2×6 × 10 ft — three boards, two joists each', 120, [
-      { len: 58, label: '58 joist' }, { len: 58, label: '58 joist' }, { len: 4, label: '', scrap: true }
+    html += barSvg(capLine('2×6 × 10 ft', 6, 'Cross joist', 6, '2 per board', '3 boards'), 120, [
+      { len: 58, label: '58 ×1' }, { len: 58, label: '58 ×1' }, { len: 4, label: '', scrap: true }
     ]);
-    html += barSvg('2×4 × 10 ft — two boards, lower long rails', 120, [
-      { len: 111, label: '111 lower rail' }, { len: 9, label: '', scrap: true }
+    html += barSvg(capLine('2×4 × 10 ft', 4, 'Lower long rail', 2, '1 per board', '2 boards'), 120, [
+      { len: 111, label: '111 ×1' }, { len: 9, label: '', scrap: true }
     ]);
-    html += barSvg('2×4 × 10 ft — one board, two cross rails', 120, [
-      { len: 51, label: '51 cross' }, { len: 51, label: '51 cross' }, { len: 18, label: 'spare', scrap: true }
+    html += barSvg(capLine('2×4 × 10 ft', 4, 'Lower cross rail', 3, '2 on this board', '1 of 2 boards'), 120, [
+      { len: 51, label: '51 ×1' }, { len: 51, label: '51 ×1' }, { len: 18, label: 'spare', scrap: true }
     ]);
-    html += barSvg('2×4 × 10 ft — one board, the third cross rail', 120, [
-      { len: 51, label: '51 cross' }, { len: 69, label: 'spare', scrap: true }
+    html += barSvg(capLine('2×4 × 10 ft', 4, 'Lower cross rail', 3, '1 on this board', '1 of 2 boards'), 120, [
+      { len: 51, label: '51 ×1' }, { len: 69, label: 'spare', scrap: true }
     ]);
     const b1 = [];
     let used = 0;
     for (let i = 0; i < midCount; i++) { b1.push({ len: 14.5, label: '14.5' }); used += 14.5; }
     if (endBlocks[0]) { b1.push({ len: endBlocks[0].len, label: String(endBlocks[0].len) }); used += endBlocks[0].len; }
     b1.push({ len: Math.max(0, 96 - used), label: '', scrap: true });
-    html += barSvg('2×4 × 8 ft — seam blocks', 96, b1);
+    html += barSvg(capLine('2×4 × 8 ft', 2, 'Seam block', 7, '6 on this board', '1 of 2 boards'), 96, b1);
     const b2len = endBlocks[1] ? endBlocks[1].len : 12.75;
-    html += barSvg('2×4 × 8 ft — last block, rest is spare', 96, [
-      { len: b2len, label: String(b2len) }, { len: 96 - b2len, label: 'spare', scrap: true }
+    html += barSvg(capLine('2×4 × 8 ft', 2, 'Seam block', 7, '1 on this board', '1 of 2 boards'), 96, [
+      { len: b2len, label: b2len + ' ×1' }, { len: 96 - b2len, label: 'spare', scrap: true }
     ]);
-    html += barSvg('4×4 × 8 ft — three posts, two legs each', 96, [
-      { len: leg, label: leg + ' leg' }, { len: leg, label: leg + ' leg' }, { len: r2(96 - 2 * leg), label: 'too short', scrap: true }
+    html += barSvg(capLine('4×4 × 8 ft', M.posts, 'Leg', 6, '2 per board', M.posts + ' boards'), 96, [
+      { len: leg, label: leg + ' ×1' }, { len: leg, label: leg + ' ×1' }, { len: r2(96 - 2 * leg), label: 'short', scrap: true }
     ]);
     html += '<div class="sheet-grid">';
-    html += sheetSvg('Sheet 1', 'Top sheet 96×48', [{ x: 4, y: 4, w: 172, h: 86, label: '96 × 48' }]);
-    html += sheetSvg('Sheet 2', 'Strip, then an end panel', [
-      { x: 4, y: 4, w: 172, h: 24, label: '96 × 13 strip' },
-      { x: 4, y: 32, w: 92, h: 48, label: 'end panel' }
+    html += sheetSvg(capLine('¾ plywood 4×8', 3, 'Top sheet', 1, '1 on this sheet', 'sheet 1 of 3'), [{ x: 4, y: 4, w: 172, h: 86, label: '96×48 ×1' }]);
+    html += sheetSvg(capLine('¾ plywood 4×8', 3, 'Top strip', 1, '1 strip and 1 panel', 'sheet 2 of 3'), [
+      { x: 4, y: 4, w: 172, h: 24, label: '96×13 ×1' },
+      { x: 4, y: 32, w: 92, h: 48, label: 'panel ×1' }
     ]);
-    html += sheetSvg('Sheet 3', 'End pieces and the other panel', [
-      { x: 4, y: 4, w: 28, h: 86, label: '15×48' },
-      { x: 36, y: 4, w: 28, h: 24, label: '15×13' },
-      { x: 70, y: 20, w: 96, h: 50, label: 'end panel' }
+    html += sheetSvg(capLine('¾ plywood 4×8', 3, 'Top end', 1, '2 end pieces and 1 panel', 'sheet 3 of 3'), [
+      { x: 4, y: 4, w: 28, h: 86, label: '15×48 ×1' },
+      { x: 36, y: 4, w: 28, h: 24, label: '15×13 ×1' },
+      { x: 70, y: 20, w: 96, h: 50, label: 'panel ×1' }
     ]);
     html += '</div>';
     return html;
   }
 
-  function sheetSvg(title, cap, rects) {
+  function sheetSvg(caption, rects) {
     const shapes = rects.map(function (r) {
+      const size = r.w < 40 ? 12 : 14;
       return '<rect x="' + r.x + '" y="' + r.y + '" width="' + r.w + '" height="' + r.h + '" fill="#d7b07a" stroke="#3a2a1c"/>' +
-        '<text x="' + (r.x + r.w / 2) + '" y="' + (r.y + r.h / 2 + 4) + '" text-anchor="middle" font-size="11" fill="#1c1712">' + esc(r.label) + '</text>';
+        '<text x="' + (r.x + r.w / 2) + '" y="' + (r.y + r.h / 2 + 4) + '" text-anchor="middle" font-size="' + size + '" fill="#1c1712">' + esc(r.label) + '</text>';
     }).join('');
-    return '<figure class="board"><figcaption>' + esc(title + ' — ' + cap) + '</figcaption><svg viewBox="0 0 180 100" role="img">' + shapes + '</svg></figure>';
+    const plain = caption.replace(/<[^>]+>/g, '');
+    return '<figure class="board"><figcaption>' + caption + '</figcaption><svg viewBox="0 0 180 100" role="img" aria-label="' + esc(plain) + '">' + shapes + '</svg></figure>';
   }
 
   function stepData() {
@@ -575,13 +646,13 @@
       { day: 1, title: 'Cut the 2×6 frame pieces',
         goal: 'The top-frame boards are cut and marked before any screws go in.',
         actions: [
-          'Pick the straightest 2×6s. Sight each one, and save a mild crown for the long rails.',
+          'Pick the straightest 2×6s. Sight each one, and save a mild crown for the long rails. While the frame is flipped, that crown faces the floor.',
           'Cut two long rails at 111 in.',
           'Cut two end rails at 58 in and six joists at 58 in. Two of those cuts fit on one 10 ft board.',
-          'Mark joist centers on both long rails at 16, 32, 48, 64, 80, and 96 in from the same end.'
+          'Mark joist centers on both long rails at 16, 32, 48, 64, 80, and 96 in from the same end. The 96 in mark is the seam that lands on a joist.'
         ],
-        done: 'Eight 2×6s are cut, and both rails show the same marks. The 96 in mark is where the plywood seam lands.',
-        details: 'The viewer draws each board where it will live, so the joints are easy to see. On the floor, this step is only cutting.',
+        done: 'Ten 2×6s are cut (2 long rails, 2 end rails, 6 joists), and both rails show the same marks.',
+        details: 'Drawn right-side up so the joints show. On the floor this step is only cutting. While the frame is flipped, the crown faces the floor. The edge facing the floor now becomes the top.',
         born: ['long-rail', 'end-rail', 'joist'], focus: ['long-rail', 'end-rail', 'joist'] },
       { day: 1, title: 'Dry-stack a leveler, then cut the legs and the lower boards',
         goal: 'The leg length matches the feet you actually have.',
@@ -589,44 +660,46 @@
           'Stand one leveler at mid-thread, pad included, and measure it. Write that height down.',
           'Cut six legs at ' + TOP_H + ' − 0.72 − that height. A 2.5 in leveler makes a ' + leg + ' in leg.',
           'Use three 8 ft 4×4s. Only two legs fit in each post.',
-          'Cut two lower long rails at 111 in, three lower cross rails at about ' + M.panelW + ' in, and seven flat seam blocks (' + blockNote + ').'
+          'Cut two lower 2×4 long rails at 111 in, three lower 2×4 cross rails at about ' + M.panelW + ' in, and seven flat 2×4 seam blocks (' + blockNote + ').'
         ],
-        done: 'Six matching legs, the lower rails, and the blocks are cut, and the real leveler height is written down.',
-        details: 'Dry-stack your real leveler before cutting. If the foot is taller than 2.5 in, the legs get shorter by the same amount.',
+        done: 'Six matching legs, the lower 2×4s, and the blocks are cut, and the real leveler height is written down.',
+        details: 'Drawn right-side up so the joints show. Dry-stack your real leveler before cutting. If the foot is taller than 2.5 in, the legs get shorter by the same amount.',
         born: ['leg', 'lower-long', 'lower-cross', 'seam-block'],
         focus: ['leg', 'lower-long', 'lower-cross', 'seam-block'] },
       { day: 1, title: 'Assemble the top frame upside down',
         goal: 'A square 111 × 61 frame, still on its back, with the joists and seam blocks in.',
         actions: [
-          'Lay the long rails on edge, inside faces toward each other, 58 in apart on the inside.',
+          'Lay the long rails on edge, crown toward the floor, inside faces toward each other, 58 in apart on the inside.',
           'Glue and screw the end rails and the six joists between them with 3½ in structural screws.',
           'Measure both diagonals and nudge the frame until they match within about ⅛ in.',
-          'Set the flat blocks on the 48 in seam, between the joists, tops flush with the joists. Screw the ends into the joists.'
+          'Set the flat blocks on the 48 in seam, between the joists. The block face that will touch the plywood is flush with the joist edges. Screw the ends into the joists.'
         ],
-        done: 'Diagonals match, every joist is on its mark, and the blocks are flush with the top of the joists.',
-        details: 'Upside down means the future top face is toward the floor. A helper can hold a rail while you drive the screws.',
+        done: 'Diagonals match, every joist is on its mark, and the block face that will touch the plywood is flush with the joist edges.',
+        details: 'Drawn right-side up so the joints show. Lay the crown toward the floor, as in step 1. A helper can hold a rail while you drive the screws.',
         born: [], focus: ['long-rail', 'end-rail', 'joist', 'seam-block'] },
       { day: 1, title: 'Bolt on the six legs',
-        goal: 'Each leg is tight against the inside face of a long rail.',
+        goal: 'Each leg is tight against the inside face of a long rail, flush with the rail edge that is face-down.',
         actions: [
           'Clamp a leg at each corner, tight to the end rail, and one in the middle of each long rail.',
-          'Drill two ⅜ in holes through the top rail into the leg.',
-          'Run two ⅜ × 5 in carriage bolts, washer and nut on the inside. Snug them. Do not crush the wood.',
+          'Set the leg end flush with the rail edge that is face-down. The 36 in height depends on that.',
+          'Drill two ⅜ in holes through the top rail into the leg. Use a bit at least 6 in long, or an extension.',
+          'Run two ⅜ × 6 in carriage bolts, washer and nut on the inside. Snug them. Do not crush the wood.',
           'Leave the lower two holes for the next step.'
         ],
-        done: 'All six legs are bolted to the top rails and do not rock.',
-        details: 'Four bolts per leg when you are done: two here, two into the lower rail. Carriage head on the outside of the rail.',
+        done: 'All six legs are bolted to the top rails, each leg end is flush with the face-down rail edge, and the legs do not rock.',
+        details: 'Four ⅜ × 6 in bolts per leg when you are done: two here, two into the lower 2×4. Carriage head on the outside of the rail. 6 in leaves thread for the washer and nut.',
         born: [], focus: ['leg'] },
       { day: 1, title: 'Add the lower rail loop',
-        goal: 'A 2×4 loop about 8 in off the floor ties all six legs together.',
+        goal: 'A lower loop of 2×4s, about 8 in off the floor, ties all six legs together.',
         actions: [
-          'From the end of the leg that will sit on the leveler, measure ' + fromLeg + ' in along the leg. That line is the bottom edge of the lower rail, which lands ' + LOWER_OFF + ' in off the floor.',
-          'Bolt each leg to its lower long rail with two more carriage bolts.',
-          'Fit the three cross rails between the leg pairs and trim them so the ends sit tight. They are about ' + M.panelW + ' in.',
+          'The lower long rails and the lower cross rails are 2×4s. The long ones sit on the outside face of the legs, in line with the top rail.',
+          'From the end of the leg that will sit on the leveler, measure ' + fromLeg + ' in along the leg. That line is the bottom edge of the lower 2×4, which lands ' + LOWER_OFF + ' in off the floor.',
+          'Bolt each lower 2×4 long rail to the legs with two more ⅜ × 6 in carriage bolts.',
+          'Fit the three lower 2×4 cross rails between the leg pairs and trim them so the ends sit tight. They are about ' + M.panelW + ' in.',
           'Screw the cross-rail ends into the legs with structural screws.'
         ],
-        done: 'Every leg has four bolts, and you cannot shift one leg without the whole frame moving.',
-        details: 'The frame is still upside down. This is the end of day 1. The picture shows the finished stance so you can see the joints.',
+        done: 'Every leg has four ⅜ × 6 in bolts, and you cannot shift one leg without the whole frame moving.',
+        details: 'The frame is still upside down. This is the end of day 1. The picture is drawn right-side up so the joints show. The lower 2×4 long rails line up with the top rails, on the outside face of the legs.',
         born: [], focus: ['lower-long', 'lower-cross'] },
       { day: 2, title: 'Fit the levelers and flip with a helper',
         goal: 'The frame is right-side up on its pads, and nobody lifts it alone.',
@@ -644,10 +717,10 @@
         actions: [
           'Turn the levelers until the rails read level the short way and the long way. You have about an inch of travel either way.',
           'The top of the rails should be about ' + railTop + ' in off the floor. The plywood makes up the rest.',
-          'Cut two panels to the opening between the end legs, from the lower cross rail up to the underside of the plywood. About ' + panel + ' in. Measure yours.',
-          'Screw each panel to the legs and to the end rail with #8 × 2 in screws.'
+          'Cut two panels to the opening between the end legs, from the lower cross rail up to the underside of the plywood. About ' + panel + ' in. Measure yours. The panels butt the leg sides.',
+          'Screw through the panel face into the end rail and the lower cross rail. Glue or toe-screw the edges where the panel butts the legs.'
         ],
-        done: 'A level on the rails reads true, and both panels are tight and screwed.',
+        done: 'A level on the rails reads true, and both panels are tight, screwed into the rails, and glued or toe-screwed at the legs.',
         details: 'This ' + TOP_H + ' in height is provisional until the machine’s bed height is known.',
         born: ['end-panel'], focus: ['end-panel'] },
       { day: 2, title: 'Push test for racking',
@@ -711,7 +784,24 @@
   const DAYS = [
     { day: 1, title: 'Cut and frame', focus: 'Still upside down at the end of the day.', range: 'Steps 1–5' },
     { day: 2, title: 'Stand it up and skin it', focus: 'Flip with a helper, then the top goes on.', range: 'Steps 6–10' },
-    { day: 3, title: 'Bed and machine', focus: 'After you measure the real bed.', range: 'Steps 11–12' }
+    { day: 3, title: 'Bed and machine', focus: 'After you measure the real bed.', range: 'Steps 11–12' },
+    { day: 4, title: 'Buffer', focus: 'Re-level, tighten the bolts, and run a short smoke test.', range: 'Buffer', buffer: true }
+  ];
+
+  const WHERE = [
+    { id: 'long-rail', name: 'Long top rail', qty: 2, where: 'On edge, both long sides of the top frame' },
+    { id: 'end-rail', name: 'End top rail', qty: 2, where: 'Between the long rails, at each end' },
+    { id: 'joist', name: 'Cross joist', qty: 6, where: 'Between the long rails, every 16 in. The 96 in seam lands on one' },
+    { id: 'seam-block', name: 'Seam block', qty: 7, where: 'Flat 2×4s under the seam 48 in from the front' },
+    { id: 'leg', name: 'Leg', qty: 6, where: 'Inside face of each long rail. End flush with the top edge' },
+    { id: 'leveler', name: 'Leveler and pad', qty: 6, where: 'Under each leg, pad on the slab' },
+    { id: 'lower-long', name: 'Lower long rail', qty: 2, where: '2×4 on the outside face of the legs, in line with the top rail' },
+    { id: 'lower-cross', name: 'Lower cross rail', qty: 3, where: '2×4 between each pair of legs' },
+    { id: 'end-panel', name: 'End panel', qty: 2, where: 'Butts the leg sides. Screws into the end rail and lower cross rail' },
+    { id: 'top-sheet', name: 'Top plywood', qty: 4, where: 'On the joists. Four pieces make the 111 × 61 top' },
+    { id: 'fire-break', name: 'Fire-break sheet', qty: 1, where: 'On the plywood, inside the work area. Lifts off' },
+    { id: 'honeycomb', name: 'Honeycomb', qty: 1, where: 'On the fire break. Lifts off' },
+    { id: 'machine-mark', name: 'Machine outline', qty: 1, where: 'Pencil rectangle on the top, about 109 × 58 in' }
   ];
 
   let current = 0;
@@ -719,6 +809,7 @@
   let exploreApplied = false;
   let sceneReady = false;
   let initialFrameDone = false;
+  let selectedPart = null;
   let camera, controls, renderer, scene, wrap;
   const registry = {};
   const pickables = [];
@@ -728,8 +819,9 @@
   });
 
   function stepHtml(s, i) {
+    const drawn = i <= 2 ? '<p>Drawn right-side up so the joints show.</p>' : '';
     return '<button type="button" class="step-jump" data-step-index="' + i + '">' + (i + 1) + '. ' + esc(s.title) + '</button>' +
-      '<p class="goal">' + esc(s.goal) + '</p><ul>' +
+      drawn + '<p class="goal">' + esc(s.goal) + '</p><ul>' +
       s.actions.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') +
       '</ul><p class="done-when"><strong>Done when.</strong> ' + esc(s.done) + '</p>' +
       '<details class="more"><summary>Details</summary><p>' + esc(s.details) + '</p></details>';
@@ -738,6 +830,9 @@
   function renderSteps() {
     const cards = document.getElementById('day-cards');
     cards.innerHTML = DAYS.map(function (d) {
+      if (d.buffer) {
+        return '<section class="day-block"><div class="k" style="color:var(--warn);font-size:12px;font-weight:800">DAY ' + d.day + ' · ' + esc(d.range) + '</div><strong>' + esc(d.title) + '</strong><p>' + esc(d.focus) + '</p><p>No new pieces. Check the level with the machine on it, tighten the bolts, and run a short smoke test before you leave it.</p></section>';
+      }
       const steps = STEPS.map(function (s, i) { return s.day === d.day ? stepHtml(s, i) : ''; }).join('');
       return '<section class="day-block"><div class="k" style="color:var(--warn);font-size:12px;font-weight:800">DAY ' + d.day + ' · ' + esc(d.range) + '</div><strong>' + esc(d.title) + '</strong><p>' + esc(d.focus) + '</p><details class="day-view"><summary>View</summary><div class="day-steps">' + steps + '</div></details></section>';
     }).join('') + '<p><button type="button" class="explore-chip" id="btn-explore-end">Explore</button></p>';
@@ -778,12 +873,16 @@
     const s = STEPS[current];
     const title = explore ? 'Finished table — look around' : ('Step ' + (current + 1) + ' · ' + s.title);
     document.getElementById('step-title-bar').textContent = title;
-    document.getElementById('hint-mode-line').textContent = explore
-      ? 'Look around. Tap a part for its size. Nothing else fades, and the camera stays where you put it.'
-      : 'This step is highlighted. Earlier parts stay solid. Later parts are hidden.';
+    const upright = !explore && current <= 2;
+    document.getElementById('hint-mode-line').textContent = (explore
+      ? 'Finished table. Open Where each piece goes, or tap a part. Nothing fades, and the camera stays where you put it.'
+      : 'This step is highlighted. Earlier parts stay solid. Later parts are hidden.') +
+      (upright ? ' Drawn right-side up so the joints show.' : '');
+    const sheet = document.getElementById('piece-sheet');
+    if (sheet) sheet.hidden = !explore;
     const sb = document.getElementById('sb-step');
     if (explore) {
-      sb.innerHTML = '<p class="goal">The whole table is here.</p><p>Orbit, zoom, and pan. Tap any part for its cut. Use Prev, a step number, or Back to build steps when you want the step view again.</p>';
+      sb.innerHTML = '<p class="goal">Finished table.</p><p>The list under the picture names each piece. Tap a row or a part. Matching pieces light up, the rest stay solid, and the camera stays put.</p>';
     } else {
       sb.innerHTML = stepHtml(s, current);
     }
@@ -827,6 +926,16 @@
     document.getElementById('btn-explore-end').onclick = function () { enterExplore({ frame: true }); };
     document.getElementById('btn-back-build').onclick = function () { setStep(current, { frame: false }); };
     document.getElementById('btn-reset-cam').onclick = function () { if (sceneReady) frameStand(); };
+    const pieceList = document.getElementById('piece-list');
+    pieceList.addEventListener('click', function (ev) {
+      const btn = ev.target.closest('[data-part-id]');
+      if (btn) highlightPart(btn.dataset.partId);
+    });
+    pieceList.addEventListener('mouseover', function (ev) {
+      const btn = ev.target.closest('[data-part-id]');
+      if (!btn || btn.contains(ev.relatedTarget)) return;
+      highlightPart(btn.dataset.partId);
+    });
     document.getElementById('btn-copy-csv').onclick = copyCsv;
     document.getElementById('btn-print-cuts').onclick = function () { window.print(); };
     window.addEventListener('keydown', function (ev) {
@@ -885,14 +994,47 @@
 
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
+      const existing = document.querySelector('script[data-x1-src="' + src + '"]');
+      if (existing) {
+        if (existing.dataset.loaded === '1') { resolve(); return; }
+        existing.addEventListener('load', function () { resolve(); });
+        existing.addEventListener('error', function () { reject(new Error(src)); });
+        return;
+      }
       const s = document.createElement('script');
       s.src = src;
       s.async = false;
-      s.onload = function () { resolve(); };
-      s.onerror = function () { reject(new Error('Could not load ' + src)); };
+      s.dataset.x1Src = src;
+      s.onload = function () { s.dataset.loaded = '1'; resolve(); };
+      s.onerror = function () { s.remove(); reject(new Error(src)); };
       document.head.appendChild(s);
     });
   }
+  function loadFirst(urls) {
+    return urls.reduce(function (chain, url) {
+      return chain.catch(function () { return loadScript(url); });
+    }, Promise.reject());
+  }
+  function show3dError(kind) {
+    const el = document.getElementById('three-error');
+    el.hidden = false;
+    el.textContent = kind === 'webgl'
+      ? 'The 3D view did not start. This browser could not open WebGL.'
+      : 'The 3D view did not start. The model scripts could not be loaded.';
+  }
+
+  const THREE_URLS = [
+    '/x1/vendor/three.min.js',
+    'vendor/three.min.js',
+    'https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js',
+    'https://unpkg.com/three@0.149.0/build/three.min.js'
+  ];
+  const OC_URLS = [
+    '/x1/vendor/OrbitControls.js',
+    'vendor/OrbitControls.js',
+    'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js',
+    'https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js'
+  ];
 
   let booted = false;
   let booting = null;
@@ -902,17 +1044,19 @@
     const loading = document.getElementById('three-loading');
     loading.hidden = false;
     booting = (async function () {
+      let scriptsOk = false;
       try {
-        await loadScript('vendor/three.min.js');
-        await loadScript('vendor/OrbitControls.js');
+        await loadFirst(THREE_URLS);
+        await loadFirst(OC_URLS);
+        if (!window.THREE || !window.THREE.OrbitControls) throw new Error('scripts');
+        scriptsOk = true;
         initScene();
         booted = true;
         loading.hidden = true;
       } catch (err) {
         loading.hidden = true;
-        const el = document.getElementById('three-error');
-        el.hidden = false;
-        el.textContent = 'The 3D view did not start. ' + (err && err.message ? err.message : err);
+        const msg = err && err.message ? String(err.message) : '';
+        show3dError(scriptsOk || /webgl/i.test(msg) ? 'webgl' : 'scripts');
       }
     })();
   }
@@ -1072,13 +1216,13 @@
       });
     });
 
-    addBox('lower-long', [DECK_L, M.W24, M.T24], [0, M.lowerY, M.frontZ], wood24, { label: 'Lower long rail', spec: '2×4 × 111 in', qty: '2', notes: 'Bottom edge ' + LOWER_OFF + ' in off the floor. Bolted to the inside faces of the legs.' });
-    addBox('lower-long', [DECK_L, M.W24, M.T24], [0, M.lowerY, M.backZ], wood24, { label: 'Lower long rail', spec: '2×4 × 111 in', qty: '2', notes: 'Bottom edge ' + LOWER_OFF + ' in off the floor.' });
+    addBox('lower-long', [DECK_L, M.W24, M.T24], [0, M.lowerY, M.frontZ], wood24, { label: 'Lower long rail', spec: '2×4 × 111 in', qty: '2', notes: '2×4 on the outside face of the legs, in line with the top rail. Bottom edge ' + LOWER_OFF + ' in off the floor.' });
+    addBox('lower-long', [DECK_L, M.W24, M.T24], [0, M.lowerY, M.backZ], wood24, { label: 'Lower long rail', spec: '2×4 × 111 in', qty: '2', notes: '2×4 on the outside face of the legs, in line with the top rail. Bottom edge ' + LOWER_OFF + ' in off the floor.' });
     [[M.innerXLeft + M.T24 / 2, 'Left'], [0, 'Middle'], [M.innerXRight - M.T24 / 2, 'Right']].forEach(function (pair) {
       addBox('lower-cross', [M.T24, M.W24, M.panelW], [pair[0], M.lowerY, 0], wood24, { label: pair[1] + ' lower cross rail', spec: '2×4 × ' + M.panelW + ' in', qty: '3', notes: 'Fits between the front and back legs.' });
     });
-    addBox('end-panel', [PLY_T, M.panelH, M.panelW], [M.innerXLeft + PLY_T / 2, M.panelY, 0], ply, { label: 'End panel', spec: M.panelW + ' × ' + M.panelH + ' in, ¾ plywood', qty: '2', notes: 'Screwed to the end legs and the end rail. Sits on the lower cross rail.' });
-    addBox('end-panel', [PLY_T, M.panelH, M.panelW], [M.innerXRight - PLY_T / 2, M.panelY, 0], ply, { label: 'End panel', spec: M.panelW + ' × ' + M.panelH + ' in, ¾ plywood', qty: '2', notes: 'Screwed to the end legs and the end rail. Sits on the lower cross rail.' });
+    addBox('end-panel', [PLY_T, M.panelH, M.panelW], [M.innerXLeft + PLY_T / 2, M.panelY, 0], ply, { label: 'End panel', spec: M.panelW + ' × ' + M.panelH + ' in, ¾ plywood', qty: '2', notes: 'Butts the leg sides. Screws go through the panel face into the end rail and the lower cross rail. Glue or toe-screw the leg edges.' });
+    addBox('end-panel', [PLY_T, M.panelH, M.panelW], [M.innerXRight - PLY_T / 2, M.panelY, 0], ply, { label: 'End panel', spec: M.panelW + ' × ' + M.panelH + ' in, ¾ plywood', qty: '2', notes: 'Butts the leg sides. Screws go through the panel face into the end rail and the lower cross rail. Glue or toe-screw the leg edges.' });
 
     const sheets = [
       { label: 'Top sheet', spec: '96 × 48 in', w: 96, d: 48, x: M.x0 + 48, z: M.z0 + 24, notes: 'Full sheet. The 96 in edge lands on a joist.' },
@@ -1248,28 +1392,78 @@
     });
   }
 
+  function whereMeta(id) {
+    return WHERE.find(function (p) { return p.id === id; }) || null;
+  }
+  function markPieceRow(id) {
+    document.querySelectorAll('#piece-list [data-part-id]').forEach(function (el) {
+      el.classList.toggle('current', el.dataset.partId === id);
+    });
+  }
+  function clearSelection() {
+    selectedPart = null;
+    markPieceRow('');
+    const host = document.getElementById('part-tags');
+    if (host) host.innerHTML = '';
+  }
+  function placeTags() {
+    const host = document.getElementById('part-tags');
+    if (!host) return;
+    host.innerHTML = '';
+    if (!sceneReady || !selectedPart || !camera || !wrap || !registry[selectedPart]) return;
+    const meta = whereMeta(selectedPart);
+    const visible = registry[selectedPart].meshes.filter(function (m) { return m.visible; });
+    if (!visible.length || !meta) return;
+    const rect = wrap.getBoundingClientRect();
+    let sx = 0, sy = 0, n = 0;
+    visible.forEach(function (m) {
+      const v = m.position.clone().project(camera);
+      if (v.z < -1 || v.z > 1) return;
+      sx += (v.x * 0.5 + 0.5) * rect.width;
+      sy += (-v.y * 0.5 + 0.5) * rect.height;
+      n += 1;
+    });
+    if (!n) return;
+    const tag = document.createElement('div');
+    tag.className = 'part-tag';
+    tag.textContent = meta.name + ' ×' + meta.qty;
+    tag.style.left = (sx / n) + 'px';
+    tag.style.top = (sy / n) + 'px';
+    host.appendChild(tag);
+  }
   function showDetail(obj) {
     const d = obj.userData || {};
+    const meta = whereMeta(d.partId);
     const el = document.getElementById('part-detail');
     el.hidden = false;
     el.innerHTML =
       (d.provisional ? '<div class="tag">PROVISIONAL</div>' : '') +
-      '<h3>' + esc(d.label || d.partId) + '</h3>' +
+      '<h3>' + esc(meta ? meta.name : (d.label || d.partId)) + '</h3>' +
       '<p><strong>Cut.</strong> ' + esc(d.spec || '') + '</p>' +
-      '<p><strong>Qty.</strong> ' + esc(d.qty || '') + '</p>' +
+      '<p><strong>Qty.</strong> ' + esc(meta ? ('Qty ' + meta.qty) : (d.qty || '')) + '</p>' +
+      (meta ? '<p><strong>Where.</strong> ' + esc(meta.where) + '</p>' : '') +
       '<p>' + esc(d.notes || '') + '</p>';
   }
-
-  function selectObject(obj) {
+  function highlightPart(id) {
+    selectedPart = id;
+    markPieceRow(id);
+    if (!sceneReady || !registry[id]) { placeTags(); return; }
     applyVisibility();
+    const visible = registry[id].meshes.filter(function (m) { return m.visible; });
+    visible.forEach(function (obj) {
+      if (obj.isMesh && obj.material && obj.material.emissive) {
+        obj.material.emissive.set(0xff7a3c);
+        obj.material.emissiveIntensity = 0.75;
+      } else if (obj.isLine && obj.material) {
+        obj.material.color.set(0xff7a3c);
+      }
+    });
+    if (visible[0]) showDetail(visible[0]);
+    placeTags();
+  }
+  function selectObject(obj) {
     if (!obj || !obj.visible) return;
-    if (obj.isMesh && obj.material && obj.material.emissive) {
-      obj.material.emissive.set(0xff7a3c);
-      obj.material.emissiveIntensity = 0.75;
-    } else if (obj.isLine) {
-      obj.material.color.set(0xff7a3c);
-    }
-    showDetail(obj);
+    highlightPart(obj.userData.partId || obj.name);
   }
 
   function setStep(i, opts) {
@@ -1277,6 +1471,7 @@
     explore = false;
     exploreApplied = false;
     current = Math.max(0, Math.min(STEPS.length - 1, i | 0));
+    clearSelection();
     const detail = document.getElementById('part-detail');
     if (detail) detail.hidden = true;
     if (sceneReady) applyVisibility();
@@ -1288,7 +1483,10 @@
     const frame = !opts || opts.frame !== false;
     const already = exploreApplied;
     explore = true;
+    if (!already) clearSelection();
     updateChrome();
+    const sheet = document.getElementById('piece-sheet');
+    if (sheet && !already) sheet.open = true;
     if (!sceneReady) return;
     if (already) return;
     exploreApplied = true;
@@ -1300,7 +1498,7 @@
 
   function goNext() {
     if (explore) return;
-    if (current >= STEPS.length - 1) enterExplore({ frame: true });
+    if (current >= STEPS.length - 1) enterExplore({ frame: false });
     else setStep(current + 1);
   }
   function goPrev() {
@@ -1368,6 +1566,7 @@
     const hits = raycaster.intersectObjects(pickables.filter(function (o) { return o.visible; }), false);
     if (hits.length) selectObject(hits[0].object);
     else {
+      clearSelection();
       document.getElementById('part-detail').hidden = true;
       applyVisibility();
     }
@@ -1413,13 +1612,10 @@
 
   // Optional PBR swap. Name GLB nodes with the part id (long-rail, leg, joist, …).
   // If there is no loader or no matching node, the procedural wood materials stay.
-  const PBR_GLB_URLS = ['assets/x1-option-b.glb', '/x1/assets/x1-option-b.glb'];
+  const PBR_GLB_URLS = ['/x1/assets/x1-option-b.glb', 'assets/x1-option-b.glb'];
   function applyPbrAppearance() {
     const Loader = (window.THREE && window.THREE.GLTFLoader) || window.GLTFLoader;
-    if (typeof Loader !== 'function') {
-      console.info('[X1] procedural wood materials — no GLB loader in vendor/');
-      return Promise.resolve(false);
-    }
+    if (typeof Loader !== 'function') return Promise.resolve(false);
     const loader = new Loader();
     const tryUrl = function (url) {
       return new Promise(function (resolve, reject) { loader.load(url, resolve, undefined, reject); });
@@ -1429,10 +1625,7 @@
       for (let i = 0; i < PBR_GLB_URLS.length; i++) {
         try { gltf = await tryUrl(PBR_GLB_URLS[i]); break; } catch (e) { /* keep procedural */ }
       }
-      if (!gltf || !gltf.scene) {
-        console.info('[X1] PBR GLB not found — keeping procedural materials');
-        return false;
-      }
+      if (!gltf || !gltf.scene) return false;
       let swapped = 0;
       Object.keys(registry).forEach(function (id) {
         const group = gltf.scene.getObjectByName(id);
@@ -1464,6 +1657,7 @@
     if ('outputEncoding' in renderer && THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
     wrap.appendChild(renderer.domElement);
     controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.addEventListener('change', placeTags);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.minDistance = 18;
@@ -1495,7 +1689,7 @@
     sceneReady = true;
     if (explore) enterExplore({ frame: true });
     else setStep(current, { frame: true });
-    applyPbrAppearance();
+    applyPbrAppearance().catch(function () { /* missing GLB stays on procedural wood */ });
     (function scheduleInitialFrame() {
       let tries = 0;
       const attempt = function () {
@@ -1523,10 +1717,8 @@
       sampleMeshModes: sampleMeshModes,
       visibleIds: visibleIds,
       projectPart: projectPart,
-      highlight: function (id) {
-        const obj = registry[id] && registry[id].meshes.find(function (m) { return m.visible; });
-        if (obj) selectObject(obj);
-      },
+      highlight: highlightPart,
+      selectedPart: function () { return selectedPart; },
       audit: audit,
       applyPbrAppearance: applyPbrAppearance,
       PICK_MOVE_PX: PICK_MOVE_PX,
@@ -1536,9 +1728,17 @@
     };
   }
 
+  function renderPieceSheet() {
+    document.getElementById('piece-list').innerHTML = WHERE.map(function (p) {
+      return '<li><button type="button" data-part-id="' + p.id + '"><span class="qty-badge">×' + p.qty + '</span> ' +
+        esc(p.name) + '<small>' + esc(p.where) + '</small></button></li>';
+    }).join('');
+  }
+
   fillNumbers();
   renderLists();
   renderSteps();
+  renderPieceSheet();
   wireUi();
   window.__x1CutCsv = cutCsv;
 })();
