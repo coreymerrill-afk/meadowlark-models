@@ -1,0 +1,425 @@
+{
+ "name": "Compact Desk with Drawer",
+ "slug": "desk",
+ "pitch": "A real desk cut to your room: panel legs with robot-vac clearance, a rear stretcher, hidden-joint drawer, monitor shelf and a cable slot.",
+ "dimensions_mm": {
+  "width": 1200.0,
+  "depth": 600.0,
+  "height": 740.0,
+  "plinth_clearance": 100.0,
+  "knee_bay_clear_width": 673.0
+ },
+ "parameters": [
+  {
+   "name": "width",
+   "default": 1200.0,
+   "limits": "900-1600 mm (2nd divider/leg panel over 1400)"
+  },
+  {
+   "name": "depth",
+   "default": 600.0,
+   "limits": "450-800 mm"
+  },
+  {
+   "name": "height",
+   "default": 740.0,
+   "limits": "650-1050 mm"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm"
+  },
+  {
+   "name": "plinth",
+   "default": 100.0,
+   "limits": "90-150 mm"
+  },
+  {
+   "name": "drawer",
+   "default": 1,
+   "limits": "0 or 1"
+  },
+  {
+   "name": "drawer_w",
+   "default": 420.0,
+   "limits": "300-520 mm"
+  },
+  {
+   "name": "drawer_len",
+   "default": 420.0,
+   "limits": "300-480 mm (must fit the depth)"
+  },
+  {
+   "name": "monitor_shelf",
+   "default": 1,
+   "limits": "0 or 1"
+  },
+  {
+   "name": "cable_slot",
+   "default": 1,
+   "limits": "0 or 1"
+  }
+ ],
+ "sheet_count": 1,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "desk-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "TOP",
+     "number": 1,
+     "size_mm": [
+      1200.0,
+      600.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-L",
+     "number": 2,
+     "size_mm": [
+      550.0,
+      740.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-R",
+     "number": 3,
+     "size_mm": [
+      550.0,
+      740.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "BACK-STRETCHER",
+     "number": 4,
+     "size_mm": [
+      1150.0,
+      268.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DRAWER-DIVIDER",
+     "number": 7,
+     "size_mm": [
+      530.0,
+      218.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "FRONT-APRON",
+     "number": 8,
+     "size_mm": [
+      709.0,
+      88.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "LEDGER-R",
+     "number": 14,
+     "size_mm": [
+      48.0,
+      435.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "LEDGER-D",
+     "number": 14,
+     "size_mm": [
+      48.0,
+      435.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DRW-SIDE-L",
+     "number": 10,
+     "size_mm": [
+      420.0,
+      130.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DRW-SIDE-R",
+     "number": 10,
+     "size_mm": [
+      420.0,
+      130.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DRW-FRONT",
+     "number": 11,
+     "size_mm": [
+      420.0,
+      130.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DRW-BACK",
+     "number": 12,
+     "size_mm": [
+      420.0,
+      130.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DRW-BOTTOM",
+     "number": 5,
+     "size_mm": [
+      420.0,
+      384.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DRW-FACE",
+     "number": 9,
+     "size_mm": [
+      420.0,
+      140.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "MON-SHELF",
+     "number": 6,
+     "size_mm": [
+      760.0,
+      200.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "MON-UP-L",
+     "number": 13,
+     "size_mm": [
+      170.0,
+      146.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "MON-UP-R",
+     "number": 13,
+     "size_mm": [
+      170.0,
+      146.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 17,
+   "coverage_pct": 75.1,
+   "cut_path_m": 39.22
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheets",
+   "detail": "Fit-test coupon first (slot = tab + 0.1 mm), then cut 1 sheet(s): 39 m of cut path. The 1200 x 600 TOP is the biggest part; keep it flat on the honeycomb and cut inside-out.",
+   "minutes": 261
+  },
+  {
+   "step": 2,
+   "title": "Remove char and sand",
+   "detail": "Brush char off every edge, 120 then 180 grit; round the desktop edge by hand (about 3 mm). Sand the side-panel windows.",
+   "minutes": 70
+  },
+  {
+   "step": 3,
+   "title": "Dry fit the frame",
+   "detail": "Stand SIDE-L and SIDE-R, slide the BACK-STRETCHER into both, add the DRAWER-DIVIDER and FRONT-APRON, then drop the TOP over all the tabs. Check the tab ends are flush with the desktop and the legs stand square.",
+   "minutes": 20
+  },
+  {
+   "step": 4,
+   "title": "Dry fit drawer",
+   "detail": "Assemble the drawer (finger corners, bottom with 4 tabs, face) and slide it on the two LEDGERs; it should run freely with 1.5 mm side play. Sand the finger pull slots.",
+   "minutes": 20
+  },
+  {
+   "step": 5,
+   "title": "Pre-finish",
+   "detail": "Oil or poly the desktop top, the drawer, and the inside faces now; mask the tabs and slots so the glue bonds.",
+   "minutes": 50
+  },
+  {
+   "step": 6,
+   "title": "Glue-up frame (Titebond III)",
+   "detail": "Glue the stretcher, apron, divider and ledgers into SIDE-L/R and the divider, then fit the TOP onto the tabs and clamp across the width. Wipe squeeze-out; 30 min clamp, 24 h before heavy use.",
+   "minutes": 35
+  },
+  {
+   "step": 7,
+   "title": "Screws as clamps",
+   "detail": "10 #8 x 1-1/2 in and 2 #8 x 1-1/4 in screws (3.0 mm pilots pre-cut): through each side face into the back stretcher edge; the drawer corners, bottom and face as the nightstand drawer.",
+   "minutes": 25
+  },
+  {
+   "step": 8,
+   "title": "Monitor shelf and cable slot",
+   "detail": "Glue MON-UP-L/R into their top slots (they stand on the desktop and their tabs come through underneath), then the MON-SHELF onto their upper tabs. Edge-band or sand the cable slot.",
+   "minutes": 15
+  },
+  {
+   "step": 9,
+   "title": "Wall stabilizer / cleat (optional)",
+   "detail": "Screw a Z-bar half to the rear face of the BACK-STRETCHER and the other half into studs to stop the desk creeping or wobbling. It is a stabilizer, not a floating-desk mount.",
+   "minutes": 15
+  },
+  {
+   "step": 10,
+   "title": "Finish and pack",
+   "detail": "Last coat, 24 h cure, felt pads under the 4 feet, load-test 60 kg on the desktop centre, flat-pack with corner guards (parts up to 1.2 m).",
+   "minutes": 40
+  }
+ ],
+ "stage_total_minutes": 551,
+ "materials": {
+  "sheet": "18 mm (3/4 in) birch or Baltic-birch plywood, 4 x 8 ft x 1 (hardwood-ply top is a CNC upgrade)",
+  "sheets_required": 1,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in wood screws",
+    "qty": 10,
+    "unit_cost": 0.06,
+    "note": "from model"
+   },
+   {
+    "item": "#8 x 1-1/4 in wood screws",
+    "qty": 2,
+    "unit_cost": 0.06,
+    "note": ""
+   },
+   {
+    "item": "Aluminum Z-bar pair (wall stabilizer)",
+    "qty": 1,
+    "unit_cost": 12.0,
+    "note": "optional"
+   },
+   {
+    "item": "Felt/rubber foot pads",
+    "qty": 4,
+    "unit_cost": 0.4,
+    "note": ""
+   },
+   {
+    "item": "Cable grommet (optional)",
+    "qty": 1,
+    "unit_cost": 3.0,
+    "note": "60 mm plastic"
+   },
+   {
+    "item": "Wood plugs / filler",
+    "qty": 1,
+    "unit_cost": 2.0,
+    "note": ""
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 10,
+   "#8 x 1-1/4 in": 2
+  },
+  "glue": "Titebond III, about 5 oz",
+  "finish": "hardwax oil or water-based poly, 3 coats on the top (about $15)"
+ },
+ "safety": [
+  "Rated target 60 kg distributed on the desktop - UNVERIFIED; sag-test a 1200 mm top with 20 kg at the centre.",
+  "Top is held only by through-tabs and glue: let the glue cure 24 h before loading.",
+  "Stand-height (1000 mm) builds are less stable: fit the wall stabilizer and widen the stance (depth >= 650).",
+  "Not a children's product."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "birch",
+  "sheets": 1,
+  "sheet_price_low_mid_high": [
+   70,
+   90,
+   110
+  ],
+  "sheet_cost_mid": 90,
+  "hardware_cost": 19.32,
+  "finish_cost": 15.0,
+  "packaging_cost": 18.0,
+  "cut_path_m": 39.2,
+  "machine_minutes_at_100_150_200_mm_per_min": [
+   392.0,
+   261.0,
+   196.0
+  ],
+  "machine_hours_mid": 4.36,
+  "machine_wear_cost": 7.41,
+  "labor_hours": 2.8,
+  "product_weight_kg": 24.9,
+  "shipping_estimate_if_absorbed": 60.0,
+  "cost_per_unit_low_mid_high": [
+   129.73,
+   149.73,
+   169.73
+  ],
+  "price_band_source": "SHORTLIST.md: custom target $250-$600 (estimate); small computer desks widely sold ~$100-$400 [third-party estimates]",
+  "at_price": {
+   "low": {
+    "price": 250.0,
+    "cogs_mid": 149.73,
+    "gross_margin": 100.27,
+    "gross_margin_pct": 40.1,
+    "gross_margin_if_you_absorb_shipping": 40.27,
+    "net_after_fees_and_labor": 5.27,
+    "gross_margin_per_machine_hour": 23.01,
+    "net_after_fees_and_labor_per_machine_hour": 1.21
+   },
+   "mid": {
+    "price": 425.0,
+    "cogs_mid": 149.73,
+    "gross_margin": 275.27,
+    "gross_margin_pct": 64.8,
+    "gross_margin_if_you_absorb_shipping": 215.27,
+    "net_after_fees_and_labor": 162.77,
+    "gross_margin_per_machine_hour": 63.17,
+    "net_after_fees_and_labor_per_machine_hour": 37.35
+   },
+   "high": {
+    "price": 600.0,
+    "cogs_mid": 149.73,
+    "gross_margin": 450.27,
+    "gross_margin_pct": 75.0,
+    "gross_margin_if_you_absorb_shipping": 390.27,
+    "net_after_fees_and_labor": 320.27,
+    "gross_margin_per_machine_hour": 103.33,
+    "net_after_fees_and_labor_per_machine_hour": 73.49
+   }
+  },
+  "note_machine_time": "At 100-200 mm/min the laser path alone is 3.3-6.5 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting."
+ },
+ "unverified": [
+  "Desktop deflection with 18 mm ply over 1200 mm not tested; rear stretcher and divider are the only stiffeners.",
+  "Laser feed 100-200 mm/min on 18 mm ply is an estimate.",
+  "Visible tab ends on the desktop surface (sand flush / cover with a desk mat or veneer).",
+  "Drawer slides on plywood ledgers (no hardware slides).",
+  "Price band is an estimate from SHORTLIST.md."
+ ]
+}

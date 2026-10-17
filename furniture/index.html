@@ -4,715 +4,128 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#1c1712" />
-<meta name="description" content="Nightstand and rolling kitchen cart: 18 mm plywood, one 4×8 sheet each, with a 3D view, the nest, and the build order." />
+<meta name="description" content="Seven flat-pack plywood designs: bookcase, desk, dog crate, kitchen cart, nightstand, retail display, and shoe bench. Cut sheets, a 3D model, and a build order for each." />
 <link rel="icon" href="data:," />
 <title>Shop furniture — Meadowlark Models</title>
-<style>
-  :root {
-    --bg: #1c1712; --bg2: #2a231c; --bg3: #3a3128; --border: #5c4c3c;
-    --text: #f6f0e6; --muted: #a08f7c; --accent: #f0b429; --ok: #b7d7a8;
-    --warn: #f0c36a; --ink: #1c1712;
-  }
-  * { box-sizing: border-box; }
-  html { overflow-x: clip; }
-  body {
-    margin: 0; min-height: 100dvh;
-    background: var(--bg); color: var(--text);
-    font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  }
-  a { color: var(--accent); }
-  h2 { font-size: 1.35rem; margin: 0 0 8px; }
-  h3 { font-size: 1rem; margin: 22px 0 8px; color: var(--accent); }
-  p { margin: 0 0 10px; }
-  .sr {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-  }
-  header.doc-header {
-    background: var(--bg2); border-bottom: 1px solid var(--border);
-    padding: 10px 14px 0;
-  }
-  .hub-back {
-    color: var(--accent); text-decoration: none; font-size: 14px; font-weight: 700;
-    min-height: 44px; display: inline-flex; align-items: center;
-  }
-  header h1 { font-size: 1.25rem; margin: 0; }
-  .meta { color: var(--muted); font-size: 13px; margin: 2px 0 0; }
-  nav.tabs { display: flex; gap: 4px; overflow-x: auto; margin-top: 8px; }
-  nav.tabs button {
-    flex: 0 0 auto; min-height: 44px; padding: 8px 14px; border: none;
-    border-bottom: 3px solid transparent; background: transparent; color: var(--muted);
-    font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; white-space: nowrap;
-  }
-  nav.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
-  nav.tabs button:focus-visible, button.ghost:focus-visible, a.file:focus-visible, .chip:focus-within {
-    outline: 2px solid var(--accent); outline-offset: 2px;
-  }
-  .stage { background: #241e18; border-bottom: 1px solid var(--border); }
-  #canvas-wrap { position: relative; height: clamp(320px, 56vh, 520px); }
-  #canvas-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
-  #three-loading, #three-error {
-    position: absolute; inset: 0; z-index: 4; display: flex; align-items: center; justify-content: center;
-    padding: 16px; text-align: center; color: var(--muted); background: rgba(28, 23, 18, 0.92);
-  }
-  #three-loading[hidden], #three-error[hidden] { display: none !important; }
-  #three-error { color: #ffd0d0; }
-  .tool-bar {
-    display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center;
-    padding: 8px 12px; background: var(--bg2); border-top: 1px solid var(--border);
-  }
-  .explode {
-    display: flex; align-items: center; gap: 10px; min-height: 44px;
-    font-weight: 700; flex: 1 1 240px; min-width: 0;
-  }
-  .explode input { flex: 1 1 auto; min-width: 96px; accent-color: var(--accent); }
-  .chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    min-height: 44px; padding: 0 12px;
-    border: 1px solid var(--border); border-radius: 8px;
-    background: var(--bg3); font-weight: 700; cursor: pointer;
-  }
-  .chip[hidden] { display: none !important; }
-  .chip input { width: 1.05rem; height: 1.05rem; accent-color: var(--accent); }
-  button.ghost {
-    min-height: 44px; padding: 8px 12px; border-radius: 8px;
-    border: 1px solid var(--border); background: var(--bg3); color: var(--text);
-    font: inherit; font-weight: 700; cursor: pointer;
-  }
-  .tool-note { flex: 1 0 100%; margin: 0; color: var(--muted); font-size: 13px; }
-  .doc { max-width: 980px; margin: 0 auto; padding: 16px 14px 56px; }
-  .panel[hidden] { display: none !important; }
-  .facts { display: grid; gap: 6px; margin: 10px 0 12px; }
-  .facts div { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
-  .facts strong { display: block; font-size: 12px; color: var(--accent); }
-  .callout {
-    border-left: 4px solid var(--warn); background: #3a2e1c; padding: 12px 14px;
-    border-radius: 0 10px 10px 0; margin: 12px 0;
-  }
-  ol.steps { margin: 0 0 12px; padding-left: 1.25em; }
-  ol.steps li { margin: 6px 0; }
-  .figures { display: grid; gap: 10px; margin: 8px 0 4px; }
-  figure {
-    margin: 0; background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 10px; overflow: hidden;
-  }
-  figure img { width: 100%; height: auto; display: block; }
-  figcaption { padding: 8px 10px 10px; color: var(--muted); font-size: 13px; }
-  .files { display: grid; gap: 8px; margin: 8px 0 12px; }
-  a.file {
-    display: block; text-decoration: none; color: var(--text);
-    background: var(--bg2); border: 1px solid var(--border); border-left: 4px solid var(--accent);
-    border-radius: 10px; padding: 10px 12px;
-  }
-  a.file strong { display: block; color: var(--accent); }
-  a.file span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
-  @media (min-width: 800px) {
-    .facts { grid-template-columns: 1fr 1fr; }
-    .figures { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 767px) {
-    nav.tabs button { padding: 8px 12px; }
-  }
-</style>
+<link rel="stylesheet" href="/furniture/furniture.css" />
 </head>
 <body>
 <header class="doc-header">
-  <a class="hub-back" href="/">All models</a>
+  <p class="crumbs"><a href="/">All models</a></p>
   <h1>Shop furniture</h1>
-  <p class="meta">18 mm plywood, one 4×8 sheet each. Glued, with the screws as clamps while the glue cures.</p>
-  <nav class="tabs" aria-label="Furniture">
-    <button type="button" id="tab-nightstand" role="tab" aria-selected="true" aria-controls="panel-nightstand">Nightstand</button>
-    <button type="button" id="tab-kitchen-cart" role="tab" aria-selected="false" aria-controls="panel-kitchen-cart">Kitchen cart</button>
-  </nav>
+  <p class="lede">Seven flat-pack designs in 18 mm plywood, each cut from 4×8 sheets. Open a piece for the model, the cut sheets, and the build. Mid prices are planning estimates, not quotes.</p>
 </header>
-
-<p class="sr" id="model-status" aria-live="polite"></p>
-
-<div class="stage">
-  <div id="canvas-wrap">
-    <div id="three-loading">Loading the model…</div>
-    <div id="three-error" hidden></div>
+<main class="wrap">
+  <div class="gallery">
+    <a class="card" href="/furniture/bookcase">
+  <div class="card-media">
+    <img src="/furniture-data/bookcase/assembly.png" width="1800" height="937" alt="Assembly drawing of the Modular Bookcase / Cube Shelf." />
   </div>
-  <div class="tool-bar">
-    <label class="explode" for="explode">Exploded
-      <input id="explode" type="range" min="0" max="100" value="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" />
-    </label>
-    <label class="chip" data-for="nightstand" for="tog-ns-cleat"><input id="tog-ns-cleat" type="checkbox" /> Cleat backer</label>
-    <label class="chip" data-for="kitchen-cart" for="tog-cart-drawer" hidden><input id="tog-cart-drawer" type="checkbox" checked /> Drawer module</label>
-    <label class="chip" data-for="kitchen-cart" for="tog-cart-cleat" hidden><input id="tog-cart-cleat" type="checkbox" /> Cleat backer</label>
-    <label class="chip" data-for="kitchen-cart" for="tog-cart-casters" hidden><input id="tog-cart-casters" type="checkbox" checked /> Casters</label>
-    <button type="button" class="ghost" id="btn-reset">Reset view</button>
-    <p class="tool-note">Drag to turn. Scroll or pinch to zoom. The slider pulls the panels apart.</p>
+  <div class="card-body">
+    <h2>Modular Bookcase / Cube Shelf</h2>
+    <p class="pitch">Open shelving cut to your wall: adjustable shelves, cube bays, raised for the robot vacuum, with a cleat rail and anti-tip anchor.</p>
+    <dl class="stats">
+      <div class="wide"><dt>Size</dt><dd>800 × 300 × 1,600 mm</dd></div>
+      <div><dt>Sheets</dt><dd>1 sheet</dd></div>
+      <div><dt>Mid price</dt><dd>$315</dd></div>
+    </dl>
   </div>
-</div>
-
-<main class="doc">
-  <section class="panel" id="panel-nightstand" role="tabpanel" aria-labelledby="tab-nightstand">
+</a>
+<a class="card" href="/furniture/desk">
+  <div class="card-media">
+    <img src="/furniture-data/desk/assembly.png" width="1800" height="937" alt="Assembly drawing of the Compact Desk with Drawer." />
+  </div>
+  <div class="card-body">
+    <h2>Compact Desk with Drawer</h2>
+    <p class="pitch">A real desk cut to your room: panel legs with robot-vac clearance, a rear stretcher, hidden-joint drawer, monitor shelf and a cable slot.</p>
+    <dl class="stats">
+      <div class="wide"><dt>Size</dt><dd>1,200 × 600 × 740 mm</dd></div>
+      <div><dt>Sheets</dt><dd>1 sheet</dd></div>
+      <div><dt>Mid price</dt><dd>$425</dd></div>
+    </dl>
+  </div>
+</a>
+<a class="card" href="/furniture/dog-crate">
+  <div class="card-media">
+    <img src="/furniture-data/dog-crate/assembly.png" width="1800" height="937" alt="Assembly drawing of the Dog-Crate End Table." />
+  </div>
+  <div class="card-body">
+    <h2>Dog-Crate End Table</h2>
+    <p class="pitch">A dog crate that looks like furniture: tabletop, slatted door, ventilated sides, lift-out washable trays, sized to your dog.</p>
+    <dl class="stats">
+      <div class="wide"><dt>Size</dt><dd>900 × 600 × 700 mm</dd></div>
+      <div><dt>Sheets</dt><dd>2 sheets</dd></div>
+      <div><dt>Mid price</dt><dd>$525</dd></div>
+    </dl>
+  </div>
+</a>
+<a class="card" href="/furniture/kitchen-cart">
+  <div class="card-media">
+    <img src="/furniture-data/kitchen-cart/assembly.png" width="1800" height="937" alt="Assembly drawing of the Rolling Kitchen Cart." />
+  </div>
+  <div class="card-body">
+    <h2>Rolling Kitchen Cart</h2>
+    <p class="pitch">A rolling cart for toasters and panini presses: 13 slot rows for shelves on a 50 mm pitch, an optional drawer, locking casters, and one dense 4x8 sheet.</p>
+    <dl class="stats">
+      <div class="wide"><dt>Size</dt><dd>600 × 450 × 900 mm</dd></div>
+      <div><dt>Sheets</dt><dd>1 sheet</dd></div>
+      <div><dt>Mid price</dt><dd>$280</dd></div>
+    </dl>
+  </div>
+</a>
+<a class="card" href="/furniture/nightstand">
+  <div class="card-media">
+    <img src="/furniture-data/nightstand/assembly.png" width="1800" height="937" alt="Assembly drawing of the Nightstand." />
+  </div>
+  <div class="card-body">
     <h2>Nightstand</h2>
-    <p>A bedside table from one sheet of 18 mm plywood. It stands on its own feet, and the same sheet includes a French cleat backer so it can hang on the wall.</p>
-
-    <h3>Dimensions</h3>
-    <div class="facts">
-      <div><strong>Overall</strong> 560 × 400 × 600 mm (22 × 15.75 × 23.6 in)</div>
-      <div><strong>Top</strong> 560 × 400 mm, overhanging the carcass 20 mm on every side</div>
-      <div><strong>Carcass</strong> 520 mm wide × 360 mm deep. Drawer above an open cubby.</div>
-      <div><strong>Parts</strong> 15 plywood parts in the model: 13 in the standing piece, 2 optional cleat layers. Two test coupons are in the nest and are not drawn here.</div>
-      <div><strong>Sheet</strong> One 1220 × 2440 mm sheet. The parts cover 49% of it.</div>
-      <div><strong>Thickness</strong> 18 mm plywood. Slots are drawn 0.1 mm over the tab.</div>
-    </div>
-
-    <h3>The sheet</h3>
-    <div class="figures">
-      <figure>
-        <img src="/furniture/nightstand/nightstand-nest-layout.png" width="2400" height="1260" alt="Nightstand parts nested on one 1220 by 2440 mm plywood sheet, each part labelled." />
-        <figcaption>Every part on one sheet, 6 mm apart. Long edges run along the sheet.</figcaption>
-      </figure>
-      <figure>
-        <img src="/furniture/nightstand/nightstand-assembly.png" width="2600" height="1350" alt="Exploded and assembled views of the nightstand, with joint callouts and the foot notch." />
-        <figcaption>How the tabs, the drawer, the feet, and the cleat go together.</figcaption>
-      </figure>
-    </div>
-
-    <h3>Build</h3>
-    <p>Glue is the joint. Spread wood glue on every tab, slot, and finger face, then drive the screws so they clamp the joint while the glue cures. The screws stay in after that. Scrape or sand the char off the lasered faces first, because char does not hold glue. Wipe the squeeze-out. Give it about an hour before you move it, and a day before you load it.</p>
-    <p>Pilot holes are 3.0 mm. Thirty screws in all: twenty #8 × 1½ in, and six #8 × 1¼ in. The four #8 × 1¾ in are only for the cleat backer. The shorter 1¼ in screws are the ones that must not poke out the far side (runners and drawer face).</p>
-    <ol class="steps">
-      <li>Dry-fit the parts. Lay one side flat, glue the back and the shelf into its slots, fit the other side, and screw from the outside.</li>
-      <li>Turn the carcass onto its back and screw both runners on. They need to sit level with each other, or the drawer will rack.</li>
-      <li>Lay the top upside down. Stand the carcass on it so the side tabs enter the top slots, glue, and drive the four top screws. Check that all four feet touch the floor.</li>
-      <li>If you are adding the cleat, do it now, before the drawer goes in. Glue the two backer layers to the rear of the back panel and drive the four screws from inside. Then screw the Z-bar to the outer layer.</li>
-      <li>Glue the drawer finger joints and the bottom tabs, check the box is square, and drive the box screws. Glue and screw the face on from the inside. Leave the drawer free of glue so it can ride on the runners.</li>
-    </ol>
-    <div class="callout">
-      <strong>Cut the two test coupons first.</strong> The tab should slide through the slot with finger pressure and sit flush. Adjust the cut from that pair before you cut the real parts. A feed of 100–200 mm per minute at full power is only a starting guess. The machine’s maker does not publish a rate for 18 mm plywood, so treat that speed as an unverified estimate and set your own from the coupons. Stay with the machine while it cuts.
-    </div>
-
-    <h3>Downloads</h3>
-    <div class="files">
-      <a class="file" href="/furniture/nightstand/nightstand-nest-1220x2440.dxf" download="nightstand-nest-1220x2440.dxf">
-        <strong>Nest DXF</strong>
-        <span>nightstand-nest-1220x2440.dxf · millimeters, one 1220 × 2440 mm sheet</span>
-      </a>
-      <a class="file" href="/furniture/nightstand/README.md" download="nightstand-README.md">
-        <strong>README</strong>
-        <span>Full notes: joints, screw positions, and the check that was run on the model.</span>
-      </a>
-    </div>
-
-    <h3>Notes</h3>
-    <p>The cleat is optional. Two plywood layers glue to the back, and a metal Z-bar screws to the outer layer. The nightstand is light enough to hang. Lift it straight up to take it off the wall, and straight down to set it on the bar. The wall bar can stay up when you stand the nightstand back on its feet.</p>
-    <p>Each side is notched into two feet, so there is 86 mm clear under the sides and 100 mm under the shelf. The opening runs front to back, between the feet, which is room for a typical robot vacuum. Check the height of yours. A felt or rubber dot under each foot keeps a hard floor from getting scratched.</p>
-    <div class="callout">
-      <strong>Design rule.</strong> Where a piece of furniture can reasonably hang, design it so a French cleat can hold it. The cleat parts ride along in the same sheet, and the floor-standing build still works if you leave them off.
-    </div>
-  </section>
-
-  <section class="panel" id="panel-kitchen-cart" role="tabpanel" aria-labelledby="tab-kitchen-cart" hidden>
-    <h2>Kitchen cart</h2>
-    <p>A rolling cart from one sheet of 18 mm plywood. The worktop sits at counter height. An empty cart can park on a French cleat; a loaded one stays on its casters.</p>
-
-    <h3>Dimensions</h3>
-    <div class="facts">
-      <div><strong>Overall</strong> 600 × 450 × 900 mm (23.6 × 17.7 × 35.4 in). Worktop at 900 mm.</div>
-      <div><strong>Rail</strong> A 22 mm lip on the back and both sides, top at 922 mm. The front stays open.</div>
-      <div><strong>Shelf</strong> Ledgers drop into a grid of slots, 50 mm apart, so the shelf can move. The drawer, if you build it, rides on the same kind of ledger.</div>
-      <div><strong>Parts</strong> 29 plywood parts: 19 in the core cart, 10 optional (the drawer module and the cleat). Four casters are bought parts, shown here as simple wheels. Two test coupons are in the nest and are not drawn here.</div>
-      <div><strong>Sheet</strong> One 1220 × 2440 mm sheet. The parts cover 79% of it.</div>
-      <div><strong>Feet</strong> Two 18 mm layers at each corner. Caster plate on the bottom, base on the top. Base underside at 138 mm.</div>
-    </div>
-
-    <h3>The sheet</h3>
-    <div class="figures">
-      <figure>
-        <img src="/furniture/kitchen-cart/cart-nest-layout.png" width="1680" height="882" alt="Kitchen cart parts nested on one plywood sheet, with optional parts in lighter colours." />
-        <figcaption>All 29 parts, plus the two coupons, on one sheet. Lighter shapes are the optional parts.</figcaption>
-      </figure>
-      <figure>
-        <img src="/furniture/kitchen-cart/cart-assembly.png" width="2080" height="1400" alt="Exploded and assembled views of the kitchen cart, including the shelf slots and caster feet." />
-        <figcaption>Carcass, shelf slots, drawer, and the caster feet.</figcaption>
-      </figure>
-    </div>
-
-    <h3>Build</h3>
-    <p>Glue is the joint. Spread water-resistant wood glue on every tab, slot, and finger face, then drive the screws so they clamp the joint while the glue cures. The screws stay in after that. Scrape or sand the char off the lasered faces first. Wipe the squeeze-out. Give it about an hour before you move it, and a day before you load it. Leave the ledgers and the shelf dry so you can lift them into another row later.</p>
-    <p>Pilot holes are 3.0 mm. Twenty #8 × 1½ in, thirteen #8 × 1¼ in, and twelve #8 × 1¾ in. Eight of the long screws hold the feet and four hold the cleat. A cart with no drawer and no cleat uses 31 screws. The casters take sixteen M8 × 30 bolts, with a nut and a washer on each.</p>
-    <ol class="steps">
-      <li>Cut the coupons, then the sheet. Dry-fit every part and clean the char out of the slots and off the tab faces.</li>
-      <li>Bolt a caster to each foot plate, glue the nut-pocket layer over the nuts, and clamp. Do all four feet.</li>
-      <li>Glue the feet under the base and drive the screws down through the base.</li>
-      <li>Stand the sides on the base. Glue the bottom tabs into the base and the back tabs into both sides. Strap the box, screw the sides to the back, then drive the base screws up from below.</li>
-      <li>Glue the top onto the side tabs and drive its screws.</li>
-      <li>Glue the three rails around the top and screw them up from underneath. Leave the front open.</li>
-      <li>Drop the shelf ledgers into the row you want and set the loose shelf on them. If you are building the drawer, assemble it the same way as the nightstand and set it on the upper ledgers.</li>
-      <li>If you want the cleat, glue the backer on and fit the Z-bar. Fill the screw holes in the top, finish the wood, and lock the casters before you load the cart.</li>
-    </ol>
-    <div class="callout">
-      <strong>Cut the two test coupons first.</strong> The tab should slide through the slot with finger pressure and sit flush. A feed of 100–200 mm per minute at full power is only a starting guess, carried over from the nightstand. It is an unverified estimate for 18 mm plywood. Set the real speed from the coupons, and stay with the machine while it cuts.
-    </div>
-
-    <h3>Downloads</h3>
-    <div class="files">
-      <a class="file" href="/furniture/kitchen-cart/kitchen-cart-nest-1220x2440.dxf" download="kitchen-cart-nest-1220x2440.dxf">
-        <strong>Nest DXF</strong>
-        <span>kitchen-cart-nest-1220x2440.dxf · millimeters, one 1220 × 2440 mm sheet</span>
-      </a>
-      <a class="file" href="/furniture/kitchen-cart/README.md" download="kitchen-cart-README.md">
-        <strong>README</strong>
-        <span>Full notes: the shelf grid, caster feet, screw positions, and the check that was run on the model.</span>
-      </a>
-    </div>
-
-    <h3>Notes</h3>
-    <p>The cleat is optional, and it is for parking an empty cart. A loaded cart stays on its casters. Two plywood layers glue to the back so a Z-bar can stand proud of the top and the base. Empty the cart, lift it onto the wall bar, and lock the casters. Lift it off when you want to roll it.</p>
-    <p>The underside of the base is 138 mm above the floor: the casters, plus the two plywood foot layers. The gap is open from the front and the back, so a robot vacuum can pass under. Between the front and back feet the side opening is shorter, so a robot comes in from the front or the back.</p>
-    <div class="callout">
-      <strong>Design rule.</strong> Where a piece of furniture can reasonably hang, design it so a French cleat can hold it. On this cart that means an empty park on the wall. The cleat parts are in the same sheet, and the rolling build still works if you leave them off.
-    </div>
-  </section>
+    <p class="pitch">A drawer-and-shelf nightstand that fits on a single 4x8 sheet, stands on its own feet so the robot vacuum goes underneath, and converts to a wall-hung French-cleat piece.</p>
+    <dl class="stats">
+      <div class="wide"><dt>Size</dt><dd>560 × 400 × 600 mm</dd></div>
+      <div><dt>Sheets</dt><dd>1 sheet</dd></div>
+      <div><dt>Mid price</dt><dd>$190</dd></div>
+    </dl>
+  </div>
+</a>
+<a class="card" href="/furniture/retail-display">
+  <div class="card-media">
+    <img src="/furniture-data/retail-display/assembly.png" width="1800" height="937" alt="Assembly drawing of the Retail / Market Display Shelving." />
+  </div>
+  <div class="card-body">
+    <h2>Retail / Market Display Shelving</h2>
+    <p class="pitch">Tiered booth shelving that knocks down flat: stepped sides, 4 shelves, a sign band with your logo cut into it, no glue.</p>
+    <dl class="stats">
+      <div class="wide"><dt>Size</dt><dd>900 × 440 × 1,500 mm</dd></div>
+      <div><dt>Sheets</dt><dd>2 sheets</dd></div>
+      <div><dt>Mid price</dt><dd>$500</dd></div>
+    </dl>
+  </div>
+</a>
+<a class="card" href="/furniture/shoe-bench">
+  <div class="card-media">
+    <img src="/furniture-data/shoe-bench/assembly.png" width="1800" height="937" alt="Assembly drawing of the Entryway Shoe Bench." />
+  </div>
+  <div class="card-body">
+    <h2>Entryway Shoe Bench</h2>
+    <p class="pitch">A seat plus shoe storage in one flat-pack: slatted shelves, a laser-cut cushion recess, raised so the robot vacuum goes underneath.</p>
+    <dl class="stats">
+      <div class="wide"><dt>Size</dt><dd>1,000 × 400 × 450 mm</dd></div>
+      <div><dt>Sheets</dt><dd>1 sheet</dd></div>
+      <div><dt>Mid price</dt><dd>$220</dd></div>
+    </dl>
+  </div>
+</a>
+  </div>
+  <p class="site-foot">Meadowlark Models. The feed rate behind the cut times is unverified.</p>
 </main>
-
-<script src="/x1/vendor/three.min.js"></script>
-<script src="/x1/vendor/OrbitControls.js"></script>
 <script>
 (function () {
-  'use strict';
-
-  var DESIGNS = ['nightstand', 'kitchen-cart'];
-  var current = 'nightstand';
-  var scene, camera, renderer, controls, wrap;
-  var userMoved = false;
-  var framed = false;
-  var models = {};
-  var grain = null;
-
-  function el(id) { return document.getElementById(id); }
-
-  function showError(msg) {
-    el('three-loading').hidden = true;
-    var box = el('three-error');
-    box.hidden = false;
-    box.textContent = msg;
-  }
-
-  function mapVec(x, y, z) {
-    return new THREE.Vector3(x, z, -y);
-  }
-
-  function cleanRing(outline) {
-    var pts = [];
-    var i, p, prev;
-    for (i = 0; i < outline.length; i++) {
-      p = outline[i];
-      prev = pts[pts.length - 1];
-      if (prev && Math.abs(prev[0] - p[0]) < 1e-6 && Math.abs(prev[1] - p[1]) < 1e-6) continue;
-      pts.push([p[0], p[1]]);
-    }
-    if (pts.length > 1) {
-      var a = pts[0], b = pts[pts.length - 1];
-      if (Math.abs(a[0] - b[0]) < 1e-6 && Math.abs(a[1] - b[1]) < 1e-6) pts.pop();
-    }
-    return pts;
-  }
-
-  function signedArea(pts) {
-    var a = 0, i, p, q;
-    for (i = 0; i < pts.length; i++) {
-      p = pts[i];
-      q = pts[(i + 1) % pts.length];
-      a += p[0] * q[1] - q[0] * p[1];
-    }
-    return a / 2;
-  }
-
-  function paintUVs(geom) {
-    var pos = geom.getAttribute('position');
-    var uv = geom.getAttribute('uv');
-    if (!pos || !uv) return;
-    var i;
-    for (i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / 160, pos.getY(i) / 160);
-    uv.needsUpdate = true;
-  }
-
-  function makeGrain() {
-    var c = document.createElement('canvas');
-    c.width = 256;
-    c.height = 128;
-    var g = c.getContext('2d');
-    g.fillStyle = '#ffffff';
-    g.fillRect(0, 0, 256, 128);
-    var i, y;
-    for (i = 0; i < 22; i++) {
-      y = (i + 0.15) * (128 / 22);
-      g.strokeStyle = 'rgba(80, 46, 18, ' + (0.08 + (i % 4) * 0.04) + ')';
-      g.lineWidth = i % 5 === 0 ? 2 : 1;
-      g.beginPath();
-      g.moveTo(0, y);
-      g.bezierCurveTo(80, y + 2, 160, y - 2, 256, y + 1);
-      g.stroke();
-    }
-    var tex = new THREE.CanvasTexture(c);
-    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-    if (THREE.sRGBEncoding) tex.encoding = THREE.sRGBEncoding;
-    tex.anisotropy = 4;
-    return tex;
-  }
-
-  var TINT = {
-    carcass: 0xd7b48a,
-    shelf: 0xdec4a0,
-    drawer: 0xc99668,
-    feet: 0xc9a56f,
-    cleat: 0xb58358
-  };
-  var mats = {};
-  function matFor(group) {
-    var key = TINT[group] ? group : 'carcass';
-    if (!mats[key]) {
-      mats[key] = new THREE.MeshStandardMaterial({
-        map: grain,
-        color: TINT[key],
-        roughness: 0.78,
-        metalness: 0.02,
-        flatShading: true,
-        side: THREE.DoubleSide,
-        polygonOffset: true,
-        polygonOffsetFactor: 1,
-        polygonOffsetUnits: 1
-      });
-    }
-    return mats[key];
-  }
-
-  function panelGeometry(part) {
-    var pts = cleanRing(part.outline);
-    if (pts.length < 3) return null;
-    if (signedArea(pts) < 0) pts.reverse();
-    var shape = new THREE.Shape();
-    shape.moveTo(pts[0][0], pts[0][1]);
-    var i;
-    for (i = 1; i < pts.length; i++) shape.lineTo(pts[i][0], pts[i][1]);
-    var depth = Math.max(1, part.thickness - 0.4);
-    var geom = new THREE.ExtrudeGeometry(shape, { depth: depth, bevelEnabled: false, steps: 1 });
-    paintUVs(geom);
-    return { geom: geom, depth: depth };
-  }
-
-  function addPanel(root, movers, part, modelCenter) {
-    var built = panelGeometry(part);
-    if (!built) return false;
-    var mesh = new THREE.Mesh(built.geom, matFor(part.group));
-    var eu = mapVec(part.u[0], part.u[1], part.u[2]);
-    var ev = mapVec(part.v[0], part.v[1], part.v[2]);
-    var en = mapVec(part.n[0], part.n[1], part.n[2]);
-    var basis = new THREE.Matrix4().makeBasis(eu, ev, en);
-    mesh.quaternion.setFromRotationMatrix(basis);
-    var origin = mapVec(part.origin[0], part.origin[1], part.origin[2]);
-    origin.addScaledVector(en, (part.thickness - built.depth) / 2);
-    mesh.position.copy(origin);
-    mesh.name = part.name;
-    mesh.userData.kind = 'panel';
-    mesh.userData.group = part.group;
-    mesh.userData.optional = !!part.optional;
-    var edges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(built.geom, 28),
-      new THREE.LineBasicMaterial({ color: 0x3a2918 })
-    );
-    mesh.add(edges);
-    root.add(mesh);
-    var center = mapVec(part.center[0], part.center[1], part.center[2]);
-    movers.push({
-      obj: mesh,
-      base: origin.clone(),
-      away: center.sub(modelCenter),
-      normal: en.clone()
-    });
-    return true;
-  }
-
-  function addCasters(root, movers, data, modelCenter) {
-    var list = data.casters_render_only || [];
-    if (!list.length) return;
-    var plateMat = new THREE.MeshStandardMaterial({ color: 0x3a3a3a, roughness: 0.4, metalness: 0.6 });
-    var steelMat = new THREE.MeshStandardMaterial({ color: 0x6a6e72, roughness: 0.35, metalness: 0.7 });
-    var wheelMat = new THREE.MeshStandardMaterial({ color: 0x1c1c1c, roughness: 0.9, metalness: 0.05 });
-    var plateGeo = new THREE.BoxGeometry(94, 5, 64);
-    var stemGeo = new THREE.CylinderGeometry(8, 10, 42, 12);
-    var i, spec, group, wheel, plate, stem, away;
-    for (i = 0; i < list.length; i++) {
-      spec = list[i];
-      group = new THREE.Group();
-      group.name = spec.name;
-      group.userData.kind = 'caster';
-      group.userData.group = 'casters';
-      group.userData.optional = true;
-      group.position.set(spec.center_xy[0], 0, -spec.center_xy[1]);
-      wheel = new THREE.Mesh(new THREE.CylinderGeometry(spec.wheel_dia / 2, spec.wheel_dia / 2, 24, 24), wheelMat);
-      wheel.rotation.z = Math.PI / 2;
-      wheel.position.y = spec.wheel_dia / 2;
-      plate = new THREE.Mesh(plateGeo, plateMat);
-      plate.position.y = spec.height - 2.6;
-      stem = new THREE.Mesh(stemGeo, steelMat);
-      stem.position.y = 76;
-      group.add(wheel);
-      group.add(stem);
-      group.add(plate);
-      root.add(group);
-      away = new THREE.Vector3(spec.center_xy[0], spec.height / 2, -spec.center_xy[1]).sub(modelCenter);
-      movers.push({
-        obj: group,
-        base: group.position.clone(),
-        away: away,
-        normal: new THREE.Vector3()
-      });
-    }
-  }
-
-  function buildModel(id, data) {
-    var root = new THREE.Group();
-    root.name = id;
-    var movers = [];
-    var overall = data.overall;
-    var modelCenter = new THREE.Vector3(overall.width / 2, overall.height / 2, -overall.depth / 2);
-    var missing = [];
-    var i, part;
-    for (i = 0; i < data.parts.length; i++) {
-      part = data.parts[i];
-      try {
-        if (!addPanel(root, movers, part, modelCenter)) missing.push(part.name);
-      } catch (err) {
-        missing.push(part.name);
-      }
-    }
-    if (id === 'kitchen-cart') addCasters(root, movers, data, modelCenter);
-    root.visible = false;
-    scene.add(root);
-    models[id] = { root: root, movers: movers, data: data, missing: missing };
-  }
-
-  function flags() {
-    if (current === 'nightstand') {
-      return { cleat: el('tog-ns-cleat').checked, drawer: true, casters: false };
-    }
-    return {
-      cleat: el('tog-cart-cleat').checked,
-      drawer: el('tog-cart-drawer').checked,
-      casters: el('tog-cart-casters').checked
-    };
-  }
-
-  function applyVisibility() {
-    var model = models[current];
-    if (!model) return;
-    var f = flags();
-    var i, obj, ud;
-    for (i = 0; i < model.movers.length; i++) {
-      obj = model.movers[i].obj;
-      ud = obj.userData;
-      if (ud.kind === 'caster') obj.visible = f.casters;
-      else if (ud.optional && ud.group === 'cleat') obj.visible = f.cleat;
-      else if (ud.optional && ud.group === 'drawer') obj.visible = f.drawer;
-      else obj.visible = true;
-    }
-  }
-
-  function applyExplode() {
-    var model = models[current];
-    if (!model) return;
-    var slider = el('explode');
-    var k = Number(slider.value) / 100;
-    slider.setAttribute('aria-valuenow', slider.value);
-    var i, item;
-    for (i = 0; i < model.movers.length; i++) {
-      item = model.movers[i];
-      item.obj.position.copy(item.base);
-      item.obj.position.addScaledVector(item.away, k * 0.72);
-      item.obj.position.addScaledVector(item.normal, k * 40);
-    }
-  }
-
-  function frameCamera() {
-    var model = models[current];
-    if (!model || !camera || !wrap) return;
-    var w = wrap.clientWidth;
-    var h = wrap.clientHeight;
-    if (w < 2 || h < 2) return;
-    model.root.updateMatrixWorld(true);
-    var box = new THREE.Box3().setFromObject(model.root);
-    if (box.isEmpty()) return;
-    var center = box.getCenter(new THREE.Vector3());
-    var size = box.getSize(new THREE.Vector3());
-    var radius = 0.5 * Math.sqrt(size.x * size.x + size.y * size.y + size.z * size.z);
-    var aspect = w / h;
-    camera.aspect = aspect;
-    camera.fov = aspect < 0.85 ? 50 : 36;
-    camera.updateProjectionMatrix();
-    var vFov = camera.fov * Math.PI / 180;
-    var hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);
-    var dist = Math.max(radius / Math.sin(vFov / 2), radius / Math.sin(hFov / 2)) * 1.08;
-    var dir = new THREE.Vector3(0.9, 0.55, 1.08).normalize();
-    camera.position.copy(center).addScaledVector(dir, dist);
-    camera.near = 5;
-    camera.far = Math.max(8000, dist * 6);
-    camera.updateProjectionMatrix();
-    controls.target.copy(center);
-    controls.minDistance = Math.max(80, radius * 0.25);
-    controls.maxDistance = radius * 8;
-    controls.update();
-    framed = true;
-  }
-
-  function resize() {
-    if (!renderer || !camera || !wrap) return;
-    var w = wrap.clientWidth;
-    var h = wrap.clientHeight;
-    if (w < 2 || h < 2) return;
-    if (!userMoved || !framed) frameCamera();
-    else {
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-    renderer.setSize(w, h, false);
-  }
-
-  function setDesign(id, fromHash) {
-    if (DESIGNS.indexOf(id) === -1) id = 'nightstand';
-    current = id;
-    var i, on;
-    for (i = 0; i < DESIGNS.length; i++) {
-      on = DESIGNS[i] === id;
-      el('tab-' + DESIGNS[i]).setAttribute('aria-selected', on ? 'true' : 'false');
-      el('panel-' + DESIGNS[i]).hidden = !on;
-      if (models[DESIGNS[i]]) models[DESIGNS[i]].root.visible = on;
-    }
-    var chips = document.querySelectorAll('.chip');
-    for (i = 0; i < chips.length; i++) chips[i].hidden = chips[i].getAttribute('data-for') !== id;
-    el('explode').value = '0';
-    applyVisibility();
-    applyExplode();
-    userMoved = false;
-    frameCamera();
-    var label = id === 'kitchen-cart' ? 'Kitchen cart' : 'Nightstand';
-    el('model-status').textContent = 'Showing the ' + label.toLowerCase() + '.';
-    if (!fromHash) {
-      if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
-    }
-  }
-
-  function designFromHash() {
-    var h = (location.hash || '').replace('#', '');
-    if (h === 'kitchen-cart' || h === 'cart') return 'kitchen-cart';
-    return 'nightstand';
-  }
-
-  function wireUi() {
-    el('tab-nightstand').addEventListener('click', function () { setDesign('nightstand', false); });
-    el('tab-kitchen-cart').addEventListener('click', function () { setDesign('kitchen-cart', false); });
-    el('explode').addEventListener('input', applyExplode);
-    ['tog-ns-cleat', 'tog-cart-drawer', 'tog-cart-cleat', 'tog-cart-casters'].forEach(function (id) {
-      el(id).addEventListener('change', applyVisibility);
-    });
-    el('btn-reset').addEventListener('click', function () {
-      userMoved = false;
-      frameCamera();
-    });
-    window.addEventListener('hashchange', function () { setDesign(designFromHash(), true); });
-  }
-
-  function visibleCount() {
-    var model = models[current];
-    if (!model) return 0;
-    var n = 0, i;
-    for (i = 0; i < model.movers.length; i++) if (model.movers[i].obj.visible) n++;
-    return n;
-  }
-
-  function boot() {
-    if (!window.THREE || !window.THREE.OrbitControls) {
-      showError('The 3D view did not start. The model scripts could not be loaded.');
-      return;
-    }
-    wrap = el('canvas-wrap');
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x241e18);
-    camera = new THREE.PerspectiveCamera(36, 1, 5, 8000);
-    try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
-    } catch (err) {
-      showError('The 3D view did not start. This browser could not open WebGL.');
-      return;
-    }
-    if (!renderer.getContext()) {
-      showError('The 3D view did not start. This browser could not open WebGL.');
-      return;
-    }
-    var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarse ? 1.75 : 2));
-    if ('outputEncoding' in renderer && THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
-    wrap.appendChild(renderer.domElement);
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = false;
-    controls.screenSpacePanning = true;
-    controls.maxPolarAngle = Math.PI * 0.92;
-    if (THREE.TOUCH) {
-      controls.touches.ONE = THREE.TOUCH.ROTATE;
-      controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
-    }
-    controls.addEventListener('start', function () { userMoved = true; });
-    scene.add(new THREE.HemisphereLight(0xfff1df, 0x3a3228, 0.92));
-    var sun = new THREE.DirectionalLight(0xfff6ea, 1.05);
-    sun.position.set(700, 1100, 480);
-    scene.add(sun);
-    var fill = new THREE.DirectionalLight(0xf0d7b4, 0.38);
-    fill.position.set(-600, 420, -500);
-    scene.add(fill);
-    var grid = new THREE.GridHelper(1600, 16, 0x5c4c3c, 0x3a3128);
-    grid.position.set(300, -0.6, -240);
-    var gridMats = Array.isArray(grid.material) ? grid.material : [grid.material];
-    gridMats.forEach(function (m) { m.transparent = true; m.opacity = 0.45; });
-    scene.add(grid);
-    grain = makeGrain();
-
-    Promise.all(DESIGNS.map(function (id) {
-      return fetch('/furniture/' + id + '/parts.json').then(function (res) {
-        if (!res.ok) throw new Error(id);
-        return res.json().then(function (data) { return { id: id, data: data }; });
-      });
-    })).then(function (loaded) {
-      var i;
-      for (i = 0; i < loaded.length; i++) buildModel(loaded[i].id, loaded[i].data);
-      wireUi();
-      setDesign(designFromHash(), true);
-      el('three-loading').hidden = true;
-      window.addEventListener('resize', resize);
-      if (window.ResizeObserver) new ResizeObserver(resize).observe(wrap);
-      resize();
-      renderer.setAnimationLoop(function () { renderer.render(scene, camera); });
-      window.__furniture = {
-        ready: true,
-        design: function () { return current; },
-        visibleCount: visibleCount,
-        partCount: function (id) { return models[id] ? models[id].data.parts.length : 0; },
-        missing: function (id) { return models[id] ? models[id].missing.slice() : []; },
-        bounds: function () {
-          var model = models[current];
-          model.root.updateMatrixWorld(true);
-          var box = new THREE.Box3().setFromObject(model.root);
-          var size = box.getSize(new THREE.Vector3());
-          var min = box.min;
-          return {
-            minY: min.y, sizeX: size.x, sizeY: size.y, sizeZ: size.z,
-            visible: visibleCount()
-          };
-        }
-      };
-    }).catch(function () {
-      showError('The 3D view did not start. The part file could not be loaded.');
-    });
-  }
-
-  boot();
+  var slugs = ["bookcase", "desk", "dog-crate", "kitchen-cart", "nightstand", "retail-display", "shoe-bench"];
+  var h = (location.hash || '').replace(/^#/, '');
+  if (h === 'cart') h = 'kitchen-cart';
+  if (slugs.indexOf(h) !== -1) location.replace('/furniture/' + h);
 })();
 </script>
+
 </body>
 </html>

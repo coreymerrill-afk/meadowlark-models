@@ -5,5 +5,17 @@
     { "source": "/shared.css", "destination": "/insect/shared.css" },
     { "source": "/three-stack.js", "destination": "/insect/three-stack.js" },
     { "source": "/page-chrome.js", "destination": "/insect/page-chrome.js" }
+  ],
+  "redirects": [
+    { "source": "/furniture/nightstand/nightstand-nest-layout.png", "destination": "/furniture-data/nightstand/sheet-1.png", "permanent": true },
+    { "source": "/furniture/nightstand/nightstand-assembly.png", "destination": "/furniture-data/nightstand/assembly.png", "permanent": true },
+    { "source": "/furniture/nightstand/nightstand-nest-1220x2440.dxf", "destination": "/furniture-data/nightstand/nightstand-nest-sheet1-1220x2440.dxf", "permanent": true },
+    { "source": "/furniture/nightstand/README.md", "destination": "/furniture-data/nightstand/README.md", "permanent": true },
+    { "source": "/furniture/nightstand/parts.json", "destination": "/furniture-data/nightstand/parts.json", "permanent": true },
+    { "source": "/furniture/kitchen-cart/cart-nest-layout.png", "destination": "/furniture-data/kitchen-cart/sheet-1.png", "permanent": true },
+    { "source": "/furniture/kitchen-cart/cart-assembly.png", "destination": "/furniture-data/kitchen-cart/assembly.png", "permanent": true },
+    { "source": "/furniture/kitchen-cart/kitchen-cart-nest-1220x2440.dxf", "destination": "/furniture-data/kitchen-cart/kitchen-cart-nest-sheet1-1220x2440.dxf", "permanent": true },
+    { "source": "/furniture/kitchen-cart/README.md", "destination": "/furniture-data/kitchen-cart/README.md", "permanent": true },
+    { "source": "/furniture/kitchen-cart/parts.json", "destination": "/furniture-data/kitchen-cart/parts.json", "permanent": true }
   ]
 }
