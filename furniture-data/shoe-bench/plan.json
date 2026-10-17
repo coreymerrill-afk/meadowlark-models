@@ -1,0 +1,348 @@
+{
+ "name": "Entryway Shoe Bench",
+ "slug": "shoe-bench",
+ "pitch": "A seat plus shoe storage in one flat-pack: slatted shelves, a laser-cut cushion recess, raised so the robot vacuum goes underneath.",
+ "dimensions_mm": {
+  "width": 1000.0,
+  "height": 450.0,
+  "depth": 400.0,
+  "plinth_clearance": 90.0,
+  "bay_clear_height": 134.0,
+  "top_overhang": 20.0
+ },
+ "parameters": [
+  {
+   "name": "width",
+   "default": 1000.0,
+   "limits": "600-1400 mm (2 dividers over 1000)"
+  },
+  {
+   "name": "height",
+   "default": 450.0,
+   "limits": "380-520 mm"
+  },
+  {
+   "name": "depth",
+   "default": 400.0,
+   "limits": "300-480 mm"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm"
+  },
+  {
+   "name": "plinth",
+   "default": 90.0,
+   "limits": "90-150 mm"
+  },
+  {
+   "name": "shelves",
+   "default": 2,
+   "limits": "1-3 (bay >= 120 mm)"
+  },
+  {
+   "name": "dividers",
+   "default": 1,
+   "limits": "0-2"
+  },
+  {
+   "name": "cushion_recess",
+   "default": 1,
+   "limits": "0 or 1"
+  },
+  {
+   "name": "slatted",
+   "default": 1,
+   "limits": "0 or 1"
+  },
+  {
+   "name": "cleat",
+   "default": 1,
+   "limits": "0 or 1"
+  }
+ ],
+ "sheet_count": 1,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "shoe-bench-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "SEAT",
+     "number": 1,
+     "size_mm": [
+      1000.0,
+      400.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-L",
+     "number": 5,
+     "size_mm": [
+      360.0,
+      432.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-R",
+     "number": 5,
+     "size_mm": [
+      360.0,
+      432.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-1",
+     "number": 3,
+     "size_mm": [
+      960.0,
+      360.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-2",
+     "number": 4,
+     "size_mm": [
+      960.0,
+      360.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "RAIL-TOP",
+     "number": 6,
+     "size_mm": [
+      960.0,
+      98.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DIVIDER-B1-1",
+     "number": 7,
+     "size_mm": [
+      322.0,
+      170.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DIVIDER-B2-1",
+     "number": 7,
+     "size_mm": [
+      322.0,
+      170.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SEAT-RIM",
+     "number": 2,
+     "size_mm": [
+      1000.0,
+      400.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 9,
+   "coverage_pct": 49.9,
+   "cut_path_m": 36.04
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheet(s)",
+   "detail": "Run the fit-test coupon (slot = tab + 0.1 mm), then cut 1 sheet(s) from the DXFs (CUT layer): 36 m of path, 33 slotted vents in the shelves. Inside-out order, air assist on.",
+   "minutes": 240
+  },
+  {
+   "step": 2,
+   "title": "Remove char and sand",
+   "detail": "Brush the char from every cut edge, 120 then 180 grit; ease the seat edge to a 3 mm round-over by hand; sand the vent slots with a folded strip of paper.",
+   "minutes": 55
+  },
+  {
+   "step": 3,
+   "title": "Dry fit",
+   "detail": "Stand the SIDES, slide in the 2 SHELF board(s), dividers, RAIL-TOP, then the SEAT. Check tab ends are flush and the case is square; no glue.",
+   "minutes": 15
+  },
+  {
+   "step": 4,
+   "title": "Pre-finish",
+   "detail": "Seal all faces now (poly or hardwax oil) - shoes are wet and dirty. Mask the tabs and slots so the glue still bonds.",
+   "minutes": 45
+  },
+  {
+   "step": 5,
+   "title": "Glue-up (Titebond III)",
+   "detail": "Glue the dividers into the shelves, then the shelves into SIDE-L, add SIDE-R, RAIL-TOP, and finally seat the SEAT over all top tabs. Clamp across the width; wipe squeeze-out.",
+   "minutes": 30
+  },
+  {
+   "step": 6,
+   "title": "Screws as clamps",
+   "detail": "6 #8 screws (3.0 mm pilots pre-cut): #8 x 1-1/2 in through the side faces into the shelf edges and down through the seat into the side edges (hidden under the frame); then 6 x #8 x 1-1/4 in down through SEAT-RIM into the seat.",
+   "minutes": 20
+  },
+  {
+   "step": 7,
+   "title": "Cushion frame",
+   "detail": "Glue and screw SEAT-RIM on the seat (covers the tab ends). The recess holds a cushion up to about 45 mm thick, size = opening printed on sheet 1. Cut the cushion board from the offcut if wanted.",
+   "minutes": 15
+  },
+  {
+   "step": 8,
+   "title": "Optional cleat / wall hang",
+   "detail": "For a floating SHOE SHELF version only: Z-bar cleat on the rear face of RAIL-TOP into studs. Do not use as a seat when wall-hung unless every cleat screw is in a stud and the wall half is rated (unverified).",
+   "minutes": 20
+  },
+  {
+   "step": 9,
+   "title": "Finish, load test, pack",
+   "detail": "Final coat on the seat, 24 h cure, sit-test with 120 kg, felt pads on the 4 feet, flat-pack in one box with corner guards.",
+   "minutes": 40
+  }
+ ],
+ "stage_total_minutes": 480,
+ "materials": {
+  "sheet": "18 mm (3/4 in) sanded plywood (basic birch-faced or cabinet ply), 4 x 8 ft x 1; use hardwood ply for a premium version",
+  "sheets_required": 1,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in wood screws",
+    "qty": 6,
+    "unit_cost": 0.06,
+    "note": "from model"
+   },
+   {
+    "item": "#8 x 1-1/4 in wood screws",
+    "qty": 6,
+    "unit_cost": 0.06,
+    "note": "frame to seat"
+   },
+   {
+    "item": "Aluminum Z-bar cleat pair",
+    "qty": 1,
+    "unit_cost": 12.0,
+    "note": "optional, shoe shelf only"
+   },
+   {
+    "item": "Seat cushion 1-2 in foam + cover (optional, sold separately)",
+    "qty": 0,
+    "unit_cost": 0.0,
+    "note": "customer or add-on"
+   },
+   {
+    "item": "Felt/rubber foot pads",
+    "qty": 4,
+    "unit_cost": 0.4,
+    "note": ""
+   },
+   {
+    "item": "Wood plugs",
+    "qty": 1,
+    "unit_cost": 2.0,
+    "note": ""
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 6,
+   "#8 x 1-1/4 in": 6
+  },
+  "glue": "Titebond III, about 3 oz",
+  "finish": "water-based poly (wet-area rated), 2 coats (about $9)"
+ },
+ "safety": [
+  "Seat load rating target 120 kg (265 lb) - UNVERIFIED, load test every design change (sag test at the seat centre).",
+  "The center divider(s) carry the seat; do not omit them on benches wider than 800 mm.",
+  "Wall-hung (cleat) use: shoe shelf only unless studs and a rated cleat are used.",
+  "Not a children's product (no CPSIA testing)."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "basic",
+  "sheets": 1,
+  "sheet_price_low_mid_high": [
+   55,
+   65,
+   75
+  ],
+  "sheet_cost_mid": 65,
+  "hardware_cost": 16.32,
+  "finish_cost": 9.0,
+  "packaging_cost": 10.0,
+  "cut_path_m": 36.0,
+  "machine_minutes_at_100_150_200_mm_per_min": [
+   360.0,
+   240.0,
+   180.0
+  ],
+  "machine_hours_mid": 4.0,
+  "machine_wear_cost": 6.81,
+  "labor_hours": 2.0,
+  "product_weight_kg": 16.6,
+  "shipping_estimate_if_absorbed": 40.0,
+  "cost_per_unit_low_mid_high": [
+   97.13,
+   107.13,
+   117.13
+  ],
+  "price_band_source": "SHORTLIST.md: custom target $140-$300 (estimate); Amazon typical ~$75, Etsy $129-$190 [third-party estimates]",
+  "at_price": {
+   "low": {
+    "price": 140.0,
+    "cogs_mid": 107.13,
+    "gross_margin": 32.87,
+    "gross_margin_pct": 23.5,
+    "gross_margin_if_you_absorb_shipping": -7.13,
+    "net_after_fees_and_labor": -31.13,
+    "gross_margin_per_machine_hour": 8.21,
+    "net_after_fees_and_labor_per_machine_hour": -7.77
+   },
+   "mid": {
+    "price": 220.0,
+    "cogs_mid": 107.13,
+    "gross_margin": 112.87,
+    "gross_margin_pct": 51.3,
+    "gross_margin_if_you_absorb_shipping": 72.87,
+    "net_after_fees_and_labor": 40.87,
+    "gross_margin_per_machine_hour": 28.19,
+    "net_after_fees_and_labor_per_machine_hour": 10.21
+   },
+   "high": {
+    "price": 300.0,
+    "cogs_mid": 107.13,
+    "gross_margin": 192.87,
+    "gross_margin_pct": 64.3,
+    "gross_margin_if_you_absorb_shipping": 152.87,
+    "net_after_fees_and_labor": 112.87,
+    "gross_margin_per_machine_hour": 48.16,
+    "net_after_fees_and_labor_per_machine_hour": 28.19
+   }
+  },
+  "note_machine_time": "At 100-200 mm/min the laser path alone is 3.0-6.0 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting."
+ },
+ "unverified": [
+  "Seat strength and deflection untested (18 mm ply over 1000 mm without dividers would sag about 12 mm at 100 kg by hand calculation).",
+  "Laser feed 100-200 mm/min is an estimate.",
+  "Cushion fit depends on the cushion bought.",
+  "Composite decking top is a CNC-only variant, not modeled here.",
+  "Price band is an estimate from SHORTLIST.md."
+ ]
+}

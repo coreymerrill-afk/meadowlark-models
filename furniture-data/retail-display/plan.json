@@ -1,0 +1,334 @@
+{
+ "name": "Retail / Market Display Shelving",
+ "slug": "retail-display",
+ "pitch": "Tiered booth shelving that knocks down flat: stepped sides, 4 shelves, a sign band with your logo cut into it, no glue.",
+ "dimensions_mm": {
+  "width": 900.0,
+  "height": 1500.0,
+  "base_depth": 440.0,
+  "top_shelf_depth": 200.0,
+  "tier_pitch": 351.0,
+  "tiers": 4
+ },
+ "parameters": [
+  {
+   "name": "width",
+   "default": 900.0,
+   "limits": "500-1300 mm (centre divider over 1000)"
+  },
+  {
+   "name": "height",
+   "default": 1500.0,
+   "limits": "900-1900 mm"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm"
+  },
+  {
+   "name": "tiers",
+   "default": 4,
+   "limits": "3-6"
+  },
+  {
+   "name": "base_depth",
+   "default": 440.0,
+   "limits": "300-520 mm"
+  },
+  {
+   "name": "step",
+   "default": 80.0,
+   "limits": "50-100 mm (top shelf >= 160)"
+  },
+  {
+   "name": "first_z",
+   "default": 180.0,
+   "limits": "120-300 mm"
+  },
+  {
+   "name": "sign_h",
+   "default": 230.0,
+   "limits": "150-350 mm (0 = no band)"
+  },
+  {
+   "name": "logo",
+   "default": 1,
+   "limits": "0 or 1"
+  }
+ ],
+ "sheet_count": 2,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "retail-display-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "SIDE-L",
+     "number": 1,
+     "size_mm": [
+      440.0,
+      1500.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-R",
+     "number": 1,
+     "size_mm": [
+      440.0,
+      1500.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-1",
+     "number": 2,
+     "size_mm": [
+      900.0,
+      440.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-2",
+     "number": 3,
+     "size_mm": [
+      900.0,
+      360.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-3",
+     "number": 4,
+     "size_mm": [
+      900.0,
+      280.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "BRACE-1",
+     "number": 7,
+     "size_mm": [
+      900.0,
+      100.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "BRACE-2",
+     "number": 7,
+     "size_mm": [
+      900.0,
+      100.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIGN-BAND",
+     "number": 5,
+     "size_mm": [
+      900.0,
+      230.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 8,
+   "coverage_pct": 71.9,
+   "cut_path_m": 28.81
+  },
+  {
+   "sheet": 2,
+   "dxf": "retail-display-nest-sheet2-1220x2440.dxf",
+   "png": "sheet-2.png",
+   "parts": [
+    {
+     "name": "SHELF-4",
+     "number": 6,
+     "size_mm": [
+      900.0,
+      200.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 1,
+   "coverage_pct": 5.9,
+   "cut_path_m": 2.26
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheets",
+   "detail": "Fit-test coupon first (slot = tab + 0.1 mm); cut 2 sheet(s): 31 m of path. Replace the logo placeholder in sheet 1 (CUT layer) with the customer artwork: keep every letter island tied with a 3 mm bridge. Inside-out order, air assist on.",
+   "minutes": 207
+  },
+  {
+   "step": 2,
+   "title": "Remove char and sand",
+   "detail": "Brush off the char, 120 then 180 grit; ease the shelf front edges and the logo opening. Wipe clean.",
+   "minutes": 60
+  },
+  {
+   "step": 3,
+   "title": "Dry fit",
+   "detail": "Lay SIDE-L flat, push the 4 shelves, 2 braces and the sign band into their slots, add SIDE-R. Check the tab ends are flush and that the unit stands without rocking.",
+   "minutes": 20
+  },
+  {
+   "step": 4,
+   "title": "Finish all parts flat",
+   "detail": "Oil or poly all faces and edges flat (fast), mask the tab and slot surfaces only if you want them to be glued later. Brand colour or stain on the sign band if ordered.",
+   "minutes": 60
+  },
+  {
+   "step": 5,
+   "title": "Test-assemble with screws",
+   "detail": "NO GLUE: it is knock-down. Drive 12 #8 x 1-1/2 in screws (3.0 mm pilots pre-cut) through the side faces into the shelf and brace edges. Re-removable for flat storage.",
+   "minutes": 20
+  },
+  {
+   "step": 6,
+   "title": "Stability check",
+   "detail": "Tip test with every shelf loaded (see the load rating): it must not tip at a 10 deg lean. Fit the 2 anchor holes in the sign band with a wall strap or hang a 5 kg ballast bag on the bottom shelf for outdoor use.",
+   "minutes": 15
+  },
+  {
+   "step": 7,
+   "title": "Knock down and flat-pack",
+   "detail": "Unscrew, stack the 4 shelves, braces and band between the two sides with cardboard spacers, add the screws in a labelled bag and the 1-page assembly sheet; 1.5 m x 0.5 m x 0.2 m box.",
+   "minutes": 25
+  },
+  {
+   "step": 8,
+   "title": "Customer assembly (about 10 min)",
+   "detail": "Customer lays one side flat, slides in shelves and braces, adds the second side and drives the 12 screws with a Phillips/Torx driver. No glue, no clamps.",
+   "minutes": 10
+  }
+ ],
+ "stage_total_minutes": 417,
+ "materials": {
+  "sheet": "18 mm (3/4 in) Baltic-birch or birch plywood, 4 x 8 ft x 2 (paulownia/light ply for carry-friendly sets)",
+  "sheets_required": 2,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in wood screws (incl. spares)",
+    "qty": 16,
+    "unit_cost": 0.06,
+    "note": "from model"
+   },
+   {
+    "item": "Ballast bag / wall strap",
+    "qty": 1,
+    "unit_cost": 5.0,
+    "note": "anchor"
+   },
+   {
+    "item": "Felt/rubber foot pads",
+    "qty": 4,
+    "unit_cost": 0.4,
+    "note": ""
+   },
+   {
+    "item": "Assembly sheet + cardboard spacers",
+    "qty": 1,
+    "unit_cost": 2.0,
+    "note": ""
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 12
+  },
+  "glue": "Titebond III, about none (screw-together)",
+  "finish": "water-based poly or hardwax oil; stain or paint the band in brand colour (about $14)"
+ },
+ "safety": [
+  "Target load per shelf 15 kg, bottom shelf 25 kg - UNVERIFIED; load-test one unit.",
+  "Tall and shallow at the top: strap to a wall indoors or add 5 kg ballast outdoors (wind). Do not let customers climb it.",
+  "Keep heavy product on the bottom tiers; the top tier is for light items only.",
+  "Not a children's product."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "birch",
+  "sheets": 2,
+  "sheet_price_low_mid_high": [
+   70,
+   90,
+   110
+  ],
+  "sheet_cost_mid": 180,
+  "hardware_cost": 9.56,
+  "finish_cost": 14.0,
+  "packaging_cost": 22.0,
+  "cut_path_m": 31.1,
+  "machine_minutes_at_100_150_200_mm_per_min": [
+   311.0,
+   207.0,
+   155.0
+  ],
+  "machine_hours_mid": 3.45,
+  "machine_wear_cost": 5.87,
+  "labor_hours": 2.2,
+  "product_weight_kg": 25.8,
+  "shipping_estimate_if_absorbed": 67.0,
+  "cost_per_unit_low_mid_high": [
+   191.43,
+   231.43,
+   271.43
+  ],
+  "price_band_source": "SHORTLIST.md: Etsy/web listings $180-$1,100, four-tier A-frame ~$570; custom target $200-$800 (estimate)",
+  "at_price": {
+   "low": {
+    "price": 200.0,
+    "cogs_mid": 231.43,
+    "gross_margin": -31.43,
+    "gross_margin_pct": -15.7,
+    "gross_margin_if_you_absorb_shipping": -98.43,
+    "net_after_fees_and_labor": -106.43,
+    "gross_margin_per_machine_hour": -9.1,
+    "net_after_fees_and_labor_per_machine_hour": -30.83
+   },
+   "mid": {
+    "price": 500.0,
+    "cogs_mid": 231.43,
+    "gross_margin": 268.57,
+    "gross_margin_pct": 53.7,
+    "gross_margin_if_you_absorb_shipping": 201.57,
+    "net_after_fees_and_labor": 163.57,
+    "gross_margin_per_machine_hour": 77.8,
+    "net_after_fees_and_labor_per_machine_hour": 47.38
+   },
+   "high": {
+    "price": 800.0,
+    "cogs_mid": 231.43,
+    "gross_margin": 568.57,
+    "gross_margin_pct": 71.1,
+    "gross_margin_if_you_absorb_shipping": 501.57,
+    "net_after_fees_and_labor": 433.57,
+    "gross_margin_per_machine_hour": 164.7,
+    "net_after_fees_and_labor_per_machine_hour": 125.59
+   }
+  },
+  "note_machine_time": "At 100-200 mm/min the laser path alone is 2.6-5.2 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting."
+ },
+ "unverified": [
+  "Load rating and tip angle untested.",
+  "Folding variant is not modeled (this is knock-down only).",
+  "Laser feed 100-200 mm/min is an estimate.",
+  "Logo cut-out is a placeholder; customer artwork needs bridges for letter islands.",
+  "Price band is an estimate from SHORTLIST.md (the repeat B2B reorders are the draw, not a measured demand)."
+ ]
+}

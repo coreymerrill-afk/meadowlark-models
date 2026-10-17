@@ -1,0 +1,354 @@
+{
+ "name": "Dog-Crate End Table",
+ "slug": "dog-crate",
+ "pitch": "A dog crate that looks like furniture: tabletop, slatted door, ventilated sides, lift-out washable trays, sized to your dog.",
+ "dimensions_mm": {
+  "width": 900.0,
+  "depth": 600.0,
+  "height": 700.0,
+  "plinth_clearance": 90.0,
+  "interior_length": 824.0,
+  "interior_width": 484.0,
+  "interior_height": 536.0,
+  "door_opening": [
+   484.0,
+   487.0
+  ]
+ },
+ "parameters": [
+  {
+   "name": "width",
+   "default": 900.0,
+   "limits": "700-1300 mm"
+  },
+  {
+   "name": "depth",
+   "default": 600.0,
+   "limits": "480-800 mm"
+  },
+  {
+   "name": "height",
+   "default": 700.0,
+   "limits": "600-900 mm (interior = height - plinth - 20 - 4T)"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm"
+  },
+  {
+   "name": "plinth",
+   "default": 90.0,
+   "limits": "60-150 mm"
+  },
+  {
+   "name": "door_w",
+   "default": 480.0,
+   "limits": "300-560 mm"
+  },
+  {
+   "name": "slat_gap",
+   "default": 38.0,
+   "limits": "25-45 mm (small dog 25-30, medium 38, large 45)"
+  },
+  {
+   "name": "slat_bar",
+   "default": 26.0,
+   "limits": "20-40 mm"
+  }
+ ],
+ "sheet_count": 2,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "dog-crate-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "TOP",
+     "number": 1,
+     "size_mm": [
+      900.0,
+      600.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-L",
+     "number": 5,
+     "size_mm": [
+      560.0,
+      700.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-R",
+     "number": 5,
+     "size_mm": [
+      560.0,
+      700.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "FLOOR",
+     "number": 4,
+     "size_mm": [
+      860.0,
+      560.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "BACK",
+     "number": 2,
+     "size_mm": [
+      860.0,
+      590.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DOOR",
+     "number": 6,
+     "size_mm": [
+      480.0,
+      483.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 6,
+   "coverage_pct": 66.7,
+   "cut_path_m": 49.67
+  },
+  {
+   "sheet": 2,
+   "dxf": "dog-crate-nest-sheet2-1220x2440.dxf",
+   "png": "sheet-2.png",
+   "parts": [
+    {
+     "name": "FRONT",
+     "number": 3,
+     "size_mm": [
+      860.0,
+      590.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "TRAY-L",
+     "number": 7,
+     "size_mm": [
+      409.0,
+      480.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "TRAY-R",
+     "number": 7,
+     "size_mm": [
+      409.0,
+      480.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 3,
+   "coverage_pct": 19.4,
+   "cut_path_m": 12.18
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheets",
+   "detail": "Fit-test coupon first (slot = tab + 0.1 mm); cut 2 sheet(s): 62 m of path with 30 rounded vent/slat openings. Use cabinet-grade ply with NAUF/CARB2 glue (no MDF - dogs chew it and moisture swells it). Inside-out order, air assist on.",
+   "minutes": 412
+  },
+  {
+   "step": 2,
+   "title": "Remove char, sand, round every edge",
+   "detail": "Brush the char off, 120 then 180 then 220 grit. Hand-round ALL edges, slot ends and the inside of the door opening (about 3 mm) - no splinters or sharp arrises where a dog can rub. Sand the tab ends flush later.",
+   "minutes": 120
+  },
+  {
+   "step": 3,
+   "title": "Dry fit",
+   "detail": "Stand SIDE-L/R, slide in FLOOR, FRONT and BACK, then drop TOP over every tab. Check the DOOR sits in its opening with about 2 mm all round and the trays drop in.",
+   "minutes": 20
+  },
+  {
+   "step": 4,
+   "title": "Pre-finish (pet-safe)",
+   "detail": "Finish every part before glue-up with a cured pet-safe finish (water-based poly or food-safe hardwax oil, 2-3 coats); let it cure fully (3-7 days is best) before a dog goes in. Mask tabs and slots.",
+   "minutes": 75
+  },
+  {
+   "step": 5,
+   "title": "Glue-up (Titebond III)",
+   "detail": "Glue FLOOR, FRONT and BACK into SIDE-L, add SIDE-R, then seat TOP on all tabs. Clamp across the width and check it is square. Wipe squeeze-out; no glue on the door or trays.",
+   "minutes": 35
+  },
+  {
+   "step": 6,
+   "title": "Screws from the outside only",
+   "detail": "12 #8 x 1-1/2 in screws (3.0 mm pilots pre-cut) through the side faces into the floor, front and back edges. Nothing protrudes inside the crate. Countersink and plug.",
+   "minutes": 20
+  },
+  {
+   "step": 7,
+   "title": "Hang the door",
+   "detail": "Two 3 in surface-mount flush hinges on the right: pre-drill 2.5 mm for the hinge screws, set the door with 2 mm gaps (never wider than 4 mm - paw safety). Fit a dog-proof barrel bolt on the door and drop its pin through the 9 mm hole in the header.",
+   "minutes": 30
+  },
+  {
+   "step": 8,
+   "title": "Sand tab ends and final finish",
+   "detail": "Sand the tab ends on the tabletop flush, final coat on the top (wipe-clean, heat/water resistant poly), edge-seal the cut ends.",
+   "minutes": 40
+  },
+  {
+   "step": 9,
+   "title": "Pad, test, pack",
+   "detail": "Lay a washable pad on the trays. Shake test, then flat-pack: parts up to 900 x 600 mm in one box with corner guards; include hinge and bolt hardware and the care and safety sheet.",
+   "minutes": 30
+  }
+ ],
+ "stage_total_minutes": 782,
+ "materials": {
+  "sheet": "18 mm (3/4 in) birch cabinet plywood (NAUF/CARB2 glue), 4 x 8 ft x 2 - no MDF",
+  "sheets_required": 2,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in wood screws",
+    "qty": 12,
+    "unit_cost": 0.06,
+    "note": "from model"
+   },
+   {
+    "item": "3 in surface-mount flush hinges (pair)",
+    "qty": 1,
+    "unit_cost": 7.0,
+    "note": "door"
+   },
+   {
+    "item": "Dog-proof barrel bolt / slide latch",
+    "qty": 1,
+    "unit_cost": 6.0,
+    "note": "pin goes in the 9 mm header hole"
+   },
+   {
+    "item": "Wood plugs / filler",
+    "qty": 1,
+    "unit_cost": 2.0,
+    "note": ""
+   },
+   {
+    "item": "Felt/rubber foot pads",
+    "qty": 4,
+    "unit_cost": 0.4,
+    "note": ""
+   },
+   {
+    "item": "Washable crate pad (optional add-on)",
+    "qty": 0,
+    "unit_cost": 0.0,
+    "note": "sold separately"
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 12
+  },
+  "glue": "Titebond III, about 5 oz",
+  "finish": "pet-safe water-based poly or food-safe hardwax oil, 3 coats (about $18)"
+ },
+ "safety": [
+  "Animal safety (design intent, NOT certified): all openings <= 38 mm, every slot end rounded, door gap about 2 mm, no screws or hinge hardware inside, tabs flush.",
+  "Use a dog-proof latch and test with the dog supervised; this is a rest crate, not a restraint or vehicle crate.",
+  "Pet-safe cured finish only; no MDF, no chemical stains inside; ventilation about 30 slotted openings.",
+  "Interior 824 x 484 x 536 mm: check the dog's shoulder height + 50 mm, nose-to-tail length + 80 mm before ordering; the default suits a dog up to about 18 kg.",
+  "Tabletop rating target 25 kg of objects (UNVERIFIED); the crate floor target 40 kg dog (UNVERIFIED)."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "birch",
+  "sheets": 2,
+  "sheet_price_low_mid_high": [
+   70,
+   90,
+   110
+  ],
+  "sheet_cost_mid": 180,
+  "hardware_cost": 17.32,
+  "finish_cost": 18.0,
+  "packaging_cost": 20.0,
+  "cut_path_m": 61.9,
+  "machine_minutes_at_100_150_200_mm_per_min": [
+   618.0,
+   412.0,
+   309.0
+  ],
+  "machine_hours_mid": 6.87,
+  "machine_wear_cost": 11.68,
+  "labor_hours": 3.5,
+  "product_weight_kg": 28.6,
+  "shipping_estimate_if_absorbed": 74.0,
+  "cost_per_unit_low_mid_high": [
+   207.0,
+   247.0,
+   287.0
+  ],
+  "price_band_source": "SHORTLIST.md: Etsy median $395; custom target $350-$700 (estimate)",
+  "at_price": {
+   "low": {
+    "price": 350.0,
+    "cogs_mid": 247.0,
+    "gross_margin": 103.0,
+    "gross_margin_pct": 29.4,
+    "gross_margin_if_you_absorb_shipping": 29.0,
+    "net_after_fees_and_labor": -19.5,
+    "gross_margin_per_machine_hour": 14.99,
+    "net_after_fees_and_labor_per_machine_hour": -2.84
+   },
+   "mid": {
+    "price": 525.0,
+    "cogs_mid": 247.0,
+    "gross_margin": 278.0,
+    "gross_margin_pct": 53.0,
+    "gross_margin_if_you_absorb_shipping": 204.0,
+    "net_after_fees_and_labor": 138.0,
+    "gross_margin_per_machine_hour": 40.45,
+    "net_after_fees_and_labor_per_machine_hour": 20.08
+   },
+   "high": {
+    "price": 700.0,
+    "cogs_mid": 247.0,
+    "gross_margin": 453.0,
+    "gross_margin_pct": 64.7,
+    "gross_margin_if_you_absorb_shipping": 379.0,
+    "net_after_fees_and_labor": 295.5,
+    "gross_margin_per_machine_hour": 65.92,
+    "net_after_fees_and_labor_per_machine_hour": 43.0
+   }
+  },
+  "note_machine_time": "At 100-200 mm/min the laser path alone is 5.2-10.3 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting."
+ },
+ "unverified": [
+  "Not tested with an animal; rating and chew resistance unknown.",
+  "Hinge and bolt positions are guidance; screw holes for hinges are drilled by hand.",
+  "Laser feed 100-200 mm/min is an estimate.",
+  "Height default is 700 mm (spec said ~650): the extra 50 mm keeps a 90 mm robot-vac plinth and a 536 mm interior.",
+  "Visible tab ends on the tabletop (sand flush or cover).",
+  "Price band is an estimate from SHORTLIST.md."
+ ]
+}
