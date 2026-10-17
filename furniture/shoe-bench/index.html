@@ -14,7 +14,7 @@
   <p class="crumbs"><a href="/">All models</a> · <a href="/furniture/">Shop furniture</a></p>
   <h1>Entryway Shoe Bench</h1>
   <p class="pitch">A seat plus shoe storage in one flat-pack: slatted shelves, a laser-cut cushion recess, raised so the robot vacuum goes underneath.</p>
-  <p class="size-line">1,000 mm wide, 400 mm deep, 450 mm tall (39.4 × 15.7 × 17.7 in). 90 mm clear underneath. The top overhangs 20 mm. Shelf bay 134 mm clear. 1 sheet. Mid retail price $220, an estimate.</p>
+  <p class="size-line">1,000 mm wide, 400 mm deep, 450 mm tall (39.4 × 15.7 × 17.7 in). 90 mm clear underneath. The top overhangs 20 mm. Shelf bay 134 mm clear. 1 sheet. Mid retail price $220, an estimate. Typical machine time 2.4 h.</p>
 </header>
 <nav class="jumps" aria-label="On this page">
   <a href="#model">Model</a>
@@ -29,10 +29,13 @@
 <p class="sr" id="model-status" aria-live="polite"></p>
 <section class="block" id="model" aria-labelledby="model-heading">
   <h2 class="sr" id="model-heading">Model</h2>
-  <div class="stage">
-    <div id="canvas-wrap">
-      <div id="three-loading">Loading the model…</div>
-      <div id="three-error" hidden></div>
+  <div id="model-stage">
+    <div class="stage">
+      <div id="canvas-wrap">
+        <div id="three-loading">Loading the model…</div>
+        <div id="three-error" hidden></div>
+      </div>
+      <p id="rotate-hint" class="rotate-hint" hidden>Rotate your phone for a wider view.</p>
     </div>
     <div class="tool-bar">
       <label class="explode" for="explode">Exploded
@@ -40,6 +43,8 @@
       </label>
       
       <button type="button" class="ghost" id="btn-reset">Reset view</button>
+      <button type="button" class="ghost" id="btn-fullscreen">Full screen</button>
+      <button type="button" id="btn-exit-fs" hidden>Exit</button>
       <p class="tool-note">Drag to turn. Scroll or pinch to zoom. The slider pulls the panels apart, and the view pulls back so the pieces stay in frame.</p>
       <p class="tool-note" id="lit-note" aria-live="polite"></p>
     </div>
@@ -50,12 +55,14 @@
     <h2 id="sheets-heading">The cut sheets</h2>
     <div class="sheet-summary">
   <p><strong>1 sheet.</strong> 1220 × 2440 mm, 18 mm plywood. Total cut path 36.0 m.</p>
-  <p>If the feed is 100, 150, or 200 mm per minute, the machine time is about 6 h, 4 h, or 3 h. The profit table uses the middle figure. That feed rate is an unverified estimate. Sheet 1 carries a fit-test coupon: cut it first and try the tab in the slot before you cut the rest. Hover or tap a part below to light it in the model.</p>
+  <p>Machine time for the whole unit: about 1.3 h best, 2.4 h typical, 5.4 h slow. Based on reported 120 W-class diode speeds, multiple passes at 18 mm. One timed scrap cut will replace this.</p>
+  <p>A commercial CO2 flatbed is about 1.1 h in the sourced case. That number is an assumption, not a cut on this machine.</p>
+  <p>Sheet 1 carries a fit-test coupon: cut it first and try the tab in the slot before you cut the rest. Hover or tap a part below to light it in the model.</p>
 </div>
 <article class="sheet">
   <div class="sheet-head">
     <h3>Sheet 1 of 1</h3>
-    <p class="sheet-meta">9 parts on this sheet. They cover 49.9% of a 1220 × 2440 mm sheet. Cut path 36.04 m, about 4 h at 150 mm per minute.</p>
+    <p class="sheet-meta">9 parts on this sheet. They cover 49.9% of a 1220 × 2440 mm sheet. Cut path 36.04 m. About 2 h 22 min at the typical diode estimate (best 1 h 18 min, slow 5 h 24 min).</p>
   </div>
   <div class="sheet-bleed">
     <button type="button" class="sheet-open" data-title="Sheet 1 of 1" aria-label="Open Sheet 1 of 1 larger, then pan and zoom">
@@ -223,40 +230,76 @@
   <section class="block" id="profit" aria-labelledby="profit-heading">
     <h2 id="profit-heading">Profit estimate</h2>
     <div class="callout">
-  <strong>Estimates and assumptions.</strong> Every dollar figure on this page is a planning estimate, not a quote and not a promise. Sheet price, hardware, fees, labor, and machine wear are assumptions. The feed rate of 100–200 mm per minute is unverified. The maker does not publish a rate for 18 mm plywood, so the hours and the profit per hour move once you time a real cut.
+  <strong>Estimates and assumptions.</strong> Every dollar figure on this page is a planning estimate, not a quote and not a promise. Sheet price, hardware, fees, labor, and machine wear are assumptions. Machine time is based on reported 120 W-class diode speeds, multiple passes at 18 mm. One timed scrap cut will replace this.
 </div>
+<h3>Diode machine time</h3>
+<p>These three columns are the same unit at the mid selling price. Best, typical, and slow are the diode estimates. Based on reported 120 W-class diode speeds, multiple passes at 18 mm. One timed scrap cut will replace this.</p>
 <div class="table-wrap">
 <table>
-  <caption>Gross margin and net use the mid cost per unit ($107.13). Low and high sheet prices would put the cost at $97.13 or $117.13. Machine hours are the middle feed, 4 h. At 100 mm/min that is 6 h; at 200 mm/min, 3 h.</caption>
+  <caption>At the mid selling price. Best is the fast diode case, typical is the planning case, slow is the cautious case.</caption>
+  <thead><tr><th></th><th class="num">Best</th><th class="num">Typical</th><th class="num">Slow</th></tr></thead>
+  <tbody>
+    <tr><th>Machine time</th><td class="num">1.31 h</td><td class="num">2.36 h</td><td class="num">5.4 h</td></tr>
+    <tr><th>Cost per unit</th><td class="num">$102.55</td><td class="num">$104.33</td><td class="num">$109.50</td></tr>
+    <tr><th>Gross margin</th><td class="num">$117.45</td><td class="num">$115.67</td><td class="num">$110.50</td></tr>
+    <tr><th>Gross margin %</th><td class="num">53.4%</td><td class="num">52.6%</td><td class="num">50.2%</td></tr>
+    <tr><th>Net after fees and labor</th><td class="num">$45.45</td><td class="num">$43.67</td><td class="num">$38.50</td></tr>
+    <tr><th>Gross profit per machine hour</th><td class="num">$89.66</td><td class="num">$49.01</td><td class="num">$20.46</td></tr>
+    <tr><th>Net profit per machine hour</th><td class="num">$34.70</td><td class="num">$18.50</td><td class="num">$7.13</td></tr>
+  </tbody>
+</table>
+</div>
+<h3>Commercial laser (assumptions)</h3>
+<p>These columns are assumptions, not a cut on this machine. ASSUMPTION. Sourced case: 300-600 W CO2 flatbed, single pass at ~600 mm/min (vendor 480-720), 60 m/min rapids, 5 min/sheet, $8/h operating cost. What-if cases: a machine 10x / 20x faster than the diode mid cut+travel time (not sourced for 18 mm ply).</p>
+<div class="table-wrap">
+<table>
+  <caption>Assumption only. Commercial CO2 is the sourced case. The 10× and 20× columns are what-if speeds, not a measured machine.</caption>
+  <thead><tr><th></th><th class="num">Commercial CO2 (assumption)</th><th class="num">What-if 10× (assumption)</th><th class="num">What-if 20× (assumption)</th></tr></thead>
+  <tbody>
+    <tr><th>Machine time</th><td class="num">1.09 h</td><td class="num">0.29 h</td><td class="num">0.19 h</td></tr>
+    <tr><th>Cost per unit</th><td class="num">$109.04</td><td class="num">$102.64</td><td class="num">$101.84</td></tr>
+    <tr><th>Gross margin</th><td class="num">$110.96</td><td class="num">$117.36</td><td class="num">$118.16</td></tr>
+    <tr><th>Gross margin %</th><td class="num">50.4%</td><td class="num">53.3%</td><td class="num">53.7%</td></tr>
+    <tr><th>Net after fees and labor</th><td class="num">$38.96</td><td class="num">$45.36</td><td class="num">$46.16</td></tr>
+    <tr><th>Gross profit per machine hour</th><td class="num">$101.80</td><td class="num">$404.69</td><td class="num">$621.89</td></tr>
+    <tr><th>Net profit per machine hour</th><td class="num">$35.74</td><td class="num">$156.41</td><td class="num">$242.95</td></tr>
+  </tbody>
+</table>
+</div>
+<h3>Selling price, at the typical diode time</h3>
+<div class="table-wrap">
+<table>
+  <caption>Gross margin and net use the mid cost per unit ($104.33) and the typical diode time, 2.36 h. A low sheet price would put the cost at $94.33; a high sheet price, $114.33.</caption>
   <thead>
     <tr><th></th><th class="num">Low price</th><th class="num">Mid price</th><th class="num">High price</th></tr>
   </thead>
   <tbody>
     <tr><th>Selling price</th><td class="num">$140.00</td><td class="num">$220.00</td><td class="num">$300.00</td></tr>
-    <tr><th>Cost per unit</th><td class="num">$107.13</td><td class="num">$107.13</td><td class="num">$107.13</td></tr>
-    <tr><th>Gross margin</th><td class="num">$32.87</td><td class="num">$112.87</td><td class="num">$192.87</td></tr>
-    <tr><th>Gross margin %</th><td class="num">23.5%</td><td class="num">51.3%</td><td class="num">64.3%</td></tr>
-    <tr><th>Net after fees and labor</th><td class="num neg">-$31.13</td><td class="num">$40.87</td><td class="num">$112.87</td></tr>
-    <tr><th>Machine hours</th><td class="num">4 h</td><td class="num">4 h</td><td class="num">4 h</td></tr>
-    <tr><th>Gross profit per machine hour</th><td class="num">$8.21</td><td class="num">$28.19</td><td class="num">$48.16</td></tr>
-    <tr><th>Net profit per machine hour</th><td class="num neg">-$7.77</td><td class="num">$10.21</td><td class="num">$28.19</td></tr>
+    <tr><th>Cost per unit</th><td class="num">$104.33</td><td class="num">$104.33</td><td class="num">$104.33</td></tr>
+    <tr><th>Gross margin</th><td class="num">$35.67</td><td class="num">$115.67</td><td class="num">$195.67</td></tr>
+    <tr><th>Gross margin %</th><td class="num">25.5%</td><td class="num">52.6%</td><td class="num">65.2%</td></tr>
+    <tr><th>Net after fees and labor</th><td class="num neg">-$28.33</td><td class="num">$43.67</td><td class="num">$115.67</td></tr>
+    <tr><th>Machine hours</th><td class="num">2.36 h</td><td class="num">2.36 h</td><td class="num">2.36 h</td></tr>
+    <tr><th>Gross profit per machine hour</th><td class="num">$15.11</td><td class="num">$49.01</td><td class="num">$82.91</td></tr>
+    <tr><th>Net profit per machine hour</th><td class="num neg">-$12.00</td><td class="num">$18.50</td><td class="num">$49.01</td></tr>
   </tbody>
 </table>
 </div>
-<p>At 100-200 mm/min the laser path alone is 3.0-6.0 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting.</p>
-<p class="fine">All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the &quot;after labor&quot; line only. Marketplace fees 10% (assumption, e.g. Etsy-style).</p>
+<p>ESTIMATE: 2.4 h (low-speed case 5.4 h, best case 1.3 h) of machine time per unit for 36 m of cut path in 1 sheet(s) on a 120 W diode, 18 mm plywood. Machine time, not material, is still the limit on profit per hour, but a single test cut on scrap will replace this range with a real number.</p>
+<p class="fine">All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine time uses a sourced RANGE for a 120 W diode on 18 mm ply (low 120 / typical 300 / high 600 mm/min effective, i.e. after multiple passes; see CUT-SPEED-RESEARCH.md); ACMER publishes no 18 mm ply feed rate, so none of it is measured on this machine. Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the &quot;after labor&quot; line only. Marketplace fees 10% (assumption, e.g. Etsy-style).</p>
 <p class="fine">Where the price band came from: SHORTLIST.md: custom target $140-$300 (estimate); Amazon typical ~$75, Etsy $129-$190 [third-party estimates]</p>
 <h3>Try your own numbers</h3>
-<p>Change the sheet cost, hardware, selling price, or labor rate. Finish ($$9.00), packaging ($$10.00), and machine wear ($$6.81) stay put, together $25.81. Fees stay at 10% of the selling price. Labor uses the planned 2 h at the rate you type. Machine hours stay at 4 h, which still depends on the unverified feed.</p>
+<p>Change the sheet cost, hardware, selling price, labor rate, or machine time. Finish ($9.00) and packaging ($10.00) stay put. Machine wear follows the machine-time choice: $1.70 per hour on the diode estimates, $8.00 per hour on the commercial assumptions. Fees stay at 10% of the selling price. Labor uses the planned 2 h at the rate you type.</p>
 <div class="calc">
   <label>Sheet cost, $ <input id="sheet-cost" inputmode="decimal" type="number" min="0" step="0.01" value="65" /></label>
   <label>Hardware cost, $ <input id="hardware-cost" inputmode="decimal" type="number" min="0" step="0.01" value="16.32" /></label>
   <label>Selling price, $ <input id="selling-price" inputmode="decimal" type="number" min="0" step="0.01" value="220.0" /></label>
   <label>Labor rate, $ per hour <input id="labor-rate" inputmode="decimal" type="number" min="0" step="0.5" value="25" /></label>
+  <label>Machine time <select id="machine-scenario"><option value="mid" selected>Typical diode</option><option value="high">Best diode</option><option value="low">Slow diode</option><option value="commercial_co2">Commercial CO2 (assumption)</option><option value="what_if_10x">What-if 10× (assumption)</option><option value="what_if_20x">What-if 20× (assumption)</option></select></label>
 </div>
 <div class="calc-out" id="calc-out" aria-live="polite"></div>
-<p class="fine">Still an estimate. If the real cut is slower or faster than 150 mm per minute, machine hours and profit per hour change even when these four numbers do not.</p>
-<script type="application/json" id="calc-data">{"sheetCost": 65, "hardwareCost": 16.32, "price": 220.0, "laborRate": 25, "laborHours": 2.0, "fixedCost": 25.81, "machineHours": 4.0, "feeRate": 0.1}</script>
+<p class="fine">Still an estimate. Based on reported 120 W-class diode speeds, multiple passes at 18 mm. One timed scrap cut will replace this. The commercial rows are assumptions, not a cut on this machine.</p>
+<script type="application/json" id="calc-data">{"sheetCost": 65, "hardwareCost": 16.32, "price": 220.0, "laborRate": 25, "laborHours": 2.0, "fixedCost": 19.0, "feeRate": 0.1, "defaultScenario": "mid", "scenarios": [{"id": "mid", "hours": 2.36, "wearPerHour": 1.7, "assumption": false}, {"id": "high", "hours": 1.31, "wearPerHour": 1.7, "assumption": false}, {"id": "low", "hours": 5.4, "wearPerHour": 1.7, "assumption": false}, {"id": "commercial_co2", "hours": 1.09, "wearPerHour": 8.0, "assumption": true}, {"id": "what_if_10x", "hours": 0.29, "wearPerHour": 8.0, "assumption": true}, {"id": "what_if_20x", "hours": 0.19, "wearPerHour": 8.0, "assumption": true}]}</script>
   </section>
   <section class="block" id="parameters" aria-labelledby="parameters-heading">
     <h2 id="parameters-heading">Parameters</h2>
@@ -288,7 +331,7 @@
 <li>Not a children&#x27;s product (no CPSIA testing).</li></ul>
 <h2>Unverified / to test</h2>
 <ul class="plain"><li>Seat strength and deflection untested (18 mm ply over 1000 mm without dividers would sag about 12 mm at 100 kg by hand calculation).</li>
-<li>Laser feed 100-200 mm/min is an estimate.</li>
+<li>Machine time is an estimate (120 W diode on 18 mm ply, sourced range, not measured on this machine); cut time and profit/hour depend on it.</li>
 <li>Cushion fit depends on the cushion bought.</li>
 <li>Composite decking top is a CNC-only variant, not modeled here.</li>
 <li>Price band is an estimate from SHORTLIST.md.</li></ul>
@@ -308,7 +351,7 @@
   <span>README.md · size, joints, and the check that was run on the model</span>
 </a></div>
   </section>
-  <p class="site-foot">Meadowlark Models. Numbers on this page are estimates. The feed rate is unverified.</p>
+  <p class="site-foot">Meadowlark Models. Numbers on this page are estimates. Machine time is based on reported 120 W-class diode speeds. One timed scrap cut will replace it.</p>
 </main>
 <dialog class="zoom" id="zoom" aria-label="Cut sheet zoom">
   <div class="zoom-bar">

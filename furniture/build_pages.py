@@ -105,6 +105,22 @@ def hours(h) -> str:
     return text + " h"
 
 
+def machine_hours(h) -> str:
+    return f"{float(h):.1f} h"
+
+
+def sheet_machine_minutes(plan: dict, sheet: dict, key: str) -> float:
+    profit = plan["profit"]
+    scenario = profit["machine_time"]["scenarios"][key]
+    path = float(sheet["cut_path_m"])
+    total = float(profit["cut_path_m"]) or 1.0
+    rate = float(scenario["effective_mm_min"])
+    cut = path * 1000.0 / rate if rate else 0.0
+    travel = float(scenario.get("travel_min") or 0) * (path / total)
+    setup = float(scenario.get("setup_min") or 0) / max(int(plan["sheet_count"]), 1)
+    return cut + travel + setup
+
+
 def fmt_min(m) -> str:
     total = int(round(float(m)))
     h, mins = divmod(total, 60)
@@ -234,6 +250,7 @@ def render_gallery(designs: list[dict]) -> str:
         slug = plan["slug"]
         sheets = int(plan["sheet_count"])
         price = plan["profit"]["at_price"]["mid"]["price"]
+        typical = plan["profit"]["machine_hours_mid"]
         cards.append(
             f"""<a class="card" href="/furniture/{esc(slug)}">
   <div class="card-media">
@@ -246,6 +263,7 @@ def render_gallery(designs: list[dict]) -> str:
       <div class="wide"><dt>Size</dt><dd>{esc(size_phrase(plan['dimensions_mm']))}</dd></div>
       <div><dt>Sheets</dt><dd>{esc(sheet_word(sheets))}</dd></div>
       <div><dt>Mid price</dt><dd>{esc(money_short(price))}</dd></div>
+      <div><dt>Machine time</dt><dd>{esc(machine_hours(typical))} typical</dd></div>
     </dl>
   </div>
 </a>"""
@@ -259,7 +277,7 @@ def render_gallery(designs: list[dict]) -> str:
   <div class="gallery">
     {chr(10).join(cards)}
   </div>
-  <p class="site-foot">Meadowlark Models. The feed rate behind the cut times is unverified.</p>
+  <p class="site-foot">Meadowlark Models. Machine time is an estimate from reported 120 W-class diode speeds. One timed scrap cut will replace it.</p>
 </main>
 <script>
 (function () {{
@@ -323,14 +341,18 @@ def render_parts_list(plan_sheet: dict, parts: dict) -> str:
 def render_sheets(plan: dict, parts: dict) -> str:
     profit = plan["profit"]
     count = int(plan["sheet_count"])
-    slow, mid, fast = profit["machine_minutes_at_100_150_200_mm_per_min"]
+    slow_h, typical_h, best_h = profit["machine_time"]["diode_low_mid_high_hours"]
+    commercial_h = profit["machine_time"]["commercial_laser"]["hours_sourced_co2"]
     blocks = []
     for sheet in plan["sheets"]:
         n = int(sheet["sheet"])
         title = f"Sheet {n} of {count}"
         png = f"/furniture-data/{plan['slug']}/{sheet['png']}"
         path_m = float(sheet["cut_path_m"])
-        mid_min = path_m * 1000 / 150
+        best_m = sheet_machine_minutes(plan, sheet, "high")
+        typical_m = sheet_machine_minutes(plan, sheet, "mid")
+        slow_m = sheet_machine_minutes(plan, sheet, "low")
+        path_text = f"{path_m:.2f}".rstrip("0").rstrip(".")
         alt = (
             f"{title} for the {plan['name']}. "
             f"Each part is labelled on a 1220 by 2440 mm plywood sheet."
@@ -339,7 +361,7 @@ def render_sheets(plan: dict, parts: dict) -> str:
             f"""<article class="sheet">
   <div class="sheet-head">
     <h3>{esc(title)}</h3>
-    <p class="sheet-meta">{esc(str(sheet['part_count']))} parts on this sheet. They cover {esc(sheet['coverage_pct'])}% of a 1220 × 2440 mm sheet. Cut path {esc(f'{path_m:.2f}'.rstrip('0').rstrip('.'))} m, about {esc(fmt_min(mid_min))} at 150 mm per minute.</p>
+    <p class="sheet-meta">{esc(str(sheet['part_count']))} parts on this sheet. They cover {esc(sheet['coverage_pct'])}% of a 1220 × 2440 mm sheet. Cut path {esc(path_text)} m. About {esc(fmt_min(typical_m))} at the typical diode estimate (best {esc(fmt_min(best_m))}, slow {esc(fmt_min(slow_m))}).</p>
   </div>
   <div class="sheet-bleed">
     <button type="button" class="sheet-open" data-title="{esc(title)}" aria-label="Open {esc(title)} larger, then pan and zoom">
@@ -354,7 +376,9 @@ def render_sheets(plan: dict, parts: dict) -> str:
         )
     summary = f"""<div class="sheet-summary">
   <p><strong>{esc(sheet_word(count))}.</strong> 1220 × 2440 mm, 18 mm plywood. Total cut path {esc(profit['cut_path_m'])} m.</p>
-  <p>If the feed is 100, 150, or 200 mm per minute, the machine time is about {esc(fmt_min(slow))}, {esc(fmt_min(mid))}, or {esc(fmt_min(fast))}. The profit table uses the middle figure. That feed rate is an unverified estimate. Sheet 1 carries a fit-test coupon: cut it first and try the tab in the slot before you cut the rest. Hover or tap a part below to light it in the model.</p>
+  <p>Machine time for the whole unit: about {esc(machine_hours(best_h))} best, {esc(machine_hours(typical_h))} typical, {esc(machine_hours(slow_h))} slow. Based on reported 120 W-class diode speeds, multiple passes at 18 mm. One timed scrap cut will replace this.</p>
+  <p>A commercial CO2 flatbed is about {esc(machine_hours(commercial_h))} in the sourced case. That number is an assumption, not a cut on this machine.</p>
+  <p>Sheet 1 carries a fit-test coupon: cut it first and try the tab in the slot before you cut the rest. Hover or tap a part below to light it in the model.</p>
 </div>"""
     return summary + "\n" + "\n".join(blocks)
 
@@ -413,6 +437,30 @@ def render_materials(plan: dict) -> str:
 {screw_line}"""
 
 
+DIODE_WEAR_PER_HOUR = 1.70
+
+DIODE_COLUMNS = (
+    ("high", "Best"),
+    ("mid", "Typical"),
+    ("low", "Slow"),
+)
+
+COMMERCIAL_COLUMNS = (
+    ("commercial_co2", "Commercial CO2"),
+    ("what_if_10x", "What-if 10×"),
+    ("what_if_20x", "What-if 20×"),
+)
+
+CALC_SCENARIOS = (
+    ("mid", "Typical diode", False),
+    ("high", "Best diode", False),
+    ("low", "Slow diode", False),
+    ("commercial_co2", "Commercial CO2 (assumption)", True),
+    ("what_if_10x", "What-if 10× (assumption)", True),
+    ("what_if_20x", "What-if 20× (assumption)", True),
+)
+
+
 def margin_cells(profit: dict, key: str, as_pct: bool = False) -> str:
     cells = []
     for band in ("low", "mid", "high"):
@@ -425,16 +473,68 @@ def margin_cells(profit: dict, key: str, as_pct: bool = False) -> str:
     return "".join(cells)
 
 
+def rate_cells(rates: dict, columns: tuple[tuple[str, str], ...], field: str, kind: str) -> str:
+    cells = []
+    for key, _label in columns:
+        value = float(rates[key][field])
+        if kind == "hours":
+            text = hours(value)
+        elif kind == "pct":
+            text = f"{value:.1f}%"
+        else:
+            text = money(value)
+        cls = "num neg" if kind == "money" and value < 0 else "num"
+        cells.append(f'<td class="{cls}">{esc(text)}</td>')
+    return "".join(cells)
+
+
+def rate_table(rates: dict, columns: tuple[tuple[str, str], ...], caption: str) -> str:
+    heads = "".join(f'<th class="num">{esc(label)}</th>' for _key, label in columns)
+    rows = [
+        ("Machine time", "machine_hours", "hours"),
+        ("Cost per unit", "cogs", "money"),
+        ("Gross margin", "gross_margin", "money"),
+        ("Gross margin %", "gross_margin_pct", "pct"),
+        ("Net after fees and labor", "net_after_fees_and_labor", "money"),
+        ("Gross profit per machine hour", "gross_margin_per_machine_hour", "money"),
+        ("Net profit per machine hour", "net_after_fees_and_labor_per_machine_hour", "money"),
+    ]
+    body = "\n    ".join(
+        f"<tr><th>{esc(label)}</th>{rate_cells(rates, columns, field, kind)}</tr>"
+        for label, field, kind in rows
+    )
+    return f"""<div class="table-wrap">
+<table>
+  <caption>{caption}</caption>
+  <thead><tr><th></th>{heads}</tr></thead>
+  <tbody>
+    {body}
+  </tbody>
+</table>
+</div>"""
+
+
 def render_profit(plan: dict) -> str:
     profit = plan["profit"]
     costs = profit["cost_per_unit_low_mid_high"]
-    bands = "".join(
-        f'<td class="num">{esc(money(profit["at_price"][band]["price"]))}</td>' for band in ("low", "mid", "high")
-    )
-    cost_cells = "".join(f'<td class="num">{esc(money(profit["at_price"]["mid"]["cogs_mid"]))}</td>' for _ in range(3))
-    hours_cells = "".join(f'<td class="num">{esc(hours(profit["machine_hours_mid"]))}</td>' for _ in range(3))
-    slow, mid, fast = profit["machine_minutes_at_100_150_200_mm_per_min"]
-    fixed = float(profit["finish_cost"]) + float(profit["packaging_cost"]) + float(profit["machine_wear_cost"])
+    rates = profit["profit_per_machine_hour_at_mid_price"]
+    machine = profit["machine_time"]
+    fixed = float(profit["finish_cost"]) + float(profit["packaging_cost"])
+    scenarios = []
+    options = []
+    for key, label, assumption in CALC_SCENARIOS:
+        block = machine["scenarios"][key]
+        wear = float(block["operating_cost_per_hr"]) if "operating_cost_per_hr" in block else DIODE_WEAR_PER_HOUR
+        scenarios.append(
+            {
+                "id": key,
+                "hours": rates[key]["machine_hours"],
+                "wearPerHour": wear,
+                "assumption": assumption,
+            }
+        )
+        selected = " selected" if key == "mid" else ""
+        options.append(f'<option value="{esc(key)}"{selected}>{esc(label)}</option>')
     calc = {
         "sheetCost": profit["sheet_cost_mid"],
         "hardwareCost": profit["hardware_cost"],
@@ -442,15 +542,33 @@ def render_profit(plan: dict) -> str:
         "laborRate": 25,
         "laborHours": profit["labor_hours"],
         "fixedCost": round(fixed, 2),
-        "machineHours": profit["machine_hours_mid"],
         "feeRate": 0.10,
+        "defaultScenario": "mid",
+        "scenarios": scenarios,
     }
+    bands = "".join(
+        f'<td class="num">{esc(money(profit["at_price"][band]["price"]))}</td>' for band in ("low", "mid", "high")
+    )
+    cost_cells = "".join(f'<td class="num">{esc(money(profit["at_price"]["mid"]["cogs_mid"]))}</td>' for _ in range(3))
+    hours_cells = "".join(f'<td class="num">{esc(hours(profit["machine_hours_mid"]))}</td>' for _ in range(3))
+    commercial_heads = tuple((key, f"{label} (assumption)") for key, label in COMMERCIAL_COLUMNS)
+    diode_note = (
+        "Based on reported 120 W-class diode speeds, multiple passes at 18 mm. "
+        "One timed scrap cut will replace this."
+    )
     return f"""<div class="callout">
-  <strong>Estimates and assumptions.</strong> Every dollar figure on this page is a planning estimate, not a quote and not a promise. Sheet price, hardware, fees, labor, and machine wear are assumptions. The feed rate of 100–200 mm per minute is unverified. The maker does not publish a rate for 18 mm plywood, so the hours and the profit per hour move once you time a real cut.
+  <strong>Estimates and assumptions.</strong> Every dollar figure on this page is a planning estimate, not a quote and not a promise. Sheet price, hardware, fees, labor, and machine wear are assumptions. Machine time is based on reported 120 W-class diode speeds, multiple passes at 18 mm. One timed scrap cut will replace this.
 </div>
+<h3>Diode machine time</h3>
+<p>These three columns are the same unit at the mid selling price. Best, typical, and slow are the diode estimates. {esc(diode_note)}</p>
+{rate_table(rates, DIODE_COLUMNS, "At the mid selling price. Best is the fast diode case, typical is the planning case, slow is the cautious case.")}
+<h3>Commercial laser (assumptions)</h3>
+<p>These columns are assumptions, not a cut on this machine. {esc(machine['commercial_laser']['label'])}</p>
+{rate_table(rates, commercial_heads, "Assumption only. Commercial CO2 is the sourced case. The 10× and 20× columns are what-if speeds, not a measured machine.")}
+<h3>Selling price, at the typical diode time</h3>
 <div class="table-wrap">
 <table>
-  <caption>Gross margin and net use the mid cost per unit (${esc(f'{float(costs[1]):.2f}')}). Low and high sheet prices would put the cost at {esc(money(costs[0]))} or {esc(money(costs[2]))}. Machine hours are the middle feed, {esc(hours(profit['machine_hours_mid']))}. At 100 mm/min that is {esc(fmt_min(slow))}; at 200 mm/min, {esc(fmt_min(fast))}.</caption>
+  <caption>Gross margin and net use the mid cost per unit (${esc(f'{float(costs[1]):.2f}')}) and the typical diode time, {esc(hours(profit['machine_hours_mid']))}. A low sheet price would put the cost at {esc(money(costs[0]))}; a high sheet price, {esc(money(costs[2]))}.</caption>
   <thead>
     <tr><th></th><th class="num">Low price</th><th class="num">Mid price</th><th class="num">High price</th></tr>
   </thead>
@@ -470,15 +588,16 @@ def render_profit(plan: dict) -> str:
 <p class="fine">{esc(profit['assumptions'])}</p>
 <p class="fine">Where the price band came from: {esc(profit['price_band_source'])}</p>
 <h3>Try your own numbers</h3>
-<p>Change the sheet cost, hardware, selling price, or labor rate. Finish (${esc(money(profit['finish_cost']))}), packaging (${esc(money(profit['packaging_cost']))}), and machine wear (${esc(money(profit['machine_wear_cost']))}) stay put, together {esc(money(fixed))}. Fees stay at 10% of the selling price. Labor uses the planned {esc(hours(profit['labor_hours']))} at the rate you type. Machine hours stay at {esc(hours(profit['machine_hours_mid']))}, which still depends on the unverified feed.</p>
+<p>Change the sheet cost, hardware, selling price, labor rate, or machine time. Finish ({esc(money(profit['finish_cost']))}) and packaging ({esc(money(profit['packaging_cost']))}) stay put. Machine wear follows the machine-time choice: {esc(money(DIODE_WEAR_PER_HOUR))} per hour on the diode estimates, {esc(money(8))} per hour on the commercial assumptions. Fees stay at 10% of the selling price. Labor uses the planned {esc(hours(profit['labor_hours']))} at the rate you type.</p>
 <div class="calc">
   <label>Sheet cost, $ <input id="sheet-cost" inputmode="decimal" type="number" min="0" step="0.01" value="{esc(profit['sheet_cost_mid'])}" /></label>
   <label>Hardware cost, $ <input id="hardware-cost" inputmode="decimal" type="number" min="0" step="0.01" value="{esc(profit['hardware_cost'])}" /></label>
   <label>Selling price, $ <input id="selling-price" inputmode="decimal" type="number" min="0" step="0.01" value="{esc(profit['at_price']['mid']['price'])}" /></label>
   <label>Labor rate, $ per hour <input id="labor-rate" inputmode="decimal" type="number" min="0" step="0.5" value="25" /></label>
+  <label>Machine time <select id="machine-scenario">{''.join(options)}</select></label>
 </div>
 <div class="calc-out" id="calc-out" aria-live="polite"></div>
-<p class="fine">Still an estimate. If the real cut is slower or faster than 150 mm per minute, machine hours and profit per hour change even when these four numbers do not.</p>
+<p class="fine">Still an estimate. {esc(diode_note)} The commercial rows are assumptions, not a cut on this machine.</p>
 <script type="application/json" id="calc-data">{json.dumps(calc)}</script>"""
 
 
@@ -564,7 +683,7 @@ def render_design(plan: dict, parts: dict) -> str:
   <p class="crumbs"><a href="/">All models</a> · <a href="/furniture/">Shop furniture</a></p>
   <h1>{esc(name)}</h1>
   <p class="pitch">{esc(plan['pitch'])}</p>
-  <p class="size-line">{esc(size_sentence(plan['dimensions_mm']))} {esc(sheet_word(sheets))}. Mid retail price {esc(money_short(price))}, an estimate.</p>
+  <p class="size-line">{esc(size_sentence(plan['dimensions_mm']))} {esc(sheet_word(sheets))}. Mid retail price {esc(money_short(price))}, an estimate. Typical machine time {esc(machine_hours(plan['profit']['machine_hours_mid']))}.</p>
 </header>
 <nav class="jumps" aria-label="On this page">
   <a href="#model">Model</a>
@@ -579,10 +698,13 @@ def render_design(plan: dict, parts: dict) -> str:
 <p class="sr" id="model-status" aria-live="polite"></p>
 <section class="block" id="model" aria-labelledby="model-heading">
   <h2 class="sr" id="model-heading">Model</h2>
-  <div class="stage">
-    <div id="canvas-wrap">
-      <div id="three-loading">Loading the model…</div>
-      <div id="three-error" hidden></div>
+  <div id="model-stage">
+    <div class="stage">
+      <div id="canvas-wrap">
+        <div id="three-loading">Loading the model…</div>
+        <div id="three-error" hidden></div>
+      </div>
+      <p id="rotate-hint" class="rotate-hint" hidden>Rotate your phone for a wider view.</p>
     </div>
     <div class="tool-bar">
       <label class="explode" for="explode">Exploded
@@ -590,6 +712,8 @@ def render_design(plan: dict, parts: dict) -> str:
       </label>
       {render_toggles(parts)}
       <button type="button" class="ghost" id="btn-reset">Reset view</button>
+      <button type="button" class="ghost" id="btn-fullscreen">Full screen</button>
+      <button type="button" id="btn-exit-fs" hidden>Exit</button>
       <p class="tool-note">Drag to turn. Scroll or pinch to zoom. The slider pulls the panels apart, and the view pulls back so the pieces stay in frame.</p>
       <p class="tool-note" id="lit-note" aria-live="polite"></p>
     </div>
@@ -623,7 +747,7 @@ def render_design(plan: dict, parts: dict) -> str:
     <h2 id="downloads-heading">Downloads</h2>
     {render_downloads(plan)}
   </section>
-  <p class="site-foot">Meadowlark Models. Numbers on this page are estimates. The feed rate is unverified.</p>
+  <p class="site-foot">Meadowlark Models. Numbers on this page are estimates. Machine time is based on reported 120 W-class diode speeds. One timed scrap cut will replace it.</p>
 </main>
 {render_zoom()}
 <script src="/x1/vendor/three.min.js"></script>

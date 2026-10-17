@@ -128,14 +128,33 @@
     return mats[key];
   }
 
+  function toVec2(pts) {
+    var out = [];
+    var i;
+    for (i = 0; i < pts.length; i++) out.push(new THREE.Vector2(pts[i][0], pts[i][1]));
+    return out;
+  }
+
   function panelGeometry(part) {
     var pts = cleanRing(part.outline || []);
     if (pts.length < 3) return null;
-    if (signedArea(pts) < 0) pts.reverse();
-    var shape = new THREE.Shape();
-    shape.moveTo(pts[0][0], pts[0][1]);
-    var i;
-    for (i = 1; i < pts.length; i++) shape.lineTo(pts[i][0], pts[i][1]);
+    var outline = toVec2(pts);
+    var outlineCW = THREE.ShapeUtils.isClockWise(outline);
+    if (outlineCW) {
+      outline.reverse();
+      outlineCW = false;
+    }
+    var shape = new THREE.Shape(outline);
+    var holes = Array.isArray(part.holes) ? part.holes : [];
+    var h, ring, hole, holeCW;
+    for (h = 0; h < holes.length; h++) {
+      ring = cleanRing(holes[h] || []);
+      if (ring.length < 3) continue;
+      hole = toVec2(ring);
+      holeCW = THREE.ShapeUtils.isClockWise(hole);
+      if (holeCW === outlineCW) hole.reverse();
+      shape.holes.push(new THREE.Path(hole));
+    }
     var depth = Math.max(1, part.thickness - 0.4);
     var geom = new THREE.ExtrudeGeometry(shape, { depth: depth, bevelEnabled: false, steps: 1 });
     paintUVs(geom);
@@ -546,8 +565,88 @@
         return n;
       },
       fits: projectedFits,
-      highlight: function () { return litName(); }
+      highlight: function () { return litName(); },
+      slots: slotsOpen,
+      aim: function (x, y, z) {
+        userMoved = true;
+        var dir = new THREE.Vector3(x, y, z);
+        if (dir.lengthSq() < 1e-6) dir.set(0.9, 0.55, 1.08);
+        camera.position.copy(controls.target).add(dir);
+        fitCamera(true);
+        if (renderer && wrap) renderer.setSize(wrap.clientWidth, wrap.clientHeight, false);
+      }
     };
+  }
+
+  function ringCentroid(ring) {
+    var a = 0;
+    var b = 0;
+    var i;
+    if (!ring || !ring.length) return null;
+    for (i = 0; i < ring.length; i++) {
+      a += ring[i][0];
+      b += ring[i][1];
+    }
+    return [a / ring.length, b / ring.length];
+  }
+
+  function pointInRing(x, y, ring) {
+    var inside = false;
+    var i, j, xi, yi, xj, yj;
+    for (i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      xi = ring[i][0];
+      yi = ring[i][1];
+      xj = ring[j][0];
+      yj = ring[j][1];
+      if (((yi > y) !== (yj > y)) && (x < ((xj - xi) * (y - yi)) / ((yj - yi) || 1e-9) + xi)) inside = !inside;
+    }
+    return inside;
+  }
+
+  function slotsOpen() {
+    var report = { checked: 0, open: 0, blocked: 0, parts: [] };
+    if (!model) return report;
+    var raycaster = new THREE.Raycaster();
+    var i, item, mesh, part, holes, picks, h, center, local, world, normal, hits, opened, blocked;
+    for (i = 0; i < model.movers.length; i++) {
+      item = model.movers[i];
+      mesh = item.obj;
+      if (!mesh.isMesh) continue;
+      part = partByName[mesh.name];
+      holes = part && Array.isArray(part.holes) ? part.holes : [];
+      if (!holes.length) continue;
+      picks = [];
+      for (h = 0; h < holes.length && picks.length < 6; h++) {
+        center = ringCentroid(holes[h]);
+        if (center && pointInRing(center[0], center[1], holes[h])) picks.push(center);
+      }
+      if (!picks.length) {
+        for (h = 0; h < holes.length && picks.length < 6; h++) {
+          center = ringCentroid(holes[h]);
+          if (center) picks.push(center);
+        }
+      }
+      opened = 0;
+      blocked = 0;
+      for (h = 0; h < picks.length; h++) {
+        center = picks[h];
+        local = new THREE.Vector3(center[0], center[1], Math.max(0.2, (part.thickness - 0.4) / 2));
+        world = mesh.localToWorld(local);
+        normal = new THREE.Vector3(0, 0, 1).applyQuaternion(mesh.getWorldQuaternion(new THREE.Quaternion())).normalize();
+        raycaster.set(world.clone().addScaledVector(normal, 80), normal.clone().negate());
+        hits = raycaster.intersectObject(mesh, false);
+        report.checked += 1;
+        if (hits.length) {
+          blocked += 1;
+          report.blocked += 1;
+        } else {
+          opened += 1;
+          report.open += 1;
+        }
+      }
+      report.parts.push({ name: mesh.name, holes: holes.length, open: opened, blocked: blocked });
+    }
+    return report;
   }
 
   function wireModelUi() {
@@ -574,6 +673,147 @@
         fitCamera(false);
       });
     }
+    wireFullscreen();
+  }
+
+  function isPortrait() {
+    return window.matchMedia && window.matchMedia('(orientation: portrait)').matches;
+  }
+
+  function fsElement() {
+    return document.fullscreenElement || document.webkitFullscreenElement || null;
+  }
+
+  function modelStage() {
+    return el('model-stage');
+  }
+
+  function inNativeFs() {
+    var stage = modelStage();
+    return !!(stage && fsElement() === stage);
+  }
+
+  function inFallbackFs() {
+    var stage = modelStage();
+    return !!(stage && stage.classList.contains('is-fs'));
+  }
+
+  function inFullscreen() {
+    return inNativeFs() || inFallbackFs();
+  }
+
+  function syncFsChrome() {
+    var stage = modelStage();
+    var on = inFullscreen();
+    var openBtn = el('btn-fullscreen');
+    var exitBtn = el('btn-exit-fs');
+    if (openBtn) openBtn.hidden = on;
+    if (exitBtn) exitBtn.hidden = !on;
+    document.body.classList.toggle('fs-lock', inFallbackFs());
+    if (!stage) return;
+    var landscape = !isPortrait();
+    var turned = on && inFallbackFs() && !landscape;
+    var hint = el('rotate-hint');
+    stage.classList.toggle('is-turned', turned);
+    if (hint) hint.hidden = !(on && !landscape && !turned);
+  }
+
+  function refitAfterLayout() {
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        if (wrap && camera) {
+          fitCamera(userMoved);
+          if (renderer) renderer.setSize(wrap.clientWidth, wrap.clientHeight, false);
+        } else {
+          resize();
+        }
+      });
+    });
+  }
+
+  function lockLandscape() {
+    try {
+      if (screen.orientation && typeof screen.orientation.lock === 'function') {
+        var pending = screen.orientation.lock('landscape');
+        if (pending && typeof pending.then === 'function') {
+          pending.then(function () { syncFsChrome(); refitAfterLayout(); }).catch(function () { syncFsChrome(); refitAfterLayout(); });
+          return;
+        }
+      }
+    } catch (err) {
+      /* lock is unsupported or was refused */
+    }
+    syncFsChrome();
+    refitAfterLayout();
+  }
+
+  function enterFallback() {
+    var stage = modelStage();
+    if (!stage) return;
+    stage.classList.add('is-fs');
+    syncFsChrome();
+    lockLandscape();
+  }
+
+  function exitFullscreen() {
+    var stage = modelStage();
+    if (stage) stage.classList.remove('is-fs', 'is-turned');
+    try {
+      if (screen.orientation && typeof screen.orientation.unlock === 'function') screen.orientation.unlock();
+    } catch (err) {
+      /* unlock can throw when nothing was locked */
+    }
+    var exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if (fsElement() && exit) {
+      var pending = exit.call(document);
+      if (pending && typeof pending.catch === 'function') pending.catch(function () {});
+    }
+    syncFsChrome();
+    refitAfterLayout();
+  }
+
+  function enterFullscreen() {
+    var stage = modelStage();
+    if (!stage) return;
+    var req = stage.requestFullscreen || stage.webkitRequestFullscreen;
+    if (!req) {
+      enterFallback();
+      return;
+    }
+    try {
+      var pending = req.call(stage);
+      if (pending && typeof pending.then === 'function') {
+        pending.then(function () { lockLandscape(); }).catch(function () { enterFallback(); });
+      } else {
+        lockLandscape();
+      }
+    } catch (err) {
+      enterFallback();
+    }
+  }
+
+  function wireFullscreen() {
+    var openBtn = el('btn-fullscreen');
+    var exitBtn = el('btn-exit-fs');
+    if (openBtn) openBtn.addEventListener('click', enterFullscreen);
+    if (exitBtn) exitBtn.addEventListener('click', exitFullscreen);
+    document.addEventListener('fullscreenchange', function () {
+      syncFsChrome();
+      refitAfterLayout();
+    });
+    document.addEventListener('webkitfullscreenchange', function () {
+      syncFsChrome();
+      refitAfterLayout();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && inFullscreen()) exitFullscreen();
+    });
+    window.addEventListener('orientationchange', function () {
+      if (inFullscreen()) {
+        syncFsChrome();
+        refitAfterLayout();
+      }
+    });
   }
 
   function applyZoomTransform() {
@@ -700,6 +940,7 @@
     if (!node || !out) return;
     var data = JSON.parse(node.textContent);
     var fields = ['sheet-cost', 'hardware-cost', 'selling-price', 'labor-rate'].map(el);
+    var scenarioPick = el('machine-scenario');
 
     function row(label, value, bad) {
       var div = document.createElement('div');
@@ -723,15 +964,18 @@
         out.appendChild(row('Margin', 'Enter a number in each field', true));
         return;
       }
-      var cost = sheet + hardware + data.fixedCost;
+      var choice = scenarioChoice();
+      var wear = choice.hours * choice.wearPerHour;
+      var cost = sheet + hardware + data.fixedCost + wear;
       var gross = price - cost;
       var pct = price === 0 ? null : (gross / price) * 100;
       var fees = price * data.feeRate;
       var labor = data.laborHours * rate;
       var net = gross - fees - labor;
-      var hours = data.machineHours;
+      var hours = choice.hours;
       var perHour = hours ? net / hours : null;
       var grossHour = hours ? gross / hours : null;
+      out.appendChild(row('Machine time', fmtHours(hours) + (choice.assumption ? ' (assumption)' : ''), false));
       out.appendChild(row('Cost per unit', money(cost), cost < 0));
       out.appendChild(row('Gross margin', money(gross) + (pct === null ? '' : ' (' + pct.toFixed(1) + '%)'), gross < 0));
       out.appendChild(row('Fees (10%)', money(fees), false));
@@ -740,7 +984,22 @@
       out.appendChild(row('Profit per machine hour', perHour === null ? '—' : money(grossHour) + ' gross, ' + money(perHour) + ' net', net < 0));
     }
 
+    function fmtHours(n) {
+      var text = (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+      return text + ' h';
+    }
+
+    function scenarioChoice() {
+      var list = data.scenarios || [];
+      var id = scenarioPick ? scenarioPick.value : (data.defaultScenario || 'mid');
+      var i;
+      for (i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+      if (list.length) return list[0];
+      return { hours: data.machineHours || 0, wearPerHour: 0, assumption: false };
+    }
+
     fields.forEach(function (input) { input.addEventListener('input', render); });
+    if (scenarioPick) scenarioPick.addEventListener('change', render);
     render();
   }
 
