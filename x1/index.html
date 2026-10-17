@@ -50,7 +50,7 @@
   body.mode-3d { height: 100dvh; overflow: hidden; }
   .panel { display: none; }
   .panel.active { display: block; }
-  #panel-build.active { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  #panel-build.active, #panel-bed.active { display: flex; flex-direction: column; flex: 1; min-height: 0; }
   .facts { display: grid; gap: 6px; margin: 10px 0 12px; }
   .facts div { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
   .facts strong { display: block; font-size: 12px; color: var(--accent); }
@@ -90,11 +90,27 @@
     .facts { grid-template-columns: 1fr 1fr; }
     .sheet-grid { grid-template-columns: 1fr 1fr 1fr; }
   }
+  .bed-files { display: grid; gap: 8px; margin: 8px 0 12px; }
+  a.bed-file {
+    display: block; text-decoration: none; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  a.bed-file strong { display: block; color: var(--accent); }
+  a.bed-file span { display: block; margin-top: 4px; color: var(--text); font-size: 14px; font-weight: 600; }
+  .bed-bar button.current { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+  #sidebar-bed .facts { grid-template-columns: 1fr 1fr; }
+  #sidebar-bed .facts div { padding: 6px 8px; }
+  #sidebar-bed h2 { font-size: 1.15rem; }
+  @media (max-width: 767px) {
+    #panel-bed .step-bar-nav button { flex: 1 1 30%; min-width: 0; padding-left: 4px; padding-right: 4px; }
+    #bed-title { display: none; }
+  }
   @media (max-width: 767px) {
     .day-plan-table { display: none; }
     .day-plan-cards { display: grid; gap: 8px; }
-    nav.tabs { overflow-x: hidden; }
-    nav.tabs button { padding: 8px 8px; }
+    nav.tabs { overflow-x: auto; }
+    nav.tabs button { padding: 8px 10px; }
     #shop-list .table-wrap, #cut-list .table-wrap { display: none; }
     .shop-cards, .cut-cards { display: grid; gap: 8px; }
   }
@@ -130,7 +146,7 @@
     background: #3a2a1c; color: var(--text); border: 1px solid var(--warn);
     border-radius: 6px; padding: 2px 6px; font-size: 12px; font-weight: 800; white-space: nowrap;
   }
-  #sidebar-3d {
+  #sidebar-3d, #sidebar-bed {
     width: 340px; flex-shrink: 0; overflow: auto; background: var(--bg2);
     border-left: 1px solid var(--border); padding: 10px 12px 20px; font-size: 14px;
   }
@@ -139,7 +155,7 @@
   .goal { font-weight: 700; }
   .done-when { background: #243024; border-radius: 8px; padding: 8px 10px; margin: 8px 0; }
   .done-when strong { color: var(--ok); }
-  details.more > summary, .day-view > summary, #piece-sheet > summary, #bed-build > summary {
+  details.more > summary, .day-view > summary, #piece-sheet > summary, #bed-build > summary, #sidebar-bed details > summary {
     min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; color: var(--accent);
   }
   .step-jump { display: block; width: 100%; text-align: left; margin: 6px 0; background: transparent; }
@@ -181,7 +197,7 @@
     .step-nums-wrap[open] .step-nums { padding: 8px; max-height: 30dvh; overflow: auto; }
     .view3d-wrap { flex-direction: column; min-height: 0; overflow: hidden; }
     #canvas-wrap { min-height: 0; flex: 1 1 42%; }
-    #sidebar-3d {
+    #sidebar-3d, #sidebar-bed {
       width: 100%; max-height: none; flex: 1 1 58%; min-height: 0;
       border-left: none; border-top: 1px solid var(--border);
       padding-bottom: 12px;
@@ -198,7 +214,7 @@
   }
   @media print {
     body, main { display: block !important; height: auto !important; overflow: visible !important; background: #fff !important; color: #111 !important; }
-    header, #panel-overview, #panel-build, #panel-faq, .noprint { display: none !important; }
+    header, #panel-overview, #panel-build, #panel-bed, #panel-faq, .noprint { display: none !important; }
     #panel-shop { display: block !important; }
     .shop-cards, .cut-cards { display: none !important; }
     #shop-list .table-wrap, #cut-list .table-wrap { display: block !important; }
@@ -217,6 +233,7 @@
     <button type="button" data-tab="overview" class="active">Overview</button>
     <button type="button" data-tab="shop">Shop &amp; cuts</button>
     <button type="button" data-tab="build">Build</button>
+    <button type="button" data-tab="bed">Bed</button>
     <button type="button" data-tab="faq">FAQ</button>
   </nav>
 </header>
@@ -257,6 +274,7 @@
   </div>
   <h3>The laser bed</h3>
   <div class="bed-note">
+    <p>The steel egg-crate has its own Bed tab: two interlocking grids, no fasteners, and the cut files. The honeycomb in these steps is the thin stack until that bed is cut.</p>
     <p>Keep the bed stack thin. A honeycomb tile is a metal grid, 22 mm thick, with cells about 5.5, 7.5, or 9.5 mm across. It is usually framed. A steel grid is magnetic, so a magnet can hold a sheet. The open cells let the beam pass and give smoke a way down. Honeycomb is not a fire break by itself, so a 1.5 mm steel plate sits under it. Together that is about 24 mm. The machine’s Z travel is about 80 mm.</p>
     <p>A single panel the size of the work area, 1250 × 2450 mm, is not a realistic buy. Use two tiles, about 4 × 4 ft each, meeting at the center. Together the plates and the tiles are about 96 × 48 in, slightly smaller than ACMER's 1250 × 2450 mm work area. The tiles are made to order, so order them before Day 1. Order the plates before Day 1 too.</p>
     <p>The six levelers level the deck. After the tiles are on, check the head height at the corners and the middle, and shim a tile corner until the spread is about 1 mm.</p>
@@ -358,6 +376,48 @@
   </div>
 </section>
 
+<section id="panel-bed" class="panel">
+  <div class="step-bar bed-bar">
+    <div class="step-bar-row step-bar-nav">
+      <button type="button" id="btn-bed-corner" class="current">Corner</button>
+      <button type="button" id="btn-bed-tooth">Tooth</button>
+      <button type="button" id="btn-bed-machine">Machine</button>
+      <button type="button" id="btn-bed-explode" aria-pressed="false">Explode</button>
+      <button type="button" id="btn-bed-reset" aria-label="Reset camera"><span class="cam-long">Reset camera</span><span class="cam-short">Reset</span></button>
+      <div class="step-title" id="bed-title">Corner</div>
+    </div>
+  </div>
+  <div class="view3d-wrap" id="bed-view">
+    <aside id="sidebar-bed">
+      <h2>Steel egg-crate bed</h2>
+      <p>Two steel grids sit on the deck, inside the opening. The work rests on the tooth tips, with open air underneath. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
+      <p class="hint-3d" id="bed-hint"></p>
+      <h3>Bed files</h3>
+      <div class="bed-files">
+        <a class="bed-file" href="/x1/bed/egg_crate_bed.dxf" download="egg_crate_bed.dxf"><strong>Blade and rib, DXF</strong><span>One blade and one cross-rib, in millimetres. Layers CUT and LABELS. This is the laser file for a single part of each.</span></a>
+        <a class="bed-file" href="/x1/bed/nest_one_panel_4x8.dxf" download="nest_one_panel_4x8.dxf"><strong>One panel on a 4×8, DXF</strong><span>All 31 parts of one panel, nested on a 1220 × 2440 mm sheet.</span></a>
+        <a class="bed-file" href="/x1/bed/egg_crate_drawing.pdf" download="egg_crate_drawing.pdf"><strong>Dimensioned drawing, PDF</strong><span>Two pages. The corner, the slot, the top view, and the part list.</span></a>
+        <a class="bed-file" href="/x1/bed/egg_crate_assembly.png" download="egg_crate_assembly.png"><strong>Assembly picture, PNG</strong><span>How the blades and the ribs drop together, and the colour key.</span></a>
+      </div>
+      <div class="facts">
+        <div><strong>Size</strong> Two panels, 1200 × 1200 mm, 2400 × 1200 mm together. 38 mm tall.</div>
+        <div><strong>Weight</strong> About 33 kg a panel. About 65 kg (143 lb) for the whole bed.</div>
+        <div><strong>Lift</strong> Two people lift one panel. Do not lift the whole bed at once.</div>
+        <div><strong>Parts</strong> 24 blades and 7 cross-ribs a panel. 48 blades and 14 ribs in all.</div>
+      </div>
+      <p class="meta">The drawing’s inside opening, about 2530 × 1470 mm, is an estimate. Measure the real opening before the steel is cut.</p>
+      <details>
+        <summary>Slot and tooth sizes</summary>
+        <ul>
+          <li>Blades run the long way, 50 mm apart, 38 mm tall including the teeth. Teeth are 4 mm tall on a 12 mm pitch.</li>
+          <li>Ribs run across, 183.3 mm apart, the first and last 50 mm in from the blade ends. A rib is 34 mm tall, so only the teeth touch the work.</li>
+          <li>Slots are 3.4 mm wide and 17.3 mm deep. The steel is 1/8 in, 3.18 mm, so a slot is the thickness plus 0.2 mm.</li>
+        </ul>
+      </details>
+    </aside>
+  </div>
+</section>
+
 <section id="panel-faq" class="panel">
   <h2>FAQ &amp; specs</h2>
   <h3>Confirmed vs. still unknown about the machine</h3>
@@ -371,7 +431,7 @@
       <tr><td>Confirmed</td><td>CNC spindle</td><td>200 W, 52 mm body</td></tr>
       <tr><td>Confirmed</td><td>Exhaust</td><td>One port on the rear profile, 130 × 125 × 70 mm. Leave at least 24 in clear behind that end and keep the duct run short.</td></tr>
       <tr><td>Confirmed</td><td>How it ships</td><td>Left and right walls, front and rear ends, an X-axis beam, and a sliding door, joined with M4 and M5 screws. Weigh each piece. Three people per long wall. Never lift the assembled ring.</td></tr>
-      <tr><td>Confirmed</td><td>Bed stack</td><td>22 mm honeycomb on a 1.5 mm steel plate, about 24 mm total. Keep it thin. Z travel is about 80 mm.</td></tr>
+      <tr><td>Confirmed</td><td>Bed stack</td><td>22 mm honeycomb on a 1.5 mm steel plate, about 24 mm total. Keep it thin. Z travel is about 80 mm. The steel egg-crate is a separate bed. See the Bed tab.</td></tr>
       <tr><td>Unknown, asked of ACMER</td><td>Power and bottom vents</td><td>Not published. Long sides stay open until vents are known.</td></tr>
     </tbody>
   </table></div>
@@ -862,6 +922,11 @@
     document.getElementById('btn-explore-end').onclick = function () { enterExplore({ frame: false }); };
     document.getElementById('btn-back-build').onclick = function () { setStep(current, { frame: false }); };
     document.getElementById('btn-reset-cam').onclick = function () { if (sceneReady) frameStand(); };
+    document.getElementById('btn-bed-corner').onclick = function () { setBedView('corner', true); };
+    document.getElementById('btn-bed-tooth').onclick = function () { setBedView('tooth', true); };
+    document.getElementById('btn-bed-machine').onclick = function () { setBedView('machine', true); };
+    document.getElementById('btn-bed-explode').onclick = toggleBedExplode;
+    document.getElementById('btn-bed-reset').onclick = function () { if (sceneReady && bedActive) frameBed(); };
     document.getElementById('btn-reset-side').onclick = function () { if (sceneReady) frameStand(); };
     document.getElementById('btn-waste').onclick = function () {
       wasteOn = !wasteOn;
@@ -896,10 +961,21 @@
       b.classList.toggle('active', on);
       b.setAttribute('aria-selected', on ? 'true' : 'false');
     });
-    const build = id === 'build';
-    document.body.classList.toggle('mode-3d', build);
-    document.getElementById('main').classList.toggle('is-3d', build);
-    if (build) requestAnimationFrame(boot);
+    const threeD = id === 'build' || id === 'bed';
+    document.body.classList.toggle('mode-3d', threeD);
+    document.getElementById('main').classList.toggle('is-3d', threeD);
+    if (id === 'bed') {
+      bedActive = true;
+      moveCanvas(document.getElementById('bed-view'));
+      const ready = boot();
+      if (ready && ready.then) ready.then(function () {
+        if (document.getElementById('panel-bed').classList.contains('active')) enterBed();
+      });
+    } else {
+      if (bedActive) leaveBed();
+      moveCanvas(document.querySelector('#panel-build .view3d-wrap'));
+      if (id === 'build') requestAnimationFrame(boot);
+    }
   }
   let lastCsv = '';
   function copyCsv() {
@@ -968,8 +1044,8 @@
   ];
   let booted = false, booting = null;
   function boot() {
-    if (booted) { resize(); requestRender(); return; }
-    if (booting) return;
+    if (booted) { resize(); requestRender(); return Promise.resolve(); }
+    if (booting) return booting;
     document.getElementById('three-loading').hidden = false;
     booting = (async function () {
       let scriptsOk = false;
@@ -987,6 +1063,7 @@
         show3dError(scriptsOk || /webgl/i.test(msg) ? 'webgl' : 'scripts');
       }
     })();
+    return booting;
   }
 
   function rng(seed) {
@@ -1759,6 +1836,7 @@
     mat.needsUpdate = true;
   }
   function applyVisibility() {
+    if (bedActive) { applyBedVisibility(); return; }
     const step = STEPS[current];
     pickables.forEach(function (obj) {
       const id = obj.userData.partId;
@@ -1998,6 +2076,7 @@
   const pointer = { x: 0, y: 0 };
   let raycaster, pickGesture = null;
   function pickAt(clientX, clientY) {
+    if (bedActive) return;
     const rect = wrap.getBoundingClientRect();
     if (rect.width < 2) return;
     pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
@@ -2105,6 +2184,321 @@
     })();
   }
 
+  let bedActive = false;
+  let bedView = 'corner';
+  let bedBuilt = false;
+  let bedCut = null;
+  let bedFull = null;
+  let bedBlades = [];
+  let explodeT = 0;
+  let explodeTarget = 0;
+  let explodeRaf = 0;
+  let savedCam = null;
+  let savedCamValid = false;
+  const BED_LIFT = 28 / 25.4;
+  const BED = (function () {
+    const inch = 1 / 25.4;
+    const t = 3.18 * inch;
+    const slot = 3.4 * inch;
+    const panel = 1200 * inch;
+    const H = 38 * inch;
+    const toothH = 4 * inch;
+    const toothP = 12 * inch;
+    const Hv = H - toothH;
+    const rh = Hv;
+    const depth = 17.3 * inch;
+    const nBlades = 24;
+    const first = (1200 - (nBlades - 1) * 50) / 2 * inch;
+    const pitch = 50 * inch;
+    const bladeY = [];
+    for (let i = 0; i < nBlades; i++) bladeY.push(first + i * pitch);
+    const nRibs = 7;
+    const ribPitch = (1200 - 100) / (nRibs - 1) * inch;
+    const rib0 = 50 * inch;
+    const ribX = [];
+    for (let j = 0; j < nRibs; j++) ribX.push(rib0 + j * ribPitch);
+    return {
+      t: t, slot: slot, panel: panel, span: panel * 2, halfW: panel / 2,
+      H: H, Hv: Hv, rh: rh, toothP: toothP, depth: depth,
+      bladeY: bladeY, ribX: ribX, nBlades: nBlades, nRibs: nRibs
+    };
+  })();
+
+  function bedGapMm() {
+    return Math.round(((BED.depth - (BED.rh - BED.depth)) * 25.4) * 100) / 100;
+  }
+  function dedupePts(pts) {
+    const out = [];
+    pts.forEach(function (p) {
+      const last = out[out.length - 1];
+      if (!last || Math.abs(p[0] - last[0]) > 1e-8 || Math.abs(p[1] - last[1]) > 1e-8) out.push(p);
+    });
+    return out;
+  }
+  function bladeProfile(len, ribs) {
+    const s = BED.slot, db = BED.depth, Hv = BED.Hv, H = BED.H, tp = BED.toothP;
+    const pts = [[0, 0]];
+    ribs.forEach(function (x) {
+      pts.push([x - s / 2, 0], [x - s / 2, db], [x + s / 2, db], [x + s / 2, 0]);
+    });
+    pts.push([len, 0], [len, Hv]);
+    const n = Math.round(len / tp);
+    const p = len / n;
+    for (let k = n; k > 0; k--) pts.push([(k - 0.5) * p, H], [(k - 1) * p, Hv]);
+    return dedupePts(pts);
+  }
+  function ribProfile(width, blades) {
+    const s = BED.slot, rh = BED.rh, dr = BED.depth;
+    const pts = [[0, 0], [width, 0], [width, rh]];
+    for (let i = blades.length - 1; i >= 0; i--) {
+      const y = blades[i];
+      pts.push([y + s / 2, rh], [y + s / 2, rh - dr], [y - s / 2, rh - dr], [y - s / 2, rh]);
+    }
+    pts.push([0, rh]);
+    return dedupePts(pts);
+  }
+  function extrudeProfile(pts, rotateRib) {
+    const shape = new THREE.Shape();
+    shape.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) shape.lineTo(pts[i][0], pts[i][1]);
+    const geo = new THREE.ExtrudeGeometry(shape, { depth: BED.t, bevelEnabled: false, steps: 1, curveSegments: 1 });
+    geo.translate(0, 0, -BED.t / 2);
+    if (rotateRib) geo.rotateY(-Math.PI / 2);
+    geo.computeVertexNormals();
+    return geo;
+  }
+  function steelMat(color) {
+    return new THREE.MeshStandardMaterial({
+      color: color, metalness: 0.62, roughness: 0.36,
+      polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
+    });
+  }
+  function buildBed() {
+    if (bedBuilt) return;
+    bedBuilt = true;
+    const bladeMat = steelMat(0x8ea0b4);
+    const ribMat = steelMat(0xd4893a);
+    const cutLen = 480 / 25.4;
+    const cutW = 240 / 25.4;
+    const cutRibs = BED.ribX.slice(0, 3);
+    const cutBladesY = BED.bladeY.slice(0, 4);
+    const bladeGeo = extrudeProfile(bladeProfile(BED.panel, BED.ribX), false);
+    const ribGeo = extrudeProfile(ribProfile(BED.panel, BED.bladeY), true);
+    const bladeShort = extrudeProfile(bladeProfile(cutLen, cutRibs), false);
+    const ribShort = extrudeProfile(ribProfile(cutW, cutBladesY), true);
+    bedCut = new THREE.Group();
+    bedCut.name = 'bed-cut';
+    bedCut.visible = false;
+    cutBladesY.forEach(function (z) {
+      const mesh = new THREE.Mesh(bladeShort, bladeMat);
+      mesh.position.set(0, 0, z);
+      mesh.name = 'bed-blade';
+      bedCut.add(mesh);
+      bedBlades.push(mesh);
+    });
+    cutRibs.forEach(function (x) {
+      const mesh = new THREE.Mesh(ribShort, ribMat);
+      mesh.position.set(x, 0, 0);
+      mesh.name = 'bed-rib';
+      bedCut.add(mesh);
+    });
+    scene.add(bedCut);
+    bedFull = new THREE.Group();
+    bedFull.name = 'bed-full';
+    bedFull.visible = false;
+    bedFull.position.y = TOP_H;
+    const blades = new THREE.InstancedMesh(bladeGeo, bladeMat, BED.nBlades * 2);
+    const ribs = new THREE.InstancedMesh(ribGeo, ribMat, BED.nRibs * 2);
+    blades.frustumCulled = false;
+    ribs.frustumCulled = false;
+    const m4 = new THREE.Matrix4();
+    let nb = 0;
+    let nr = 0;
+    for (let p = 0; p < 2; p++) {
+      const ox = -BED.panel + p * BED.panel;
+      for (let i = 0; i < BED.nBlades; i++) {
+        m4.makeTranslation(ox, 0, -BED.halfW + BED.bladeY[i]);
+        blades.setMatrixAt(nb++, m4);
+      }
+      for (let j = 0; j < BED.nRibs; j++) {
+        m4.makeTranslation(ox + BED.ribX[j], 0, -BED.halfW);
+        ribs.setMatrixAt(nr++, m4);
+      }
+    }
+    blades.instanceMatrix.needsUpdate = true;
+    ribs.instanceMatrix.needsUpdate = true;
+    bedFull.add(blades);
+    bedFull.add(ribs);
+    scene.add(bedFull);
+  }
+  function applyExplode() {
+    const y = explodeT * BED_LIFT;
+    bedBlades.forEach(function (mesh) { mesh.position.y = y; });
+  }
+  function renderNow() {
+    if (!renderer) return;
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  function startExplode() {
+    if (explodeRaf) cancelAnimationFrame(explodeRaf);
+    const step = function () {
+      if (!bedActive) { explodeRaf = 0; return; }
+      const d = explodeTarget - explodeT;
+      if (Math.abs(d) < 0.02) {
+        explodeT = explodeTarget;
+        applyExplode();
+        renderNow();
+        explodeRaf = 0;
+        return;
+      }
+      explodeT += d * 0.28;
+      applyExplode();
+      renderNow();
+      explodeRaf = requestAnimationFrame(step);
+    };
+    explodeRaf = requestAnimationFrame(step);
+  }
+  function toggleBedExplode() {
+    if (!bedActive || bedView === 'machine') return;
+    explodeTarget = explodeTarget > 0.5 ? 0 : 1;
+    const btn = document.getElementById('btn-bed-explode');
+    btn.textContent = explodeTarget > 0.5 ? 'Assemble' : 'Explode';
+    btn.setAttribute('aria-pressed', explodeTarget > 0.5 ? 'true' : 'false');
+    startExplode();
+  }
+  function applyBedVisibility() {
+    const machine = bedView === 'machine';
+    pickables.forEach(function (obj) {
+      const id = obj.userData.partId;
+      let vis = false;
+      if (machine && !obj.userData.later && id !== 'fire-break' && id !== 'honeycomb' && id !== 'work-mark' && id !== 'machine-mark' && id !== 'waste') vis = true;
+      obj.visible = vis;
+      obj.userData.faded = false;
+      if (obj.isMesh && obj.material && !obj.userData.keepEmissive) {
+        obj.material.transparent = false;
+        obj.material.opacity = 1;
+        obj.material.depthWrite = true;
+      }
+      paint(obj, 'solid');
+    });
+    const floor = scene.getObjectByName('floor');
+    if (floor) floor.visible = machine;
+    if (bedCut) bedCut.visible = !machine;
+    if (bedFull) bedFull.visible = machine;
+  }
+  function fitBox(box, dir) {
+    const pts = [];
+    [box.min.x, box.max.x].forEach(function (x) {
+      [box.min.y, box.max.y].forEach(function (y) {
+        [box.min.z, box.max.z].forEach(function (z) { pts.push(new THREE.Vector3(x, y, z)); });
+      });
+    });
+    const center = new THREE.Vector3((box.min.x + box.max.x) / 2, (box.min.y + box.max.y) / 2, (box.min.z + box.max.z) / 2);
+    const view = dir.clone().normalize();
+    const aspect = Math.max(wrap.clientWidth / Math.max(wrap.clientHeight, 1), 0.05);
+    camera.aspect = aspect;
+    camera.fov = aspect < 0.85 ? 50 : 38;
+    camera.updateProjectionMatrix();
+    function fits(dist) {
+      camera.position.copy(center).addScaledVector(view, dist);
+      camera.lookAt(center);
+      camera.updateMatrixWorld();
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i].clone().project(camera);
+        if (p.z < -1 || p.z > 1 || Math.abs(p.x) > 0.84 || Math.abs(p.y) > 0.84) return false;
+      }
+      return true;
+    }
+    let lo = 0.3;
+    let hi = 80;
+    if (!fits(hi)) hi = 160;
+    for (let i = 0; i < 22; i++) {
+      const mid = (lo + hi) / 2;
+      if (fits(mid)) hi = mid;
+      else lo = mid;
+    }
+    camera.position.copy(center).addScaledVector(view, Math.max(hi, controls.minDistance));
+    controls.target.copy(center);
+    controls.update();
+    requestRender();
+  }
+  function frameBed() {
+    if (!wrap || wrap.clientWidth < 2) return;
+    if (bedView === 'machine') { frameStand(); return; }
+    const box = new THREE.Box3();
+    if (bedView === 'tooth') {
+      const x = BED.ribX[0];
+      const z = BED.bladeY[0];
+      box.set(
+        new THREE.Vector3(x - 0.35, -0.02, z - 0.45),
+        new THREE.Vector3(x + 1.55, BED.H + 0.2, z + 0.85)
+      );
+    } else if (bedCut) box.setFromObject(bedCut);
+    fitBox(box, frameDir());
+  }
+  function setBedView(mode, frame) {
+    if (!sceneReady) return;
+    bedView = mode;
+    const machine = mode === 'machine';
+    document.getElementById('btn-bed-corner').classList.toggle('current', mode === 'corner');
+    document.getElementById('btn-bed-tooth').classList.toggle('current', mode === 'tooth');
+    document.getElementById('btn-bed-machine').classList.toggle('current', machine);
+    document.getElementById('btn-bed-explode').disabled = machine;
+    document.getElementById('bed-title').textContent = machine ? 'In the machine' : (mode === 'tooth' ? 'Slot and tooth' : 'Corner');
+    document.getElementById('bed-hint').textContent = machine
+      ? 'Both panels, centered on the 1250 × 2450 mm work area, sitting on the plywood inside the opening.'
+      : (mode === 'tooth'
+        ? 'One crossing. The blade is notched up from the bottom. The rib is notched down from the top.'
+        : 'Four blades and three ribs, with the real slots and teeth. Explode lifts the blades so the notches show.');
+    applyBedVisibility();
+    if (frame) frameBed();
+    else requestRender();
+  }
+  function moveCanvas(host) {
+    const el = document.getElementById('canvas-wrap');
+    if (el && host && el.parentElement !== host) host.insertBefore(el, host.firstChild);
+  }
+  function enterBed() {
+    if (!sceneReady || !document.getElementById('panel-bed').classList.contains('active')) return;
+    bedActive = true;
+    if (!savedCam) {
+      savedCam = snapshotCamera();
+      savedCamValid = !!initialFrameDone;
+    }
+    controls.minDistance = 0.35;
+    camera.near = 0.02;
+    camera.updateProjectionMatrix();
+    buildBed();
+    resize();
+    setBedView(bedView || 'corner', true);
+  }
+  function leaveBed() {
+    const was = bedActive;
+    bedActive = false;
+    if (explodeRaf) { cancelAnimationFrame(explodeRaf); explodeRaf = 0; }
+    if (!sceneReady || !was) return;
+    if (bedCut) bedCut.visible = false;
+    if (bedFull) bedFull.visible = false;
+    const floor = scene.getObjectByName('floor');
+    if (floor) floor.visible = true;
+    controls.minDistance = 20;
+    camera.near = 0.5;
+    camera.updateProjectionMatrix();
+    if (savedCam && savedCamValid) {
+      camera.position.set(savedCam.px, savedCam.py, savedCam.pz);
+      controls.target.set(savedCam.tx, savedCam.ty, savedCam.tz);
+      controls.update();
+    }
+    const needFrame = !savedCamValid;
+    savedCam = null;
+    savedCamValid = false;
+    applyVisibility();
+    if (needFrame) frameStand();
+    resize();
+    requestRender();
+  }
+
   function initScene() {
     wrap = document.getElementById('canvas-wrap');
     scene = new THREE.Scene();
@@ -2150,7 +2544,7 @@
     (function scheduleInitialFrame() {
       let tries = 0;
       const attempt = function () {
-        if (initialFrameDone) return;
+        if (initialFrameDone || bedActive) return;
         tries += 1;
         resize();
         if (wrap.clientWidth > 2 && wrap.clientHeight > 2) { frameStand(); return; }
@@ -2174,6 +2568,9 @@
       audit: audit,
       PICK_MOVE_PX: PICK_MOVE_PX,
       dims: { TOP_H: TOP_H, legH: M.legH, posts: M.posts, pieceCount: M.pieceCount, panelH: M.panelH, panelW: M.panelW, steps: STEPS.length },
+      bedState: function () {
+        return { active: bedActive, view: bedView, explode: explodeTarget, gapMm: bedGapMm() };
+      },
       cutCsv: cutCsv,
       lastCsv: function () { return lastCsv; }
     };
