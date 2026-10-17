@@ -287,7 +287,7 @@
   </div>
   <h3>The laser bed</h3>
   <div class="bed-note">
-    <p>The steel egg-crate has its own Bed tab: two interlocking grids, no fasteners, and the cut files. The honeycomb in these steps is the thin stack until that bed is cut.</p>
+    <p>The steel egg-crate has its own Bed tab: two interlocking grids on two 1.5 mm steel plates, with vents in the blade bottoms, and the cut files. The honeycomb in these steps is the thin stack until that bed is on.</p>
     <p>Keep the bed stack thin. A honeycomb tile is a metal grid, 22 mm thick, with cells about 5.5, 7.5, or 9.5 mm across. It is usually framed. A steel grid is magnetic, so a magnet can hold a sheet. The open cells let the beam pass and give smoke a way down. Honeycomb is not a fire break by itself, so a 1.5 mm steel plate sits under it. Together that is about 24 mm. The machine’s Z travel is about 80 mm.</p>
     <p>A single panel the size of the work area, 1250 × 2450 mm, is not a realistic buy. Use two tiles, about 4 × 4 ft each, meeting at the center. Together the plates and the tiles are about 96 × 48 in, slightly smaller than ACMER's 1250 × 2450 mm work area. The tiles are made to order, so order them before Day 1. Order the plates before Day 1 too.</p>
     <p>The six levelers level the deck. After the tiles are on, check the head height at the corners and the middle, and shim a tile corner until the spread is about 1 mm.</p>
@@ -407,11 +407,11 @@
     <aside id="sidebar-bed">
       <h2>Steel egg-crate bed</h2>
       <p class="bed-count">Each panel is 24 blades and 7 ribs. The bed is two panels, 48 blades and 14 ribs. Blades and ribs are the same 1/8 in steel. Two greys keep the crossings easy to see.</p>
-      <p>The two panels sit on the deck, inside the opening, 2400 × 1200 mm together. The work rests on the tooth tips, with open air underneath. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
+      <p>The two panels sit on the deck, inside the opening, 2400 × 1200 mm together. The work rests on the tooth tips. Vents in the bottom edge let air and debris pass between cells. Two 1.5 mm steel plates sit under the panels. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
       <p class="hint-3d" id="bed-hint"></p>
       <h3>Bed files</h3>
       <div class="bed-files">
-        <a class="bed-file" href="/x1/bed/egg_crate_bed.dxf" download="egg_crate_bed.dxf"><strong>Blade and rib, DXF</strong><span>One blade and one cross-rib, in millimetres. Layers CUT and LABELS. This is the laser file for a single part of each.</span></a>
+        <a class="bed-file" href="/x1/bed/egg_crate_bed.dxf" download="egg_crate_bed.dxf"><strong>Blade and rib, DXF</strong><span>One blade and one cross-rib, in millimetres, including the six bottom vents. Layers CUT and LABELS. This is the laser file for a single part of each.</span></a>
         <a class="bed-file" href="/x1/bed/nest_one_panel_4x8.dxf" download="nest_one_panel_4x8.dxf"><strong>One panel on a 4×8, DXF</strong><span>All 31 parts of one panel, nested on a 1220 × 2440 mm sheet.</span></a>
         <a class="bed-file" href="/x1/bed/egg_crate_drawing.pdf" download="egg_crate_drawing.pdf"><strong>Dimensioned drawing, PDF</strong><span>Two pages. The corner, the slot, the top view, and the part list.</span></a>
         <a class="bed-file" href="/x1/bed/egg_crate_assembly.png" download="egg_crate_assembly.png"><strong>Assembly picture, PNG</strong><span>How the blades and the ribs drop together. Both are the same steel. The drawing uses two line colours so the parts are easy to tell apart.</span></a>
@@ -429,6 +429,7 @@
           <li>Blades run the long way, 50 mm apart, 38 mm tall including the teeth. Teeth are 4 mm tall on a 12 mm pitch.</li>
           <li>Ribs run across, 183.3 mm apart, the first and last 50 mm in from the blade ends. A rib is 34 mm tall, so only the teeth touch the work.</li>
           <li>Slots are 3.4 mm wide and 17.3 mm deep. The steel is 1/8 in, 3.18 mm, so a slot is the thickness plus 0.2 mm.</li>
+          <li>Each blade has six vents in the bottom edge, 120 mm wide and 13 mm tall, centered between the ribs.</li>
         </ul>
       </details>
     </aside>
@@ -448,7 +449,7 @@
       <tr><td>Confirmed</td><td>CNC spindle</td><td>200 W, 52 mm body</td></tr>
       <tr><td>Confirmed</td><td>Exhaust</td><td>One port on the rear profile, 130 × 125 × 70 mm. Leave at least 24 in clear behind that end and keep the duct run short.</td></tr>
       <tr><td>Confirmed</td><td>How it ships</td><td>Left and right walls, front and rear ends, an X-axis beam, and a sliding door, joined with M4 and M5 screws. Weigh each piece. Three people per long wall. Never lift the assembled ring.</td></tr>
-      <tr><td>Confirmed</td><td>Bed stack</td><td>22 mm honeycomb on a 1.5 mm steel plate, about 24 mm total. Keep it thin. Z travel is about 80 mm. The steel egg-crate is a separate bed. See the Bed tab.</td></tr>
+      <tr><td>Confirmed</td><td>Bed stack</td><td>22 mm honeycomb on a 1.5 mm steel plate, about 24 mm total. Keep it thin. Z travel is about 80 mm. The finished bed is the steel egg-crate on two 1.5 mm plates. See the Bed tab.</td></tr>
       <tr><td>Unknown, asked of ACMER</td><td>Power and bottom vents</td><td>Not published. Long sides stay open until vents are known.</td></tr>
     </tbody>
   </table></div>
@@ -780,7 +781,7 @@
           'Check the head height at the corners and the center. Shim a tile corner until the spread is about 1 mm.'
         ],
         done: 'Both tiles sit on the plates, the seam is at the center, the stack is about 24 mm, and the corner spread is about 1 mm.',
-        details: 'A steel grid is magnetic. Cells are about 5.5, 7.5, or 9.5 mm. The tile is 22 mm, often with a frame.',
+        details: 'A steel grid is magnetic. Cells are about 5.5, 7.5, or 9.5 mm. The tile is 22 mm, often with a frame. These tiles are the thin stack. The egg-crate and its plates go on once the ring is up.',
         focus: ['honeycomb'] },
       { day: 3, title: 'Assemble the machine in place on the finished deck',
         goal: 'The ring is together, centered on the plywood. You never lift it as one piece.',
@@ -789,10 +790,11 @@
           'Weigh each piece first. The whole machine is about 550 lb.',
           'Three people per long wall. Lift each piece. Do not drag it on the coated slab.',
           'If a wall is over about 150 lb, rent a hydraulic lift table. Do not use an engine hoist.',
-          'Never lift the assembled ring. Build it in place, centered on the outline.'
+          'Never lift the assembled ring. Build it in place, centered on the outline.',
+          'Lay the two steel plates on the open frame, then set the two egg-crate panels on top and fix them at the corners with small angle brackets or low screws, nothing in the work area.'
         ],
-        done: 'The ring is screwed together on the deck, centered, and nobody lifted it as one piece.',
-        details: 'Open bottom, no feet. The ring sits fully on the plywood, about 0.95 in in from each end and 0.9 in in from each long side. The bed stays inside the opening.',
+        done: 'The ring is screwed together on the deck, centered, and nobody lifted it as one piece. The plates and both egg-crate panels are on, fixed only at the corners.',
+        details: 'Open bottom, no feet. The ring sits fully on the plywood, about 0.95 in in from each end and 0.9 in in from each long side. The bed stays inside the opening. The plates are 1.5 mm steel, 1200 × 1200 mm each.',
         focus: ['machine-frame', 'machine-lid', 'machine-gantry', 'machine-head'] },
       { day: 4, title: 'Chiller, exhaust, level and smoke test',
         goal: 'The chiller and the exhaust are in place, the deck is level under the machine, and a short smoke test is done.',
@@ -1865,6 +1867,7 @@
       if (id === 'machine-mark') vis = !explore && current >= 8 && current < 11;
       if (id === 'waste') vis = !!wasteOn && (explore || current >= 5);
       if (wasteOn && (id === 'fire-break' || id === 'honeycomb')) vis = false;
+      if ((explore || current >= 11) && (id === 'fire-break' || id === 'honeycomb')) vis = false;
       obj.userData.faded = false;
       obj.visible = vis;
       let mode = 'solid';
@@ -1873,7 +1876,18 @@
       }
       paint(obj, vis ? mode : 'solid');
     });
+    showFinishedBed(explore || current >= 11);
     requestRender();
+  }
+  function showFinishedBed(on) {
+    if (!bedBuilt) return;
+    syncBedStack();
+    if (bedPlatesFull) bedPlatesFull.visible = !!on;
+    if (bedFull) bedFull.visible = !!on;
+    if (bedPanel) bedPanel.visible = false;
+    if (bedCut) bedCut.visible = false;
+    if (bedPlatesPanel) bedPlatesPanel.visible = false;
+    if (bedPlatesCut) bedPlatesCut.visible = false;
   }
   const FADE_WITH_TOP = ['top-center', 'top-end', 'fire-break', 'honeycomb', 'waste'];
   function fadeTop(on) {
@@ -2209,6 +2223,9 @@
   let bedCut = null;
   let bedPanel = null;
   let bedFull = null;
+  let bedPlatesFull = null;
+  let bedPlatesPanel = null;
+  let bedPlatesCut = null;
   let bedBlades = [];
   let panelBlades = null;
   let fullBlades = null;
@@ -2222,6 +2239,9 @@
   const BED_LIFT_FULL = 72 / 25.4;
   function currentLift() {
     return bedView === 'full' ? BED_LIFT_FULL : BED_LIFT;
+  }
+  function panelLiftAmount() {
+    return (bedView === 'full' ? 56 : 24) / 25.4;
   }
   const BED = (function () {
     const inch = 1 / 25.4;
@@ -2247,7 +2267,8 @@
     return {
       t: t, slot: slot, panel: panel, span: panel * 2, halfW: panel / 2,
       H: H, Hv: Hv, rh: rh, toothP: toothP, depth: depth,
-      bladeY: bladeY, ribX: ribX, nBlades: nBlades, nRibs: nRibs
+      bladeY: bladeY, ribX: ribX, nBlades: nBlades, nRibs: nRibs,
+      ventW: 120 * inch, ventH: 13 * inch, plateT: 1.5 * inch
     };
   })();
 
@@ -2264,9 +2285,20 @@
   }
   function bladeProfile(len, ribs) {
     const s = BED.slot, db = BED.depth, Hv = BED.Hv, H = BED.H, tp = BED.toothP;
-    const pts = [[0, 0]];
+    const features = [];
     ribs.forEach(function (x) {
-      pts.push([x - s / 2, 0], [x - s / 2, db], [x + s / 2, db], [x + s / 2, 0]);
+      features.push({ x0: x - s / 2, x1: x + s / 2, h: db });
+    });
+    for (let j = 0; j < ribs.length - 1; j++) {
+      const c = (ribs[j] + ribs[j + 1]) / 2;
+      const x0 = c - BED.ventW / 2;
+      const x1 = c + BED.ventW / 2;
+      if (x0 > 0.02 && x1 < len - 0.02) features.push({ x0: x0, x1: x1, h: BED.ventH });
+    }
+    features.sort(function (a, b) { return a.x0 - b.x0; });
+    const pts = [[0, 0]];
+    features.forEach(function (f) {
+      pts.push([f.x0, 0], [f.x0, f.h], [f.x1, f.h], [f.x1, 0]);
     });
     pts.push([len, 0], [len, Hv]);
     const n = Math.round(len / tp);
@@ -2379,6 +2411,46 @@
     bedFull.add(blades);
     bedFull.add(ribs);
     scene.add(bedFull);
+    const plateMat = new THREE.MeshStandardMaterial({
+      color: 0x3a4148, metalness: 0.66, roughness: 0.42,
+      polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1
+    });
+    function addPlate(group, x, z, len, wid) {
+      const mesh = new THREE.Mesh(new THREE.BoxGeometry(len, BED.plateT, wid), plateMat);
+      mesh.position.set(x, BED.plateT / 2, z);
+      mesh.name = 'bed-plate';
+      group.add(mesh);
+    }
+    bedPlatesFull = new THREE.Group();
+    bedPlatesFull.name = 'bed-plates-full';
+    bedPlatesFull.visible = false;
+    addPlate(bedPlatesFull, -BED.panel / 2, 0, BED.panel, BED.panel);
+    addPlate(bedPlatesFull, BED.panel / 2, 0, BED.panel, BED.panel);
+    scene.add(bedPlatesFull);
+    bedPlatesPanel = new THREE.Group();
+    bedPlatesPanel.name = 'bed-plates-panel';
+    bedPlatesPanel.visible = false;
+    addPlate(bedPlatesPanel, BED.panel / 2, BED.panel / 2, BED.panel, BED.panel);
+    scene.add(bedPlatesPanel);
+    bedPlatesCut = new THREE.Group();
+    bedPlatesCut.name = 'bed-plates-cut';
+    bedPlatesCut.visible = false;
+    addPlate(bedPlatesCut, cutLen / 2, cutW / 2, cutLen, cutW);
+    scene.add(bedPlatesCut);
+  }
+  function stackBase() {
+    return bedActive && bedView !== 'machine' ? 0 : TOP_H;
+  }
+  function syncBedStack() {
+    if (!bedBuilt) return;
+    const base = stackBase();
+    const crateY = base + BED.plateT + 0.004 + explodeT * panelLiftAmount();
+    if (bedPlatesFull) bedPlatesFull.position.y = base;
+    if (bedPlatesPanel) bedPlatesPanel.position.y = base;
+    if (bedPlatesCut) bedPlatesCut.position.y = base;
+    if (bedCut) bedCut.position.y = crateY;
+    if (bedPanel) bedPanel.position.y = crateY;
+    if (bedFull) bedFull.position.y = crateY;
   }
   function applyExplode() {
     const y = explodeT * currentLift();
@@ -2401,6 +2473,7 @@
       }
       fullBlades.instanceMatrix.needsUpdate = true;
     }
+    syncBedStack();
   }
   function renderNow() {
     if (!renderer) return;
@@ -2411,7 +2484,7 @@
     const btn = document.getElementById('btn-bed-explode');
     const up = explodeTarget > 0.5;
     btn.setAttribute('aria-pressed', up ? 'true' : 'false');
-    btn.setAttribute('aria-label', up ? 'Assemble the blades' : 'Explode the blades');
+    btn.setAttribute('aria-label', up ? 'Assemble the bed' : 'Explode the bed');
   }
   function setExplode(target, animate) {
     explodeTarget = target > 0.5 ? 1 : 0;
@@ -2462,19 +2535,20 @@
     });
     const floor = scene.getObjectByName('floor');
     if (floor) floor.visible = machine;
+    syncBedStack();
     if (bedCut) bedCut.visible = cut;
     if (bedPanel) bedPanel.visible = bedView === 'panel';
-    if (bedFull) {
-      bedFull.visible = machine || bedView === 'full';
-      bedFull.position.y = machine ? TOP_H : 0;
-    }
+    if (bedPlatesCut) bedPlatesCut.visible = cut;
+    if (bedPlatesPanel) bedPlatesPanel.visible = bedView === 'panel';
+    if (bedFull) bedFull.visible = machine || bedView === 'full';
+    if (bedPlatesFull) bedPlatesFull.visible = machine || bedView === 'full';
   }
   function bedCopy(mode) {
     if (mode === 'corner') {
       return {
         title: 'Corner cutaway',
-        caption: 'Corner cutaway: 4 of 24 blades, 3 of 7 ribs per panel.',
-        hint: 'This is one corner, drawn large so the slots show. A panel is 24 blades and 7 ribs. The bed is two panels.'
+        caption: 'Corner cutaway: 4 of 24 blades, 3 of 7 ribs per panel. Vents in the bottom edge let air and debris pass between cells.',
+        hint: 'This is one corner, drawn large so the slots and vents show. A panel is 24 blades and 7 ribs. The bed is two panels on two steel plates.'
       };
     }
     if (mode === 'tooth') {
@@ -2487,21 +2561,21 @@
     if (mode === 'machine') {
       return {
         title: 'In the machine',
-        caption: 'Both panels on the deck: 48 blades and 14 ribs, centered in the opening.',
-        hint: 'The whole bed sits on the plywood, centered on the 1250 × 2450 mm work area.'
+        caption: 'Both panels on two steel plates, centered in the opening. Vents in the bottom edge let air and debris pass between cells.',
+        hint: 'The whole bed sits on two 1.5 mm plates, centered on the 1250 × 2450 mm work area.'
       };
     }
     if (mode === 'panel') {
       return {
         title: 'One panel',
-        caption: 'One panel: 24 blades and 7 ribs, 1200 × 1200 mm. Ribs are 183 mm apart.',
-        hint: 'One panel, so the rib spacing is easy to see. Full bed shows both panels.'
+        caption: 'One panel: 24 blades and 7 ribs, on a 1.5 mm plate. Vents in the bottom edge let air and debris pass between cells.',
+        hint: 'One panel, so the rib spacing and the vents are easy to see. Full bed shows both panels.'
       };
     }
     return {
       title: 'Whole bed',
-      caption: 'Whole bed: 2 panels, 48 blades and 14 ribs, 2400 × 1200 mm.',
-      hint: 'Both panels. Each one is 24 blades and 7 ribs. Explode lifts every blade. Panel is a closer look at one of them.'
+      caption: 'Whole bed: 2 panels, 48 blades and 14 ribs, on two steel plates. Vents in the bottom edge let air and debris pass between cells.',
+      hint: 'Both panels sit on 1.5 mm plates. Explode lifts the panels off the plates. Panel is a closer look at one of them.'
     };
   }
   function writeBedCaption() {
@@ -2509,7 +2583,7 @@
     if (!el) return;
     const copy = bedCopy(bedView);
     const lifted = bedView !== 'machine' && explodeTarget > 0.5;
-    el.textContent = lifted ? (copy.caption + ' Blades are lifted. Assemble sets them back down.') : copy.caption;
+    el.textContent = lifted ? (copy.caption + ' The panels are lifted off the plates. Assemble sets them back down.') : copy.caption;
     el.hidden = !bedActive;
   }
   function fitBox(box, dir) {
@@ -2553,24 +2627,26 @@
     if (bedView === 'machine') { frameStand(); return; }
     const box = new THREE.Box3();
     let dir = frameDir();
+    const rise = BED.plateT + explodeT * panelLiftAmount();
+    const top = rise + BED.H + explodeT * currentLift();
     if (bedView === 'tooth') {
       const x = BED.ribX[0];
       const z = BED.bladeY[0];
       box.set(
-        new THREE.Vector3(x - 0.35, -0.02, z - 0.45),
-        new THREE.Vector3(x + 1.55, BED.H + explodeT * currentLift() + 0.2, z + 0.85)
+        new THREE.Vector3(x - 0.35, rise - 0.02, z - 0.45),
+        new THREE.Vector3(x + 1.55, top + 0.2, z + 0.85)
       );
     } else if (bedView === 'panel') {
       const pad = BED.t;
       box.set(
         new THREE.Vector3(-pad, 0, -pad),
-        new THREE.Vector3(BED.panel + pad, BED.H + explodeT * currentLift(), BED.panel + pad)
+        new THREE.Vector3(BED.panel + pad, top, BED.panel + pad)
       );
     } else if (bedView === 'full') {
       const pad = BED.t;
       box.set(
         new THREE.Vector3(-BED.panel - pad, 0, -BED.halfW - pad),
-        new THREE.Vector3(BED.panel + pad, BED.H + explodeT * currentLift(), BED.halfW + pad)
+        new THREE.Vector3(BED.panel + pad, top, BED.halfW + pad)
       );
       dir = new THREE.Vector3(0.36, 0.5, 0.92);
     } else if (bedCut) box.setFromObject(bedCut);
@@ -2623,6 +2699,9 @@
     if (bedCut) bedCut.visible = false;
     if (bedPanel) bedPanel.visible = false;
     if (bedFull) bedFull.visible = false;
+    if (bedPlatesFull) bedPlatesFull.visible = false;
+    if (bedPlatesPanel) bedPlatesPanel.visible = false;
+    if (bedPlatesCut) bedPlatesCut.visible = false;
     const floor = scene.getObjectByName('floor');
     if (floor) floor.visible = true;
     controls.minDistance = 20;
@@ -2665,6 +2744,7 @@
     bay.position.set(0, TOP_H + 7, 0);
     scene.add(bay);
     buildStand();
+    buildBed();
     const fails = audit();
     if (fails.length) console.error('[X1] joint check failed', fails);
     else console.info('[X1] joints ok', M.pieceCount, 'pieces', STEPS.length, 'steps');
@@ -2712,7 +2792,15 @@
       PICK_MOVE_PX: PICK_MOVE_PX,
       dims: { TOP_H: TOP_H, legH: M.legH, posts: M.posts, pieceCount: M.pieceCount, panelH: M.panelH, panelW: M.panelW, steps: STEPS.length },
       bedState: function () {
-        return { active: bedActive, view: bedView, explode: explodeTarget, explodeT: explodeT, gapMm: bedGapMm(), blades: BED.nBlades * 2, ribs: BED.nRibs * 2 };
+        const plate = bedPlatesFull;
+        const crate = bedFull;
+        return {
+          active: bedActive, view: bedView, explode: explodeTarget, explodeT: explodeT,
+          gapMm: bedGapMm(), blades: BED.nBlades * 2, ribs: BED.nRibs * 2,
+          platesOn: !!(plate && plate.visible), plateCount: plate ? plate.children.length : 0,
+          crateOn: !!(crate && crate.visible),
+          liftIn: crate && plate ? +((crate.position.y - plate.position.y - BED.plateT) * 25.4).toFixed(2) : 0
+        };
       },
       cutCsv: cutCsv,
       lastCsv: function () { return lastCsv; }
