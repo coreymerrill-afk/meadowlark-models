@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#1c1712" />
+<meta name="description" content="A rolling cart for toasters and panini presses: 13 slot rows for shelves on a 50 mm pitch, an optional drawer, locking casters, and one dense 4x8 sheet." />
+<link rel="icon" href="data:," />
+<title>Rolling Kitchen Cart — Shop furniture</title>
+<link rel="stylesheet" href="/furniture/furniture.css" />
+</head>
+<body data-slug="kitchen-cart">
+<header class="doc-header">
+  <p class="crumbs"><a href="/">All models</a> · <a href="/furniture/">Shop furniture</a></p>
+  <h1>Rolling Kitchen Cart</h1>
+  <p class="pitch">A rolling cart for toasters and panini presses: 13 slot rows for shelves on a 50 mm pitch, an optional drawer, locking casters, and one dense 4x8 sheet.</p>
+  <p class="size-line">600 mm wide, 450 mm deep, 900 mm tall (23.6 × 17.7 × 35.4 in). Casters lift the base 102 mm. 13 shelf rows, 50 mm apart. 1 sheet. Mid retail price $280, an estimate.</p>
+</header>
+<nav class="jumps" aria-label="On this page">
+  <a href="#model">Model</a>
+  <a class="jump-main" href="#cut-sheets">Cut sheets</a>
+  <a href="#build">Build</a>
+  <a href="#materials">Materials</a>
+  <a href="#profit">Profit</a>
+  <a href="#parameters">Parameters</a>
+  <a href="#safety">Safety</a>
+  <a href="#downloads">Downloads</a>
+</nav>
+<p class="sr" id="model-status" aria-live="polite"></p>
+<section class="block" id="model" aria-labelledby="model-heading">
+  <h2 class="sr" id="model-heading">Model</h2>
+  <div class="stage">
+    <div id="canvas-wrap">
+      <div id="three-loading">Loading the model…</div>
+      <div id="three-error" hidden></div>
+    </div>
+    <div class="tool-bar">
+      <label class="explode" for="explode">Exploded
+        <input id="explode" type="range" min="0" max="100" value="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 percent exploded" />
+      </label>
+      <label class="chip"><input type="checkbox" data-toggle="drawer" checked /> Drawer</label>
+    <label class="chip"><input type="checkbox" data-toggle="casters" checked /> Casters</label>
+    <label class="chip"><input type="checkbox" data-toggle="cleat" /> Cleat backer</label>
+      <button type="button" class="ghost" id="btn-reset">Reset view</button>
+      <p class="tool-note">Drag to turn. Scroll or pinch to zoom. The slider pulls the panels apart, and the view pulls back so the pieces stay in frame.</p>
+      <p class="tool-note" id="lit-note" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+<main class="wrap">
+  <section class="block" id="cut-sheets" aria-labelledby="sheets-heading">
+    <h2 id="sheets-heading">The cut sheets</h2>
+    <div class="sheet-summary">
+  <p><strong>1 sheet.</strong> 1220 × 2440 mm, 18 mm plywood. Total cut path 50.1 m.</p>
+  <p>If the feed is 100, 150, or 200 mm per minute, the machine time is about 8 h 21 min, 5 h 34 min, or 4 h 11 min. The profit table uses the middle figure. That feed rate is an unverified estimate. Sheet 1 carries a fit-test coupon: cut it first and try the tab in the slot before you cut the rest. Hover or tap a part below to light it in the model.</p>
+</div>
+<article class="sheet">
+  <div class="sheet-head">
+    <h3>Sheet 1 of 1</h3>
+    <p class="sheet-meta">29 parts on this sheet. They cover 78.7% of a 1220 × 2440 mm sheet. Cut path 50.12 m, about 5 h 34 min at 150 mm per minute.</p>
+  </div>
+  <div class="sheet-bleed">
+    <button type="button" class="sheet-open" data-title="Sheet 1 of 1" aria-label="Open Sheet 1 of 1 larger, then pan and zoom">
+      <img src="/furniture-data/kitchen-cart/sheet-1.png" width="1800" alt="Sheet 1 of 1 for the Rolling Kitchen Cart. Each part is labelled on a 1220 by 2440 mm plywood sheet." />
+      <span class="zoom-hint">Tap to zoom and pan</span>
+    </button>
+  </div>
+  <ul class="parts">
+    <li><button type="button" class="part" data-part="BACK" aria-pressed="false">
+  <span class="pn">1</span>
+  <span class="pn-name">BACK</span>
+  <span class="pn-size">570 × 726 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="SIDE-L" aria-pressed="false">
+  <span class="pn">2</span>
+  <span class="pn-name">SIDE-L</span>
+  <span class="pn-size">420 × 726 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="SIDE-R" aria-pressed="false">
+  <span class="pn">2</span>
+  <span class="pn-name">SIDE-R</span>
+  <span class="pn-size">420 × 726 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="BASE" aria-pressed="false">
+  <span class="pn">3</span>
+  <span class="pn-name">BASE</span>
+  <span class="pn-size">600 × 450 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="TOP" aria-pressed="false">
+  <span class="pn">3</span>
+  <span class="pn-name">TOP</span>
+  <span class="pn-size">600 × 450 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="SHELF" aria-pressed="false">
+  <span class="pn">4</span>
+  <span class="pn-name">SHELF</span>
+  <span class="pn-size">532 × 381 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Shelf</span>
+</button></li>
+<li><button type="button" class="part" data-part="DRW-BOTTOM" aria-pressed="false">
+  <span class="pn">5</span>
+  <span class="pn-name">DRW-BOTTOM <span class="badge">Optional</span></span>
+  <span class="pn-size">531 × 314 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="DRW-FACE" aria-pressed="false">
+  <span class="pn">6</span>
+  <span class="pn-name">DRW-FACE <span class="badge">Optional</span></span>
+  <span class="pn-size">531 × 150 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="DRW-FRONT" aria-pressed="false">
+  <span class="pn">7</span>
+  <span class="pn-name">DRW-FRONT <span class="badge">Optional</span></span>
+  <span class="pn-size">531 × 130 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="DRW-BACK" aria-pressed="false">
+  <span class="pn">8</span>
+  <span class="pn-name">DRW-BACK <span class="badge">Optional</span></span>
+  <span class="pn-size">531 × 130 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="DRW-SIDE-L" aria-pressed="false">
+  <span class="pn">9</span>
+  <span class="pn-name">DRW-SIDE-L <span class="badge">Optional</span></span>
+  <span class="pn-size">350 × 130 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="DRW-SIDE-R" aria-pressed="false">
+  <span class="pn">9</span>
+  <span class="pn-name">DRW-SIDE-R <span class="badge">Optional</span></span>
+  <span class="pn-size">350 × 130 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="CLEAT-BACKER-A" aria-pressed="false">
+  <span class="pn">10</span>
+  <span class="pn-name">CLEAT-BACKER-A <span class="badge">Optional</span></span>
+  <span class="pn-size">514 × 80 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Cleat</span>
+</button></li>
+<li><button type="button" class="part" data-part="CLEAT-BACKER-B" aria-pressed="false">
+  <span class="pn">10</span>
+  <span class="pn-name">CLEAT-BACKER-B <span class="badge">Optional</span></span>
+  <span class="pn-size">514 × 80 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Cleat</span>
+</button></li>
+<li><button type="button" class="part" data-part="LEDGER-SH5-L" aria-pressed="false">
+  <span class="pn">11</span>
+  <span class="pn-name">LEDGER-SH5-L</span>
+  <span class="pn-size">48 × 365 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Shelf</span>
+</button></li>
+<li><button type="button" class="part" data-part="LEDGER-SH5-R" aria-pressed="false">
+  <span class="pn">11</span>
+  <span class="pn-name">LEDGER-SH5-R</span>
+  <span class="pn-size">48 × 365 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Shelf</span>
+</button></li>
+<li><button type="button" class="part" data-part="LEDGER-DR-L" aria-pressed="false">
+  <span class="pn">12</span>
+  <span class="pn-name">LEDGER-DR-L <span class="badge">Optional</span></span>
+  <span class="pn-size">48 × 365 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="LEDGER-DR-R" aria-pressed="false">
+  <span class="pn">12</span>
+  <span class="pn-name">LEDGER-DR-R <span class="badge">Optional</span></span>
+  <span class="pn-size">48 × 365 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Drawer</span>
+</button></li>
+<li><button type="button" class="part" data-part="RAIL-B" aria-pressed="false">
+  <span class="pn">13</span>
+  <span class="pn-name">RAIL-B</span>
+  <span class="pn-size">564 × 22 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="RAIL-L" aria-pressed="false">
+  <span class="pn">14</span>
+  <span class="pn-name">RAIL-L</span>
+  <span class="pn-size">450 × 22 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="RAIL-R" aria-pressed="false">
+  <span class="pn">14</span>
+  <span class="pn-name">RAIL-R</span>
+  <span class="pn-size">450 × 22 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Carcass</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-A1" aria-pressed="false">
+  <span class="pn">15</span>
+  <span class="pn-name">FOOT-A1</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-A2" aria-pressed="false">
+  <span class="pn">15</span>
+  <span class="pn-name">FOOT-A2</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-A3" aria-pressed="false">
+  <span class="pn">15</span>
+  <span class="pn-name">FOOT-A3</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-A4" aria-pressed="false">
+  <span class="pn">15</span>
+  <span class="pn-name">FOOT-A4</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-B1" aria-pressed="false">
+  <span class="pn">16</span>
+  <span class="pn-name">FOOT-B1</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-B2" aria-pressed="false">
+  <span class="pn">16</span>
+  <span class="pn-name">FOOT-B2</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-B3" aria-pressed="false">
+  <span class="pn">16</span>
+  <span class="pn-name">FOOT-B3</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+<li><button type="button" class="part" data-part="FOOT-B4" aria-pressed="false">
+  <span class="pn">16</span>
+  <span class="pn-name">FOOT-B4</span>
+  <span class="pn-size">100 × 75 mm</span>
+  <span class="pn-qty">Qty 1</span>
+  <span class="pn-group">Feet</span>
+</button></li>
+  </ul>
+</article>
+  </section>
+  <section class="block" id="build" aria-labelledby="build-heading">
+    <h2 id="build-heading">Build stages</h2>
+    <ol class="timeline">
+<li>
+  <div class="step-no">1</div>
+  <div class="step-body">
+    <h3>Cut the sheet <span class="mins">about 334 min (5 h 34 min)</span></h3>
+    <p>Cut the fit-test coupon first (slot = tab + 0.1 mm), then the 29-part sheet from the DXF (CUT layer): 50 m of path. The cart is the densest nest: expect a long run, so check the sheet is flat and weighted before starting.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">2</div>
+  <div class="step-body">
+    <h3>Remove char and sand <span class="mins">about 60 min (1 h)</span></h3>
+    <p>Brush the char off every edge, sand 120 then 180 grit, ease the worktop edge and the shelf fronts by hand.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">3</div>
+  <div class="step-body">
+    <h3>Dry fit <span class="mins">about 20 min</span></h3>
+    <p>Stand SIDE-L and SIDE-R on BASE, add BACK, RAILs, the worktop, and slide in a SHELF on its LEDGERs. Check the shelf-slot pitch (50 mm) and that the tabs end flush.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">4</div>
+  <div class="step-body">
+    <h3>Pre-finish <span class="mins">about 60 min (1 h)</span></h3>
+    <p>Seal every face now, the worktop most of all (kitchen use: water-based poly, 3 coats on top). Mask the tabs and slots so the glue bonds to bare wood.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">5</div>
+  <div class="step-body">
+    <h3>Feet and casters <span class="mins">about 30 min</span></h3>
+    <p>Glue and screw the FOOT-A and FOOT-B pairs under the base (8 x #8 x 1-3/4 in), then bolt the 4 casters on the 73.2 x 44.5 mm pattern with M8 bolts and nuts. Fit at least 2 locking casters.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">6</div>
+  <div class="step-body">
+    <h3>Glue-up (Titebond III) <span class="mins">about 35 min</span></h3>
+    <p>Glue SIDE-L and SIDE-R onto BASE, the BACK, then the three RAILs, then set the worktop over the side tabs. Clamp across the width and check diagonals.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">7</div>
+  <div class="step-body">
+    <h3>Screws as clamps <span class="mins">about 30 min</span></h3>
+    <p>45 #8 screws in all: #8 x 1-1/2 in through the side faces and top; #8 x 1-1/4 in for rails and shelf locks. Pilots are laser-cut at 3.0 mm.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">8</div>
+  <div class="step-body">
+    <h3>Shelves and ledgers <span class="mins">about 20 min</span></h3>
+    <p>Screw a LEDGER pair into the slot row you choose, then drop in the SHELF and lock it with the 2 SHELF-LOCK screws. Move rows in 50 mm steps for tall appliances.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">9</div>
+  <div class="step-body">
+    <h3>Optional drawer and cleat <span class="mins">about 45 min</span></h3>
+    <p>Drawer: glue the finger-jointed box, drop in the bottom, screw DRW-FACE, set on its DRAW ledgers. Cleat: glue the two CLEAT-BACKER layers to the back and fit the Z-bar. A loaded cart is not wall-hung: use the cleat for an empty/tidy-storage version only.</p>
+  </div>
+</li>
+<li>
+  <div class="step-no">10</div>
+  <div class="step-body">
+    <h3>Finish, load test, pack <span class="mins">about 40 min</span></h3>
+    <p>Final coat, 24 h cure, a 40 kg load test rolled across a doorstep, lock check on a slope, then flat-pack.</p>
+  </div>
+</li>
+</ol>
+<p class="total">About 11 h 14 min for all 10 stages.</p>
+  </section>
+  <section class="block" id="materials" aria-labelledby="materials-heading">
+    <h2 id="materials-heading">Materials and hardware</h2>
+    <p>18 mm (3/4 in) sanded plywood (basic birch-faced or cabinet ply), 4 x 8 ft x 1. Thickness 18 mm. 1 sheet.</p>
+<p>Glue: Titebond III, about 4 oz.</p>
+<p>Finish: water-based poly, 3 coats on the worktop (about $14).</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hardware</th><th class="num">Qty</th><th class="num">Each</th><th class="num">Line</th></tr></thead>
+  <tbody>
+    <tr><td>#8 x 1-1/2 in wood screws<br /><span class="fine">from model</span></td><td class="num">20</td><td class="num">$0.06</td><td class="num">$1.20</td></tr>
+<tr><td>#8 x 1-1/4 in wood screws<br /><span class="fine">rails, shelf locks, drawer face</span></td><td class="num">13</td><td class="num">$0.06</td><td class="num">$0.78</td></tr>
+<tr><td>#8 x 1-3/4 in wood screws<br /><span class="fine">feet, cleat backer</span></td><td class="num">12</td><td class="num">$0.08</td><td class="num">$0.96</td></tr>
+<tr><td>3 in locking swivel casters (73.2 x 44.5 mm plate, M8)<br /><span class="fine">ASSUMPTION: about $7 each, 2 locking minimum</span></td><td class="num">4</td><td class="num">$7.00</td><td class="num">$28.00</td></tr>
+<tr><td>M8 bolt + nyloc nut sets<br /><span class="fine">caster mount</span></td><td class="num">16</td><td class="num">$0.35</td><td class="num">$5.60</td></tr>
+<tr><td>Aluminum Z-bar French cleat pair<br /><span class="fine">optional, empty / light-duty wall version</span></td><td class="num">1</td><td class="num">$8.00</td><td class="num">$8.00</td></tr>
+<tr><td>Felt/rubber stops<br /><span class="fine">drawer</span></td><td class="num">2</td><td class="num">$0.50</td><td class="num">$1.00</td></tr>
+    <tr><td>Hardware total</td><td></td><td></td><td class="num">$45.54</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Screws counted from the model: #8 x 1-1/2 in × 20, #8 x 1-1/4 in × 13, #8 x 1-3/4 in × 12.</p>
+  </section>
+  <section class="block" id="profit" aria-labelledby="profit-heading">
+    <h2 id="profit-heading">Profit estimate</h2>
+    <div class="callout">
+  <strong>Estimates and assumptions.</strong> Every dollar figure on this page is a planning estimate, not a quote and not a promise. Sheet price, hardware, fees, labor, and machine wear are assumptions. The feed rate of 100–200 mm per minute is unverified. The maker does not publish a rate for 18 mm plywood, so the hours and the profit per hour move once you time a real cut.
+</div>
+<div class="table-wrap">
+<table>
+  <caption>Gross margin and net use the mid cost per unit ($146.01). Low and high sheet prices would put the cost at $136.01 or $156.01. Machine hours are the middle feed, 5.57 h. At 100 mm/min that is 8 h 21 min; at 200 mm/min, 4 h 11 min.</caption>
+  <thead>
+    <tr><th></th><th class="num">Low price</th><th class="num">Mid price</th><th class="num">High price</th></tr>
+  </thead>
+  <tbody>
+    <tr><th>Selling price</th><td class="num">$180.00</td><td class="num">$280.00</td><td class="num">$420.00</td></tr>
+    <tr><th>Cost per unit</th><td class="num">$146.01</td><td class="num">$146.01</td><td class="num">$146.01</td></tr>
+    <tr><th>Gross margin</th><td class="num">$33.99</td><td class="num">$133.99</td><td class="num">$273.99</td></tr>
+    <tr><th>Gross margin %</th><td class="num">18.9%</td><td class="num">47.9%</td><td class="num">65.2%</td></tr>
+    <tr><th>Net after fees and labor</th><td class="num neg">-$59.01</td><td class="num">$30.99</td><td class="num">$156.99</td></tr>
+    <tr><th>Machine hours</th><td class="num">5.57 h</td><td class="num">5.57 h</td><td class="num">5.57 h</td></tr>
+    <tr><th>Gross profit per machine hour</th><td class="num">$6.10</td><td class="num">$24.06</td><td class="num">$49.20</td></tr>
+    <tr><th>Net profit per machine hour</th><td class="num neg">-$10.60</td><td class="num">$5.56</td><td class="num">$28.19</td></tr>
+  </tbody>
+</table>
+</div>
+<p>At 100-200 mm/min the laser path alone is 4.2-8.4 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting.</p>
+<p class="fine">All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the &quot;after labor&quot; line only. Marketplace fees 10% (assumption, e.g. Etsy-style).</p>
+<p class="fine">Where the price band came from: ASSUMPTION (not in SHORTLIST.md): $180-$420 band, set against 2-shelf rolling kitchen carts at roughly $70-$250 retail [third-party estimate]</p>
+<h3>Try your own numbers</h3>
+<p>Change the sheet cost, hardware, selling price, or labor rate. Finish ($$14.00), packaging ($$12.00), and machine wear ($$9.47) stay put, together $35.47. Fees stay at 10% of the selling price. Labor uses the planned 3 h at the rate you type. Machine hours stay at 5.57 h, which still depends on the unverified feed.</p>
+<div class="calc">
+  <label>Sheet cost, $ <input id="sheet-cost" inputmode="decimal" type="number" min="0" step="0.01" value="65" /></label>
+  <label>Hardware cost, $ <input id="hardware-cost" inputmode="decimal" type="number" min="0" step="0.01" value="45.54" /></label>
+  <label>Selling price, $ <input id="selling-price" inputmode="decimal" type="number" min="0" step="0.01" value="280.0" /></label>
+  <label>Labor rate, $ per hour <input id="labor-rate" inputmode="decimal" type="number" min="0" step="0.5" value="25" /></label>
+</div>
+<div class="calc-out" id="calc-out" aria-live="polite"></div>
+<p class="fine">Still an estimate. If the real cut is slower or faster than 150 mm per minute, machine hours and profit per hour change even when these four numbers do not.</p>
+<script type="application/json" id="calc-data">{"sheetCost": 65, "hardwareCost": 45.54, "price": 280.0, "laborRate": 25, "laborHours": 3.0, "fixedCost": 35.47, "machineHours": 5.57, "feeRate": 0.1}</script>
+  </section>
+  <section class="block" id="parameters" aria-labelledby="parameters-heading">
+    <h2 id="parameters-heading">Parameters</h2>
+    <p class="prose">These are the knobs for a custom order. The model on this page uses the defaults. Stay inside the limits.</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Parameter</th><th>Default</th><th>Limits</th></tr></thead>
+  <tbody>
+    <tr><th>Width</th><td>600</td><td>450-750 mm (over 750 would need a centre post; not modeled)</td></tr>
+<tr><th>Depth</th><td>450</td><td>380-560 mm</td></tr>
+<tr><th>Height</th><td>900</td><td>760-1000 mm</td></tr>
+<tr><th>Thickness</th><td>18</td><td>17.5-19 mm</td></tr>
+<tr><th>Slot clearance</th><td>0.1</td><td>0.0-0.2 mm</td></tr>
+  </tbody>
+</table>
+</div>
+  </section>
+  <section class="block" id="safety" aria-labelledby="safety-heading">
+    <h2 id="safety-heading">Safety notes</h2>
+<ul class="plain"><li>Locking casters: lock at least two on any loaded or worktop use.</li>
+<li>Cart load rating is untested: target 40 kg shelves + 20 kg worktop, UNVERIFIED. Load test every design change.</li>
+<li>Tip: the cart is 900 mm tall and narrow; keep heavy appliances on the lowest shelves and do not roll over thresholds loaded.</li>
+<li>Do not run heat-producing appliances on the ply unprotected: use a trivet.</li>
+<li>Not a children&#x27;s product (no CPSIA testing).</li></ul>
+<h2>Unverified / to test</h2>
+<ul class="plain"><li>Laser feed 100-200 mm/min is an estimate.</li>
+<li>Load and tip behaviour untested.</li>
+<li>Price band is my assumption (cart is not in SHORTLIST.md).</li>
+<li>Caster price and fit are from the original design; the hole pattern is assumed for common 3 in plate casters.</li>
+<li>Depth and width ranges were build-checked only at the stress variants (400-520 mm deep, 480-800 mm wide).</li></ul>
+  </section>
+  <section class="block" id="downloads" aria-labelledby="downloads-heading">
+    <h2 id="downloads-heading">Downloads</h2>
+    <div class="files"><a class="file" href="/furniture-data/kitchen-cart/kitchen-cart-nest-sheet1-1220x2440.dxf" download="kitchen-cart-nest-sheet1-1220x2440.dxf">
+  <strong>Sheet 1 DXF</strong>
+  <span>kitchen-cart-nest-sheet1-1220x2440.dxf · millimeters, one 1220 × 2440 mm sheet</span>
+</a>
+<a class="file" href="/furniture-data/kitchen-cart/parts.json" download="kitchen-cart-parts.json">
+  <strong>Parts file</strong>
+  <span>parts.json · the plates the 3D model is built from, with a sheet number on each part</span>
+</a>
+<a class="file" href="/furniture-data/kitchen-cart/README.md" download="kitchen-cart-README.md">
+  <strong>README</strong>
+  <span>README.md · size, joints, and the check that was run on the model</span>
+</a></div>
+  </section>
+  <p class="site-foot">Meadowlark Models. Numbers on this page are estimates. The feed rate is unverified.</p>
+</main>
+<dialog class="zoom" id="zoom" aria-label="Cut sheet zoom">
+  <div class="zoom-bar">
+    <p id="zoom-title">Cut sheet</p>
+    <button type="button" id="zoom-close">Close</button>
+  </div>
+  <div class="zoom-stage" id="zoom-stage">
+    <img id="zoom-img" alt="" draggable="false" />
+  </div>
+  <div class="zoom-tools">
+    <button type="button" id="zoom-out">Zoom out</button>
+    <button type="button" id="zoom-in">Zoom in</button>
+    <button type="button" id="zoom-labels">Read labels</button>
+    <button type="button" id="zoom-fit">Fit</button>
+    <p class="tool-note">Drag to pan. Scroll, pinch, or use the buttons to zoom. Double-click zooms in on that spot.</p>
+  </div>
+</dialog>
+<script src="/x1/vendor/three.min.js"></script>
+<script src="/x1/vendor/OrbitControls.js"></script>
+<script src="/furniture/viewer.js"></script>
+
+</body>
+</html>
