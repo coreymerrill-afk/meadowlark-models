@@ -64,6 +64,9 @@
     return a / 2;
   }
 
+  var EDGE = 0x5c4632;
+  var WOOD_GLOW = 0x3a2a1c;
+
   function paintUVs(geom) {
     var pos = geom.getAttribute('position');
     var uv = geom.getAttribute('uv');
@@ -71,6 +74,82 @@
     var i;
     for (i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / 160, pos.getY(i) / 160);
     uv.needsUpdate = true;
+  }
+
+  function ringSpan(pts) {
+    var minA = Infinity, minB = Infinity, maxA = -Infinity, maxB = -Infinity, i, p;
+    for (i = 0; i < pts.length; i++) {
+      p = pts[i];
+      if (p[0] < minA) minA = p[0];
+      if (p[1] < minB) minB = p[1];
+      if (p[0] > maxA) maxA = p[0];
+      if (p[1] > maxB) maxB = p[1];
+    }
+    return Math.max(maxA - minA, maxB - minB);
+  }
+
+  function pointLineDist(p, a, b) {
+    var dx = b[0] - a[0];
+    var dy = b[1] - a[1];
+    var len = Math.hypot(dx, dy) || 1;
+    return Math.abs(dy * (p[0] - a[0]) - dx * (p[1] - a[1])) / len;
+  }
+
+  function rdp(points, tol) {
+    if (points.length < 3) return points.slice();
+    var a = points[0];
+    var b = points[points.length - 1];
+    var maxD = 0;
+    var idx = 0;
+    var i, d;
+    for (i = 1; i < points.length - 1; i++) {
+      d = pointLineDist(points[i], a, b);
+      if (d > maxD) {
+        maxD = d;
+        idx = i;
+      }
+    }
+    if (maxD > tol) {
+      var left = rdp(points.slice(0, idx + 1), tol);
+      var right = rdp(points.slice(idx), tol);
+      return left.slice(0, -1).concat(right);
+    }
+    return [a, b];
+  }
+
+  function decimateRing(pts, tol) {
+    var n = pts.length;
+    var best = -1;
+    var start = 0;
+    var i, prev, cur, next, ax, ay, bx, by, score;
+    for (i = 0; i < n; i++) {
+      prev = pts[(i + n - 1) % n];
+      cur = pts[i];
+      next = pts[(i + 1) % n];
+      ax = prev[0] - cur[0];
+      ay = prev[1] - cur[1];
+      bx = next[0] - cur[0];
+      by = next[1] - cur[1];
+      score = Math.abs(ax * by - ay * bx) / ((Math.hypot(ax, ay) * Math.hypot(bx, by)) || 1);
+      if (score > best) {
+        best = score;
+        start = i;
+      }
+    }
+    var rotated = pts.slice(start).concat(pts.slice(0, start));
+    rotated.push(rotated[0]);
+    var simple = rdp(rotated, tol);
+    if (simple.length > 1) {
+      var f = simple[0];
+      var l = simple[simple.length - 1];
+      if (Math.abs(f[0] - l[0]) < 1e-6 && Math.abs(f[1] - l[1]) < 1e-6) simple.pop();
+    }
+    return simple.length >= 3 ? simple : pts;
+  }
+
+  function displayRing(pts) {
+    if (pts.length <= 24 || ringSpan(pts) < 14) return pts;
+    return decimateRing(pts, 0.35);
   }
 
   function makeGrain() {
@@ -116,9 +195,11 @@
       mats[key] = new THREE.MeshStandardMaterial({
         map: grain,
         color: TINT[key],
-        roughness: 0.78,
+        roughness: 0.72,
         metalness: 0.02,
-        flatShading: true,
+        emissive: WOOD_GLOW,
+        emissiveIntensity: 0.12,
+        flatShading: false,
         side: THREE.DoubleSide,
         polygonOffset: true,
         polygonOffsetFactor: 1,
@@ -135,8 +216,21 @@
     return out;
   }
 
+  function displayRings(part) {
+    var outline = displayRing(cleanRing(part.outline || []));
+    var holes = [];
+    var raw = Array.isArray(part.holes) ? part.holes : [];
+    var h, ring;
+    for (h = 0; h < raw.length; h++) {
+      ring = displayRing(cleanRing(raw[h] || []));
+      if (ring.length >= 3) holes.push(ring);
+    }
+    return { outline: outline, holes: holes };
+  }
+
   function panelGeometry(part) {
-    var pts = cleanRing(part.outline || []);
+    var rings = displayRings(part);
+    var pts = rings.outline;
     if (pts.length < 3) return null;
     var outline = toVec2(pts);
     var outlineCW = THREE.ShapeUtils.isClockWise(outline);
@@ -145,20 +239,52 @@
       outlineCW = false;
     }
     var shape = new THREE.Shape(outline);
-    var holes = Array.isArray(part.holes) ? part.holes : [];
-    var h, ring, hole, holeCW;
-    for (h = 0; h < holes.length; h++) {
-      ring = cleanRing(holes[h] || []);
-      if (ring.length < 3) continue;
-      hole = toVec2(ring);
+    var h, hole, holeCW;
+    for (h = 0; h < rings.holes.length; h++) {
+      hole = toVec2(rings.holes[h]);
       holeCW = THREE.ShapeUtils.isClockWise(hole);
       if (holeCW === outlineCW) hole.reverse();
       shape.holes.push(new THREE.Path(hole));
     }
     var depth = Math.max(1, part.thickness - 0.4);
-    var geom = new THREE.ExtrudeGeometry(shape, { depth: depth, bevelEnabled: false, steps: 1 });
+    var geom = new THREE.ExtrudeGeometry(shape, { depth: depth, bevelEnabled: false, steps: 1, curveSegments: 1 });
+    geom.computeVertexNormals();
     paintUVs(geom);
-    return { geom: geom, depth: depth };
+    return { geom: geom, depth: depth, rings: rings };
+  }
+
+  function sharpCorner(prev, cur, next) {
+    var ax = cur[0] - prev[0];
+    var ay = cur[1] - prev[1];
+    var bx = next[0] - cur[0];
+    var by = next[1] - cur[1];
+    return Math.abs(Math.atan2(ax * by - ay * bx, ax * bx + ay * by)) > 0.5;
+  }
+
+  function boundaryGeometry(rings, depth) {
+    var positions = [];
+    function addLoop(ring) {
+      var n = ring.length;
+      var i, a, b, prev, next;
+      if (n < 2) return;
+      for (i = 0; i < n; i++) {
+        a = ring[i];
+        b = ring[(i + 1) % n];
+        positions.push(a[0], a[1], depth, b[0], b[1], depth);
+        positions.push(a[0], a[1], 0, b[0], b[1], 0);
+        prev = ring[(i + n - 1) % n];
+        next = b;
+        if (n <= 8 || sharpCorner(prev, a, next)) {
+          positions.push(a[0], a[1], 0, a[0], a[1], depth);
+        }
+      }
+    }
+    addLoop(rings.outline);
+    var h;
+    for (h = 0; h < rings.holes.length; h++) addLoop(rings.holes[h]);
+    var geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    return geom;
   }
 
   function addPanel(root, movers, part, modelCenter) {
@@ -177,9 +303,9 @@
     mesh.userData.kind = 'panel';
     mesh.userData.group = part.group;
     mesh.userData.optional = !!part.optional;
-    var edgeMat = new THREE.LineBasicMaterial({ color: 0x3a2918 });
+    var edgeMat = new THREE.LineBasicMaterial({ color: EDGE });
     mesh.userData.edgeMat = edgeMat;
-    mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(built.geom, 28), edgeMat));
+    mesh.add(new THREE.LineSegments(boundaryGeometry(built.rings, built.depth), edgeMat));
     root.add(mesh);
     var center = mapVec(part.center[0], part.center[1], part.center[2]);
     movers.push({
@@ -234,24 +360,15 @@
     }
   }
 
-  function buildModel(data) {
+  function buildModel(data, done) {
     var root = new THREE.Group();
     root.name = slug;
     var movers = [];
     var overall = data.overall;
     var modelCenter = new THREE.Vector3(overall.width / 2, overall.height / 2, -overall.depth / 2);
     var missing = [];
-    var i, part;
-    for (i = 0; i < data.parts.length; i++) {
-      part = data.parts[i];
-      partByName[part.name] = part;
-      try {
-        if (!addPanel(root, movers, part, modelCenter)) missing.push(part.name);
-      } catch (err) {
-        missing.push(part.name);
-      }
-    }
-    addCasters(root, movers, data, modelCenter);
+    var loading = el('three-loading');
+    var index = 0;
     scene.add(root);
     var grid = new THREE.GridHelper(3200, 16, 0x5c4c3c, 0x3a3128);
     grid.position.set(overall.width / 2, -0.6, -overall.depth / 2);
@@ -259,6 +376,38 @@
     gridMats.forEach(function (m) { m.transparent = true; m.opacity = 0.45; });
     scene.add(grid);
     model = { root: root, movers: movers, data: data, missing: missing };
+
+    function step() {
+      var batch = 0;
+      var part;
+      while (index < data.parts.length && batch < 2) {
+        part = data.parts[index];
+        partByName[part.name] = part;
+        if (loading) {
+          loading.classList.add('is-progress');
+          loading.hidden = false;
+          loading.textContent = 'Building the model, part ' + (index + 1) + ' of ' + data.parts.length;
+        }
+        try {
+          if (!addPanel(root, movers, part, modelCenter)) missing.push(part.name);
+        } catch (err) {
+          missing.push(part.name);
+        }
+        index += 1;
+        batch += 1;
+      }
+      if (index < data.parts.length) {
+        applyVisibility();
+        applyExplode();
+        resize();
+        window.requestAnimationFrame(step);
+        return;
+      }
+      addCasters(root, movers, data, modelCenter);
+      done();
+    }
+
+    window.requestAnimationFrame(step);
   }
 
   function toggleInput(group) {
@@ -402,9 +551,9 @@
 
   function paintPart(mesh, on) {
     if (!mesh.isMesh || !mesh.material || !mesh.material.emissive) return;
-    mesh.material.emissive.setHex(on ? 0xc47b12 : 0x000000);
-    mesh.material.emissiveIntensity = on ? 0.7 : 0;
-    if (mesh.userData.edgeMat) mesh.userData.edgeMat.color.setHex(on ? 0xf0b429 : 0x3a2918);
+    mesh.material.emissive.setHex(on ? 0xc47b12 : WOOD_GLOW);
+    mesh.material.emissiveIntensity = on ? 0.7 : 0.12;
+    if (mesh.userData.edgeMat) mesh.userData.edgeMat.color.setHex(on ? 0xf0b429 : EDGE);
   }
 
   function showHighlight() {
@@ -532,28 +681,37 @@
       controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
     }
     controls.addEventListener('start', function () { userMoved = true; });
-    scene.add(new THREE.HemisphereLight(0xfff1df, 0x3a3228, 0.92));
-    var sun = new THREE.DirectionalLight(0xfff6ea, 1.05);
+    scene.add(new THREE.AmbientLight(0xfff1e4, 0.34));
+    scene.add(new THREE.HemisphereLight(0xfff6ea, 0xb08960, 0.42));
+    var sun = new THREE.DirectionalLight(0xfff6ea, 0.55);
     sun.position.set(700, 1400, 480);
     scene.add(sun);
-    var fill = new THREE.DirectionalLight(0xf0d7b4, 0.38);
+    var fill = new THREE.DirectionalLight(0xf0d7b4, 0.28);
     fill.position.set(-600, 420, -500);
     scene.add(fill);
+    var rim = new THREE.DirectionalLight(0xffe6c4, 0.16);
+    rim.position.set(-180, 260, 820);
+    scene.add(rim);
     grain = makeGrain();
-    buildModel(data);
+    var buildStarted = performance.now();
+    window.addEventListener('resize', resize);
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(wrap);
+    renderer.setAnimationLoop(function () { renderer.render(scene, camera); });
+    buildModel(data, function () {
     applyVisibility();
     applyExplode();
-    el('three-loading').hidden = true;
+    var loading = el('three-loading');
+    if (loading) {
+      loading.hidden = true;
+      loading.classList.remove('is-progress');
+    }
     var status = el('model-status');
     if (status) {
       status.textContent = model.missing.length
         ? 'The model is ready, with ' + model.missing.length + ' parts left out.'
         : 'The model is ready.';
     }
-    window.addEventListener('resize', resize);
-    if (window.ResizeObserver) new ResizeObserver(resize).observe(wrap);
     resize();
-    renderer.setAnimationLoop(function () { renderer.render(scene, camera); });
     window.__furniture = {
       ready: true,
       slug: slug,
@@ -567,6 +725,7 @@
       fits: projectedFits,
       highlight: function () { return litName(); },
       slots: slotsOpen,
+      buildMs: Math.round(performance.now() - buildStarted),
       aim: function (x, y, z) {
         userMoved = true;
         var dir = new THREE.Vector3(x, y, z);
@@ -576,6 +735,7 @@
         if (renderer && wrap) renderer.setSize(wrap.clientWidth, wrap.clientHeight, false);
       }
     };
+    });
   }
 
   function ringCentroid(ring) {
@@ -981,7 +1141,8 @@
       out.appendChild(row('Fees (10%)', money(fees), false));
       out.appendChild(row('Labor', money(labor), false));
       out.appendChild(row('Net after fees and labor', money(net), net < 0));
-      out.appendChild(row('Profit per machine hour', perHour === null ? '—' : money(grossHour) + ' gross, ' + money(perHour) + ' net', net < 0));
+      out.appendChild(row('Gross per hour', grossHour === null ? '—' : money(grossHour), gross < 0));
+      out.appendChild(row('Net per hour', perHour === null ? '—' : money(perHour), net < 0));
     }
 
     function fmtHours(n) {
