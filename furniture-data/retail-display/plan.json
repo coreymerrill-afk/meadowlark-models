@@ -260,8 +260,8 @@
   "Not a children's product."
  ],
  "profit": {
-  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed",
-  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed, machine time NOT measured on the real machine",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine time uses a sourced RANGE for a 120 W diode on 18 mm ply (low 120 / typical 300 / high 600 mm/min effective, i.e. after multiple passes; see CUT-SPEED-RESEARCH.md); ACMER publishes no 18 mm ply feed rate, so none of it is measured on this machine. Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
   "sheet_kind": "birch",
   "sheets": 2,
   "sheet_price_low_mid_high": [
@@ -274,60 +274,194 @@
   "finish_cost": 14.0,
   "packaging_cost": 22.0,
   "cut_path_m": 31.1,
-  "machine_minutes_at_100_150_200_mm_per_min": [
-   311.0,
-   207.0,
-   155.0
-  ],
-  "machine_hours_mid": 3.45,
-  "machine_wear_cost": 5.87,
+  "contours": 53,
+  "rapid_travel_m": 10.1,
+  "machine_time": {
+   "label": "ESTIMATE. Diode = ACMER X1 Ultra 120 W on 18 mm plywood; effective rate = speed / passes. Includes rapid travel between contours and 15 min per sheet of load/focus/unload. Not measured.",
+   "diode_low_mid_high_minutes": [
+    295.3,
+    138.7,
+    84.3
+   ],
+   "diode_low_mid_high_hours": [
+    4.92,
+    2.31,
+    1.41
+   ],
+   "scenarios": {
+    "low": {
+     "passes": 5,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 120,
+     "cut_min": 258.9,
+     "travel_min": 6.4,
+     "setup_min": 30.0,
+     "total_min": 295.3,
+     "total_hours": 4.92
+    },
+    "mid": {
+     "passes": 4,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 300,
+     "cut_min": 103.6,
+     "travel_min": 5.1,
+     "setup_min": 30.0,
+     "total_min": 138.7,
+     "total_hours": 2.31
+    },
+    "high": {
+     "passes": 2,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 600,
+     "cut_min": 51.8,
+     "travel_min": 2.5,
+     "setup_min": 30.0,
+     "total_min": 84.3,
+     "total_hours": 1.41
+    },
+    "commercial_co2": {
+     "passes": 1,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 600,
+     "cut_min": 51.8,
+     "travel_min": 0.3,
+     "setup_min": 10.0,
+     "total_min": 62.0,
+     "total_hours": 1.03,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_10x": {
+     "factor": 10,
+     "total_min": 20.9,
+     "total_hours": 0.35,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_20x": {
+     "factor": 20,
+     "total_min": 15.4,
+     "total_hours": 0.26,
+     "operating_cost_per_hr": 8.0
+    }
+   },
+   "commercial_laser": {
+    "label": "ASSUMPTION. Sourced case: 300-600 W CO2 flatbed, single pass at ~600 mm/min (vendor 480-720), 60 m/min rapids, 5 min/sheet, $8/h operating cost. What-if cases: a machine 10x / 20x faster than the diode mid cut+travel time (not sourced for 18 mm ply).",
+    "minutes_sourced_co2": 62.0,
+    "hours_sourced_co2": 1.03,
+    "hours_what_if_10x": 0.35,
+    "hours_what_if_20x": 0.26
+   }
+  },
+  "machine_hours_mid": 2.31,
+  "machine_wear_cost": 3.93,
+  "profit_per_machine_hour_at_mid_price": {
+   "low": {
+    "machine_hours": 4.92,
+    "machine_minutes": 295.3,
+    "cogs": 233.92,
+    "gross_margin": 266.08,
+    "gross_margin_pct": 53.2,
+    "net_after_fees_and_labor": 161.08,
+    "gross_margin_per_machine_hour": 54.08,
+    "net_after_fees_and_labor_per_machine_hour": 32.74
+   },
+   "mid": {
+    "machine_hours": 2.31,
+    "machine_minutes": 138.7,
+    "cogs": 229.49,
+    "gross_margin": 270.51,
+    "gross_margin_pct": 54.1,
+    "net_after_fees_and_labor": 165.51,
+    "gross_margin_per_machine_hour": 117.11,
+    "net_after_fees_and_labor_per_machine_hour": 71.65
+   },
+   "high": {
+    "machine_hours": 1.41,
+    "machine_minutes": 84.3,
+    "cogs": 227.96,
+    "gross_margin": 272.04,
+    "gross_margin_pct": 54.4,
+    "net_after_fees_and_labor": 167.04,
+    "gross_margin_per_machine_hour": 192.94,
+    "net_after_fees_and_labor_per_machine_hour": 118.47
+   },
+   "commercial_co2": {
+    "machine_hours": 1.03,
+    "machine_minutes": 62.0,
+    "cogs": 233.8,
+    "gross_margin": 266.2,
+    "gross_margin_pct": 53.2,
+    "net_after_fees_and_labor": 161.2,
+    "gross_margin_per_machine_hour": 258.45,
+    "net_after_fees_and_labor_per_machine_hour": 156.5
+   },
+   "what_if_10x": {
+    "machine_hours": 0.35,
+    "machine_minutes": 20.9,
+    "cogs": 228.36,
+    "gross_margin": 271.64,
+    "gross_margin_pct": 54.3,
+    "net_after_fees_and_labor": 166.64,
+    "gross_margin_per_machine_hour": 776.11,
+    "net_after_fees_and_labor_per_machine_hour": 476.11
+   },
+   "what_if_20x": {
+    "machine_hours": 0.26,
+    "machine_minutes": 15.4,
+    "cogs": 227.64,
+    "gross_margin": 272.36,
+    "gross_margin_pct": 54.5,
+    "net_after_fees_and_labor": 167.36,
+    "gross_margin_per_machine_hour": 1047.54,
+    "net_after_fees_and_labor_per_machine_hour": 643.69
+   }
+  },
   "labor_hours": 2.2,
   "product_weight_kg": 25.8,
   "shipping_estimate_if_absorbed": 67.0,
   "cost_per_unit_low_mid_high": [
-   191.43,
-   231.43,
-   271.43
+   189.49,
+   229.49,
+   269.49
   ],
   "price_band_source": "SHORTLIST.md: Etsy/web listings $180-$1,100, four-tier A-frame ~$570; custom target $200-$800 (estimate)",
   "at_price": {
    "low": {
     "price": 200.0,
-    "cogs_mid": 231.43,
-    "gross_margin": -31.43,
-    "gross_margin_pct": -15.7,
-    "gross_margin_if_you_absorb_shipping": -98.43,
-    "net_after_fees_and_labor": -106.43,
-    "gross_margin_per_machine_hour": -9.1,
-    "net_after_fees_and_labor_per_machine_hour": -30.83
+    "cogs_mid": 229.49,
+    "gross_margin": -29.49,
+    "gross_margin_pct": -14.7,
+    "gross_margin_if_you_absorb_shipping": -96.49,
+    "net_after_fees_and_labor": -104.49,
+    "gross_margin_per_machine_hour": -12.77,
+    "net_after_fees_and_labor_per_machine_hour": -45.23
    },
    "mid": {
     "price": 500.0,
-    "cogs_mid": 231.43,
-    "gross_margin": 268.57,
-    "gross_margin_pct": 53.7,
-    "gross_margin_if_you_absorb_shipping": 201.57,
-    "net_after_fees_and_labor": 163.57,
-    "gross_margin_per_machine_hour": 77.8,
-    "net_after_fees_and_labor_per_machine_hour": 47.38
+    "cogs_mid": 229.49,
+    "gross_margin": 270.51,
+    "gross_margin_pct": 54.1,
+    "gross_margin_if_you_absorb_shipping": 203.51,
+    "net_after_fees_and_labor": 165.51,
+    "gross_margin_per_machine_hour": 117.1,
+    "net_after_fees_and_labor_per_machine_hour": 71.65
    },
    "high": {
     "price": 800.0,
-    "cogs_mid": 231.43,
-    "gross_margin": 568.57,
-    "gross_margin_pct": 71.1,
-    "gross_margin_if_you_absorb_shipping": 501.57,
-    "net_after_fees_and_labor": 433.57,
-    "gross_margin_per_machine_hour": 164.7,
-    "net_after_fees_and_labor_per_machine_hour": 125.59
+    "cogs_mid": 229.49,
+    "gross_margin": 570.51,
+    "gross_margin_pct": 71.3,
+    "gross_margin_if_you_absorb_shipping": 503.51,
+    "net_after_fees_and_labor": 435.51,
+    "gross_margin_per_machine_hour": 246.97,
+    "net_after_fees_and_labor_per_machine_hour": 188.53
    }
   },
-  "note_machine_time": "At 100-200 mm/min the laser path alone is 2.6-5.2 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting."
+  "note_machine_time": "ESTIMATE: 2.3 h (low-speed case 4.9 h, best case 1.4 h) of machine time per unit for 31 m of cut path in 2 sheet(s) on a 120 W diode, 18 mm plywood. Machine time, not material, is still the limit on profit per hour, but a single test cut on scrap will replace this range with a real number."
  },
  "unverified": [
   "Load rating and tip angle untested.",
   "Folding variant is not modeled (this is knock-down only).",
-  "Laser feed 100-200 mm/min is an estimate.",
+  "Machine time is an estimate (120 W diode on 18 mm ply, sourced range, not measured on this machine); cut time and profit/hour depend on it.",
   "Logo cut-out is a placeholder; customer artwork needs bridges for letter islands.",
   "Price band is an estimate from SHORTLIST.md (the repeat B2B reorders are the draw, not a measured demand)."
  ]

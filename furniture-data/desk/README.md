@@ -2,7 +2,7 @@
 
 A real desk cut to your room: panel legs with robot-vac clearance, a rear stretcher, hidden-joint drawer, monitor shelf and a cable slot.
 
-> Planning numbers are ESTIMATES / ASSUMPTIONS. Machine feed 100-200 mm/min is unverified. Run the fit-test coupon (on sheet 1) before cutting a full sheet.
+> Planning numbers are ESTIMATES / ASSUMPTIONS. Machine times are estimates (sourced range, not measured; see ../CUT-SPEED-RESEARCH.md). Run the fit-test coupon (on sheet 1) before cutting a full sheet.
 
 ## Size
 Overall 1200 W x 600 D x 740 H mm. 1 sheet(s) of 4x8 (1220 x 2440 mm) 18 mm ply, cut path 39.2 m.
@@ -64,20 +64,33 @@ Sheet: 18 mm (3/4 in) birch or Baltic-birch plywood, 4 x 8 ft x 1 (hardwood-ply 
 Glue: Titebond III, about 5 oz. Finish: hardwax oil or water-based poly, 3 coats on the top (about $15).
 
 ## Profit estimate (ESTIMATES / ASSUMPTIONS)
-All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine feed 100-200 mm/min is an UNVERIFIED estimate (ACMER publishes no 18 mm ply feed rate). Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the "after labor" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).
+All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine time uses a sourced RANGE for a 120 W diode on 18 mm ply (low 120 / typical 300 / high 600 mm/min effective, i.e. after multiple passes; see CUT-SPEED-RESEARCH.md); ACMER publishes no 18 mm ply feed rate, so none of it is measured on this machine. Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the "after labor" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).
 
 Price band source: SHORTLIST.md: custom target $250-$600 (estimate); small computer desks widely sold ~$100-$400 [third-party estimates]
 
 | | Low | Mid | High |
 |---|---|---|---|
 | Price | $250 | $425 | $600 |
-| COGS (sheets at mid + hardware + finish + packaging + machine wear) | $150 | $150 | $150 |
-| Gross margin | $100 (40%) | $275 (65%) | $450 (75%) |
-| Gross margin if you absorb shipping (est. $60) | $40 | $215 | $390 |
-| Net after 10% fees and labor | $5 | $163 | $320 |
-| Gross margin per machine hour | $23 | $63 | $103 |
+| COGS (sheets at mid + hardware + finish + packaging + machine wear) | $147 | $147 | $147 |
+| Gross margin | $103 (41%) | $278 (66%) | $453 (76%) |
+| Gross margin if you absorb shipping (est. $60) | $43 | $218 | $393 |
+| Net after 10% fees and labor | $8 | $166 | $323 |
 
-Machine time 4.4 h per unit at mid feed (392/261/196 min at 100/150/200 mm/min). At 100-200 mm/min the laser path alone is 3.3-6.5 machine hours per unit; machine time, not material, is the bottleneck. Verify the real feed on scrap before quoting.
+### Machine time and profit per machine hour (ESTIMATE, at the mid price; includes 15 min/sheet of load, focus and unload, rapid travel between 73 contours)
+| Scenario | Effective rate | Machine hours per unit | COGS | Gross margin | Gross margin per machine hour | Net after fees+labor per machine hour |
+|---|---|---|---|---|---|---|
+| Diode, slow case | 120 mm/min (5 pass x 600 mm/min) | 5.8 | $152 | $273 | $47 | $27 |
+| Diode, typical | 300 mm/min (4 pass x 1200 mm/min) | 2.5 | $147 | $278 | $109 | $65 |
+| Diode, best case | 600 mm/min (2 pass x 1200 mm/min) | 1.4 | $145 | $280 | $200 | $120 |
+| Commercial CO2 300-600 W (sourced) | 600 mm/min (1 pass x 600 mm/min) | 1.2 | $152 | $273 | $232 | $136 |
+| What-if 10x faster than diode typical (assumption) | x10 on diode typical cut+travel | 0.3 | $145 | $280 | $904 | $541 |
+| What-if 20x faster (assumption) | x20 on diode typical cut+travel | 0.2 | $144 | $281 | $1405 | $843 |
+
+ESTIMATE: 2.5 h (low-speed case 5.8 h, best case 1.4 h) of machine time per unit for 39 m of cut path in 1 sheet(s) on a 120 W diode, 18 mm plywood. Machine time, not material, is still the limit on profit per hour, but a single test cut on scrap will replace this range with a real number.
+
+ASSUMPTION. Sourced case: 300-600 W CO2 flatbed, single pass at ~600 mm/min (vendor 480-720), 60 m/min rapids, 5 min/sheet, $8/h operating cost. What-if cases: a machine 10x / 20x faster than the diode mid cut+travel time (not sourced for 18 mm ply).
+
+Sources and method: ../CUT-SPEED-RESEARCH.md.
 
 ## Safety
 - Rated target 60 kg distributed on the desktop - UNVERIFIED; sag-test a 1200 mm top with 20 kg at the centre.
@@ -87,7 +100,7 @@ Machine time 4.4 h per unit at mid feed (392/261/196 min at 100/150/200 mm/min).
 
 ## Unverified / caveats
 - Desktop deflection with 18 mm ply over 1200 mm not tested; rear stretcher and divider are the only stiffeners.
-- Laser feed 100-200 mm/min on 18 mm ply is an estimate.
+- Machine time is an estimate (120 W diode on 18 mm ply, sourced range, not measured on this machine); cut time and profit/hour depend on it.
 - Visible tab ends on the desktop surface (sand flush / cover with a desk mat or veneer).
 - Drawer slides on plywood ledgers (no hardware slides).
 - Price band is an estimate from SHORTLIST.md.
