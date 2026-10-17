@@ -50,7 +50,7 @@
   body.mode-3d { height: 100dvh; overflow: hidden; }
   .panel { display: none; }
   .panel.active { display: block; }
-  #panel-build.active, #panel-bed.active { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+  #panel-build.active, #panel-bed.active, #panel-lift.active { display: flex; flex-direction: column; flex: 1; min-height: 0; }
   .facts { display: grid; gap: 6px; margin: 10px 0 12px; }
   .facts div { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
   .facts strong { display: block; font-size: 12px; color: var(--accent); }
@@ -109,15 +109,39 @@
     border: 1px solid var(--border); border-left: 4px solid var(--accent);
     border-radius: 8px; padding: 8px 10px; font-size: 13px; font-weight: 700; line-height: 1.35;
   }
-  #bed-caption[hidden] { display: none !important; }
+  #bed-caption[hidden], #lift-caption[hidden] { display: none !important; }
+  #lift-caption {
+    position: absolute; z-index: 5; left: 8px; right: 8px; bottom: 8px; max-width: 36rem;
+    pointer-events: none; background: rgba(28, 23, 18, 0.9); color: var(--text);
+    border: 1px solid var(--border); border-left: 4px solid var(--warn);
+    border-radius: 8px; padding: 8px 10px; font-size: 13px; font-weight: 700; line-height: 1.35;
+  }
+  #btn-lift .lift-down { display: none; }
+  #btn-lift[aria-pressed="true"] .lift-up { display: none; }
+  #btn-lift[aria-pressed="true"] .lift-down { display: inline; }
+  #lift-diagram svg { width: 100%; height: auto; background: #241c16; border-radius: 8px; display: block; }
+  #lift-diagram { margin: 8px 0; }
+  .phone-mock {
+    max-width: 280px; border: 2px solid var(--border); border-radius: 18px; padding: 12px;
+    background: #1a1612; margin: 8px 0 4px;
+  }
+  .phone-mock .k { font-size: 12px; font-weight: 800; letter-spacing: 0.04em; color: var(--warn); }
+  .phone-actions, .jog { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+  .mock-btn {
+    display: inline-block; min-height: 32px; line-height: 32px; padding: 0 8px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg3); color: var(--text); font-size: 12px; font-weight: 700;
+  }
+  .jog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; margin-top: 6px; }
+  .jog span:first-child { font-weight: 800; color: var(--accent); min-width: 1.2em; }
   .bed-count { font-weight: 700; margin: 0 0 8px; }
   #sidebar-bed .facts { grid-template-columns: 1fr 1fr; }
   #sidebar-bed .facts div { padding: 6px 8px; }
   #sidebar-bed h2 { font-size: 1.15rem; }
   @media (max-width: 767px) {
     #panel-bed .step-bar-nav button { flex: 1 1 calc(25% - 8px); min-width: 0; padding-left: 2px; padding-right: 2px; font-size: 13px; }
-    #bed-title { display: none; }
-    #bed-caption { font-size: 12px; padding: 6px 8px; }
+    #bed-title, #lift-title { display: none; }
+    #bed-caption, #lift-caption { font-size: 12px; padding: 6px 8px; }
+    #panel-lift .step-bar-nav button { flex: 1 1 auto; min-width: 0; }
   }
   @media (max-width: 767px) {
     .day-plan-table { display: none; }
@@ -159,7 +183,7 @@
     background: #3a2a1c; color: var(--text); border: 1px solid var(--warn);
     border-radius: 6px; padding: 2px 6px; font-size: 12px; font-weight: 800; white-space: nowrap;
   }
-  #sidebar-3d, #sidebar-bed {
+  #sidebar-3d, #sidebar-bed, #sidebar-lift {
     width: 340px; flex-shrink: 0; overflow: auto; background: var(--bg2);
     border-left: 1px solid var(--border); padding: 10px 12px 20px; font-size: 14px;
   }
@@ -168,7 +192,7 @@
   .goal { font-weight: 700; }
   .done-when { background: #243024; border-radius: 8px; padding: 8px 10px; margin: 8px 0; }
   .done-when strong { color: var(--ok); }
-  details.more > summary, .day-view > summary, #piece-sheet > summary, #bed-build > summary, #sidebar-bed details > summary {
+  details.more > summary, .day-view > summary, #piece-sheet > summary, #bed-build > summary, #sidebar-bed details > summary, #sidebar-lift details > summary {
     min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; color: var(--accent);
   }
   .step-jump { display: block; width: 100%; text-align: left; margin: 6px 0; background: transparent; }
@@ -210,7 +234,7 @@
     .step-nums-wrap[open] .step-nums { padding: 8px; max-height: 30dvh; overflow: auto; }
     .view3d-wrap { flex-direction: column; min-height: 0; overflow: hidden; }
     #canvas-wrap { min-height: 0; flex: 1 1 42%; }
-    #sidebar-3d, #sidebar-bed {
+    #sidebar-3d, #sidebar-bed, #sidebar-lift {
       width: 100%; max-height: none; flex: 1 1 58%; min-height: 0;
       border-left: none; border-top: 1px solid var(--border);
       padding-bottom: 12px;
@@ -227,7 +251,7 @@
   }
   @media print {
     body, main { display: block !important; height: auto !important; overflow: visible !important; background: #fff !important; color: #111 !important; }
-    header, #panel-overview, #panel-build, #panel-bed, #panel-faq, .noprint { display: none !important; }
+    header, #panel-overview, #panel-build, #panel-bed, #panel-lift, #panel-faq, .noprint { display: none !important; }
     #panel-shop { display: block !important; }
     .shop-cards, .cut-cards { display: none !important; }
     #shop-list .table-wrap, #cut-list .table-wrap { display: block !important; }
@@ -247,6 +271,7 @@
     <button type="button" data-tab="shop">Shop &amp; cuts</button>
     <button type="button" data-tab="build">Build</button>
     <button type="button" data-tab="bed">Bed</button>
+    <button type="button" data-tab="lift">Lift</button>
     <button type="button" data-tab="faq">FAQ</button>
   </nav>
 </header>
@@ -369,6 +394,7 @@
       <div id="three-error" hidden role="alert"></div>
       <div id="part-tags"></div>
       <div id="bed-caption" hidden></div>
+      <div id="lift-caption" hidden></div>
     </div>
     <aside id="sidebar-3d">
       <button type="button" id="btn-reset-side">Reset camera</button>
@@ -432,6 +458,64 @@
           <li>Each blade has six vents in the bottom edge, 120 mm wide and 20 mm tall, with rounded corners about 6 mm across, centered between the ribs.</li>
         </ul>
       </details>
+    </aside>
+  </div>
+</section>
+
+<section id="panel-lift" class="panel">
+  <div class="step-bar">
+    <div class="step-bar-row step-bar-nav">
+      <button type="button" id="btn-lift" aria-pressed="false" aria-label="Raise the machine"><span class="lift-up">Raise</span><span class="lift-down">Lower</span></button>
+      <button type="button" id="btn-lift-reset" aria-label="Reset camera"><span class="cam-long">Reset camera</span><span class="cam-short">Reset</span></button>
+      <div class="step-title" id="lift-title">Machine lift</div>
+    </div>
+  </div>
+  <div class="view3d-wrap" id="lift-view">
+    <aside id="sidebar-lift">
+      <h2>Machine lift</h2>
+      <p class="bed-count">The steel bed stays on the table. Fourteen actuators raise only the machine.</p>
+      <h3>How the lift works</h3>
+      <p>The two fire plates and the two egg-crate panels are fixed on the deck. The ACMER X1 Ultra has no feet and a flat underside. Fourteen small electric actuators, mounted to the table frame from below, push up on flat steel pads under the machine skirting. That raises the whole machine off the bed and gives more room above the grid, including when an MDF board is on it. The plates and the egg-crate do not move.</p>
+      <p>Five actuators sit on each long side, corners included, and two more sit on each end. Four steel stops at the corners keep the machine from sliding sideways. Each actuator is a 12 V screw with a 100 mm (4 in) stroke. A limit switch stops it at the bottom and at the top. The screw is self-locking: it holds the load when the power is off. A level sensor reads tilt. An ESP32 controller board, on the shop Wi-Fi, serves the phone screen.</p>
+      <p>A height change is rare. Start with every actuator on its bottom stop. Run them all up at the same time, by the same amount. Then trim one at a time, using the level sensor, until the machine is level. The self-locking screws hold that height. The lift does not lift the bed.</p>
+      <h3>Where the 14 actuators sit</h3>
+      <p>Top view. Orange numbers are the actuators. Grey marks are the four corner stops. The long axis of the machine runs left to right.</p>
+      <div id="lift-diagram"></div>
+      <h3>Parts</h3>
+      <div class="table-wrap"><table class="data">
+        <thead><tr><th>Item</th><th>Qty</th><th>Where it goes</th></tr></thead>
+        <tbody>
+          <tr><td>Linear actuator, 12 V, 100 mm (4 in) stroke, about 88 lb rated, with limit switches. The screw is self-locking and holds the load when power is off.</td><td class="num">14</td><td>On the frame, under the skirting. Five on each long side, two on each end.</td></tr>
+          <tr><td>Steel pad</td><td class="num">14</td><td>Flat plate under the skirting. The actuator pushes on this pad.</td></tr>
+          <tr><td>Corner guide stop</td><td class="num">4</td><td>Steel stop at each corner. Keeps the machine from sliding sideways.</td></tr>
+          <tr><td>12 V power supply, about 600 W</td><td class="num">1</td><td>Feeds the actuators.</td></tr>
+          <tr><td>ESP32 controller board with Wi-Fi</td><td class="num">1</td><td>Runs the phone screen.</td></tr>
+          <tr><td>Dual-channel motor driver</td><td class="num">7</td><td>Each driver runs two actuators.</td></tr>
+          <tr><td>Level (tilt) sensor</td><td class="num">1</td><td>Used while trimming the machine level.</td></tr>
+          <tr><td>Wiring and fuses</td><td class="num">1</td><td>From the supply to the drivers, the controller, and the stop button.</td></tr>
+          <tr><td>Emergency stop button</td><td class="num">1</td><td>On the wall. Cuts power to the actuators.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Notes</h3>
+      <ul>
+        <li>Design load is 500 lb for the whole machine, about 35 lb on each actuator.</li>
+        <li>ACMER lists the packaged weight at about 250 kg.</li>
+        <li>Fit and test one actuator before mounting the other thirteen.</li>
+        <li>Z travel on the machine is about 80 mm. It is not yet known whether focus height is measured from the machine bottom, so a way to raise or lower the machine may be needed. That question is still open with ACMER. Four inches of lift travel leaves margin for the bed and for a sacrificial board.</li>
+      </ul>
+      <h3>Phone controller</h3>
+      <div class="phone-mock">
+        <div class="k">CONCEPT</div>
+        <strong>Not connected</strong>
+        <p>This is a picture of the phone screen. These controls do not move the machine. Use Raise and Lower on the 3D view.</p>
+        <div class="phone-actions">
+          <span class="mock-btn">Raise</span>
+          <span class="mock-btn">Lower</span>
+          <span class="mock-btn">Level</span>
+        </div>
+        <p class="meta">Jog one actuator. Numbers match the diagram.</p>
+        <div class="jog-grid" id="lift-jogs"></div>
+      </div>
     </aside>
   </div>
 </section>
@@ -945,6 +1029,8 @@
     document.getElementById('btn-bed-machine').onclick = function () { setBedView('machine', true); };
     document.getElementById('btn-bed-explode').onclick = toggleBedExplode;
     document.getElementById('btn-bed-reset').onclick = function () { if (sceneReady && bedActive) frameBed(); };
+    document.getElementById('btn-lift').onclick = toggleMachineLift;
+    document.getElementById('btn-lift-reset').onclick = function () { if (sceneReady && liftActive) frameLift(); };
     document.getElementById('btn-reset-side').onclick = function () { if (sceneReady) frameStand(); };
     document.getElementById('btn-waste').onclick = function () {
       wasteOn = !wasteOn;
@@ -979,9 +1065,11 @@
       b.classList.toggle('active', on);
       b.setAttribute('aria-selected', on ? 'true' : 'false');
     });
-    const threeD = id === 'build' || id === 'bed';
+    const threeD = id === 'build' || id === 'bed' || id === 'lift';
     document.body.classList.toggle('mode-3d', threeD);
     document.getElementById('main').classList.toggle('is-3d', threeD);
+    if (id !== 'bed' && bedActive) leaveBed();
+    if (id !== 'lift' && liftActive) leaveLift();
     if (id === 'bed') {
       bedActive = true;
       moveCanvas(document.getElementById('bed-view'));
@@ -989,8 +1077,14 @@
       if (ready && ready.then) ready.then(function () {
         if (document.getElementById('panel-bed').classList.contains('active')) enterBed();
       });
+    } else if (id === 'lift') {
+      liftActive = true;
+      moveCanvas(document.getElementById('lift-view'));
+      const ready = boot();
+      if (ready && ready.then) ready.then(function () {
+        if (document.getElementById('panel-lift').classList.contains('active')) enterLift();
+      });
     } else {
-      if (bedActive) leaveBed();
       moveCanvas(document.querySelector('#panel-build .view3d-wrap'));
       if (id === 'build') requestAnimationFrame(boot);
     }
@@ -1859,6 +1953,8 @@
   }
   function applyVisibility() {
     if (bedActive) { applyBedVisibility(); return; }
+    if (liftActive) { applyLiftVisibility(); return; }
+    if (liftRig) liftRig.visible = false;
     const step = STEPS[current];
     pickables.forEach(function (obj) {
       const id = obj.userData.partId;
@@ -2036,7 +2132,7 @@
       x0: -DECK_L / 2 - pad,
       x1: MACHINE_L / 2 + 5,
       y0: 0,
-      y1: TOP_H + MACHINE_H + 0.4,
+      y1: TOP_H + MACHINE_H + 0.4 + (liftActive ? LIFT_STROKE : 0),
       z: DECK_W / 2 + CHILLER_GAP + CHILLER_X + pad
     };
   }
@@ -2109,7 +2205,7 @@
   const pointer = { x: 0, y: 0 };
   let raycaster, pickGesture = null;
   function pickAt(clientX, clientY) {
-    if (bedActive) return;
+    if (bedActive || liftActive) return;
     const rect = wrap.getBoundingClientRect();
     if (rect.width < 2) return;
     pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
@@ -2218,6 +2314,15 @@
   }
 
   let bedActive = false;
+  let liftActive = false;
+  const LIFT_STROKE = 100 / 25.4;
+  let liftRig = null;
+  let liftParts = [];
+  let liftRods = [];
+  let liftPads = [];
+  let liftT = 0;
+  let liftTarget = 0;
+  let liftRaf = 0;
   let bedView = 'full';
   let bedBuilt = false;
   let bedCut = null;
@@ -2538,6 +2643,7 @@
     setExplode(explodeTarget > 0.5 ? 0 : 1, true);
   }
   function applyBedVisibility() {
+    if (liftRig) liftRig.visible = false;
     const machine = bedView === 'machine';
     const cut = bedView === 'corner' || bedView === 'tooth';
     pickables.forEach(function (obj) {
@@ -2742,6 +2848,238 @@
     requestRender();
   }
 
+  function liftLayout() {
+    const halfL = MACHINE_L / 2;
+    const halfW = MACHINE_W / 2;
+    const zOut = halfW + 0.62;
+    const xOut = halfL + 0.62;
+    const xs = [-1, -0.5, 0, 0.5, 1].map(function (t) { return t * (halfL - 1.8); });
+    const zs = [-0.36, 0.36].map(function (t) { return t * halfW; });
+    const pts = [];
+    let n = 1;
+    xs.forEach(function (x) { pts.push({ n: n++, x: x, z: -zOut, side: 'long' }); });
+    zs.forEach(function (z) { pts.push({ n: n++, x: xOut, z: z, side: 'end' }); });
+    xs.forEach(function (x) { pts.push({ n: n++, x: x, z: zOut, side: 'long' }); });
+    zs.forEach(function (z) { pts.push({ n: n++, x: -xOut, z: z, side: 'end' }); });
+    return pts;
+  }
+  function renderLiftChrome() {
+    const pts = liftLayout();
+    const halfL = MACHINE_L / 2 + 1.4;
+    const halfW = MACHINE_W / 2 + 1.4;
+    const W = 320;
+    const H = 188;
+    const pad = 26;
+    function sx(x) { return pad + ((x + halfL) / (halfL * 2)) * (W - pad * 2); }
+    function sy(z) { return pad + ((halfW - z) / (halfW * 2)) * (H - pad * 2); }
+    const x0 = sx(-MACHINE_L / 2);
+    const x1 = sx(MACHINE_L / 2);
+    const y0 = sy(MACHINE_W / 2);
+    const y1 = sy(-MACHINE_W / 2);
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Top view. Fourteen actuator points around the machine, and four corner stops.">';
+    svg += '<rect x="' + x0.toFixed(1) + '" y="' + y0.toFixed(1) + '" width="' + (x1 - x0).toFixed(1) + '" height="' + (y1 - y0).toFixed(1) + '" fill="none" stroke="#c5b8a4" stroke-width="2"/>';
+    [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(function (c) {
+      const gx = sx(c[0] * MACHINE_L / 2);
+      const gy = sy(c[1] * MACHINE_W / 2);
+      svg += '<rect x="' + (gx - 5).toFixed(1) + '" y="' + (gy - 5).toFixed(1) + '" width="10" height="10" fill="#8e979f"/>';
+    });
+    pts.forEach(function (p) {
+      const cx = sx(p.x);
+      const cy = sy(p.z);
+      svg += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="8" fill="#e25b12"/>';
+      svg += '<text x="' + cx.toFixed(1) + '" y="' + (cy + 3).toFixed(1) + '" text-anchor="middle" font-size="10" font-weight="700" fill="#1a120c">' + p.n + '</text>';
+    });
+    svg += '<text x="' + (W / 2) + '" y="16" text-anchor="middle" fill="#f3eadf" font-size="11">Long side</text>';
+    svg += '<text x="' + (W / 2) + '" y="' + (H - 6) + '" text-anchor="middle" fill="#f3eadf" font-size="11">Long side</text>';
+    svg += '<text x="8" y="' + (H / 2) + '" fill="#f3eadf" font-size="11">End</text>';
+    svg += '<text x="' + (W - 28) + '" y="' + (H / 2) + '" fill="#f3eadf" font-size="11">End</text>';
+    svg += '</svg>';
+    document.getElementById('lift-diagram').innerHTML = svg;
+    document.getElementById('lift-jogs').innerHTML = pts.map(function (p) {
+      const where = p.side === 'long' ? 'Long side' : 'End';
+      return '<div class="jog"><span>' + p.n + '</span><span class="meta">' + where + '</span><span class="mock-btn">Up</span><span class="mock-btn">Down</span></div>';
+    }).join('');
+  }
+  function liftHeightLabel() {
+    const mm = liftT * 100;
+    if (mm > 99.5) return '4 in (100 mm)';
+    if (mm < 0.5) return '0 in (0 mm)';
+    return (mm / 25.4).toFixed(1) + ' in (' + Math.round(mm) + ' mm)';
+  }
+  function writeLiftCaption() {
+    const el = document.getElementById('lift-caption');
+    if (!el) return;
+    const moving = Math.abs(liftT - liftTarget) > 0.02;
+    const where = liftT < 0.04 ? 'Sitting on the frame.' : 'Raised above the frame.';
+    el.textContent = 'Height ' + liftHeightLabel() + '. ' + (moving ? 'The machine is moving. ' : where + ' ') + 'The bed does not move.';
+    el.hidden = !liftActive;
+  }
+  function syncLiftButton() {
+    const btn = document.getElementById('btn-lift');
+    if (!btn) return;
+    const up = liftTarget > 0.5;
+    btn.setAttribute('aria-pressed', up ? 'true' : 'false');
+    btn.setAttribute('aria-label', up ? 'Lower the machine' : 'Raise the machine');
+  }
+  function applyMachineLift() {
+    const offset = liftT * LIFT_STROKE;
+    liftParts.forEach(function (p) { p.mesh.position.y = p.y + offset; });
+    const bodyTop = TOP_H + 1.35;
+    liftRods.forEach(function (rod) {
+      const len = Math.max(0.12, offset - 1.2);
+      rod.scale.y = len;
+      rod.position.y = bodyTop + len / 2;
+    });
+    liftPads.forEach(function (pad) { pad.position.y = TOP_H + offset + 0.08; });
+  }
+  function buildLift() {
+    if (liftRig) return;
+    liftRig = new THREE.Group();
+    liftRig.name = 'lift-rig';
+    liftRig.visible = false;
+    scene.add(liftRig);
+    const orange = new THREE.MeshStandardMaterial({ color: 0xe25b12, metalness: 0.35, roughness: 0.42 });
+    const rodMat = new THREE.MeshStandardMaterial({ color: 0xd5dbe0, metalness: 0.72, roughness: 0.28 });
+    const padMat = new THREE.MeshStandardMaterial({ color: 0x3a4148, metalness: 0.66, roughness: 0.42 });
+    const guideMat = new THREE.MeshStandardMaterial({ color: 0x9aa3ab, metalness: 0.7, roughness: 0.34 });
+    const bodyH = 1.35;
+    const bodyTop = TOP_H + bodyH;
+    liftLayout().forEach(function (p) {
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.44, bodyH, 18), orange);
+      body.position.set(p.x, bodyTop - bodyH / 2, p.z);
+      body.name = 'lift-actuator';
+      liftRig.add(body);
+      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), rodMat);
+      rod.position.set(p.x, bodyTop, p.z);
+      rod.name = 'lift-rod';
+      liftRig.add(rod);
+      liftRods.push(rod);
+      const long = p.side === 'long';
+      const pad = new THREE.Mesh(new THREE.BoxGeometry(long ? 1.7 : 1.15, 0.1, long ? 1.15 : 1.7), padMat);
+      pad.position.set(p.x, TOP_H + 0.08, p.z);
+      pad.name = 'lift-pad';
+      liftRig.add(pad);
+      liftPads.push(pad);
+    });
+    const postH = 7;
+    const y = TOP_H + postH / 2;
+    [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(function (c) {
+      const sx = c[0];
+      const sz = c[1];
+      const alongEnd = new THREE.Mesh(new THREE.BoxGeometry(0.16, postH, 1.7), guideMat);
+      alongEnd.position.set(sx * (MACHINE_L / 2 + 0.58), y, sz * (MACHINE_W / 2 - 0.35));
+      const alongSide = new THREE.Mesh(new THREE.BoxGeometry(1.7, postH, 0.16), guideMat);
+      alongSide.position.set(sx * (MACHINE_L / 2 - 0.35), y, sz * (MACHINE_W / 2 + 0.58));
+      alongEnd.name = 'lift-guide';
+      alongSide.name = 'lift-guide';
+      liftRig.add(alongEnd);
+      liftRig.add(alongSide);
+    });
+    pickables.forEach(function (mesh) {
+      const id = mesh.userData.partId || '';
+      if (id.indexOf('machine-') === 0 && id !== 'machine-chiller') liftParts.push({ mesh: mesh, y: mesh.position.y });
+    });
+    applyMachineLift();
+  }
+  function applyLiftVisibility() {
+    pickables.forEach(function (obj) {
+      const id = obj.userData.partId;
+      const vis = !obj.userData.later && id !== 'work-mark' && id !== 'machine-mark' && id !== 'waste';
+      obj.visible = vis;
+      obj.userData.faded = false;
+      if (obj.isMesh && obj.material && !obj.userData.keepEmissive) {
+        obj.material.transparent = false;
+        obj.material.opacity = 1;
+        obj.material.depthWrite = true;
+      }
+      paint(obj, 'solid');
+    });
+    const floor = scene.getObjectByName('floor');
+    if (floor) floor.visible = true;
+    syncBedStack();
+    if (bedFull) bedFull.visible = true;
+    if (bedPanel) bedPanel.visible = false;
+    if (bedCut) bedCut.visible = false;
+    if (bedPlatesFull) bedPlatesFull.visible = false;
+    if (bedPlatesPanel) bedPlatesPanel.visible = false;
+    if (bedPlatesCut) bedPlatesCut.visible = false;
+    if (liftRig) liftRig.visible = true;
+    applyMachineLift();
+  }
+  function frameLift() {
+    frameStand();
+  }
+  function setMachineLift(target, animate) {
+    liftTarget = target > 0.5 ? 1 : 0;
+    syncLiftButton();
+    if (liftRaf) { cancelAnimationFrame(liftRaf); liftRaf = 0; }
+    writeLiftCaption();
+    if (!animate || !liftActive) {
+      liftT = liftTarget;
+      applyMachineLift();
+      if (renderer) renderNow();
+      return;
+    }
+    const from = liftT;
+    const to = liftTarget;
+    const t0 = performance.now();
+    const dur = 640;
+    const step = function (now) {
+      if (!liftActive) { liftRaf = 0; return; }
+      const u = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - u, 3);
+      liftT = from + (to - from) * e;
+      applyMachineLift();
+      writeLiftCaption();
+      renderNow();
+      if (u < 1) liftRaf = requestAnimationFrame(step);
+      else liftRaf = 0;
+    };
+    liftRaf = requestAnimationFrame(step);
+  }
+  function toggleMachineLift() {
+    if (!liftActive) return;
+    setMachineLift(liftTarget > 0.5 ? 0 : 1, true);
+  }
+  function enterLift() {
+    if (!sceneReady || !document.getElementById('panel-lift').classList.contains('active')) return;
+    liftActive = true;
+    if (!savedCam) {
+      savedCam = snapshotCamera();
+      savedCamValid = !!initialFrameDone;
+    }
+    buildLift();
+    resize();
+    applyLiftVisibility();
+    writeLiftCaption();
+    syncLiftButton();
+    frameLift();
+  }
+  function leaveLift() {
+    const was = liftActive;
+    liftActive = false;
+    if (liftRaf) { cancelAnimationFrame(liftRaf); liftRaf = 0; }
+    liftT = 0;
+    liftTarget = 0;
+    applyMachineLift();
+    syncLiftButton();
+    writeLiftCaption();
+    if (liftRig) liftRig.visible = false;
+    if (!sceneReady || !was) return;
+    if (savedCam && savedCamValid) {
+      camera.position.set(savedCam.px, savedCam.py, savedCam.pz);
+      controls.target.set(savedCam.tx, savedCam.ty, savedCam.tz);
+      controls.update();
+    }
+    const needFrame = !savedCamValid;
+    savedCam = null;
+    savedCamValid = false;
+    applyVisibility();
+    if (needFrame) frameStand();
+    resize();
+    requestRender();
+  }
+
   function initScene() {
     wrap = document.getElementById('canvas-wrap');
     scene = new THREE.Scene();
@@ -2788,7 +3126,7 @@
     (function scheduleInitialFrame() {
       let tries = 0;
       const attempt = function () {
-        if (initialFrameDone || bedActive) return;
+        if (initialFrameDone || bedActive || liftActive) return;
         tries += 1;
         resize();
         if (wrap.clientWidth > 2 && wrap.clientHeight > 2) { frameStand(); return; }
@@ -2812,6 +3150,25 @@
       audit: audit,
       PICK_MOVE_PX: PICK_MOVE_PX,
       dims: { TOP_H: TOP_H, legH: M.legH, posts: M.posts, pieceCount: M.pieceCount, panelH: M.panelH, panelW: M.panelW, steps: STEPS.length },
+      liftState: function () {
+        const part = liftParts[0];
+        const bedY = bedFull ? bedFull.position.y : null;
+        return {
+          active: liftActive,
+          t: liftT,
+          target: liftTarget,
+          mm: +(liftT * 100).toFixed(1),
+          raisedIn: part ? +(part.mesh.position.y - part.y).toFixed(3) : 0,
+          actuators: liftLayout().length,
+          guides: liftRig ? liftRig.children.filter(function (m) { return m.name === 'lift-guide'; }).length / 2 : 0,
+          bedY: bedY,
+          chillerY: (function () {
+            const c = registry['machine-chiller'] && registry['machine-chiller'].meshes[0];
+            return c ? +c.position.y.toFixed(3) : null;
+          })(),
+          caption: document.getElementById('lift-caption') ? document.getElementById('lift-caption').textContent : ''
+        };
+      },
       bedState: function () {
         const plate = bedPlatesFull;
         const crate = bedFull;
@@ -2829,6 +3186,7 @@
   }
 
   fillNumbers();
+  renderLiftChrome();
   renderLists();
   renderSteps();
   renderPieceSheet();
