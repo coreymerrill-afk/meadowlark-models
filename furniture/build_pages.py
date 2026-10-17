@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,6 +73,25 @@ TOGGLE_ORDER = ["drawer", "casters", "cleat"]
 
 def esc(value) -> str:
     return html.escape(str(value), quote=True)
+
+
+def public_text(value: str) -> str:
+    """Drop internal note names from copy that is shown on the page."""
+    text = str(value)
+    text = text.replace(
+        "see CUT-SPEED-RESEARCH.md",
+        "taken from reported speeds for a 120 W-class diode",
+    )
+    text = text.replace("CUT-SPEED-RESEARCH.md", "reported diode speeds")
+    text = text.replace("SHORTLIST.md: ", "")
+    text = text.replace("(not in SHORTLIST.md)", "")
+    text = text.replace("is not in SHORTLIST.md", "was not part of that price survey")
+    text = text.replace("from SHORTLIST.md", "from a survey of similar pieces for sale")
+    text = text.replace("SHORTLIST.md", "a survey of similar pieces for sale")
+    text = text.replace("ASSUMPTION :", "Assumption:")
+    text = text.replace("ASSUMPTION:", "Assumption:")
+    text = re.sub(r"[ ]{2,}", " ", text)
+    return text.strip()
 
 
 def mm(n) -> str:
@@ -254,7 +274,7 @@ def render_gallery(designs: list[dict]) -> str:
         cards.append(
             f"""<a class="card" href="/furniture/{esc(slug)}">
   <div class="card-media">
-    <img src="/furniture-data/{esc(slug)}/assembly.png" width="1800" height="937" alt="Assembly drawing of the {esc(plan['name'])}." />
+    <img src="/furniture/thumbs/{esc(slug)}.png" width="1280" height="666" alt="3D preview of the {esc(plan['name'])}, assembled in plywood." />
   </div>
   <div class="card-body">
     <h2>{esc(plan['name'])}</h2>
@@ -563,7 +583,7 @@ def render_profit(plan: dict) -> str:
 <p>These three columns are the same unit at the mid selling price. Best, typical, and slow are the diode estimates. {esc(diode_note)}</p>
 {rate_table(rates, DIODE_COLUMNS, "At the mid selling price. Best is the fast diode case, typical is the planning case, slow is the cautious case.")}
 <h3>Commercial laser (assumptions)</h3>
-<p>These columns are assumptions, not a cut on this machine. {esc(machine['commercial_laser']['label'])}</p>
+<p>These columns are assumptions, not a cut on this machine. {esc(public_text(machine['commercial_laser']['label']))}</p>
 {rate_table(rates, commercial_heads, "Assumption only. Commercial CO2 is the sourced case. The 10× and 20× columns are what-if speeds, not a measured machine.")}
 <h3>Selling price, at the typical diode time</h3>
 <div class="table-wrap">
@@ -584,9 +604,9 @@ def render_profit(plan: dict) -> str:
   </tbody>
 </table>
 </div>
-<p>{esc(profit['note_machine_time'])}</p>
-<p class="fine">{esc(profit['assumptions'])}</p>
-<p class="fine">Where the price band came from: {esc(profit['price_band_source'])}</p>
+<p>{esc(public_text(profit['note_machine_time']))}</p>
+<p class="fine">{esc(public_text(profit['assumptions']))}</p>
+<p class="fine">Where the price band came from: {esc(public_text(profit['price_band_source']))}</p>
 <h3>Try your own numbers</h3>
 <p>Change the sheet cost, hardware, selling price, labor rate, or machine time. Finish ({esc(money(profit['finish_cost']))}) and packaging ({esc(money(profit['packaging_cost']))}) stay put. Machine wear follows the machine-time choice: {esc(money(DIODE_WEAR_PER_HOUR))} per hour on the diode estimates, {esc(money(8))} per hour on the commercial assumptions. Fees stay at 10% of the selling price. Labor uses the planned {esc(hours(profit['labor_hours']))} at the rate you type.</p>
 <div class="calc">
@@ -621,8 +641,8 @@ def render_parameters(plan: dict) -> str:
 
 
 def render_safety(plan: dict) -> str:
-    safety = "\n".join(f"<li>{esc(item)}</li>" for item in plan["safety"])
-    unverified = "\n".join(f"<li>{esc(item)}</li>" for item in plan["unverified"])
+    safety = "\n".join(f"<li>{esc(public_text(item))}</li>" for item in plan["safety"])
+    unverified = "\n".join(f"<li>{esc(public_text(item))}</li>" for item in plan["unverified"])
     return f"""<h2 id="safety-heading">Safety notes</h2>
 <ul class="plain">{safety}</ul>
 <h2>Unverified / to test</h2>

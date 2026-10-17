@@ -87,8 +87,8 @@ a.card:hover, a.card:focus-visible {
   outline-offset: 2px;
 }
 .card-media {
-  aspect-ratio: 1800 / 937;
-  background: var(--sheet);
+  aspect-ratio: 1280 / 666;
+  background: #241e18;
   flex: 0 0 auto;
 }
 .card-media img {
@@ -271,6 +271,18 @@ body.fs-lock { overflow: hidden; }
   display: flex; align-items: center; justify-content: center;
   padding: 16px; text-align: center; color: var(--muted);
   background: rgba(28, 23, 18, 0.92);
+}
+#three-loading.is-progress {
+  inset: auto 12px 12px auto;
+  width: auto;
+  max-width: calc(100% - 24px);
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(28, 23, 18, 0.9);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
 }
 #three-loading[hidden], #three-error[hidden] { display: none !important; }
 #three-error { color: #ffd0d0; }
@@ -485,7 +497,7 @@ caption { text-align: left; caption-side: bottom; color: var(--muted); font-size
   padding: 8px 10px;
 }
 .calc-out strong { display: block; color: var(--accent); font-size: 12px; font-weight: 700; }
-.calc-out span { font-variant-numeric: tabular-nums; font-weight: 700; }
+.calc-out span { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
 .calc-out .neg span { color: var(--bad); }
 
 .files { display: grid; gap: 8px; }
