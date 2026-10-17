@@ -99,12 +99,25 @@
   a.bed-file strong { display: block; color: var(--accent); }
   a.bed-file span { display: block; margin-top: 4px; color: var(--text); font-size: 14px; font-weight: 600; }
   .bed-bar button.current { background: var(--accent); color: var(--ink); border-color: var(--accent); }
+  #btn-bed-explode .ex-down { display: none; }
+  #btn-bed-explode[aria-pressed="true"] .ex-up { display: none; }
+  #btn-bed-explode[aria-pressed="true"] .ex-down { display: inline; }
+  #btn-bed-explode:disabled { opacity: 0.4; cursor: default; }
+  #bed-caption {
+    position: absolute; z-index: 5; left: 8px; right: 8px; bottom: 8px; max-width: 36rem;
+    pointer-events: none; background: rgba(28, 23, 18, 0.9); color: var(--text);
+    border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 8px; padding: 8px 10px; font-size: 13px; font-weight: 700; line-height: 1.35;
+  }
+  #bed-caption[hidden] { display: none !important; }
+  .bed-count { font-weight: 700; margin: 0 0 8px; }
   #sidebar-bed .facts { grid-template-columns: 1fr 1fr; }
   #sidebar-bed .facts div { padding: 6px 8px; }
   #sidebar-bed h2 { font-size: 1.15rem; }
   @media (max-width: 767px) {
-    #panel-bed .step-bar-nav button { flex: 1 1 30%; min-width: 0; padding-left: 4px; padding-right: 4px; }
+    #panel-bed .step-bar-nav button { flex: 1 1 calc(25% - 8px); min-width: 0; padding-left: 2px; padding-right: 2px; font-size: 13px; }
     #bed-title { display: none; }
+    #bed-caption { font-size: 12px; padding: 6px 8px; }
   }
   @media (max-width: 767px) {
     .day-plan-table { display: none; }
@@ -355,6 +368,7 @@
       <div id="three-loading" hidden>Loading the 3D view…</div>
       <div id="three-error" hidden role="alert"></div>
       <div id="part-tags"></div>
+      <div id="bed-caption" hidden></div>
     </div>
     <aside id="sidebar-3d">
       <button type="button" id="btn-reset-side">Reset camera</button>
@@ -379,25 +393,28 @@
 <section id="panel-bed" class="panel">
   <div class="step-bar bed-bar">
     <div class="step-bar-row step-bar-nav">
-      <button type="button" id="btn-bed-corner" class="current">Corner</button>
+      <button type="button" id="btn-bed-full" class="current">Full bed</button>
+      <button type="button" id="btn-bed-panel">Panel</button>
+      <button type="button" id="btn-bed-corner">Corner</button>
       <button type="button" id="btn-bed-tooth">Tooth</button>
       <button type="button" id="btn-bed-machine">Machine</button>
-      <button type="button" id="btn-bed-explode" aria-pressed="false">Explode</button>
+      <button type="button" id="btn-bed-explode" aria-pressed="false"><span class="ex-up">Explode</span><span class="ex-down">Assemble</span></button>
       <button type="button" id="btn-bed-reset" aria-label="Reset camera"><span class="cam-long">Reset camera</span><span class="cam-short">Reset</span></button>
-      <div class="step-title" id="bed-title">Corner</div>
+      <div class="step-title" id="bed-title">Whole bed</div>
     </div>
   </div>
   <div class="view3d-wrap" id="bed-view">
     <aside id="sidebar-bed">
       <h2>Steel egg-crate bed</h2>
-      <p>Two steel grids sit on the deck, inside the opening. The work rests on the tooth tips, with open air underneath. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
+      <p class="bed-count">Each panel is 24 blades and 7 ribs. The bed is two panels, 48 blades and 14 ribs. Blades and ribs are the same 1/8 in steel. Two greys keep the crossings easy to see.</p>
+      <p>The two panels sit on the deck, inside the opening, 2400 × 1200 mm together. The work rests on the tooth tips, with open air underneath. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
       <p class="hint-3d" id="bed-hint"></p>
       <h3>Bed files</h3>
       <div class="bed-files">
         <a class="bed-file" href="/x1/bed/egg_crate_bed.dxf" download="egg_crate_bed.dxf"><strong>Blade and rib, DXF</strong><span>One blade and one cross-rib, in millimetres. Layers CUT and LABELS. This is the laser file for a single part of each.</span></a>
         <a class="bed-file" href="/x1/bed/nest_one_panel_4x8.dxf" download="nest_one_panel_4x8.dxf"><strong>One panel on a 4×8, DXF</strong><span>All 31 parts of one panel, nested on a 1220 × 2440 mm sheet.</span></a>
         <a class="bed-file" href="/x1/bed/egg_crate_drawing.pdf" download="egg_crate_drawing.pdf"><strong>Dimensioned drawing, PDF</strong><span>Two pages. The corner, the slot, the top view, and the part list.</span></a>
-        <a class="bed-file" href="/x1/bed/egg_crate_assembly.png" download="egg_crate_assembly.png"><strong>Assembly picture, PNG</strong><span>How the blades and the ribs drop together, and the colour key.</span></a>
+        <a class="bed-file" href="/x1/bed/egg_crate_assembly.png" download="egg_crate_assembly.png"><strong>Assembly picture, PNG</strong><span>How the blades and the ribs drop together. Both are the same steel. The drawing uses two line colours so the parts are easy to tell apart.</span></a>
       </div>
       <div class="facts">
         <div><strong>Size</strong> Two panels, 1200 × 1200 mm, 2400 × 1200 mm together. 38 mm tall.</div>
@@ -922,6 +939,8 @@
     document.getElementById('btn-explore-end').onclick = function () { enterExplore({ frame: false }); };
     document.getElementById('btn-back-build').onclick = function () { setStep(current, { frame: false }); };
     document.getElementById('btn-reset-cam').onclick = function () { if (sceneReady) frameStand(); };
+    document.getElementById('btn-bed-full').onclick = function () { setBedView('full', true); };
+    document.getElementById('btn-bed-panel').onclick = function () { setBedView('panel', true); };
     document.getElementById('btn-bed-corner').onclick = function () { setBedView('corner', true); };
     document.getElementById('btn-bed-tooth').onclick = function () { setBedView('tooth', true); };
     document.getElementById('btn-bed-machine').onclick = function () { setBedView('machine', true); };
@@ -2185,17 +2204,25 @@
   }
 
   let bedActive = false;
-  let bedView = 'corner';
+  let bedView = 'full';
   let bedBuilt = false;
   let bedCut = null;
+  let bedPanel = null;
   let bedFull = null;
   let bedBlades = [];
+  let panelBlades = null;
+  let fullBlades = null;
+  let panelM = null;
   let explodeT = 0;
   let explodeTarget = 0;
   let explodeRaf = 0;
   let savedCam = null;
   let savedCamValid = false;
   const BED_LIFT = 28 / 25.4;
+  const BED_LIFT_FULL = 72 / 25.4;
+  function currentLift() {
+    return bedView === 'full' ? BED_LIFT_FULL : BED_LIFT;
+  }
   const BED = (function () {
     const inch = 1 / 25.4;
     const t = 3.18 * inch;
@@ -2269,15 +2296,15 @@
   }
   function steelMat(color) {
     return new THREE.MeshStandardMaterial({
-      color: color, metalness: 0.62, roughness: 0.36,
+      color: color, metalness: 0.74, roughness: 0.32,
       polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
     });
   }
   function buildBed() {
     if (bedBuilt) return;
     bedBuilt = true;
-    const bladeMat = steelMat(0x8ea0b4);
-    const ribMat = steelMat(0xd4893a);
+    const bladeMat = steelMat(0xc5ced6);
+    const ribMat = steelMat(0x8e979f);
     const cutLen = 480 / 25.4;
     const cutW = 240 / 25.4;
     const cutRibs = BED.ribX.slice(0, 3);
@@ -2303,11 +2330,33 @@
       bedCut.add(mesh);
     });
     scene.add(bedCut);
+    bedPanel = new THREE.Group();
+    bedPanel.name = 'bed-panel';
+    bedPanel.visible = false;
+    panelBlades = new THREE.InstancedMesh(bladeGeo, bladeMat, BED.nBlades);
+    const panelRibs = new THREE.InstancedMesh(ribGeo, ribMat, BED.nRibs);
+    panelBlades.frustumCulled = false;
+    panelRibs.frustumCulled = false;
+    panelM = new THREE.Matrix4();
+    for (let i = 0; i < BED.nBlades; i++) {
+      panelM.makeTranslation(0, 0, BED.bladeY[i]);
+      panelBlades.setMatrixAt(i, panelM);
+    }
+    for (let j = 0; j < BED.nRibs; j++) {
+      panelM.makeTranslation(BED.ribX[j], 0, 0);
+      panelRibs.setMatrixAt(j, panelM);
+    }
+    panelBlades.instanceMatrix.needsUpdate = true;
+    panelRibs.instanceMatrix.needsUpdate = true;
+    bedPanel.add(panelBlades);
+    bedPanel.add(panelRibs);
+    scene.add(bedPanel);
     bedFull = new THREE.Group();
     bedFull.name = 'bed-full';
     bedFull.visible = false;
     bedFull.position.y = TOP_H;
     const blades = new THREE.InstancedMesh(bladeGeo, bladeMat, BED.nBlades * 2);
+    fullBlades = blades;
     const ribs = new THREE.InstancedMesh(ribGeo, ribMat, BED.nRibs * 2);
     blades.frustumCulled = false;
     ribs.frustumCulled = false;
@@ -2332,43 +2381,72 @@
     scene.add(bedFull);
   }
   function applyExplode() {
-    const y = explodeT * BED_LIFT;
+    const y = explodeT * currentLift();
     bedBlades.forEach(function (mesh) { mesh.position.y = y; });
+    if (panelBlades && panelM) {
+      for (let i = 0; i < BED.nBlades; i++) {
+        panelM.makeTranslation(0, y, BED.bladeY[i]);
+        panelBlades.setMatrixAt(i, panelM);
+      }
+      panelBlades.instanceMatrix.needsUpdate = true;
+    }
+    if (fullBlades && panelM) {
+      let n = 0;
+      for (let p = 0; p < 2; p++) {
+        const ox = -BED.panel + p * BED.panel;
+        for (let i = 0; i < BED.nBlades; i++) {
+          panelM.makeTranslation(ox, y, -BED.halfW + BED.bladeY[i]);
+          fullBlades.setMatrixAt(n++, panelM);
+        }
+      }
+      fullBlades.instanceMatrix.needsUpdate = true;
+    }
   }
   function renderNow() {
     if (!renderer) return;
     controls.update();
     renderer.render(scene, camera);
   }
-  function startExplode() {
-    if (explodeRaf) cancelAnimationFrame(explodeRaf);
-    const step = function () {
+  function syncExplodeButton() {
+    const btn = document.getElementById('btn-bed-explode');
+    const up = explodeTarget > 0.5;
+    btn.setAttribute('aria-pressed', up ? 'true' : 'false');
+    btn.setAttribute('aria-label', up ? 'Assemble the blades' : 'Explode the blades');
+  }
+  function setExplode(target, animate) {
+    explodeTarget = target > 0.5 ? 1 : 0;
+    syncExplodeButton();
+    if (explodeRaf) { cancelAnimationFrame(explodeRaf); explodeRaf = 0; }
+    writeBedCaption();
+    if (!animate || !bedActive) {
+      explodeT = explodeTarget;
+      applyExplode();
+      if (renderer) renderNow();
+      return;
+    }
+    const from = explodeT;
+    const to = explodeTarget;
+    const t0 = performance.now();
+    const dur = 520;
+    const step = function (now) {
       if (!bedActive) { explodeRaf = 0; return; }
-      const d = explodeTarget - explodeT;
-      if (Math.abs(d) < 0.02) {
-        explodeT = explodeTarget;
-        applyExplode();
-        renderNow();
-        explodeRaf = 0;
-        return;
-      }
-      explodeT += d * 0.28;
+      const u = Math.min(1, (now - t0) / dur);
+      const e = 1 - Math.pow(1 - u, 3);
+      explodeT = from + (to - from) * e;
       applyExplode();
       renderNow();
-      explodeRaf = requestAnimationFrame(step);
+      if (u < 1) explodeRaf = requestAnimationFrame(step);
+      else explodeRaf = 0;
     };
     explodeRaf = requestAnimationFrame(step);
   }
   function toggleBedExplode() {
     if (!bedActive || bedView === 'machine') return;
-    explodeTarget = explodeTarget > 0.5 ? 0 : 1;
-    const btn = document.getElementById('btn-bed-explode');
-    btn.textContent = explodeTarget > 0.5 ? 'Assemble' : 'Explode';
-    btn.setAttribute('aria-pressed', explodeTarget > 0.5 ? 'true' : 'false');
-    startExplode();
+    setExplode(explodeTarget > 0.5 ? 0 : 1, true);
   }
   function applyBedVisibility() {
     const machine = bedView === 'machine';
+    const cut = bedView === 'corner' || bedView === 'tooth';
     pickables.forEach(function (obj) {
       const id = obj.userData.partId;
       let vis = false;
@@ -2384,8 +2462,55 @@
     });
     const floor = scene.getObjectByName('floor');
     if (floor) floor.visible = machine;
-    if (bedCut) bedCut.visible = !machine;
-    if (bedFull) bedFull.visible = machine;
+    if (bedCut) bedCut.visible = cut;
+    if (bedPanel) bedPanel.visible = bedView === 'panel';
+    if (bedFull) {
+      bedFull.visible = machine || bedView === 'full';
+      bedFull.position.y = machine ? TOP_H : 0;
+    }
+  }
+  function bedCopy(mode) {
+    if (mode === 'corner') {
+      return {
+        title: 'Corner cutaway',
+        caption: 'Corner cutaway: 4 of 24 blades, 3 of 7 ribs per panel.',
+        hint: 'This is one corner, drawn large so the slots show. A panel is 24 blades and 7 ribs. The bed is two panels.'
+      };
+    }
+    if (mode === 'tooth') {
+      return {
+        title: 'Slot and tooth',
+        caption: 'One crossing, full size. Each panel has 24 blades and 7 ribs.',
+        hint: 'The blade is notched up from the bottom. The rib is notched down from the top. Assemble lowers the blade back into the slot.'
+      };
+    }
+    if (mode === 'machine') {
+      return {
+        title: 'In the machine',
+        caption: 'Both panels on the deck: 48 blades and 14 ribs, centered in the opening.',
+        hint: 'The whole bed sits on the plywood, centered on the 1250 × 2450 mm work area.'
+      };
+    }
+    if (mode === 'panel') {
+      return {
+        title: 'One panel',
+        caption: 'One panel: 24 blades and 7 ribs, 1200 × 1200 mm. Ribs are 183 mm apart.',
+        hint: 'One panel, so the rib spacing is easy to see. Full bed shows both panels.'
+      };
+    }
+    return {
+      title: 'Whole bed',
+      caption: 'Whole bed: 2 panels, 48 blades and 14 ribs, 2400 × 1200 mm.',
+      hint: 'Both panels. Each one is 24 blades and 7 ribs. Explode lifts every blade. Panel is a closer look at one of them.'
+    };
+  }
+  function writeBedCaption() {
+    const el = document.getElementById('bed-caption');
+    if (!el) return;
+    const copy = bedCopy(bedView);
+    const lifted = bedView !== 'machine' && explodeTarget > 0.5;
+    el.textContent = lifted ? (copy.caption + ' Blades are lifted. Assemble sets them back down.') : copy.caption;
+    el.hidden = !bedActive;
   }
   function fitBox(box, dir) {
     const pts = [];
@@ -2427,30 +2552,45 @@
     if (!wrap || wrap.clientWidth < 2) return;
     if (bedView === 'machine') { frameStand(); return; }
     const box = new THREE.Box3();
+    let dir = frameDir();
     if (bedView === 'tooth') {
       const x = BED.ribX[0];
       const z = BED.bladeY[0];
       box.set(
         new THREE.Vector3(x - 0.35, -0.02, z - 0.45),
-        new THREE.Vector3(x + 1.55, BED.H + 0.2, z + 0.85)
+        new THREE.Vector3(x + 1.55, BED.H + explodeT * currentLift() + 0.2, z + 0.85)
       );
+    } else if (bedView === 'panel') {
+      const pad = BED.t;
+      box.set(
+        new THREE.Vector3(-pad, 0, -pad),
+        new THREE.Vector3(BED.panel + pad, BED.H + explodeT * currentLift(), BED.panel + pad)
+      );
+    } else if (bedView === 'full') {
+      const pad = BED.t;
+      box.set(
+        new THREE.Vector3(-BED.panel - pad, 0, -BED.halfW - pad),
+        new THREE.Vector3(BED.panel + pad, BED.H + explodeT * currentLift(), BED.halfW + pad)
+      );
+      dir = new THREE.Vector3(0.36, 0.5, 0.92);
     } else if (bedCut) box.setFromObject(bedCut);
-    fitBox(box, frameDir());
+    fitBox(box, dir);
   }
   function setBedView(mode, frame) {
     if (!sceneReady) return;
+    if (mode !== bedView && (explodeTarget !== 0 || explodeT !== 0)) setExplode(0, false);
     bedView = mode;
     const machine = mode === 'machine';
+    const copy = bedCopy(mode);
+    document.getElementById('btn-bed-full').classList.toggle('current', mode === 'full');
+    document.getElementById('btn-bed-panel').classList.toggle('current', mode === 'panel');
     document.getElementById('btn-bed-corner').classList.toggle('current', mode === 'corner');
     document.getElementById('btn-bed-tooth').classList.toggle('current', mode === 'tooth');
     document.getElementById('btn-bed-machine').classList.toggle('current', machine);
     document.getElementById('btn-bed-explode').disabled = machine;
-    document.getElementById('bed-title').textContent = machine ? 'In the machine' : (mode === 'tooth' ? 'Slot and tooth' : 'Corner');
-    document.getElementById('bed-hint').textContent = machine
-      ? 'Both panels, centered on the 1250 × 2450 mm work area, sitting on the plywood inside the opening.'
-      : (mode === 'tooth'
-        ? 'One crossing. The blade is notched up from the bottom. The rib is notched down from the top.'
-        : 'Four blades and three ribs, with the real slots and teeth. Explode lifts the blades so the notches show.');
+    document.getElementById('bed-title').textContent = copy.title;
+    document.getElementById('bed-hint').textContent = copy.hint;
+    writeBedCaption();
     applyBedVisibility();
     if (frame) frameBed();
     else requestRender();
@@ -2471,14 +2611,17 @@
     camera.updateProjectionMatrix();
     buildBed();
     resize();
-    setBedView(bedView || 'corner', true);
+    setBedView(bedView || 'full', true);
   }
   function leaveBed() {
     const was = bedActive;
     bedActive = false;
-    if (explodeRaf) { cancelAnimationFrame(explodeRaf); explodeRaf = 0; }
+    if (explodeTarget !== 0 || explodeT !== 0) setExplode(0, false);
+    else if (explodeRaf) { cancelAnimationFrame(explodeRaf); explodeRaf = 0; }
+    writeBedCaption();
     if (!sceneReady || !was) return;
     if (bedCut) bedCut.visible = false;
+    if (bedPanel) bedPanel.visible = false;
     if (bedFull) bedFull.visible = false;
     const floor = scene.getObjectByName('floor');
     if (floor) floor.visible = true;
@@ -2569,7 +2712,7 @@
       PICK_MOVE_PX: PICK_MOVE_PX,
       dims: { TOP_H: TOP_H, legH: M.legH, posts: M.posts, pieceCount: M.pieceCount, panelH: M.panelH, panelW: M.panelW, steps: STEPS.length },
       bedState: function () {
-        return { active: bedActive, view: bedView, explode: explodeTarget, gapMm: bedGapMm() };
+        return { active: bedActive, view: bedView, explode: explodeTarget, explodeT: explodeT, gapMm: bedGapMm(), blades: BED.nBlades * 2, ribs: BED.nRibs * 2 };
       },
       cutCsv: cutCsv,
       lastCsv: function () { return lastCsv; }
