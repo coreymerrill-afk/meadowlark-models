@@ -20,6 +20,11 @@ ORDER = [
     "nightstand",
     "retail-display",
     "shoe-bench",
+    "plant-stand",
+    "tv-console",
+    "floating-shelves",
+    "cat-enclosure",
+    "potting-bench",
 ]
 
 PARAM_LABELS = {
@@ -53,6 +58,20 @@ PARAM_LABELS = {
     "slatted": "Slatted shelves",
     "cleat": "Cleat",
     "shelf_z": "Shelf height",
+    "cable_slots": "Cable slots",
+    "tv_max_kg": "TV weight limit",
+    "pitch": "Shelf pitch",
+    "shelf_height": "Shelf height",
+    "box_w": "Litter box width",
+    "box_d": "Litter box depth",
+    "entry_w": "Entry width",
+    "entry_h": "Entry height",
+    "sill": "Door sill",
+    "vents": "Vents",
+    "hutch_top": "Hutch top",
+    "hutch_depth": "Hutch depth",
+    "hutch_shelf_z": "Hutch shelf height",
+    "foot": "Foot clearance",
 }
 
 GROUP_LABELS = {
@@ -66,9 +85,11 @@ GROUP_LABELS = {
     "tray": "Tray",
     "option": "Option",
     "sign": "Sign",
+    "frame": "Frame",
+    "hanger": "Hanger",
 }
 
-TOGGLE_ORDER = ["drawer", "casters", "cleat"]
+TOGGLE_ORDER = ["drawer", "casters", "cleat", "hanger"]
 
 
 def esc(value) -> str:
@@ -84,6 +105,7 @@ def public_text(value: str) -> str:
     )
     text = text.replace("CUT-SPEED-RESEARCH.md", "reported diode speeds")
     text = text.replace("SHORTLIST.md: ", "")
+    text = re.sub(r"SHORTLIST\.md\s+R\d+", "a survey of similar pieces", text)
     text = text.replace("(not in SHORTLIST.md)", "")
     text = text.replace("is not in SHORTLIST.md", "was not part of that price survey")
     text = text.replace("from SHORTLIST.md", "from a survey of similar pieces for sale")
@@ -188,6 +210,10 @@ def size_sentence(dims: dict) -> str:
         bits.append(
             f"inside {mm(dims['interior_length'])} × {mm(dims['interior_width'])} × {mm(dims['interior_height'])} mm"
         )
+    elif "interior_width" in dims and "interior_depth" in dims and "interior_height" in dims:
+        bits.append(
+            f"inside {mm(dims['interior_width'])} × {mm(dims['interior_depth'])} × {mm(dims['interior_height'])} mm"
+        )
     elif "interior_width" in dims:
         bits.append(f"inside width {mm(dims['interior_width'])} mm")
     if "door_opening" in dims:
@@ -207,6 +233,25 @@ def size_sentence(dims: dict) -> str:
         bits.append(f"{int(dims['shelf_slot_rows'])} shelf rows, {mm(dims['shelf_pitch'])} mm apart")
     if "tiers" in dims:
         bits.append(f"{int(dims['tiers'])} tiers, top shelf {mm(dims['top_shelf_depth'])} mm deep")
+    if "top_tier_depth" in dims:
+        bits.append(f"top tier {mm(dims['top_tier_depth'])} mm deep")
+    if "shelf_pitch" in dims and "shelf_slot_rows" not in dims:
+        bits.append(f"shelves {mm(dims['shelf_pitch'])} mm apart")
+    if "bay_clear_width" in dims:
+        bits.append(f"each bay {mm(dims['bay_clear_width'])} mm wide")
+    if "shelf_lengths" in dims:
+        lengths = ", ".join(mm(n) for n in dims["shelf_lengths"])
+        bits.append(f"shelf lengths {lengths} mm")
+    if "shelf_height" in dims:
+        bits.append(f"each shelf box {mm(dims['shelf_height'])} mm tall")
+    if "worktop_height" in dims:
+        bits.append(f"worktop at {mm(dims['worktop_height'])} mm")
+    if "foot_clearance" in dims:
+        bits.append(f"{mm(dims['foot_clearance'])} mm clear under the feet")
+    if "upper_shelf_depth" in dims:
+        bits.append(f"upper shelf {mm(dims['upper_shelf_depth'])} mm deep")
+    if "bay_width" in dims:
+        bits.append(f"lower bay {mm(dims['bay_width'])} mm wide")
     if "bay_clear_height" in dims:
         bits.append(f"shelf bay {mm(dims['bay_clear_height'])} mm clear")
     return ". ".join(bit[:1].upper() + bit[1:] for bit in bits) + "."
@@ -241,6 +286,8 @@ def toggle_label(group: str) -> tuple[str, bool]:
         return "Drawer", True
     if group == "casters":
         return "Casters", True
+    if group == "hanger":
+        return "Hangers", True
     return group_label(group), True
 
 
@@ -291,7 +338,7 @@ def render_gallery(designs: list[dict]) -> str:
     body = f"""<header class="doc-header">
   <p class="crumbs"><a href="/">All models</a></p>
   <h1>Shop furniture</h1>
-  <p class="lede">Seven flat-pack designs in 18 mm plywood, each cut from 4×8 sheets. Open a piece for the model, the cut sheets, and the build. Mid prices are planning estimates, not quotes.</p>
+  <p class="lede">Twelve flat-pack designs in 18 mm plywood, each cut from 4×8 sheets. Open a piece for the model, the cut sheets, and the build. Mid prices are planning estimates, not quotes.</p>
 </header>
 <main class="wrap">
   <div class="gallery">
@@ -310,7 +357,7 @@ def render_gallery(designs: list[dict]) -> str:
 """
     return page_shell(
         "Shop furniture — Meadowlark Models",
-        "Seven flat-pack plywood designs: bookcase, desk, dog crate, kitchen cart, nightstand, retail display, and shoe bench. Cut sheets, a 3D model, and a build order for each.",
+        "Twelve flat-pack plywood designs, from a bookcase and a dog crate to floating shelves and a potting bench. Cut sheets, a 3D model, and a build order for each.",
         body,
     )
 

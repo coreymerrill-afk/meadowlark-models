@@ -186,7 +186,9 @@
     door: 0xc9a27a,
     tray: 0xd8c2a0,
     option: 0xd2b48c,
-    sign: 0xc4a882
+    sign: 0xc4a882,
+    frame: 0xcbb48a,
+    hanger: 0xb58358
   };
   var mats = {};
   function matFor(group) {
