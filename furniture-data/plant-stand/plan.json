@@ -1,0 +1,435 @@
+{
+ "name": "Tiered Plant Stand",
+ "slug": "plant-stand",
+ "pitch": "A stepped plant stand cut to your window or wall: 2 to 4 slatted shelves, raised for the robot vacuum, with an anti-tip anchor.",
+ "dimensions_mm": {
+  "width": 700.0,
+  "height": 800.0,
+  "depth": 400.0,
+  "plinth_clearance": 90.0,
+  "top_tier_depth": 200.0,
+  "shelf_pitch": 316.0
+ },
+ "parameters": [
+  {
+   "name": "width",
+   "default": 700.0,
+   "limits": "400-900 mm"
+  },
+  {
+   "name": "height",
+   "default": 800.0,
+   "limits": "500-1100 mm (anchor above 900)"
+  },
+  {
+   "name": "depth",
+   "default": 400.0,
+   "limits": "250-500 mm"
+  },
+  {
+   "name": "tiers",
+   "default": 3,
+   "limits": "2-4 (>= 200 mm clear between shelves)"
+  },
+  {
+   "name": "step",
+   "default": 100.0,
+   "limits": "60-140 mm (top tier >= 150 deep)"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm"
+  },
+  {
+   "name": "plinth",
+   "default": 90.0,
+   "limits": "90-150 mm (0 = floor standing)"
+  },
+  {
+   "name": "slatted",
+   "default": 1,
+   "limits": "0 or 1"
+  }
+ ],
+ "sheet_count": 1,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "plant-stand-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "SIDE-L",
+     "number": 1,
+     "size_mm": [
+      400.0,
+      800.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-R",
+     "number": 1,
+     "size_mm": [
+      400.0,
+      800.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-1",
+     "number": 2,
+     "size_mm": [
+      700.0,
+      400.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-2",
+     "number": 3,
+     "size_mm": [
+      700.0,
+      300.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-3",
+     "number": 4,
+     "size_mm": [
+      700.0,
+      200.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "RAIL-TOP",
+     "number": 5,
+     "size_mm": [
+      700.0,
+      90.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "RAIL-BOT",
+     "number": 6,
+     "size_mm": [
+      700.0,
+      90.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 7,
+   "coverage_pct": 33.9,
+   "cut_path_m": 34.66
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheet",
+   "detail": "Run the fit-test coupon (slot = tab + 0.1 mm), then cut 1 sheet from the DXF (CUT layer): 35 m of path, 68 drainage slots. Inside-out order, air assist on. If the ply is exterior/marine grade, expect the phenolic glue lines to char more: slow down and test a scrap.",
+   "minutes": 231
+  },
+  {
+   "step": 2,
+   "title": "Remove char and sand",
+   "detail": "Brush char from every edge, 120 then 180 grit; ease the shelf edges. Sand the drainage slots with a folded strip of paper.",
+   "minutes": 40
+  },
+  {
+   "step": 3,
+   "title": "Dry fit",
+   "detail": "Lay SIDE-L flat, push the 3 SHELF boards and the two rails into its slots, add SIDE-R. Check each shelf tab ends flush with the outside face and the stair profile lines up. No glue.",
+   "minutes": 12
+  },
+  {
+   "step": 4,
+   "title": "Pre-finish",
+   "detail": "Seal every face and edge now: 3 coats of spar urethane or exterior poly (wet pots, spills). Mask tabs and slots so the glue still bonds. Seal the drainage slot edges well; they take the water.",
+   "minutes": 60
+  },
+  {
+   "step": 5,
+   "title": "Glue-up (Titebond III, water-resistant)",
+   "detail": "Glue the 3 shelf tabs and the two rail tabs into SIDE-L, then fit SIDE-R and clamp across the width. Wipe squeeze-out at once; check square by measuring both diagonals.",
+   "minutes": 25
+  },
+  {
+   "step": 6,
+   "title": "Screws as clamps",
+   "detail": "10 #8 screws (3.0 mm pilots pre-cut): #8 x 1-1/2 in through the side faces into the shelf edges, between the tabs. Use coated or stainless screws if it will live outdoors.",
+   "minutes": 12
+  },
+  {
+   "step": 7,
+   "title": "Anti-tip anchor",
+   "detail": "Fit the anti-tip strap through one of the two 6 mm holes in RAIL-TOP into a wall stud. Heavy pots on the top tier raise the tipping risk, so keep the heaviest pots on the bottom tier.",
+   "minutes": 10
+  },
+  {
+   "step": 8,
+   "title": "Final coat, cure, pack",
+   "detail": "Last coat on the top faces, 24 h cure, 15 kg pot load test on each shelf, felt/rubber pads on the 4 feet, flat-pack in one box (about 720 x 820 x 80 mm).",
+   "minutes": 30
+  }
+ ],
+ "stage_total_minutes": 420,
+ "materials": {
+  "sheet": "18 mm (3/4 in) birch or Baltic-birch plywood, 4 x 8 ft (1220 x 2440 mm) x 1; use exterior-grade ply for a patio stand",
+  "sheets_required": 1,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in wood screws (coated/stainless)",
+    "qty": 10,
+    "unit_cost": 0.1,
+    "note": "from model"
+   },
+   {
+    "item": "Anti-tip furniture strap kit",
+    "qty": 1,
+    "unit_cost": 6.0,
+    "note": "mandatory above 900 mm; recommended always"
+   },
+   {
+    "item": "Wood plugs / filler",
+    "qty": 1,
+    "unit_cost": 2.0,
+    "note": ""
+   },
+   {
+    "item": "Felt/rubber foot pads",
+    "qty": 4,
+    "unit_cost": 0.4,
+    "note": ""
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 10
+  },
+  "glue": "Titebond III, about 3 oz",
+  "finish": "spar urethane or exterior poly, 3 coats (about $14)"
+ },
+ "safety": [
+  "Anchor to a wall stud with the anti-tip strap (ASTM F3096 style); mandatory above 900 mm, recommended on every unit.",
+  "Rated target 15 kg per shelf (UNVERIFIED - load test a shelf before selling). Wet soil is heavy: 5 L of damp potting mix is about 4 kg.",
+  "Not a children's product (no CPSIA testing). Not a climbing aid.",
+  "Outdoor use needs exterior-grade ply plus a UV-rated finish; indoor-grade birch ply swells and delaminates when wet."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed, machine time NOT measured on the real machine",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine time uses a sourced RANGE for a 120 W diode on 18 mm ply (low 120 / typical 300 / high 600 mm/min effective, i.e. after multiple passes; see CUT-SPEED-RESEARCH.md); ACMER publishes no 18 mm ply feed rate, so none of it is measured on this machine. Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "birch",
+  "sheets": 1,
+  "sheet_price_low_mid_high": [
+   70,
+   90,
+   110
+  ],
+  "sheet_cost_mid": 90,
+  "hardware_cost": 10.6,
+  "finish_cost": 14.0,
+  "packaging_cost": 10.0,
+  "cut_path_m": 34.7,
+  "contours": 110,
+  "rapid_travel_m": 10.9,
+  "machine_time": {
+   "label": "ESTIMATE. Diode = ACMER X1 Ultra 120 W on 18 mm plywood; effective rate = speed / passes. Includes rapid travel between contours and 15 min per sheet of load/focus/unload. Not measured.",
+   "diode_low_mid_high_minutes": [
+    312.0,
+    137.1,
+    76.0
+   ],
+   "diode_low_mid_high_hours": [
+    5.2,
+    2.28,
+    1.27
+   ],
+   "scenarios": {
+    "low": {
+     "passes": 5,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 120,
+     "cut_min": 288.8,
+     "travel_min": 8.2,
+     "setup_min": 15.0,
+     "total_min": 312.0,
+     "total_hours": 5.2
+    },
+    "mid": {
+     "passes": 4,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 300,
+     "cut_min": 115.5,
+     "travel_min": 6.6,
+     "setup_min": 15.0,
+     "total_min": 137.1,
+     "total_hours": 2.28
+    },
+    "high": {
+     "passes": 2,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 600,
+     "cut_min": 57.8,
+     "travel_min": 3.3,
+     "setup_min": 15.0,
+     "total_min": 76.0,
+     "total_hours": 1.27
+    },
+    "commercial_co2": {
+     "passes": 1,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 600,
+     "cut_min": 57.8,
+     "travel_min": 0.4,
+     "setup_min": 5.0,
+     "total_min": 63.1,
+     "total_hours": 1.05,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_10x": {
+     "factor": 10,
+     "total_min": 17.2,
+     "total_hours": 0.29,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_20x": {
+     "factor": 20,
+     "total_min": 11.1,
+     "total_hours": 0.19,
+     "operating_cost_per_hr": 8.0
+    }
+   },
+   "commercial_laser": {
+    "label": "ASSUMPTION. Sourced case: 300-600 W CO2 flatbed, single pass at ~600 mm/min (vendor 480-720), 60 m/min rapids, 5 min/sheet, $8/h operating cost. What-if cases: a machine 10x / 20x faster than the diode mid cut+travel time (not sourced for 18 mm ply).",
+    "minutes_sourced_co2": 63.1,
+    "hours_sourced_co2": 1.05,
+    "hours_what_if_10x": 0.29,
+    "hours_what_if_20x": 0.19
+   }
+  },
+  "machine_hours_mid": 2.28,
+  "machine_wear_cost": 3.88,
+  "profit_per_machine_hour_at_mid_price": {
+   "low": {
+    "machine_hours": 5.2,
+    "machine_minutes": 312.0,
+    "cogs": 133.44,
+    "gross_margin": 31.56,
+    "gross_margin_pct": 19.1,
+    "net_after_fees_and_labor": -34.94,
+    "gross_margin_per_machine_hour": 6.07,
+    "net_after_fees_and_labor_per_machine_hour": -6.72
+   },
+   "mid": {
+    "machine_hours": 2.28,
+    "machine_minutes": 137.1,
+    "cogs": 128.48,
+    "gross_margin": 36.52,
+    "gross_margin_pct": 22.1,
+    "net_after_fees_and_labor": -29.98,
+    "gross_margin_per_machine_hour": 16.02,
+    "net_after_fees_and_labor_per_machine_hour": -13.15
+   },
+   "high": {
+    "machine_hours": 1.27,
+    "machine_minutes": 76.0,
+    "cogs": 126.76,
+    "gross_margin": 38.24,
+    "gross_margin_pct": 23.2,
+    "net_after_fees_and_labor": -28.26,
+    "gross_margin_per_machine_hour": 30.11,
+    "net_after_fees_and_labor_per_machine_hour": -22.25
+   },
+   "commercial_co2": {
+    "machine_hours": 1.05,
+    "machine_minutes": 63.1,
+    "cogs": 133.0,
+    "gross_margin": 32.0,
+    "gross_margin_pct": 19.4,
+    "net_after_fees_and_labor": -34.5,
+    "gross_margin_per_machine_hour": 30.48,
+    "net_after_fees_and_labor_per_machine_hour": -32.86
+   },
+   "what_if_10x": {
+    "machine_hours": 0.29,
+    "machine_minutes": 17.2,
+    "cogs": 126.92,
+    "gross_margin": 38.08,
+    "gross_margin_pct": 23.1,
+    "net_after_fees_and_labor": -28.42,
+    "gross_margin_per_machine_hour": 131.31,
+    "net_after_fees_and_labor_per_machine_hour": -98.0
+   },
+   "what_if_20x": {
+    "machine_hours": 0.19,
+    "machine_minutes": 11.1,
+    "cogs": 126.12,
+    "gross_margin": 38.88,
+    "gross_margin_pct": 23.6,
+    "net_after_fees_and_labor": -27.62,
+    "gross_margin_per_machine_hour": 204.63,
+    "net_after_fees_and_labor_per_machine_hour": -145.37
+   }
+  },
+  "labor_hours": 2.0,
+  "product_weight_kg": 11.3,
+  "shipping_estimate_if_absorbed": 34.0,
+  "cost_per_unit_low_mid_high": [
+   108.48,
+   128.48,
+   148.48
+  ],
+  "price_band_source": "My estimate: Etsy/Amazon plywood plant stands run about $30-$110 for small units (SHORTLIST.md R1, third-party estimates); a window- or wall-fitted 3-tier unit with slatted shelves, finished, is priced above that. Low = 2-tier unfinished, high = 4-tier finished and sized to order.",
+  "at_price": {
+   "low": {
+    "price": 95.0,
+    "cogs_mid": 128.48,
+    "gross_margin": -33.48,
+    "gross_margin_pct": -35.2,
+    "gross_margin_if_you_absorb_shipping": -67.48,
+    "net_after_fees_and_labor": -92.98,
+    "gross_margin_per_machine_hour": -14.68,
+    "net_after_fees_and_labor_per_machine_hour": -40.78
+   },
+   "mid": {
+    "price": 165.0,
+    "cogs_mid": 128.48,
+    "gross_margin": 36.52,
+    "gross_margin_pct": 22.1,
+    "gross_margin_if_you_absorb_shipping": 2.52,
+    "net_after_fees_and_labor": -29.98,
+    "gross_margin_per_machine_hour": 16.02,
+    "net_after_fees_and_labor_per_machine_hour": -13.15
+   },
+   "high": {
+    "price": 250.0,
+    "cogs_mid": 128.48,
+    "gross_margin": 121.52,
+    "gross_margin_pct": 48.6,
+    "gross_margin_if_you_absorb_shipping": 87.52,
+    "net_after_fees_and_labor": 46.52,
+    "gross_margin_per_machine_hour": 53.3,
+    "net_after_fees_and_labor_per_machine_hour": 20.4
+   }
+  },
+  "note_machine_time": "ESTIMATE: 2.3 h (low-speed case 5.2 h, best case 1.3 h) of machine time per unit for 35 m of cut path in 1 sheet(s) on a 120 W diode, 18 mm plywood. Machine time, not material, is still the limit on profit per hour, but a single test cut on scrap will replace this range with a real number."
+ },
+ "unverified": [
+  "Machine time is an estimate (120 W diode on 18 mm ply, sourced range, not measured on this machine); cut time and profit/hour depend on it.",
+  "Shelf load rating and deflection untested; the deflection line in checks.txt is a hand calculation with an assumed ply modulus.",
+  "Exterior/marine ply (phenolic glue) cut quality on the diode laser is unverified.",
+  "The cost model charges one whole 4x8 sheet but this design fills only 34% of it (offcut not credited). Nesting 2 stands per sheet (area allows it; not nested here) would cut mid cost to about $83 and lift mid gross margin from 22% to about 49%. As modeled, the low price band is below cost.",
+  "Price band is my estimate, not a market quote."
+ ]
+}

@@ -1,0 +1,459 @@
+{
+ "name": "Cat Litter Enclosure End Table",
+ "slug": "cat-enclosure",
+ "pitch": "Hide the litter box in an end table: cut around your litter box, arch cat door, vented sides, a lift-off lid for a lamp or plant, and raised so the robot vacuum goes underneath.",
+ "dimensions_mm": {
+  "width": 676.0,
+  "height": 600.0,
+  "depth": 586.0,
+  "interior_width": 610.0,
+  "interior_depth": 480.0,
+  "interior_height": 454.0,
+  "plinth_clearance": 90.0
+ },
+ "parameters": [
+  {
+   "name": "box_w",
+   "default": 560.0,
+   "limits": "400-700 mm (litter box length)"
+  },
+  {
+   "name": "box_d",
+   "default": 430.0,
+   "limits": "330-550 mm (litter box depth)"
+  },
+  {
+   "name": "height",
+   "default": 600.0,
+   "limits": "520-700 mm"
+  },
+  {
+   "name": "entry_w",
+   "default": 220.0,
+   "limits": "170-280 mm (<= interior width - 120)"
+  },
+  {
+   "name": "entry_h",
+   "default": 250.0,
+   "limits": "200-320 mm (>= door width)"
+  },
+  {
+   "name": "sill",
+   "default": 70.0,
+   "limits": "40-100 mm"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm"
+  },
+  {
+   "name": "plinth",
+   "default": 90.0,
+   "limits": "90-150 mm"
+  },
+  {
+   "name": "vents",
+   "default": 1,
+   "limits": "0 or 1"
+  }
+ ],
+ "sheet_count": 1,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "cat-enclosure-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "SIDE-L",
+     "number": 3,
+     "size_mm": [
+      556.0,
+      582.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-R",
+     "number": 3,
+     "size_mm": [
+      556.0,
+      582.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "BOTTOM",
+     "number": 2,
+     "size_mm": [
+      646.0,
+      516.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "FRONT",
+     "number": 4,
+     "size_mm": [
+      646.0,
+      454.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "BACK",
+     "number": 5,
+     "size_mm": [
+      646.0,
+      454.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "LID",
+     "number": 1,
+     "size_mm": [
+      676.0,
+      586.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "LID-KEY-L",
+     "number": 6,
+     "size_mm": [
+      32.0,
+      478.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "LID-KEY-R",
+     "number": 6,
+     "size_mm": [
+      32.0,
+      478.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 8,
+   "coverage_pct": 58.7,
+   "cut_path_m": 31.74
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheet(s)",
+   "detail": "Run the fit-test coupon first (slot = tab + 0.1 mm), then cut 1 sheet(s) from the DXFs (CUT layer): 32 m of path, 36 vent slots. Inside-out order, air assist on.",
+   "minutes": 212
+  },
+  {
+   "step": 2,
+   "title": "Remove char and sand",
+   "detail": "Brush char from every edge, 120 then 180 grit; round over the cat-door edge and the lid edge by hand so there is nothing sharp at whisker height.",
+   "minutes": 50
+  },
+  {
+   "step": 3,
+   "title": "Dry fit",
+   "detail": "Stand SIDE-L, push in BOTTOM, FRONT and BACK, add SIDE-R, then set the LID (with keys loose) on top. Check the litter box slides in and out with the lid off, and the door is square. No glue.",
+   "minutes": 15
+  },
+  {
+   "step": 4,
+   "title": "Seal the inside",
+   "detail": "Litter and urine are the enemy of bare ply: give every inside face and the BOTTOM top 3 coats of waterborne poly or a 2-part epoxy, masking the tabs and slots. A removable plastic tray under the box is a cheap second layer.",
+   "minutes": 75
+  },
+  {
+   "step": 5,
+   "title": "Glue-up (Titebond III)",
+   "detail": "Glue BOTTOM, FRONT and BACK into SIDE-L, add SIDE-R and clamp with cauls across the width. Check square by measuring the diagonals. Wipe squeeze-out at once.",
+   "minutes": 30
+  },
+  {
+   "step": 6,
+   "title": "Screws as clamps",
+   "detail": "16 #8 screws (3.0 mm pilots cut in): #8 x 1-1/2 in through the side faces into BOTTOM, FRONT and BACK; the lid keys take 4 x #8 x 1-1/4 in down through the LID (plug the heads).",
+   "minutes": 20
+  },
+  {
+   "step": 7,
+   "title": "Lid keys",
+   "detail": "Glue the two LID-KEY strips under the LID so they sit 1 mm inside the walls (use the carcass as the jig), screw from the top, plug and sand. The lid then lifts off by hand for litter-box access.",
+   "minutes": 20
+  },
+  {
+   "step": 8,
+   "title": "Finish, test, pack",
+   "detail": "Two coats of low-VOC water-based poly on the outside, 48 h cure and air out before it goes near a cat. Check a 15 kg lid load. Felt pads under the 4 feet. Flat-pack in one box about 0.7 x 0.6 x 0.12 m.",
+   "minutes": 45
+  }
+ ],
+ "stage_total_minutes": 467,
+ "materials": {
+  "sheet": "18 mm (3/4 in) birch or Baltic-birch plywood, 4 x 8 ft (1220 x 2440 mm) x 1",
+  "sheets_required": 1,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in wood screws",
+    "qty": 12,
+    "unit_cost": 0.06,
+    "note": "from model"
+   },
+   {
+    "item": "#8 x 1-1/4 in wood screws",
+    "qty": 4,
+    "unit_cost": 0.06,
+    "note": "lid keys"
+   },
+   {
+    "item": "Wood plugs / filler",
+    "qty": 1,
+    "unit_cost": 2.0,
+    "note": ""
+   },
+   {
+    "item": "Felt/rubber foot pads",
+    "qty": 4,
+    "unit_cost": 0.4,
+    "note": ""
+   },
+   {
+    "item": "Low-VOC sealer / epoxy for the inside (share of a quart)",
+    "qty": 1,
+    "unit_cost": 14.0,
+    "note": "interior is wet-area; included in finish too for the outside coats"
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 12,
+   "#8 x 1-1/4 in": 4
+  },
+  "glue": "Titebond III, about 5 oz",
+  "finish": "low-VOC water-based poly outside, poly or epoxy inside (about $24 for both)"
+ },
+ "safety": [
+  "Pet safety: no gaps a paw or head can wedge into (door is a smooth arch with no latch); keep the lid heavy enough to stay put (the lid weighs about 3 kg).",
+  "Seal the inside with a waterproof finish; urine soaks bare ply. Let VOCs off-gas fully (48 h minimum) before use.",
+  "Rated target 15 kg on the lid (a lamp and a plant), UNVERIFIED - do not sit on it.",
+  "Ventilation: keep the side vents unblocked. Not a children's product (no CPSIA testing).",
+  "Low piece (under 27 in): no wall anchor needed."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed, machine time NOT measured on the real machine",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine time uses a sourced RANGE for a 120 W diode on 18 mm ply (low 120 / typical 300 / high 600 mm/min effective, i.e. after multiple passes; see CUT-SPEED-RESEARCH.md); ACMER publishes no 18 mm ply feed rate, so none of it is measured on this machine. Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "birch",
+  "sheets": 1,
+  "sheet_price_low_mid_high": [
+   70,
+   90,
+   110
+  ],
+  "sheet_cost_mid": 90,
+  "hardware_cost": 18.56,
+  "finish_cost": 24.0,
+  "packaging_cost": 16.0,
+  "cut_path_m": 31.7,
+  "contours": 82,
+  "rapid_travel_m": 11.0,
+  "machine_time": {
+   "label": "ESTIMATE. Diode = ACMER X1 Ultra 120 W on 18 mm plywood; effective rate = speed / passes. Includes rapid travel between contours and 15 min per sheet of load/focus/unload. Not measured.",
+   "diode_low_mid_high_minutes": [
+    287.1,
+    126.8,
+    70.9
+   ],
+   "diode_low_mid_high_hours": [
+    4.78,
+    2.11,
+    1.18
+   ],
+   "scenarios": {
+    "low": {
+     "passes": 5,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 120,
+     "cut_min": 264.5,
+     "travel_min": 7.5,
+     "setup_min": 15.0,
+     "total_min": 287.1,
+     "total_hours": 4.78
+    },
+    "mid": {
+     "passes": 4,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 300,
+     "cut_min": 105.8,
+     "travel_min": 6.0,
+     "setup_min": 15.0,
+     "total_min": 126.8,
+     "total_hours": 2.11
+    },
+    "high": {
+     "passes": 2,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 600,
+     "cut_min": 52.9,
+     "travel_min": 3.0,
+     "setup_min": 15.0,
+     "total_min": 70.9,
+     "total_hours": 1.18
+    },
+    "commercial_co2": {
+     "passes": 1,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 600,
+     "cut_min": 52.9,
+     "travel_min": 0.3,
+     "setup_min": 5.0,
+     "total_min": 58.2,
+     "total_hours": 0.97,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_10x": {
+     "factor": 10,
+     "total_min": 16.2,
+     "total_hours": 0.27,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_20x": {
+     "factor": 20,
+     "total_min": 10.6,
+     "total_hours": 0.18,
+     "operating_cost_per_hr": 8.0
+    }
+   },
+   "commercial_laser": {
+    "label": "ASSUMPTION. Sourced case: 300-600 W CO2 flatbed, single pass at ~600 mm/min (vendor 480-720), 60 m/min rapids, 5 min/sheet, $8/h operating cost. What-if cases: a machine 10x / 20x faster than the diode mid cut+travel time (not sourced for 18 mm ply).",
+    "minutes_sourced_co2": 58.2,
+    "hours_sourced_co2": 0.97,
+    "hours_what_if_10x": 0.27,
+    "hours_what_if_20x": 0.18
+   }
+  },
+  "machine_hours_mid": 2.11,
+  "machine_wear_cost": 3.59,
+  "profit_per_machine_hour_at_mid_price": {
+   "low": {
+    "machine_hours": 4.78,
+    "machine_minutes": 287.1,
+    "cogs": 156.69,
+    "gross_margin": 233.31,
+    "gross_margin_pct": 59.8,
+    "net_after_fees_and_labor": 129.31,
+    "gross_margin_per_machine_hour": 48.81,
+    "net_after_fees_and_labor_per_machine_hour": 27.05
+   },
+   "mid": {
+    "machine_hours": 2.11,
+    "machine_minutes": 126.8,
+    "cogs": 152.15,
+    "gross_margin": 237.85,
+    "gross_margin_pct": 61.0,
+    "net_after_fees_and_labor": 133.85,
+    "gross_margin_per_machine_hour": 112.73,
+    "net_after_fees_and_labor_per_machine_hour": 63.44
+   },
+   "high": {
+    "machine_hours": 1.18,
+    "machine_minutes": 70.9,
+    "cogs": 150.57,
+    "gross_margin": 239.43,
+    "gross_margin_pct": 61.4,
+    "net_after_fees_and_labor": 135.43,
+    "gross_margin_per_machine_hour": 202.91,
+    "net_after_fees_and_labor_per_machine_hour": 114.77
+   },
+   "commercial_co2": {
+    "machine_hours": 0.97,
+    "machine_minutes": 58.2,
+    "cogs": 156.32,
+    "gross_margin": 233.68,
+    "gross_margin_pct": 59.9,
+    "net_after_fees_and_labor": 129.68,
+    "gross_margin_per_machine_hour": 240.91,
+    "net_after_fees_and_labor_per_machine_hour": 133.69
+   },
+   "what_if_10x": {
+    "machine_hours": 0.27,
+    "machine_minutes": 16.2,
+    "cogs": 150.72,
+    "gross_margin": 239.28,
+    "gross_margin_pct": 61.4,
+    "net_after_fees_and_labor": 135.28,
+    "gross_margin_per_machine_hour": 886.22,
+    "net_after_fees_and_labor_per_machine_hour": 501.04
+   },
+   "what_if_20x": {
+    "machine_hours": 0.18,
+    "machine_minutes": 10.6,
+    "cogs": 150.0,
+    "gross_margin": 240.0,
+    "gross_margin_pct": 61.5,
+    "net_after_fees_and_labor": 136.0,
+    "gross_margin_per_machine_hour": 1333.33,
+    "net_after_fees_and_labor_per_machine_hour": 755.56
+   }
+  },
+  "labor_hours": 2.6,
+  "product_weight_kg": 19.5,
+  "shipping_estimate_if_absorbed": 54.0,
+  "cost_per_unit_low_mid_high": [
+   132.15,
+   152.15,
+   172.15
+  ],
+  "price_band_source": "My estimate: Etsy and Amazon cat-litter furniture runs about $90-$200 (mass-market MDF) to $250-$600 (solid wood/plywood handmade); SHORTLIST.md measured strong demand for pet furniture. Low = compact, one finish; high = XL for two cats, finished inside and out.",
+  "at_price": {
+   "low": {
+    "price": 240.0,
+    "cogs_mid": 152.15,
+    "gross_margin": 87.85,
+    "gross_margin_pct": 36.6,
+    "gross_margin_if_you_absorb_shipping": 33.85,
+    "net_after_fees_and_labor": -1.15,
+    "gross_margin_per_machine_hour": 41.64,
+    "net_after_fees_and_labor_per_machine_hour": -0.55
+   },
+   "mid": {
+    "price": 390.0,
+    "cogs_mid": 152.15,
+    "gross_margin": 237.85,
+    "gross_margin_pct": 61.0,
+    "gross_margin_if_you_absorb_shipping": 183.85,
+    "net_after_fees_and_labor": 133.85,
+    "gross_margin_per_machine_hour": 112.73,
+    "net_after_fees_and_labor_per_machine_hour": 63.44
+   },
+   "high": {
+    "price": 600.0,
+    "cogs_mid": 152.15,
+    "gross_margin": 447.85,
+    "gross_margin_pct": 74.6,
+    "gross_margin_if_you_absorb_shipping": 393.85,
+    "net_after_fees_and_labor": 322.85,
+    "gross_margin_per_machine_hour": 212.25,
+    "net_after_fees_and_labor_per_machine_hour": 153.01
+   }
+  },
+  "note_machine_time": "ESTIMATE: 2.1 h (low-speed case 4.8 h, best case 1.2 h) of machine time per unit for 32 m of cut path in 1 sheet(s) on a 120 W diode, 18 mm plywood. Machine time, not material, is still the limit on profit per hour, but a single test cut on scrap will replace this range with a real number."
+ },
+ "unverified": [
+  "Machine time is an estimate (120 W diode on 18 mm ply, sourced range, not measured on this machine); cut time and profit/hour depend on it.",
+  "Litter box sizes vary a lot: measure the exact box before ordering; interior = box + 50 mm in each direction.",
+  "Odor control of the vented design is untested; a carbon filter pad in the vents is an add-on, not modeled.",
+  "A French cleat is not offered: a litter box is too heavy and wet for a cleat; the piece stands on short feet raised for the robot vacuum instead.",
+  "Exterior (marine) plywood and cut quality of sealed inside faces are unverified.",
+  "Price band is my estimate, not a market quote."
+ ]
+}

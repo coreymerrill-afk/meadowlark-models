@@ -1,0 +1,469 @@
+{
+ "name": "Garden Potting Bench",
+ "slug": "potting-bench",
+ "pitch": "A potting bench with a drainage worktop, a lower shelf and a hutch shelf with tool-hang holes, built from exterior-grade ply and raised off wet ground. Cut to your patio or greenhouse.",
+ "dimensions_mm": {
+  "width": 1100.0,
+  "height": 1500.0,
+  "depth": 500.0,
+  "worktop_height": 900.0,
+  "foot_clearance": 60.0,
+  "bay_width": 503.0,
+  "upper_shelf_depth": 217.0
+ },
+ "parameters": [
+  {
+   "name": "width",
+   "default": 1100.0,
+   "limits": "700-1600 mm (each bay <= 700)"
+  },
+  {
+   "name": "height",
+   "default": 900.0,
+   "limits": "750-1000 mm"
+  },
+  {
+   "name": "depth",
+   "default": 500.0,
+   "limits": "420-600 mm"
+  },
+  {
+   "name": "hutch_top",
+   "default": 1500.0,
+   "limits": "1250-1800 mm"
+  },
+  {
+   "name": "hutch_depth",
+   "default": 260.0,
+   "limits": "210-320 mm"
+  },
+  {
+   "name": "hutch_shelf_z",
+   "default": 1200.0,
+   "limits": ">= worktop height + 250"
+  },
+  {
+   "name": "shelf_z",
+   "default": 260.0,
+   "limits": ">= foot + 60 mm"
+  },
+  {
+   "name": "foot",
+   "default": 60.0,
+   "limits": "40-120 mm"
+  },
+  {
+   "name": "dividers",
+   "default": 1,
+   "limits": "0-2 (each bay <= 700)"
+  },
+  {
+   "name": "slatted",
+   "default": 1,
+   "limits": "0 or 1"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm (keep >= 0.1 outdoors)"
+  }
+ ],
+ "sheet_count": 2,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "potting-bench-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "TOP",
+     "number": 3,
+     "size_mm": [
+      1100.0,
+      500.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-LOW",
+     "number": 4,
+     "size_mm": [
+      1060.0,
+      460.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "BACK",
+     "number": 2,
+     "size_mm": [
+      1060.0,
+      538.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SHELF-UP",
+     "number": 6,
+     "size_mm": [
+      1060.0,
+      217.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 4,
+   "coverage_pct": 54.2,
+   "cut_path_m": 38.91
+  },
+  {
+   "sheet": 2,
+   "dxf": "potting-bench-nest-sheet2-1220x2440.dxf",
+   "png": "sheet-2.png",
+   "parts": [
+    {
+     "name": "SIDE-L",
+     "number": 1,
+     "size_mm": [
+      460.0,
+      1500.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "SIDE-R",
+     "number": 1,
+     "size_mm": [
+      460.0,
+      1500.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "DIVIDER-1",
+     "number": 5,
+     "size_mm": [
+      387.0,
+      640.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 3,
+   "coverage_pct": 44.0,
+   "cut_path_m": 13.13
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheets",
+   "detail": "Run the fit-test coupon first (slot = tab + 0.1 mm; do not tighten it for outdoor ply, which swells), then cut 2 sheets from the DXFs (CUT layer): 52 m of path, 87 drainage slots, 13 tool-hang holes. Inside-out order, air assist on. Exterior-grade ply has more glue lines: expect more char, and test a scrap.",
+   "minutes": 347
+  },
+  {
+   "step": 2,
+   "title": "Remove char and sand",
+   "detail": "Brush the char from every edge, 120 then 180 grit; round over the worktop edge. End grain drinks water: sand the slot edges smooth now so the sealer can soak in.",
+   "minutes": 60
+  },
+  {
+   "step": 3,
+   "title": "Dry fit",
+   "detail": "Stand SIDE-L flat, push in SHELF-LOW, the 1 divider(s), BACK and SHELF-UP, add SIDE-R, then lower the TOP over the uprights and every tab. Check square. No glue.",
+   "minutes": 20
+  },
+  {
+   "step": 4,
+   "title": "Seal every face and edge",
+   "detail": "Outdoors the finish is the product: 3 coats of exterior spar urethane, or 2 coats of penetrating epoxy sealer then 2 coats of exterior paint, on every face and edge, including the insides of the drainage slots. Mask the tabs and slots so the glue still bonds (a dry run first). Do this before glue-up.",
+   "minutes": 120
+  },
+  {
+   "step": 5,
+   "title": "Glue-up (Titebond III, water-resistant)",
+   "detail": "Glue SHELF-LOW, the divider(s), BACK and SHELF-UP into SIDE-L, fit SIDE-R and clamp. Then lower the TOP over the tabs and the two uprights. Wipe squeeze-out at once. Titebond III is rated water-resistant (exterior use under cover); it is not for standing water.",
+   "minutes": 40
+  },
+  {
+   "step": 6,
+   "title": "Screws as clamps",
+   "detail": "6 #8 x 1-1/2 in stainless or coated deck screws (3.0 mm pilots cut in): through the side faces into the lower shelf edges and down through the TOP into the side edges (plug and seal the heads). For a knock-down bench omit the glue and use the screws only (weaker; unverified).",
+   "minutes": 20
+  },
+  {
+   "step": 7,
+   "title": "Wall anchor",
+   "detail": "Strap the BACK to the wall through one of the two 6 mm holes near its top (stud or masonry anchor). Required: this piece is 1500 mm tall and holds wet soil.",
+   "minutes": 15
+  },
+  {
+   "step": 8,
+   "title": "Hooks, test, pack",
+   "detail": "Fit S-hooks or 10 mm dowel pegs in the tool-hang holes. Load-test 40 kg on the worktop and 25 kg on the lower shelf. Feet pads on all 4 feet. Flat-pack in two boxes (long parts about 1.55 m).",
+   "minutes": 45
+  }
+ ],
+ "stage_total_minutes": 667,
+ "materials": {
+  "sheet": "18 mm (3/4 in) EXTERIOR-grade plywood (exterior glue, e.g. exterior birch/fir or marine okoume for wet sites), 4 x 8 ft (1220 x 2440 mm) x 2",
+  "sheets_required": 2,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in stainless/coated screws",
+    "qty": 6,
+    "unit_cost": 0.15,
+    "note": "from model; stainless for coastal/wet sites"
+   },
+   {
+    "item": "Wall anchor strap / bracket kit (stud + masonry)",
+    "qty": 1,
+    "unit_cost": 8.0,
+    "note": "mandatory"
+   },
+   {
+    "item": "S-hooks or 10 mm dowel pegs",
+    "qty": 6,
+    "unit_cost": 0.8,
+    "note": "for the tool-hang holes"
+   },
+   {
+    "item": "Wood plugs / filler (exterior)",
+    "qty": 1,
+    "unit_cost": 3.0,
+    "note": ""
+   },
+   {
+    "item": "Rubber foot pads",
+    "qty": 4,
+    "unit_cost": 0.6,
+    "note": ""
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 6
+  },
+  "glue": "Titebond III, about 6 oz",
+  "finish": "exterior spar urethane or epoxy-sealer plus exterior paint (about $34 for the whole bench)"
+ },
+ "safety": [
+  "Anchor the BACK to the wall (anti-tip strap or bracket); mandatory, the bench is 1500 mm tall and carries wet soil.",
+  "Rated target 40 kg on the worktop and 25 kg on the lower shelf, UNVERIFIED - load test before selling; wet soil is about 1.3 kg per litre.",
+  "Use exterior-grade ply only; interior ply delaminates outdoors within a season. Seal every edge.",
+  "Not a children's product (no CPSIA testing); do not use as a ladder or step.",
+  "Keep it off standing water and treat the feet pads as wear parts."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed, machine time NOT measured on the real machine",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine time uses a sourced RANGE for a 120 W diode on 18 mm ply (low 120 / typical 300 / high 600 mm/min effective, i.e. after multiple passes; see CUT-SPEED-RESEARCH.md); ACMER publishes no 18 mm ply feed rate, so none of it is measured on this machine. Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "birch",
+  "sheets": 2,
+  "sheet_price_low_mid_high": [
+   70,
+   90,
+   110
+  ],
+  "sheet_cost_mid": 180,
+  "hardware_cost": 19.1,
+  "finish_cost": 34.0,
+  "packaging_cost": 22.0,
+  "cut_path_m": 52.0,
+  "contours": 147,
+  "rapid_travel_m": 19.2,
+  "machine_time": {
+   "label": "ESTIMATE. Diode = ACMER X1 Ultra 120 W on 18 mm plywood; effective rate = speed / passes. Includes rapid travel between contours and 15 min per sheet of load/focus/unload. Not measured.",
+   "diode_low_mid_high_minutes": [
+    476.9,
+    214.1,
+    122.0
+   ],
+   "diode_low_mid_high_hours": [
+    7.95,
+    3.57,
+    2.03
+   ],
+   "scenarios": {
+    "low": {
+     "passes": 5,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 120,
+     "cut_min": 433.7,
+     "travel_min": 13.3,
+     "setup_min": 30.0,
+     "total_min": 476.9,
+     "total_hours": 7.95
+    },
+    "mid": {
+     "passes": 4,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 300,
+     "cut_min": 173.5,
+     "travel_min": 10.6,
+     "setup_min": 30.0,
+     "total_min": 214.1,
+     "total_hours": 3.57
+    },
+    "high": {
+     "passes": 2,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 600,
+     "cut_min": 86.7,
+     "travel_min": 5.3,
+     "setup_min": 30.0,
+     "total_min": 122.0,
+     "total_hours": 2.03
+    },
+    "commercial_co2": {
+     "passes": 1,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 600,
+     "cut_min": 86.7,
+     "travel_min": 0.6,
+     "setup_min": 10.0,
+     "total_min": 97.3,
+     "total_hours": 1.62,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_10x": {
+     "factor": 10,
+     "total_min": 28.4,
+     "total_hours": 0.47,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_20x": {
+     "factor": 20,
+     "total_min": 19.2,
+     "total_hours": 0.32,
+     "operating_cost_per_hr": 8.0
+    }
+   },
+   "commercial_laser": {
+    "label": "ASSUMPTION. Sourced case: 300-600 W CO2 flatbed, single pass at ~600 mm/min (vendor 480-720), 60 m/min rapids, 5 min/sheet, $8/h operating cost. What-if cases: a machine 10x / 20x faster than the diode mid cut+travel time (not sourced for 18 mm ply).",
+    "minutes_sourced_co2": 97.3,
+    "hours_sourced_co2": 1.62,
+    "hours_what_if_10x": 0.47,
+    "hours_what_if_20x": 0.32
+   }
+  },
+  "machine_hours_mid": 3.57,
+  "machine_wear_cost": 6.07,
+  "profit_per_machine_hour_at_mid_price": {
+   "low": {
+    "machine_hours": 7.95,
+    "machine_minutes": 476.9,
+    "cogs": 268.62,
+    "gross_margin": 151.38,
+    "gross_margin_pct": 36.0,
+    "net_after_fees_and_labor": 24.38,
+    "gross_margin_per_machine_hour": 19.04,
+    "net_after_fees_and_labor_per_machine_hour": 3.07
+   },
+   "mid": {
+    "machine_hours": 3.57,
+    "machine_minutes": 214.1,
+    "cogs": 261.17,
+    "gross_margin": 158.83,
+    "gross_margin_pct": 37.8,
+    "net_after_fees_and_labor": 31.83,
+    "gross_margin_per_machine_hour": 44.49,
+    "net_after_fees_and_labor_per_machine_hour": 8.92
+   },
+   "high": {
+    "machine_hours": 2.03,
+    "machine_minutes": 122.0,
+    "cogs": 258.55,
+    "gross_margin": 161.45,
+    "gross_margin_pct": 38.4,
+    "net_after_fees_and_labor": 34.45,
+    "gross_margin_per_machine_hour": 79.53,
+    "net_after_fees_and_labor_per_machine_hour": 16.97
+   },
+   "commercial_co2": {
+    "machine_hours": 1.62,
+    "machine_minutes": 97.3,
+    "cogs": 268.06,
+    "gross_margin": 151.94,
+    "gross_margin_pct": 36.2,
+    "net_after_fees_and_labor": 24.94,
+    "gross_margin_per_machine_hour": 93.79,
+    "net_after_fees_and_labor_per_machine_hour": 15.4
+   },
+   "what_if_10x": {
+    "machine_hours": 0.47,
+    "machine_minutes": 28.4,
+    "cogs": 258.86,
+    "gross_margin": 161.14,
+    "gross_margin_pct": 38.4,
+    "net_after_fees_and_labor": 34.14,
+    "gross_margin_per_machine_hour": 342.85,
+    "net_after_fees_and_labor_per_machine_hour": 72.64
+   },
+   "what_if_20x": {
+    "machine_hours": 0.32,
+    "machine_minutes": 19.2,
+    "cogs": 257.66,
+    "gross_margin": 162.34,
+    "gross_margin_pct": 38.7,
+    "net_after_fees_and_labor": 35.34,
+    "gross_margin_per_machine_hour": 507.31,
+    "net_after_fees_and_labor_per_machine_hour": 110.44
+   }
+  },
+  "labor_hours": 3.4,
+  "product_weight_kg": 32.6,
+  "shipping_estimate_if_absorbed": 80.0,
+  "cost_per_unit_low_mid_high": [
+   221.17,
+   261.17,
+   301.17
+  ],
+  "price_band_source": "My estimate: Amazon/Home Depot garden potting benches run about $90-$250 (thin fir/steel), handmade cedar or ply benches about $250-$700 (Etsy; SHORTLIST.md R2 outdoor planter/bench). A sealed exterior-ply bench cut to size, with hutch and hooks, sits in the handmade tier. Low = balcony size unpainted, high = 1.6 m greenhouse size painted.",
+  "at_price": {
+   "low": {
+    "price": 260.0,
+    "cogs_mid": 261.17,
+    "gross_margin": -1.17,
+    "gross_margin_pct": -0.5,
+    "gross_margin_if_you_absorb_shipping": -81.17,
+    "net_after_fees_and_labor": -112.17,
+    "gross_margin_per_machine_hour": -0.33,
+    "net_after_fees_and_labor_per_machine_hour": -31.42
+   },
+   "mid": {
+    "price": 420.0,
+    "cogs_mid": 261.17,
+    "gross_margin": 158.83,
+    "gross_margin_pct": 37.8,
+    "gross_margin_if_you_absorb_shipping": 78.83,
+    "net_after_fees_and_labor": 31.83,
+    "gross_margin_per_machine_hour": 44.49,
+    "net_after_fees_and_labor_per_machine_hour": 8.92
+   },
+   "high": {
+    "price": 650.0,
+    "cogs_mid": 261.17,
+    "gross_margin": 388.83,
+    "gross_margin_pct": 59.8,
+    "gross_margin_if_you_absorb_shipping": 308.83,
+    "net_after_fees_and_labor": 238.83,
+    "gross_margin_per_machine_hour": 108.92,
+    "net_after_fees_and_labor_per_machine_hour": 66.9
+   }
+  },
+  "note_machine_time": "ESTIMATE: 3.6 h (low-speed case 8.0 h, best case 2.0 h) of machine time per unit for 52 m of cut path in 2 sheet(s) on a 120 W diode, 18 mm plywood. Machine time, not material, is still the limit on profit per hour, but a single test cut on scrap will replace this range with a real number."
+ },
+ "unverified": [
+  "Machine time is an estimate (120 W diode on 18 mm ply, sourced range, not measured on this machine); cut time and profit/hour depend on it.",
+  "Exterior and marine plywood (phenolic/waterproof glue lines) cut quality and speed on the 120 W diode are unverified; the laser may need more passes or leave heavier char.",
+  "Weather life of the finish and of the tab joints is untested; swelling can bind tabs, so the 0.1 mm slot clearance should not be tightened.",
+  "A folding version is not modeled; knock-down (screws, no glue) is possible but unverified and weaker.",
+  "French cleat not offered: the piece is heavy, wet and meant to stand on its feet.",
+  "Price band is my estimate, not a market quote. Low and high bands are applied to the default-size cost, so the low band is about break-even; a balcony-size unit costs less in material."
+ ]
+}

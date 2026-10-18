@@ -1,0 +1,544 @@
+{
+ "name": "Floating Shelf Set on French Cleats",
+ "slug": "floating-shelves",
+ "pitch": "A set of hollow floating shelves, each hung on a concealed aluminum Z-bar French cleat, stepped in length. Off the floor entirely, so the robot vacuum is unaffected.",
+ "dimensions_mm": {
+  "width": 900.0,
+  "height": 680.0,
+  "depth": 220.0,
+  "shelf_height": 80.0,
+  "shelf_lengths": [
+   900,
+   750,
+   600
+  ],
+  "zbar_inches": [
+   24,
+   24,
+   18
+  ]
+ },
+ "parameters": [
+  {
+   "name": "width",
+   "default": 900.0,
+   "limits": "400-1200 mm"
+  },
+  {
+   "name": "shelves",
+   "default": 3,
+   "limits": "1-5"
+  },
+  {
+   "name": "depth",
+   "default": 220.0,
+   "limits": "190-300 mm"
+  },
+  {
+   "name": "shelf_height",
+   "default": 80.0,
+   "limits": "76-110 mm"
+  },
+  {
+   "name": "pitch",
+   "default": 300.0,
+   "limits": "200-500 mm (>= height + 120)"
+  },
+  {
+   "name": "step",
+   "default": 150.0,
+   "limits": "0-300 mm (shortest >= 300)"
+  },
+  {
+   "name": "thickness",
+   "default": 18.0,
+   "limits": "17.5-19 mm"
+  },
+  {
+   "name": "clearance",
+   "default": 0.1,
+   "limits": "0.0-0.2 mm"
+  }
+ ],
+ "sheet_count": 1,
+ "sheets": [
+  {
+   "sheet": 1,
+   "dxf": "floating-shelves-nest-sheet1-1220x2440.dxf",
+   "png": "sheet-1.png",
+   "parts": [
+    {
+     "name": "S1-TOP",
+     "number": 1,
+     "size_mm": [
+      900.0,
+      220.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S1-BOTTOM",
+     "number": 2,
+     "size_mm": [
+      900.0,
+      196.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S1-END-L",
+     "number": 10,
+     "size_mm": [
+      200.0,
+      80.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S1-END-R",
+     "number": 10,
+     "size_mm": [
+      200.0,
+      80.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S1-FRONT",
+     "number": 7,
+     "size_mm": [
+      860.0,
+      44.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S1-HANGER",
+     "number": 7,
+     "size_mm": [
+      860.0,
+      44.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S2-TOP",
+     "number": 3,
+     "size_mm": [
+      750.0,
+      220.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S2-BOTTOM",
+     "number": 4,
+     "size_mm": [
+      750.0,
+      196.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S2-END-L",
+     "number": 10,
+     "size_mm": [
+      200.0,
+      80.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S2-END-R",
+     "number": 10,
+     "size_mm": [
+      200.0,
+      80.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S2-FRONT",
+     "number": 8,
+     "size_mm": [
+      710.0,
+      44.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S2-HANGER",
+     "number": 8,
+     "size_mm": [
+      710.0,
+      44.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S3-TOP",
+     "number": 5,
+     "size_mm": [
+      600.0,
+      220.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S3-BOTTOM",
+     "number": 6,
+     "size_mm": [
+      600.0,
+      196.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S3-END-L",
+     "number": 10,
+     "size_mm": [
+      200.0,
+      80.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S3-END-R",
+     "number": 10,
+     "size_mm": [
+      200.0,
+      80.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S3-FRONT",
+     "number": 9,
+     "size_mm": [
+      560.0,
+      44.0
+     ],
+     "optional": false
+    },
+    {
+     "name": "S3-HANGER",
+     "number": 9,
+     "size_mm": [
+      560.0,
+      44.0
+     ],
+     "optional": false
+    }
+   ],
+   "part_count": 18,
+   "coverage_pct": 39.2,
+   "cut_path_m": 29.24
+  }
+ ],
+ "stages": [
+  {
+   "step": 1,
+   "title": "Cut the sheet(s)",
+   "detail": "Run the fit-test coupon first (slot = tab + 0.1 mm), then cut 1 sheet(s) from the DXFs (CUT layer): 29 m of path, 18 parts. Inside-out order, air assist on.",
+   "minutes": 195
+  },
+  {
+   "step": 2,
+   "title": "Remove char and sand",
+   "detail": "Brush the char off every edge, 120 then 180 grit. Ease the TOP front and side edges (the visible top slab); sand the slot ends flush later, after glue.",
+   "minutes": 72
+  },
+  {
+   "step": 3,
+   "title": "Dry fit one shelf",
+   "detail": "For each shelf: stand the two END plates, drop the FRONT and HANGER between them, then fit BOTTOM underneath and TOP on top of all the tabs. Check the box is square and the cavity is clear for the Z-bar.",
+   "minutes": 30
+  },
+  {
+   "step": 4,
+   "title": "Pre-finish",
+   "detail": "Stain or seal the inside of the box and the HANGER rear face lightly, then finish TOP/BOTTOM faces. Mask the tabs and slots so the glue still bonds.",
+   "minutes": 65
+  },
+  {
+   "step": 5,
+   "title": "Glue-up (Titebond III)",
+   "detail": "Per shelf: glue the ENDs into BOTTOM, add FRONT and HANGER, then seat TOP over every tab. Clamp with cauls across the width. Wipe squeeze-out.",
+   "minutes": 60
+  },
+  {
+   "step": 6,
+   "title": "Screws as clamps",
+   "detail": "6 #8 x 1-1/2 in screws (3.0 mm pilots cut in the BOTTOM): from the underside up into the END plates, between the tabs. The TOP is glue and tab only, so the top face stays clean; clamp it with cauls while it dries.",
+   "minutes": 24
+  },
+  {
+   "step": 7,
+   "title": "Fit the Z-bar cleats",
+   "detail": "Screw the shelf half of each aluminum Z-bar (lengths 24/24/18 in) to the rear face of the HANGER with #8 x 5/8 in screws (shorter than the 18 mm plate, so they cannot show). Mount the wall half level into studs (2 screws per stud, 16 in centers), then hang the shelf from above.",
+   "minutes": 45
+  },
+  {
+   "step": 8,
+   "title": "Hang, test, pack",
+   "detail": "Hang, then load-test each shelf with 10 kg at the front edge. Flat-pack in one 1.0 x 0.3 x 0.1 m box.",
+   "minutes": 25
+  }
+ ],
+ "stage_total_minutes": 516,
+ "materials": {
+  "sheet": "18 mm (3/4 in) birch or Baltic-birch plywood, 4 x 8 ft (1220 x 2440 mm) x 1",
+  "sheets_required": 1,
+  "thickness_mm": 18.0,
+  "hardware": [
+   {
+    "item": "#8 x 1-1/2 in wood screws",
+    "qty": 6,
+    "unit_cost": 0.06,
+    "note": "from model"
+   },
+   {
+    "item": "Aluminum Z-bar French cleat pair (wall half + shelf half), lengths 24/24/18 in",
+    "qty": 1,
+    "unit_cost": 36.3,
+    "note": "about $0.55 per inch per pair (assumption); laser cannot cut the 45 deg bevel"
+   },
+   {
+    "item": "#8 x 5/8 in screws for the shelf-half bars",
+    "qty": 18,
+    "unit_cost": 0.04,
+    "note": ""
+   },
+   {
+    "item": "Wall screws / stud screws for the wall-half bars",
+    "qty": 12,
+    "unit_cost": 0.15,
+    "note": "#10 x 2-1/2 in; into studs"
+   },
+   {
+    "item": "Wood plugs / filler",
+    "qty": 1,
+    "unit_cost": 2.0,
+    "note": ""
+   }
+  ],
+  "screws_counted_from_model": {
+   "#8 x 1-1/2 in": 6
+  },
+  "glue": "Titebond III, about 3 oz",
+  "finish": "stain or water-based poly, 2 coats (about $10)"
+ },
+ "safety": [
+  "Mount the wall half of each cleat into studs only (not drywall anchors alone); level it before hanging.",
+  "Rated target 10 kg per shelf at a 220 mm depth, UNVERIFIED - load test each shelf at 15 kg before selling; the rating falls as depth grows.",
+  "Keep heavy items (books, appliances) on a conventional bookcase, not on a floating shelf.",
+  "Not a children's product (no CPSIA testing); do not use as a climbing aid."
+ ],
+ "profit": {
+  "labels": "ESTIMATES AND ASSUMPTIONS ONLY - not quotes, not guaranteed, machine time NOT measured on the real machine",
+  "assumptions": "All dollar figures are planning ESTIMATES / ASSUMPTIONS, not quotes, not guaranteed. Sheet prices: 4x8 ft 18 mm birch plywood $70-110, basic plywood $55-75 (assumption). Machine time uses a sourced RANGE for a 120 W diode on 18 mm ply (low 120 / typical 300 / high 600 mm/min effective, i.e. after multiple passes; see CUT-SPEED-RESEARCH.md); ACMER publishes no 18 mm ply feed rate, so none of it is measured on this machine. Machine wear/electricity $1.70 per machine-hour (assumption). Labor valued at $25/h for the \"after labor\" line only. Marketplace fees 10% (assumption, e.g. Etsy-style).",
+  "sheet_kind": "birch",
+  "sheets": 1,
+  "sheet_price_low_mid_high": [
+   70,
+   90,
+   110
+  ],
+  "sheet_cost_mid": 90,
+  "hardware_cost": 41.18,
+  "finish_cost": 10.0,
+  "packaging_cost": 10.0,
+  "cut_path_m": 29.2,
+  "contours": 63,
+  "rapid_travel_m": 8.5,
+  "machine_time": {
+   "label": "ESTIMATE. Diode = ACMER X1 Ultra 120 W on 18 mm plywood; effective rate = speed / passes. Includes rapid travel between contours and 15 min per sheet of load/focus/unload. Not measured.",
+   "diode_low_mid_high_minutes": [
+    264.5,
+    117.1,
+    66.1
+   ],
+   "diode_low_mid_high_hours": [
+    4.41,
+    1.95,
+    1.1
+   ],
+   "scenarios": {
+    "low": {
+     "passes": 5,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 120,
+     "cut_min": 243.7,
+     "travel_min": 5.8,
+     "setup_min": 15.0,
+     "total_min": 264.5,
+     "total_hours": 4.41
+    },
+    "mid": {
+     "passes": 4,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 300,
+     "cut_min": 97.5,
+     "travel_min": 4.7,
+     "setup_min": 15.0,
+     "total_min": 117.1,
+     "total_hours": 1.95
+    },
+    "high": {
+     "passes": 2,
+     "speed_mm_min": 1200.0,
+     "effective_mm_min": 600,
+     "cut_min": 48.7,
+     "travel_min": 2.3,
+     "setup_min": 15.0,
+     "total_min": 66.1,
+     "total_hours": 1.1
+    },
+    "commercial_co2": {
+     "passes": 1,
+     "speed_mm_min": 600.0,
+     "effective_mm_min": 600,
+     "cut_min": 48.7,
+     "travel_min": 0.2,
+     "setup_min": 5.0,
+     "total_min": 54.0,
+     "total_hours": 0.9,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_10x": {
+     "factor": 10,
+     "total_min": 15.2,
+     "total_hours": 0.25,
+     "operating_cost_per_hr": 8.0
+    },
+    "what_if_20x": {
+     "factor": 20,
+     "total_min": 10.1,
+     "total_hours": 0.17,
+     "operating_cost_per_hr": 8.0
+    }
+   },
+   "commercial_laser": {
+    "label": "ASSUMPTION. Sourced case: 300-600 W CO2 flatbed, single pass at ~600 mm/min (vendor 480-720), 60 m/min rapids, 5 min/sheet, $8/h operating cost. What-if cases: a machine 10x / 20x faster than the diode mid cut+travel time (not sourced for 18 mm ply).",
+    "minutes_sourced_co2": 54.0,
+    "hours_sourced_co2": 0.9,
+    "hours_what_if_10x": 0.25,
+    "hours_what_if_20x": 0.17
+   }
+  },
+  "machine_hours_mid": 1.95,
+  "machine_wear_cost": 3.31,
+  "profit_per_machine_hour_at_mid_price": {
+   "low": {
+    "machine_hours": 4.41,
+    "machine_minutes": 264.5,
+    "cogs": 158.68,
+    "gross_margin": 51.32,
+    "gross_margin_pct": 24.4,
+    "net_after_fees_and_labor": -24.68,
+    "gross_margin_per_machine_hour": 11.64,
+    "net_after_fees_and_labor_per_machine_hour": -5.6
+   },
+   "mid": {
+    "machine_hours": 1.95,
+    "machine_minutes": 117.1,
+    "cogs": 154.5,
+    "gross_margin": 55.5,
+    "gross_margin_pct": 26.4,
+    "net_after_fees_and_labor": -20.5,
+    "gross_margin_per_machine_hour": 28.46,
+    "net_after_fees_and_labor_per_machine_hour": -10.51
+   },
+   "high": {
+    "machine_hours": 1.1,
+    "machine_minutes": 66.1,
+    "cogs": 153.05,
+    "gross_margin": 56.95,
+    "gross_margin_pct": 27.1,
+    "net_after_fees_and_labor": -19.05,
+    "gross_margin_per_machine_hour": 51.77,
+    "net_after_fees_and_labor_per_machine_hour": -17.32
+   },
+   "commercial_co2": {
+    "machine_hours": 0.9,
+    "machine_minutes": 54.0,
+    "cogs": 158.38,
+    "gross_margin": 51.62,
+    "gross_margin_pct": 24.6,
+    "net_after_fees_and_labor": -24.38,
+    "gross_margin_per_machine_hour": 57.36,
+    "net_after_fees_and_labor_per_machine_hour": -27.09
+   },
+   "what_if_10x": {
+    "machine_hours": 0.25,
+    "machine_minutes": 15.2,
+    "cogs": 153.18,
+    "gross_margin": 56.82,
+    "gross_margin_pct": 27.1,
+    "net_after_fees_and_labor": -19.18,
+    "gross_margin_per_machine_hour": 227.28,
+    "net_after_fees_and_labor_per_machine_hour": -76.72
+   },
+   "what_if_20x": {
+    "machine_hours": 0.17,
+    "machine_minutes": 10.1,
+    "cogs": 152.54,
+    "gross_margin": 57.46,
+    "gross_margin_pct": 27.4,
+    "net_after_fees_and_labor": -18.54,
+    "gross_margin_per_machine_hour": 338.0,
+    "net_after_fees_and_labor_per_machine_hour": -109.06
+   }
+  },
+  "labor_hours": 2.2,
+  "product_weight_kg": 13.0,
+  "shipping_estimate_if_absorbed": 38.0,
+  "cost_per_unit_low_mid_high": [
+   134.5,
+   154.5,
+   174.5
+  ],
+  "price_band_source": "My estimate: single floating shelves sell for about $25-$60 at commodity level and $60-$120 handmade (Etsy; SHORTLIST.md \"considered and not picked\" because commodity pricing is low). A 3-shelf stepped set, finished, with the cleat hardware included, is priced as a set. Low = 2 short unfinished shelves, high = 5 long finished.",
+  "at_price": {
+   "low": {
+    "price": 130.0,
+    "cogs_mid": 154.5,
+    "gross_margin": -24.5,
+    "gross_margin_pct": -18.8,
+    "gross_margin_if_you_absorb_shipping": -62.5,
+    "net_after_fees_and_labor": -92.5,
+    "gross_margin_per_machine_hour": -12.56,
+    "net_after_fees_and_labor_per_machine_hour": -47.44
+   },
+   "mid": {
+    "price": 210.0,
+    "cogs_mid": 154.5,
+    "gross_margin": 55.5,
+    "gross_margin_pct": 26.4,
+    "gross_margin_if_you_absorb_shipping": 17.5,
+    "net_after_fees_and_labor": -20.5,
+    "gross_margin_per_machine_hour": 28.46,
+    "net_after_fees_and_labor_per_machine_hour": -10.51
+   },
+   "high": {
+    "price": 320.0,
+    "cogs_mid": 154.5,
+    "gross_margin": 165.5,
+    "gross_margin_pct": 51.7,
+    "gross_margin_if_you_absorb_shipping": 127.5,
+    "net_after_fees_and_labor": 78.5,
+    "gross_margin_per_machine_hour": 84.87,
+    "net_after_fees_and_labor_per_machine_hour": 40.26
+   }
+  },
+  "note_machine_time": "ESTIMATE: 1.9 h (low-speed case 4.4 h, best case 1.1 h) of machine time per unit for 29 m of cut path in 1 sheet(s) on a 120 W diode, 18 mm plywood. Machine time, not material, is still the limit on profit per hour, but a single test cut on scrap will replace this range with a real number."
+ },
+ "unverified": [
+  "Machine time is an estimate (120 W diode on 18 mm ply, sourced range, not measured on this machine); cut time and profit/hour depend on it.",
+  "Z-bar cleat load rating and the pull-out strength of the shelf-half screws in an 18 mm HANGER face are not tested; the checks.txt load-path line is a rough hand estimate.",
+  "Z-bar profile dimensions differ by supplier (the 24 mm recess and 44 mm cavity are sized for a typical 1 in bar and must be confirmed with the bar you buy).",
+  "The wall bar is aluminum from a hardware store: the laser cannot cut a true 45 deg bevel in ply, so ply-only cleats are not offered.",
+  "The cost model charges one whole 4x8 sheet but this set fills only 39% of it (offcut not credited). Nesting 2 sets per sheet (area allows it; not nested here) would cut mid cost to about $110 and lift mid gross margin from 26% to about 48%. The Z-bar hardware (about $36) is a large share of cost. As modeled, the low price band is below cost.",
+  "Price band is my estimate, not a market quote."
+ ]
+}
