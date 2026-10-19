@@ -153,7 +153,7 @@ a.card:hover, a.card:focus-visible {
   font-weight: 700;
   background: var(--bg2);
 }
-.jumps a.jump-main {
+.jumps a.is-current {
   color: var(--ink);
   background: var(--accent);
   border-color: var(--accent);
@@ -163,7 +163,10 @@ a.card:hover, a.card:focus-visible {
   outline-offset: 2px;
 }
 
-section.block { scroll-margin-top: 64px; margin: 0 0 36px; }
+section.block {
+  scroll-margin-top: calc(var(--jump-h, 72px) + 12px);
+  margin: 0 0 36px;
+}
 section.block h2 { color: var(--text); }
 
 #model-stage { position: relative; background: #241e18; }
@@ -330,8 +333,9 @@ button.ghost, .zoom-bar button, .zoom-tools button {
 .sheet-head { padding: 14px 14px 0; }
 .sheet-meta { color: var(--muted); margin: 0 0 10px; }
 .sheet-bleed {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   padding: 0 10px 4px;
 }
 .sheet-open {
@@ -350,6 +354,7 @@ button.ghost, .zoom-bar button, .zoom-tools button {
 }
 .sheet-open img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   max-height: none;
   display: block;
