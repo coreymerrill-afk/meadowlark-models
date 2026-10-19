@@ -753,8 +753,8 @@ def render_design(plan: dict, parts: dict) -> str:
   <p class="size-line">{esc(size_sentence(plan['dimensions_mm']))} {esc(sheet_word(sheets))}. Mid retail price {esc(money_short(price))}, an estimate. Typical machine time {esc(machine_hours(plan['profit']['machine_hours_mid']))}.</p>
 </header>
 <nav class="jumps" aria-label="On this page">
-  <a href="#model">Model</a>
-  <a class="jump-main" href="#cut-sheets">Cut sheets</a>
+  <a class="is-current" href="#model" aria-current="location">Model</a>
+  <a href="#cut-sheets">Cut sheets</a>
   <a href="#build">Build</a>
   <a href="#materials">Materials</a>
   <a href="#profit">Profit</a>

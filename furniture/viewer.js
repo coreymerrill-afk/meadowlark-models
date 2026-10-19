@@ -12,6 +12,7 @@
   var partByName = {};
   var zoom = {
     scale: 1,
+    minScale: 1,
     x: 0,
     y: 0,
     pointers: new Map(),
@@ -991,17 +992,32 @@
     var py = clientY - rect.top;
     var ix = (px - zoom.x) / zoom.scale;
     var iy = (py - zoom.y) / zoom.scale;
-    zoom.scale = Math.min(8, Math.max(1, next));
+    zoom.scale = Math.min(8, Math.max(zoom.minScale, next));
     zoom.x = px - ix * zoom.scale;
     zoom.y = py - iy * zoom.scale;
     applyZoomTransform();
   }
 
-  function resetZoom() {
-    zoom.scale = 1;
-    zoom.x = 0;
-    zoom.y = 0;
+  function fitZoom() {
+    var stage = el('zoom-stage');
+    var img = el('zoom-img');
+    if (!stage || !img) return;
+    var sw = stage.clientWidth;
+    var sh = stage.clientHeight;
+    if (sw < 2 || sh < 2) return;
+    var iw = img.offsetWidth || sw;
+    var ih = img.offsetHeight || 1;
+    var contain = Math.min(sw / iw, sh / ih);
+    if (!isFinite(contain) || contain <= 0) contain = 1;
+    zoom.minScale = contain;
+    zoom.scale = contain;
+    zoom.x = (sw - iw * contain) / 2;
+    zoom.y = (sh - ih * contain) / 2;
     applyZoomTransform();
+  }
+
+  function resetZoom() {
+    fitZoom();
   }
 
   function openZoom(src, title, alt) {
@@ -1012,8 +1028,11 @@
     heading.textContent = title || 'Cut sheet';
     img.alt = alt || title || 'Cut sheet';
     img.src = src;
-    resetZoom();
     if (typeof dialog.showModal === 'function' && !dialog.open) dialog.showModal();
+    function place() { fitZoom(); }
+    if (img.complete && img.naturalWidth) place();
+    else img.addEventListener('load', place, { once: true });
+    requestAnimationFrame(function () { requestAnimationFrame(place); });
   }
 
   function wireZoom() {
@@ -1166,7 +1185,57 @@
     render();
   }
 
+  function wireScrollSpy() {
+    var nav = document.querySelector('nav.jumps');
+    if (!nav) return;
+    var links = Array.prototype.filter.call(nav.querySelectorAll('a[href^="#"]'), function (a) {
+      return document.getElementById(a.getAttribute('href').slice(1));
+    });
+    if (!links.length) return;
+
+    function syncOffset() {
+      var h = Math.ceil(nav.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--jump-h', h + 'px');
+    }
+
+    function sectionAtProbe() {
+      var navBox = nav.getBoundingClientRect();
+      var line = navBox.bottom + 24;
+      var doc = document.documentElement;
+      if (window.scrollY + window.innerHeight >= doc.scrollHeight - 2) {
+        return links[links.length - 1];
+      }
+      var hit = links[0];
+      var i;
+      for (i = 0; i < links.length; i++) {
+        var section = document.getElementById(links[i].getAttribute('href').slice(1));
+        if (section.getBoundingClientRect().top <= line) hit = links[i];
+      }
+      return hit;
+    }
+
+    function paint() {
+      var current = sectionAtProbe();
+      var i;
+      for (i = 0; i < links.length; i++) {
+        var on = links[i] === current;
+        links[i].classList.toggle('is-current', on);
+        if (on) links[i].setAttribute('aria-current', 'location');
+        else links[i].removeAttribute('aria-current');
+      }
+    }
+
+    syncOffset();
+    paint();
+    window.addEventListener('scroll', paint, { passive: true });
+    window.addEventListener('resize', function () {
+      syncOffset();
+      paint();
+    });
+  }
+
   wireParts();
+  wireScrollSpy();
   wireZoom();
   wireCalc();
   wireModelUi();
