@@ -2,9 +2,9 @@ Biomimetics — Flyer catalog (CONTENT LOCK v1.3 + alternates v0)
 ==============================================================
 
 Publish target
-  https://models.meadowlarkhomecare.com/insect/
-  https://models.meadowlarkhomecare.com/insect/flyer-1/
-  https://models.meadowlarkhomecare.com/insect/flyer-2/
+  https://models.coreyhq.com/insect/
+  https://models.coreyhq.com/insect/flyer-1/
+  https://models.coreyhq.com/insect/flyer-2/
 
 Copy source
   MODELS-PAGE-CONTENT-LOCK v1.3
