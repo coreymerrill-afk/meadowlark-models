@@ -2,7 +2,7 @@ Automated Burrito Maker — Pass-3 Concept B (interactive 3D viewer)
 ==================================================================
 
 Publish target
-  https://models.meadowlarkhomecare.com/burrito/
+  https://models.coreyhq.com/burrito/
 
 Files
   index.html                 Primary static page (Three.js viewer)

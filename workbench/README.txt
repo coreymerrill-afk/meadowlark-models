@@ -2,7 +2,7 @@ Workbench Gen-0 — rolling shop tables (draft)
 =============================================
 
 Publish target
-  https://models.meadowlarkhomecare.com/workbench/
+  https://models.coreyhq.com/workbench/
 
 Status
   DRAFT so the program is visible. Not a finished product,
