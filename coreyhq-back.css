@@ -1,0 +1,8 @@
+/* Escape hatch back to the main CoreyHQ hub, shown on every models page. */
+.coreyhq-back{position:fixed;left:12px;bottom:12px;z-index:2147483000;
+  font:600 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.02em;
+  padding:7px 11px;border-radius:999px;text-decoration:none;
+  color:#f4f1ea;background:rgba(20,22,26,.78);border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 2px 8px rgba(0,0,0,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.coreyhq-back:hover,.coreyhq-back:focus-visible{background:rgba(20,22,26,.95);color:#fff}
+@media print{.coreyhq-back{display:none}}
