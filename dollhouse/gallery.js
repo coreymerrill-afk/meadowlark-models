@@ -28,7 +28,7 @@ const P=[
 ['clock_shaft_v43','Clock shaft','v4.3 Cogsworth vertical. Peg → corner-post top; top sock for finial.'],
 ['porch_post_v43','Porch post','v4.3 façade. Peg → floor/lawn/path Ø6.3 (same as outdoor); top sock for beam.'],
 ['porch_beam_v43','Porch beam','v4.3. Pegs at 0 & 127 → porch_post tops.'],
-['porch_roof_slice_v43','Porch roof slice','v4.3 shed porch roof. Pegs → porch_post tops. Does not cover windows.'],
+['porch_roof_slice_v43','Porch roof slice','v4.3 shed porch roof. Pegs at y=12 seat on porch_post tops (not the floor grid). Does not cover windows.'],
 ['gable_end_v43','Gable end','v4.3 roofs-on silhouette. Pegs at 0 & 127; apex sock for finial.'],
 ['dormer_play_v43','Play dormer','v4.3. Peg → ridge; clear window opening; lift-compatible.'],
 ['mansard_break_v43','Mansard break','v4.3 silhouette panel. Pegs at 0 & 127 → ridge.'],

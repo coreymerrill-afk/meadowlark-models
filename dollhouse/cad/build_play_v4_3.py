@@ -194,7 +194,8 @@ def mansard_break():
     return lift(clean(m))
 
 def cupola_play():
-    """Octagon cupola for widow's walk / ranch. Bottom pegs at ±PITCH → ridge socks.
+    """Octagon cupola for widow's walk / ranch. v4.3.1: pegs at ±2·PITCH (span 127) on a
+    base sill → roof_panel_lift_v4 ridge socks at x=15.875 & 142.875 (centre over 79.375).
     Top sock for finial. Lift-compatible. Mate: pegs → roof_panel_lift ridge."""
     R, h = 20.0, 42.0
     body = cyl(R * 2, h, 0, 0, PEG_H, sec=8)
@@ -210,8 +211,9 @@ def cupola_play():
         frames.append(bx(fx - 3, fy - 1.2, PEG_H + 10, fx + 3, fy + 1.2, PEG_H + 28)
                       if abs(np.cos(a)) > abs(np.sin(a))
                       else bx(fx - 1.2, fy - 3, PEG_H + 10, fx + 1.2, fy + 3, PEG_H + 28))
-    pegs = [peg(-PITCH, 0), peg(PITCH, 0)]
-    m = U([body, roof, spire, ball, tip, collar] + frames + pegs)
+    pegs = [peg(-2 * PITCH, 0), peg(2 * PITCH, 0)]
+    sill = bx(-2 * PITCH - 7, -7, 0, 2 * PITCH + 7, 7, PEG_H + 2)
+    m = U([sill, body, roof, spire, ball, tip, collar] + frames + pegs)
     m = D_(m, [sock(0, 0, PEG_H + h + 40)])
     return lift(clean(m))
 

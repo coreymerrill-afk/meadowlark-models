@@ -94,7 +94,7 @@ All accents mate only Ø6.3 / 31.75; porch posts use the same floor/tile sockets
 | `clock_shaft_v43.stl` | Peg → corner-post top; top sock for finial | Cogsworth vertical |
 | `porch_post_v43.stl` | Peg → floor/lawn/path Ø6.3; top sock for beam | Street façade |
 | `porch_beam_v43.stl` | Pegs at 0 & 127 → porch_post tops | Façade beam |
-| `porch_roof_slice_v43.stl` | Pegs → porch_post tops | Porch roof slice |
+| `porch_roof_slice_v43.stl` | Pegs (y=12) → porch_post tops, not floor grid | Porch roof slice |
 | `gable_end_v43.stl` | Pegs at 0 & 127; apex sock for finial | Roofs-on silhouette |
 | `dormer_play_v43.stl` | Peg → ridge Ø6.3; clear window opening | Roofs-on break |
 | `mansard_break_v43.stl` | Pegs at 0 & 127 → ridge; top sock | Mansard silhouette |
