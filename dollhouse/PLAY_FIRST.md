@@ -1,4 +1,4 @@
-# Dollhouse Play-First Kit — v4.3 Grand (2026-11-05)
+# Dollhouse Play-First Kit — v4.3.1 Mates (2026-11-05)
 
 Corey’s brief: Grand v3 was “plenty pretty, maybe too pretty.” Designs are for **practical kid play** — see inside, reach inside, rearrange outdoors like Legos. Scale **1:24**. Snap system unchanged.
 
@@ -77,12 +77,12 @@ Kids rearrange the garden layer without tools; houses stay on structural floor t
 
 ## Viewer (models.coreyhq.com/dollhouse)
 
-- Banner / rev: **v4.3 Grand**
+- Banner / rev: **v4.3.1 Mates**
 - **Play view** control: roofs OFF + rear walls OFF + clear (non-stained) windows — **default ON**
 - Explode / night / turntable kept
 - Kit tab: play outdoor + structure STLs first; v3 ornaments optional
 
-## v4.3 Grand accents (REQUIRED play BOM)
+## v4.3.1 Mates accents (REQUIRED play BOM)
 
 All accents mate only Ø6.3 / 31.75; porch posts use the same floor/tile sockets as outdoor. Spans ≤127 mm. Do not cover clear windows or kill lift-off roofs.
 
@@ -100,7 +100,7 @@ All accents mate only Ø6.3 / 31.75; porch posts use the same floor/tile sockets
 | `mansard_break_v43.stl` | Pegs at 0 & 127 → ridge; top sock | Mansard silhouette |
 | `cupola_play_v43.stl` | Pegs ±63.5 (span 127) → ridge socks x=15.875/142.875; top Ø6.3 sock in Ø16 boss | Widow’s-walk cupola |
 
-Per-manor required accents live in `grand.js` COREBOM (v4.3 Grand).
+Per-manor required accents live in `grand.js` COREBOM (v4.3.1 Mates).
 
 ## Gaps left
 
