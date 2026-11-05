@@ -101,10 +101,12 @@ def post_lamp():
 def power_module():
     """USB-C / 3xAAA box 60x30x20 that snaps on 2 sockets; Ø5 wire exit down into floor centre riser."""
     m=U([bx(0,0,0,60,30,20),peg(15.875,15),peg(15.875+PITCH,15)]); return D_(m,[bx(3,3,3,57,27,20.1),bx(-0.1,10,6,3.1,20,11),cyl(WC,4,30,15,-0.1)])
-PARTS=dict(upper_floor_tile_v1=upper_floor_tile,stair_module_v1=stair_module,
+# Published exporters (STLs exist under dollhouse/stl/). Stair + fix_* lamps are CAD-only — see UNPUBLISHED.
+PARTS=dict(upper_floor_tile_v1=upper_floor_tile,
   wired_floor_tile_v1w=wired_floor_tile,wired_corner_post_v1w=wired_corner_post,wired_wall_short_v1w=wired_wall,service_panel_v1w=service_panel,power_module_v1w=power_module,
   furn_bed_v1=bed,furn_table_v1=table,furn_chair_v1=chair,furn_sofa_v1=sofa,furn_bookshelf_v1=bookshelf,furn_counter_v1=counter,furn_toilet_v1=toilet,furn_sink_v1=sink,
-  fig_adult_standing_v1=lambda:_figure(73),fig_adult_sitting_v1=lambda:_figure(56,True),fig_child_v1=lambda:_figure(46),
+  fig_adult_standing_v1=lambda:_figure(73),fig_adult_sitting_v1=lambda:_figure(56,True),fig_child_v1=lambda:_figure(46))
+UNPUBLISHED=dict(stair_module_v1=stair_module,
   fix_ceiling_puck_v1=ceiling_puck,fix_table_lamp_v1=table_lamp,fix_wall_sconce_v1=wall_sconce,fix_porch_light_v1=porch_light,fix_post_lamp_v1=post_lamp)
 if __name__=='__main__':
     for n,f in PARTS.items():

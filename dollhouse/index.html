@@ -25,6 +25,9 @@
   .tabs button{background:none;border:1px solid transparent;border-bottom:none;color:var(--muted);font:inherit;padding:.5rem 1rem;border-radius:8px 8px 0 0;cursor:pointer}
   .tabs button[aria-selected="true"]{color:var(--text);background:var(--bg2);border-color:var(--border);box-shadow:inset 0 3px 0 var(--accent)}
   section[hidden]{display:none}
+  /* Keep Explore WebGL alive when other tabs show — display:none kills the context once Kit spins up a second renderer */
+  section#explore.tab-parked{position:fixed!important;left:-10000px;top:0;width:64rem;max-width:100vw;opacity:0;pointer-events:none;display:block!important;z-index:-1}
+  section#explore.tab-parked #view{max-height:70vh}
   #view{width:100%;aspect-ratio:16/9;max-height:70vh;background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative}
   #view .hint{position:absolute;left:.75rem;bottom:.5rem;color:var(--muted);font-size:.8rem;pointer-events:none}
   .controls{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0}
@@ -85,9 +88,9 @@
   <div class="legend"><span><i style="background:#facc15"></i>Light channels (Ø3.2)</span><span id="lg-w" hidden><i style="background:#22d3ee"></i>Wire runs (Ø5)</span><span id="lg-p" hidden><i style="background:#a78bfa"></i>Magnetic service panels</span><span><i style="background:#86efac"></i>Outdoor modules (snap)</span></div>
 </section>
 <section id="explode" hidden>
-  <p>Press <strong>Explode</strong> in Explore and the house lifts apart in build order:</p>
-  <ol><li>Garden / outdoor modules, floor tiles</li><li>Ground-story walls and corner posts (rear face open for play)</li><li>Porches and wide doorways</li><li>Upper stories</li><li>Lift-off roof panels</li><li>Optional chimneys / cupolas</li></ol>
-  <p class="muted">Every outdoor module pegs into the same Ø6.3 sockets on the 31.75&nbsp;mm grid — rearrange the yard like Legos.</p>
+  <p><strong>Explode</strong> is a toggle on the Explore tab (not a separate 3D view). Open Explore, press <strong>Explode</strong>, and the current manor lifts apart in build order:</p>
+  <ol><li>Garden / outdoor modules, floor tiles</li><li>Ground-story walls and corner posts (rear face open for play)</li><li>Porches, tower stubs, and wide doorways</li><li>Upper stories</li><li>Lift-off roof panels + ridge accents (chimney / dormer / cupola)</li></ol>
+  <p class="muted">This tab opens Explore with Explode already on. Outdoor modules peg into the same Ø6.3 sockets on the 31.75&nbsp;mm grid.</p>
 </section>
 <section id="print" hidden><div id="bom"></div></section>
 <section id="notes" hidden><div id="notes-house"></div>
@@ -101,17 +104,19 @@
   </ol>
 </section>
 <section id="kit" hidden>
-  <h3>v4.1 play parts: real CAD</h3>
-  <p class="muted">Print-ready STLs from <code>build_play_v4_1.py</code> (Structure TWEAKs on shed / clear window / gate). Core snap pack included. Click one to inspect or download.</p>
+  <h3>v4.3 Grand — print-ready CAD</h3>
+  <p class="muted">STLs from <code>build_play_v4_3.py</code> accents + play/core/wired packs. Click one to inspect or download. <b>Print tab BOM is the sole required list</b> — gallery includes optional furn/fig/wired extras for browsing.</p>
   <div id="gal"></div>
   <p id="galinfo"></p>
   <div class="galgrid" id="galgrid"></div>
-  <p>Furniture and figures stay free-standing on floor tiles. Optional ornaments (porte-cochère, stained glass, weathervane, clocktower) may exist under <code>/dollhouse/stl/</code> as showpiece extras — never required for the play BOM. Ø6.3 sockets lock after the H3C clearance-strip print.</p>
+  <p>Furniture and figures stay free-standing on floor tiles. Showpiece ornaments (porte-cochère, stained glass, weathervane, <code>lamppost_cluster_v3</code>) may exist under <code>/dollhouse/stl/</code> as optional downloads — never required unless listed on Print. Ø6.3 sockets lock after the H3C clearance-strip print.</p>
   <table><thead><tr><th>Group</th><th>Parts (STL)</th><th>Notes</th></tr></thead><tbody>
-  <tr><td>Play structure</td><td>wall_panel_clear_window_v4, wall_panel_wide_door_v4, roof_panel_lift_v4, open_face_rail_v4</td><td>Clear openings, lift-off roofs, open-back rail.</td></tr>
+  <tr><td>v4.3 accents</td><td>tower_stub_v43, chimney_ridge_v43, finial_ridge_v43, clock_shaft_v43, porch_post/beam/roof_slice_v43, gable_end_v43, dormer_play_v43, mansard_break_v43, cupola_play_v43</td><td>Required per-manor qtys on Print. Ø6.3 / 31.75 only.</td></tr>
+  <tr><td>Play structure</td><td>wall_panel_clear_window_v4, wall_panel_wide_door_v4, roof_panel_lift_v4, open_face_rail_v4</td><td>Clear openings; roof lip on wall tops; ridge socks for accents.</td></tr>
   <tr><td>Outdoor (Lego)</td><td>lawn_tile_v4, path_tile_v4, garden_bed_v4, fence_straight_v4, fence_corner_v4, garden_gate_play_v4, sandbox_v4, planter_stub_v4, bench_play_v4, shed_shell_v4</td><td>All Ø5.9 pegs → tile sockets.</td></tr>
-  <tr><td>Core snap</td><td>floor_tile_v0, upper_floor_tile_v1, snap_post_v0, corner_post_v0, dowel_pin_v0, snap_clearance_strip_v0, wall_panel_short_v0c (+ window/door shorts), wired_* for Electrified</td><td>Published — required to assemble any manor.</td></tr>
-  <tr><td>Furniture / figures</td><td>furn_*_v1, fig_*_v1</td><td>Free-standing; leave rooms open.</td></tr>
+  <tr><td>Core snap</td><td>floor_tile_v0, upper_floor_tile_v1, snap_post_v0, corner_post_v0, dowel_pin_v0, snap_clearance_strip_v0, wall_panel_short_v0c</td><td>Required to assemble any manor.</td></tr>
+  <tr><td>Wired (Electrified)</td><td>wired_floor_tile_v1w, wired_corner_post_v1w, wired_wall_short_v1w, service_panel_v1w, power_module_v1w</td><td>On Print for Wired-5 only.</td></tr>
+  <tr><td>Furniture / figures</td><td>furn_*_v1, fig_*_v1</td><td>Free-standing; browse in gallery; not required Print qty.</td></tr>
   </tbody></table>
 </section>
 <script src="/dollhouse/vendor/three.min.js"></script>

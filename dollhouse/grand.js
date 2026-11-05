@@ -460,15 +460,15 @@ const HOUSES=[
   ['room',{x:-254,z:254,w:80,d:80,h:H*.6,ops:{S:['r']}}],['room',{x:254,z:254,w:80,d:80,h:H*.6,ops:{S:['r']}}],
   ['tree',{x:-60,z:120,s:.7,kind:'pine'}],['tree',{x:60,z:120,s:.7,kind:'pine'}],['tree',{x:-60,z:-40,s:.6,kind:'pine'}],['tree',{x:60,z:-40,s:.6,kind:'pine'}],
   ['lady',{x:-30,z:80,c:0xb91c1c}],['gent',{x:30,z:90,c:0x1e3a8a}],['cat',{x:0,z:100,y:16}],['lampc',{x:-150,z:300}],['lampc',{x:150,z:300}],['gwall',{x:-220,z:330,L:180}],['gwall',{x:220,z:330,L:180}],['bed',{x:-190,z:150}],['chair',{x:190,z:100}],['gclock',{x:-200,z:-190}]]);path(P,0,320,50,60);}},
-{id:'shop4',name:'Cogsworth Works',old:'Workshop-4',size:'2 × 2 home + 2 × 3 works',pal:'shop',stories:'2 + clocktower',blurb:'Inventor home + open workshop. Wide arched doors, open back on the house, outdoor shed and sandbox for yard play — gears and clocktower stay as optional silhouette.',
- story:'Professor Cogsworth builds clocks, kettles and, recently, a small airship. The clocktower keeps the whole street on time (badly). Light the smokestack LED and the workshop looks like it\'s working late.',
+{id:'shop4',name:'Cogsworth Works',old:'Workshop-4',size:'2 × 2 home + 2 × 3 works',pal:'shop',stories:'2',blurb:'Inventor home + open workshop. Wide arched doors, open back on the house, outdoor shed and sandbox for yard play. Printable clock_shaft_v43 is the vertical accent (no full clocktower in the play footprint).',
+ story:'Professor Cogsworth builds clocks, kettles and, recently, a small airship. The workshop clock shaft keeps the street roughly on time. Light the smokestack LED and the works looks like it\'s working late.',
  
  build(P){base(P,820,560);mk(P,[['room',{x:-210,w:254,d:254,ops:{S:['w','d'],W:['w','w'],N:['w','w']},wk:'arch'}],['room',{x:-210,lv:1,w:254,d:254,ops:{S:['w','w'],W:['w','w'],N:['w','w']}}],
   ['gable',{x:-210,y:LV*2,w:254,d:254,pitch:50,over:12}],['dormer',{x:-260,y:LV*2+8,z:98}],['dormer',{x:-160,y:LV*2+8,z:98}],['chimney',{x:-330,z:-60,y:0,h:LV*2+140}],
   ['room',{x:180,w:381,d:254,h:H*1.25,ops:{S:['D','D','D'],E:['W','W'],N:['W','W','W']}}],
   ['box',{x:180,y:F+H*1.25,w:395,h:8,d:268,c:0xd9b779,grp:'roof',layer:5}],
   ['tesla_',{}],
-  ['clock',{x:-50,z:-60,h:300}],['stack',{x:330,z:-90,y:0,h:330}],
+  ['stack',{x:330,z:-90,y:0,h:330}],
   ['gear',{x:180,y:F+90,z:129,rad:24}],['gear',{x:226,y:F+70,z:129,rad:14}],['gear',{x:-210,y:LV+F+75,z:129,rad:16}],['gear',{x:-337,y:LV+40,z:0,rad:20,r:Math.PI/2}],
   ['porch',{x:-210,z:127,w:200,d:50,posts:4,roof:'shed'}],['airship',{x:60,y:560,z:40}],
   ['gent',{x:120,z:170,c:0x78350f}],['child',{x:160,z:175,c:0x0e7490}],['cat',{x:-150,z:170,y:8}],['lady',{x:-240,z:190,c:0x7c2d12}],['gclock',{x:-300,z:-80}],['bed',{x:-200,y:LV,z:-40}],['chand',{x:180,y:F+H*1.25-2}],
@@ -530,12 +530,61 @@ let CUR_H=null;
 // ---------- UI ----------
 let cur=0;const pills=document.getElementById('pills');
 HOUSES.forEach((h,n)=>{const b=document.createElement('button');b.textContent=h.name;b.onclick=()=>{location.hash=h.id;select(n);};pills.appendChild(b);});
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==b.dataset.tab);if(b.dataset.tab==='explore')resize();if(b.dataset.tab==='kit'&&window.__gal)window.__gal();});
+function showTab(tab){
+  // Explode tab = Explore with Explode toggle on (not a second canvas)
+  if(tab==='explode'){
+    const eb=document.getElementById('btn-explode');
+    if(eb&&!eb.classList.contains('on')){eb.classList.add('on');target=1;}
+    tab='explore';
+  }
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab===tab));
+  document.querySelectorAll('section').forEach(s=>{
+    if(s.id==='explore'){
+      // Never display:none Explore — park off-screen when another tab is active so WebGL survives Kit
+      s.hidden=false;
+      s.classList.toggle('tab-parked', tab!=='explore');
+    }else{
+      s.hidden=s.id!==tab;
+    }
+  });
+  if(tab==='kit'){if(window.__gal)window.__gal();}
+  else{if(window.__galPause){window.__galPause();window.__exploreNeedsRebuild=true;}}
+  if(tab==='explore')restoreExplore();
+}
+function restoreExplore(){
+  let needRebuild=false;
+  try{
+    const gl=renderer&&renderer.getContext&&renderer.getContext();
+    const lost=gl&&gl.isContextLost&&gl.isContextLost();
+    if(lost||(renderer&&renderer.domElement&&(renderer.domElement.width===0||!renderer.domElement.isConnected))){recreateExploreGL();needRebuild=true;}
+  }catch(e){try{recreateExploreGL();needRebuild=true;}catch(_){}}
+  resize();
+  // After Kit tore down GPU, force a house rebuild so canvas/chips aren't blank
+  if(needRebuild||window.__exploreNeedsRebuild){
+    window.__exploreNeedsRebuild=false;
+    if(typeof select==='function'&&HOUSES[cur]){const keep=ex;const t0=target;select(cur);ex=keep;target=t0;}
+  }
+}
+function recreateExploreGL(){
+  if(!renderer)return;
+  try{renderer.dispose();}catch(_){}
+  const old=renderer.domElement;if(old&&old.parentNode)old.parentNode.removeChild(old);
+  renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:Q.has('shot')});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  el.prepend(renderer.domElement);
+  if(controls){controls.dispose();const OC=THREE.OrbitControls||window.OrbitControls;controls=new OC(camera,renderer.domElement);controls.enableDamping=true;controls.maxPolarAngle=Math.PI*.49;}
+  renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();},{passive:false});
+  renderer.domElement.addEventListener('webglcontextrestored',()=>{restoreExplore();});
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+// Context-loss listeners on initial canvas (set after renderer exists — hooked below too)
+
 const WIRE=`<h3>Wiring the Electrified Manor</h3><p><strong>Low voltage only (3–5 V DC, USB or batteries). Never mains.</strong></p><ul>
 <li><strong>Trunk:</strong> Ø5 bores up every <code>wired_corner_post_v1w</code> carry 30 AWG silicone pairs between stories. The tower has its own riser to the Tesla-coil LED. <em>Fish wire through the corner trunk before seating the top dowel</em> — the top Ø6.3 socket opens into the Ø5 trunk; the dowel closes it.</li>
 <li><strong>Floors:</strong> <code>wired_floor_tile_v1w</code> centre channels feed the chandelier of the room below.</li>
 <li><strong>Wire theater:</strong> the back-wall runs stay visible behind magnetic <code>service_panel_v1w</code> covers (4 × Ø6×1 N52 magnets in the panel pockets), so you can watch the wiring. The animated sparks in the viewer show current flowing from the dynamo kiosk. Wall magnets face north-out and panel magnets south-out, so any panel fits any wall.</li>
-<li><strong>Garden lighting:</strong> uses the floor-tile / lawn-tile <code>Ø3.2</code> light race — <em>not a second bus</em>. Pink viewer runs are the same race to lamppost clusters (<code>lamppost_cluster_v3</code>, optional). Gold runs feed conservatory / cresting on that race.</li>
+<li><strong>Garden lighting:</strong> uses the floor-tile / lawn-tile <code>Ø3.2</code> light race — <em>not a second bus</em>. Viewer pink/gold runs are that race only. Optional showpiece <code>lamppost_cluster_v3</code> may be downloaded from Kit, but it is <b>not</b> on the Print BOM (Print is sole required truth).</li>
 <li><strong>Power:</strong> <code>power_module_v1w</code> (USB-C 5 V trigger or 3×AAA) sits in the dynamo kiosk behind the house, with a green pilot LED and a JST-PH plug per story.</li></ul>
 <table><thead><tr><th>Kit</th><th>Qty</th></tr></thead><tbody><tr><td>30 AWG silicone wire red + black</td><td>2 × 10 m</td></tr><tr><td>Warm-white 3 mm LEDs w/ resistor, 5 V</td><td>24</td></tr><tr><td>Micro LEDs 1.8 mm (chandelier cups, globes)</td><td>30</td></tr><tr><td>Purple flicker LED (Tesla coil) + 2 amber flicker (chimneys)</td><td>3</td></tr><tr><td>Green pilot LED (dynamo dial)</td><td>1</td></tr><tr><td>Micro slide switches</td><td>9 (one per room + garden + exterior)</td></tr><tr><td>JST-PH 2-pin pigtails</td><td>12 pairs</td></tr><tr><td>N52 magnets Ø6×1 (service_panel_v1w pockets)</td><td>40</td></tr><tr><td>Warm fairy-light string, 2 m</td><td>2</td></tr></tbody></table>`;
 const COREBOM={
@@ -600,6 +649,8 @@ function setNight(on){night=on;if(!scene)return;scene.background=on?skyN:skyD;co
 let hemi,key,rim,fill,floor,resize=()=>{};
 renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:Q.has('shot')});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;el.prepend(renderer.domElement);
+renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();},{passive:false});
+renderer.domElement.addEventListener('webglcontextrestored',()=>{restoreExplore();});
 scene=new THREE.Scene();scene.fog=new THREE.Fog(0xf7d9b5,2500,7000);camera=new THREE.PerspectiveCamera(34,1,1,9000);const OC=THREE.OrbitControls||window.OrbitControls;controls=new OC(camera,renderer.domElement);controls.enableDamping=true;controls.maxPolarAngle=Math.PI*.49;
 controls.addEventListener('start',()=>{if(spin){spin=false;document.getElementById('btn-spin').classList.remove('on');}});
 // soft studio environment for metals + glass

@@ -32,7 +32,23 @@ const P=[
 ['gable_end_v43','Gable end','v4.3 roofs-on silhouette. Pegs at 0 & 127; apex sock for finial.'],
 ['dormer_play_v43','Play dormer','v4.3. Peg → ridge; clear window opening; lift-compatible.'],
 ['mansard_break_v43','Mansard break','v4.3 silhouette panel. Pegs at 0 & 127 → ridge.'],
-['cupola_play_v43','Play cupola','v4.3. Pegs at ±31.75 → ridge; top sock for finial.']
+['cupola_play_v43','Play cupola','v4.3. Pegs at ±31.75 → ridge; top sock for finial.'],
+['wired_floor_tile_v1w','Wired floor tile','Electrified Manor floor — Ø5 channels + corner risers. Print BOM wired5.'],
+['wired_corner_post_v1w','Wired corner post','Ø5 trunk bore + top Ø6.3 socket. Fish wire before seating top dowel.'],
+['wired_wall_short_v1w','Wired short wall','Raceway + service-panel recess + magnet pockets.'],
+['service_panel_v1w','Service panel','Magnetic cover — Ø6×1 N52 in pockets. Print BOM wired5.'],
+['power_module_v1w','Power module','USB-C / AAA power brick for Wired-5.'],
+['furn_bed_v1','Bed','Free-standing 1:24 bed. Not a required Print qty.'],
+['furn_table_v1','Table','Free-standing table.'],
+['furn_chair_v1','Chair','Free-standing chair.'],
+['furn_sofa_v1','Sofa','Free-standing sofa.'],
+['furn_bookshelf_v1','Bookshelf','Free-standing bookshelf.'],
+['furn_counter_v1','Counter','Kitchen counter.'],
+['furn_sink_v1','Sink','Bath/kitchen sink.'],
+['furn_toilet_v1','Toilet','Bath fixture.'],
+['fig_adult_standing_v1','Adult (standing)','Play figure.'],
+['fig_adult_sitting_v1','Adult (sitting)','Play figure.'],
+['fig_child_v1','Child','Play figure.']
 ];
 const el=document.getElementById('gal'),grid=document.getElementById('galgrid'),info=document.getElementById('galinfo');if(!el||!window.THREE)return;
 let R,S,C,O,mesh,inited=false;
@@ -50,6 +66,17 @@ async function load(i){init();const [id,name,desc]=P[i];[...grid.children].forEa
   const b=g.boundingBox,c=b.getCenter(new THREE.Vector3()),sz=b.getSize(new THREE.Vector3());g.translate(-c.x,-b.min.y,-c.z);mesh=new THREE.Mesh(g,M);S.add(mesh);
   const r=sz.length()/2;O.target.set(0,sz.y/2,0);C.position.set(r*1.6,sz.y/2+r*.9,r*1.9);}
 P.forEach((p,i)=>{const b=document.createElement('button');b.textContent=p[1];b.onclick=()=>load(i);grid.appendChild(b);});
-window.__gal=()=>{if(!inited)load(0);};
+window.__gal=()=>{if(!inited)load(0); else if(R){ /* resume */ O.autoRotate=true; }};
+window.__galPause=()=>{
+  if(!inited||!R)return;
+  try{
+    O.autoRotate=false;
+    // Drop Kit's WebGL context so Explore can reclaim GPU — critical after Kit→Explore
+    R.dispose();
+    if(R.domElement&&R.domElement.parentNode)R.domElement.parentNode.removeChild(R.domElement);
+    if(mesh){try{mesh.geometry.dispose();}catch(_){} mesh=null;}
+    R=null;S=null;C=null;O=null;inited=false;
+  }catch(e){console.warn('gal pause',e);}
+};
 })();
-(function(){const k=document.getElementById('kit');if(!k)return;const go=()=>{if(!k.hidden&&window.__gal)window.__gal();};new MutationObserver(go).observe(k,{attributes:true,attributeFilter:['hidden']});go();})();
+(function(){const k=document.getElementById('kit');if(!k)return;const go=()=>{if(!k.hidden&&window.__gal)window.__gal();};new MutationObserver(go).observe(k,{attributes:true,attributeFilter:['hidden']});})();
