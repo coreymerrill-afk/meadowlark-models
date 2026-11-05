@@ -5,8 +5,9 @@ Publish target
   https://models.coreyhq.com/workbench/
 
 Status
-  DRAFT so the program is visible. Not a finished product,
-  not a cut list, not a buy package. Living catalog.
+  DRAFT catalog. Gen-0.1 freeze locked. Physics-bearing 3D live
+  post-#12 (aprons / rails / shelf / nest · snap + latch).
+  Not a finished product, not a cut list, not a buy package.
 
 Public names
   Workbench Gen-0
@@ -18,7 +19,7 @@ IA
   /workbench/extension/    Helper 3D
   /workbench/miter/        DWS716XPS 3D (not “generic”)
 
-Locked (do not invent past this)
+Locked (Gen-0.1 freeze — do not invent past this)
   Outer size         36 × 36 inches
   Between posts      about 29 × 29 inches
   Posts              4×4 (about 3½ inches)
