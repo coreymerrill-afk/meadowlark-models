@@ -1,6 +1,7 @@
-// Grand dollhouse kit v3 "Gallery" — storybook explorer (Three r149). Units mm, 1:24. x right, z toward viewer, y up.
+// Play dollhouse kit v4 — kid play-first explorer (Three r149). Units mm, 1:24. Open-back, clear windows, modular yard.
 (function(){
 const T=127,H=101.6,F=10,LV=H+F;
+let playMode=true;
 const el=document.getElementById('view');
 if(!window.THREE){el.insertAdjacentHTML('afterbegin','<p style="padding:1rem" class="muted">3D viewer could not load.</p>');return;}
 THREE.ColorManagement&&(THREE.ColorManagement.legacyMode=false);
@@ -76,12 +77,12 @@ function tubeM(a,b,col,r){const v=V3().subVectors(b,a),len=v.length();const m=ne
 function finial(c,y=0){return G(cy(1.5,1.5,14,c,0,y+7),sp(3.2,c,0,y+16),cone(2,7,c,0,y+22));}
 // ---------- components (all return Groups in local frame) ----------
 // window on a wall face (local: face plane z=0, outward +z). kind: arch|rect|round|lancet
-function windowM(P,w=22,h=40,kind='arch'){const g=G();const gl=glass();
+function windowM(P,w=30,h=48,kind='arch'){const g=G();const gl=glass(0xffd58a,P&&P.plainGlass?'p':undefined);
   g.add(bx(w,h-(kind=='rect'?0:w/2),1.5,0,0,0,1,gl));
   if(kind!='rect'){const a=new THREE.Mesh(new THREE.CylinderGeometry(w/2,w/2,1.5,20,1,false,0,Math.PI),gl);a.rotation.x=Math.PI/2;a.rotation.z=Math.PI/2;a.rotation.y=0;a.position.set(0,(h-w/2)/2,1);a.rotation.set(Math.PI/2,0,Math.PI/2);g.add(a);
     const ar=tor(w/2+1.5,1.6,P.trim,0,(h-w/2)/2,2,Math.PI);g.add(ar);g.add(bx(4,5,3,P.trim,0,(h-w/2)/2+w/2+1.5,2.2));}
   g.add(bx(w+3,2.4,3,P.trim,0,-(h-(kind=='rect'?0:w/2))/2-1,2),bx(w+8,3,6,P.trim,0,-(h-(kind=='rect'?0:w/2))/2-3,3));
-  g.add(bx(1.6,h-(kind=='rect'?0:w/2),2.2,P.trim,0,0,1.8),bx(w,1.4,2.2,P.trim,0,4,1.8));
+  if(!(P&&P.plainGlass)){g.add(bx(1.6,h-(kind=='rect'?0:w/2),2.2,P.trim,0,0,1.8),bx(w,1.4,2.2,P.trim,0,4,1.8));}
   g.add(bx(2,h-(kind=='rect'?0:w/2),2,P.trim,-w/2-1,0,1.6),bx(2,h-(kind=='rect'?0:w/2),2,P.trim,w/2+1,0,1.6));
   if(P.shutter){g.add(bx(w*.45,h*.8,1.5,P.shutter,-w*.8,-h*.06,1.3),bx(w*.45,h*.8,1.5,P.shutter,w*.8,-h*.06,1.3));}
   if(P.flowers){const yb=-(h-(kind=='rect'?0:w/2))/2-8;g.add(bx(w+6,6,7,P.shutter||P.trim,0,yb,4));[0xf472b6,0xfacc15,0xf87171,0xc084fc,0xfb7185].forEach((c,k)=>g.add(sp(2.4,c,-w/2+2+k*(w-4)/4,yb+4,5)));}
@@ -104,7 +105,7 @@ function ivy(P,h){const g=G();let x=0,y=0;for(let k=0;k<70;k++){x+=(rnd()-.5)*6;
 function room(P,o){const {w,d,h=H}=o;const g=G();const wc=o.c||P.wall;
   g.add(bx(w+4,F,d+4,P.floor||0xc9b79c,0,F/2,0));
   const sides={S:[w,0,d/2,0],N:[w,0,-d/2,Math.PI],E:[d,w/2,0,Math.PI/2],W:[d,-w/2,0,-Math.PI/2]};
-  for(const s in sides){const[L,x,z,r]=sides[s];if(o.open&&o.open.includes(s))continue;const f=G(bx(L,h,6,wc,0,F+h/2,-3));
+  const openFaces=(o.open?o.open.slice():[]);if(playMode&&!o.keepBack){const back=o.back||'N';if(!openFaces.includes(back))openFaces.push(back);}for(const s in sides){const[L,x,z,r]=sides[s];if(openFaces.includes(s)){if(playMode){const rail=G(bx(L,3,4,P.trim,0,F+10,-1));for(let k=0;k<=L/20;k++)rail.add(cy(1.4,1.4,12,P.trim,-L/2+k*20,F+16,-1,6));at(rail,x,0,z,r);g.add(rail);}continue;}const f=G(bx(L,h,6,wc,0,F+h/2,-3));
     // siding courses
     if(P.siding)for(let y=F+8;y<F+h-4;y+=7)f.add(bx(L+.2,1,6.6,P.siding,0,y,-3));
     if(P.brick)for(let y=F+6;y<F+h-4;y+=9)f.add(bx(L+.2,.8,6.5,P.brick,0,y,-3));
@@ -116,7 +117,7 @@ function room(P,o){const {w,d,h=H}=o;const g=G();const wc=o.c||P.wall;
     for(const sx of[-1,1])f.add(bx(7,h-18,8.6,P.pilaster||P.trim,sx*(L/2-3.5),F+h/2-2,-3),bx(10,5,10,P.trim,sx*(L/2-3.5),F+h-19,-3),bx(10,4,10,P.trim,sx*(L/2-3.5),F+10,-3));
     if(h>70)f.add(bx(L+2,3,7.6,P.trim,0,F+h*.3,-3));
     const ops=(o.ops&&o.ops[s])||[];const n=ops.length;ops.forEach((t,k)=>{const px=-L/2+L*(k+.5)/n;
-      if(t=='w'){f.add(at(windowM(P,o.ww||22,o.wh||44,o.wk||'arch'),px,F+h*.55,0));if(P.pediment&&(k%2==0))f.add(at(pediment(P,(o.ww||22)+12),px,F+h*.55+(o.wh||44)/2+6,1));}
+      if(t=='w'){f.add(at(windowM(P,o.ww||32,o.wh||52,o.wk||(P.plainGlass?'rect':'arch')),px,F+h*.55,0));if(P.pediment&&(k%2==0))f.add(at(pediment(P,(o.ww||22)+12),px,F+h*.55+(o.wh||44)/2+6,1));}
       if(t=='b'){f.add(at(medallion(P),px,F+h*.55,0));}
       if(t=='W')f.add(at(windowM(P,30,58,'arch'),px,F+h*.52,0));
       if(t=='r')f.add(at(windowM(P,26,26,'rect'),px,F+h*.58,0));
@@ -288,9 +289,22 @@ function dynamo(P){const fr=P.metal||0xe8c468;const g=G(bx(70,8,60,P.stone||0x8f
   g.userData.halo=V3(-28,40,24);return g;}
 function plaque(name,sub){const c=cvs(1024,128,(x,w,h)=>{const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,'#e9c46a');g.addColorStop(.5,'#c99a2e');g.addColorStop(1,'#8a6514');x.fillStyle=g;x.fillRect(0,0,w,h);x.strokeStyle='#5a400c';x.lineWidth=8;x.strokeRect(8,8,w-16,h-16);
   x.fillStyle='#3a2806';x.font='italic 600 54px Georgia,serif';x.textAlign='center';x.fillText(name,w/2,66);x.font='26px Georgia,serif';x.fillText(sub,w/2,104);});const t=mkTex(c);t.wrapS=t.wrapT=THREE.ClampToEdgeWrapping;return new THREE.MeshStandardMaterial({map:t,metalness:.7,roughness:.35});}
+
+// ---------- v4 play outdoor modules (viewer stand-ins for build_play_v4.py STLs) ----------
+function fencePlay(P,{L=127}={}){const g=G(bx(L,3,4,P.trim||0xdddddd,0,3,0),bx(L,3,4,P.trim||0xdddddd,0,40,0));for(let x=-L/2+8;x<L/2-4;x+=10)g.add(bx(2.4,34,3,P.trim||0xdddddd,x,22,0));return g;}
+function fenceCornerPlay(P){return G(at(fencePlay(P,{L:64}),32,0,0),at(fencePlay(P,{L:64}),0,0,32,Math.PI/2),cy(4,4,42,P.stone||0xb9b2a6,0,21,0,12));}
+function gatePlay(P){const g=G();for(const x of[-60,60]){g.add(bx(16,70,16,P.stone||0xb9b2a6,x,35,0));}for(const s of[-1,1]){g.add(bx(48,3,3,P.trim,s*30,12,0),bx(48,3,3,P.trim,s*30,58,0),bx(3,46,3,P.trim,s*6,35,0),bx(3,46,3,P.trim,s*54,35,0),bx(48,2,2,P.trim,s*30,35,0));}return g;}
+function sandboxPlay(P){return G(bx(100,12,100,P.deck||0xd2b48c,0,6,0),bx(92,8,92,0xe8d5a3,0,10,0));}
+function planterPlay(P){return G(cy(14,16,14,P.stone||0xb9b2a6,0,7,0,16),cy(4,5,30,0x6b4a2f,0,28,0,10),cy(12,10,8,P.leaf||0x4d7c3a,0,50,0,12));}
+function shedPlay(P,{w=120,d=100,h=90}={}){const g=G(bx(w,4,d,P.deck||0x8b6b4a,0,2,d/2));g.add(bx(w,h,4,P.wall,0,2+h/2,2),bx(4,h,d,P.wall,-w/2+2,2+h/2,d/2),bx(4,h,d,P.wall,w/2-2,2+h/2,d/2));
+  g.add(bx(56,40,1.2,0,0,2+h*.55,2.2,glass(0xffd58a,'p')));g.add(bx(w+8,4,d+8,P.roof,0,2+h+8,d/2));return g;}
+function lawnTilePlay(P){return G(bx(127,4,127,P.lawn||0x5f8f4a,0,2,0));}
+function pathTilePlay(P){const g=G(bx(127,4,127,P.stone||0xb9b2a6,0,2,0));for(let i=0;i<4;i++)for(let j=0;j<4;j++)g.add(bx(24,1,24,0xa89880,-48+i*32,4.2,-48+j*32));return g;}
+function gardenBedPlay(P){const g=G(bx(100,16,50,0x6b4a2f,0,8,0),bx(90,10,40,0x5a4030,0,14,0));for(let k=0;k<8;k++)g.add(sp(2.2,[0xf472b6,0xfacc15,0xffffff,0xc084fc][k%4],-35+k*10,20,(k%2?8:-8)));return g;}
+function applyPlayOpen(){/* rooms already open via playMode in room(); sync roof/orn buttons */const rb=document.getElementById('btn-roof');if(rb){rb.classList.toggle('on',!!vis.roof);}const pb=document.getElementById('btn-play');if(pb)pb.classList.toggle('on',playMode);}
 // ---------- scene plumbing ----------
 let renderer,scene,camera,controls,root,parts=[],spinners=[],target=0,ex=0,night=false,spin=!Q.has('nospin'),lights=[],HALOS=[],WIRES=[],PULSES=[],SMOKES=[],FLIES=null;
-const vis={roof:1,wall:1,furn:1,garden:1,light:1,wire:1,panel:1,orn:1,base:1};
+const vis={roof:0,wall:1,furn:1,garden:1,light:1,wire:1,panel:1,orn:0,base:1};
 const MAXPL=Q.has('lite')?2:7;
 function put(obj,grp,layer,lv=0){root.add(obj);parts.push({m:obj,by:obj.position.y,lift:layer*55+lv*120,grp});
   obj.traverse(o=>{if(o.userData){if(o.userData.spin)spinners.push(o.userData.spin);if(o.userData.spin2)spinners.push(o.userData.spin2);if(o.userData.smoke)SMOKES.push(o.userData.smoke);
@@ -355,11 +369,20 @@ function mk(P,list){for(const it of list){const[t,o]=it;const lv=o.lv||0,y=(o.y!
    case'conserv':g=conservatory(P,o);layer=2.5;glowLight(x+60,90,z,0x99f6e4,.9,220);break;
    case'dynamo':g=dynamo(P);grp='wire';layer=1;glowLight(x,50,z,0x86efac,.9,160);break;
    case'sconce':g=sconce(P);g.scale.setScalar(1.6);grp='orn';layer=3+lv;break;
+   case'fence':g=fencePlay(P,o);grp='garden';layer=.35;break;
+   case'fcorner':g=fenceCornerPlay(P);grp='garden';layer=.35;break;
+   case'gateplay':g=gatePlay(P);grp='garden';layer=.4;break;
+   case'sandbox':g=sandboxPlay(P);grp='garden';layer=.25;break;
+   case'planter':g=planterPlay(P);grp='garden';layer=.25;break;
+   case'shed':g=shedPlay(P,o);grp='garden';layer=.5;break;
+   case'lawn':g=lawnTilePlay(P);grp='garden';layer=.15;break;
+   case'path':g=pathTilePlay(P);grp='garden';layer=.15;break;
+   case'gbed':g=gardenBedPlay(P);grp='garden';layer=.25;break;
    default:continue;}
   at(g,x,y+(o.dy||0),z,ry);if(o.s&&t!='tree'&&t!='shroom')g.scale.setScalar(o.s);put(g,grp,layer,0);}}
 function base(P,w,d){const g=G(bx(w,8,d,P.lawn||0x5f8f4a,0,-4,0));
   const wd=P.plinth||0x4a2f1e;g.add(bx(w+30,22,d+30,wd,0,-19,0),bx(w+36,4,d+36,P.plinthTrim||0xc9a227,0,-8,0),bx(w+42,8,d+42,wd,0,-34,0),bx(w+46,3,d+46,P.plinthTrim||0xc9a227,0,-39.5,0));
-  const pl=new THREE.Mesh(new THREE.BoxGeometry(220,26,1.5),plaque(CUR_H.name,'1:24 · Grand v3 · Meadowlark Models'));pl.position.set(0,-20,d/2+15.8);pl.userData.keepUV=1;g.add(pl);
+  const pl=new THREE.Mesh(new THREE.BoxGeometry(220,26,1.5),plaque(CUR_H.name,'1:24 · v4 Play · Meadowlark Models'));pl.position.set(0,-20,d/2+15.8);pl.userData.keepUV=1;g.add(pl);
   for(let k=0;k<Math.round((w+d)/6);k++){const side=k%4,t=rnd()-.5;const px=side<2?t*w*.96:(side==2?-1:1)*(w/2-5),pz=side<2?(side==0?-1:1)*(d/2-5):t*d*.96;g.add(sp(1.8+rnd()*1.6,(P.blooms||[0xf472b6,0xfacc15,0xffffff,0xc084fc])[k%4],px,1.5+rnd()*2,pz));if(k%3==0)g.add(sp(3.4,0x3f6b35,px*.99,2,pz*.99));}
   for(let k=0;k<160;k++){const x=(rnd()-.5)*w*.98,z=(rnd()-.5)*d*.98;g.add(cone(1.2+rnd(),3+rnd()*4,[0x4f7d3a,0x6a9a4a,0x3f6b35][k%3],x,1.5,z,4));}
   put(g,'base',0,0);
@@ -389,7 +412,7 @@ function roles(P){for(const k in ROLE)delete ROLE[k];const S=(c,r)=>{if(c!=null)
   S(P.stone,{t:'stone',b:.9});S(P.quoin,{t:'stone',b:.7});S(P.chim,{t:'brick',b:.8});S(P.deck,{t:'plank',b:.5});S(P.door,{t:'wood',b:.4,r:.5});S(P.lawn,{t:'grass',b:.5,r:.95});S(P.plinth,{t:'wood',b:.3,r:.35});
   S(P.roof,{t:P.roofTex||'shingle',b:.9,m:P.roofMetal,r:P.roofMetal?.45:.8});S(P.metal2,{t:'copper',b:.3,m:.55,r:.4});S(P.metal,{t:'copper',b:.05,m:.92,r:.26});S(P.plinthTrim||0xc9a227,{t:'copper',b:.05,m:.95,r:.25});}
 const HOUSES=[
-{id:'cottage0',name:'Bramble Cottage',old:'Cottage-0',size:'2 × 2 + porch',pal:'cottage',stories:'1½',blurb:'A storybook cottage straight out of a fairy tale: steep mossy roof with two dormers, a witch-hat turret on the corner, a lacy front porch, a fieldstone chimney, and flower boxes under every window.',
+{id:'cottage0',name:'Bramble Cottage',old:'Cottage-0',size:'2 × 2 + porch',pal:'cottage',stories:'1½',blurb:'Open-back storybook cottage: clear windows, lift-off roof, flower boxes optional. A kid sees the whole floor at a glance and snaps yard tiles, fence, sandbox and a shed around it.',
  story:'Built by a retired hedge-witch who wanted a cottage that looked like it grew there. The turret holds her reading nook, the dormers are the guest attic, and the chimney never quite stops glowing.',
  bom:{'floor_tile_v0':4,'corner_post_v0':4,'wall_panels (v0c short/full mix)':8,'roof_panel_v2':2,'gable_end_v2':2,'dormer_v2':2,'turret_segment_v2':2,'turret_cap_v2':1,'porch_post_v2':5,'railing_v2':3,'gingerbread_trim_v2':4,'bay_window_v2':1,'chimney_v2':1,'garden_wall_v2':2,'fix_victorian_lamppost_v2':1},
  build(P){base(P,560,520);mk(P,[['room',{w:254,d:254,ops:{S:['w','d','w'],N:['w','w'],E:['w','w'],W:['b','b']},wk:'arch'}],
@@ -400,7 +423,7 @@ const HOUSES=[
   ['bed',{x:60,z:-60,y:0}],['chair',{x:-60,z:-40}],['chand',{x:0,y:F+H-2,z:0}]]);
   parts.filter(p=>p.m.position.x==-127&&p.m.position.z==0).forEach(p=>p.m.rotation.y=-Math.PI/2);
   path(P,20,230,50,80);}},
-{id:'ranch1',name:'Larkspur Grand Ranch',old:'Ranch-1',size:'4 × 2 + porte-cochère',pal:'ranch',stories:'1 + tower',blurb:'A long butter-yellow ranch with a wraparound porch the full width of the front, a cross-gabled centre hall that rises into a widow\'s walk and copper cupola, and a porte-cochère on the east for the carriage.',
+{id:'ranch1',name:'Larkspur Grand Ranch',old:'Ranch-1',size:'4 × 2 + porte-cochère',pal:'ranch',stories:'1 + tower',blurb:'Long ranch with a wraparound porch and open rear. Wide doorways between rooms, clear windows, modular porte-side yard with path tiles and a play gate — rearrange the outdoor kit like Legos.',
  story:'A horse-country summer house. Everyone lives on the porch. The centre hall has a ballroom-height ceiling; climb to the widow\'s walk to watch for guests coming up the lane.',
  bom:{'floor_tile_v0':10,'corner_post_v0':10,'wall_panels':18,'roof_panel_v2':6,'gable_end_v2':4,'porch_post_v2':14,'railing_v2':10,'gingerbread_trim_v2':10,'widows_walk_v2':1,'cupola_v2':1,'chimney_v2':2,'bay_window_v2':2,'garden_wall_v2':2},
  build(P){base(P,820,560);mk(P,[['room',{x:-190,w:254,d:254,ops:{S:['w','w'],N:['w','w'],W:['w','w']}}],['room',{x:190,w:254,d:254,ops:{S:['w','w'],N:['w','w'],E:['d']}}],
@@ -408,13 +431,13 @@ const HOUSES=[
   ['hip',{x:-190,y:LV,w:254,d:254,h:56}],['hip',{x:190,y:LV,w:254,d:254,h:56}],['gable',{y:F*2+H*2.2,w:127,d:127,pitch:30,over:8}],
   ['rail',{y:F*2+H*2.2+20,w:90,d:90}],['cupola',{y:F*2+H*2.2+28,s:.9}],
   ['porch',{z:127,w:640,d:70,posts:13,roof:'shed'}],['porch',{x:-317,z:0,w:254,d:60,posts:6,r:-Math.PI/2}],
-  ['pcochere',{x:317,z:-20,r:Math.PI/2}],['bay',{x:-190,z:-127,r:44,r:Math.PI}],
+  ['porch',{x:317,z:-20,w:180,d:70,posts:4,roof:'shed',r:Math.PI/2}],['bay',{x:-190,z:-127,r:44,r:Math.PI}],
   ['chimney',{x:-250,z:-60,y:LV-10,h:110}],['chimney',{x:250,z:-60,y:LV-10,h:110}],
   ['lady',{x:-60,z:160,y:8,c:0x60a5fa}],['gent',{x:-30,z:165,y:8}],['chair',{x:120,z:150,y:8}],['chair',{x:160,z:150,y:8,c:0x9a3412}],['child',{x:80,z:240}],
   ['lampc',{x:-160,z:250}],['lampc',{x:160,z:250}],['tree',{x:-380,z:-220,s:1.3}],['tree',{x:380,z:-200,s:1.5,kind:'pine'}],['tree',{x:-390,z:230,s:1}],['gwall',{x:-260,z:268,L:240}],['gwall',{x:260,z:268,L:240}],['chand',{y:F+H*1.5-2}]]);
   parts.filter(p=>p.m.position.x==-190&&p.m.position.z==-127).forEach(p=>p.m.rotation.y=Math.PI);
   path(P,0,240,60,60);}},
-{id:'town2',name:'Pennywhistle Row House',old:'Townhouse-2',size:'2 × 2 × 3 stories',pal:'town',stories:3,blurb:'A tall raspberry townhouse stacked three stories high: a two-story bay window, a lace-railed Juliet balcony, a corner oriel turret with an onion dome, a mansard roof with dormers, and a rooftop terrace strung with fairy lights.',
+{id:'town2',name:'Pennywhistle Row House',old:'Townhouse-2',size:'2 × 2 × 3 stories',pal:'town',stories:3,blurb:'Tall open-back townhouse: shop below, rooms above, lift-off mansard. Clear sightlines down the stack; outdoor modules along the front walk.',
  story:'A confectioner lives over her sweet shop. Ground floor is the shop, the bay is her parlour, the balcony is for waving at the parade, and the rooftop terrace is where the cocoa gets served at midnight.',
  bom:{'floor_tile_v0':4,'upper_floor_tile_v1':8,'corner_post_v0':12,'wall_panels':24,'bay_window_v2':2,'balcony_v2':1,'turret_segment_v2':3,'turret_cap_v2 (onion variant)':1,'dormer_v2':3,'crenel_parapet_v2':4,'grand_stair_v2':2,'chimney_v2':2,'gingerbread_trim_v2':4},
  build(P){base(P,480,480);mk(P,[['room',{w:254,d:254,ops:{S:['W','D'],N:['w','w'],E:['w','w'],W:['w','w']},ww:20}],['room',{lv:1,w:254,d:254,ops:{S:['b','w'],N:['w','w'],E:['w','w'],W:['w','w']}}],['room',{lv:2,w:254,d:254,h:H*.9,ops:{N:['w','w'],E:['w'],W:['w']}}],
@@ -425,7 +448,7 @@ const HOUSES=[
   ['box',{x:0,z:132,y:F+H+F-4,w:260,h:10,d:14,c:0xfdf2f8,layer:2}],['glowbox',{x:60,z:131,y:F+H-12,w:60,h:12,d:4,c:0xf9a8d4,layer:2}],
   ['lady',{x:64,y:LV+F+22,z:140,c:0x0f766e}],['gent',{x:30,z:190,c:0x581c87}],['child',{x:-10,z:200,c:0xf472b6}],['cat',{x:-80,y:LV*3+12,z:0}],
   ['chair',{x:-60,y:LV,z:20}],['bed',{x:50,y:LV*2,z:-50}],['chand',{x:0,y:LV+F+H-2}],['lamp',{x:-180,z:200}],['tree',{x:180,z:-170,s:1}],['hedge',{x:-180,z:-200,L:120}]]);path(P,30,200,46,60);}},
-{id:'court3',name:'Cloisterwick Manor',old:'Courtyard-3',size:'4 × 4 cloister',pal:'court',stories:'1–2 + towers',blurb:'A sun-baked cloister manor wrapped around a secret courtyard: an arcade of twisted columns on every side, a tiered fountain in the middle, crenellated towers at the back corners, a gatehouse with twin turrets, and red tile roofs.',
+{id:'court3',name:'Cloisterwick Manor',old:'Courtyard-3',size:'4 × 4 cloister',pal:'court',stories:'1–2 + towers',blurb:'Cloister manor with an open play courtyard: arcade stays for charm, rear walls open for hands. Fountain optional; fence/gate/sandbox snap on the same grid.',
  story:'Once a mountain abbey, now a family manor. The gatehouse is the welcome hall, the back towers hold the library and the bell, and the fountain sings all night with a blue LED in its well.',
  bom:{'floor_tile_v0':12,'corner_post_v0':16,'wall_panels':30,'arcade_panel_v2':10,'fountain_v2':1,'turret_segment_v2':8,'turret_cap_v2':2,'crenel_parapet_v2':10,'roof_panel_v2':8,'gable_end_v2':2,'garden_wall_v2':2},
  build(P){base(P,700,700);const s=127;mk(P,[['room',{z:-190,w:508,d:127,ops:{N:['w','w','w','w'],S:['d','b','b','d']}}],['room',{x:-190,z:63,w:127,d:380,ops:{W:['w','w','w'],E:['b','d','b']}}],['room',{x:190,z:63,w:127,d:380,ops:{E:['w','w','w'],W:['b','d','b']}}],
@@ -436,7 +459,7 @@ const HOUSES=[
   ['room',{x:-254,z:254,w:80,d:80,h:H*.6,ops:{S:['r']}}],['room',{x:254,z:254,w:80,d:80,h:H*.6,ops:{S:['r']}}],
   ['tree',{x:-60,z:120,s:.7,kind:'pine'}],['tree',{x:60,z:120,s:.7,kind:'pine'}],['tree',{x:-60,z:-40,s:.6,kind:'pine'}],['tree',{x:60,z:-40,s:.6,kind:'pine'}],
   ['lady',{x:-30,z:80,c:0xb91c1c}],['gent',{x:30,z:90,c:0x1e3a8a}],['cat',{x:0,z:100,y:16}],['lampc',{x:-150,z:300}],['lampc',{x:150,z:300}],['gwall',{x:-220,z:330,L:180}],['gwall',{x:220,z:330,L:180}],['bed',{x:-190,z:150}],['chair',{x:190,z:100}],['gclock',{x:-200,z:-190}]]);path(P,0,320,50,60);}},
-{id:'shop4',name:'Cogsworth Works',old:'Workshop-4',size:'2 × 2 home + 2 × 3 works',pal:'shop',stories:'2 + clocktower',blurb:'An inventor\'s compound: a cosy two-story brick home on one side, a sawtooth-roofed workshop with great arched doors on the other, a clocktower between them, a copper-banded smokestack puffing away, brass gears on the walls, and a little airship tethered overhead.',
+{id:'shop4',name:'Cogsworth Works',old:'Workshop-4',size:'2 × 2 home + 2 × 3 works',pal:'shop',stories:'2 + clocktower',blurb:'Inventor home + open workshop. Wide arched doors, open back on the house, outdoor shed and sandbox for yard play — gears and clocktower stay as optional silhouette.',
  story:'Professor Cogsworth builds clocks, kettles and, recently, a small airship. The clocktower keeps the whole street on time (badly). Light the smokestack LED and the workshop looks like it\'s working late.',
  bom:{'floor_tile_v0':10,'upper_floor_tile_v1':4,'corner_post_v0':14,'wall_panels':28,'clock_tower_v2':1,'clock_spire_v2':1,'smokestack_v2':1,'roof_panel_v2':8,'gable_end_v2':2,'dormer_v2':2,'chimney_v2':1,'balcony_v2':1,'porch_post_v2':4},
  build(P){base(P,820,560);mk(P,[['room',{x:-210,w:254,d:254,ops:{S:['w','d'],W:['w','w'],N:['w','w']},wk:'arch'}],['room',{x:-210,lv:1,w:254,d:254,ops:{S:['w','w'],W:['w','w'],N:['w','w']}}],
@@ -451,7 +474,7 @@ const HOUSES=[
   ['lampc',{x:20,z:240}],['tree',{x:-380,z:-220,s:1.2,kind:'pine'}],['tree',{x:-380,z:220,s:1}],['hedge',{x:-210,z:255,L:200}]]);
   for(let k=0;k<3;k++){const gr=G();const xx=180-127+k*127;const s=bx(127,4,140,P.roof,0,0,0);s.rotation.x=-.55;s.position.set(0,38,-4);const gl=bx(125,64,3,0,0,30,64,glass(0xbfe3ff));gl.rotation.x=0;gr.add(s,gl,bx(129,4,6,P.trim,0,64,66));at(gr,xx,F+H*1.25+8,-60);put(gr,'roof',5,0);}
   path(P,180,230,120,50);}},
-{id:'wired5',name:'The Electrified Manor',old:'Wired-5',size:'3 × 2 × 3 stories, wired',pal:'wired',stories:3,wired:true,blurb:'The showpiece. A plum-and-gold Second Empire manor with a three-story round tower, a wraparound porch dripping with gingerbread, a mansard roof full of dormers, and a crackling Tesla coil on the tower cap — wired like a real house, with glowing wire runs you can see, magnetic gold-framed service panels, and every fixture lit.',
+{id:'wired5',name:'The Electrified Manor',old:'Wired-5',size:'3 × 2 × 3 stories, wired',pal:'wired',stories:3,wired:true,blurb:'Electrified Manor for play: open back, clear windows, lift-off mansard, visible low-voltage runs and magnetic service panels. Outdoor modules plug into the garden circuit tiles.',
  story:'A lighting inventor built this to show off her electric miracles. Every room has a switch, every lamp is real, and she left the wiring visible on purpose — wire theater. The Tesla coil is just for drama.',
  bom:{'wired_floor_tile_v1w':6,'upper_floor_tile_v1':10,'wired_corner_post_v1w':18,'wired_wall_short_v1w':8,'wall_panels':28,'wire_theater_panel_v2w':6,'power_module_v1w':1,'turret_segment_v2':6,'turret_cap_v2':1,'dormer_v2':4,'porch_post_v2':12,'railing_v2':9,'gingerbread_trim_v2':10,'bay_window_v2':1,'chimney_v2':2,'edison_sconce_v2w':6,'fix_chandelier_v2':3,'fix_victorian_lamppost_v2':2},
  build(P){base(P,760,600);mk(P,[['room',{w:381,d:254,ops:{S:['W','D','W'],N:['w','w','w'],E:['w','w'],W:['w','w']}}],['room',{lv:1,w:381,d:254,ops:{S:['w','w','w'],N:['w','w','w'],E:['w','w'],W:['w','w']}}],
@@ -472,18 +495,23 @@ const HOUSES=[
 // fix bay rotation via r key duplicates: handled by mk ry (last r wins in object literal)
 // ---------- v3 extra dressing per house ----------
 const EXTRA={
- cottage0:[['gate',{x:20,z:248,s:.95}],['lampc',{x:-205,z:195,s:.85}],['pond',{x:-60,z:-205,r:40}],['bench',{x:-140,z:-200,r:.3}],['rose',{x:-110,z:150}],['rose',{x:120,z:150}],['rose',{x:150,z:-150}],
+ cottage0:[['gateplay',{x:20,z:248,s:.95}],['lampc',{x:-205,z:195,s:.85}],['pond',{x:-60,z:-205,r:40}],['bench',{x:-140,z:-200,r:.3}],['rose',{x:-110,z:150}],['rose',{x:120,z:150}],['rose',{x:150,z:-150}],
    ['flowers',{x:145,z:0,L:200,dep:16,r:Math.PI/2}],['flowers',{x:0,z:-145,L:200,dep:14}],['shroom',{x:225,z:110,s:1.6}],['shroom',{x:235,z:128,s:1.1}],['shroom',{x:200,z:120,s:.9}],['shroom',{x:-210,z:-120,s:1.3}],['shroom',{x:-245,z:-170,s:1}],
-   ['string',{a:V3(-132,150,170),b:V3(100,F+H+30,191),n:14,sag:16}]],
- ranch1:[['gate',{x:0,z:268}],['flowers',{x:-200,z:212,L:170}],['flowers',{x:200,z:212,L:170}],['rose',{x:-340,z:120}],['rose',{x:-340,z:60}],['bench',{x:-300,z:200}],['pond',{x:-300,z:-200,r:44}],['shroom',{x:-380,z:-120,s:1.4}],['shroom',{x:-370,z:-140}],
-   ['string',{a:V3(-317,105,150),b:V3(-60,108,200),n:14,sag:14}],['string',{a:V3(60,108,200),b:V3(260,108,150),n:12,sag:14}],['vane',{x:0,y:F*2+H*2.2+28+125*.9+4}]],
- town2:[['gate',{x:30,z:228,s:.75}],['lampc',{x:-185,z:200,s:.9}],['spiral',{x:80,z:-60}],['flowers',{x:-150,z:128,L:40,dep:14}],['rose',{x:-190,z:120}],['rose',{x:190,z:40}],['bench',{x:-120,z:200}],
-   ['vane',{x:127,y:LV+LV*2-6+30*2.6+8,z:127}],['shroom',{x:200,z:-120,s:1.3}],['shroom',{x:-200,z:-160}]],
- court3:[['gate',{x:0,z:332,s:1.4}],['flowers',{x:-60,z:-110,L:90,dep:12}],['flowers',{x:60,z:-110,L:90,dep:12}],['rose',{x:-90,z:150}],['rose',{x:90,z:150}],['rose',{x:-320,z:100}],['rose',{x:320,z:100}],
-   ['bench',{x:-70,z:150,r:.4}],['bench',{x:70,z:150,r:-.4}],['string',{a:V3(-120,96,-110),b:V3(120,96,180),n:18,sag:20}],['string',{a:V3(120,96,-110),b:V3(-120,96,180),n:18,sag:20}]],
- shop4:[['vane',{x:-50,y:300+112,z:-60}],['flowers',{x:-210,z:200,L:160,dep:14}],['bench',{x:-120,z:210}],['rose',{x:-330,z:140}],['box',{x:340,z:60,w:22,h:22,d:22,c:0x7a5534,grp:'garden',layer:.3}],['box',{x:345,z:90,w:18,h:18,d:18,c:0x8b6b4a,grp:'garden',layer:.3}],
-   ['string',{a:V3(-80,180,40),b:V3(330,250,-60),n:16,sag:30}],['lampc',{x:340,z:220,s:.9}]],
- wired5:[['gate',{x:0,z:292,s:1.05}],['dynamo',{x:-255,z:-235}],['flowers',{x:-150,z:205,L:90}],['flowers',{x:150,z:205,L:90}],['rose',{x:-300,z:120}],['bench',{x:-290,z:180}],
+   ['string',{a:V3(-132,150,170),b:V3(100,F+H+30,191),n:14,sag:16}],
+   ['lawn',{x:-190,z:190}],['path',{x:20,z:190}],['lawn',{x:190,z:190}],['fence',{x:-190,z:260,L:127}],['fence',{x:190,z:260,L:127}],['gateplay',{x:20,z:260}],['sandbox',{x:200,z:80}],['shed',{x:-220,z:-60,r:Math.PI}],['planter',{x:160,z:-180}],['planter',{x:-180,z:100}],['gbed',{x:140,z:40,r:Math.PI/2}],['fcorner',{x:-260,z:260}]],
+ ranch1:[['gateplay',{x:0,z:268}],['flowers',{x:-200,z:212,L:170}],['flowers',{x:200,z:212,L:170}],['rose',{x:-340,z:120}],['rose',{x:-340,z:60}],['bench',{x:-300,z:200}],['pond',{x:-300,z:-200,r:44}],['shroom',{x:-380,z:-120,s:1.4}],['shroom',{x:-370,z:-140}],
+   ['string',{a:V3(-317,105,150),b:V3(-60,108,200),n:14,sag:14}],['string',{a:V3(60,108,200),b:V3(260,108,150),n:12,sag:14}],
+   ['lawn',{x:-380,z:200}],['path',{x:0,z:200}],['lawn',{x:380,z:200}],['fence',{x:-320,z:280,L:200}],['fence',{x:320,z:280,L:200}],['gateplay',{x:0,z:280}],['sandbox',{x:300,z:100}],['shed',{x:-360,z:-40}],['planter',{x:-280,z:140}],['gbed',{x:200,z:180}],['fcorner',{x:-420,z:280}]],
+ town2:[['gateplay',{x:30,z:228,s:.75}],['lampc',{x:-185,z:200,s:.9}],['spiral',{x:80,z:-60}],['flowers',{x:-150,z:128,L:40,dep:14}],['rose',{x:-190,z:120}],['rose',{x:190,z:40}],['bench',{x:-120,z:200}],
+   ['shroom',{x:200,z:-120,s:1.3}],['shroom',{x:-200,z:-160}],
+   ['path',{x:30,z:200}],['lawn',{x:-180,z:200}],['sandbox',{x:180,z:140}],['planter',{x:-160,z:140}],['fence',{x:-180,z:240,L:100}],['gbed',{x:160,z:40}]],
+ court3:[['gateplay',{x:0,z:332,s:1.4}],['flowers',{x:-60,z:-110,L:90,dep:12}],['flowers',{x:60,z:-110,L:90,dep:12}],['rose',{x:-90,z:150}],['rose',{x:90,z:150}],['rose',{x:-320,z:100}],['rose',{x:320,z:100}],
+   ['bench',{x:-70,z:150,r:.4}],['bench',{x:70,z:150,r:-.4}],['string',{a:V3(-120,96,-110),b:V3(120,96,180),n:18,sag:20}],['string',{a:V3(120,96,-110),b:V3(-120,96,180),n:18,sag:20}],
+   ['lawn',{x:0,z:360}],['path',{x:0,z:300}],['sandbox',{x:-200,z:200}],['shed',{x:280,z:40}],['planter',{x:-100,z:160}],['planter',{x:100,z:160}],['fence',{x:-260,z:360,L:160}],['fence',{x:260,z:360,L:160}],['gbed',{x:0,z:-100}]],
+ shop4:[['flowers',{x:-210,z:200,L:160,dep:14}],['bench',{x:-120,z:210}],['rose',{x:-330,z:140}],['box',{x:340,z:60,w:22,h:22,d:22,c:0x7a5534,grp:'garden',layer:.3}],['box',{x:345,z:90,w:18,h:18,d:18,c:0x8b6b4a,grp:'garden',layer:.3}],
+   ['string',{a:V3(-80,180,40),b:V3(330,250,-60),n:16,sag:30}],['lampc',{x:340,z:220,s:.9}],
+   ['lawn',{x:-300,z:200}],['path',{x:180,z:200}],['gateplay',{x:-100,z:250}],['sandbox',{x:300,z:160}],['shed',{x:360,z:-40}],['planter',{x:-360,z:100}],['fence',{x:-300,z:260,L:160}],['gbed',{x:-180,z:200}]],
+ wired5:[['gateplay',{x:0,z:292,s:1.05}],['dynamo',{x:-255,z:-235}],['flowers',{x:-150,z:205,L:90}],['flowers',{x:150,z:205,L:90}],['rose',{x:-300,z:120}],['bench',{x:-290,z:180}],
    ['wire',{pts:[[-255,6,-205],[-255,6,-150],[0,6,-150]],col:0x22d3ee,r:2.4,layer:1}],
    ['wire',{pts:[[0,6,-150],[300,6,-150],[300,6,250],[330,6,250],[330,170,250]],col:0xf472b6,r:1.8,layer:1}],
    ['wire',{pts:[[0,6,-150],[-300,6,-150],[-300,6,250],[-330,6,250],[-330,170,250]],col:0xf472b6,r:1.8,layer:1}],
@@ -492,8 +520,10 @@ const EXTRA={
    ['wire',{pts:[[-150,LV*2+H,-130],[-150,LV*2+H+20,-160],[150,LV*2+H+20,-160],[150,LV*2+H,-130]],col:0xfacc15,r:1.6,layer:2}],
    ['sconce',{x:-40,y:F+52,z:134}],['sconce',{x:40,y:F+52,z:134}],['sconce',{x:-130,y:LV+F+52,z:134}],['sconce',{x:130,y:LV+F+52,z:134}],
    ['panel',{x:-130,y:LV+F+60,z:-131,r:Math.PI,k:2}],['panel',{x:130,y:LV+F+60,z:-131,r:Math.PI,k:3}],['panel',{x:-130,y:F+60,z:-131,r:Math.PI,k:4}],['panel',{x:130,y:F+60,z:-131,r:Math.PI,k:1}],
-   ['string',{a:V3(-190,LV*3-10,180),b:V3(0,LV*2+H+10,127),n:16,sag:18}]]
+   ['string',{a:V3(-190,LV*3-10,180),b:V3(0,LV*2+H+10,127),n:16,sag:18}],
+   ['lawn',{x:-300,z:220}],['path',{x:0,z:220}],['lawn',{x:300,z:220}],['sandbox',{x:280,z:80}],['shed',{x:-340,z:-40}],['planter',{x:-280,z:140}],['planter',{x:280,z:140}],['fence',{x:-280,z:320,L:180}],['fence',{x:280,z:320,L:180}],['gbed',{x:160,z:180}]]
 };
+
 const CAM={cottage0:[34,20,.7],ranch1:[28,22,.64],town2:[38,14,.72],court3:[30,28,.68],shop4:[24,18,.66],wired5:[32,16,.68]};
 let CUR_H=null;
 // ---------- UI ----------
@@ -507,19 +537,19 @@ const WIRE=`<h3>Wiring the Electrified Manor</h3><p><strong>Low voltage only (3�
 <li><strong>Garden circuit:</strong> pink runs go under the lawn tiles to the two lamppost clusters (<code>lamppost_cluster_v3</code>, 4 LEDs each). Gold runs feed the conservatory chandelier and the roof cresting.</li>
 <li><strong>Power:</strong> <code>power_module_v1w</code> (USB-C 5 V trigger or 3×AAA) sits in the dynamo kiosk behind the house, with a green pilot LED and a JST-PH plug per story.</li></ul>
 <table><thead><tr><th>Kit</th><th>Qty</th></tr></thead><tbody><tr><td>30 AWG silicone wire red + black</td><td>2 × 10 m</td></tr><tr><td>Warm-white 3 mm LEDs w/ resistor, 5 V</td><td>24</td></tr><tr><td>Micro LEDs 1.8 mm (chandelier cups, globes)</td><td>30</td></tr><tr><td>Purple flicker LED (Tesla coil) + 2 amber flicker (chimneys)</td><td>3</td></tr><tr><td>Green pilot LED (dynamo dial)</td><td>1</td></tr><tr><td>Micro slide switches</td><td>9 (one per room + garden + exterior)</td></tr><tr><td>JST-PH 2-pin pigtails</td><td>12 pairs</td></tr><tr><td>N52 magnets Ø6×2 / Ø6×1</td><td>40 / 40</td></tr><tr><td>Warm fairy-light string, 2 m</td><td>2</td></tr></tbody></table>`;
-const V3BOM={cottage0:{'weathervane_v3':1,'garden_gate_v3':1,'lamppost_cluster_v3':1,'door_surround_v3':1,'stained_bay_v3':1,'roof_cresting_v3':1,'stained_insert_*_v3 (lead+glass)':14,'finial_spire_v3':2},
- ranch1:{'porte_cochere_v3':1,'garden_gate_v3':1,'lamppost_cluster_v3':2,'door_surround_v3':2,'stained_bay_v3':1,'roof_cresting_v3':2,'weathervane_v3':1,'stained_insert_*_v3 (lead+glass)':24},
- town2:{'spiral_stair_v3':1,'weathervane_v3':1,'garden_gate_v3':1,'lamppost_cluster_v3':1,'door_surround_v3':1,'mansard_panel_v3':4,'stained_bay_v3':2,'stained_insert_*_v3 (lead+glass)':30},
- court3:{'garden_gate_v3':1,'lamppost_cluster_v3':2,'weathervane_v3':1,'door_surround_v3':4,'stained_insert_*_v3 (lead+glass)':28,'finial_spire_v3':4},
- shop4:{'weathervane_v3':1,'lamppost_cluster_v3':2,'door_surround_v3':1,'roof_cresting_v3':1,'stained_insert_*_v3 (lead+glass)':22},
- wired5:{'mansard_panel_v3':6,'garden_gate_v3':1,'lamppost_cluster_v3':2,'door_surround_v3':1,'stained_bay_v3':2,'spiral_stair_v3':1,'stained_insert_*_v3 (lead+glass)':36,'finial_spire_v3':5}};
+const V3BOM={cottage0:{'wall_panel_clear_window_v4':4,'wall_panel_wide_door_v4':1,'roof_panel_lift_v4':2,'open_face_rail_v4':2,'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':1,'bench_play_v4':1},
+ ranch1:{'wall_panel_clear_window_v4':8,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':4,'open_face_rail_v4':3,'lawn_tile_v4':4,'path_tile_v4':2,'fence_straight_v4':4,'fence_corner_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':2,'bench_play_v4':2},
+ town2:{'wall_panel_clear_window_v4':8,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':2,'open_face_rail_v4':2,'lawn_tile_v4':1,'path_tile_v4':1,'garden_gate_play_v4':1,'sandbox_v4':1,'planter_stub_v4':2,'garden_bed_v4':1,'bench_play_v4':1},
+ court3:{'wall_panel_clear_window_v4':10,'wall_panel_wide_door_v4':4,'roof_panel_lift_v4':4,'open_face_rail_v4':4,'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':4,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':2,'bench_play_v4':2},
+ shop4:{'wall_panel_clear_window_v4':6,'wall_panel_wide_door_v4':3,'roof_panel_lift_v4':3,'open_face_rail_v4':2,'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':1,'garden_bed_v4':1,'bench_play_v4':1},
+ wired5:{'wall_panel_clear_window_v4':10,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':4,'open_face_rail_v4':3,'lawn_tile_v4':3,'path_tile_v4':2,'fence_straight_v4':4,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':1,'bench_play_v4':1,'wired_floor_tile_v1w':6,'service_panel_v1w':6}};
 function select(n){cur=n;const h=HOUSES[n];CUR_H=h;[...pills.children].forEach((b,k)=>b.classList.toggle('on',k==n));
-  document.getElementById('rev').textContent='Grand v3 · Gallery — '+h.name;document.getElementById('blurb').textContent=h.blurb;
+  document.getElementById('rev').textContent='v4 Play — '+h.name;document.getElementById('blurb').textContent=h.blurb;
   const bom=Object.assign({},h.bom,V3BOM[h.id]||{});const tot=Object.values(bom).reduce((a,b)=>a+b,0);
-  document.getElementById('facts').innerHTML=[[h.size,'Footprint (tiles)'],[h.stories,'Stories'],[tot+' parts','Structure + ornament'],[h.old,'Was (v1)']].map(([a,b])=>`<div class="fact"><b>${a}</b><span>${b}</span></div>`).join('');
-  document.getElementById('bom').innerHTML=`<h3>${h.name} — print list</h3><table><thead><tr><th>Part (STL)</th><th>Qty</th></tr></thead><tbody>${Object.entries(bom).map(([k,v])=>`<tr><td><code>${k}</code>${/_v3/.test(k)?' <span class="new">v3</span>':''}</td><td>${v}</td></tr>`).join('')}</tbody></table>
-  <p class="muted">Roof panels, gables, mansard panels and arcades print flat. Turret drums, caps, the spiral stair and lamppost clusters print upright. Stained-glass inserts print as two bodies (lead + translucent glass) in one H3C tool-swap plate: <a href="/dollhouse/stl/stained_inserts_plate_v3.3mf">stained_inserts_plate_v3.3mf</a>. Every part fits the H3C bed; the largest is porte_cochere_v3 at 236 × 128 × 146.</p>`;
-  document.getElementById('notes-house').innerHTML=`<h3>${h.name}</h3><p>${h.story}</p>`+(h.wired?WIRE:`<p class="muted">Lights: Ø3.2 channels run around each wall top and down a corner post. Turret, chimney, lamppost globes and fountain each hide an LED pocket. Press <b>Night lights</b> to see it lit.</p>`);
+  document.getElementById('facts').innerHTML=[[h.size,'Footprint (tiles)'],[h.stories,'Stories'],[tot+' parts','Structure + outdoor'],[h.old,'Was (v1)']].map(([a,b])=>`<div class="fact"><b>${a}</b><span>${b}</span></div>`).join('');
+  document.getElementById('bom').innerHTML=`<h3>${h.name} — print list</h3><table><thead><tr><th>Part (STL)</th><th>Qty</th></tr></thead><tbody>${Object.entries(bom).map(([k,v])=>`<tr><td><code>${k}</code>${/_v4|play/.test(k)?' <span class="new">v4</span>':(/_v3/.test(k)?' <span class="new">opt</span>':'')}</td><td>${v}</td></tr>`).join('')}</tbody></table>
+  <p class="muted">Play structure: <code>wall_panel_clear_window_v4</code>, <code>wall_panel_wide_door_v4</code>, <code>roof_panel_lift_v4</code>, <code>open_face_rail_v4</code>. Outdoor Lego modules: lawn/path tiles, fence, gate, sandbox, planter, bench, shed. Optional v3 ornaments remain in <code>/dollhouse/stl/</code> but are not required for play. Snap sizes lock after the H3C clearance-strip test.</p>`;
+  document.getElementById('notes-house').innerHTML=`<h3>${h.name}</h3><p>${h.story}</p>`+(h.wired?WIRE:`<p class="muted">Play view leaves the back open and roofs off so a kid can see and reach every room. Lights: Ø3.2 channels in wall tops and corner posts. Press <b>Night lights</b> for LED pockets. Rearrange outdoor modules on the 127 mm snap grid like Legos.</p>`);
   ['btn-wire','btn-panel','lg-w','lg-p'].forEach(id=>document.getElementById(id).hidden=!h.wired);build(h);}
 function mergeParts(){const keep=new Set();spinners.forEach(s=>{const o=s.isObject3D?s:(s.air||s.g);if(o)o.traverse(c=>keep.add(c));});SMOKES.forEach(S=>S.sm.forEach(x=>keep.add(x)));
   const inv=new THREE.Matrix4(),rel=new THREE.Matrix4();let before=0,after=0;
@@ -534,7 +564,7 @@ function mergeParts(){const keep=new Set();spinners.forEach(s=>{const o=s.isObje
   window.__dh_stats={before,after};}
 function clearMats(){for(const k in MC)delete MC[k];}
 function build(h){if(root){scene.remove(root);root.traverse(o=>{if(o.geometry)o.geometry.dispose();});}root=new THREE.Group();scene.add(root);parts=[];spinners=[];lights=[];HALOS=[];WIRES=[];PULSES=[];SMOKES=[];GLOW.length=0;SGI=0;seed(h.id.length*977+13);clearMats();
-  const P=PAL[h.pal];CUR_P=P;roles(P);h.build(P);mk(P,EXTRA[h.id]||[]);
+  const P=Object.assign({},PAL[h.pal],{plainGlass:true});CUR_P=P;roles(P);h.build(P);mk(P,EXTRA[h.id]||[]);applyPlayOpen();
   root.traverse(o=>{if(o.isMesh&&o.material&&o.material.map&&!o.material.userData.keepUV&&!o.userData.keepUV)worldUV(o);});
   mergeParts();
   // fireflies
@@ -586,7 +616,8 @@ addEventListener('resize',resize);resize();const tv=V3();
   controls.update();renderer.render(scene,camera);})(0);
 const tog=(id,fn)=>{const b=document.getElementById(id);b.onclick=()=>{b.classList.toggle('on');fn(b.classList.contains('on'));};};
 tog('btn-explode',on=>target=on?1:0);tog('btn-night',setNight);tog('btn-spin',on=>spin=on);
-[['btn-roof',['roof','orn']],['btn-wall',['wall']],['btn-furn',['furn']],['btn-garden',['garden']],['btn-light',['light']],['btn-wire',['wire']],['btn-panel',['panel']]].forEach(([id,ks])=>tog(id,on=>{ks.forEach(k=>vis[k]=on?1:0);applyVis();}));
+[['btn-roof',['roof','orn']],['btn-wall',['wall']],['btn-furn',['furn']],['btn-garden',['garden']],['btn-light',['light']],['btn-wire',['wire']],['btn-panel',['panel']]].forEach(([id,ks])=>tog(id,on=>{ks.forEach(k=>vis[k]=on?1:0);if(id==='btn-roof'&&on){playMode=false;const pb=document.getElementById('btn-play');if(pb)pb.classList.remove('on');}applyVis();}));
+(function(){const b=document.getElementById('btn-play');if(!b)return;b.onclick=()=>{playMode=!playMode;b.classList.toggle('on',playMode);vis.roof=playMode?0:1;vis.orn=playMode?0:1;const rb=document.getElementById('btn-roof');if(rb)rb.classList.toggle('on',!!vis.roof);applyVis();select(cur);};})();
 addEventListener('hashchange',()=>{const i=HOUSES.findIndex(h=>h.id==location.hash.slice(1));if(i>=0&&i!=cur)select(i);});
 if(!spin)document.getElementById('btn-spin').classList.remove('on');
 select(Math.max(0,HOUSES.findIndex(h=>h.id==location.hash.slice(1))));
