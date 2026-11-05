@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Dollhouse — Cottage-0 (draft): a 1:24 snap-together modular dollhouse for the Bambu Lab H3C, with built-in low-voltage light channels and room switch points." />
+<meta name="description" content="Dollhouse kit (draft): six 1:24 snap-together modular dollhouse for the Bambu Lab H3C, with built-in low-voltage light channels and room switch points." />
 <link rel="icon" href="data:," />
-<title>Dollhouse — Cottage-0 — Meadowlark Models</title>
+<title>Dollhouse kit — Meadowlark Models</title>
 <link rel="stylesheet" href="/coreyhq-back.css">
 <style>
   :root{color-scheme:dark;--bg:#12151a;--bg2:#1a1f27;--bg3:#242a34;--border:#3a4250;--text:#e8eaed;--muted:#9aa0a6;--accent:#f472b6}
@@ -39,6 +39,7 @@
   ol li,ul li{margin-bottom:.35rem}
   .legend span{display:inline-block;margin-right:1rem;font-size:.85rem;color:var(--muted)}
   .legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;margin-right:.3rem;vertical-align:-1px}
+  .pills{display:flex;gap:.4rem;flex-wrap:wrap;margin:0 0 1rem}.pills button{background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:.35rem .9rem;font:inherit;cursor:pointer}.pills button.on{border-color:var(--accent);color:var(--accent);background:var(--bg2)}
 </style>
 </head>
 <body>
@@ -47,180 +48,246 @@
 <div class="banner"><strong>Draft.</strong> First look at the dollhouse kit. Sizes can still move after the snap fit test.</div>
 
 <header>
-  <div class="rev">Dollhouse — Cottage-0</div>
-  <h1>Modular dollhouse</h1>
-  <p class="meta">Cottage-0 · 1:24 · Bambu Lab H3C · Draft</p>
+  <div class="rev" id="rev">Dollhouse — Cottage-0</div>
+  <h1>Modular dollhouse kit</h1>
+  <p class="meta">Six layouts · one snap system · 1:24 · Bambu Lab H3C · Draft v1</p>
 </header>
-
-<div class="facts">
-  <div class="fact"><b>1:24</b><span>scale (1 ft = 12.7 mm)</span></div>
-  <div class="fact"><b>127 mm</b><span>floor tile (10 × 10 ft)</span></div>
-  <div class="fact"><b>101.6 mm</b><span>story height (8 ft ceiling)</span></div>
-  <div class="fact"><b>Ø6 / Ø6.3</b><span>snap post / socket (socket pending fit test)</span></div>
-  <div class="fact"><b>Ø3.2 mm</b><span>light channels</span></div>
-  <div class="fact"><b>330×320×325</b><span>H3C build volume, mm</span></div>
-</div>
-
+<div class="pills" id="pills" role="tablist" aria-label="House layout"></div>
+<div class="facts" id="facts"></div>
 <nav class="tabs" role="tablist">
   <button role="tab" aria-selected="true" data-tab="explore">Explore</button>
   <button role="tab" aria-selected="false" data-tab="explode">Explode</button>
   <button role="tab" aria-selected="false" data-tab="print">Print</button>
   <button role="tab" aria-selected="false" data-tab="notes">Notes</button>
+  <button role="tab" aria-selected="false" data-tab="kit">Accessories</button>
 </nav>
-
 <section id="explore">
-  <p>Cottage-0 is a 2 × 2 grid of floor tiles, 254 mm square — about a 20 × 20 ft house at 1:24. Four corner posts hold eight short walls: one door, two windows, five plain. Drag to look around.</p>
-  <div id="view"><div class="hint">Drag to rotate · scroll or pinch to zoom · simple boxes, not the real STLs yet</div></div>
+  <p id="blurb"></p>
+  <div id="view"><div class="hint">Drag to rotate · scroll or pinch to zoom · simple shapes, not the final STLs</div></div>
   <div class="controls">
     <button id="btn-explode">Explode</button>
     <button id="btn-walls" class="on">Walls</button>
+    <button id="btn-upper" class="on">Upper story</button>
+    <button id="btn-furn" class="on">Furniture &amp; people</button>
     <button id="btn-lights" class="on">Light channels</button>
+    <button id="btn-wires" class="on" hidden>Wiring</button>
+    <button id="btn-panel" class="on" hidden>Service panels</button>
   </div>
   <div class="legend">
-    <span><i style="background:#c9b79c"></i>Floor tiles</span>
-    <span><i style="background:#e8e2d6"></i>Short walls</span>
-    <span><i style="background:#8a6f55"></i>Corner posts</span>
-    <span><i style="background:#facc15"></i>Light channels</span>
-    <span><i style="background:#f472b6"></i>Switch points</span>
+    <span><i style="background:#c9b79c"></i>Floor tiles</span><span><i style="background:#e8e2d6"></i>Walls</span>
+    <span><i style="background:#8a6f55"></i>Corner posts</span><span><i style="background:#facc15"></i>Light channels</span>
+    <span><i style="background:#f472b6"></i>Switch points</span><span id="lg-w" hidden><i style="background:#22d3ee"></i>Wiring (Wired-5)</span>
+    <span id="lg-p" hidden><i style="background:#a78bfa"></i>Magnetic service panel</span>
   </div>
 </section>
-
 <section id="explode" hidden>
-  <p>The Explore view has an <strong>Explode</strong> button that lifts each layer apart: tiles, then dowels and corner posts, then walls. That shows the build order in one glance.</p>
-  <div class="card"><strong>Coming next:</strong> the real STL parts in the viewer, with a slider that steps through each assembly stage and labels every part.</div>
-  <p class="muted">Layer order, bottom to top: floor tiles → dowel pins → corner posts → short walls → (later) ceiling tile and gable roof.</p>
+  <p>Press <strong>Explode</strong> in Explore to lift each layer apart in build order:</p>
+  <ol><li>Floor tiles (story 1)</li><li>Dowel pins + corner posts</li><li>Walls</li><li>Furniture, fixtures, people</li><li>Upper floor tiles, then the story-2 posts and walls (two-story houses)</li></ol>
+  <p class="muted">Every house uses the same parts. A layout is just a different arrangement of tiles, posts and walls, so pieces move between houses.</p>
 </section>
-
-<section id="print" hidden>
-  <h3>Plates</h3>
-  <table>
-    <thead><tr><th>Plate</th><th>What's on it</th><th>Settings</th></tr></thead>
-    <tbody>
-      <tr><td><strong>1b — print first</strong></td><td>Snap clearance strip (Ø6.2 / 6.3 / 6.4 sockets, marked with 1/2/3 dots) + 3 loose pins. About 10 minutes.</td><td>0.4 nozzle, 0.2 layer, upright, no supports</td></tr>
-      <tr><td><strong>1 — floors</strong></td><td>4 floor tiles in a 2 × 2 layout (~270 × 270 mm with gaps), test pins in the margin.</td><td>0.4 nozzle, 0.2 layer, ribs down, 15% infill, no supports</td></tr>
-      <tr><td><strong>2 — walls</strong></td><td>8 short walls (about 5 per plate) + 4 corner posts + dowels. Walls print upside-down on their top edge.</td><td>0.4 nozzle, 0.2 layer, 5–8 mm brim, no supports</td></tr>
-    </tbody>
-  </table>
-  <h3>Cottage-0 parts</h3>
-  <table>
-    <thead><tr><th>Part</th><th>Qty</th><th>Size (mm)</th></tr></thead>
-    <tbody>
-      <tr><td><code>floor_tile_v0</code></td><td>4</td><td>127 × 127 × 10</td></tr>
-      <tr><td><code>corner_post_v0</code></td><td>4</td><td>19.4 × 19.4 × 101.6</td></tr>
-      <tr><td><code>dowel_pin_v0</code></td><td>4 (+2 spare)</td><td>Ø6 × 13.5</td></tr>
-      <tr><td><code>wall_panel_door_short_v0c</code></td><td>1</td><td>107.1 × 8 × 109.6</td></tr>
-      <tr><td><code>wall_panel_window_short_v0c</code></td><td>2</td><td>107.1 × 8 × 109.6</td></tr>
-      <tr><td><code>wall_panel_short_v0c</code></td><td>5</td><td>107.1 × 8 × 109.6</td></tr>
-      <tr><td><code>snap_clearance_strip_v0</code></td><td>1</td><td>40 × 24.5 × 12</td></tr>
-    </tbody>
-  </table>
-  <p class="muted">Files: STL now. Bambu Studio 3MF plates come after the fit test locks the socket size. Full-length 127 mm walls are only for houses wider than two tiles.</p>
-</section>
-
-<section id="notes" hidden>
-  <h3>Assembly</h3>
+<section id="print" hidden><div id="bom"></div></section>
+<section id="notes" hidden><div id="notes-house"></div>
+  <h3>Assembly (all houses)</h3>
   <ol>
-    <li>Print the clearance strip first. Pick the socket where a pin pushes in firmly and pulls out by hand.</li>
-    <li>Lay the four floor tiles in a square, switch stubs facing where you want room switches.</li>
-    <li>At each outer corner, push a dowel pin into the corner socket and drop a corner post on it.</li>
-    <li>Seat the short walls: corner end against the post, posts into the tile sockets. Two walls meet on each tile seam.</li>
-    <li>Run LEDs or wire before the walls go on: floor loop → corner riser → up the post → wall-top channel.</li>
+    <li>Print the snap clearance strip first. Choose the socket where a pin pushes in firmly and still pulls out by hand.</li>
+    <li>Lay out the floor tiles. Point the switch stubs where you want room switches.</li>
+    <li>Push a dowel into each corner socket and drop a corner post on it. The corner post owns the corner socket.</li>
+    <li>Seat the walls. Use short walls (107 mm) next to a corner, full walls (127 mm) mid-run, and mini walls (87 mm) on a one-tile side with corners at both ends.</li>
+    <li>Two-story houses: upper floor tiles drop onto the dowels on top of the corner posts. The stair module pegs into a ground-floor socket.</li>
   </ol>
-  <h3>Lights</h3>
-  <ul>
-    <li>Low voltage only — coin cell, AA pack, or USB 5 V. The channels fit 3 mm LEDs, fiber, or thin (30 AWG) wire.</li>
-    <li>Each room has one switch pocket on a tile edge, sized for a micro slide or tact switch.</li>
-    <li>One outside switch point feeds porch and corner lamps.</li>
-  </ul>
-  <h3>Snap fit tip</h3>
-  <p>FDM holes print a little small. If pins are too tight, use the next bigger socket from the strip; if they wobble, go one smaller. Parts should snap apart without tools.</p>
-  <h3>Next</h3>
-  <p class="muted">3MF plates → ceiling tile and gable roof → stairs, lamps, furniture, and 1:24 figures.</p>
 </section>
-
+<section id="kit" hidden>
+  <p>Accessories share the 1:24 scale (an adult figure is 73 mm, about 6 ft). Bases that sit on the floor have Ø5.9 pegs that drop into the tile sockets, so nothing slides around.</p>
+  <table><thead><tr><th>Group</th><th>Parts (STL)</th><th>Notes</th></tr></thead><tbody>
+  <tr><td>Furniture</td><td>bed, table, chair (×2), sofa, bookshelf, kitchen counter, toilet, sink</td><td>Blocky, clean shapes. Print at 0.2 layers. The counter has a sink well.</td></tr>
+  <tr><td>Figures</td><td>adult standing (73 mm), adult sitting (fits the chair or sofa), child (46 mm)</td><td>Print on the 0.2 mm nozzle for detail. Simple poseable-looking silhouettes.</td></tr>
+  <tr><td>Fixtures</td><td>ceiling puck, table lamp, wall sconce, porch light, outdoor post lamp</td><td>Each has a 3 mm or 5 mm LED pocket and a wire bore that exits into the channels. Print in white or translucent PETG so the light glows.</td></tr>
+  <tr><td>Structure</td><td>stair module, upper floor tile, mini walls, power module</td><td>The stairs climb 111.6 mm (wall + upper tile) in 12 steps, 38 mm (3 ft) wide.</td></tr>
+  </tbody></table>
+</section>
 <script src="vendor/three.min.js"></script>
 <script src="vendor/OrbitControls.js"></script>
 <script>
-// tabs
+const T=127,H=101.6,F=10,LVL=H+F,S=15.875;
+// tiles: [col,row,level]; furn: [type,x,z,level,rotY] in tile units (centre of tile = i+.5)
+const HOUSES=[
+ {id:'cottage0',name:'Cottage-0',size:'2 × 2',stories:1,blurb:'The starter: four floor tiles, 254 mm square (about 20 × 20 ft). One open room with a door and two windows.',
+  tiles:g(2,2),doors:[[0,0,'S']],windows:[[1,0,'S'],[0,1,'W']],
+  furn:[['sofa',0.6,1.4,0,0],['table',1.4,0.9,0,0],['chair',1.2,0.7,0,0],['chair',1.6,1.1,0,3.14],['adult',0.9,0.6,0,0],['lamp',1.7,1.7,0,0]]},
+ {id:'ranch1',name:'Ranch-1',size:'3 × 2',stories:1,blurb:'Six tiles in one story (about 30 × 20 ft). Open living room and kitchen across the front, two bedrooms and a bath along the back.',
+  tiles:g(3,2),doors:[[1,0,'S']],windows:[[0,0,'S'],[2,0,'S'],[0,1,'N'],[2,1,'N'],[0,1,'W'],[2,0,'E']],inner:[[1,1,'W'],[2,1,'W'],[1,1,'S',.5]],
+  furn:[['sofa',0.5,0.4,0,0],['counter',2.3,0.25,0,0],['table',1.6,0.7,0,0],['chair',1.4,0.7,0,0],['chair',1.8,0.7,0,0],['bed',0.5,1.5,0,0],['bed',2.5,1.5,0,0],['toilet',1.3,1.8,0,0],['sink',1.7,1.8,0,0],['adult',1.2,0.4,0,0],['child',1.4,0.4,0,0]]},
+ {id:'town2',name:'Townhouse-2',size:'2 × 2 × 2 stories',stories:2,blurb:'Cottage footprint, two stories. Living room and kitchen downstairs, bedroom and bath upstairs, with a straight stair along one wall.',
+  tiles:g(2,2).concat(g(2,2,1)),doors:[[0,0,'S']],windows:[[1,0,'S'],[0,1,'W'],[1,1,'E',1],[0,0,'S',1],[1,0,'S',1]],stairs:[[1.7,1.0,0]],
+  furn:[['sofa',0.6,1.5,0,0],['counter',0.5,0.25,0,0],['table',0.8,0.8,0,0],['adult',0.9,1.0,0,0],['bed',0.5,1.2,1,0],['toilet',1.3,0.3,1,0],['sink',1.7,0.3,1,0],['child',0.6,0.5,1,0]]},
+ {id:'court3',name:'Courtyard-3',size:'3 × 3 U-plan',stories:1,blurb:'Seven tiles in a U around a courtyard open to the front (about 30 × 30 ft). Uses mini walls on the one-tile courtyard sides. The post lamp lights the court.',
+  tiles:g(3,3).filter(t=>!(t[0]==1&&t[1]==1)&&!(t[0]==1&&t[1]==0)),doors:[[1,1,'S'],[0,0,'E'],[2,0,'W']],windows:[[0,0,'S'],[2,0,'S'],[0,2,'N'],[2,2,'N'],[0,1,'W'],[2,1,'E']],
+  furn:[['postlamp',1.5,0.6,0,0],['sofa',1.5,2.5,0,0],['bed',0.5,0.5,0,0],['bed',2.5,0.5,0,0],['counter',0.5,2.75,0,0],['table',2.5,2.4,0,0],['chair',2.3,2.4,0,0],['adult',1.4,0.4,0,0],['child',1.7,0.5,0,0]]},
+ {id:'shop4',name:'Workshop-4',size:'2 × 3',stories:1,blurb:'A two-tile-deep workshop and garage bay with a wide opening, plus a two-tile house wing with a bedroom and kitchen.',
+  tiles:g(2,3),doors:[[0,0,'S'],[1,0,'S'],[1,2,'E']],windows:[[0,2,'W'],[0,1,'W'],[1,2,'N']],inner:[[0,2,'S'],[1,2,'S',.5]],bay:true,
+  furn:[['counter',1.5,1.75,0,0],['bookshelf',0.15,1.0,0,1.57],['table',0.8,0.8,0,0],['adult',1.0,0.5,0,0],['bed',0.5,2.5,0,0],['sink',1.6,2.8,0,0],['porch',1,0,0,0]]},
+ {id:'wired5',name:'Wired-5',size:'2 × 2 × 2, wired',stories:2,wired:true,blurb:'Townhouse-2 rebuilt to be wired like a real house. Wider Ø5 channels in the floors, posts and walls, a power module, and thin magnetic service panels that cover the wiring and lift off with a fingernail.',
+  tiles:g(2,2).concat(g(2,2,1)),doors:[[0,0,'S']],windows:[[1,0,'S'],[0,1,'W'],[1,1,'E',1],[0,0,'S',1],[1,0,'S',1]],stairs:[[1.7,1.0,0]],
+  furn:[['sofa',0.6,1.5,0,0],['lamp',0.2,1.6,0,0],['table',0.8,0.8,0,0],['adult',0.9,1.0,0,0],['bed',0.5,1.2,1,0],['lamp',0.2,1.6,1,0],['child',0.6,0.5,1,0],['porch',0.5,0,0,0],['postlamp',1.6,-0.3,0,0],['power',1.5,1.85,0,0]],
+  pucks:[[0.5,0.5,0],[1.5,1.5,0],[0.5,1.5,1],[1.5,0.5,1]],sconces:[[0,1,'W',0],[1,1,'E',1]],panels:[[1,1,'N',0],[0,1,'N',1]]}
+];
+function g(w,d,l=0){const a=[];for(let i=0;i<w;i++)for(let j=0;j<d;j++)a.push([i,j,l]);return a;}
+// ---------- geometry analysis: perimeter edges -> wall types, corners -> posts ----------
+const DIRS={S:[0,-1],N:[0,1],W:[-1,0],E:[1,0]};
+function analyse(h){
+  const out={walls:[],posts:[],levels:{}};
+  for(const t of h.tiles)(out.levels[t[2]]=out.levels[t[2]]||new Set()).add(t[0]+','+t[1]);
+  for(const L in out.levels){const set=out.levels[L],has=(i,j)=>set.has(i+','+j);
+    const vert=new Map(); // vertex -> count of perimeter edges touching
+    const edges=[];
+    for(const k of set){const[i,j]=k.split(',').map(Number);
+      for(const d in DIRS){const[di,dj]=DIRS[d];if(has(i+di,j+dj))continue;
+        // edge endpoints in grid vertex coords
+        let a,b; if(d=='S'){a=[i,j];b=[i+1,j];} if(d=='N'){a=[i,j+1];b=[i+1,j+1];} if(d=='W'){a=[i,j];b=[i,j+1];} if(d=='E'){a=[i+1,j];b=[i+1,j+1];}
+        edges.push({i,j,d,a,b,L:+L});}}
+    const dirAt=new Map();
+    for(const e of edges)for(const v of[e.a,e.b]){const k=v+'';const s=dirAt.get(k)||new Set();s.add('SN'.includes(e.d)?'h':'v');dirAt.set(k,s);}
+    const corner=v=>dirAt.get(v+'').size==2;
+    for(const[k,s]of dirAt)if(s.size==2){const[x,z]=k.split(',').map(Number);out.posts.push([x,z,+L]);}
+    for(const e of edges){const c=(corner(e.a)?1:0)+(corner(e.b)?1:0);
+      const op=(h.doors||[]).find(o=>o[0]==e.i&&o[1]==e.j&&o[2]==e.d&&(o[3]||0)==e.L)?'door':(h.windows||[]).find(o=>o[0]==e.i&&o[1]==e.j&&o[2]==e.d&&(o[3]||0)==e.L)?'window':'blank';
+      out.walls.push({...e,len:c==2?87.25:c==1?107.125:127,type:c==2?'mini':c==1?'short':'full',op,ca:corner(e.a),cb:corner(e.b),bay:h.bay&&e.L==0&&e.j==0&&e.d=='S'});}
+  }
+  return out;
+}
+function bom(h){const A=analyse(h),c={};const add=(k,n=1)=>c[k]=(c[k]||0)+n;
+  const lv0=h.tiles.filter(t=>t[2]==0).length,lv1=h.tiles.length-lv0;
+  add(h.wired?'wired_floor_tile_v1w':'floor_tile_v0',lv0); if(lv1)add('upper_floor_tile_v1',lv1);
+  add(h.wired?'wired_corner_post_v1w':'corner_post_v0',A.posts.length); add('dowel_pin_v0',A.posts.length*(h.stories>1?2:1)+2);
+  for(const w of A.walls){if(w.bay&&w.op=='door'){add('(open garage bay: no wall)');continue;}
+    const base={mini:'wall_panel_mini_v1',short:'wall_panel_short_v0c',full:'wall_panel_v0'}[w.type];
+    let n=w.op=='blank'?base:base.replace('wall_panel','wall_panel_'+w.op);
+    if(h.wired&&w.type=='short'&&w.op=='blank'&&(h.panels||[]).some(p=>p[0]==w.i&&p[1]==w.j&&p[2]==w.d&&p[3]==w.L))n='wired_wall_short_v1w';
+    add(n);}
+  (h.inner||[]).forEach(()=>add('wall_panel_short_v0c (interior partition)'));
+  if(h.stairs)add('stair_module_v1',h.stairs.length);
+  if(h.wired){add('service_panel_v1w',h.panels.length);add('power_module_v1w');add('fix_ceiling_puck_v1',h.pucks.length);add('fix_wall_sconce_v1',h.sconces.length);}
+  return {c,A};}
+// ---------- UI ----------
+let cur=0;const pills=document.getElementById('pills');
+HOUSES.forEach((h,n)=>{const b=document.createElement('button');b.textContent=h.name;b.onclick=()=>select(n);pills.appendChild(b);});
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
-  document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==b.dataset.tab);
-  if(b.dataset.tab==='explore') resize();
-});
-
-// viewer (procedural boxes, mm, Y up)
-const el=document.getElementById('view');
-let renderer,scene,camera,controls,resize=()=>{};
-if(window.THREE){
-  renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  el.prepend(renderer.domElement);
-  scene=new THREE.Scene();scene.background=new THREE.Color(0x1a1f27);
-  camera=new THREE.PerspectiveCamera(40,1,1,5000);camera.position.set(340,300,380);
-  const OC=THREE.OrbitControls||window.OrbitControls;
-  controls=new OC(camera,renderer.domElement);controls.target.set(0,40,0);controls.enableDamping=true;
-  scene.add(new THREE.HemisphereLight(0xffffff,0x334455,0.9));
-  const d=new THREE.DirectionalLight(0xffffff,0.8);d.position.set(200,400,150);scene.add(d);
-  const grid=new THREE.GridHelper(600,24,0x3a4250,0x2a313c);grid.position.y=-0.5;scene.add(grid);
-
-  const T=127,H=101.6,F=10,W=8,S=15.875,L=107.125;
-  const mat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.8});
-  const box=(x,y,z,c)=>new THREE.Mesh(new THREE.BoxGeometry(x,y,z),mat(c));
-  const parts=[]; // {mesh, base:Vector3, lift}
-  const add=(m,x,y,z,lift,grp)=>{m.position.set(x,y,z);scene.add(m);parts.push({m,base:m.position.clone(),lift,grp});return m;};
-  // tiles
-  for(const i of [-1,1])for(const j of [-1,1]) add(box(T-0.6,F,T-0.6,0xc9b79c),i*T/2,F/2,j*T/2,0,'floor');
-  // corner posts (socket at S from outer edge)
-  const o=T-S; // = 111.125 from center
-  for(const i of [-1,1])for(const j of [-1,1]) add(box(8,H,8,0x8a6f55),i*o,F+H/2,j*o,60,'post');
-  // short walls: each side has two, meeting at seam (center line)
-  const wallH=H, wy=F+wallH/2;
-  const walls=[]; let k=0;
-  const kinds=['door','blank','window','blank','window','blank','blank','blank'];
-  for(const side of [0,1,2,3]){
-    for(const half of [-1,1]){
-      const kind=kinds[k++];
-      const g=new THREE.Group();
-      const len=L-0.4, cx=half*L/2;
-      const panel=box(len,wallH,W,0xe8e2d6);g.add(panel);
-      if(kind!=='blank'){ // dark opening as inset
-        const ow=kind==='door'?36:38, oh=kind==='door'?76:50, oy=kind==='door'?-wallH/2+oh/2+2:-wallH/2+36+oh/2;
-        const op=box(ow,oh,W+0.6,0x2a2f38);op.position.y=oy;g.add(op);
-      }
-      const z=o, pos=new THREE.Vector3();
-      if(side===0){pos.set(cx,wy,z);} if(side===1){pos.set(cx,wy,-z);}
-      if(side===2){pos.set(z,wy,cx);g.rotation.y=Math.PI/2;} if(side===3){pos.set(-z,wy,cx);g.rotation.y=Math.PI/2;}
-      add(g,pos.x,pos.y,pos.z,130,'wall');
-    }
-  }
-  // light channels: floor loop 5mm in, wall-top race
-  const lmat=new THREE.MeshBasicMaterial({color:0xfacc15});
-  const tube=(a,b,lift)=>{const v=new THREE.Vector3().subVectors(b,a),len=v.length();
-    const m=new THREE.Mesh(new THREE.CylinderGeometry(1.8,1.8,len,8),lmat);
-    m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.clone().normalize());
-    add(m,(a.x+b.x)/2,(a.y+b.y)/2,(a.z+b.z)/2,lift,'light');};
-  const r=T-5, V=(x,y,z)=>new THREE.Vector3(x,y,z);
-  [[V(-r,3,-r),V(r,3,-r)],[V(r,3,-r),V(r,3,r)],[V(r,3,r),V(-r,3,r)],[V(-r,3,r),V(-r,3,-r)]].forEach(p=>tube(p[0],p[1],0));
-  const ty=F+H-3;
-  [[V(-o,ty,o),V(o,ty,o)],[V(-o,ty,-o),V(o,ty,-o)],[V(o,ty,-o),V(o,ty,o)],[V(-o,ty,-o),V(-o,ty,o)]].forEach(p=>tube(p[0],p[1],130));
-  for(const i of [-1,1])for(const j of [-1,1]) tube(V(i*o,F,j*o),V(i*o,ty,j*o),60);
-  // switch points (one per tile on outer edge + exterior)
-  const sw=new THREE.MeshBasicMaterial({color:0xf472b6});
-  [[0,-T],[0,T],[-T,0],[T,0]].forEach(([x,z],n)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(10,6,3),sw);
-    add(m,x===0?(n?60:-60):x+(x>0?1.5:-1.5),5,z===0?(n===2?-60:60):z+(z>0?1.5:-1.5),0,'light');});
-
-  let exploded=0,target=0;
-  const setVis=(grp,v)=>parts.forEach(p=>{if(p.grp===grp)p.m.visible=v;});
-  const tog=(id,fn)=>{const b=document.getElementById(id);b.onclick=()=>{b.classList.toggle('on');fn(b.classList.contains('on'));};};
-  tog('btn-explode',on=>target=on?1:0);
-  tog('btn-walls',on=>setVis('wall',on));
-  tog('btn-lights',on=>setVis('light',on));
-  resize=()=>{const w=el.clientWidth,h=el.clientHeight;if(!w)return;renderer.setSize(w,h,false);renderer.domElement.style.width='100%';renderer.domElement.style.height='100%';camera.aspect=w/h;camera.updateProjectionMatrix();};
+  document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==b.dataset.tab);if(b.dataset.tab==='explore')resize();});
+const WIRE_NOTES=`<h3>Wired-5 wiring</h3>
+<p><strong>Low voltage only: 3–5 V DC from batteries or USB. Never connect to household (mains) power.</strong></p>
+<h4>Channels</h4><ul>
+<li><strong>Floors</strong> (<code>wired_floor_tile_v1w</code>): the Ø3.2 edge loop stays, plus two Ø5 cross channels along the tile centrelines at z = 3, and Ø5 risers at the four corners and the centre. The centre riser feeds the ceiling puck of the room below.</li>
+<li><strong>Corner posts</strong> (<code>wired_corner_post_v1w</code>): a Ø5 vertical bore plus a 3 × 1.6 mm open fishing slot on the inside face. This is the "trunk" between stories.</li>
+<li><strong>Walls</strong> (<code>wired_wall_short_v1w</code>): 2 mm thicker inside, with a 3.5 × 2 mm vertical raceway and a horizontal raceway 4 mm below the top. A 60 × 80 × 1.2 mm recess holds the service panel flush.</li>
+<li><strong>Fixtures</strong>: ceiling puck (10 × 2.2 mm LED pocket, Ø2.2 wire hole), sconce and porch light (Ø3.6 for 3 mm LEDs), table lamp (Ø3.6 in the shade, wire down the stem and out a base slot), post lamp (Ø5.2 LED, Ø1.6 bore down the 72 mm post).</li></ul>
+<h4>Magnetic service panel</h4><ul>
+<li><code>service_panel_v1w</code> is 59.6 × 79.6 × 1.2 mm. It sits in the wall recess flush with the wall face, so the wall looks seamless.</li>
+<li>Magnets: 4 × Ø6 × 2 mm N52 discs in the wall (Ø6.2 × 2.2 pockets) and 4 × Ø6 × 1 mm discs in the panel (blind pockets under a 0.2 mm skin, so they don't show). Spacing 48 × 68 mm.</li>
+<li><strong>Polarity:</strong> put every wall magnet in north-out (mark with a Sharpie dot). Every panel magnet goes south-out. Then any panel fits any wall.</li>
+<li><strong>Remove:</strong> fingernail in the notch on the bottom edge, tip it out. <strong>Replace:</strong> line up the notch at the bottom and let it snap in. Panels can be painted or wallpapered separately.</li></ul>
+<h4>Wire + LED kit (per Wired-5 house)</h4>
+<table><thead><tr><th>Item</th><th>Qty</th><th>Notes</th></tr></thead><tbody>
+<tr><td>30 AWG silicone wire, red + black</td><td>2 × 5 m</td><td>About 7 m used, plus spare. Silicone is soft and slides through bends.</td></tr>
+<tr><td>Warm-white 3 mm LEDs, pre-wired with resistor (5 V)</td><td>8</td><td>4 ceiling pucks, 2 sconces, porch, post lamp. Table lamps optional: 2 more.</td></tr>
+<tr><td>Micro slide switches (SS12D00 class)</td><td>5</td><td>4 rooms + exterior. They fit the tile switch stubs.</td></tr>
+<tr><td>Power: USB-C 5 V trigger board or 3 × AAA holder with switch</td><td>1</td><td>Goes in <code>power_module_v1w</code>, which snaps onto ground floor back-right sockets and drops wire into the centre riser.</td></tr>
+<tr><td>JST-PH 2-pin pigtails</td><td>6 pairs</td><td>One per story trunk and fixture, so floors and fixtures unplug.</td></tr>
+<tr><td>Wago-style micro lever nuts or solder + heat-shrink</td><td>10</td><td>Splices go behind service panels.</td></tr>
+<tr><td>N52 magnets Ø6 × 2 / Ø6 × 1</td><td>8 / 8</td><td>2 panels. Add 4 + 4 per extra panel.</td></tr>
+<tr><td>Fish line (0.5 mm mono or a guitar string)</td><td>1</td><td>For pulling wire.</td></tr></tbody></table>
+<p><strong>Polarity convention:</strong> red = +5 V, black = ground, everywhere. Each room's switch breaks only the red wire. Bus wiring: power module → red/black bus along the ground floor cross channels → one tap per room through its switch → fixtures in parallel. The upper story bus goes up one corner post trunk.</p>
+<h4>Routing steps</h4><ol>
+<li>Lay the bus in the floor cross channels before the walls go on. Leave 5 cm loops at each riser.</li>
+<li><strong>Fishing a corner post:</strong> drop the fish line down the Ø5 bore from the top, tape both wires to it, then pull up. The open slot on the inside face lets you grab it halfway if it snags. Then the service panel covers it.</li>
+<li>Ceiling pucks: push the pigtail up the centre riser of the upper tile and glue the LED into the puck. The puck snap-fits under the tile.</li>
+<li>Sconces: thread into the wall raceway and out the Ø2 hole behind the sconce. Splice behind the panel.</li>
+<li>Test with power on before closing panels. Then press the panels in.</li></ol>`;
+function select(n){cur=n;const h=HOUSES[n];[...pills.children].forEach((b,k)=>b.classList.toggle('on',k==n));
+  document.getElementById('rev').textContent='Dollhouse — '+h.name;document.getElementById('blurb').textContent=h.blurb;
+  const {c,A}=bom(h);const tiles=h.tiles.length;
+  document.getElementById('facts').innerHTML=[[h.size,'tiles'],[tiles,'floor tiles'],[A.posts.length,'corner posts'],[A.walls.length,'wall positions'],[h.stories,h.stories>1?'stories':'story'],['1:24','scale · 1 ft = 12.7 mm']].map(f=>`<div class="fact"><b>${f[0]}</b><span>${f[1]}</span></div>`).join('');
+  document.getElementById('bom').innerHTML=`<h3>${h.name} parts</h3><table><thead><tr><th>Part</th><th>Qty</th></tr></thead><tbody>${Object.entries(c).map(([k,v])=>`<tr><td><code>${k}</code></td><td>${v}</td></tr>`).join('')}</tbody></table>
+  <p class="muted">Counts come straight from the layout. Furniture, figures and fixtures are in the Accessories tab. Print the clearance strip first; Bambu Studio 3MF plates come after that fit test.</p>
+  <h3>Plates (H3C 330 × 320)</h3><table><tbody><tr><td>Floors</td><td>4 tiles per plate (2 × 2). ${Math.ceil(tiles/4)} plate(s). 0.4 nozzle, 15% infill, ribs down.</td></tr>
+  <tr><td>Walls + posts</td><td>About 5 walls per plate, printed upside down on the top edge, with a 5–8 mm brim. ${Math.ceil(A.walls.length/5)} plate(s).</td></tr>
+  <tr><td>Accessories</td><td>Figures and fixtures on the 0.2 nozzle. Furniture on 0.4. Use translucent PETG for lamps.</td></tr></tbody></table>`;
+  document.getElementById('notes-house').innerHTML=h.wired?WIRE_NOTES:`<h3>${h.name}</h3><p>${h.blurb}</p><p class="muted">Lights: the standard Ø3.2 channels (floor loop → corner riser → up the post → wall-top channel) take 3 mm LEDs or 30 AWG wire. For full house-style wiring, see Wired-5.</p>`;
+  ['btn-wires','btn-panel','lg-w','lg-p'].forEach(id=>document.getElementById(id).hidden=!h.wired);
+  document.getElementById('btn-upper').hidden=h.stories<2;
+  build(h,A);}
+// ---------- viewer ----------
+const el=document.getElementById('view');let renderer,scene,camera,controls,root,parts=[],resize=()=>{},target=0,ex=0;
+const mat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.8}),box=(x,y,z,c)=>new THREE.Mesh(new THREE.BoxGeometry(x,y,z),mat(c));
+const vis={wall:1,upper:1,furn:1,light:1,wire:1,panel:1};
+function add(m,x,y,z,lift,grp,lv){m.position.set(x,y,z);root.add(m);parts.push({m,by:y,lift,grp,lv});return m;}
+function tube(a,b,col,r,lift,grp,lv){const v=new THREE.Vector3().subVectors(b,a),len=v.length();if(len<.1)return;
+  const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,8),new THREE.MeshBasicMaterial({color:col}));
+  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.normalize());add(m,(a.x+b.x)/2,(a.y+b.y)/2,(a.z+b.z)/2,lift,grp,lv);}
+const FURN={sofa:[76,39,34,0x6b7fa8],table:[48,31,30,0x9c7a55],chair:[16,38,16,0x9c7a55],bed:[50,35,80,0xd6d0e8],counter:[76,38,25,0xb8b2a6],toilet:[16,32,26,0xf3f4f6],sink:[18,33,20,0xf3f4f6],bookshelf:[38,76,12,0x7c5c3f],power:[60,25,30,0x334155]};
+function build(h,A){if(!window.THREE)return;if(root)scene.remove(root);root=new THREE.Group();scene.add(root);parts=[];
+  const xs=h.tiles.map(t=>t[0]),zs=h.tiles.map(t=>t[1]),cx=(Math.min(...xs)+Math.max(...xs)+1)/2*T,cz=(Math.min(...zs)+Math.max(...zs)+1)/2*T;
+  const X=i=>i*T-cx,Z=j=>-(j*T-cz),Y=l=>l*LVL;
+  const lift=(base,l)=>base+l*260;
+  for(const[i,j,l]of h.tiles)add(box(T-.6,F,T-.6,l?0xb9a78c:0xc9b79c),X(i+.5),Y(l)+F/2,Z(j+.5),lift(0,l),l?'upper':'floor',l);
+  // posts: inset S toward the inside of the corner — approximate by nudging toward plan centre
+  const occ=(i,j,l)=>h.tiles.some(t=>t[0]==i&&t[1]==j&&t[2]==l);
+  for(const[x,z,l]of A.posts){let dx=0,dz=0;for(const[a,b]of[[0,0],[-1,0],[0,-1],[-1,-1]])if(occ(x+a,z+b,l)){dx+=a+.5;dz+=b+.5;}
+    const n=Math.hypot(dx,dz)||1,sx=Math.sign(dx)*(Math.abs(dx)>.01),sz=Math.sign(dz)*(Math.abs(dz)>.01);
+    const px=X(x)+sx*S,pz=Z(z)-sz*S;add(box(8,H,8,h.wired?0x6b5640:0x8a6f55),px,Y(l)+F+H/2,pz,lift(60,l),l?'upper':'post',l);
+    if(h.wired)tube(new THREE.Vector3(px,Y(l)+F,pz),new THREE.Vector3(px,Y(l)+F+H,pz),0x22d3ee,2.6,lift(60,l),'wire',l);
+    else tube(new THREE.Vector3(px,Y(l)+F,pz),new THREE.Vector3(px,Y(l)+F+H-3,pz),0xfacc15,1.8,lift(60,l),'light',l);}
+  for(const w of A.walls){if(w.bay&&w.op=='door')continue;const gp=new THREE.Group(),len=w.len-.4;
+    gp.add(box(len,H,8,0xe8e2d6));
+    if(w.op!='blank'){const ow=w.op=='door'?36:38,oh=w.op=='door'?76:50,oy=w.op=='door'?-H/2+oh/2+2:-H/2+36+oh/2;const o=box(ow,oh,8.8,0x2a2f38);o.position.y=oy;gp.add(o);}
+    const horiz='SN'.includes(w.d),inset=S*(w.d=='S'||w.d=='W'?1:-1);
+    // centre of the wall run on that edge, shifted away from corner ends
+    let mid=(horiz?w.i:w.j)+.5, shift=((w.ca?1:0)-(w.cb?1:0))*(127-w.len)/2/ (w.type=='mini'?1e9:1);
+    let px,pz;if(horiz){px=X(mid)+shift;pz=Z(w.d=='S'?w.j:w.j+1)-inset;}else{px=X(w.d=='W'?w.i:w.i+1)+inset;pz=Z(mid)-shift;gp.rotation.y=Math.PI/2;}
+    add(gp,px,Y(w.L)+F+H/2,pz,lift(130,w.L),w.L?'upper':'wall',w.L);
+    if(!h.wired)tube(new THREE.Vector3(horiz?px-len/2:px,Y(w.L)+F+H-3,horiz?pz:pz-len/2),new THREE.Vector3(horiz?px+len/2:px,Y(w.L)+F+H-3,horiz?pz:pz+len/2),0xfacc15,1.8,lift(130,w.L),'light',w.L);
+    else tube(new THREE.Vector3(horiz?px-len/2:px,Y(w.L)+F+H-6,horiz?pz:pz-len/2),new THREE.Vector3(horiz?px+len/2:px,Y(w.L)+F+H-6,horiz?pz:pz+len/2),0x22d3ee,1.8,lift(130,w.L),'wire',w.L);
+    const P=(h.panels||[]).find(p=>p[0]==w.i&&p[1]==w.j&&p[2]==w.d&&p[3]==w.L);
+    if(P){const pn=box(60,80,1.4,0xa78bfa),off=w.d=='S'||w.d=='W'?5:-5;const g2=new THREE.Group();g2.add(pn);if(!horiz)g2.rotation.y=Math.PI/2;
+      add(g2,horiz?px:px+off,Y(w.L)+F+60,horiz?pz-off:pz,lift(130,w.L),'panel',w.L);
+      tube(new THREE.Vector3(horiz?px:px+off*.6,Y(w.L)+F+2,horiz?pz-off*.6:pz),new THREE.Vector3(horiz?px:px+off*.6,Y(w.L)+F+H-6,horiz?pz-off*.6:pz),0x22d3ee,1.6,lift(130,w.L),'wire',w.L);}}
+  (h.inner||[]).forEach(([i,j,d,frac=1])=>{const horiz='SN'.includes(d),len=(frac<1?T*frac:107);const m=box(horiz?len:8,H,horiz?8:len,0xd8d1c3);
+    const px=horiz?X(i+.5)-(frac<1?T*(1-frac)/2:0):X(d=='W'?i:i+1),pz=horiz?Z(d=='S'?j:j+1):Z(j+.5);add(m,px,F+H/2,pz,130,'wall',0);});
+  // floor light loop + switches (non-wired) / bus (wired)
+  for(const[i,j,l]of h.tiles){const y=Y(l)+3,a=X(i)+5,b=X(i+1)-5,c=Z(j)-5,d=Z(j+1)+5,V=(x,z)=>new THREE.Vector3(x,y,z);
+    if(!h.wired){[[V(a,c),V(b,c)],[V(b,c),V(b,d)],[V(b,d),V(a,d)],[V(a,d),V(a,c)]].forEach(p=>tube(p[0],p[1],0xfacc15,1.4,lift(0,l),'light',l));}
+    else{const mx=X(i+.5),mz=Z(j+.5);tube(V(X(i),mz),V(X(i+1),mz),0x22d3ee,2.4,lift(0,l),'wire',l);tube(V(mx,Z(j)),V(mx,Z(j+1)),0x22d3ee,2.4,lift(0,l),'wire',l);}
+    const sw=new THREE.Mesh(new THREE.BoxGeometry(10,6,3),new THREE.MeshBasicMaterial({color:0xf472b6}));add(sw,X(i+.5),Y(l)+5,Z(j+1)+1,lift(0,l),'light',l);}
+  // stairs
+  (h.stairs||[]).forEach(([x,z,l])=>{const g3=new THREE.Group();for(let k=0;k<12;k++){const r=LVL/12;const s=box(38,r*(k+1),9.5,0xa08566);s.position.set(0,r*(k+1)/2,-k*9.5);g3.add(s);}
+    add(g3,X(x),Y(l)+F,Z(z)+57,lift(80,l),'furn',l);});
+  // furniture & figures & fixtures
+  for(const[t,x,z,l,r]of h.furn){let m;
+    if(FURN[t]){const[a,b,c,col]=FURN[t];m=box(a,b,c,col);m.position.y=0;const g4=new THREE.Group();m.position.y=b/2;g4.add(m);m=g4;}
+    else if(t=='adult'||t=='child'){const k=t=='adult'?1:.63;m=new THREE.Group();const body=new THREE.Mesh(new THREE.CylinderGeometry(6*k,7*k,58*k,10),mat(0x60a5fa));body.position.y=29*k;
+      const hd=new THREE.Mesh(new THREE.SphereGeometry(5*k,12,10),mat(0xf2c9a0));hd.position.y=68*k;m.add(body,hd);}
+    else if(t=='lamp'){m=new THREE.Group();const s=new THREE.Mesh(new THREE.ConeGeometry(9,14,24,1,true),new THREE.MeshBasicMaterial({color:0xfde68a,side:2}));s.position.y=25;const st=new THREE.Mesh(new THREE.CylinderGeometry(1.3,1.3,20),mat(0x444));st.position.y=10;m.add(s,st);}
+    else if(t=='postlamp'){m=new THREE.Group();const p=new THREE.Mesh(new THREE.CylinderGeometry(2,2,74),mat(0x222));p.position.y=37;const l2=new THREE.Mesh(new THREE.BoxGeometry(12,14,12),new THREE.MeshBasicMaterial({color:0xfde68a}));l2.position.y=81;m.add(p,l2);}
+    else if(t=='porch'){m=new THREE.Group();const l2=new THREE.Mesh(new THREE.BoxGeometry(10,12,8),new THREE.MeshBasicMaterial({color:0xfde68a}));l2.position.set(30,70,-8);m.add(l2);}
+    m.rotation.y=r||0;add(m,X(x),Y(l)+F,Z(z),lift(100,l),'furn',l);}
+  (h.pucks||[]).forEach(([x,z,l])=>{const m=new THREE.Mesh(new THREE.CylinderGeometry(8,8,4,20),new THREE.MeshBasicMaterial({color:0xfde68a}));add(m,X(x),Y(l)+F+H-2,Z(z),lift(130,l),'furn',l);
+    tube(new THREE.Vector3(X(x),Y(l)+F+H-2,Z(z)),new THREE.Vector3(X(x),Y(l)+F+H+6,Z(z)),0x22d3ee,1.6,lift(130,l),'wire',l);});
+  (h.sconces||[]).forEach(([i,j,d,l])=>{const m=new THREE.Mesh(new THREE.BoxGeometry(8,12,8),new THREE.MeshBasicMaterial({color:0xfde68a}));add(m,d=='W'?X(i)+S+8:X(i+1)-S-8,Y(l)+F+70,Z(j+.5),lift(130,l),'furn',l);});
+  camera.position.set(cx*0+420,380+h.stories*80,460);controls.target.set(0,50*h.stories,0);applyVis();}
+function applyVis(){parts.forEach(p=>{let v=vis[p.grp]??1;if(p.lv>0&&!vis.upper)v=0;p.m.visible=!!v;});}
+if(window.THREE){renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));el.prepend(renderer.domElement);
+  scene=new THREE.Scene();scene.background=new THREE.Color(0x1a1f27);camera=new THREE.PerspectiveCamera(40,1,1,6000);
+  const OC=THREE.OrbitControls||window.OrbitControls;controls=new OC(camera,renderer.domElement);controls.enableDamping=true;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x334455,.9));const dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(200,400,150);scene.add(dl);
+  const grid=new THREE.GridHelper(900,36,0x3a4250,0x2a313c);grid.position.y=-.5;scene.add(grid);
+  resize=()=>{const w=el.clientWidth,hh=el.clientHeight;if(!w)return;renderer.setSize(w,hh,false);renderer.domElement.style.width='100%';renderer.domElement.style.height='100%';camera.aspect=w/hh;camera.updateProjectionMatrix();};
   addEventListener('resize',resize);resize();
-  (function loop(){requestAnimationFrame(loop);exploded+=(target-exploded)*0.12;
-    parts.forEach(p=>p.m.position.y=p.base.y+p.lift*exploded);controls.update();renderer.render(scene,camera);})();
-} else {
-  el.insertAdjacentHTML('afterbegin','<p style="padding:1rem" class="muted">3D viewer could not load. The Print and Notes tabs still have the full plan.</p>');
-}
+  (function loop(){requestAnimationFrame(loop);ex+=(target-ex)*.12;parts.forEach(p=>p.m.position.y=p.by+p.lift*ex);controls.update();renderer.render(scene,camera);})();
+}else el.insertAdjacentHTML('afterbegin','<p style="padding:1rem" class="muted">3D viewer could not load. The Print and Notes tabs still have the full plan.</p>');
+const tog=(id,fn)=>{const b=document.getElementById(id);b.onclick=()=>{b.classList.toggle('on');fn(b.classList.contains('on'));};};
+tog('btn-explode',on=>target=on?1:0);
+[['btn-walls','wall'],['btn-upper','upper'],['btn-furn','furn'],['btn-lights','light'],['btn-wires','wire'],['btn-panel','panel']].forEach(([id,k])=>tog(id,on=>{vis[k]=on;if(k=='wall')vis.post=on;applyVis();}));
+const q=location.hash.slice(1);select(Math.max(0,HOUSES.findIndex(h=>h.id==q)));
 </script>
 </body>
 </html>
