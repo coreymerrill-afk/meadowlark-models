@@ -129,6 +129,16 @@
 
   let api = null;
 
+  setTimeout(function () {
+    const ld = document.getElementById('three-loading');
+    if (!ld || ld.classList.contains('hidden') || getComputedStyle(ld).display === 'none') return;
+    if (document.getElementById('three-retry')) return;
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.id = 'three-retry'; btn.textContent = 'Still loading — retry';
+    btn.onclick = function () { location.reload(); };
+    ld.appendChild(document.createElement('br')); ld.appendChild(btn);
+  }, 8000);
+
   loadThreeStack().then(function (stack) {
     api = boot(stack.THREE, stack.OrbitControls, stack.via);
     api.setModule(KIND);
@@ -202,7 +212,7 @@
     scene.fog = new THREE.Fog(0x16130c, 90, 220);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.5, 400);
-    camera.position.set(58, 50, 64);
+    camera.position.set(62, 42, 62);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -788,25 +798,40 @@
       controls.target.set(tgt.x, tgt.y, tgt.z);
       controls.update();
     }
+    const VIEW_BTNS = ['btn-reset', 'btn-iso', 'btn-top', 'btn-side'];
+    function markView(id) {
+      VIEW_BTNS.forEach(function (b) {
+        const el = document.getElementById(b);
+        if (el) el.classList.toggle('active', b === id);
+      });
+    }
+    setView({ x: 62, y: 42, z: 62 }, { x: 0, y: 19, z: 0 });
+    markView('btn-iso');
     document.getElementById('btn-reset').onclick = function () {
       setView({ x: 58, y: 50, z: 64 }, { x: 0, y: 20, z: 0 });
       selectPart(null);
+      markView('btn-reset');
     };
     document.getElementById('btn-iso').onclick = function () {
       setView({ x: 62, y: 42, z: 62 }, { x: 0, y: 19, z: 0 });
+      markView('btn-iso');
     };
     document.getElementById('btn-top').onclick = function () {
       setView({ x: 0.4, y: 110, z: 0.2 }, { x: 0, y: 20, z: 0 });
+      markView('btn-top');
     };
     document.getElementById('btn-side').onclick = function () {
       setView({ x: 0, y: 22, z: 90 }, { x: 0, y: 20, z: 0 });
+      markView('btn-side');
     };
     document.getElementById('tog-labels').addEventListener('change', function (e) {
       labelSprites.forEach(function (s) { s.visible = e.target.checked; });
     });
-    document.getElementById('tog-neighbor').addEventListener('change', function (e) {
+    const togNeighbor = document.getElementById('tog-neighbor');
+    togNeighbor.addEventListener('change', function (e) {
       neighbor.visible = e.target.checked;
     });
+    neighbor.visible = !!togNeighbor.checked;
 
     function resize() {
       const w = wrap.clientWidth || 1;
