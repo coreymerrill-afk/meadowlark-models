@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Dollhouse — Cottage-0 (draft): a 1:24 snap-together modular dollhouse for the Bambu Lab H3C, with built-in low-voltage light channels and room switch points." />
+<link rel="icon" href="data:," />
+<title>Dollhouse — Cottage-0 — Meadowlark Models</title>
+<link rel="stylesheet" href="/coreyhq-back.css">
+<style>
+  :root{color-scheme:dark;--bg:#12151a;--bg2:#1a1f27;--bg3:#242a34;--border:#3a4250;--text:#e8eaed;--muted:#9aa0a6;--accent:#f472b6}
+  *{box-sizing:border-box}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:64rem;margin:0 auto;padding:1rem 1.25rem 3rem;line-height:1.5;background:var(--bg);color:var(--text)}
+  a{color:var(--accent)}
+  .hub-back{display:inline-block;margin:.5rem 0 1rem;text-decoration:none}
+  .banner{background:var(--bg2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:.6rem .9rem;margin-bottom:1rem;font-size:.92rem}
+  h1{font-size:1.6rem;margin:0 0 .25rem}
+  .meta{color:var(--muted);margin:0 0 1rem}
+  .rev{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:.1rem .55rem;margin-bottom:.5rem}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.6rem;margin:0 0 1.25rem}
+  .fact{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.55rem .75rem}
+  .fact b{display:block;font-size:1.05rem}
+  .fact span{color:var(--muted);font-size:.8rem}
+  .tabs{display:flex;gap:.4rem;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:1rem}
+  .tabs button{background:none;border:1px solid transparent;border-bottom:none;color:var(--muted);font:inherit;padding:.5rem 1rem;border-radius:8px 8px 0 0;cursor:pointer}
+  .tabs button[aria-selected="true"]{color:var(--text);background:var(--bg2);border-color:var(--border);box-shadow:inset 0 3px 0 var(--accent)}
+  section[hidden]{display:none}
+  #view{width:100%;aspect-ratio:16/9;max-height:70vh;background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative}
+  #view .hint{position:absolute;left:.75rem;bottom:.5rem;color:var(--muted);font-size:.8rem;pointer-events:none}
+  .controls{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0}
+  .controls button{background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:.35rem .8rem;font:inherit;cursor:pointer}
+  .controls button.on{border-color:var(--accent);color:var(--accent)}
+  table{width:100%;border-collapse:collapse;margin:.5rem 0 1.25rem;font-size:.92rem}
+  th,td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--muted);font-weight:600}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85em;color:var(--accent)}
+  .muted{color:var(--muted)}
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem;margin:0 0 1rem}
+  ol li,ul li{margin-bottom:.35rem}
+  .legend span{display:inline-block;margin-right:1rem;font-size:.85rem;color:var(--muted)}
+  .legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;margin-right:.3rem;vertical-align:-1px}
+</style>
+</head>
+<body>
+<a class="coreyhq-back" href="https://coreyhq.com/" title="Back to CoreyHQ">← CoreyHQ</a>
+<a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+<div class="banner"><strong>Draft.</strong> First look at the dollhouse kit. Sizes can still move after the snap fit test.</div>
+
+<header>
+  <div class="rev">Dollhouse — Cottage-0</div>
+  <h1>Modular dollhouse</h1>
+  <p class="meta">Cottage-0 · 1:24 · Bambu Lab H3C · Draft</p>
+</header>
+
+<div class="facts">
+  <div class="fact"><b>1:24</b><span>scale (1 ft = 12.7 mm)</span></div>
+  <div class="fact"><b>127 mm</b><span>floor tile (10 × 10 ft)</span></div>
+  <div class="fact"><b>101.6 mm</b><span>story height (8 ft ceiling)</span></div>
+  <div class="fact"><b>Ø6 / Ø6.3</b><span>snap post / socket (socket pending fit test)</span></div>
+  <div class="fact"><b>Ø3.2 mm</b><span>light channels</span></div>
+  <div class="fact"><b>330×320×325</b><span>H3C build volume, mm</span></div>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-tab="explore">Explore</button>
+  <button role="tab" aria-selected="false" data-tab="explode">Explode</button>
+  <button role="tab" aria-selected="false" data-tab="print">Print</button>
+  <button role="tab" aria-selected="false" data-tab="notes">Notes</button>
+</nav>
+
+<section id="explore">
+  <p>Cottage-0 is a 2 × 2 grid of floor tiles, 254 mm square — about a 20 × 20 ft house at 1:24. Four corner posts hold eight short walls: one door, two windows, five plain. Drag to look around.</p>
+  <div id="view"><div class="hint">Drag to rotate · scroll or pinch to zoom · simple boxes, not the real STLs yet</div></div>
+  <div class="controls">
+    <button id="btn-explode">Explode</button>
+    <button id="btn-walls" class="on">Walls</button>
+    <button id="btn-lights" class="on">Light channels</button>
+  </div>
+  <div class="legend">
+    <span><i style="background:#c9b79c"></i>Floor tiles</span>
+    <span><i style="background:#e8e2d6"></i>Short walls</span>
+    <span><i style="background:#8a6f55"></i>Corner posts</span>
+    <span><i style="background:#facc15"></i>Light channels</span>
+    <span><i style="background:#f472b6"></i>Switch points</span>
+  </div>
+</section>
+
+<section id="explode" hidden>
+  <p>The Explore view has an <strong>Explode</strong> button that lifts each layer apart: tiles, then dowels and corner posts, then walls. That shows the build order in one glance.</p>
+  <div class="card"><strong>Coming next:</strong> the real STL parts in the viewer, with a slider that steps through each assembly stage and labels every part.</div>
+  <p class="muted">Layer order, bottom to top: floor tiles → dowel pins → corner posts → short walls → (later) ceiling tile and gable roof.</p>
+</section>
+
+<section id="print" hidden>
+  <h3>Plates</h3>
+  <table>
+    <thead><tr><th>Plate</th><th>What's on it</th><th>Settings</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1b — print first</strong></td><td>Snap clearance strip (Ø6.2 / 6.3 / 6.4 sockets, marked with 1/2/3 dots) + 3 loose pins. About 10 minutes.</td><td>0.4 nozzle, 0.2 layer, upright, no supports</td></tr>
+      <tr><td><strong>1 — floors</strong></td><td>4 floor tiles in a 2 × 2 layout (~270 × 270 mm with gaps), test pins in the margin.</td><td>0.4 nozzle, 0.2 layer, ribs down, 15% infill, no supports</td></tr>
+      <tr><td><strong>2 — walls</strong></td><td>8 short walls (about 5 per plate) + 4 corner posts + dowels. Walls print upside-down on their top edge.</td><td>0.4 nozzle, 0.2 layer, 5–8 mm brim, no supports</td></tr>
+    </tbody>
+  </table>
+  <h3>Cottage-0 parts</h3>
+  <table>
+    <thead><tr><th>Part</th><th>Qty</th><th>Size (mm)</th></tr></thead>
+    <tbody>
+      <tr><td><code>floor_tile_v0</code></td><td>4</td><td>127 × 127 × 10</td></tr>
+      <tr><td><code>corner_post_v0</code></td><td>4</td><td>19.4 × 19.4 × 101.6</td></tr>
+      <tr><td><code>dowel_pin_v0</code></td><td>4 (+2 spare)</td><td>Ø6 × 13.5</td></tr>
+      <tr><td><code>wall_panel_door_short_v0c</code></td><td>1</td><td>107.1 × 8 × 109.6</td></tr>
+      <tr><td><code>wall_panel_window_short_v0c</code></td><td>2</td><td>107.1 × 8 × 109.6</td></tr>
+      <tr><td><code>wall_panel_short_v0c</code></td><td>5</td><td>107.1 × 8 × 109.6</td></tr>
+      <tr><td><code>snap_clearance_strip_v0</code></td><td>1</td><td>40 × 24.5 × 12</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">Files: STL now. Bambu Studio 3MF plates come after the fit test locks the socket size. Full-length 127 mm walls are only for houses wider than two tiles.</p>
+</section>
+
+<section id="notes" hidden>
+  <h3>Assembly</h3>
+  <ol>
+    <li>Print the clearance strip first. Pick the socket where a pin pushes in firmly and pulls out by hand.</li>
+    <li>Lay the four floor tiles in a square, switch stubs facing where you want room switches.</li>
+    <li>At each outer corner, push a dowel pin into the corner socket and drop a corner post on it.</li>
+    <li>Seat the short walls: corner end against the post, posts into the tile sockets. Two walls meet on each tile seam.</li>
+    <li>Run LEDs or wire before the walls go on: floor loop → corner riser → up the post → wall-top channel.</li>
+  </ol>
+  <h3>Lights</h3>
+  <ul>
+    <li>Low voltage only — coin cell, AA pack, or USB 5 V. The channels fit 3 mm LEDs, fiber, or thin (30 AWG) wire.</li>
+    <li>Each room has one switch pocket on a tile edge, sized for a micro slide or tact switch.</li>
+    <li>One outside switch point feeds porch and corner lamps.</li>
+  </ul>
+  <h3>Snap fit tip</h3>
+  <p>FDM holes print a little small. If pins are too tight, use the next bigger socket from the strip; if they wobble, go one smaller. Parts should snap apart without tools.</p>
+  <h3>Next</h3>
+  <p class="muted">3MF plates → ceiling tile and gable roof → stairs, lamps, furniture, and 1:24 figures.</p>
+</section>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script>
+// tabs
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==b.dataset.tab);
+  if(b.dataset.tab==='explore') resize();
+});
+
+// viewer (procedural boxes, mm, Y up)
+const el=document.getElementById('view');
+let renderer,scene,camera,controls,resize=()=>{};
+if(window.THREE){
+  renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  el.prepend(renderer.domElement);
+  scene=new THREE.Scene();scene.background=new THREE.Color(0x1a1f27);
+  camera=new THREE.PerspectiveCamera(40,1,1,5000);camera.position.set(340,300,380);
+  const OC=THREE.OrbitControls||window.OrbitControls;
+  controls=new OC(camera,renderer.domElement);controls.target.set(0,40,0);controls.enableDamping=true;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x334455,0.9));
+  const d=new THREE.DirectionalLight(0xffffff,0.8);d.position.set(200,400,150);scene.add(d);
+  const grid=new THREE.GridHelper(600,24,0x3a4250,0x2a313c);grid.position.y=-0.5;scene.add(grid);
+
+  const T=127,H=101.6,F=10,W=8,S=15.875,L=107.125;
+  const mat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.8});
+  const box=(x,y,z,c)=>new THREE.Mesh(new THREE.BoxGeometry(x,y,z),mat(c));
+  const parts=[]; // {mesh, base:Vector3, lift}
+  const add=(m,x,y,z,lift,grp)=>{m.position.set(x,y,z);scene.add(m);parts.push({m,base:m.position.clone(),lift,grp});return m;};
+  // tiles
+  for(const i of [-1,1])for(const j of [-1,1]) add(box(T-0.6,F,T-0.6,0xc9b79c),i*T/2,F/2,j*T/2,0,'floor');
+  // corner posts (socket at S from outer edge)
+  const o=T-S; // = 111.125 from center
+  for(const i of [-1,1])for(const j of [-1,1]) add(box(8,H,8,0x8a6f55),i*o,F+H/2,j*o,60,'post');
+  // short walls: each side has two, meeting at seam (center line)
+  const wallH=H, wy=F+wallH/2;
+  const walls=[]; let k=0;
+  const kinds=['door','blank','window','blank','window','blank','blank','blank'];
+  for(const side of [0,1,2,3]){
+    for(const half of [-1,1]){
+      const kind=kinds[k++];
+      const g=new THREE.Group();
+      const len=L-0.4, cx=half*L/2;
+      const panel=box(len,wallH,W,0xe8e2d6);g.add(panel);
+      if(kind!=='blank'){ // dark opening as inset
+        const ow=kind==='door'?36:38, oh=kind==='door'?76:50, oy=kind==='door'?-wallH/2+oh/2+2:-wallH/2+36+oh/2;
+        const op=box(ow,oh,W+0.6,0x2a2f38);op.position.y=oy;g.add(op);
+      }
+      const z=o, pos=new THREE.Vector3();
+      if(side===0){pos.set(cx,wy,z);} if(side===1){pos.set(cx,wy,-z);}
+      if(side===2){pos.set(z,wy,cx);g.rotation.y=Math.PI/2;} if(side===3){pos.set(-z,wy,cx);g.rotation.y=Math.PI/2;}
+      add(g,pos.x,pos.y,pos.z,130,'wall');
+    }
+  }
+  // light channels: floor loop 5mm in, wall-top race
+  const lmat=new THREE.MeshBasicMaterial({color:0xfacc15});
+  const tube=(a,b,lift)=>{const v=new THREE.Vector3().subVectors(b,a),len=v.length();
+    const m=new THREE.Mesh(new THREE.CylinderGeometry(1.8,1.8,len,8),lmat);
+    m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),v.clone().normalize());
+    add(m,(a.x+b.x)/2,(a.y+b.y)/2,(a.z+b.z)/2,lift,'light');};
+  const r=T-5, V=(x,y,z)=>new THREE.Vector3(x,y,z);
+  [[V(-r,3,-r),V(r,3,-r)],[V(r,3,-r),V(r,3,r)],[V(r,3,r),V(-r,3,r)],[V(-r,3,r),V(-r,3,-r)]].forEach(p=>tube(p[0],p[1],0));
+  const ty=F+H-3;
+  [[V(-o,ty,o),V(o,ty,o)],[V(-o,ty,-o),V(o,ty,-o)],[V(o,ty,-o),V(o,ty,o)],[V(-o,ty,-o),V(-o,ty,o)]].forEach(p=>tube(p[0],p[1],130));
+  for(const i of [-1,1])for(const j of [-1,1]) tube(V(i*o,F,j*o),V(i*o,ty,j*o),60);
+  // switch points (one per tile on outer edge + exterior)
+  const sw=new THREE.MeshBasicMaterial({color:0xf472b6});
+  [[0,-T],[0,T],[-T,0],[T,0]].forEach(([x,z],n)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(10,6,3),sw);
+    add(m,x===0?(n?60:-60):x+(x>0?1.5:-1.5),5,z===0?(n===2?-60:60):z+(z>0?1.5:-1.5),0,'light');});
+
+  let exploded=0,target=0;
+  const setVis=(grp,v)=>parts.forEach(p=>{if(p.grp===grp)p.m.visible=v;});
+  const tog=(id,fn)=>{const b=document.getElementById(id);b.onclick=()=>{b.classList.toggle('on');fn(b.classList.contains('on'));};};
+  tog('btn-explode',on=>target=on?1:0);
+  tog('btn-walls',on=>setVis('wall',on));
+  tog('btn-lights',on=>setVis('light',on));
+  resize=()=>{const w=el.clientWidth,h=el.clientHeight;if(!w)return;renderer.setSize(w,h,false);renderer.domElement.style.width='100%';renderer.domElement.style.height='100%';camera.aspect=w/h;camera.updateProjectionMatrix();};
+  addEventListener('resize',resize);resize();
+  (function loop(){requestAnimationFrame(loop);exploded+=(target-exploded)*0.12;
+    parts.forEach(p=>p.m.position.y=p.base.y+p.lift*exploded);controls.update();renderer.render(scene,camera);})();
+} else {
+  el.insertAdjacentHTML('afterbegin','<p style="padding:1rem" class="muted">3D viewer could not load. The Print and Notes tabs still have the full plan.</p>');
+}
+</script>
+</body>
+</html>
