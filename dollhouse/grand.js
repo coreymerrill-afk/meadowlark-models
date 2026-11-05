@@ -293,7 +293,7 @@ function plaque(name,sub){const c=cvs(1024,128,(x,w,h)=>{const g=x.createLinearG
 // ---------- v4 play outdoor modules (viewer stand-ins for build_play_v4.py STLs) ----------
 function fencePlay(P,{L=127}={}){const g=G(bx(L,3,4,P.trim||0xdddddd,0,3,0),bx(L,3,4,P.trim||0xdddddd,0,40,0));for(let x=-L/2+8;x<L/2-4;x+=10)g.add(bx(2.4,34,3,P.trim||0xdddddd,x,22,0));return g;}
 function fenceCornerPlay(P){return G(at(fencePlay(P,{L:64}),32,0,0),at(fencePlay(P,{L:64}),0,0,32,Math.PI/2),cy(4,4,42,P.stone||0xb9b2a6,0,21,0,12));}
-function gatePlay(P){const g=G();for(const x of[-60,60]){g.add(bx(16,75,16,P.stone||0xb9b2a6,x,37.5,0),bx(20,6,20,P.trim,x,78,0));}g.add(bx(140,10,12,P.trim,0,78,0));for(const s of[-1,1]){g.add(bx(48,4,6,P.trim,s*30,12,0),bx(48,12,6,P.trim,s*30,68,0),bx(4,56,6,P.trim,s*6,40,0),bx(4,56,6,P.trim,s*54,40,0),bx(48,4,4,P.trim,s*30,40,0));}return g;}
+function gatePlay(P){const g=G();for(const x of[-63.5,63.5]){g.add(bx(16,75,16,P.stone||0xb9b2a6,x,37.5,0),bx(20,6,20,P.trim,x,78,0));}g.add(bx(145,10,12,P.trim,0,78,0));for(const s of[-1,1]){g.add(bx(48,4,6,P.trim,s*30,12,0),bx(48,12,6,P.trim,s*30,68,0),bx(4,56,6,P.trim,s*6,40,0),bx(4,56,6,P.trim,s*54,40,0),bx(48,4,4,P.trim,s*30,40,0));}return g;}
 function sandboxPlay(P){return G(bx(100,12,100,P.deck||0xd2b48c,0,6,0),bx(92,8,92,0xe8d5a3,0,10,0));}
 function planterPlay(P){return G(cy(14,16,14,P.stone||0xb9b2a6,0,7,0,16),cy(4,5,30,0x6b4a2f,0,28,0,10),cy(12,10,8,P.leaf||0x4d7c3a,0,50,0,12));}
 function shedPlay(P,{w=120,d=100,h=90}={}){const g=G(bx(w,4,d,P.deck||0x8b6b4a,0,2,d/2));g.add(bx(w,h,4,P.wall,0,2+h/2,2),bx(4,h,d,P.wall,-w/2+2,2+h/2,d/2),bx(4,h,d,P.wall,w/2-2,2+h/2,d/2));
@@ -415,7 +415,7 @@ function roles(P){for(const k in ROLE)delete ROLE[k];const S=(c,r)=>{if(c!=null)
 const HOUSES=[
 {id:'cottage0',name:'Bramble Cottage',old:'Cottage-0',size:'2 × 2 + porch',pal:'cottage',stories:'1½',blurb:'Open-back storybook cottage: clear windows, lift-off roof, flower boxes optional. A kid sees the whole floor at a glance and snaps yard tiles, fence, sandbox and a shed around it.',
  story:'Built by a retired hedge-witch who wanted a cottage that looked like it grew there. The turret holds her reading nook, the dormers are the guest attic, and the chimney never quite stops glowing.',
- bom:{'floor_tile_v0':4,'corner_post_v0':4,'wall_panels (v0c short/full mix)':8,'roof_panel_v2':2,'gable_end_v2':2,'dormer_v2':2,'turret_segment_v2':2,'turret_cap_v2':1,'porch_post_v2':5,'railing_v2':3,'gingerbread_trim_v2':4,'bay_window_v2':1,'chimney_v2':1,'garden_wall_v2':2,'fix_victorian_lamppost_v2':1},
+ 
  build(P){base(P,560,520);mk(P,[['room',{w:254,d:254,ops:{S:['w','d','w'],N:['w','w'],E:['w','w'],W:['b','b']},wk:'arch'}],
   ['gable',{y:LV,w:254,d:254,pitch:52,over:14}],['dormer',{x:-60,y:LV+6,z:100}],['dormer',{x:60,y:LV+6,z:100}],
   ['turret',{x:-132,z:132,r:42,h:LV*1.55,capH:140,vane:true}],['porch',{x:20,z:127,w:170,d:64,roof:'gable'}],['bay',{x:-127,z:0,r:44,r_:0,r:-Math.PI/2+0}],
@@ -426,7 +426,7 @@ const HOUSES=[
   path(P,20,230,50,80);}},
 {id:'ranch1',name:'Larkspur Grand Ranch',old:'Ranch-1',size:'4 × 2 + porte-cochère',pal:'ranch',stories:'1 + tower',blurb:'Long ranch with a wraparound porch and open rear. Wide doorways between rooms, clear windows, modular porte-side yard with path tiles and a play gate — rearrange the outdoor kit like Legos.',
  story:'A horse-country summer house. Everyone lives on the porch. The centre hall has a ballroom-height ceiling; climb to the widow\'s walk to watch for guests coming up the lane.',
- bom:{'floor_tile_v0':10,'corner_post_v0':10,'wall_panels':18,'roof_panel_v2':6,'gable_end_v2':4,'porch_post_v2':14,'railing_v2':10,'gingerbread_trim_v2':10,'widows_walk_v2':1,'cupola_v2':1,'chimney_v2':2,'bay_window_v2':2,'garden_wall_v2':2},
+ 
  build(P){base(P,820,560);mk(P,[['room',{x:-190,w:254,d:254,ops:{S:['w','w'],N:['w','w'],W:['w','w']}}],['room',{x:190,w:254,d:254,ops:{S:['w','w'],N:['w','w'],E:['d']}}],
   ['room',{w:127,d:254,h:H*1.5,ops:{S:['D'],N:['W']},c:0xfbe7a1}],['room',{y:F+H*1.5,w:127,d:127,h:H*.7,ops:{S:['r'],N:['r'],E:['r'],W:['r']},c:0xfbe7a1}],
   ['hip',{x:-190,y:LV,w:254,d:254,h:56}],['hip',{x:190,y:LV,w:254,d:254,h:56}],['gable',{y:F*2+H*2.2,w:127,d:127,pitch:30,over:8}],
@@ -440,7 +440,7 @@ const HOUSES=[
   path(P,0,240,60,60);}},
 {id:'town2',name:'Pennywhistle Row House',old:'Townhouse-2',size:'2 × 2 × 3 stories',pal:'town',stories:3,blurb:'Tall open-back townhouse: shop below, rooms above, lift-off mansard. Clear sightlines down the stack; outdoor modules along the front walk.',
  story:'A confectioner lives over her sweet shop. Ground floor is the shop, the bay is her parlour, the balcony is for waving at the parade, and the rooftop terrace is where the cocoa gets served at midnight.',
- bom:{'floor_tile_v0':4,'upper_floor_tile_v1':8,'corner_post_v0':12,'wall_panels':24,'bay_window_v2':2,'balcony_v2':1,'turret_segment_v2':3,'turret_cap_v2 (onion variant)':1,'dormer_v2':3,'crenel_parapet_v2':4,'grand_stair_v2':2,'chimney_v2':2,'gingerbread_trim_v2':4},
+ 
  build(P){base(P,480,480);mk(P,[['room',{w:254,d:254,ops:{S:['W','D'],N:['w','w'],E:['w','w'],W:['w','w']},ww:20}],['room',{lv:1,w:254,d:254,ops:{S:['b','w'],N:['w','w'],E:['w','w'],W:['w','w']}}],['room',{lv:2,w:254,d:254,h:H*.9,ops:{N:['w','w'],E:['w'],W:['w']}}],
   ['mansard',{y:LV*2,w:254,d:254,h:H*.9+F}],['dormer',{x:-60,y:LV*2+30,z:118}],['dormer',{x:60,y:LV*2+30,z:118}],['dormer',{x:0,y:LV*2+30,z:-118,r:Math.PI}],
   ['crenels',{y:LV*2+H*.9+F+2,w:190,d:190,c:0xe75480}],['string',{a:V3(-90,LV*3+40,-90),b:V3(90,LV*3+40,90),n:16,sag:16}],['string',{a:V3(90,LV*3+40,-90),b:V3(-90,LV*3+40,90),n:16,sag:16}],
@@ -451,7 +451,7 @@ const HOUSES=[
   ['chair',{x:-60,y:LV,z:20}],['bed',{x:50,y:LV*2,z:-50}],['chand',{x:0,y:LV+F+H-2}],['lamp',{x:-180,z:200}],['tree',{x:180,z:-170,s:1}],['hedge',{x:-180,z:-200,L:120}]]);path(P,30,200,46,60);}},
 {id:'court3',name:'Cloisterwick Manor',old:'Courtyard-3',size:'4 × 4 cloister',pal:'court',stories:'1–2 + towers',blurb:'Cloister manor with an open play courtyard: arcade stays for charm, rear walls open for hands. Fountain optional; fence/gate/sandbox snap on the same grid.',
  story:'Once a mountain abbey, now a family manor. The gatehouse is the welcome hall, the back towers hold the library and the bell, and the fountain sings all night with a blue LED in its well.',
- bom:{'floor_tile_v0':12,'corner_post_v0':16,'wall_panels':30,'arcade_panel_v2':10,'fountain_v2':1,'turret_segment_v2':8,'turret_cap_v2':2,'crenel_parapet_v2':10,'roof_panel_v2':8,'gable_end_v2':2,'garden_wall_v2':2},
+ 
  build(P){base(P,700,700);const s=127;mk(P,[['room',{z:-190,w:508,d:127,ops:{N:['w','w','w','w'],S:['d','b','b','d']}}],['room',{x:-190,z:63,w:127,d:380,ops:{W:['w','w','w'],E:['b','d','b']}}],['room',{x:190,z:63,w:127,d:380,ops:{E:['w','w','w'],W:['b','d','b']}}],
   ['hip',{z:-190,y:LV,w:508,d:127,h:46}],['hip',{x:-190,z:63,y:LV,w:127,d:380,h:46}],['hip',{x:190,z:63,y:LV,w:127,d:380,h:46}],
   ['arcade',{z:-120,w:250,n:4}],['arcade',{x:-120,z:63,w:250,n:4,r:Math.PI/2}],['arcade',{x:120,z:63,w:250,n:4,r:-Math.PI/2}],
@@ -462,7 +462,7 @@ const HOUSES=[
   ['lady',{x:-30,z:80,c:0xb91c1c}],['gent',{x:30,z:90,c:0x1e3a8a}],['cat',{x:0,z:100,y:16}],['lampc',{x:-150,z:300}],['lampc',{x:150,z:300}],['gwall',{x:-220,z:330,L:180}],['gwall',{x:220,z:330,L:180}],['bed',{x:-190,z:150}],['chair',{x:190,z:100}],['gclock',{x:-200,z:-190}]]);path(P,0,320,50,60);}},
 {id:'shop4',name:'Cogsworth Works',old:'Workshop-4',size:'2 × 2 home + 2 × 3 works',pal:'shop',stories:'2 + clocktower',blurb:'Inventor home + open workshop. Wide arched doors, open back on the house, outdoor shed and sandbox for yard play — gears and clocktower stay as optional silhouette.',
  story:'Professor Cogsworth builds clocks, kettles and, recently, a small airship. The clocktower keeps the whole street on time (badly). Light the smokestack LED and the workshop looks like it\'s working late.',
- bom:{'floor_tile_v0':10,'upper_floor_tile_v1':4,'corner_post_v0':14,'wall_panels':28,'clock_tower_v2':1,'clock_spire_v2':1,'smokestack_v2':1,'roof_panel_v2':8,'gable_end_v2':2,'dormer_v2':2,'chimney_v2':1,'balcony_v2':1,'porch_post_v2':4},
+ 
  build(P){base(P,820,560);mk(P,[['room',{x:-210,w:254,d:254,ops:{S:['w','d'],W:['w','w'],N:['w','w']},wk:'arch'}],['room',{x:-210,lv:1,w:254,d:254,ops:{S:['w','w'],W:['w','w'],N:['w','w']}}],
   ['gable',{x:-210,y:LV*2,w:254,d:254,pitch:50,over:12}],['dormer',{x:-260,y:LV*2+8,z:98}],['dormer',{x:-160,y:LV*2+8,z:98}],['chimney',{x:-330,z:-60,y:0,h:LV*2+140}],
   ['room',{x:180,w:381,d:254,h:H*1.25,ops:{S:['D','D','D'],E:['W','W'],N:['W','W','W']}}],
@@ -477,7 +477,7 @@ const HOUSES=[
   path(P,180,230,120,50);}},
 {id:'wired5',name:'The Electrified Manor',old:'Wired-5',size:'3 × 2 × 3 stories, wired',pal:'wired',stories:3,wired:true,blurb:'Electrified Manor for play: open back, clear windows, lift-off mansard, visible low-voltage runs and magnetic service panels. Outdoor modules plug into the garden circuit tiles.',
  story:'A lighting inventor built this to show off her electric miracles. Every room has a switch, every lamp is real, and she left the wiring visible on purpose — wire theater. The Tesla coil is just for drama.',
- bom:{'wired_floor_tile_v1w':6,'upper_floor_tile_v1':10,'wired_corner_post_v1w':18,'wired_wall_short_v1w':8,'wall_panels':28,'wire_theater_panel_v2w':6,'power_module_v1w':1,'turret_segment_v2':6,'turret_cap_v2':1,'dormer_v2':4,'porch_post_v2':12,'railing_v2':9,'gingerbread_trim_v2':10,'bay_window_v2':1,'chimney_v2':2,'edison_sconce_v2w':6,'fix_chandelier_v2':3,'fix_victorian_lamppost_v2':2},
+ 
  build(P){base(P,760,600);mk(P,[['room',{w:381,d:254,ops:{S:['W','D','W'],N:['w','w','w'],E:['w','w'],W:['w','w']}}],['room',{lv:1,w:381,d:254,ops:{S:['w','w','w'],N:['w','w','w'],E:['w','w'],W:['w','w']}}],
   ['mansard',{y:LV*2,w:381,d:254,h:H}],['dormer',{x:-100,y:LV*2+34,z:120}],['dormer',{x:0,y:LV*2+34,z:120}],['dormer',{x:100,y:LV*2+34,z:120}],['dormer',{x:0,y:LV*2+34,z:-120,r:Math.PI}],
   ['rail',{y:LV*2+H+2,w:250,d:150}],['turret',{x:-190,z:127,r:52,h:LV*3,levels:3,capH:170}],['tesla',{x:-190,y:LV*3+168,z:127}],
@@ -534,10 +534,10 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.que
 const WIRE=`<h3>Wiring the Electrified Manor</h3><p><strong>Low voltage only (3–5 V DC, USB or batteries). Never mains.</strong></p><ul>
 <li><strong>Trunk:</strong> Ø5 bores up every <code>wired_corner_post_v1w</code> carry 30 AWG silicone pairs between stories. The tower has its own riser to the Tesla-coil LED.</li>
 <li><strong>Floors:</strong> <code>wired_floor_tile_v1w</code> centre channels feed the chandelier of the room below.</li>
-<li><strong>Wire theater:</strong> the back-wall runs stay visible behind jewel-glass <code>wire_theater_panel_v2w</code> covers (gold arched frames, 4 × Ø6×2 N52 magnets), so you can watch the wiring. The animated sparks in the viewer show current flowing from the dynamo kiosk. Wall magnets face north-out and panel magnets south-out, so any panel fits any wall.</li>
+<li><strong>Wire theater:</strong> the back-wall runs stay visible behind magnetic <code>service_panel_v1w</code> covers (4 × Ø6×1 N52 magnets in the panel pockets), so you can watch the wiring. The animated sparks in the viewer show current flowing from the dynamo kiosk. Wall magnets face north-out and panel magnets south-out, so any panel fits any wall.</li>
 <li><strong>Garden circuit:</strong> pink runs go under the lawn tiles to the two lamppost clusters (<code>lamppost_cluster_v3</code>, 4 LEDs each). Gold runs feed the conservatory chandelier and the roof cresting.</li>
 <li><strong>Power:</strong> <code>power_module_v1w</code> (USB-C 5 V trigger or 3×AAA) sits in the dynamo kiosk behind the house, with a green pilot LED and a JST-PH plug per story.</li></ul>
-<table><thead><tr><th>Kit</th><th>Qty</th></tr></thead><tbody><tr><td>30 AWG silicone wire red + black</td><td>2 × 10 m</td></tr><tr><td>Warm-white 3 mm LEDs w/ resistor, 5 V</td><td>24</td></tr><tr><td>Micro LEDs 1.8 mm (chandelier cups, globes)</td><td>30</td></tr><tr><td>Purple flicker LED (Tesla coil) + 2 amber flicker (chimneys)</td><td>3</td></tr><tr><td>Green pilot LED (dynamo dial)</td><td>1</td></tr><tr><td>Micro slide switches</td><td>9 (one per room + garden + exterior)</td></tr><tr><td>JST-PH 2-pin pigtails</td><td>12 pairs</td></tr><tr><td>N52 magnets Ø6×2 / Ø6×1</td><td>40 / 40</td></tr><tr><td>Warm fairy-light string, 2 m</td><td>2</td></tr></tbody></table>`;
+<table><thead><tr><th>Kit</th><th>Qty</th></tr></thead><tbody><tr><td>30 AWG silicone wire red + black</td><td>2 × 10 m</td></tr><tr><td>Warm-white 3 mm LEDs w/ resistor, 5 V</td><td>24</td></tr><tr><td>Micro LEDs 1.8 mm (chandelier cups, globes)</td><td>30</td></tr><tr><td>Purple flicker LED (Tesla coil) + 2 amber flicker (chimneys)</td><td>3</td></tr><tr><td>Green pilot LED (dynamo dial)</td><td>1</td></tr><tr><td>Micro slide switches</td><td>9 (one per room + garden + exterior)</td></tr><tr><td>JST-PH 2-pin pigtails</td><td>12 pairs</td></tr><tr><td>N52 magnets Ø6×1 (service_panel_v1w pockets)</td><td>40</td></tr><tr><td>Warm fairy-light string, 2 m</td><td>2</td></tr></tbody></table>`;
 const COREBOM={
  cottage0:{'floor_tile_v0':4,'corner_post_v0':4,'dowel_pin_v0':4,'snap_post_v0':8,'wall_panel_short_v0c':4,'wall_panel_clear_window_v4':4,'wall_panel_wide_door_v4':1,'roof_panel_lift_v4':2,'open_face_rail_v4':2,'snap_clearance_strip_v0':1},
  ranch1:{'floor_tile_v0':10,'corner_post_v0':12,'dowel_pin_v0':12,'snap_post_v0':16,'wall_panel_short_v0c':10,'wall_panel_clear_window_v4':8,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':4,'open_face_rail_v4':3,'snap_clearance_strip_v0':1},
@@ -552,10 +552,10 @@ const OUTBOM={cottage0:{'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':2,
  shop4:{'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':1,'garden_bed_v4':1,'bench_play_v4':1},
  wired5:{'lawn_tile_v4':3,'path_tile_v4':2,'fence_straight_v4':4,'fence_corner_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':1,'bench_play_v4':1}};
 function select(n){cur=n;const h=HOUSES[n];CUR_H=h;[...pills.children].forEach((b,k)=>b.classList.toggle('on',k==n));
-  document.getElementById('rev').textContent='v4.1 Physical — '+h.name;document.getElementById('blurb').textContent=h.blurb;
+  document.getElementById('rev').textContent='v4.2 Mates — '+h.name;document.getElementById('blurb').textContent=h.blurb;
   const bom=Object.assign({},COREBOM[h.id]||{},OUTBOM[h.id]||{});const tot=Object.values(bom).reduce((a,b)=>a+b,0);
   document.getElementById('facts').innerHTML=[[h.size,'Footprint (tiles)'],[h.stories,'Stories'],[tot+' parts','Print kit'],[h.old,'Was (v1)']].map(([a,b])=>`<div class="fact"><b>${a}</b><span>${b}</span></div>`).join('');
-  document.getElementById('bom').innerHTML=`<h3>${h.name} — print list (v4.1 Physical)</h3><table><thead><tr><th>Part (STL)</th><th>Qty</th></tr></thead><tbody>${Object.entries(bom).map(([k,v])=>`<tr><td><code>${k}</code>${/_v4|play/.test(k)?' <span class="new">v4.1</span>':(/_v0|_v1/.test(k)?' <span class="new">core</span>':'')}</td><td>${v}</td></tr>`).join('')}</tbody></table>
+  document.getElementById('bom').innerHTML=`<h3>${h.name} — print list (v4.2 Mates)</h3><table><thead><tr><th>Part (STL)</th><th>Qty</th></tr></thead><tbody>${Object.entries(bom).map(([k,v])=>`<tr><td><code>${k}</code>${/_v4|play/.test(k)?' <span class="new">v4.1</span>':(/_v0|_v1/.test(k)?' <span class="new">core</span>':'')}</td><td>${v}</td></tr>`).join('')}</tbody></table>
   <p class="muted">BOM = printable parts that exist under <code>/dollhouse/stl/</code>. Core snap (floors, posts, dowels, clearance strip) + play walls/roofs + outdoor Lego modules. Multi-story kits list <code>upper_floor_tile_v1</code>. Long spans seat on posts ≤127&nbsp;mm. Ornaments (clocktower, porte-cochère, stained glass) are optional downloads only — not required. Ø6.3 socket size locks after the H3C clearance-strip print.</p>`;
   document.getElementById('notes-house').innerHTML=`<h3>${h.name}</h3><p>${h.story}</p>`+(h.wired?WIRE:`<p class="muted">Play view leaves the back open and roofs off so a kid can see and reach every room. Lights: Ø3.2 channels in wall tops and corner posts. Press <b>Night lights</b> for LED pockets. Rearrange outdoor modules on the 127 mm snap grid like Legos.</p>`);
   ['btn-wire','btn-panel','lg-w','lg-p'].forEach(id=>document.getElementById(id).hidden=!h.wired);build(h);}

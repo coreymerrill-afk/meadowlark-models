@@ -3,7 +3,7 @@
 const P=[
 ['floor_tile_v0','Floor tile (core)','127×127 snap floor. Ø6.3 sockets on 31.75 grid + Ø3.2 light races. Required for every manor.'],
 ['upper_floor_tile_v1','Upper floor tile','Same grid as floor_tile_v0 for stacked stories (town / shop / wired).'],
-['corner_post_v0','Corner post (core)','Owns the corner socket; walls butt at 19.875. Dowel peg separate.'],
+['corner_post_v0','Corner post (core)','v4.2: top Ø6.3×5.5 socket — dowel up into upper_floor_tile_v1. Owns corner socket.'],
 ['snap_post_v0','Snap post','Ø6 post for mid-span / porch bearing ≤127 mm.'],
 ['dowel_pin_v0','Dowel pin','Ø6 peg seating posts into floor sockets.'],
 ['snap_clearance_strip_v0','Clearance strip','Print first — pick the Ø socket that pushes firm and pulls by hand.'],
@@ -13,14 +13,14 @@ const P=[
 ['garden_bed_v4','Garden bed','Raised bed ~100×50, hollow well, 2 pegs on the 31.75 grid.'],
 ['fence_straight_v4','Fence (straight)','See-through picket fence spanning one tile edge, 2 pegs.'],
 ['fence_corner_v4','Fence (corner)','90° corner fence, pegs on both legs.'],
-['garden_gate_play_v4','Play garden gate','v4.1: deeper header + pier-cap beam. Open frames, clear sight. 140 wide.'],
+['garden_gate_play_v4','Play garden gate','v4.2: pegs 127 apart (4×pitch) seat edge sockets; deeper header. 145 wide.'],
 ['sandbox_v4','Sandbox / play pad','100×100 tray, 4 corner pegs. Drop toys in.'],
 ['planter_stub_v4','Tree / planter stub','Pot + trunk stub, 1 centre peg. Add foliage or leave bare.'],
 ['bench_play_v4','Garden bench','Bench with 2 pegs. Free-standing play seat.'],
 ['shed_shell_v4','Shed / playhouse shell','v4.1: front posts + lintel under roof edge. Open-front play kept.'],
 ['wall_panel_clear_window_v4','Clear window wall','v4.1: taller sill, mid rail, jambs ≥12 mm. Clear opening kept.'],
 ['wall_panel_wide_door_v4','Wide door wall','Short wall with ≥28 mm clear doorway for furniture pass-through.'],
-['roof_panel_lift_v4','Lift-off roof panel','Flat-print roof half with underside pegs. Kid lifts to reach rooms.'],
+['roof_panel_lift_v4','Lift-off roof panel','v4.2: grid-true pegs + Ø6.3 ridge sockets. Kid lifts to reach rooms.'],
 ['open_face_rail_v4','Open-face rail','Low furniture rail for open-back edges — full sightline.']
 ];
 const el=document.getElementById('gal'),grid=document.getElementById('galgrid'),info=document.getElementById('galinfo');if(!el||!window.THREE)return;
