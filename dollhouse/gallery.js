@@ -32,3 +32,4 @@ async function load(i){init();const [id,name,desc]=P[i];[...grid.children].forEa
 P.forEach((p,i)=>{const b=document.createElement('button');b.textContent=p[1];b.onclick=()=>load(i);grid.appendChild(b);});
 window.__gal=()=>{if(!inited)load(0);};
 })();
+(function(){const k=document.getElementById('kit');if(!k)return;const go=()=>{if(!k.hidden&&window.__gal)window.__gal();};new MutationObserver(go).observe(k,{attributes:true,attributeFilter:['hidden']});go();})();
