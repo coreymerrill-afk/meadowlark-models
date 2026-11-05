@@ -200,7 +200,7 @@ def cupola_play():
     R, h = 20.0, 42.0
     body = cyl(R * 2, h, 0, 0, PEG_H, sec=8)
     roof = cyl(R * 2 + 6, 4, 0, 0, PEG_H + h, sec=8)
-    spire = cyl(8, 18, 0, 0, PEG_H + h + 4, sec=8)
+    spire = cyl(16, 18, 0, 0, PEG_H + h + 4, sec=8)  # v4.3.1: solid boss so top Ø6.3 sock cuts real body
     ball = cyl(12, 8, 0, 0, PEG_H + h + 20, sec=16)
     tip = cyl(4, 12, 0, 0, PEG_H + h + 28, sec=12)
     collar = cyl(R * 2 + 3, 3, 0, 0, PEG_H + h - 1, sec=8)
@@ -213,8 +213,8 @@ def cupola_play():
                       else bx(fx - 1.2, fy - 3, PEG_H + 10, fx + 1.2, fy + 3, PEG_H + 28))
     pegs = [peg(-2 * PITCH, 0), peg(2 * PITCH, 0)]
     sill = bx(-2 * PITCH - 7, -7, 0, 2 * PITCH + 7, 7, PEG_H + 2)
-    m = U([sill, body, roof, spire, ball, tip, collar] + frames + pegs)
-    m = D_(m, [sock(0, 0, PEG_H + h + 40)])
+    m = U([sill, body, roof, spire, collar] + frames + pegs)
+    m = D_(m, [sock(0, 0, PEG_H + h + 22)])
     return lift(clean(m))
 
 # ---------- gate cleanup (Print Fit should) ----------

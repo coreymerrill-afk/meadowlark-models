@@ -32,7 +32,7 @@ const P=[
 ['gable_end_v43','Gable end','v4.3 roofs-on silhouette. Pegs at 0 & 127; apex sock for finial.'],
 ['dormer_play_v43','Play dormer','v4.3. Peg → ridge; clear window opening; lift-compatible.'],
 ['mansard_break_v43','Mansard break','v4.3 silhouette panel. Pegs at 0 & 127 → ridge.'],
-['cupola_play_v43','Play cupola','v4.3. Pegs at ±31.75 → ridge; top sock for finial.'],
+['cupola_play_v43','Play cupola','v4.3.1. Pegs span 127 → ridge socks 1+2; top Ø6.3 sock for finial.'],
 ['wired_floor_tile_v1w','Wired floor tile','Electrified Manor floor — Ø5 channels + corner risers. Print BOM wired5.'],
 ['wired_corner_post_v1w','Wired corner post','Ø5 trunk bore + top Ø6.3 socket. Fish wire before seating top dowel.'],
 ['wired_wall_short_v1w','Wired short wall','Raceway + service-panel recess + magnet pockets.'],

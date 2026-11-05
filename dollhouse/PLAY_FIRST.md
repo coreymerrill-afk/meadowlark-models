@@ -98,7 +98,7 @@ All accents mate only Ø6.3 / 31.75; porch posts use the same floor/tile sockets
 | `gable_end_v43.stl` | Pegs at 0 & 127; apex sock for finial | Roofs-on silhouette |
 | `dormer_play_v43.stl` | Peg → ridge Ø6.3; clear window opening | Roofs-on break |
 | `mansard_break_v43.stl` | Pegs at 0 & 127 → ridge; top sock | Mansard silhouette |
-| `cupola_play_v43.stl` | Pegs at ±PITCH → ridge; top sock | Widow’s-walk cupola |
+| `cupola_play_v43.stl` | Pegs ±63.5 (span 127) → ridge socks x=15.875/142.875; top Ø6.3 sock in Ø16 boss | Widow’s-walk cupola |
 
 Per-manor required accents live in `grand.js` COREBOM (v4.3 Grand).
 
