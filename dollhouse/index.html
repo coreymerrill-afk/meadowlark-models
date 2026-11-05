@@ -39,15 +39,19 @@
   ol li,ul li{margin-bottom:.35rem}
   .legend span{display:inline-block;margin-right:1rem;font-size:.85rem;color:var(--muted)}
   .legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;margin-right:.3rem;vertical-align:-1px}
+  .new{font-size:.68rem;font-weight:700;color:#0b1020;background:var(--accent);border-radius:999px;padding:0 .4rem;margin-left:.3rem}
+  #gal{width:100%;aspect-ratio:16/10;max-height:60vh;background:radial-gradient(circle at 50% 40%,#3a3346,#15131c);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative}
+  .galgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));gap:.45rem;margin:.6rem 0 1rem}.galgrid button{text-align:left;background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:.45rem .6rem;font:inherit;font-size:.85rem;cursor:pointer}.galgrid button.on{border-color:var(--accent);color:var(--accent)}
+  #galinfo{font-size:.9rem}
   .pills{display:flex;gap:.4rem;flex-wrap:wrap;margin:0 0 1rem}.pills button{background:var(--bg3);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:.35rem .9rem;font:inherit;cursor:pointer}.pills button.on{border-color:var(--accent);color:var(--accent);background:var(--bg2)}
 </style>
 </head>
 <body>
 <a class="coreyhq-back" href="https://coreyhq.com/" title="Back to CoreyHQ">← CoreyHQ</a>
 <a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
-<div class="banner"><strong>Grand kit · Draft v2.</strong> Six storybook manors on one 1:24 snap system. Snap sizes lock after the H3C clearance-strip test.</div>
+<div class="banner"><strong>Grand kit · v3 “Gallery”.</strong> Six storybook manors on one 1:24 snap system: stained glass, copper caps, weathervanes, porte-cochère, spiral stair, lamppost clusters. Try <b>Night lights</b>. Snap sizes lock after the H3C clearance-strip test.</div>
 <header>
-  <div class="rev" id="rev">Grand v2</div>
+  <div class="rev" id="rev">Grand v3</div>
   <h1 id="title">Grand dollhouse kit</h1>
   <p class="meta" id="sub">Six manors · one snap system · 1:24 · Bambu Lab H3C</p>
 </header>
@@ -94,6 +98,11 @@
   </ol>
 </section>
 <section id="kit" hidden>
+  <h3>v3 showpiece parts: real CAD</h3>
+  <p class="muted">These are the actual print-ready STLs from <code>build_grand_v3.py</code>, loaded straight into the viewer. All are watertight and fit the H3C bed. Click one to inspect it, or download it.</p>
+  <div id="gal"></div>
+  <p id="galinfo"></p>
+  <div class="galgrid" id="galgrid"></div>
   <p>Accessories match the storybook look. Floor items have Ø5.9 pegs; lamps have LED pockets and Ø3.2 wire bores.</p>
   <table><thead><tr><th>Group</th><th>Parts (STL, v2)</th><th>Notes</th></tr></thead><tbody>
   <tr><td>Figures</td><td>fig_lady_v2 (bustle gown + hat), fig_gent_v2 (top hat), fig_child_v2, fig_inventor_v2 (goggles + apron), fig_cat_v2</td><td>0.2 nozzle. 1:24, about 70 mm adult.</td></tr>
@@ -105,5 +114,6 @@
 <script src="/dollhouse/vendor/three.min.js"></script>
 <script src="/dollhouse/vendor/OrbitControls.js"></script>
 <script src="/dollhouse/grand.js"></script>
+<script src="/dollhouse/gallery.js"></script>
 </body>
 </html>
