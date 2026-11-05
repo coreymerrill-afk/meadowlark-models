@@ -13,15 +13,26 @@ const P=[
 ['garden_bed_v4','Garden bed','Raised bed ~100×50, hollow well, 2 pegs on the 31.75 grid.'],
 ['fence_straight_v4','Fence (straight)','See-through picket fence spanning one tile edge, 2 pegs.'],
 ['fence_corner_v4','Fence (corner)','90° corner fence, pegs on both legs.'],
-['garden_gate_play_v4','Play garden gate','v4.2: pegs 127 apart (4×pitch) seat edge sockets; deeper header. 145 wide.'],
+['garden_gate_play_v4','Play garden gate','v4.2 pegs 127 apart; v4.3 export scrubbed (no zero-area tris). 145 wide.'],
 ['sandbox_v4','Sandbox / play pad','100×100 tray, 4 corner pegs. Drop toys in.'],
 ['planter_stub_v4','Tree / planter stub','Pot + trunk stub, 1 centre peg. Add foliage or leave bare.'],
 ['bench_play_v4','Garden bench','Bench with 2 pegs. Free-standing play seat.'],
 ['shed_shell_v4','Shed / playhouse shell','v4.1: front posts + lintel under roof edge. Open-front play kept.'],
 ['wall_panel_clear_window_v4','Clear window wall','v4.1: taller sill, mid rail, jambs ≥12 mm. Clear opening kept.'],
 ['wall_panel_wide_door_v4','Wide door wall','Short wall with ≥28 mm clear doorway for furniture pass-through.'],
-['roof_panel_lift_v4','Lift-off roof panel','v4.2: grid-true pegs + Ø6.3 ridge sockets. Kid lifts to reach rooms.'],
-['open_face_rail_v4','Open-face rail','Low furniture rail for open-back edges — full sightline.']
+['roof_panel_lift_v4','Lift-off roof panel','Lip seats on wall tops; ridge Ø6.3 socks are for finial/chimney/cupola/dormer mates (not wall pegs).'],
+['open_face_rail_v4','Open-face rail','Low furniture rail for open-back edges — full sightline.'],
+['tower_stub_v43','Tower stub','v4.3 vertical accent. Peg → corner-post top / floor; top sock for finial.'],
+['chimney_ridge_v43','Ridge chimney','v4.3. Peg → roof_panel_lift ridge Ø6.3. Lift-compatible.'],
+['finial_ridge_v43','Ridge finial','v4.3. Peg → ridge / tower / gable top sock.'],
+['clock_shaft_v43','Clock shaft','v4.3 Cogsworth vertical. Peg → corner-post top; top sock for finial.'],
+['porch_post_v43','Porch post','v4.3 façade. Peg → floor/lawn/path Ø6.3 (same as outdoor); top sock for beam.'],
+['porch_beam_v43','Porch beam','v4.3. Pegs at 0 & 127 → porch_post tops.'],
+['porch_roof_slice_v43','Porch roof slice','v4.3 shed porch roof. Pegs → porch_post tops. Does not cover windows.'],
+['gable_end_v43','Gable end','v4.3 roofs-on silhouette. Pegs at 0 & 127; apex sock for finial.'],
+['dormer_play_v43','Play dormer','v4.3. Peg → ridge; clear window opening; lift-compatible.'],
+['mansard_break_v43','Mansard break','v4.3 silhouette panel. Pegs at 0 & 127 → ridge.'],
+['cupola_play_v43','Play cupola','v4.3. Pegs at ±31.75 → ridge; top sock for finial.']
 ];
 const el=document.getElementById('gal'),grid=document.getElementById('galgrid'),info=document.getElementById('galinfo');if(!el||!window.THREE)return;
 let R,S,C,O,mesh,inited=false;

@@ -305,7 +305,7 @@ function gardenBedPlay(P){const g=G(bx(100,16,50,0x6b4a2f,0,8,0),bx(90,10,40,0x5
 function applyPlayOpen(){/* rooms already open via playMode in room(); sync roof/orn buttons */const rb=document.getElementById('btn-roof');if(rb){rb.classList.toggle('on',!!vis.roof);}const pb=document.getElementById('btn-play');if(pb)pb.classList.toggle('on',playMode);}
 // ---------- scene plumbing ----------
 let renderer,scene,camera,controls,root,parts=[],spinners=[],target=0,ex=0,night=false,spin=!Q.has('nospin'),lights=[],HALOS=[],WIRES=[],PULSES=[],SMOKES=[],FLIES=null;
-const vis={roof:0,wall:1,furn:1,garden:1,light:1,wire:1,panel:1,orn:0,base:1};
+const vis={roof:0,wall:1,furn:1,garden:1,light:1,wire:1,panel:1,orn:0,accent:1,base:1};
 const MAXPL=Q.has('lite')?2:7;
 function put(obj,grp,layer,lv=0){root.add(obj);parts.push({m:obj,by:obj.position.y,lift:layer*55+lv*120,grp});
   obj.traverse(o=>{if(o.userData){if(o.userData.spin)spinners.push(o.userData.spin);if(o.userData.spin2)spinners.push(o.userData.spin2);if(o.userData.smoke)SMOKES.push(o.userData.smoke);
@@ -329,18 +329,18 @@ function mk(P,list){for(const it of list){const[t,o]=it;const lv=o.lv||0,y=(o.y!
    case'gable':g=gable(P,o);grp='roof';layer=5+lv;break;
    case'hip':g=hip(P,o);grp='roof';layer=5+lv;break;
    case'mansard':g=mansard(P,o);grp='roof';layer=5+lv;break;
-   case'turret':g=turret(P,o);layer=2+lv;glowLight(x,y+(o.h||H*1.6)*.6,z,0xffb35c,.7,200);break;
-   case'porch':g=porch(P,o);layer=2.5;break;
+   case'turret':g=turret(P,o);grp='accent';layer=2+lv;glowLight(x,y+(o.h||H*1.6)*.6,z,0xffb35c,.7,200);break;
+   case'porch':g=porch(P,o);grp='accent';layer=2.5;break;
    case'dormer':g=dormer(P,o);grp='roof';layer=6+lv;break;
-   case'chimney':g=chimney(P,o);grp='orn';layer=7+lv;break;
-   case'bay':g=bay(P,o);layer=2.5+lv;break;
-   case'cupola':g=cupola(P,o);grp='orn';layer=8+lv;break;
+   case'chimney':g=chimney(P,o);grp='accent';layer=7+lv;break;
+   case'bay':g=bay(P,o);grp='accent';layer=2.5+lv;break;
+   case'cupola':g=cupola(P,o);grp='accent';layer=8+lv;break;
    case'rail':g=rail(P,o);grp='orn';layer=6+lv;break;
    case'crenels':g=crenels(P,o);grp='orn';layer=6+lv;break;
    case'arcade':g=arcade(P,o);layer=2.5;break;
    case'fountain':g=fountain(P);grp='garden';layer=.5;glowLight(x,30,z,0x60a5fa,.8,200);break;
-   case'clock':g=clocktower(P,o);grp='orn';layer=4;break;
-   case'stack':g=smokestack(P,o);grp='orn';layer=7;break;
+   case'clock':g=clocktower(P,o);grp='accent';layer=4;break;
+   case'stack':g=smokestack(P,o);grp='accent';layer=7;break;
    case'gear':g=gear(o.c||P.metal||0xb87333,o.rad||22,0,0,0);grp='orn';layer=3+lv;break;
    case'tree':g=tree(P,o);grp='garden';layer=.3;break;
    case'lamp':g=lamppost(P);grp='garden';layer=.4;glowLight(x,118,z,0xffd58a,.9,180);break;
@@ -383,7 +383,7 @@ function mk(P,list){for(const it of list){const[t,o]=it;const lv=o.lv||0,y=(o.y!
   at(g,x,y+(o.dy||0),z,ry);if(o.s&&t!='tree'&&t!='shroom')g.scale.setScalar(o.s);put(g,grp,layer,0);}}
 function base(P,w,d){const g=G(bx(w,8,d,P.lawn||0x5f8f4a,0,-4,0));
   const wd=P.plinth||0x4a2f1e;g.add(bx(w+30,22,d+30,wd,0,-19,0),bx(w+36,4,d+36,P.plinthTrim||0xc9a227,0,-8,0),bx(w+42,8,d+42,wd,0,-34,0),bx(w+46,3,d+46,P.plinthTrim||0xc9a227,0,-39.5,0));
-  const pl=new THREE.Mesh(new THREE.BoxGeometry(220,26,1.5),plaque(CUR_H.name,'1:24 · v4 Play · Meadowlark Models'));pl.position.set(0,-20,d/2+15.8);pl.userData.keepUV=1;g.add(pl);
+  const pl=new THREE.Mesh(new THREE.BoxGeometry(220,26,1.5),plaque(CUR_H.name,'1:24 · v4.3 Grand · Meadowlark Models'));pl.position.set(0,-20,d/2+15.8);pl.userData.keepUV=1;g.add(pl);
   for(let k=0;k<Math.round((w+d)/6);k++){const side=k%4,t=rnd()-.5;const px=side<2?t*w*.96:(side==2?-1:1)*(w/2-5),pz=side<2?(side==0?-1:1)*(d/2-5):t*d*.96;g.add(sp(1.8+rnd()*1.6,(P.blooms||[0xf472b6,0xfacc15,0xffffff,0xc084fc])[k%4],px,1.5+rnd()*2,pz));if(k%3==0)g.add(sp(3.4,0x3f6b35,px*.99,2,pz*.99));}
   for(let k=0;k<160;k++){const x=(rnd()-.5)*w*.98,z=(rnd()-.5)*d*.98;g.add(cone(1.2+rnd(),3+rnd()*4,[0x4f7d3a,0x6a9a4a,0x3f6b35][k%3],x,1.5,z,4));}
   put(g,'base',0,0);
@@ -532,19 +532,19 @@ let cur=0;const pills=document.getElementById('pills');
 HOUSES.forEach((h,n)=>{const b=document.createElement('button');b.textContent=h.name;b.onclick=()=>{location.hash=h.id;select(n);};pills.appendChild(b);});
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==b.dataset.tab);if(b.dataset.tab==='explore')resize();if(b.dataset.tab==='kit'&&window.__gal)window.__gal();});
 const WIRE=`<h3>Wiring the Electrified Manor</h3><p><strong>Low voltage only (3–5 V DC, USB or batteries). Never mains.</strong></p><ul>
-<li><strong>Trunk:</strong> Ø5 bores up every <code>wired_corner_post_v1w</code> carry 30 AWG silicone pairs between stories. The tower has its own riser to the Tesla-coil LED.</li>
+<li><strong>Trunk:</strong> Ø5 bores up every <code>wired_corner_post_v1w</code> carry 30 AWG silicone pairs between stories. The tower has its own riser to the Tesla-coil LED. <em>Fish wire through the corner trunk before seating the top dowel</em> — the top Ø6.3 socket opens into the Ø5 trunk; the dowel closes it.</li>
 <li><strong>Floors:</strong> <code>wired_floor_tile_v1w</code> centre channels feed the chandelier of the room below.</li>
 <li><strong>Wire theater:</strong> the back-wall runs stay visible behind magnetic <code>service_panel_v1w</code> covers (4 × Ø6×1 N52 magnets in the panel pockets), so you can watch the wiring. The animated sparks in the viewer show current flowing from the dynamo kiosk. Wall magnets face north-out and panel magnets south-out, so any panel fits any wall.</li>
-<li><strong>Garden circuit:</strong> pink runs go under the lawn tiles to the two lamppost clusters (<code>lamppost_cluster_v3</code>, 4 LEDs each). Gold runs feed the conservatory chandelier and the roof cresting.</li>
+<li><strong>Garden lighting:</strong> uses the floor-tile / lawn-tile <code>Ø3.2</code> light race — <em>not a second bus</em>. Pink viewer runs are the same race to lamppost clusters (<code>lamppost_cluster_v3</code>, optional). Gold runs feed conservatory / cresting on that race.</li>
 <li><strong>Power:</strong> <code>power_module_v1w</code> (USB-C 5 V trigger or 3×AAA) sits in the dynamo kiosk behind the house, with a green pilot LED and a JST-PH plug per story.</li></ul>
 <table><thead><tr><th>Kit</th><th>Qty</th></tr></thead><tbody><tr><td>30 AWG silicone wire red + black</td><td>2 × 10 m</td></tr><tr><td>Warm-white 3 mm LEDs w/ resistor, 5 V</td><td>24</td></tr><tr><td>Micro LEDs 1.8 mm (chandelier cups, globes)</td><td>30</td></tr><tr><td>Purple flicker LED (Tesla coil) + 2 amber flicker (chimneys)</td><td>3</td></tr><tr><td>Green pilot LED (dynamo dial)</td><td>1</td></tr><tr><td>Micro slide switches</td><td>9 (one per room + garden + exterior)</td></tr><tr><td>JST-PH 2-pin pigtails</td><td>12 pairs</td></tr><tr><td>N52 magnets Ø6×1 (service_panel_v1w pockets)</td><td>40</td></tr><tr><td>Warm fairy-light string, 2 m</td><td>2</td></tr></tbody></table>`;
 const COREBOM={
- cottage0:{'floor_tile_v0':4,'corner_post_v0':4,'dowel_pin_v0':4,'snap_post_v0':8,'wall_panel_short_v0c':4,'wall_panel_clear_window_v4':4,'wall_panel_wide_door_v4':1,'roof_panel_lift_v4':2,'open_face_rail_v4':2,'snap_clearance_strip_v0':1},
- ranch1:{'floor_tile_v0':10,'corner_post_v0':12,'dowel_pin_v0':12,'snap_post_v0':16,'wall_panel_short_v0c':10,'wall_panel_clear_window_v4':8,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':4,'open_face_rail_v4':3,'snap_clearance_strip_v0':1},
- town2:{'floor_tile_v0':4,'upper_floor_tile_v1':8,'corner_post_v0':12,'dowel_pin_v0':12,'snap_post_v0':12,'wall_panel_short_v0c':8,'wall_panel_clear_window_v4':8,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':2,'open_face_rail_v4':2,'snap_clearance_strip_v0':1},
- court3:{'floor_tile_v0':12,'corner_post_v0':16,'dowel_pin_v0':16,'snap_post_v0':20,'wall_panel_short_v0c':16,'wall_panel_clear_window_v4':10,'wall_panel_wide_door_v4':4,'roof_panel_lift_v4':4,'open_face_rail_v4':4,'snap_clearance_strip_v0':1},
- shop4:{'floor_tile_v0':10,'upper_floor_tile_v1':4,'corner_post_v0':14,'dowel_pin_v0':14,'snap_post_v0':14,'wall_panel_short_v0c':12,'wall_panel_clear_window_v4':6,'wall_panel_wide_door_v4':3,'roof_panel_lift_v4':3,'open_face_rail_v4':2,'snap_clearance_strip_v0':1},
- wired5:{'wired_floor_tile_v1w':6,'upper_floor_tile_v1':10,'wired_corner_post_v1w':18,'dowel_pin_v0':18,'wired_wall_short_v1w':8,'wall_panel_clear_window_v4':10,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':4,'open_face_rail_v4':3,'service_panel_v1w':6,'power_module_v1w':1,'snap_clearance_strip_v0':1}};
+ cottage0:{'floor_tile_v0':4,'corner_post_v0':4,'dowel_pin_v0':4,'snap_post_v0':8,'wall_panel_short_v0c':4,'wall_panel_clear_window_v4':4,'wall_panel_wide_door_v4':1,'roof_panel_lift_v4':2,'open_face_rail_v4':2,'snap_clearance_strip_v0':1,'tower_stub_v43':1,'chimney_ridge_v43':1,'finial_ridge_v43':1,'porch_post_v43':4,'porch_beam_v43':2,'porch_roof_slice_v43':1,'gable_end_v43':1,'dormer_play_v43':2},
+ ranch1:{'floor_tile_v0':10,'corner_post_v0':12,'dowel_pin_v0':12,'snap_post_v0':16,'wall_panel_short_v0c':10,'wall_panel_clear_window_v4':8,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':4,'open_face_rail_v4':3,'snap_clearance_strip_v0':1,'cupola_play_v43':1,'chimney_ridge_v43':2,'finial_ridge_v43':1,'porch_post_v43':8,'porch_beam_v43':4,'porch_roof_slice_v43':2,'gable_end_v43':1},
+ town2:{'floor_tile_v0':4,'upper_floor_tile_v1':8,'corner_post_v0':12,'dowel_pin_v0':12,'snap_post_v0':12,'wall_panel_short_v0c':8,'wall_panel_clear_window_v4':8,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':2,'open_face_rail_v4':2,'snap_clearance_strip_v0':1,'tower_stub_v43':1,'finial_ridge_v43':1,'chimney_ridge_v43':2,'porch_post_v43':4,'porch_beam_v43':2,'porch_roof_slice_v43':1,'mansard_break_v43':2,'dormer_play_v43':2},
+ court3:{'floor_tile_v0':12,'corner_post_v0':16,'dowel_pin_v0':16,'snap_post_v0':20,'wall_panel_short_v0c':16,'wall_panel_clear_window_v4':10,'wall_panel_wide_door_v4':4,'roof_panel_lift_v4':4,'open_face_rail_v4':4,'snap_clearance_strip_v0':1,'tower_stub_v43':2,'finial_ridge_v43':2,'porch_post_v43':6,'porch_beam_v43':3,'porch_roof_slice_v43':1,'gable_end_v43':2,'dormer_play_v43':1},
+ shop4:{'floor_tile_v0':10,'upper_floor_tile_v1':4,'corner_post_v0':14,'dowel_pin_v0':14,'snap_post_v0':14,'wall_panel_short_v0c':12,'wall_panel_clear_window_v4':6,'wall_panel_wide_door_v4':3,'roof_panel_lift_v4':3,'open_face_rail_v4':2,'snap_clearance_strip_v0':1,'clock_shaft_v43':1,'finial_ridge_v43':1,'chimney_ridge_v43':1,'porch_post_v43':4,'porch_beam_v43':2,'porch_roof_slice_v43':1,'gable_end_v43':1,'dormer_play_v43':2},
+ wired5:{'wired_floor_tile_v1w':6,'upper_floor_tile_v1':10,'wired_corner_post_v1w':18,'dowel_pin_v0':18,'wired_wall_short_v1w':8,'wall_panel_clear_window_v4':10,'wall_panel_wide_door_v4':2,'roof_panel_lift_v4':4,'open_face_rail_v4':3,'service_panel_v1w':6,'power_module_v1w':1,'snap_clearance_strip_v0':1,'tower_stub_v43':1,'finial_ridge_v43':1,'chimney_ridge_v43':2,'porch_post_v43':6,'porch_beam_v43':3,'porch_roof_slice_v43':1,'mansard_break_v43':2,'dormer_play_v43':3}};
 const OUTBOM={cottage0:{'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':2,'fence_corner_v4':1,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':1,'bench_play_v4':1},
  ranch1:{'lawn_tile_v4':4,'path_tile_v4':2,'fence_straight_v4':4,'fence_corner_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':2,'bench_play_v4':2},
  town2:{'lawn_tile_v4':1,'path_tile_v4':1,'fence_straight_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'planter_stub_v4':2,'garden_bed_v4':1,'bench_play_v4':1},
@@ -552,11 +552,11 @@ const OUTBOM={cottage0:{'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':2,
  shop4:{'lawn_tile_v4':2,'path_tile_v4':1,'fence_straight_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':1,'garden_bed_v4':1,'bench_play_v4':1},
  wired5:{'lawn_tile_v4':3,'path_tile_v4':2,'fence_straight_v4':4,'fence_corner_v4':2,'garden_gate_play_v4':1,'sandbox_v4':1,'shed_shell_v4':1,'planter_stub_v4':2,'garden_bed_v4':1,'bench_play_v4':1}};
 function select(n){cur=n;const h=HOUSES[n];CUR_H=h;[...pills.children].forEach((b,k)=>b.classList.toggle('on',k==n));
-  document.getElementById('rev').textContent='v4.2 Mates — '+h.name;document.getElementById('blurb').textContent=h.blurb;
+  document.getElementById('rev').textContent='v4.3 Grand — '+h.name;document.getElementById('blurb').textContent=h.blurb;
   const bom=Object.assign({},COREBOM[h.id]||{},OUTBOM[h.id]||{});const tot=Object.values(bom).reduce((a,b)=>a+b,0);
   document.getElementById('facts').innerHTML=[[h.size,'Footprint (tiles)'],[h.stories,'Stories'],[tot+' parts','Print kit'],[h.old,'Was (v1)']].map(([a,b])=>`<div class="fact"><b>${a}</b><span>${b}</span></div>`).join('');
-  document.getElementById('bom').innerHTML=`<h3>${h.name} — print list (v4.2 Mates)</h3><table><thead><tr><th>Part (STL)</th><th>Qty</th></tr></thead><tbody>${Object.entries(bom).map(([k,v])=>`<tr><td><code>${k}</code>${/_v4|play/.test(k)?' <span class="new">v4.1</span>':(/_v0|_v1/.test(k)?' <span class="new">core</span>':'')}</td><td>${v}</td></tr>`).join('')}</tbody></table>
-  <p class="muted">BOM = printable parts that exist under <code>/dollhouse/stl/</code>. Core snap (floors, posts, dowels, clearance strip) + play walls/roofs + outdoor Lego modules. Multi-story kits list <code>upper_floor_tile_v1</code>. Long spans seat on posts ≤127&nbsp;mm. Ornaments (clocktower, porte-cochère, stained glass) are optional downloads only — not required. Ø6.3 socket size locks after the H3C clearance-strip print.</p>`;
+  document.getElementById('bom').innerHTML=`<h3>${h.name} — print list (v4.3 Grand)</h3><table><thead><tr><th>Part (STL)</th><th>Qty</th></tr></thead><tbody>${Object.entries(bom).map(([k,v])=>`<tr><td><code>${k}</code>${/_v43/.test(k)?' <span class="new">v4.3</span>':(/_v4|play/.test(k)?' <span class="new">play</span>':(/_v0|_v1/.test(k)?' <span class="new">core</span>':''))}</td><td>${v}</td></tr>`).join('')}</tbody></table>
+  <p class="muted">BOM = printable parts under <code>/dollhouse/stl/</code>. Core snap + play walls/roofs + <b>v4.3 grand accents</b> (tower/chimney/finial/clock, porch posts+beam+roof slice, gable/dormer/mansard/cupola) required per manor. Accents mate only Ø6.3 / 31.75 — porch posts use the same floor/tile sockets as outdoor. <b>Roof locate:</b> lift panels seat by lip on wall tops; ridge Ø6.3 sockets are for finial / chimney / cupola / dormer mates (not wall pegs). Long spans on posts ≤127&nbsp;mm. Stained glass / porte-cochère remain optional. Ø6.3 locks after H3C clearance-strip print.</p>`;
   document.getElementById('notes-house').innerHTML=`<h3>${h.name}</h3><p>${h.story}</p>`+(h.wired?WIRE:`<p class="muted">Play view leaves the back open and roofs off so a kid can see and reach every room. Lights: Ø3.2 channels in wall tops and corner posts. Press <b>Night lights</b> for LED pockets. Rearrange outdoor modules on the 127 mm snap grid like Legos.</p>`);
   ['btn-wire','btn-panel','lg-w','lg-p'].forEach(id=>document.getElementById(id).hidden=!h.wired);build(h);}
 function mergeParts(){const keep=new Set();spinners.forEach(s=>{const o=s.isObject3D?s:(s.air||s.g);if(o)o.traverse(c=>keep.add(c));});SMOKES.forEach(S=>S.sm.forEach(x=>keep.add(x)));
@@ -624,8 +624,8 @@ addEventListener('resize',resize);resize();const tv=V3();
   controls.update();renderer.render(scene,camera);})(0);
 const tog=(id,fn)=>{const b=document.getElementById(id);b.onclick=()=>{b.classList.toggle('on');fn(b.classList.contains('on'));};};
 tog('btn-explode',on=>target=on?1:0);tog('btn-night',setNight);tog('btn-spin',on=>spin=on);
-[['btn-roof',['roof','orn']],['btn-wall',['wall']],['btn-furn',['furn']],['btn-garden',['garden']],['btn-light',['light']],['btn-wire',['wire']],['btn-panel',['panel']]].forEach(([id,ks])=>tog(id,on=>{ks.forEach(k=>vis[k]=on?1:0);if(id==='btn-roof'&&on){playMode=false;const pb=document.getElementById('btn-play');if(pb)pb.classList.remove('on');}applyVis();}));
-(function(){const b=document.getElementById('btn-play');if(!b)return;b.onclick=()=>{playMode=!playMode;b.classList.toggle('on',playMode);vis.roof=playMode?0:1;vis.orn=playMode?0:1;const rb=document.getElementById('btn-roof');if(rb)rb.classList.toggle('on',!!vis.roof);applyVis();select(cur);};})();
+[['btn-roof',['roof']],['btn-wall',['wall']],['btn-furn',['furn']],['btn-garden',['garden']],['btn-light',['light']],['btn-wire',['wire']],['btn-panel',['panel']]].forEach(([id,ks])=>tog(id,on=>{ks.forEach(k=>vis[k]=on?1:0);if(id==='btn-roof'&&on){playMode=false;const pb=document.getElementById('btn-play');if(pb)pb.classList.remove('on');}applyVis();}));
+(function(){const b=document.getElementById('btn-play');if(!b)return;b.onclick=()=>{playMode=!playMode;b.classList.toggle('on',playMode);vis.roof=playMode?0:1;vis.orn=playMode?0:1;vis.accent=1;const rb=document.getElementById('btn-roof');if(rb)rb.classList.toggle('on',!!vis.roof);applyVis();select(cur);};})();
 addEventListener('hashchange',()=>{const i=HOUSES.findIndex(h=>h.id==location.hash.slice(1));if(i>=0&&i!=cur)select(i);});
 if(!spin)document.getElementById('btn-spin').classList.remove('on');
 select(Math.max(0,HOUSES.findIndex(h=>h.id==location.hash.slice(1))));
