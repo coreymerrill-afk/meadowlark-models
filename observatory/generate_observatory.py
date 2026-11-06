@@ -601,6 +601,8 @@ Optional feet are black TPU 75A and are not required for the mechanism.
 **{status}. Not printed. Not measured.** Clearances below are design targets
 from this CAD file, not caliper readings and not a finished-print result.
 
+All 19 unique STLs generated toolpaths in PrusaSlicer 2.7.4 using generic 0.4 mm / 0.20 mm PLA, supported where needed; not official H3C profile, not physically tested; re-slice in Bambu Studio H3C profile; assembly 3MF not plate. Generic G-code from that check is not included.
+
 ## Print the coupon first
 
 `stl/fit_coupon.stl` is the first plate. It is one body:
@@ -628,17 +630,17 @@ and the 8 mm axle only registers the spin. It is not the structure.
 Home telescope elevation is {HOME_ELEV_DEG:.0f}° above the deck, toward +X.
 The CAD range that stays clear of the dome and the deck is {ELEV_MIN:.0f}° to {ELEV_MAX:.0f}°.
 
-Supports, for a 0.4 mm nozzle and 0.20 mm layers: dome wants tree supports inside the shell.
-Telescope bosses want support. Everything else is meant to print without supports.
-Leave supports off for the coupon so the bridge is actually a bridge. This has not been sliced.
+All 19 unique STLs generated toolpaths in PrusaSlicer 2.7.4 using generic 0.4 mm / 0.20 mm PLA, supported where needed; not official H3C profile, not physically tested; re-slice in Bambu Studio H3C profile; assembly 3MF not plate. Generic G-code from that check is not included.
+
+Supports from that slice: dome and telescope require supports. **planet_ringed requires supports** — brim alone fails with no extrusions in the first layer. planet_large uses a brim and no supports. Tower uses a brim and still warned of floating bridge anchors and long bridging extrusions. axle_pin, fit_pin, and hinge_pin want a brim (low bed adhesion). Leave supports off the coupon. The optional foot was path-checked with PLA, not a TPU profile.
 
 ## Files
 
 | File | What it is |
 |------|------------|
 | `stl/*.stl` | One watertight mesh per part, bed on Z = 0. Not a toolpath. |
-| `h3c_celestial_observatory_stls.zip` | Those STLs. Not sliced. |
-| `h3c_celestial_observatory.3mf` | Colored assembly scene (face colors). **Not** a Bambu plate layout and **not** presliced. |
+| `h3c_celestial_observatory_stls.zip` | Those STLs. Toolpaths were checked in PrusaSlicer; this zip is meshes, not G-code. |
+| `h3c_celestial_observatory.3mf` | Colored assembly scene (face colors). **Not** a Bambu plate and **not** sliced as a plate. |
 | `manifest.json` | Quantities, colors, 4×4 assembly transforms, pivots. |
 | `generate_observatory.py` | This source. |
 
@@ -718,24 +720,24 @@ def main() -> None:
     }
     notes = {
         "base": "Flat on the bottom. Pockets and the axle well are in the solid.",
-        "tower": "Peg down. The shelf underside is a 45° chamfer, so no supports.",
-        "axle_pin": "Standing on the flange. The groove is near the top. No supports.",
+        "tower": "Peg down. Use a brim. PrusaSlicer 2.7.4 still warned of floating bridge anchors and long bridging extrusions on the shelf. Re-check them in the H3C profile.",
+        "axle_pin": "Standing on the flange. Brim recommended (low bed adhesion in the generic PLA slice).",
         "retainer_clip": "Flat, one piece. Slide it down the tip into the groove. Print a spare.",
         "rotating_platform": "Flat on the bottom. Ear holes are a sideways bridge. No supports.",
         "dome": "Skirt on the bed. Tree supports inside the shell. The shutter and crown hole are overhangs.",
         "telescope_tube": "Eyepiece on the bed. Support the sideways bosses. Rings are small overhangs.",
-        "hinge_pin": "Head down. Print a spare. No supports.",
+        "hinge_pin": "Head down. Print a spare. Brim recommended (low bed adhesion).",
         "orrery_arm": "Flat on the bed. Hub, arms, and posts are one body. No supports.",
-        "planet_large": "Socket rim on the bed. Add a brim. No supports.",
-        "planet_ringed": "Socket rim on the bed. The ring is joined into the sphere. Add a brim.",
+        "planet_large": "Socket rim on the bed. Brim, no supports, in the generic PLA slice.",
+        "planet_ringed": "Socket rim on the bed. The ring is joined to the sphere. Supports are required. Brim alone fails: PrusaSlicer 2.7.4 reported no extrusions in the first layer.",
         "inlay_star": "Flat. One color.",
         "inlay_crescent": "Flat. One color.",
         "inlay_hex": "Flat. One color.",
         "inlay_diamond": "Flat. One color.",
         "inlay_circle": "Flat. One color.",
         "fit_coupon": "Print this plate first, flat, supports off. The bridge is the test. The Ø8 pin stands beside the plate.",
-        "fit_pin": "Standing. Ø4.0 mate for the coupon's small holes.",
-        "tpu_foot": "Pad down. Optional. Soft TPU, not the PLA path.",
+        "fit_pin": "Standing. Ø4.0 mate for the coupon. Brim recommended (low bed adhesion).",
+        "tpu_foot": "Pad down. Optional. The generic slice used a PLA profile only, not a TPU profile.",
     }
     tests = {
         "base": ["large flat", "inlay pockets", "foot pockets", "keyed socket"],
@@ -1060,11 +1062,31 @@ def main() -> None:
             "stl_zip_kind": "individual-part-stls",
             "scene_3mf": "h3c_celestial_observatory.3mf",
             "scene_3mf_kind": "colored-assembly-scene",
-            "scene_3mf_note": "Named parts with face colors in assembled position. Not a Bambu Studio plate layout and not presliced.",
+            "scene_3mf_note": "Named parts with face colors in assembled position. Not a Bambu Studio plate layout and not sliced as a plate.",
             "preview": "renders/preview.png",
             "preview_alt": "renders/preview_alt.png",
             "readme": "README.md",
             "coupon_stl": "stl/fit_coupon.stl",
+        },
+        "slice": {
+            "sliced": True,
+            "slicer": "PrusaSlicer 2.7.4",
+            "profile": "Generic FFF 330×320 mm bed, 0.4 mm nozzle, 0.20 mm layers, PLA",
+            "parts_with_toolpaths": "19/19",
+            "official_h3c_profile": False,
+            "physically_tested": False,
+            "assembly_3mf_is_plate": False,
+            "gcode_distributed": False,
+            "summary": (
+                "All 19 unique STLs generated toolpaths in PrusaSlicer 2.7.4 using generic "
+                "0.4 mm / 0.20 mm PLA, supported where needed; not official H3C profile, not "
+                "physically tested; re-slice in Bambu Studio H3C profile; assembly 3MF not plate."
+            ),
+            "supports_required": ["dome", "telescope_tube", "planet_ringed"],
+            "brim_recommended": ["axle_pin", "fit_pin", "hinge_pin", "tower", "planet_large"],
+            "planet_ringed": "Brim-only fails with no extrusions in the first layer. Supports required.",
+            "tower": "Brim used. Warnings: floating bridge anchors and long bridging extrusions.",
+            "tpu_foot": "Path-checked with the PLA profile only, not a TPU profile.",
         },
         "validation": {
             "cad_validated": len(issues) == 0,

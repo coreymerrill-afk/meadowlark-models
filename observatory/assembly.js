@@ -123,9 +123,9 @@
   function fileKind(kind) {
     switch (kind) {
       case 'individual-part-stls':
-        return 'Individual STLs · one mesh per part, not sliced';
+        return 'Individual STLs · one mesh per part, not a G-code file';
       case 'colored-assembly-scene':
-        return 'Colored assembly scene · not a plate layout and not presliced';
+        return 'Colored assembly scene · not a plate layout';
       case 'bambu-sliced-3mf':
         return 'Bambu-sliced 3MF · toolpaths from Bambu Studio';
       case 'coupon-stl':

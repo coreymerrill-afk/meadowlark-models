@@ -7,6 +7,8 @@ Optional feet are black TPU 75A and are not required for the mechanism.
 **CAD checks passed. Not printed. Not measured.** Clearances below are design targets
 from this CAD file, not caliper readings and not a finished-print result.
 
+All 19 unique STLs generated toolpaths in PrusaSlicer 2.7.4 using generic 0.4 mm / 0.20 mm PLA, supported where needed; not official H3C profile, not physically tested; re-slice in Bambu Studio H3C profile; assembly 3MF not plate. Generic G-code from that check is not included.
+
 ## Print the coupon first
 
 `stl/fit_coupon.stl` is the first plate. It is one body:
@@ -34,17 +36,26 @@ and the 8 mm axle only registers the spin. It is not the structure.
 Home telescope elevation is 32° above the deck, toward +X.
 The CAD range that stays clear of the dome and the deck is 24° to 46°.
 
-Supports, for a 0.4 mm nozzle and 0.20 mm layers: dome wants tree supports inside the shell.
-Telescope bosses want support. Everything else is meant to print without supports.
-Leave supports off for the coupon so the bridge is actually a bridge. This has not been sliced.
+Supports, from that PrusaSlicer 2.7.4 generic PLA slice (0.4 mm nozzle, 0.20 mm layers):
+
+- **Dome:** supports required (tree supports inside the shell).
+- **Telescope:** supports required on the sideways bosses.
+- **planet_ringed:** supports required. Brim alone fails. PrusaSlicer reported no extrusions in the first layer. A supported slice produced a toolpath. Do not print this part brim-only.
+- **planet_large:** brim, no supports.
+- **Tower:** brim. The same slice still warned of floating bridge anchors and long bridging extrusions on the shelf. Re-check those bridges in the H3C profile.
+- **axle_pin, fit_pin, hinge_pin:** brim recommended. The slice warned of low bed adhesion.
+- **Coupon:** supports off, so the 14 mm span is a real bridge. Floating-bridge warnings there are the test.
+- **tpu_foot:** optional. That path check used the PLA profile, not a TPU profile.
+
+Re-slice every part in Bambu Studio on the H3C profile before a real print.
 
 ## Files
 
 | File | What it is |
 |------|------------|
 | `stl/*.stl` | One watertight mesh per part, bed on Z = 0. Not a toolpath. |
-| `h3c_celestial_observatory_stls.zip` | Those STLs. Not sliced. |
-| `h3c_celestial_observatory.3mf` | Colored assembly scene (face colors). **Not** a Bambu plate layout and **not** presliced. |
+| `h3c_celestial_observatory_stls.zip` | Those STLs. Toolpaths were checked in PrusaSlicer; this zip is meshes, not G-code. |
+| `h3c_celestial_observatory.3mf` | Colored assembly scene (face colors). **Not** a Bambu plate and **not** sliced as a plate. |
 | `manifest.json` | Quantities, colors, 4×4 assembly transforms, pivots. |
 | `generate_observatory.py` | This source. |
 

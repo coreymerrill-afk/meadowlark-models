@@ -1444,7 +1444,7 @@
       "material": "PLA",
       "color_name": "Ivory",
       "color_hex": "#f3ead7",
-      "print_notes": "Peg down. The shelf underside is a 45\u00b0 chamfer, so no supports.",
+      "print_notes": "Peg down. Use a brim. PrusaSlicer 2.7.4 still warned of floating bridge anchors and long bridging extrusions on the shelf. Re-check them in the H3C profile.",
       "tests": [
         "flutes",
         "window recesses",
@@ -1467,7 +1467,7 @@
       "material": "PLA",
       "color_name": "Brass",
       "color_hex": "#e6c36a",
-      "print_notes": "Standing on the flange. The groove is near the top. No supports.",
+      "print_notes": "Standing on the flange. Brim recommended (low bed adhesion in the generic PLA slice).",
       "tests": [
         "cylinder",
         "flange",
@@ -1575,7 +1575,7 @@
       "material": "PLA",
       "color_name": "Ivory",
       "color_hex": "#f7f1e4",
-      "print_notes": "Head down. Print a spare. No supports.",
+      "print_notes": "Head down. Print a spare. Brim recommended (low bed adhesion).",
       "tests": [
         "pin diameter"
       ],
@@ -1616,7 +1616,7 @@
       "material": "PLA",
       "color_name": "Amber",
       "color_hex": "#ffd166",
-      "print_notes": "Socket rim on the bed. Add a brim. No supports.",
+      "print_notes": "Socket rim on the bed. Brim, no supports, in the generic PLA slice.",
       "tests": [
         "sphere",
         "socket"
@@ -1637,7 +1637,7 @@
       "material": "PLA",
       "color_name": "Rose",
       "color_hex": "#ff8ad4",
-      "print_notes": "Socket rim on the bed. The ring is joined into the sphere. Add a brim.",
+      "print_notes": "Socket rim on the bed. The ring is joined to the sphere. Supports are required. Brim alone fails: PrusaSlicer 2.7.4 reported no extrusions in the first layer.",
       "tests": [
         "ring"
       ],
@@ -1779,7 +1779,7 @@
       "material": "PLA",
       "color_name": "White",
       "color_hex": "#f7f4ef",
-      "print_notes": "Standing. \u00d84.0 mate for the coupon's small holes.",
+      "print_notes": "Standing. \u00d84.0 mate for the coupon. Brim recommended (low bed adhesion).",
       "tests": [
         "coupon mate"
       ],
@@ -1799,7 +1799,7 @@
       "material": "TPU 75A",
       "color_name": "Black",
       "color_hex": "#161616",
-      "print_notes": "Pad down. Optional. Soft TPU, not the PLA path.",
+      "print_notes": "Pad down. Optional. The generic slice used a PLA profile only, not a TPU profile.",
       "tests": [
         "optional soft foot"
       ],
@@ -1820,11 +1820,27 @@
     "stl_zip_kind": "individual-part-stls",
     "scene_3mf": "h3c_celestial_observatory.3mf",
     "scene_3mf_kind": "colored-assembly-scene",
-    "scene_3mf_note": "Named parts with face colors in assembled position. Not a Bambu Studio plate layout and not presliced.",
+    "scene_3mf_note": "Named parts with face colors in assembled position. Not a Bambu Studio plate layout and not sliced as a plate.",
     "preview": "renders/preview.png",
     "preview_alt": "renders/preview_alt.png",
     "readme": "README.md",
     "coupon_stl": "stl/fit_coupon.stl"
+  },
+  "slice": {
+    "sliced": true,
+    "slicer": "PrusaSlicer 2.7.4",
+    "profile": "Generic FFF 330×320 mm bed, 0.4 mm nozzle, 0.20 mm layers, PLA",
+    "parts_with_toolpaths": "19/19",
+    "official_h3c_profile": false,
+    "physically_tested": false,
+    "assembly_3mf_is_plate": false,
+    "gcode_distributed": false,
+    "summary": "All 19 unique STLs generated toolpaths in PrusaSlicer 2.7.4 using generic 0.4 mm / 0.20 mm PLA, supported where needed; not official H3C profile, not physically tested; re-slice in Bambu Studio H3C profile; assembly 3MF not plate.",
+    "supports_required": ["dome", "telescope_tube", "planet_ringed"],
+    "brim_recommended": ["axle_pin", "fit_pin", "hinge_pin", "tower", "planet_large"],
+    "planet_ringed": "Brim-only fails with no extrusions in the first layer. Supports required.",
+    "tower": "Brim used. Warnings: floating bridge anchors and long bridging extrusions.",
+    "tpu_foot": "Path-checked with the PLA profile only, not a TPU profile."
   },
   "validation": {
     "cad_validated": true,

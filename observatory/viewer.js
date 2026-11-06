@@ -185,6 +185,16 @@
   function renderPrint(manifest) {
     var root = el('print-root');
     clear(root);
+    if (manifest.slice && manifest.slice.summary) {
+      var sliceCard = document.createElement('article');
+      sliceCard.className = 'card';
+      sliceCard.appendChild(text('h2', 'Slice check'));
+      sliceCard.appendChild(text('p', manifest.slice.summary));
+      if (manifest.slice.planet_ringed) {
+        sliceCard.appendChild(text('p', 'Ringed planet: ' + manifest.slice.planet_ringed));
+      }
+      root.appendChild(sliceCard);
+    }
     root.appendChild(couponCard(manifest));
     root.appendChild(downloadCard(manifest));
     root.appendChild(stepsCard(manifest));
@@ -216,7 +226,7 @@
     var card = document.createElement('article');
     card.className = 'card';
     card.appendChild(text('h2', 'Files'));
-    card.appendChild(text('p', 'Nothing in this package is a Bambu-sliced plate. Slice the coupon, then the part STLs, in Bambu Studio.', 'muted'));
+    card.appendChild(text('p', 'The 3MF is a colored assembly scene, not a Bambu plate. Re-slice the STLs in Bambu Studio on the H3C profile. The ringed planet needs supports.', 'muted'));
     var files = [
       ['coupon-stl', 'First-print coupon', manifest.artifacts.coupon_stl],
       ['individual-part-stls', 'STL package', manifest.artifacts.stl_zip],
