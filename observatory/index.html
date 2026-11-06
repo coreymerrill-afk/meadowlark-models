@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="H3C Celestial Observatory, a CAD-validated unprinted prototype: drum tower, turning deck, dome, tilting telescope, and orrery. 0.4 mm PLA. Print the fit coupon first." />
+<link rel="icon" href="data:," />
+<title>H3C Celestial Observatory — Meadowlark Models</title>
+<link rel="stylesheet" href="/coreyhq-back.css" />
+<link rel="stylesheet" href="/observatory/observatory.css" />
+</head>
+<body>
+<a class="coreyhq-back" href="https://coreyhq.com/" title="Back to CoreyHQ">← CoreyHQ</a>
+<a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+<p class="claim" id="claim">Loading the model manifest…</p>
+<header>
+  <div class="rev" id="rev">Observatory</div>
+  <h1 id="title">Mechanical Observatory</h1>
+  <p class="meta" id="sub">H3C · 0.4 mm PLA</p>
+</header>
+<div class="facts" id="facts"></div>
+<nav class="tabs" role="tablist" aria-label="Observatory sections">
+  <button type="button" role="tab" id="tab-observe" aria-selected="true" aria-controls="panel-observe" data-tab="observe">Observe</button>
+  <button type="button" role="tab" id="tab-parts" aria-selected="false" aria-controls="panel-parts" tabindex="-1" data-tab="parts">Parts</button>
+  <button type="button" role="tab" id="tab-print" aria-selected="false" aria-controls="panel-print" tabindex="-1" data-tab="print">Print &amp; test</button>
+</nav>
+<section id="panel-observe" role="tabpanel" aria-labelledby="tab-observe">
+  <div class="toolbar">
+    <button type="button" id="btn-assemble">Assemble</button>
+    <button type="button" id="btn-play" aria-pressed="false">Play joints</button>
+    <button type="button" id="btn-turn" aria-pressed="false">Turntable</button>
+    <button type="button" id="btn-reset">Frame</button>
+    <label class="slider">Explode <input id="explode" type="range" min="0" max="100" value="0" aria-label="Explode" /> <span id="explode-read">0%</span></label>
+  </div>
+  <div id="view">
+    <div class="reticle" aria-hidden="true"></div>
+    <div class="view-status" id="view-status">
+      <strong>Loading the CAD meshes</strong>
+      <p>Each part is its STL, placed by the manifest transform. There is no stand-in.</p>
+    </div>
+  </div>
+  <div class="motion-row" id="motion-panel"></div>
+  <p class="hint-foot">Drag to orbit · scroll or pinch to zoom · right-drag or two fingers to pan. Joints follow the manifest axis.</p>
+</section>
+<section id="panel-parts" role="tabpanel" aria-labelledby="tab-parts" hidden>
+  <div id="part-list"></div>
+</section>
+<section id="panel-print" role="tabpanel" aria-labelledby="tab-print" hidden>
+  <div id="print-root"></div>
+  <figure class="card">
+    <img src="/observatory/renders/preview.png" alt="CAD render of the assembled observatory, navy base, ivory tower, sandstone deck, cyan dome, gold telescope, magenta orrery." width="900" height="900" />
+    <figcaption class="muted">Same meshes as the viewer. A CAD render, not a photograph and not a print.</figcaption>
+  </figure>
+</section>
+<p id="error" role="alert"></p>
+<noscript>This page needs JavaScript to load the manifest, the STL viewer, and the download list.</noscript>
+<script src="/dollhouse/vendor/three.min.js"></script>
+<script src="/dollhouse/vendor/OrbitControls.js"></script>
+<script src="/observatory/assembly.js"></script>
+<script src="/observatory/viewer.js"></script>
+</body>
+</html>
