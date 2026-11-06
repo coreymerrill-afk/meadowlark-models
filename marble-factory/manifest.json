@@ -1,0 +1,1139 @@
+{
+  "name": "Hand-Cranked Marble Factory",
+  "version": "1.0.0",
+  "generated": "2026-11-05T21:52:52-07:00",
+  "timezone": "America/Denver",
+  "printer": "Bambu Lab H3C (generic 0.4 mm / 0.20 mm PLA validation \u2014 not an official H3C profile)",
+  "ball_diameter_mm": 35.0,
+  "disclaimer": "Unprinted prototype. Geometry, clearance and slicer checks are computational only. Physical fit of moving parts and rolling behavior are unproven until printed and tested. Not a certified toy. 35 mm printed balls are large, but this kit is not evaluated or certified for child safety (pinch points at the lift and spinner remain; adult supervision required). Not intended for children under 3.",
+  "mechanism": {
+    "elevator": "6-paddle wheel, R_hub=70, R_paddle=105, guided by a concentric outer wall R=108 from -120\u00b0 to +98\u00b0. Pickup in a bottom sump; a paddle sweeps the ball up between hub and guide; at the 97\u00b0 tangent the ball rolls onto a 7\u00b0 descending chute that nests into the first track.",
+    "anti_reverse": "Gravity pawl on a pin at 116 mm / 185\u00b0; forward (CCW) lifts the pawl, reverse drives the tip into a stop post.",
+    "switch": "Removable bridge-gate over a 45\u00b0 drop shelf. Gate in: ball stays on path A (-12 mm). Gate out: ball rolls off the shelf and drops 40 mm into path B.",
+    "spinner": "Overhead 4-paddle rotor on integral stubs that drop into open U-slots; a retainer bar captures the stubs. Balls push the paddles as they roll under (H=36, Rp=30)."
+  },
+  "clearances_mm": {
+    "track_peg_r": 9.7,
+    "stand_socket_r": 10.2,
+    "peg_socket_radial": 0.5,
+    "stand_peg_r": 9.7,
+    "tile_socket_r": 10.2,
+    "wheel_hex_af": 16.0,
+    "wheel_hex_hole_af": 16.4,
+    "crank_hex_af": 13.0,
+    "crank_hex_hole_af": 13.4,
+    "axle_jBack_r": 11.0,
+    "housing_back_hole_r": 11.4,
+    "axle_jFront_r": 8.75,
+    "housing_front_hole_r": 9.15,
+    "clip_groove_r": 4.75,
+    "clip_seat_r": 4.95,
+    "clip_throat": 8.9,
+    "spinner_stub_r": 4.0,
+    "spinner_slot_halfwidth": 4.4,
+    "guide_radial_on_ball": "RG-RH-2*RB = 108-70-35 = 3 mm total (ball sits on hub, ~3 mm to guide)",
+    "chute_slope_deg": 7.0,
+    "track_slope_deg": 7.13,
+    "inlet_slope_deg": 7.96,
+    "track_slope_note": "20 mm drop per 160 mm on the default loop. The 12 mm figure belongs to the older switch/merge extras, not this circuit."
+  },
+  "layout": {
+    "joints": {
+      "J0": {
+        "xy": [
+          -80.0,
+          0.0
+        ],
+        "zv": 180.963,
+        "stand_cap": 174.963
+      },
+      "J1": {
+        "xy": [
+          -240.0,
+          0.0
+        ],
+        "zv": 160.963,
+        "stand_cap": 154.963
+      },
+      "J2": {
+        "xy": [
+          -320.0,
+          80.0
+        ],
+        "zv": 140.963,
+        "stand_cap": 134.963
+      },
+      "J3": {
+        "xy": [
+          -320.0,
+          240.0
+        ],
+        "zv": 120.963,
+        "stand_cap": 114.963
+      },
+      "J4": {
+        "xy": [
+          -240.0,
+          320.0
+        ],
+        "zv": 100.963,
+        "stand_cap": 94.963
+      },
+      "J5": {
+        "xy": [
+          -80.0,
+          320.0
+        ],
+        "zv": 80.963,
+        "stand_cap": 74.963
+      },
+      "J6": {
+        "xy": [
+          0.0,
+          320.0
+        ],
+        "zv": 70.963,
+        "stand_cap": 64.963
+      },
+      "J7": {
+        "xy": [
+          80.0,
+          240.0
+        ],
+        "zv": 50.963,
+        "stand_cap": 44.963
+      },
+      "J11": {
+        "xy": [
+          80.0,
+          80.0
+        ],
+        "zv": 30.963,
+        "stand_cap": 24.963
+      }
+    },
+    "lift_origin": [
+      80.0,
+      0.0,
+      136.0
+    ],
+    "nest_x_lift_local": -160.0,
+    "inlet_length": 58.7,
+    "inlet_drop": 8.211579983184492,
+    "tiles": [
+      [
+        -360,
+        -40
+      ],
+      [
+        -360,
+        200
+      ],
+      [
+        -120,
+        -40
+      ],
+      [
+        -120,
+        200
+      ],
+      [
+        120,
+        -40
+      ],
+      [
+        120,
+        200
+      ]
+    ]
+  },
+  "parts": [
+    {
+      "path": "/workspace/marble-factory/stl/track_straight_160.stl",
+      "verts": 491,
+      "faces": 978,
+      "volume_mm3": 206313.67898950758,
+      "watertight": true,
+      "bbox_min": [
+        -80.0,
+        -38.0,
+        0.0
+      ],
+      "bbox_max": [
+        80.0,
+        38.0,
+        70.0
+      ],
+      "extents_mm": [
+        160.0,
+        76.0,
+        70.0
+      ],
+      "euler": 2,
+      "name": "track_straight_160",
+      "qty": 4,
+      "color": "#2E86DE",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/track_straight_80.stl",
+      "verts": 483,
+      "faces": 962,
+      "volume_mm3": 103304.10200445524,
+      "watertight": true,
+      "bbox_min": [
+        -40.0,
+        -38.0,
+        0.0
+      ],
+      "bbox_max": [
+        40.0,
+        38.0,
+        60.0
+      ],
+      "extents_mm": [
+        80.0,
+        76.0,
+        60.0
+      ],
+      "euler": 2,
+      "name": "track_straight_80",
+      "qty": 1,
+      "color": "#2E86DE",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/track_corner_right.stl",
+      "verts": 2228,
+      "faces": 4452,
+      "volume_mm3": 162151.48574445798,
+      "watertight": true,
+      "bbox_min": [
+        -59.0,
+        -59.0,
+        0.0
+      ],
+      "bbox_max": [
+        59.0,
+        59.0,
+        70.0
+      ],
+      "extents_mm": [
+        118.0,
+        118.0,
+        70.0
+      ],
+      "euler": 2,
+      "name": "track_corner_right",
+      "qty": 3,
+      "color": "#10AC84",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/track_corner_left.stl",
+      "verts": 2226,
+      "faces": 4448,
+      "volume_mm3": 162237.2314955493,
+      "watertight": true,
+      "bbox_min": [
+        -59.0,
+        -59.0,
+        0.0
+      ],
+      "bbox_max": [
+        59.0,
+        59.0,
+        70.0
+      ],
+      "extents_mm": [
+        118.0,
+        118.0,
+        70.0
+      ],
+      "euler": 2,
+      "name": "track_corner_left",
+      "qty": 1,
+      "color": "#10AC84",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/track_switch_Y.stl",
+      "verts": 2977,
+      "faces": 5954,
+      "volume_mm3": 609156.6627098682,
+      "watertight": true,
+      "bbox_min": [
+        -120.0,
+        -78.0,
+        0.0
+      ],
+      "bbox_max": [
+        120.0,
+        78.0,
+        102.0
+      ],
+      "extents_mm": [
+        240.0,
+        156.0,
+        102.0
+      ],
+      "euler": 0,
+      "name": "track_switch_Y",
+      "qty": 1,
+      "color": "#F368E0",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/track_spinner.stl",
+      "verts": 721,
+      "faces": 1438,
+      "volume_mm3": 258775.32688482324,
+      "watertight": true,
+      "bbox_min": [
+        -80.0,
+        -38.0,
+        0.0
+      ],
+      "bbox_max": [
+        80.0,
+        38.0,
+        70.0
+      ],
+      "extents_mm": [
+        160.0,
+        76.0,
+        70.0
+      ],
+      "euler": 2,
+      "name": "track_spinner",
+      "qty": 1,
+      "color": "#FF9F43",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/track_merge_Y.stl",
+      "verts": 3347,
+      "faces": 6690,
+      "volume_mm3": 375180.3123216088,
+      "watertight": true,
+      "bbox_min": [
+        -80.0,
+        -78.0,
+        0.0
+      ],
+      "bbox_max": [
+        80.0,
+        78.0,
+        102.0
+      ],
+      "extents_mm": [
+        160.0,
+        156.0,
+        102.0
+      ],
+      "euler": 2,
+      "name": "track_merge_Y",
+      "qty": 1,
+      "color": "#F368E0",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_inlet_chute.stl",
+      "verts": 175,
+      "faces": 346,
+      "volume_mm3": 109925.79975877363,
+      "watertight": true,
+      "bbox_min": [
+        -29.350000381469727,
+        -38.0,
+        0.0
+      ],
+      "bbox_max": [
+        29.350000381469727,
+        38.0,
+        50.0
+      ],
+      "extents_mm": [
+        58.70000076293945,
+        76.0,
+        50.0
+      ],
+      "euler": 2,
+      "name": "lift_inlet_chute",
+      "qty": 1,
+      "color": "#54A0FF",
+      "supports": false,
+      "brim": false,
+      "desc": "track module \u2014 print rim-down (upside down)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/switch_gate.stl",
+      "verts": 1064,
+      "faces": 2124,
+      "volume_mm3": 97367.76503229701,
+      "watertight": true,
+      "bbox_min": [
+        -60.0,
+        -66.0,
+        0.0
+      ],
+      "bbox_max": [
+        60.0,
+        66.0,
+        76.23500061035156
+      ],
+      "extents_mm": [
+        120.0,
+        132.0,
+        76.23500061035156
+      ],
+      "euler": 2,
+      "name": "switch_gate",
+      "qty": 1,
+      "color": "#FECA57",
+      "supports": false,
+      "brim": false,
+      "desc": "OPTIONAL extra \u2014 not in the default loop. Drop-gate for track_switch_Y."
+    },
+    {
+      "path": "/workspace/marble-factory/stl/spinner_rotor.stl",
+      "verts": 472,
+      "faces": 940,
+      "volume_mm3": 20866.9887116723,
+      "watertight": true,
+      "bbox_min": [
+        -30.0,
+        -30.0,
+        0.0
+      ],
+      "bbox_max": [
+        30.0,
+        30.0,
+        63.0
+      ],
+      "extents_mm": [
+        60.0,
+        60.0,
+        63.0
+      ],
+      "euler": 2,
+      "name": "spinner_rotor",
+      "qty": 1,
+      "color": "#FF6B6B",
+      "supports": false,
+      "brim": true,
+      "desc": "OPTIONAL extra \u2014 4-paddle rotor (use with track_spinner as a S160 substitute)."
+    },
+    {
+      "path": "/workspace/marble-factory/stl/spinner_post.stl",
+      "verts": 78,
+      "faces": 152,
+      "volume_mm3": 4799.205331091461,
+      "watertight": true,
+      "bbox_min": [
+        -7.0,
+        -5.0,
+        0.0
+      ],
+      "bbox_max": [
+        7.0,
+        5.0,
+        45.24873733520508
+      ],
+      "extents_mm": [
+        14.0,
+        10.0,
+        45.24873733520508
+      ],
+      "euler": 2,
+      "name": "spinner_post",
+      "qty": 2,
+      "color": "#FF9F43",
+      "supports": false,
+      "brim": false,
+      "desc": "OPTIONAL extra \u2014 U-slot post (print 2, second mirrored 180\u00b0)."
+    },
+    {
+      "path": "/workspace/marble-factory/stl/spinner_retainer.stl",
+      "verts": 60,
+      "faces": 116,
+      "volume_mm3": 12122.27202081296,
+      "watertight": true,
+      "bbox_min": [
+        -8.0,
+        -35.0,
+        0.0
+      ],
+      "bbox_max": [
+        8.0,
+        35.0,
+        35.400001525878906
+      ],
+      "extents_mm": [
+        16.0,
+        70.0,
+        35.400001525878906
+      ],
+      "euler": 2,
+      "name": "spinner_retainer",
+      "qty": 1,
+      "color": "#FECA57",
+      "supports": false,
+      "brim": false,
+      "desc": "OPTIONAL extra \u2014 retainer arch that clears the paddle disc."
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J0_h175.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 127506.09666717623,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        184.4628448486328
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        184.4628448486328
+      ],
+      "euler": 2,
+      "name": "stand_J0_h175",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 175.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J1_h155.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 113391.62840923465,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        164.4628448486328
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        164.4628448486328
+      ],
+      "euler": 2,
+      "name": "stand_J1_h155",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 155.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J2_h135.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 99277.16015129308,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        144.4628448486328
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        144.4628448486328
+      ],
+      "euler": 2,
+      "name": "stand_J2_h135",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 135.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J3_h115.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 85162.69189335148,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        124.46284484863281
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        124.46284484863281
+      ],
+      "euler": 2,
+      "name": "stand_J3_h115",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 115.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J4_h095.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 71048.22363540992,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        104.46284484863281
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        104.46284484863281
+      ],
+      "euler": 2,
+      "name": "stand_J4_h095",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 95.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J5_h075.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 56933.755377468326,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        84.46284484863281
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        84.46284484863281
+      ],
+      "euler": 2,
+      "name": "stand_J5_h075",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 75.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J6_h065.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 49876.52334236957,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        74.46284484863281
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        74.46284484863281
+      ],
+      "euler": 2,
+      "name": "stand_J6_h065",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 65.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J7_h045.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 35762.050298434784,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        54.46284103393555
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        54.46284103393555
+      ],
+      "euler": 2,
+      "name": "stand_J7_h045",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 45.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/stand_J11_h025.stl",
+      "verts": 640,
+      "faces": 1276,
+      "volume_mm3": 21647.582823661167,
+      "watertight": true,
+      "bbox_min": [
+        -20.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        20.0,
+        20.0,
+        34.46284103393555
+      ],
+      "extents_mm": [
+        40.0,
+        40.0,
+        34.46284103393555
+      ],
+      "euler": 2,
+      "name": "stand_J11_h025",
+      "qty": 1,
+      "color": "#8395A7",
+      "supports": false,
+      "brim": true,
+      "desc": "stand, cap top 25.0 mm above tile"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/base_tile.stl",
+      "verts": 2666,
+      "faces": 5392,
+      "volume_mm3": 202025.59883173765,
+      "watertight": true,
+      "bbox_min": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bbox_max": [
+        250.0,
+        250.0,
+        12.0
+      ],
+      "extents_mm": [
+        250.0,
+        250.0,
+        12.0
+      ],
+      "euler": -30,
+      "name": "base_tile",
+      "qty": 6,
+      "color": "#C8D6E5",
+      "supports": false,
+      "brim": false,
+      "desc": "240 mm lattice tile with dovetails and 9 stand sockets"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_housing_back.stl",
+      "verts": 2225,
+      "faces": 4450,
+      "volume_mm3": 633716.5309854979,
+      "watertight": true,
+      "bbox_min": [
+        -147.0,
+        -133.75,
+        0.0
+      ],
+      "bbox_max": [
+        147.0,
+        133.75,
+        52.0
+      ],
+      "extents_mm": [
+        294.0,
+        267.5,
+        52.0
+      ],
+      "euler": 0,
+      "name": "lift_housing_back",
+      "qty": 1,
+      "color": "#576574",
+      "supports": false,
+      "brim": false,
+      "desc": "back plate + guide + exit chute + roof + pawl pin; plate face on bed"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_housing_front.stl",
+      "verts": 2358,
+      "faces": 4772,
+      "volume_mm3": 243093.2104677253,
+      "watertight": true,
+      "bbox_min": [
+        -132.779296875,
+        -129.0,
+        0.0
+      ],
+      "bbox_max": [
+        132.779296875,
+        129.0,
+        5.0
+      ],
+      "extents_mm": [
+        265.55859375,
+        258.0,
+        5.0
+      ],
+      "euler": -28,
+      "name": "lift_housing_front",
+      "qty": 1,
+      "color": "#48DBFB",
+      "supports": false,
+      "brim": false,
+      "desc": "front plate with viewing slots and inlet port; outer face on bed"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_wheel_half.stl",
+      "verts": 1211,
+      "faces": 2446,
+      "volume_mm3": 260651.55288169245,
+      "watertight": true,
+      "bbox_min": [
+        -105.0,
+        -92.93267059326172,
+        0.0
+      ],
+      "bbox_max": [
+        105.0,
+        92.93267059326172,
+        19.0
+      ],
+      "extents_mm": [
+        210.0,
+        185.86534118652344,
+        19.0
+      ],
+      "euler": -12,
+      "name": "lift_wheel_half",
+      "qty": 2,
+      "color": "#EE5253",
+      "supports": false,
+      "brim": false,
+      "desc": "paddle-wheel half; split face on bed (print 2)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_axle.stl",
+      "verts": 816,
+      "faces": 1628,
+      "volume_mm3": 20866.56347972922,
+      "watertight": true,
+      "bbox_min": [
+        -16.0,
+        -16.0,
+        0.0
+      ],
+      "bbox_max": [
+        16.0,
+        16.0,
+        81.5
+      ],
+      "extents_mm": [
+        32.0,
+        32.0,
+        81.5
+      ],
+      "euler": 2,
+      "name": "lift_axle",
+      "qty": 1,
+      "color": "#F5F6FA",
+      "supports": false,
+      "brim": true,
+      "desc": "hex axle; print standing on the head (no supports)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_crank.stl",
+      "verts": 390,
+      "faces": 780,
+      "volume_mm3": 30700.518323580374,
+      "watertight": true,
+      "bbox_min": [
+        -40.5,
+        -13.0,
+        0.0
+      ],
+      "bbox_max": [
+        40.5,
+        13.0,
+        48.5
+      ],
+      "extents_mm": [
+        81.0,
+        26.0,
+        48.5
+      ],
+      "euler": 0,
+      "name": "lift_crank",
+      "qty": 1,
+      "color": "#FECA57",
+      "supports": false,
+      "brim": false,
+      "desc": "crank arm + knob; arm face on bed, knob stands up"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_clip.stl",
+      "verts": 138,
+      "faces": 272,
+      "volume_mm3": 2728.3715447674344,
+      "watertight": true,
+      "bbox_min": [
+        -15.0,
+        -12.0,
+        0.0
+      ],
+      "bbox_max": [
+        15.0,
+        22.0,
+        4.0
+      ],
+      "extents_mm": [
+        30.0,
+        34.0,
+        4.0
+      ],
+      "euler": 2,
+      "name": "lift_clip",
+      "qty": 1,
+      "color": "#FF9F43",
+      "supports": false,
+      "brim": true,
+      "desc": "snap U-clip on the axle groove (front)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_pawl.stl",
+      "verts": 548,
+      "faces": 1096,
+      "volume_mm3": 19716.052022128573,
+      "watertight": true,
+      "bbox_min": [
+        -25.92389488220215,
+        -9.20871353149414,
+        0.0
+      ],
+      "bbox_max": [
+        25.92389488220215,
+        9.20871353149414,
+        39.0
+      ],
+      "extents_mm": [
+        51.8477897644043,
+        18.41742706298828,
+        39.0
+      ],
+      "euler": 0,
+      "name": "lift_pawl",
+      "qty": 1,
+      "color": "#222F3E",
+      "supports": false,
+      "brim": false,
+      "desc": "gravity anti-reverse pawl; print on its flat side"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/ball_35.stl",
+      "verts": 4081,
+      "faces": 8158,
+      "volume_mm3": 22404.294578882866,
+      "watertight": true,
+      "bbox_min": [
+        -17.5,
+        -17.5,
+        0.0
+      ],
+      "bbox_max": [
+        17.5,
+        17.5,
+        34.5
+      ],
+      "extents_mm": [
+        35.0,
+        35.0,
+        34.5
+      ],
+      "euler": 2,
+      "name": "ball_35",
+      "qty": 6,
+      "color": "#FF4757",
+      "supports": true,
+      "brim": false,
+      "desc": "35 mm ball with 0.5 mm bed flat; supports required (or print as two hemispheres)"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/lift_test_base.stl",
+      "verts": 401,
+      "faces": 798,
+      "volume_mm3": 134210.20516901292,
+      "watertight": true,
+      "bbox_min": [
+        -110.0,
+        -20.0,
+        0.0
+      ],
+      "bbox_max": [
+        110.0,
+        100.0,
+        12.0
+      ],
+      "extents_mm": [
+        220.0,
+        120.0,
+        12.0
+      ],
+      "euler": 2,
+      "name": "lift_test_base",
+      "qty": 1,
+      "color": "#C8D6E5",
+      "supports": false,
+      "brim": false,
+      "desc": "first-print frame: sockets for the two housing pegs and the inlet stand"
+    },
+    {
+      "path": "/workspace/marble-factory/stl/fit_coupon.stl",
+      "verts": 1120,
+      "faces": 2236,
+      "volume_mm3": 35842.26480076137,
+      "watertight": true,
+      "bbox_min": [
+        0.0,
+        -4.0,
+        0.0
+      ],
+      "bbox_max": [
+        96.0,
+        72.0,
+        17.600000381469727
+      ],
+      "extents_mm": [
+        96.0,
+        76.0,
+        17.600000381469727
+      ],
+      "euler": 2,
+      "name": "fit_coupon",
+      "qty": 1,
+      "color": "#A3CB38",
+      "supports": false,
+      "brim": false,
+      "desc": "first-print fit coupon: pegs, sockets, hexes, clip groove, spinner slot"
+    }
+  ],
+  "moving_pivots": [
+    {
+      "name": "lift_wheel",
+      "origin": [
+        80.0,
+        0.0,
+        136.0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "motion": "child turns crank CCW (viewed from +y); wheel lifts balls on rising side (+x)"
+    },
+    {
+      "name": "lift_crank",
+      "origin": [
+        80.0,
+        34.5,
+        136.0
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "motion": "fixed to axle"
+    },
+    {
+      "name": "lift_pawl",
+      "origin": [
+        -35.558584978642486,
+        0.0,
+        125.88993384127168
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "motion": "gravity returns to rest; forward paddles push it CW out of the way"
+    }
+  ],
+  "first_print": [
+    "fit_coupon",
+    "lift_test_base",
+    "lift_housing_back",
+    "lift_housing_front",
+    "lift_wheel_half",
+    "lift_axle",
+    "lift_crank",
+    "lift_clip",
+    "lift_pawl",
+    "stand_J11_h025",
+    "lift_inlet_chute",
+    "ball_35"
+  ],
+  "ball_center_paths_note": "Default-loop ball-centre path from assembly.default_ball_path() and the lift 2D log are in reports/ball_paths.json. Track slope is 20 mm drop per 160 mm (7.13\u00b0), matching the 7\u00b0 exit chute; inlet is about 8\u00b0."
+}

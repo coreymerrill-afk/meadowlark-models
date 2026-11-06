@@ -1,0 +1,852 @@
+{
+  "fails": [],
+  "sections": {
+    "meshes": [
+      {
+        "name": "track_straight_160",
+        "verts": 491,
+        "faces": 978,
+        "volume": 206313.67898950758,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          160.0,
+          76.0,
+          70.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "track_straight_80",
+        "verts": 483,
+        "faces": 962,
+        "volume": 103304.10200445524,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          80.0,
+          76.0,
+          60.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "track_corner_right",
+        "verts": 2228,
+        "faces": 4452,
+        "volume": 162151.48574445798,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          118.0,
+          118.0,
+          70.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "track_corner_left",
+        "verts": 2226,
+        "faces": 4448,
+        "volume": 162237.2314955493,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          118.0,
+          118.0,
+          70.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "track_switch_Y",
+        "verts": 2977,
+        "faces": 5954,
+        "volume": 609156.6627098682,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          240.0,
+          156.0,
+          102.0
+        ],
+        "too_big": false,
+        "genus": 1
+      },
+      {
+        "name": "track_spinner",
+        "verts": 721,
+        "faces": 1438,
+        "volume": 258775.32688482324,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          160.0,
+          76.0,
+          70.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "track_merge_Y",
+        "verts": 3347,
+        "faces": 6690,
+        "volume": 375180.3123216088,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          160.0,
+          156.0,
+          102.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "lift_inlet_chute",
+        "verts": 175,
+        "faces": 346,
+        "volume": 109925.79975877363,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          58.70000076293945,
+          76.0,
+          50.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "switch_gate",
+        "verts": 1064,
+        "faces": 2124,
+        "volume": 97367.76503229701,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          120.0,
+          132.0,
+          76.23500061035156
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "spinner_rotor",
+        "verts": 472,
+        "faces": 940,
+        "volume": 20866.9887116723,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          60.0,
+          60.0,
+          63.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "spinner_post",
+        "verts": 78,
+        "faces": 152,
+        "volume": 4799.205331091461,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          14.0,
+          10.0,
+          45.24873733520508
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "spinner_retainer",
+        "verts": 60,
+        "faces": 116,
+        "volume": 12122.27202081296,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          16.0,
+          70.0,
+          35.400001525878906
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J0_h175",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 127506.09666717623,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          184.4628448486328
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J1_h155",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 113391.62840923465,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          164.4628448486328
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J2_h135",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 99277.16015129308,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          144.4628448486328
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J3_h115",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 85162.69189335148,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          124.46284484863281
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J4_h095",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 71048.22363540992,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          104.46284484863281
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J5_h075",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 56933.755377468326,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          84.46284484863281
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J6_h065",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 49876.52334236957,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          74.46284484863281
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J7_h045",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 35762.050298434784,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          54.46284103393555
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "stand_J11_h025",
+        "verts": 640,
+        "faces": 1276,
+        "volume": 21647.582823661167,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          40.0,
+          40.0,
+          34.46284103393555
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "base_tile",
+        "verts": 2666,
+        "faces": 5392,
+        "volume": 202025.59883173765,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          250.0,
+          250.0,
+          12.0
+        ],
+        "too_big": false,
+        "genus": 16
+      },
+      {
+        "name": "lift_housing_back",
+        "verts": 2225,
+        "faces": 4450,
+        "volume": 633716.5309854979,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          294.0,
+          267.5,
+          52.0
+        ],
+        "too_big": false,
+        "genus": 1
+      },
+      {
+        "name": "lift_housing_front",
+        "verts": 2358,
+        "faces": 4772,
+        "volume": 243093.2104677253,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          265.55859375,
+          258.0,
+          5.0
+        ],
+        "too_big": false,
+        "genus": 15
+      },
+      {
+        "name": "lift_wheel_half",
+        "verts": 1211,
+        "faces": 2446,
+        "volume": 260651.55288169245,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          210.0,
+          185.86534118652344,
+          19.0
+        ],
+        "too_big": false,
+        "genus": 7
+      },
+      {
+        "name": "lift_axle",
+        "verts": 816,
+        "faces": 1628,
+        "volume": 20866.56347972922,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          32.0,
+          32.0,
+          81.5
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "lift_crank",
+        "verts": 390,
+        "faces": 780,
+        "volume": 30700.518323580374,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          81.0,
+          26.0,
+          48.5
+        ],
+        "too_big": false,
+        "genus": 1
+      },
+      {
+        "name": "lift_clip",
+        "verts": 138,
+        "faces": 272,
+        "volume": 2728.3715447674344,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          30.0,
+          34.0,
+          4.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "lift_pawl",
+        "verts": 548,
+        "faces": 1096,
+        "volume": 19716.052022128573,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          51.8477897644043,
+          18.41742706298828,
+          39.0
+        ],
+        "too_big": false,
+        "genus": 1
+      },
+      {
+        "name": "ball_35",
+        "verts": 4081,
+        "faces": 8158,
+        "volume": 22404.294578882866,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          35.0,
+          35.0,
+          34.5
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "lift_test_base",
+        "verts": 401,
+        "faces": 798,
+        "volume": 134210.20516901292,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          220.0,
+          120.0,
+          12.0
+        ],
+        "too_big": false,
+        "genus": 0
+      },
+      {
+        "name": "fit_coupon",
+        "verts": 1120,
+        "faces": 2236,
+        "volume": 35842.26480076137,
+        "watertight": true,
+        "components": 1,
+        "extents": [
+          96.0,
+          76.0,
+          17.600000381469727
+        ],
+        "too_big": false,
+        "genus": 0
+      }
+    ],
+    "shafts": [
+      {
+        "pair": "axle\u00d7housing_back",
+        "isect_mm3": 0.0,
+        "expect": "~0 (0.4 mm radial clearance on jBack)"
+      },
+      {
+        "pair": "axle\u00d7housing_front",
+        "isect_mm3": 0.0,
+        "expect": "~0 (0.4 mm radial clearance on jFront)"
+      },
+      {
+        "pair": "axle\u00d7wheel_half[0]",
+        "isect_mm3": 0.0,
+        "expect": "~0 (0.2 mm/flat hex clearance)"
+      },
+      {
+        "pair": "axle\u00d7wheel_half[1]",
+        "isect_mm3": 0.0,
+        "expect": "~0 (0.2 mm/flat hex clearance)"
+      },
+      {
+        "pair": "axle\u00d7crank",
+        "isect_mm3": -1.0130785099704553e-15,
+        "expect": "~0 (0.2 mm/flat)"
+      },
+      {
+        "pair": "crank\u00d7housing_front",
+        "isect_mm3": 0.0,
+        "expect": "0 (3.5 mm axial gap)"
+      },
+      {
+        "pair": "pawl\u00d7housing_back (includes pin)",
+        "isect_mm3": 0.0,
+        "expect": "small or 0; pin clearance 0.4 mm radial"
+      }
+    ],
+    "neighbors": [
+      {
+        "pair": "lift_inlet_chute[0]\u00d7lift_housing_front[0]",
+        "isect_mm3": 0.0,
+        "limit": 25,
+        "why": "inlet vs front plate / baffle"
+      },
+      {
+        "pair": "lift_inlet_chute[0]\u00d7lift_crank[0]",
+        "isect_mm3": 0.0,
+        "limit": 1,
+        "why": "inlet vs crank at catalogued angle"
+      },
+      {
+        "pair": "track_straight_160[0]\u00d7lift_housing_back[0]",
+        "isect_mm3": 0.0,
+        "limit": 2,
+        "why": "chute tongue must sit in the first-track V, not the walls"
+      },
+      {
+        "pair": "lift_inlet_chute[0]\u00d7track_straight_160[3]",
+        "isect_mm3": -9.947598300641403e-14,
+        "limit": 25,
+        "why": "inlet vs last return straight at J11"
+      }
+    ],
+    "wheel_motion": [
+      {
+        "omega": 0,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 20,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 40,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 60,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 80,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 100,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 120,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 140,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 160,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 180,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 200,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 220,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 240,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 260,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 280,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 300,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 320,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      },
+      {
+        "omega": 340,
+        "back": 0.0,
+        "front": 0.0,
+        "pawl": 0.0
+      }
+    ],
+    "crank_sweep": [
+      {
+        "angle": 0,
+        "isect": 0.0
+      },
+      {
+        "angle": 15,
+        "isect": 0.0
+      },
+      {
+        "angle": 30,
+        "isect": 0.0
+      },
+      {
+        "angle": 45,
+        "isect": 0.0
+      },
+      {
+        "angle": 60,
+        "isect": 0.0
+      },
+      {
+        "angle": 75,
+        "isect": 0.0
+      },
+      {
+        "angle": 90,
+        "isect": 0.0
+      },
+      {
+        "angle": 105,
+        "isect": 0.0
+      },
+      {
+        "angle": 120,
+        "isect": 0.0
+      },
+      {
+        "angle": 135,
+        "isect": 0.0
+      },
+      {
+        "angle": 150,
+        "isect": 0.0
+      },
+      {
+        "angle": 165,
+        "isect": 0.0
+      },
+      {
+        "angle": 180,
+        "isect": 0.0
+      },
+      {
+        "angle": 195,
+        "isect": 0.0
+      },
+      {
+        "angle": 210,
+        "isect": 0.0
+      },
+      {
+        "angle": 225,
+        "isect": 0.0
+      },
+      {
+        "angle": 240,
+        "isect": 0.0
+      },
+      {
+        "angle": 255,
+        "isect": 0.0
+      },
+      {
+        "angle": 270,
+        "isect": 0.0
+      },
+      {
+        "angle": 285,
+        "isect": 0.0
+      },
+      {
+        "angle": 300,
+        "isect": 0.0
+      },
+      {
+        "angle": 315,
+        "isect": 0.0
+      },
+      {
+        "angle": 330,
+        "isect": 0.0
+      },
+      {
+        "angle": 345,
+        "isect": 0.0
+      }
+    ],
+    "headings": [
+      {
+        "from_mod": "S160",
+        "to_mod": "CR",
+        "prev_out": 180,
+        "this_in": 180,
+        "ok": true
+      },
+      {
+        "from_mod": "CR",
+        "to_mod": "S160",
+        "prev_out": 90,
+        "this_in": 90,
+        "ok": true
+      },
+      {
+        "from_mod": "S160",
+        "to_mod": "CR",
+        "prev_out": 90,
+        "this_in": 90,
+        "ok": true
+      },
+      {
+        "from_mod": "CR",
+        "to_mod": "S160",
+        "prev_out": 0,
+        "this_in": 0,
+        "ok": true
+      },
+      {
+        "from_mod": "S160",
+        "to_mod": "S80",
+        "prev_out": 0,
+        "this_in": 0,
+        "ok": true
+      },
+      {
+        "from_mod": "S80",
+        "to_mod": "CR",
+        "prev_out": 0,
+        "this_in": 0,
+        "ok": true
+      },
+      {
+        "from_mod": "CR",
+        "to_mod": "S160",
+        "prev_out": 270,
+        "this_in": 270,
+        "ok": true
+      },
+      {
+        "from_mod": "S160",
+        "to_mod": "IN",
+        "prev_out": 270,
+        "this_in": 270,
+        "ok": true
+      }
+    ],
+    "slopes": [
+      {
+        "path": "default_loop",
+        "n": 247,
+        "z0": 205.7115799831845,
+        "z1": 47.5,
+        "drop": 158.2115799831845,
+        "uphill_samples": 0
+      },
+      {
+        "path": "lift",
+        "n": 406,
+        "cleared_paddles_at_w": 88.0,
+        "zmin": -143.64,
+        "zmax": 87.5,
+        "min_second_paddle_gap": 31.05
+      }
+    ],
+    "sync_carry": [
+      {
+        "samples": 165,
+        "max_vs_housing": 0.0,
+        "max_vs_wheel": 0.0,
+        "housing_hits": 0,
+        "deep_wheel_hits": 0,
+        "note": "vs_wheel includes intended driving-paddle contact; >450 mm3 is treated as burial"
+      }
+    ],
+    "ball_clearance": [
+      {
+        "path": "default_loop",
+        "samples": 87,
+        "hits": 0,
+        "worst": 0
+      }
+    ]
+  }
+}
