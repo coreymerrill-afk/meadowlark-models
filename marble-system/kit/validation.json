@@ -1,0 +1,1889 @@
+{
+  "fails": [],
+  "n_fail": 0,
+  "sections": {
+    "meshes": [
+      {
+        "name": "tile_00",
+        "volume": 655081.2720000001,
+        "too_small": false,
+        "extents": [
+          304.8,
+          228.6,
+          12.0
+        ],
+        "bbox_min": [
+          0.0,
+          0.0,
+          -12.0
+        ],
+        "bbox_max": [
+          304.8,
+          228.6,
+          0.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 488,
+        "faces": 972
+      },
+      {
+        "name": "tile_10",
+        "volume": 634928.952,
+        "too_small": false,
+        "extents": [
+          304.8,
+          228.6,
+          12.0
+        ],
+        "bbox_min": [
+          0.0,
+          0.0,
+          -12.0
+        ],
+        "bbox_max": [
+          304.8,
+          228.6,
+          0.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 564,
+        "faces": 1132
+      },
+      {
+        "name": "tile_01",
+        "volume": 624340.8720000001,
+        "too_small": false,
+        "extents": [
+          304.8,
+          228.6,
+          12.0
+        ],
+        "bbox_min": [
+          0.0,
+          0.0,
+          -12.0
+        ],
+        "bbox_max": [
+          304.8,
+          228.6,
+          0.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 590,
+        "faces": 1176
+      },
+      {
+        "name": "tile_11",
+        "volume": 599328.6720000001,
+        "too_small": false,
+        "extents": [
+          304.8,
+          228.6,
+          12.0
+        ],
+        "bbox_min": [
+          0.0,
+          0.0,
+          -12.0
+        ],
+        "bbox_max": [
+          304.8,
+          228.6,
+          0.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 675,
+        "faces": 1354
+      },
+      {
+        "name": "tile_latch",
+        "volume": 2064.0,
+        "too_small": false,
+        "extents": [
+          28.0,
+          12.0,
+          9.0
+        ],
+        "bbox_min": [
+          0.0,
+          -6.0,
+          0.0
+        ],
+        "bbox_max": [
+          28.0,
+          6.0,
+          9.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 17,
+        "faces": 30
+      },
+      {
+        "name": "sleeve_short",
+        "volume": 16192.448000000002,
+        "too_small": false,
+        "extents": [
+          30.0,
+          30.0,
+          59.0
+        ],
+        "bbox_min": [
+          -15.0,
+          -15.0,
+          -9.0
+        ],
+        "bbox_max": [
+          15.0,
+          15.0,
+          50.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 64,
+        "faces": 128
+      },
+      {
+        "name": "sleeve_medium",
+        "volume": 22643.648000000005,
+        "too_small": false,
+        "extents": [
+          30.0,
+          30.0,
+          89.0
+        ],
+        "bbox_min": [
+          -15.0,
+          -15.0,
+          -9.0
+        ],
+        "bbox_max": [
+          15.0,
+          15.0,
+          80.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 64,
+        "faces": 128
+      },
+      {
+        "name": "sleeve_tall",
+        "volume": 32320.448000000008,
+        "too_small": false,
+        "extents": [
+          30.0,
+          30.0,
+          134.0
+        ],
+        "bbox_min": [
+          -15.0,
+          -15.0,
+          -9.0
+        ],
+        "bbox_max": [
+          15.0,
+          15.0,
+          125.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 64,
+        "faces": 128
+      },
+      {
+        "name": "post_short",
+        "volume": 15048.446848863512,
+        "too_small": false,
+        "extents": [
+          16.0,
+          16.0,
+          66.3
+        ],
+        "bbox_min": [
+          -8.0,
+          -8.0,
+          0.0
+        ],
+        "bbox_max": [
+          8.0,
+          8.0,
+          66.3
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 448,
+        "faces": 892
+      },
+      {
+        "name": "post_medium",
+        "volume": 22266.446848863514,
+        "too_small": false,
+        "extents": [
+          16.0,
+          16.0,
+          96.3
+        ],
+        "bbox_min": [
+          -8.0,
+          -8.0,
+          0.0
+        ],
+        "bbox_max": [
+          8.0,
+          8.0,
+          96.3
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 488,
+        "faces": 972
+      },
+      {
+        "name": "post_tall",
+        "volume": 33232.04684886351,
+        "too_small": false,
+        "extents": [
+          16.0,
+          16.0,
+          141.3
+        ],
+        "bbox_min": [
+          -8.0,
+          -8.0,
+          0.0
+        ],
+        "bbox_max": [
+          8.0,
+          8.0,
+          141.3
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 536,
+        "faces": 1068
+      },
+      {
+        "name": "lock_clip_short",
+        "volume": 4261.84,
+        "too_small": false,
+        "extents": [
+          22.0,
+          22.2,
+          18.0
+        ],
+        "bbox_min": [
+          5.0,
+          -11.1,
+          29.0
+        ],
+        "bbox_max": [
+          27.0,
+          11.1,
+          47.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 48,
+        "faces": 92
+      },
+      {
+        "name": "lock_clip_medium",
+        "volume": 4261.840000000001,
+        "too_small": false,
+        "extents": [
+          22.0,
+          22.2,
+          18.0
+        ],
+        "bbox_min": [
+          5.0,
+          -11.1,
+          59.0
+        ],
+        "bbox_max": [
+          27.0,
+          11.1,
+          77.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 48,
+        "faces": 92
+      },
+      {
+        "name": "lock_clip_tall",
+        "volume": 4261.84,
+        "too_small": false,
+        "extents": [
+          22.0,
+          22.2,
+          18.0
+        ],
+        "bbox_min": [
+          5.0,
+          -11.1,
+          104.0
+        ],
+        "bbox_max": [
+          27.0,
+          11.1,
+          122.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 48,
+        "faces": 92
+      },
+      {
+        "name": "ball_cap",
+        "volume": 1901.8044953275482,
+        "too_small": false,
+        "extents": [
+          16.0,
+          16.0,
+          17.23
+        ],
+        "bbox_min": [
+          -8.0,
+          -8.0,
+          3.17
+        ],
+        "bbox_max": [
+          8.0,
+          8.0,
+          20.4
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 380,
+        "faces": 756
+      },
+      {
+        "name": "track_S160",
+        "volume": 174654.56595858518,
+        "too_small": false,
+        "extents": [
+          164.2,
+          79.2,
+          50.6
+        ],
+        "bbox_min": [
+          7.2,
+          -39.6,
+          -34.0
+        ],
+        "bbox_max": [
+          171.4,
+          39.6,
+          16.6
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 328,
+        "faces": 660
+      },
+      {
+        "name": "track_S80",
+        "volume": 92771.1248699958,
+        "too_small": false,
+        "extents": [
+          91.4,
+          79.2,
+          43.1
+        ],
+        "bbox_min": [
+          0.0,
+          -39.6,
+          -26.5
+        ],
+        "bbox_max": [
+          91.4,
+          39.6,
+          16.6
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 329,
+        "faces": 662
+      },
+      {
+        "name": "track_S40",
+        "volume": 43582.732618349255,
+        "too_small": false,
+        "extents": [
+          51.4,
+          79.2,
+          38.1
+        ],
+        "bbox_min": [
+          0.0,
+          -39.6,
+          -21.5
+        ],
+        "bbox_max": [
+          51.4,
+          39.6,
+          16.6
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 203,
+        "faces": 406
+      },
+      {
+        "name": "track_CR90",
+        "volume": 140060.89201845508,
+        "too_small": false,
+        "extents": [
+          119.6,
+          122.84,
+          51.04
+        ],
+        "bbox_min": [
+          0.0,
+          -91.4,
+          -34.0
+        ],
+        "bbox_max": [
+          119.6,
+          31.44,
+          17.04
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 861,
+        "faces": 1730
+      },
+      {
+        "name": "track_CL90",
+        "volume": 140483.94514199026,
+        "too_small": false,
+        "extents": [
+          119.6,
+          122.84,
+          51.04
+        ],
+        "bbox_min": [
+          0.0,
+          -31.44,
+          -34.0
+        ],
+        "bbox_max": [
+          119.6,
+          91.4,
+          17.04
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 863,
+        "faces": 1734
+      },
+      {
+        "name": "track_CR45",
+        "volume": 75065.1327115893,
+        "too_small": false,
+        "extents": [
+          92.63,
+          91.21,
+          45.72
+        ],
+        "bbox_min": [
+          0.0,
+          -59.49,
+          -29.0
+        ],
+        "bbox_max": [
+          92.63,
+          31.71,
+          16.72
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 873,
+        "faces": 1758
+      },
+      {
+        "name": "track_CL45",
+        "volume": 75139.55358942675,
+        "too_small": false,
+        "extents": [
+          92.63,
+          91.21,
+          45.72
+        ],
+        "bbox_min": [
+          0.0,
+          -31.71,
+          -29.0
+        ],
+        "bbox_max": [
+          92.63,
+          59.49,
+          16.72
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 872,
+        "faces": 1756
+      },
+      {
+        "name": "track_SPLIT_Y",
+        "volume": 319234.9154523001,
+        "too_small": false,
+        "extents": [
+          167.9,
+          144.0,
+          61.85
+        ],
+        "bbox_min": [
+          2.1,
+          -32.0,
+          -45.25
+        ],
+        "bbox_max": [
+          170.0,
+          112.0,
+          16.6
+        ],
+        "envelope_ok": true,
+        "sliver_components": 2,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 1031,
+        "faces": 2058
+      },
+      {
+        "name": "track_MERGE_Y",
+        "volume": 307192.9285051632,
+        "too_small": false,
+        "extents": [
+          167.9,
+          143.69,
+          65.35
+        ],
+        "bbox_min": [
+          2.1,
+          -31.69,
+          -49.0
+        ],
+        "bbox_max": [
+          170.0,
+          112.0,
+          16.35
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 904,
+        "faces": 1812
+      },
+      {
+        "name": "track_FUNNEL",
+        "volume": 116322.23751510103,
+        "too_small": false,
+        "extents": [
+          90.0,
+          98.93,
+          47.0
+        ],
+        "bbox_min": [
+          0.0,
+          -50.93,
+          -29.0
+        ],
+        "bbox_max": [
+          90.0,
+          48.0,
+          18.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 1106,
+        "faces": 2212
+      },
+      {
+        "name": "track_HX360",
+        "volume": 657076.0623148673,
+        "too_small": false,
+        "extents": [
+          243.94,
+          251.48,
+          115.83
+        ],
+        "bbox_min": [
+          -121.97,
+          -39.6,
+          -99.0
+        ],
+        "bbox_max": [
+          121.97,
+          211.88,
+          16.83
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 1461,
+        "faces": 2930
+      },
+      {
+        "name": "track_DROP40",
+        "volume": 161151.12393474142,
+        "too_small": false,
+        "extents": [
+          82.8,
+          64.0,
+          77.6
+        ],
+        "bbox_min": [
+          7.2,
+          -32.0,
+          -61.0
+        ],
+        "bbox_max": [
+          90.0,
+          32.0,
+          16.6
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 502,
+        "faces": 1004
+      },
+      {
+        "name": "track_SPAN240",
+        "volume": 258579.69814300124,
+        "too_small": false,
+        "extents": [
+          244.2,
+          79.2,
+          60.6
+        ],
+        "bbox_min": [
+          7.2,
+          -39.6,
+          -44.0
+        ],
+        "bbox_max": [
+          251.4,
+          39.6,
+          16.6
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 345,
+        "faces": 694
+      },
+      {
+        "name": "track_TUN160",
+        "volume": 262189.79358369583,
+        "too_small": false,
+        "extents": [
+          164.2,
+          79.2,
+          62.0
+        ],
+        "bbox_min": [
+          7.2,
+          -39.6,
+          -34.0
+        ],
+        "bbox_max": [
+          171.4,
+          39.6,
+          28.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 346,
+        "faces": 700
+      },
+      {
+        "name": "track_SWITCH",
+        "volume": 305035.6253379584,
+        "too_small": false,
+        "extents": [
+          167.9,
+          144.0,
+          61.85
+        ],
+        "bbox_min": [
+          2.1,
+          -32.0,
+          -45.25
+        ],
+        "bbox_max": [
+          170.0,
+          112.0,
+          16.6
+        ],
+        "envelope_ok": true,
+        "sliver_components": 2,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 1042,
+        "faces": 2088
+      },
+      {
+        "name": "ADAPT_OUT",
+        "volume": 30124.40774339117,
+        "too_small": false,
+        "extents": [
+          36.0,
+          64.0,
+          23.2
+        ],
+        "bbox_min": [
+          -14.0,
+          -32.0,
+          -4.0
+        ],
+        "bbox_max": [
+          22.0,
+          32.0,
+          19.2
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 37,
+        "faces": 70
+      },
+      {
+        "name": "ADAPT_IN",
+        "volume": 66509.60662223063,
+        "too_small": false,
+        "extents": [
+          62.42,
+          64.0,
+          44.77
+        ],
+        "bbox_min": [
+          2.28,
+          -32.0,
+          -31.2
+        ],
+        "bbox_max": [
+          64.7,
+          32.0,
+          13.57
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 88,
+        "faces": 172
+      },
+      {
+        "name": "switch_gate",
+        "volume": 21856.0,
+        "too_small": false,
+        "extents": [
+          20.0,
+          42.0,
+          38.0
+        ],
+        "bbox_min": [
+          28.0,
+          8.0,
+          -18.0
+        ],
+        "bbox_max": [
+          48.0,
+          50.0,
+          20.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 20,
+        "faces": 36
+      },
+      {
+        "name": "low_mount",
+        "volume": 20192.0,
+        "too_small": false,
+        "extents": [
+          72.0,
+          20.0,
+          67.0
+        ],
+        "bbox_min": [
+          -36.0,
+          -10.0,
+          -9.0
+        ],
+        "bbox_max": [
+          36.0,
+          10.0,
+          58.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 32,
+        "faces": 64
+      },
+      {
+        "name": "lift_mount_plate",
+        "volume": 97445.23740851278,
+        "too_small": false,
+        "extents": [
+          220.0,
+          56.0,
+          17.0
+        ],
+        "bbox_min": [
+          -110.0,
+          -28.0,
+          -9.0
+        ],
+        "bbox_max": [
+          110.0,
+          28.0,
+          8.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 312,
+        "faces": 652
+      },
+      {
+        "name": "fit_coupon",
+        "volume": 52366.89390235318,
+        "too_small": false,
+        "extents": [
+          120.0,
+          80.0,
+          30.0
+        ],
+        "bbox_min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bbox_max": [
+          120.0,
+          80.0,
+          30.0
+        ],
+        "envelope_ok": true,
+        "sliver_components": 0,
+        "components": 1,
+        "watertight_kernel": true,
+        "verts": 309,
+        "faces": 618
+      }
+    ],
+    "height_windows": [
+      {
+        "kind": "short",
+        "z_bottom_min": 0.0,
+        "z_bottom_max": 30.0,
+        "overlap_at_max": 20.0,
+        "overlap_required": 20.0,
+        "below_base_at_min": 0.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "stroke": 30.0,
+        "qty": 8
+      },
+      {
+        "kind": "medium",
+        "z_bottom_min": 0.0,
+        "z_bottom_max": 55.0,
+        "overlap_at_max": 25.0,
+        "overlap_required": 25.0,
+        "below_base_at_min": 0.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "stroke": 55.0,
+        "qty": 10
+      },
+      {
+        "kind": "tall",
+        "z_bottom_min": 0.0,
+        "z_bottom_max": 85.0,
+        "overlap_at_max": 40.0,
+        "overlap_required": 40.0,
+        "below_base_at_min": 0.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "stroke": 85.0,
+        "qty": 6
+      }
+    ],
+    "articulation": [
+      {
+        "motion": "pitch",
+        "deg": -15,
+        "vs_post_mm3": 0.5751536389715298
+      },
+      {
+        "motion": "pitch",
+        "deg": 0,
+        "vs_post_mm3": 0.0
+      },
+      {
+        "motion": "pitch",
+        "deg": 15,
+        "vs_post_mm3": 0.5751536389715423
+      },
+      {
+        "motion": "roll",
+        "deg": 8,
+        "vs_cap_mm3": 30.092768510699003,
+        "note": "keyed fin should resist roll; contact volume is the key working, not a fail"
+      }
+    ],
+    "dof": {
+      "pitch_deg": 15,
+      "yaw": "cap_yaws_on_round_post_pin_with_the_track",
+      "roll": "locked_by_XZ_fin_in_along_track_slot",
+      "slide_along_track_mm": 20.0,
+      "slide_45_mm": 32.0,
+      "not_claimed": "independent_track_rotation_on_a_yaw_locked_square_post"
+    },
+    "socket_to_rail": {
+      "BJ_R": 8.0,
+      "wall_above_ball": 3.0,
+      "socket_to_v_vertex": 11.0,
+      "VH": 24.748737341529164,
+      "socket_to_rail": 35.748737341529164,
+      "formula": "BJ_R + wall + VH = 8 + 3 + 17.5*sqrt(2) = 35.7487",
+      "replaces_placeholder_22": true,
+      "why": "22 mm would put the 35 mm marble inside the 16 mm support ball"
+    },
+    "rest_joints": [
+      {
+        "pair": "S160 x CL90",
+        "isect_mm3": 0.0
+      },
+      {
+        "pair": "CL90 x S80",
+        "isect_mm3": 0.0
+      },
+      {
+        "pair": "S160 x S160",
+        "isect_mm3": 0.0
+      }
+    ],
+    "cr45_slot_reach": {
+      "end_xy": [
+        56.569,
+        -23.431
+      ],
+      "slide_mm": 32.0,
+      "captured_from_origin_start": [
+        {
+          "well": [
+            40.0,
+            0.0
+          ],
+          "lat": 4.85,
+          "along": -28.28
+        }
+      ],
+      "note": "Start joint on-grid is captured directly. End stadium (32 mm inward along the tangent) reaches well (40,0) at 4.85 mm lateral, inside BJ_R+0.3 = 8.3 mm."
+    },
+    "wells": {
+      "assembled_mm": [
+        609.6,
+        457.2
+      ],
+      "assembled_in": [
+        24.0,
+        18.0
+      ],
+      "tile_mm": [
+        304.8,
+        228.6
+      ],
+      "pitch": 40.0,
+      "count": 117,
+      "per_tile": {
+        "00": 24,
+        "01": 30,
+        "10": 28,
+        "11": 35
+      },
+      "not_192": "tile boundaries are not integer multiples of 40 mm; seam/edge/joiner wells omitted",
+      "print_orientation": "304.8 along H3C 330, 228.6 along H3C 320"
+    },
+    "bom48": {
+      "items": [
+        {
+          "id": "S160",
+          "qty": 8
+        },
+        {
+          "id": "S80",
+          "qty": 6
+        },
+        {
+          "id": "S40",
+          "qty": 4
+        },
+        {
+          "id": "CR90",
+          "qty": 5
+        },
+        {
+          "id": "CL90",
+          "qty": 5
+        },
+        {
+          "id": "CR45",
+          "qty": 2
+        },
+        {
+          "id": "CL45",
+          "qty": 2
+        },
+        {
+          "id": "SPLIT_Y",
+          "qty": 2
+        },
+        {
+          "id": "MERGE_Y",
+          "qty": 2
+        },
+        {
+          "id": "FUNNEL",
+          "qty": 2
+        },
+        {
+          "id": "HX360",
+          "qty": 2
+        },
+        {
+          "id": "DROP40",
+          "qty": 2
+        },
+        {
+          "id": "SPAN240",
+          "qty": 2
+        },
+        {
+          "id": "TUN160",
+          "qty": 1
+        },
+        {
+          "id": "SWITCH",
+          "qty": 1
+        },
+        {
+          "id": "ADAPT_OUT",
+          "qty": 1
+        },
+        {
+          "id": "ADAPT_IN",
+          "qty": 1
+        }
+      ],
+      "sum": 48
+    },
+    "support_structures": {
+      "short": 8,
+      "medium": 10,
+      "tall": 6,
+      "total": 24,
+      "parts_per": "sleeve + post + lock_clip + ball_cap",
+      "interface_parts": 96,
+      "spare_clips": 8,
+      "spare_caps": 8
+    },
+    "extras_outside_48_and_24": {
+      "switch_gate": 1,
+      "low_mount": 6,
+      "lift_mount_plate": 1
+    },
+    "helix": {
+      "extents": [
+        243.94,
+        251.48,
+        115.83
+      ],
+      "coil_diameter_mm": 244,
+      "printed_as": "single connected piece (fits H3C 320 bed on the long side? True)",
+      "drop_mm": 80,
+      "segments": 1,
+      "note": "Self-intersection avoided: 80 mm pitch vs ~41 mm section height."
+    },
+    "layouts": [
+      {
+        "name": "A_simple_loop",
+        "n_track_pieces": 10,
+        "piece_kinds": {
+          "ADAPT_OUT": 1,
+          "S160": 4,
+          "CR90": 3,
+          "S80": 1,
+          "ADAPT_IN": 1
+        },
+        "n_posts": 10,
+        "n_low_mounts": 3,
+        "n_skipped_sockets": 2,
+        "posts": [
+          {
+            "x": 260.0,
+            "y": 100.0,
+            "kind": "tall",
+            "H": 165.0,
+            "Hraw": 164.96,
+            "V": 175.96,
+            "well": [
+              260.0,
+              100.0
+            ]
+          },
+          {
+            "x": 180.0,
+            "y": 100.0,
+            "kind": "medium",
+            "H": 155.0,
+            "Hraw": 154.96,
+            "V": 165.96,
+            "well": [
+              180.0,
+              100.0
+            ]
+          },
+          {
+            "x": 140.0,
+            "y": 100.0,
+            "kind": "medium",
+            "H": 150.0,
+            "Hraw": 149.46,
+            "V": 160.46,
+            "well": [
+              140.0,
+              100.0
+            ]
+          },
+          {
+            "x": 60.0,
+            "y": 180.0,
+            "kind": "medium",
+            "H": 135.0,
+            "Hraw": 134.46,
+            "V": 145.46,
+            "well": [
+              60.0,
+              180.0
+            ]
+          },
+          {
+            "x": 60.0,
+            "y": 300.0,
+            "kind": "medium",
+            "H": 120.0,
+            "Hraw": 118.96,
+            "V": 129.96,
+            "well": [
+              60.0,
+              300.0
+            ]
+          },
+          {
+            "x": 60.0,
+            "y": 340.0,
+            "kind": "medium",
+            "H": 115.0,
+            "Hraw": 113.46,
+            "V": 124.46,
+            "well": [
+              60.0,
+              340.0
+            ]
+          },
+          {
+            "x": 140.0,
+            "y": 420.0,
+            "kind": "short",
+            "H": 100.0,
+            "Hraw": 98.46,
+            "V": 109.46,
+            "well": [
+              140.0,
+              420.0
+            ]
+          },
+          {
+            "x": 180.0,
+            "y": 420.0,
+            "kind": "short",
+            "H": 95.0,
+            "Hraw": 92.96,
+            "V": 103.96,
+            "well": [
+              180.0,
+              420.0
+            ]
+          },
+          {
+            "x": 260.0,
+            "y": 420.0,
+            "kind": "short",
+            "H": 85.0,
+            "Hraw": 82.96,
+            "V": 93.96,
+            "well": [
+              260.0,
+              420.0
+            ]
+          },
+          {
+            "x": 340.0,
+            "y": 420.0,
+            "kind": "short",
+            "H": 75.0,
+            "Hraw": 74.96,
+            "V": 85.96,
+            "well": [
+              340.0,
+              420.0
+            ]
+          }
+        ],
+        "low_mounts": [
+          {
+            "x": 380.0,
+            "y": 420.0,
+            "Hraw": 66.96,
+            "V": 77.96,
+            "well": [
+              380.0,
+              420.0
+            ]
+          },
+          {
+            "x": 460.0,
+            "y": 340.0,
+            "Hraw": 51.96,
+            "V": 62.96,
+            "well": [
+              460.0,
+              340.0
+            ]
+          },
+          {
+            "x": 460.0,
+            "y": 300.0,
+            "Hraw": 46.46,
+            "V": 57.46,
+            "well": [
+              460.0,
+              300.0
+            ]
+          }
+        ],
+        "skipped": [
+          {
+            "x": 60.0,
+            "y": 220.0,
+            "Hraw": 128.96,
+            "V": 139.96,
+            "skipped": "no well at socket (seam/edge/joiner omit)"
+          },
+          {
+            "x": 460.0,
+            "y": 220.0,
+            "Hraw": 36.46,
+            "V": 47.46,
+            "skipped": "no well at socket (seam/edge/joiner omit)"
+          }
+        ],
+        "adapt_in_drop": 19.21,
+        "adapt_in_slope_deg": 18.12,
+        "lift": {
+          "axle": [
+            460.0,
+            100.0
+          ],
+          "pegs": [
+            [
+              380.0,
+              100.0
+            ],
+            [
+              540.0,
+              100.0
+            ]
+          ],
+          "J0": [
+            300.0,
+            100.0
+          ],
+          "J11": [
+            460.0,
+            180.0
+          ],
+          "inlet_xy": [
+            460.0,
+            121.3
+          ],
+          "heading_out": 180.0,
+          "heading_in": 270.0
+        },
+        "within_24": true,
+        "off_board": [],
+        "layout_rest_joints": [
+          {
+            "a": "S160_1",
+            "b": "CR1",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "CR1",
+            "b": "S160_2",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "S160_2",
+            "b": "CR2",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "CR2",
+            "b": "S160_3",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "S160_3",
+            "b": "S80_1",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "S80_1",
+            "b": "CR3",
+            "isect_mm3": 7.958078640513122e-13
+          },
+          {
+            "a": "CR3",
+            "b": "S160_4",
+            "isect_mm3": 0.0
+          }
+        ],
+        "seq": [
+          {
+            "name": "ADAPT_OUT",
+            "kind": "ADAPT_OUT",
+            "origin": [
+              312.0,
+              100.0
+            ],
+            "hdg": 180.0,
+            "z0": 180.96
+          },
+          {
+            "name": "S160_1",
+            "kind": "S160",
+            "origin": [
+              300.0,
+              100.0
+            ],
+            "hdg": 180.0,
+            "drop": 20.0,
+            "end": [
+              140.0,
+              100.0
+            ],
+            "z0": 180.96,
+            "endV": 160.96
+          },
+          {
+            "name": "CR1",
+            "kind": "CR90",
+            "origin": [
+              140.0,
+              100.0
+            ],
+            "hdg": 180.0,
+            "drop": 15.0,
+            "end": [
+              60.0,
+              180.0
+            ],
+            "z0": 160.46,
+            "endV": 145.46
+          },
+          {
+            "name": "S160_2",
+            "kind": "S160",
+            "origin": [
+              60.0,
+              180.0
+            ],
+            "hdg": 90.0,
+            "drop": 20.0,
+            "end": [
+              60.0,
+              340.0
+            ],
+            "z0": 144.96,
+            "endV": 124.96000000000001
+          },
+          {
+            "name": "CR2",
+            "kind": "CR90",
+            "origin": [
+              60.0,
+              340.0
+            ],
+            "hdg": 90.0,
+            "drop": 15.0,
+            "end": [
+              140.0,
+              420.0
+            ],
+            "z0": 124.46000000000001,
+            "endV": 109.46000000000001
+          },
+          {
+            "name": "S160_3",
+            "kind": "S160",
+            "origin": [
+              140.0,
+              420.0
+            ],
+            "hdg": 0.0,
+            "drop": 20.0,
+            "end": [
+              300.0,
+              420.0
+            ],
+            "z0": 108.96000000000001,
+            "endV": 88.96000000000001
+          },
+          {
+            "name": "S80_1",
+            "kind": "S80",
+            "origin": [
+              300.0,
+              420.0
+            ],
+            "hdg": 0.0,
+            "drop": 10.0,
+            "end": [
+              380.0,
+              420.0
+            ],
+            "z0": 88.46000000000001,
+            "endV": 78.46000000000001
+          },
+          {
+            "name": "CR3",
+            "kind": "CR90",
+            "origin": [
+              380.0,
+              420.0
+            ],
+            "hdg": 0.0,
+            "drop": 15.0,
+            "end": [
+              460.0,
+              340.0
+            ],
+            "z0": 77.96000000000001,
+            "endV": 62.96000000000001
+          },
+          {
+            "name": "S160_4",
+            "kind": "S160",
+            "origin": [
+              460.0,
+              340.0
+            ],
+            "hdg": 270.0,
+            "drop": 20.0,
+            "end": [
+              460.0,
+              180.0
+            ],
+            "z0": 62.46000000000001,
+            "endV": 42.46000000000001
+          },
+          {
+            "name": "ADAPT_IN",
+            "kind": "ADAPT_IN",
+            "origin": [
+              460.0,
+              180.0
+            ],
+            "hdg": 270.0,
+            "z0": 41.96000000000001,
+            "drop": 19.210000000000008
+          }
+        ]
+      },
+      {
+        "name": "B_helix",
+        "n_track_pieces": 8,
+        "piece_kinds": {
+          "ADAPT_OUT": 1,
+          "HX360R": 1,
+          "CR90": 3,
+          "S80": 1,
+          "S40": 1,
+          "ADAPT_IN": 1
+        },
+        "n_posts": 3,
+        "n_low_mounts": 4,
+        "n_skipped_sockets": 0,
+        "posts": [
+          {
+            "x": 260.0,
+            "y": 100.0,
+            "kind": "tall",
+            "H": 170.0,
+            "Hraw": 169.96,
+            "V": 180.96,
+            "well": [
+              260.0,
+              100.0
+            ]
+          },
+          {
+            "x": 220.0,
+            "y": 100.0,
+            "kind": "short",
+            "H": 90.0,
+            "Hraw": 89.96,
+            "V": 100.96,
+            "well": [
+              220.0,
+              100.0
+            ]
+          },
+          {
+            "x": 140.0,
+            "y": 180.0,
+            "kind": "short",
+            "H": 75.0,
+            "Hraw": 74.46,
+            "V": 85.46,
+            "well": [
+              140.0,
+              180.0
+            ]
+          }
+        ],
+        "low_mounts": [
+          {
+            "x": 220.0,
+            "y": 260.0,
+            "Hraw": 58.96,
+            "V": 69.96,
+            "well": [
+              220.0,
+              260.0
+            ]
+          },
+          {
+            "x": 260.0,
+            "y": 260.0,
+            "Hraw": 50.96,
+            "V": 61.96,
+            "well": [
+              260.0,
+              260.0
+            ]
+          },
+          {
+            "x": 340.0,
+            "y": 260.0,
+            "Hraw": 45.46,
+            "V": 56.46,
+            "well": [
+              340.0,
+              260.0
+            ]
+          },
+          {
+            "x": 420.0,
+            "y": 180.0,
+            "Hraw": 27.46,
+            "V": 38.46,
+            "well": [
+              420.0,
+              180.0
+            ]
+          }
+        ],
+        "skipped": [],
+        "adapt_in_drop": 15.21,
+        "adapt_in_slope_deg": 14.53,
+        "lift": {
+          "axle": [
+            420.0,
+            100.0
+          ],
+          "pegs": [
+            [
+              340.0,
+              100.0
+            ],
+            [
+              500.0,
+              100.0
+            ]
+          ],
+          "J0": [
+            260.0,
+            100.0
+          ],
+          "J11": [
+            420.0,
+            180.0
+          ],
+          "inlet_xy": [
+            420.0,
+            121.3
+          ],
+          "heading_out": 180.0,
+          "heading_in": 270.0
+        },
+        "within_24": true,
+        "off_board": [],
+        "layout_rest_joints": [
+          {
+            "a": "HX1",
+            "b": "CR1",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "CR1",
+            "b": "CR2",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "CR2",
+            "b": "S80_1",
+            "isect_mm3": 0.0
+          },
+          {
+            "a": "S80_1",
+            "b": "S40_1",
+            "isect_mm3": 3.552713678800501e-15
+          },
+          {
+            "a": "S40_1",
+            "b": "CR3",
+            "isect_mm3": 0.0
+          }
+        ],
+        "seq": [
+          {
+            "name": "ADAPT_OUT",
+            "kind": "ADAPT_OUT",
+            "origin": [
+              272.0,
+              100.0
+            ],
+            "hdg": 180.0,
+            "z0": 180.96
+          },
+          {
+            "name": "HX1",
+            "kind": "HX360R",
+            "origin": [
+              260.0,
+              100.0
+            ],
+            "hdg": 180.0,
+            "drop": 80.0,
+            "end": [
+              220.0,
+              100.0
+            ],
+            "z0": 180.96,
+            "endV": 100.96000000000001
+          },
+          {
+            "name": "CR1",
+            "kind": "CR90",
+            "origin": [
+              220.0,
+              100.0
+            ],
+            "hdg": 180.0,
+            "drop": 15.0,
+            "end": [
+              140.0,
+              180.0
+            ],
+            "z0": 100.46000000000001,
+            "endV": 85.46000000000001
+          },
+          {
+            "name": "CR2",
+            "kind": "CR90",
+            "origin": [
+              140.0,
+              180.0
+            ],
+            "hdg": 90.0,
+            "drop": 15.0,
+            "end": [
+              220.0,
+              260.0
+            ],
+            "z0": 84.96000000000001,
+            "endV": 69.96000000000001
+          },
+          {
+            "name": "S80_1",
+            "kind": "S80",
+            "origin": [
+              220.0,
+              260.0
+            ],
+            "hdg": 0.0,
+            "drop": 10.0,
+            "end": [
+              300.0,
+              260.0
+            ],
+            "z0": 69.46000000000001,
+            "endV": 59.46000000000001
+          },
+          {
+            "name": "S40_1",
+            "kind": "S40",
+            "origin": [
+              300.0,
+              260.0
+            ],
+            "hdg": 0.0,
+            "drop": 5.0,
+            "end": [
+              340.0,
+              260.0
+            ],
+            "z0": 58.96000000000001,
+            "endV": 53.96000000000001
+          },
+          {
+            "name": "CR3",
+            "kind": "CR90",
+            "origin": [
+              340.0,
+              260.0
+            ],
+            "hdg": 0.0,
+            "drop": 15.0,
+            "end": [
+              420.0,
+              180.0
+            ],
+            "z0": 53.46000000000001,
+            "endV": 38.46000000000001
+          },
+          {
+            "name": "ADAPT_IN",
+            "kind": "ADAPT_IN",
+            "origin": [
+              420.0,
+              180.0
+            ],
+            "hdg": 270.0,
+            "z0": 37.96000000000001,
+            "drop": 15.210000000000008
+          }
+        ]
+      }
+    ],
+    "sample": [
+      {
+        "what": "sleeve medium @60.0,60.0 x tile",
+        "isect": 0.0
+      },
+      {
+        "what": "sleeve medium @140.0,60.0 x tile",
+        "isect": 0.0
+      },
+      {
+        "what": "sleeve medium @260.0,140.0 x tile",
+        "isect": 0.0
+      },
+      {
+        "what": "sleeve short @260.0,180.0 x tile",
+        "isect": 0.0
+      },
+      {
+        "what": "sample S160 x CL90 rest",
+        "isect": 0.0
+      },
+      {
+        "what": "sample CL90 x S80 rest",
+        "isect": 0.0
+      }
+    ]
+  }
+}

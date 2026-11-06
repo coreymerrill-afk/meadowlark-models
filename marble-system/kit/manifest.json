@@ -1,0 +1,1122 @@
+{
+  "name": "marble-system-v2",
+  "version": "0.3-full48",
+  "generated": "2026-11-05T23:54:42-07:00",
+  "timezone": "America/Denver",
+  "printer": {
+    "model": "Bambu Lab H3C",
+    "envelope_mm": [
+      330.0,
+      320.0,
+      325.0
+    ],
+    "tile_print": "304.8 mm side along the 330 axis (25.2 mm leftover); 228.6 along 320"
+  },
+  "ball_diameter_mm": 35.0,
+  "socket_to_rail_mm": 35.748737341529164,
+  "grid_pitch_mm": 40.0,
+  "tile_pitch_mm": [
+    304.8,
+    228.6
+  ],
+  "assembled_mm": [
+    609.6,
+    457.2
+  ],
+  "assembled_in": [
+    24.0,
+    18.0
+  ],
+  "well_count": 117,
+  "wells_per_tile": {
+    "00": 24,
+    "01": 30,
+    "10": 28,
+    "11": 35
+  },
+  "height_classes": {
+    "short": {
+      "Ls": 50.0,
+      "Lpost": 60.0,
+      "Omin": 20.0,
+      "Hmin": 70.0,
+      "Hmax": 100.0,
+      "qty": 8
+    },
+    "medium": {
+      "Ls": 80.0,
+      "Lpost": 90.0,
+      "Omin": 25.0,
+      "Hmin": 100.0,
+      "Hmax": 155.0,
+      "qty": 10
+    },
+    "tall": {
+      "Ls": 125.0,
+      "Lpost": 135.0,
+      "Omin": 40.0,
+      "Hmin": 145.0,
+      "Hmax": 230.0,
+      "qty": 6
+    }
+  },
+  "bom48": [
+    {
+      "id": "S160",
+      "qty": 8
+    },
+    {
+      "id": "S80",
+      "qty": 6
+    },
+    {
+      "id": "S40",
+      "qty": 4
+    },
+    {
+      "id": "CR90",
+      "qty": 5
+    },
+    {
+      "id": "CL90",
+      "qty": 5
+    },
+    {
+      "id": "CR45",
+      "qty": 2
+    },
+    {
+      "id": "CL45",
+      "qty": 2
+    },
+    {
+      "id": "SPLIT_Y",
+      "qty": 2
+    },
+    {
+      "id": "MERGE_Y",
+      "qty": 2
+    },
+    {
+      "id": "FUNNEL",
+      "qty": 2
+    },
+    {
+      "id": "HX360",
+      "qty": 2
+    },
+    {
+      "id": "DROP40",
+      "qty": 2
+    },
+    {
+      "id": "SPAN240",
+      "qty": 2
+    },
+    {
+      "id": "TUN160",
+      "qty": 1
+    },
+    {
+      "id": "SWITCH",
+      "qty": 1
+    },
+    {
+      "id": "ADAPT_OUT",
+      "qty": 1
+    },
+    {
+      "id": "ADAPT_IN",
+      "qty": 1
+    }
+  ],
+  "bom48_sum": 48,
+  "track_print_qty": 48,
+  "support_structures": {
+    "short": 8,
+    "medium": 10,
+    "tall": 6,
+    "total": 24
+  },
+  "extras": {
+    "switch_gate": 1,
+    "low_mount": 6,
+    "lift_mount_plate": 1
+  },
+  "parts": [
+    {
+      "name": "tile_00",
+      "path": "stl/tile_00.stl",
+      "qty": 1,
+      "bucket": "base",
+      "color": "#C8D6E5",
+      "verts": 488,
+      "faces": 972,
+      "volume_mm3": 655081.2720000001,
+      "extents_mm": [
+        304.8,
+        228.6,
+        12.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "tile_10",
+      "path": "stl/tile_10.stl",
+      "qty": 1,
+      "bucket": "base",
+      "color": "#B8C6D5",
+      "verts": 564,
+      "faces": 1132,
+      "volume_mm3": 634928.952,
+      "extents_mm": [
+        304.8,
+        228.6,
+        12.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "tile_01",
+      "path": "stl/tile_01.stl",
+      "qty": 1,
+      "bucket": "base",
+      "color": "#C8D6E5",
+      "verts": 590,
+      "faces": 1176,
+      "volume_mm3": 624340.8720000001,
+      "extents_mm": [
+        304.8,
+        228.6,
+        12.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "tile_11",
+      "path": "stl/tile_11.stl",
+      "qty": 1,
+      "bucket": "base",
+      "color": "#B8C6D5",
+      "verts": 675,
+      "faces": 1354,
+      "volume_mm3": 599328.6720000001,
+      "extents_mm": [
+        304.8,
+        228.6,
+        12.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "tile_latch",
+      "path": "stl/tile_latch.stl",
+      "qty": 8,
+      "bucket": "base",
+      "color": "#8395A7",
+      "verts": 17,
+      "faces": 30,
+      "volume_mm3": 2064.0,
+      "extents_mm": [
+        28.0,
+        12.0,
+        9.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "sleeve_short",
+      "path": "stl/sleeve_short.stl",
+      "qty": 8,
+      "bucket": "support24",
+      "color": "#10AC84",
+      "verts": 64,
+      "faces": 128,
+      "volume_mm3": 16192.448000000002,
+      "extents_mm": [
+        30.0,
+        30.0,
+        59.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "sleeve_medium",
+      "path": "stl/sleeve_medium.stl",
+      "qty": 10,
+      "bucket": "support24",
+      "color": "#2E86DE",
+      "verts": 64,
+      "faces": 128,
+      "volume_mm3": 22643.648000000005,
+      "extents_mm": [
+        30.0,
+        30.0,
+        89.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "sleeve_tall",
+      "path": "stl/sleeve_tall.stl",
+      "qty": 6,
+      "bucket": "support24",
+      "color": "#5F27CD",
+      "verts": 64,
+      "faces": 128,
+      "volume_mm3": 32320.448000000008,
+      "extents_mm": [
+        30.0,
+        30.0,
+        134.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "post_short",
+      "path": "stl/post_short.stl",
+      "qty": 8,
+      "bucket": "support24",
+      "color": "#1DD1A1",
+      "verts": 448,
+      "faces": 892,
+      "volume_mm3": 15048.446848863512,
+      "extents_mm": [
+        16.0,
+        16.0,
+        66.3
+      ],
+      "watertight": true
+    },
+    {
+      "name": "post_medium",
+      "path": "stl/post_medium.stl",
+      "qty": 10,
+      "bucket": "support24",
+      "color": "#54A0FF",
+      "verts": 488,
+      "faces": 972,
+      "volume_mm3": 22266.446848863514,
+      "extents_mm": [
+        16.0,
+        16.0,
+        96.3
+      ],
+      "watertight": true
+    },
+    {
+      "name": "post_tall",
+      "path": "stl/post_tall.stl",
+      "qty": 6,
+      "bucket": "support24",
+      "color": "#A55EEA",
+      "verts": 536,
+      "faces": 1068,
+      "volume_mm3": 33232.04684886351,
+      "extents_mm": [
+        16.0,
+        16.0,
+        141.3
+      ],
+      "watertight": true
+    },
+    {
+      "name": "lock_clip_short",
+      "path": "stl/lock_clip_short.stl",
+      "qty": 11,
+      "bucket": "support24",
+      "color": "#FF9F43",
+      "verts": 48,
+      "faces": 92,
+      "volume_mm3": 4261.84,
+      "extents_mm": [
+        18.0,
+        22.2,
+        22.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "lock_clip_medium",
+      "path": "stl/lock_clip_medium.stl",
+      "qty": 13,
+      "bucket": "support24",
+      "color": "#FF9F43",
+      "verts": 48,
+      "faces": 92,
+      "volume_mm3": 4261.840000000001,
+      "extents_mm": [
+        18.0,
+        22.2,
+        22.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "lock_clip_tall",
+      "path": "stl/lock_clip_tall.stl",
+      "qty": 8,
+      "bucket": "support24",
+      "color": "#FF9F43",
+      "verts": 48,
+      "faces": 92,
+      "volume_mm3": 4261.84,
+      "extents_mm": [
+        18.0,
+        22.2,
+        22.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "ball_cap",
+      "path": "stl/ball_cap.stl",
+      "qty": 32,
+      "bucket": "support24",
+      "color": "#FECA57",
+      "verts": 380,
+      "faces": 756,
+      "volume_mm3": 1901.8044953275482,
+      "extents_mm": [
+        16.0,
+        17.23,
+        16.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_S160",
+      "path": "stl/track_S160.stl",
+      "qty": 8,
+      "bucket": "track48",
+      "color": "#2E86DE",
+      "verts": 328,
+      "faces": 660,
+      "volume_mm3": 174654.56595858518,
+      "extents_mm": [
+        164.2,
+        79.2,
+        50.6
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_S80",
+      "path": "stl/track_S80.stl",
+      "qty": 6,
+      "bucket": "track48",
+      "color": "#2E86DE",
+      "verts": 329,
+      "faces": 662,
+      "volume_mm3": 92771.1248699958,
+      "extents_mm": [
+        91.4,
+        79.2,
+        43.1
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_S40",
+      "path": "stl/track_S40.stl",
+      "qty": 4,
+      "bucket": "track48",
+      "color": "#54A0FF",
+      "verts": 203,
+      "faces": 406,
+      "volume_mm3": 43582.732618349255,
+      "extents_mm": [
+        51.4,
+        79.2,
+        38.1
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_CR90",
+      "path": "stl/track_CR90.stl",
+      "qty": 5,
+      "bucket": "track48",
+      "color": "#10AC84",
+      "verts": 861,
+      "faces": 1730,
+      "volume_mm3": 140060.89201845508,
+      "extents_mm": [
+        119.6,
+        122.84,
+        51.04
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_CL90",
+      "path": "stl/track_CL90.stl",
+      "qty": 5,
+      "bucket": "track48",
+      "color": "#10AC84",
+      "verts": 863,
+      "faces": 1734,
+      "volume_mm3": 140483.94514199026,
+      "extents_mm": [
+        119.6,
+        122.84,
+        51.04
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_CR45",
+      "path": "stl/track_CR45.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#1DD1A1",
+      "verts": 873,
+      "faces": 1758,
+      "volume_mm3": 75065.1327115893,
+      "extents_mm": [
+        92.63,
+        91.21,
+        45.72
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_CL45",
+      "path": "stl/track_CL45.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#1DD1A1",
+      "verts": 872,
+      "faces": 1756,
+      "volume_mm3": 75139.55358942675,
+      "extents_mm": [
+        92.63,
+        91.21,
+        45.72
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_SPLIT_Y",
+      "path": "stl/track_SPLIT_Y.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#FF6B6B",
+      "verts": 1031,
+      "faces": 2058,
+      "volume_mm3": 319234.9154523001,
+      "extents_mm": [
+        167.9,
+        144.0,
+        61.85
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_MERGE_Y",
+      "path": "stl/track_MERGE_Y.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#FF6B6B",
+      "verts": 904,
+      "faces": 1812,
+      "volume_mm3": 307192.9285051632,
+      "extents_mm": [
+        167.9,
+        143.69,
+        65.35
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_FUNNEL",
+      "path": "stl/track_FUNNEL.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#F368E0",
+      "verts": 1106,
+      "faces": 2212,
+      "volume_mm3": 116322.23751510103,
+      "extents_mm": [
+        90.0,
+        98.93,
+        47.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_HX360",
+      "path": "stl/track_HX360.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#5F27CD",
+      "verts": 1461,
+      "faces": 2930,
+      "volume_mm3": 657076.0623148673,
+      "extents_mm": [
+        243.94,
+        251.48,
+        115.83
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_DROP40",
+      "path": "stl/track_DROP40.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#EE5A24",
+      "verts": 502,
+      "faces": 1004,
+      "volume_mm3": 161151.12393474142,
+      "extents_mm": [
+        82.8,
+        64.0,
+        77.6
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_SPAN240",
+      "path": "stl/track_SPAN240.stl",
+      "qty": 2,
+      "bucket": "track48",
+      "color": "#2E86DE",
+      "verts": 345,
+      "faces": 694,
+      "volume_mm3": 258579.69814300124,
+      "extents_mm": [
+        244.2,
+        79.2,
+        60.6
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_TUN160",
+      "path": "stl/track_TUN160.stl",
+      "qty": 1,
+      "bucket": "track48",
+      "color": "#576574",
+      "verts": 346,
+      "faces": 700,
+      "volume_mm3": 262189.79358369583,
+      "extents_mm": [
+        164.2,
+        79.2,
+        62.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "track_SWITCH",
+      "path": "stl/track_SWITCH.stl",
+      "qty": 1,
+      "bucket": "track48",
+      "color": "#FF9F43",
+      "verts": 1042,
+      "faces": 2088,
+      "volume_mm3": 305035.6253379584,
+      "extents_mm": [
+        167.9,
+        144.0,
+        61.85
+      ],
+      "watertight": true
+    },
+    {
+      "name": "ADAPT_OUT",
+      "path": "stl/ADAPT_OUT.stl",
+      "qty": 1,
+      "bucket": "track48",
+      "color": "#FF9FF3",
+      "verts": 37,
+      "faces": 70,
+      "volume_mm3": 30124.40774339117,
+      "extents_mm": [
+        36.0,
+        64.0,
+        23.2
+      ],
+      "watertight": true
+    },
+    {
+      "name": "ADAPT_IN",
+      "path": "stl/ADAPT_IN.stl",
+      "qty": 1,
+      "bucket": "track48",
+      "color": "#FF9FF3",
+      "verts": 88,
+      "faces": 172,
+      "volume_mm3": 66509.60662223063,
+      "extents_mm": [
+        62.42,
+        64.0,
+        44.77
+      ],
+      "watertight": true
+    },
+    {
+      "name": "switch_gate",
+      "path": "stl/switch_gate.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#F79F1F",
+      "verts": 20,
+      "faces": 36,
+      "volume_mm3": 21856.0,
+      "extents_mm": [
+        20.0,
+        42.0,
+        38.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "low_mount",
+      "path": "stl/low_mount.stl",
+      "qty": 6,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 32,
+      "faces": 64,
+      "volume_mm3": 20192.0,
+      "extents_mm": [
+        72.0,
+        20.0,
+        67.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "lift_mount_plate",
+      "path": "stl/lift_mount_plate.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#84817A",
+      "verts": 312,
+      "faces": 652,
+      "volume_mm3": 97445.23740851278,
+      "extents_mm": [
+        220.0,
+        56.0,
+        17.0
+      ],
+      "watertight": true
+    },
+    {
+      "name": "fit_coupon",
+      "path": "stl/fit_coupon.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 309,
+      "faces": 618,
+      "volume_mm3": 52366.89390235318,
+      "extents_mm": [
+        120.0,
+        80.0,
+        30.0
+      ],
+      "watertight": true
+    }
+  ],
+  "layouts": [
+    {
+      "name": "A_simple_loop",
+      "n_track_pieces": 10,
+      "piece_kinds": {
+        "ADAPT_OUT": 1,
+        "S160": 4,
+        "CR90": 3,
+        "S80": 1,
+        "ADAPT_IN": 1
+      },
+      "n_posts": 10,
+      "n_low_mounts": 3,
+      "n_skipped_sockets": 2,
+      "posts": [
+        {
+          "x": 260.0,
+          "y": 100.0,
+          "kind": "tall",
+          "H": 165.0,
+          "Hraw": 164.96,
+          "V": 175.96,
+          "well": [
+            260.0,
+            100.0
+          ]
+        },
+        {
+          "x": 180.0,
+          "y": 100.0,
+          "kind": "medium",
+          "H": 155.0,
+          "Hraw": 154.96,
+          "V": 165.96,
+          "well": [
+            180.0,
+            100.0
+          ]
+        },
+        {
+          "x": 140.0,
+          "y": 100.0,
+          "kind": "medium",
+          "H": 150.0,
+          "Hraw": 149.46,
+          "V": 160.46,
+          "well": [
+            140.0,
+            100.0
+          ]
+        },
+        {
+          "x": 60.0,
+          "y": 180.0,
+          "kind": "medium",
+          "H": 135.0,
+          "Hraw": 134.46,
+          "V": 145.46,
+          "well": [
+            60.0,
+            180.0
+          ]
+        },
+        {
+          "x": 60.0,
+          "y": 300.0,
+          "kind": "medium",
+          "H": 120.0,
+          "Hraw": 118.96,
+          "V": 129.96,
+          "well": [
+            60.0,
+            300.0
+          ]
+        },
+        {
+          "x": 60.0,
+          "y": 340.0,
+          "kind": "medium",
+          "H": 115.0,
+          "Hraw": 113.46,
+          "V": 124.46,
+          "well": [
+            60.0,
+            340.0
+          ]
+        },
+        {
+          "x": 140.0,
+          "y": 420.0,
+          "kind": "short",
+          "H": 100.0,
+          "Hraw": 98.46,
+          "V": 109.46,
+          "well": [
+            140.0,
+            420.0
+          ]
+        },
+        {
+          "x": 180.0,
+          "y": 420.0,
+          "kind": "short",
+          "H": 95.0,
+          "Hraw": 92.96,
+          "V": 103.96,
+          "well": [
+            180.0,
+            420.0
+          ]
+        },
+        {
+          "x": 260.0,
+          "y": 420.0,
+          "kind": "short",
+          "H": 85.0,
+          "Hraw": 82.96,
+          "V": 93.96,
+          "well": [
+            260.0,
+            420.0
+          ]
+        },
+        {
+          "x": 340.0,
+          "y": 420.0,
+          "kind": "short",
+          "H": 75.0,
+          "Hraw": 74.96,
+          "V": 85.96,
+          "well": [
+            340.0,
+            420.0
+          ]
+        }
+      ],
+      "low_mounts": [
+        {
+          "x": 380.0,
+          "y": 420.0,
+          "Hraw": 66.96,
+          "V": 77.96,
+          "well": [
+            380.0,
+            420.0
+          ]
+        },
+        {
+          "x": 460.0,
+          "y": 340.0,
+          "Hraw": 51.96,
+          "V": 62.96,
+          "well": [
+            460.0,
+            340.0
+          ]
+        },
+        {
+          "x": 460.0,
+          "y": 300.0,
+          "Hraw": 46.46,
+          "V": 57.46,
+          "well": [
+            460.0,
+            300.0
+          ]
+        }
+      ],
+      "skipped": [
+        {
+          "x": 60.0,
+          "y": 220.0,
+          "Hraw": 128.96,
+          "V": 139.96,
+          "skipped": "no well at socket (seam/edge/joiner omit)"
+        },
+        {
+          "x": 460.0,
+          "y": 220.0,
+          "Hraw": 36.46,
+          "V": 47.46,
+          "skipped": "no well at socket (seam/edge/joiner omit)"
+        }
+      ],
+      "adapt_in_drop": 19.21,
+      "adapt_in_slope_deg": 18.12,
+      "lift": {
+        "axle": [
+          460.0,
+          100.0
+        ],
+        "pegs": [
+          [
+            380.0,
+            100.0
+          ],
+          [
+            540.0,
+            100.0
+          ]
+        ],
+        "J0": [
+          300.0,
+          100.0
+        ],
+        "J11": [
+          460.0,
+          180.0
+        ],
+        "inlet_xy": [
+          460.0,
+          121.3
+        ],
+        "heading_out": 180.0,
+        "heading_in": 270.0
+      },
+      "within_24": true
+    },
+    {
+      "name": "B_helix",
+      "n_track_pieces": 8,
+      "piece_kinds": {
+        "ADAPT_OUT": 1,
+        "HX360R": 1,
+        "CR90": 3,
+        "S80": 1,
+        "S40": 1,
+        "ADAPT_IN": 1
+      },
+      "n_posts": 3,
+      "n_low_mounts": 4,
+      "n_skipped_sockets": 0,
+      "posts": [
+        {
+          "x": 260.0,
+          "y": 100.0,
+          "kind": "tall",
+          "H": 170.0,
+          "Hraw": 169.96,
+          "V": 180.96,
+          "well": [
+            260.0,
+            100.0
+          ]
+        },
+        {
+          "x": 220.0,
+          "y": 100.0,
+          "kind": "short",
+          "H": 90.0,
+          "Hraw": 89.96,
+          "V": 100.96,
+          "well": [
+            220.0,
+            100.0
+          ]
+        },
+        {
+          "x": 140.0,
+          "y": 180.0,
+          "kind": "short",
+          "H": 75.0,
+          "Hraw": 74.46,
+          "V": 85.46,
+          "well": [
+            140.0,
+            180.0
+          ]
+        }
+      ],
+      "low_mounts": [
+        {
+          "x": 220.0,
+          "y": 260.0,
+          "Hraw": 58.96,
+          "V": 69.96,
+          "well": [
+            220.0,
+            260.0
+          ]
+        },
+        {
+          "x": 260.0,
+          "y": 260.0,
+          "Hraw": 50.96,
+          "V": 61.96,
+          "well": [
+            260.0,
+            260.0
+          ]
+        },
+        {
+          "x": 340.0,
+          "y": 260.0,
+          "Hraw": 45.46,
+          "V": 56.46,
+          "well": [
+            340.0,
+            260.0
+          ]
+        },
+        {
+          "x": 420.0,
+          "y": 180.0,
+          "Hraw": 27.46,
+          "V": 38.46,
+          "well": [
+            420.0,
+            180.0
+          ]
+        }
+      ],
+      "skipped": [],
+      "adapt_in_drop": 15.21,
+      "adapt_in_slope_deg": 14.53,
+      "lift": {
+        "axle": [
+          420.0,
+          100.0
+        ],
+        "pegs": [
+          [
+            340.0,
+            100.0
+          ],
+          [
+            500.0,
+            100.0
+          ]
+        ],
+        "J0": [
+          260.0,
+          100.0
+        ],
+        "J11": [
+          420.0,
+          180.0
+        ],
+        "inlet_xy": [
+          420.0,
+          121.3
+        ],
+        "heading_out": 180.0,
+        "heading_in": 270.0
+      },
+      "within_24": true
+    }
+  ],
+  "assembly_3mf": "kit/marble_system_v2_layoutA.3mf",
+  "sample": {
+    "joints": {
+      "J0": [
+        20.0,
+        60.0
+      ],
+      "J1": [
+        180.0,
+        60.0
+      ],
+      "J2": [
+        260.0,
+        140.0
+      ],
+      "J3": [
+        260.0,
+        220.0
+      ]
+    },
+    "ZV0": 146.0,
+    "supports": [
+      {
+        "x": 60.0,
+        "y": 60.0,
+        "kind": "medium",
+        "H": 130.0
+      },
+      {
+        "x": 140.0,
+        "y": 60.0,
+        "kind": "medium",
+        "H": 120.0
+      },
+      {
+        "x": 260.0,
+        "y": 140.0,
+        "kind": "medium",
+        "H": 100.0
+      },
+      {
+        "x": 260.0,
+        "y": 180.0,
+        "kind": "short",
+        "H": 95.0
+      }
+    ],
+    "note": "Retained demo coordinates after translating onto the exact 18x24 board; they already fit tile_00."
+  },
+  "disclaimer": "Unprinted prototype. Computational checks only. Not a certified or kid-proof toy. Generic-profile slice is not an official H3C profile. v1 in /workspace/marble-factory is untouched."
+}

@@ -1,0 +1,578 @@
+[
+  {
+    "part": "ADAPT_IN",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 13034.46,
+    "extrusion_moves": 193998,
+    "z_range": [
+      0.2,
+      44.8
+    ],
+    "bytes": 8229816,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "ADAPT_OUT",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 6597.47,
+    "extrusion_moves": 101090,
+    "z_range": [
+      0.2,
+      23.2
+    ],
+    "bytes": 4477162,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "ball_cap",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 562.59,
+    "extrusion_moves": 16409,
+    "z_range": [
+      0.2,
+      16.0
+    ],
+    "bytes": 766807,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "fit_coupon",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 12170.15,
+    "extrusion_moves": 124163,
+    "z_range": [
+      0.2,
+      30.0
+    ],
+    "bytes": 5106182,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "lift_mount_plate",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 16897.16,
+    "extrusion_moves": 216821,
+    "z_range": [
+      0.2,
+      17.0
+    ],
+    "bytes": 8356297,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "lock_clip_medium",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 1025.89,
+    "extrusion_moves": 12272,
+    "z_range": [
+      0.2,
+      22.0
+    ],
+    "bytes": 561880,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "lock_clip_short",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 1025.89,
+    "extrusion_moves": 12272,
+    "z_range": [
+      0.2,
+      22.0
+    ],
+    "bytes": 561875,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "lock_clip_tall",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 1025.89,
+    "extrusion_moves": 12272,
+    "z_range": [
+      0.2,
+      22.0
+    ],
+    "bytes": 561870,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "low_mount",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 4618.89,
+    "extrusion_moves": 45375,
+    "z_range": [
+      0.2,
+      67.0
+    ],
+    "bytes": 1965122,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "post_medium",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 4652.41,
+    "extrusion_moves": 67312,
+    "z_range": [
+      0.2,
+      96.4
+    ],
+    "bytes": 2965190,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "post_short",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 3167.03,
+    "extrusion_moves": 46362,
+    "z_range": [
+      0.2,
+      66.4
+    ],
+    "bytes": 2045706,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "post_tall",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 6835.06,
+    "extrusion_moves": 98220,
+    "z_range": [
+      0.2,
+      141.4
+    ],
+    "bytes": 4314418,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "sleeve_medium",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 8287.67,
+    "extrusion_moves": 87947,
+    "z_range": [
+      0.2,
+      89.0
+    ],
+    "bytes": 4508603,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "sleeve_short",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 5619.17,
+    "extrusion_moves": 61565,
+    "z_range": [
+      0.2,
+      59.0
+    ],
+    "bytes": 3079166,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "sleeve_tall",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 12289.39,
+    "extrusion_moves": 128047,
+    "z_range": [
+      0.2,
+      134.0
+    ],
+    "bytes": 6675493,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "switch_gate",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 3486.01,
+    "extrusion_moves": 51916,
+    "z_range": [
+      0.2,
+      38.0
+    ],
+    "bytes": 2097208,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "tile_00",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 104774.71,
+    "extrusion_moves": 1517118,
+    "z_range": [
+      0.2,
+      12.0
+    ],
+    "bytes": 57908211,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "tile_01",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 106106.86,
+    "extrusion_moves": 1463411,
+    "z_range": [
+      0.2,
+      12.0
+    ],
+    "bytes": 56209593,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "tile_10",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 105395.6,
+    "extrusion_moves": 1481761,
+    "z_range": [
+      0.2,
+      12.0
+    ],
+    "bytes": 56805005,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "tile_11",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 106832.84,
+    "extrusion_moves": 1419716,
+    "z_range": [
+      0.2,
+      12.0
+    ],
+    "bytes": 54875323,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "tile_latch",
+    "settings": "generic_0.4_pla_0.20_brim.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 635.63,
+    "extrusion_moves": 6051,
+    "z_range": [
+      0.2,
+      9.0
+    ],
+    "bytes": 274666,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_CL45",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 13666.82,
+    "extrusion_moves": 253465,
+    "z_range": [
+      0.2,
+      45.8
+    ],
+    "bytes": 10635732,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_CL90",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 22402.58,
+    "extrusion_moves": 454520,
+    "z_range": [
+      0.2,
+      51.0
+    ],
+    "bytes": 18856230,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "track_CR45",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 13678.96,
+    "extrusion_moves": 257801,
+    "z_range": [
+      0.2,
+      45.8
+    ],
+    "bytes": 10846820,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "track_CR90",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 22354.86,
+    "extrusion_moves": 444285,
+    "z_range": [
+      0.2,
+      51.0
+    ],
+    "bytes": 18394447,
+    "first_layer_empty": false,
+    "warn": [
+      "floating islands/bridges mentioned"
+    ]
+  },
+  {
+    "part": "track_DROP40",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 30625.76,
+    "extrusion_moves": 530600,
+    "z_range": [
+      0.2,
+      77.6
+    ],
+    "bytes": 22380740,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_FUNNEL",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 35121.73,
+    "extrusion_moves": 616430,
+    "z_range": [
+      0.2,
+      47.0
+    ],
+    "bytes": 28758813,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_HX360",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 213619.28,
+    "extrusion_moves": 2520274,
+    "z_range": [
+      0.2,
+      115.8
+    ],
+    "bytes": 111409588,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_MERGE_Y",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 74506.8,
+    "extrusion_moves": 1067007,
+    "z_range": [
+      0.2,
+      65.4
+    ],
+    "bytes": 46807160,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_S160",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 28464.35,
+    "extrusion_moves": 455496,
+    "z_range": [
+      0.2,
+      50.6
+    ],
+    "bytes": 18267244,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_S40",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 8333.37,
+    "extrusion_moves": 116729,
+    "z_range": [
+      0.2,
+      38.0
+    ],
+    "bytes": 4851377,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_S80",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 16110.01,
+    "extrusion_moves": 239914,
+    "z_range": [
+      0.2,
+      43.0
+    ],
+    "bytes": 9711255,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_SPAN240",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 41317.98,
+    "extrusion_moves": 670204,
+    "z_range": [
+      0.2,
+      60.6
+    ],
+    "bytes": 26581947,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_SPLIT_Y",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 74959.62,
+    "extrusion_moves": 1122306,
+    "z_range": [
+      0.2,
+      61.8
+    ],
+    "bytes": 49247344,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_SWITCH",
+    "settings": "generic_0.4_pla_0.20_supports.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 74340.93,
+    "extrusion_moves": 1086912,
+    "z_range": [
+      0.2,
+      61.8
+    ],
+    "bytes": 47951950,
+    "first_layer_empty": false,
+    "warn": []
+  },
+  {
+    "part": "track_TUN160",
+    "settings": "generic_0.4_pla_0.20.ini",
+    "exit": 0,
+    "ok": true,
+    "filament_mm": 39600.21,
+    "extrusion_moves": 660770,
+    "z_range": [
+      0.2,
+      62.0
+    ],
+    "bytes": 26069340,
+    "first_layer_empty": false,
+    "warn": []
+  }
+]

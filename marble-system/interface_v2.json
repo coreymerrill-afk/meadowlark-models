@@ -1,0 +1,129 @@
+{
+  "version": "0.3-full48",
+  "assembled_mm": [
+    609.6,
+    457.2
+  ],
+  "assembled_in": [
+    24.0,
+    18.0
+  ],
+  "tile_mm": [
+    304.8,
+    228.6
+  ],
+  "pitch_mm": 40.0,
+  "well_count": 117,
+  "wells_per_tile": {
+    "00": 24,
+    "01": 30,
+    "10": 28,
+    "11": 35
+  },
+  "socket_to_rail": 35.748737341529164,
+  "classes": {
+    "short": {
+      "Ls": 50.0,
+      "Lpost": 60.0,
+      "Omin": 20.0,
+      "Hmin": 70.0,
+      "Hmax": 100.0,
+      "qty": 8
+    },
+    "medium": {
+      "Ls": 80.0,
+      "Lpost": 90.0,
+      "Omin": 25.0,
+      "Hmin": 100.0,
+      "Hmax": 155.0,
+      "qty": 10
+    },
+    "tall": {
+      "Ls": 125.0,
+      "Lpost": 135.0,
+      "Omin": 40.0,
+      "Hmin": 145.0,
+      "Hmax": 230.0,
+      "qty": 6
+    }
+  },
+  "bom48": [
+    {
+      "id": "S160",
+      "qty": 8
+    },
+    {
+      "id": "S80",
+      "qty": 6
+    },
+    {
+      "id": "S40",
+      "qty": 4
+    },
+    {
+      "id": "CR90",
+      "qty": 5
+    },
+    {
+      "id": "CL90",
+      "qty": 5
+    },
+    {
+      "id": "CR45",
+      "qty": 2
+    },
+    {
+      "id": "CL45",
+      "qty": 2
+    },
+    {
+      "id": "SPLIT_Y",
+      "qty": 2
+    },
+    {
+      "id": "MERGE_Y",
+      "qty": 2
+    },
+    {
+      "id": "FUNNEL",
+      "qty": 2
+    },
+    {
+      "id": "HX360",
+      "qty": 2
+    },
+    {
+      "id": "DROP40",
+      "qty": 2
+    },
+    {
+      "id": "SPAN240",
+      "qty": 2
+    },
+    {
+      "id": "TUN160",
+      "qty": 1
+    },
+    {
+      "id": "SWITCH",
+      "qty": 1
+    },
+    {
+      "id": "ADAPT_OUT",
+      "qty": 1
+    },
+    {
+      "id": "ADAPT_IN",
+      "qty": 1
+    }
+  ],
+  "extras": {
+    "switch_gate": 1,
+    "low_mount": 6,
+    "lift_mount_plate": 1
+  },
+  "slide": 20.0,
+  "slide_45": 32.0,
+  "tongue_clearance": 0.4,
+  "waterfall": 0.5
+}
