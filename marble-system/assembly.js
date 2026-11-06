@@ -98,7 +98,7 @@
   }
 
   function claimSentence() {
-    return 'Design under correction — do not print full kit yet. Solid-geometry checks found lift-adapter clashes and track-joint obstructions; generic slicing did not establish assembly/rolling.';
+    return 'Layout A clears a 35 mm ball in computation. Do not print the full kit. Layout B is a design study — the helix meets the lift. Snap force, creep, and rolling were not tested.';
   }
 
   function fileKind(kind) {

@@ -8,7 +8,7 @@ import catalog as Cat
 import assembly as A
 import layouts as L
 
-ROOT = Path('/workspace/marble-system-v2')
+ROOT = Path(__file__).resolve().parents[1]
 STL = ROOT / 'stl'
 KIT = ROOT / 'kit'
 for d in (STL, KIT):
@@ -17,6 +17,8 @@ for d in (STL, KIT):
 def print_orient(name, man):
     if name.startswith('track_') or name in ('ADAPT_OUT', 'ADAPT_IN'):
         return man.rotate([180, 0, 0])
+    if name.startswith('low_mount'):
+        return man  # standing, well-pin down
     if name == 'ball_cap':
         return man.rotate([90, 0, 0])
     if name.startswith('lock_clip'):
@@ -115,6 +117,25 @@ def main():
         summaries.append(L.summarize(lay))
         if lay['name'].startswith('A') and solids_A is None:
             solids_A = lay
+        for inst in lay['support_instances']:
+            if inst['kind'] == 'low_mount':
+                H = round(float(inst['Hraw']), 2)
+                lname = f"low_mount_h{int(round(H))}"
+                if lname not in cat and lname not in {pp['name'] for pp in parts}:
+                    print('export', lname, flush=True)
+                    man = print_orient(lname, Cat.low_mount(H, 0.0))
+                    tm = to_trimesh(man)
+                    path = STL / f'{lname}.stl'
+                    tm.export(str(path))
+                    V = tm.vertices
+                    ext = (V.max(0) - V.min(0)).tolist()
+                    parts.append(dict(
+                        name=lname, path=f'stl/{lname}.stl', qty=1, bucket='extra',
+                        color='#A3CB38', verts=int(len(tm.vertices)),
+                        faces=int(len(tm.faces)), volume_mm3=float(man.volume()),
+                        extents_mm=[round(x, 2) for x in ext], watertight=True,
+                        note=f'printed extra; assemble at H_ball={H} mm (rail Hraw)',
+                    ))
 
     # 3MF of layout A (tiles + tracks + supports + lift plate)
     print('writing assembly 3mf', flush=True)
@@ -144,7 +165,7 @@ def main():
     track_print_qty = sum(p['qty'] for p in parts if p['bucket'] == 'track48')
     manifest = dict(
         name='marble-system-v2',
-        version='0.3-full48',
+        version='0.5-layoutA',
         generated=now,
         timezone='America/Denver',
         printer={'model': 'Bambu Lab H3C', 'envelope_mm': list(C.ENVELOPE),
@@ -172,8 +193,23 @@ def main():
             'supports': [dict(x=s[0], y=s[1], kind=s[2], H=s[3]) for s in A.SUPPORTS],
             'note': 'Retained demo coordinates after translating onto the exact 18x24 board; they already fit tile_00.',
         },
-        disclaimer=('Unprinted prototype. Computational checks only. Not a certified or kid-proof toy. '
-                    'Generic-profile slice is not an official H3C profile. v1 in /workspace/marble-factory is untouched.'),
+        public_status={
+            'state': 'layout-a-clear-full-kit-held',
+            'layout_a_35mm_ball_clear': True,
+            'layout_a_ball_worst_mm3': 1.01,
+            'layout_b_working_route': False,
+            'layout_b_status': 'design_study',
+            'layout_b_helix_x_housing_mm3': 10230.3,
+            'do_not_print_full_kit': True,
+            'full_48_play_kit': False,
+            'kit_zip_regenerated': True,
+            'physical_test': False,
+        },
+        disclaimer=('Layout A clears a 35 mm ball in computation (worst about 1 mm³). '
+                    'Layout B is a design study: the 80 mm helix meets the lift. '
+                    'Do not print the full kit. Not a certified toy. '
+                    'Snap force, creep, fatigue, and rolling were not tested. '
+                    'Generic slicing is not an H3C result. v1 marble-factory is unchanged.'),
     )
     (KIT / 'manifest.json').write_text(json.dumps(manifest, indent=2))
     (KIT / 'assembly.json').write_text(json.dumps(_jsonify(summaries), indent=2))

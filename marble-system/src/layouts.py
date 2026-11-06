@@ -1,7 +1,5 @@
-"""Two complete downhill example layouts on the exact 18x24 / 457.2 x 609.6 board.
-
-Layout A — simple translated v1-style loop, lift at (460, 100).
-Layout B — descending helix feature, lift at (420, 100).
+"""Layout A is the assembleable default on the 18x24 board, lift at (460, 100).
+Layout B is a design study only: the 80 mm helix does not clear the lift.
 
 Each is an alternative assembly (not installed at once). The v1 lift sits in
 standard orientation (chute toward -X, inlet from +Y) via lift_mount_plate.
@@ -112,6 +110,30 @@ def _chain_z(start_V, drops):
     return out
 
 
+def _drop_posts_in_tracks(inst, pieces):
+    """Skip a post whose shaft meets a track solid by more than a kiss.
+    The well can sit 20 mm off a socket centre at the end of an S80 slide."""
+    kept = []
+    for rec in inst:
+        if rec.get('kind') == 'low_mount' or 'post' not in rec:
+            kept.append(rec)
+            continue
+        clash = False
+        for piece in pieces:
+            try:
+                hit = rec['post'] ^ piece['solid']
+            except Exception:
+                clash = True
+                break
+            if (not hit.is_empty()) and float(hit.volume()) > 8.0:
+                clash = True
+                break
+        if clash:
+            continue
+        kept.append(rec)
+    return kept
+
+
 # ===========================================================================
 # Layout A — simple loop
 # ===========================================================================
@@ -174,12 +196,10 @@ def layout_A():
         'ADAPT_OUT': Cat.adapt_out,
         'ADAPT_IN': lambda d=adapt_drop: Cat.adapt_in(d),
     }
-    # ADAPT_OUT: tongue at J0, heading 180, so origin is J0 - 12*heading
-    hrad = math.radians(180.0)
-    ht = np.array([math.cos(hrad), math.sin(hrad)])
-    ao_xy = (J0[0] - 12.0 * ht[0], J0[1] - 12.0 * ht[1])
-    pieces.append(dict(name='ADAPT_OUT', kind='ADAPT_OUT', origin=ao_xy, hdg=180.0,
-                       z0=ZV0, solid=place(Cat.adapt_out(), ao_xy, 180.0, ZV0)))
+    # ADAPT_OUT is a thin keel liner placed AT J0, heading downstream (180).
+    # It lives in the 12 mm wiped nest (into the first track), not in the chute.
+    pieces.append(dict(name='ADAPT_OUT', kind='ADAPT_OUT', origin=J0, hdg=180.0,
+                       z0=ZV0, solid=place(Cat.adapt_out(), J0, 180.0, ZV0)))
     for p in seq:
         man = builders[p['kind']]()
         p['solid'] = place(man, p['origin'], p['hdg'], p['z0'])
@@ -193,17 +213,15 @@ def layout_A():
     supports = []
     seen = set()
 
-    def add_sup(xy, V):
-        w = nearest_well(*xy, max_d=0.2) or capture_well(xy[0], xy[1], 0, 0, 0)
-        # if exact joint isn't a well, try to capture along nothing — caller passes captured
+    def add_sup(xy, V, heading=0.0):
         key = (round(xy[0], 1), round(xy[1], 1))
         if key in seen:
             return
         rec = support_record(xy[0], xy[1], V)
-        # only place a post if a well exists at/very near xy
         well = nearest_well(xy[0], xy[1], max_d=0.2)
         rec['well'] = well
         rec['has_well'] = well is not None
+        rec['heading'] = heading
         if well is None:
             rec['skipped'] = 'no well at socket (seam/edge/joiner omit)'
         seen.add(key)
@@ -217,9 +235,9 @@ def layout_A():
             V = z0 - drop * s / L
             well = capture_well(xy[0], xy[1], hdg, C.SLIDE, C.SLIDE)
             if well:
-                add_sup(well, V)
+                add_sup(well, V, hdg)
             else:
-                add_sup(xy, V)
+                add_sup(xy, V, hdg)
 
     def station_corner(origin, hdg, z0, drop, turn='R'):
         # sockets at start (inward +s) and end (inward -s)
@@ -227,7 +245,7 @@ def layout_A():
         t0 = np.array([math.cos(math.radians(hdg)), math.sin(math.radians(hdg))])
         # start
         well = capture_well(origin[0], origin[1], hdg, C.SLIDE, 0.0)
-        add_sup(well if well else origin, z0)
+        add_sup(well if well else origin, z0, hdg)
         # end
         end = (origin[0] + C.RC90 * (t0[0] + s * (-t0[1] if False else 0)),)
         # R90 displacement: local (80, -80) rotated by hdg
@@ -237,7 +255,7 @@ def layout_A():
                   origin[1] + sa * loc[0] + ca * loc[1])
         end_hdg = hdg + s * 90.0
         well = capture_well(end_xy[0], end_xy[1], end_hdg, 0.0, C.SLIDE)
-        add_sup(well if well else end_xy, z0 - drop)
+        add_sup(well if well else end_xy, z0 - drop, end_hdg)
 
     for p in seq:
         if p['kind'] in ('S160', 'S80', 'S40'):
@@ -254,9 +272,12 @@ def layout_A():
             continue
         x, y = rec['well']
         if rec['kind'] == 'low_mount':
-            inst.append(dict(rec, solid=Cat.low_mount().translate([x, y, 0])))
+            hdg = rec.get('heading', 0.0)
+            inst.append(dict(rec, H_ball=rec['Hraw'], heading=hdg,
+                             solid=Cat.low_mount(rec['Hraw'], hdg).translate([x, y, 0])))
         else:
             inst.append(dict(rec, **_support_solids(x, y, rec['kind'], rec['H'])))
+    inst = _drop_posts_in_tracks(inst, pieces)
 
     plate = Cat.lift_mount_plate().translate([axle[0], axle[1], 0])
     tiles = [P.tile(ix, iy).translate([ix * C.TILE_PX, iy * C.TILE_PY, 0])
@@ -295,9 +316,16 @@ def _support_solids(x, y, kind, H):
 # Layout B — helix feature
 # ===========================================================================
 def layout_B():
+    """Design study, not a working route.
+
+    The catalog helix is a real 80 mm pitch so a full turn does not cross
+    itself. Placed beside the lift on this 18x24 board, that coil occupies
+    the housing. This layout is kept so the collision can be inspected.
+    It is not a complete example.
+    """
     axle = (420.0, 100.0)
     L = lift_frame(axle)
-    J0, J11 = L['J0'], L['J11']   # (260,100), (420,180)
+    J0, J11 = L['J0'], L['J11']
     ZV0 = C.V1_ZV_J0
     seq = [
         dict(name='HX1', kind='HX360R', origin=(260.0, 100.0), hdg=180.0, drop=80.0,
@@ -314,11 +342,11 @@ def layout_B():
              end=(420.0, 180.0)),
     ]
     prev_end = ZV0
-    for i, p in enumerate(seq):
+    for i, pce in enumerate(seq):
         z0 = ZV0 if i == 0 else prev_end - WF
-        endV = z0 - p['drop']
-        p['z0'] = z0
-        p['endV'] = endV
+        endV = z0 - pce['drop']
+        pce['z0'] = z0
+        pce['endV'] = endV
         prev_end = endV
     j11_V = seq[-1]['endV']
     adapt_z = j11_V - WF
@@ -326,11 +354,8 @@ def layout_B():
     assert adapt_drop > 1.0, (adapt_drop, adapt_z)
 
     pieces = []
-    hrad = math.radians(180.0)
-    ht = np.array([math.cos(hrad), math.sin(hrad)])
-    ao_xy = (J0[0] - 12.0 * ht[0], J0[1] - 12.0 * ht[1])
-    pieces.append(dict(name='ADAPT_OUT', kind='ADAPT_OUT', origin=ao_xy, hdg=180.0,
-                       z0=ZV0, solid=place(Cat.adapt_out(), ao_xy, 180.0, ZV0)))
+    pieces.append(dict(name='ADAPT_OUT', kind='ADAPT_OUT', origin=J0, hdg=180.0,
+                       z0=ZV0, solid=place(Cat.adapt_out(), J0, 180.0, ZV0)))
     builders = {
         'S160': lambda: P.straight_track_r(C.S160, C.DROP160),
         'S80': lambda: P.straight_track_r(C.S80, C.DROP80),
@@ -338,9 +363,9 @@ def layout_B():
         'CR90': lambda: P.corner_track('R'),
         'HX360R': lambda: Cat.helix_360(turn='R'),
     }
-    for p in seq:
-        p['solid'] = place(builders[p['kind']](), p['origin'], p['hdg'], p['z0'])
-        pieces.append(p)
+    for pce in seq:
+        pce['solid'] = place(builders[pce['kind']](), pce['origin'], pce['hdg'], pce['z0'])
+        pieces.append(pce)
     pieces.append(dict(
         name='ADAPT_IN', kind='ADAPT_IN', origin=J11, hdg=270.0, z0=adapt_z,
         drop=adapt_drop, solid=place(Cat.adapt_in(adapt_drop), J11, 270.0, adapt_z)))
@@ -348,7 +373,7 @@ def layout_B():
     supports = []
     seen = set()
 
-    def add_sup(xy, V):
+    def add_sup(xy, V, heading=0.0):
         key = (round(xy[0], 1), round(xy[1], 1))
         if key in seen:
             return
@@ -356,6 +381,7 @@ def layout_B():
         well = nearest_well(xy[0], xy[1], max_d=0.2)
         rec['well'] = well
         rec['has_well'] = well is not None
+        rec['heading'] = heading
         if well is None:
             rec['skipped'] = 'no well at socket (seam/edge/joiner omit)'
         seen.add(key)
@@ -368,32 +394,39 @@ def layout_B():
             V = z0 - drop * s / Llen
             well = capture_well(xy[0], xy[1], hdg, C.SLIDE, C.SLIDE)
             if well:
-                add_sup(well, V)
+                add_sup(well, V, hdg)
             else:
-                add_sup(xy, V)
+                add_sup(xy, V, hdg)
 
     def station_corner(origin, hdg, z0, drop, turn='R'):
         s = -1 if turn == 'R' else 1
         ca, sa = math.cos(math.radians(hdg)), math.sin(math.radians(hdg))
         well = capture_well(origin[0], origin[1], hdg, C.SLIDE, 0.0)
-        add_sup(well if well else origin, z0)
+        add_sup(well if well else origin, z0, hdg)
         loc = (C.RC90, s * C.RC90)
         end_xy = (origin[0] + ca * loc[0] - sa * loc[1],
                   origin[1] + sa * loc[0] + ca * loc[1])
         end_hdg = hdg + s * 90.0
         well = capture_well(end_xy[0], end_xy[1], end_hdg, 0.0, C.SLIDE)
-        add_sup(well if well else end_xy, z0 - drop)
+        add_sup(well if well else end_xy, z0 - drop, end_hdg)
 
-    # helix sockets: entry inward +s (world heading), exit inward -s
-    add_sup((260.0, 100.0), ZV0)           # entry well
-    add_sup((220.0, 100.0), seq[0]['endV'])  # exit well
-    for p in seq:
-        if p['kind'] in ('S160', 'S80', 'S40'):
-            Llen = {'S160': 160.0, 'S80': 80.0, 'S40': 40.0}[p['kind']]
-            station_straight(p['origin'], p['hdg'], p['z0'], Llen, p['drop'],
+    add_sup((260.0, 100.0), ZV0, 180.0)
+    add_sup((220.0, 100.0), seq[0]['endV'], 180.0)
+    add_sup((180.0, 140.0), ZV0 - 80.0 * 56.0 / 360.0, 180.0 - 56.0)
+    add_sup((340.0, 140.0), ZV0 - 80.0 * 298.0 / 360.0, 180.0 - 298.0)
+    for rec in supports:
+        if rec.get('well') in ((180.0, 140.0), (340.0, 140.0)):
+            rec['kind'] = 'low_mount'
+            rec['H'] = None
+            rec['extra'] = True
+            rec['note'] = 'exact-height keyed extra; Hraw not on 5 mm rack'
+    for pce in seq:
+        if pce['kind'] in ('S160', 'S80', 'S40'):
+            Llen = {'S160': 160.0, 'S80': 80.0, 'S40': 40.0}[pce['kind']]
+            station_straight(pce['origin'], pce['hdg'], pce['z0'], Llen, pce['drop'],
                              P._socket_stations_straight(Llen))
-        elif p['kind'] == 'CR90':
-            station_corner(p['origin'], p['hdg'], p['z0'], p['drop'], 'R')
+        elif pce['kind'] == 'CR90':
+            station_corner(pce['origin'], pce['hdg'], pce['z0'], pce['drop'], 'R')
 
     inst = []
     for rec in supports:
@@ -401,9 +434,12 @@ def layout_B():
             continue
         x, y = rec['well']
         if rec['kind'] == 'low_mount':
-            inst.append(dict(rec, solid=Cat.low_mount().translate([x, y, 0])))
+            hdg = rec.get('heading', 0.0)
+            inst.append(dict(rec, H_ball=rec['Hraw'], heading=hdg,
+                             solid=Cat.low_mount(rec['Hraw'], hdg).translate([x, y, 0])))
         else:
             inst.append(dict(rec, **_support_solids(x, y, rec['kind'], rec['H'])))
+    inst = _drop_posts_in_tracks(inst, pieces)
 
     plate = Cat.lift_mount_plate().translate([axle[0], axle[1], 0])
     tiles = [P.tile(ix, iy).translate([ix * C.TILE_PX, iy * C.TILE_PY, 0])
@@ -411,7 +447,8 @@ def layout_B():
 
     return dict(
         name='B_helix',
-        description='Descending 360° helix (244 mm, 80 mm drop) then a three-corner return to the lift inlet. Lift axle at (420, 100).',
+        status='design_study',
+        description='Design study only. The 80 mm helix does not clear the lift on this board. Not a working route.',
         lift=L,
         ZV0=ZV0,
         J0=J0, J11=J11,
@@ -422,7 +459,7 @@ def layout_B():
         support_instances=inst,
         lift_mount_plate=plate,
         tiles=tiles,
-        seq_meta=[{k: p[k] for k in p if k != 'solid'} for p in pieces],
+        seq_meta=[{k: pce[k] for k in pce if k != 'solid'} for pce in pieces],
     )
 
 
@@ -441,10 +478,11 @@ def summarize(lay):
         n_low_mounts=len(lows),
         n_skipped_sockets=len(skipped),
         posts=[{k: p[k] for k in ('x', 'y', 'kind', 'H', 'Hraw', 'V', 'well') if k in p} for p in posts],
-        low_mounts=[{k: p[k] for k in ('x', 'y', 'Hraw', 'V', 'well') if k in p} for p in lows],
+        low_mounts=[{k: p[k] for k in ('x', 'y', 'Hraw', 'V', 'well', 'heading', 'H_ball') if k in p} for p in lows],
         skipped=[{k: s[k] for k in ('x', 'y', 'Hraw', 'V', 'skipped') if k in s} for s in skipped],
         adapt_in_drop=round(lay['adapt_in_drop'], 2),
         adapt_in_slope_deg=round(lay['adapt_in_slope_deg'], 2),
+        status=lay.get('status', 'default'),
         lift=lay['lift'],
         within_24=len(posts) <= 24,
     )

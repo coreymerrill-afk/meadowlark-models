@@ -1,0 +1,15 @@
+{
+  "version": "0.5-layoutA",
+  "layout_A_ball_worst_mm3": 1.01,
+  "layout_A_samples_over_5": 0,
+  "layout_A_rest_joints_over_5": 0,
+  "adapt_out_x_housing_back_mm3": 1.49,
+  "layout_B_status": "design_study",
+  "layout_B_helix_x_housing_mm3": 10230.3,
+  "layout_B_ball_worst_mm3": 5108.62,
+  "helix_pitch_mm": 80,
+  "helix_min_vertical_gap_mm": 22,
+  "full_48_play_kit": false,
+  "do_not_print_full_kit": true,
+  "note": "See SOLIDS_AUDIT.md. Computational clearance only."
+}

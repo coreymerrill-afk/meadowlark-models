@@ -135,6 +135,7 @@
     el('rev').textContent = 'v' + state.manifest.version + ' · unprinted';
     el('title').textContent = 'Modular marble board';
     el('claim').textContent = asm.claimSentence();
+    el('btn-shelf').textContent = 'All ' + c.families + ' STLs';
     var facts = [
       [String(c.track), 'Track pieces in the box'],
       [String(c.families), 'Unique STL families'],
@@ -169,7 +170,7 @@
     var list = el('part-list');
     clear(list);
     var c = counts();
-    list.appendChild(text('p', c.track + ' track pieces are the inventory count, not a release to print. Part downloads are held except the interface coupon. Layout A draws ' + state.scenes.A.installedTracks + ' track meshes and ' + state.scenes.A.installedPosts + ' posts. Layout B draws ' + state.scenes.B.installedTracks + ' track meshes and ' + state.scenes.B.installedPosts + ' posts. Neither layout is cleared as assembleable.', 'muted'));
+    list.appendChild(text('p', c.track + ' track pieces are the inventory count, not a release to print. Part downloads are held except the interface coupon. Layout A draws ' + state.scenes.A.installedTracks + ' track meshes and ' + state.scenes.A.installedPosts + ' posts and is the default route. Layout B draws ' + state.scenes.B.installedTracks + ' track meshes and is a design study, not a working route.', 'muted'));
     state.manifest.parts.forEach(function (part) {
       var row = document.createElement('div');
       row.className = 'part-row';
@@ -292,7 +293,7 @@
     root.appendChild(researchCard());
     root.appendChild(heightCard());
     root.appendChild(renderCard('/marble-system/renders/05_layoutA_3d.png', 'CAD preview of layout A, the simple loop with the lift.', 'CAD preview of layout A. Not a photograph and not a print.'));
-    root.appendChild(renderCard('/marble-system/renders/06_layoutB_3d.png', 'CAD preview of layout B, the descending helix example.', 'CAD preview of layout B. Helix sag on two end posts is untested.'));
+    root.appendChild(renderCard('/marble-system/renders/06_layoutB_3d.png', 'CAD preview of layout B, a helix design study that meets the lift.', 'Layout B is a design study. The helix meets the lift. Not a working route.'));
     root.appendChild(renderCard('/marble-system/renders/01_board_wells.png', 'Plan of the 18 by 24 inch board and the wells that remain after seams are skipped.', 'Well plan. 117 sites, not a full 40 mm grid.'));
     root.appendChild(renderCard('/marble-system/renders/03_support_section.png', 'Section of a height support: sleeve, post, pawl, and ball cap.', 'Support section from the CAD render.'));
   }
@@ -303,13 +304,14 @@
     card.appendChild(text('h2', 'What the 0-fail report actually checked'));
     var list = document.createElement('ul');
     [
-      '36 unique solids are single bodies inside the 330 × 320 × 325 mm envelope. Tiles are 304.8 × 228.6 × 12 mm, so the long side is the H3C 330 mm axis.',
-      'Rest-state track joints in the report (S160×CL90, CL90×S80, S160×S160, and the consecutive rails in A and B) came back at about 0 mm³. That is the latched track joint, not the clip.',
-      'Clip ears, the cap bulge, and the socket lip are labelled designed snaps. Overlap there is the snap model, not a clearance fit. Insertion force is untested.',
-      'A later solid audit, with a full 35 mm ball and the real v1 housing, found Layout A is not assembleable as published. ADAPT_OUT meets the housing by about 19,651 mm³. The lift mount plate meets the housing by about 55,132 mm³. The inlet adapter meets the housing by about 4,699 mm³. Those files on this page are unchanged.',
-      'The same audit found repeated track-joint ball collisions of about 63–70 mm³, and a low-mount clash of about 3,104 mm³. Generic slicing did not establish assembly or rolling.',
-      'Layout B holds the helix on the entry post and the exit post. Sag of that span is untested. A third post would fit inside the count of 24, and this CAD does not add one.',
-      'Creep, fatigue, tile warp, and child use are untested. Positive pawls are the design response to friction preload, not a measured life.'
+      state.manifest.parts.length + ' STL families are single bodies inside the 330 × 320 × 325 mm envelope. Tiles are 304.8 × 228.6 × 12 mm, so the long side is the H3C 330 mm axis.',
+      'Layout A, full 35 mm ball, no shrink, against the track solids and both v1 housings: worst sample 1.01 mm³. No sample above 5 mm³. Consecutive rest joints are 0 mm³. ADAPT_OUT meets the housing back by 1.49 mm³, a numeric sliver.',
+      'A post whose shaft met a track by more than 8 mm³ is left out. Layout A keeps ' + state.scenes.A.installedPosts + ' posts, inside the 24.',
+      'Clip ears, the cap bulge, and the socket lip are designed snaps. The switch gate has two detents of about 7.7 mm³. Insertion force is untested.',
+      'Catalog centrelines for straights, corners, both split branches, both merge inlets, the switch with the gate parked up, the guided DROP40, the funnel, the helix, and both adapters stay under 5 mm³. The gate down blocks branch B only.',
+      'Layout B is a design study. The 80 mm helix does not cross itself (about 22 mm of vertical air between passes) but the placed coil meets the lift housing by about 10,230 mm³. A 35 mm ball on that coil meets the route by about 5,109 mm³. It is not a working route.',
+      'The north rim of Layout A reaches about y = 459.6 mm. The tile ends at 457.2 mm, so that rim overhangs the board by about 2.4 mm. The ball centreline stays on the board.',
+      'Changed STLs were not re-sliced here. The old generic Prusa report does not cover these meshes and is not an H3C result. Creep, fatigue, and rolling were not tested.'
     ].forEach(function (line) { list.appendChild(text('li', line)); });
     card.appendChild(list);
     return card;
@@ -337,9 +339,9 @@
     card.appendChild(text('p', 'This coupon is a witness of the well, rack, tongue, and ball cup. It is not a validated toy and it is not clearance to print the full kit or the layout.', 'muted'));
     var list = document.createElement('ol');
     [
-      'The fit coupon is the only print file offered while the design is under correction.',
-      'Do not print the full kit, the layout 3MF, or a full set of tracks from these files.',
-      'A corrected package is still in progress. These meshes are the ones the solid audit failed.'
+      'The fit coupon is the only print file offered. It is not a toy and not Layout A.',
+      'Do not print the full kit or the layout 3MF. Layout A is a computational clearance, not a printed test.',
+      'Layout B is not a route to print. The helix meets the lift.'
     ].forEach(function (line) { list.appendChild(text('li', line)); });
     card.appendChild(list);
     var link = document.createElement('a');
@@ -354,14 +356,14 @@
     var card = document.createElement('article');
     card.className = 'card';
     card.appendChild(text('h2', 'Downloads'));
-    card.appendChild(text('p', 'The full kit ZIP and the layout A 3MF stay on the server and are not offered while the solids are under correction. No G-code was ever in the kit. Generic slicing did not establish assembly or rolling.', 'muted'));
-    card.appendChild(heldRow('Kit ZIP', 'Held. Do not print the full kit from this package.'));
+    card.appendChild(text('p', 'The full kit ZIP and the layout A 3MF stay on the server and are not offered. Layout A is computationally clear. The kit is not a printed toy, and Layout B is not a working route. No G-code is in the kit.', 'muted'));
+    card.appendChild(heldRow('Kit ZIP', 'Held. Do not print the full kit. Layout B does not clear the lift.'));
     card.appendChild(fileRow('coupon', 'Interface coupon', '/marble-system/stl/fit_coupon.stl', 'Interface witness only. Not a validated toy and not the full kit.'));
-    card.appendChild(heldRow('Layout A 3MF', 'Held. The colored scene is not an assembleable layout and is not a sliced plate.'));
+    card.appendChild(heldRow('Layout A 3MF', 'Held. Colored scene of the default route, not a sliced plate and not a print release.'));
     card.appendChild(fileRow('readme', 'README', '/marble-system/README.md', 'Inventory, height classes, and the limits of the computational checks.'));
     card.appendChild(fileRow('readme', 'Research brief', '/marble-system/RESEARCH_BRIEF.md', 'The interface note and its sources. An earlier grid in that draft is not the CAD that shipped.'));
     card.appendChild(fileRow('readme', 'Validation JSON', '/marble-system/reports/validation.json', 'The 0-fail report. Read the limits above before treating that count as a finished mechanism.'));
-    card.appendChild(fileRow('readme', 'Slice report', '/marble-system/slice/SLICE_REPORT.md', 'PrusaSlicer 2.7.4, generic 0.4 mm / 0.20 mm PLA, 36/36 nonempty. Not an official H3C profile.'));
+    card.appendChild(fileRow('readme', 'Slice report', '/marble-system/slice/SLICE_REPORT.md', 'Older generic PrusaSlicer 2.7.4 run. It does not cover the meshes in this revision and is not an official H3C profile.'));
     card.appendChild(fileRow('source', 'Generator', '/marble-system/src/layouts.py', 'src/layouts.py places A and B. src/parts.py and src/catalog.py build the solids.'));
     return card;
   }
@@ -410,7 +412,7 @@
       table.appendChild(tr);
     });
     card.appendChild(table);
-    card.appendChild(text('p', 'Rails below 70 mm use the low_mount extra (6 in the print list). Layout A uses 3. Layout B uses 4. The v1 ball_35 is unchanged and still needs supports.', 'muted'));
+    card.appendChild(text('p', 'Rails below 70 mm use a low_mount extra. Layout A uses ' + state.scenes.A.lowMounts + '. Layout B uses ' + state.scenes.B.lowMounts + '. The v1 ball_35 is unchanged and still needs supports.', 'muted'));
     return card;
   }
 
@@ -430,13 +432,14 @@
   function modeCopy() {
     var current = scene();
     if (state.shelfOn) {
-      el('mode-title').textContent = 'All 36 STL families, print orientation';
+      el('mode-title').textContent = 'All ' + state.manifest.parts.length + ' STL families, print orientation';
       el('mode-copy').textContent = 'One mesh of each family, in the exported print pose. Quantities are on the Inventory tab. This is not an assembled board.';
       return;
     }
-    var title = state.layout === 'A' ? 'Layout A · simple loop' : 'Layout B · helix example';
+    var title = state.layout === 'A' ? 'Layout A · default route' : 'Layout B · design study';
     el('mode-title').textContent = title;
-    el('mode-copy').textContent = 'Uncorrected model only. ' + current.installedTracks + ' track meshes and ' + current.installedPosts + ' posts are drawn, plus ' + current.lowMounts + ' low mounts and the v1 lift. This view is not a cleared assembly. The crank is illustrative. Balls stay out of the scene.';
+    var study = state.layout === 'B' ? ' Design study: the helix meets the lift. Not a working route.' : ' Computational 35 mm clearance. Not a printed test.';
+    el('mode-copy').textContent = current.installedTracks + ' track meshes and ' + current.installedPosts + ' posts are drawn, plus ' + current.lowMounts + ' low mounts and the v1 lift.' + study + ' The crank is illustrative. Balls stay out of the scene. Do not print the full kit.';
   }
 
   function applyMode() {
@@ -788,7 +791,7 @@
   ]).then(function (pair) {
     state.manifest = pair[0];
     state.scenes = pair[1];
-    if (state.manifest.parts.length !== 36) throw new Error('expected 36 STL families');
+    if (!state.manifest.parts.length) throw new Error('manifest has no STL families');
     if (state.manifest.bom48_sum !== 48) throw new Error('expected 48 track pieces');
     if (state.manifest.well_count !== 117) throw new Error('expected 117 wells');
     renderChrome();

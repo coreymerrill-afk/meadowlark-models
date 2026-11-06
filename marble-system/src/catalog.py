@@ -64,7 +64,8 @@ def split_y(drop_a=20.0, drop_b=35.0, L=160.0, off=80.0):
              (L-40.0, 0.5*off*(1-math.cos(math.pi*(L-40)/L)), -drop_b*(L-40)/L)]
     man = P._reinforce_sockets(man, socks, [(1,0), (1,0), path_b[-2][1]])
     man = man - P._female_cut(path_a[0][0], (1.0, 0.0))
-    return man
+    centers = [(p[0], p[1], p[2] + C.VH) for p, _t in path_a + path_b]
+    return P.carve_balls(man, centers)
 
 def merge_y(drop_a=35.0, drop_b=20.0, L=160.0, off=80.0):
     """Inlet A at (0,0,0) drops more (cascade into B). Inlet B at (0,80,-15) is the through floor.
@@ -88,7 +89,10 @@ def merge_y(drop_a=35.0, drop_b=20.0, L=160.0, off=80.0):
     socks = [(40, 0, -drop_a*40/L), (40, off, z_b0 - drop_b*40/L),
              (L-40, off, z_b0 - drop_b*(L-40)/L)]
     man = P._reinforce_sockets(man, socks, [(1,0), (1,0), (1,0)])
-    return man
+    # Both inlets fall toward the shared exit. Path A starts higher and path B
+    # starts already lower; neither rises.
+    centers = [(p[0], p[1], p[2] + C.VH) for p, _t in path_a + path_b]
+    return P.carve_balls(man, centers)
 
 def funnel(L=80.0, drop=20.0, mouth=96.0):
     """Wide sloped basin to a standard V exit. Floor always downhill."""
@@ -118,7 +122,8 @@ def funnel(L=80.0, drop=20.0, mouth=96.0):
     return man
 
 def helix_360(R=90.0, drop=80.0, n=72, exit_stub=40.0, turn="L"):
-    """Descending 360° helix, printable as one piece (dia ~244 mm). Exit stub +X at z=-drop."""
+    """One-turn helix. Pitch is 80 mm so the ~40 mm section does not meet the
+    next pass. A shorter pitch self-crosses the rail. Coil radius 90 mm."""
     path = []
     for i in range(n):
         a = 2*math.pi * i / (n - 1)
@@ -137,98 +142,193 @@ def helix_360(R=90.0, drop=80.0, n=72, exit_stub=40.0, turn="L"):
     man = man - P._female_cut(path[0][0], h0)
     man = man + P._tongue(path[-1][0], h1)
     man = P._apply_end_features(man, path[0][0], h0, path[-1][0], h1)
-    man = P._reinforce_sockets(
-        man,
-        [path[0][0], path[-1][0]],
-        [h0, h1],
-        slides=[(0.0, C.SLIDE), (C.SLIDE, 0.0)])
+    socks = [path[0][0], path[-1][0]]
+    tans = [h0, h1]
+    sls = [(0.0, C.SLIDE), (C.SLIDE, 0.0)]
+    # Mid-coil sockets beside the R=90 coil. Layout B's study places
+    # local (80, -40) on well (180, 140) and (-80, -40) on (340, 140).
+    if turn == "R":
+        targets = [(80.0, -40.0), (-80.0, -40.0)]
+    else:
+        targets = [(80.0, 40.0), (-80.0, 40.0)]
+    for tx, ty in targets:
+        best_i = min(range(n), key=lambda i: (path[i][0][0] - tx) ** 2 + (path[i][0][1] - ty) ** 2)
+        (_px, _py, pz), t = path[best_i]
+        socks.append((tx, ty, pz))
+        tans.append(t)
+        sls.append((C.SLIDE, C.SLIDE))
+    man = P._reinforce_sockets(man, socks, tans, slides=sls)
     man = man - P._female_cut(path[0][0], h0)
     return man
 
 def drop40(L=80.0, drop=40.0):
-    """Short fall into a catch bowl, then a V exit. Floor of the bowl is downhill to the exit."""
-    path_in = [((0.0, 0.0, 0.0), (1, 0)), ((24.0, 0.0, -3.0), (1, 0))]
-    path_mid = [((24.0 + 26.0*i/7, 0.0, -3.0 - (drop-5)*i/7), (1, 0)) for i in range(8)]
-    path_out = [((50.0, 0.0, -drop), (1, 0)), ((L, 0.0, -drop - 2.0), (1, 0))]
-    man = P._track_body(path_in) + P._track_body(path_mid) + P._track_body(path_out)
-    bowl = M.sphere(28, 24).translate([36.0, 0.0, -drop + 10])
-    bowl = bowl ^ box(10, 62, -28, 28, -drop - 16, -drop + 20)
-    # guarantee a single body even if sweeps only kiss
-    conn = box(18, 56, -20, 20, -drop - 6, 6)
-    man = man + bowl + conn
-    man = man - P._female_cut((0, 0, 0), (1, 0))
-    man = man + P._tongue((L, 0, -drop - 2), (1, 0))
-    man = P._reinforce_sockets(man, [(L - 24, 0, -drop - 2.0)], [(1, 0)])
-    return man
+    """Guided 40 mm descent. One continuous V, steeper through the middle,
+    with side walls. The ball path is the centreline — there is no unguided
+    bowl and no connector block in that path."""
+    n = 24
+    def z_at(s):
+        # Ease in, steep middle, ease out. Monotone down.
+        u = s / L
+        return -drop * (u * u * (3 - 2 * u)) - 2.0 * u
+    pts = []
+    for i in range(n):
+        s = L * i / (n - 1)
+        pts.append(((s, 0.0, z_at(s)), (1.0, 0.0)))
+    man = P._track_body(pts)
+    man = man - P._female_cut(pts[0][0], (1.0, 0.0))
+    man = man + P._tongue(pts[-1][0], (1.0, 0.0))
+    # Walls outside the ball so the descent stays a channel.
+    walls = []
+    for i in range(n - 1):
+        s0 = L * i / (n - 1)
+        s1 = L * (i + 1) / (n - 1)
+        z0, z1 = z_at(s0), z_at(s1)
+        for sg in (+1, -1):
+            walls.append(box(s0, s1, sg * 22, sg * 34, min(z0, z1) - C.BOT, max(z0, z1) + C.RIM))
+    man = man + union(walls)
+    man = P._reinforce_sockets(man, [(L - 28.0, 0.0, z_at(L - 28.0))], [(1.0, 0.0)])
+    centers = [(s, 0.0, z_at(s) + C.VH) for s in np.linspace(0, L, 28)]
+    return P.carve_balls(man, centers)
 
 def tun160():
     man = P.straight_track_r(C.S160, C.DROP160)
-    roof = box(12, 148, -18, 18, 10, 28)
-    # slope the roof roughly
-    return man + roof
+    # Side walls stay outside the ball (|y|>=20 > RB=17.5) and join the
+    # sloped body along the whole length; roof is above ball top (VH+RB≈42.25).
+    left = box(12, 148, -32, -20, -24, 56)
+    right = box(12, 148, 20, 32, -24, 56)
+    roof = box(12, 148, -32, 32, 44, 56)
+    return man + left + right + roof
 
 def switch_y():
-    """Same Y-fork as SPLIT_Y plus a vertical pocket that receives switch_gate.
-    Gate in = path B blocked; gate out = both paths open (manual)."""
+    """Y-fork plus a divider slot and two detent grooves.
+    The slot sits between the branches after they have separated past a
+    35 mm sphere (around x=110). Gate down crosses branch B. Gate up
+    is the same shoe raised clear of both balls."""
     man = split_y()
-    # pocket roughly over the B branch root (does not cut the A floor)
-    pocket = box(30, 50, 10, 38, -20, 18)
-    return man - pocket
+    # Divider pocket. Branch A ball stays inside |y|<18. Branch B centre
+    # near x=110 is about y=62, so its ball starts near y=44.
+    # The tower is the detent post. It stands above the rail so the raised
+    # gate still has a groove to sit in.
+    tower = box(106, 118, 18.0, 22.0, 0, 36)
+    man = man + tower
+    slot = box(96, 128, 22, 40, -8, 40)
+    # Grooves in the wall on the A side of the slot (y just under 22).
+    groove_down = box(106, 118, 20.6, 23.0, 3.4, 6.2)
+    groove_up = box(106, 118, 20.6, 23.0, 25.4, 28.2)
+    return man - slot - groove_down - groove_up
 
 def switch_gate():
-    """Removable wall that blocks path B of the switch when dropped in."""
-    return box(28, 48, 8, 36, -18, 16) + box(30, 46, 20, 50, 12, 20)
+    """Shoe in the divider slot, rib in the down groove, blade across B."""
+    shoe = box(100, 124, 24, 38, 0, 10)
+    # Rib is 0.4 mm taller than the groove on each side and 0.6 mm into
+    # the wall, so the seated pose is a designed snap, not a free rattle.
+    rib = box(108, 116, 20.8, 22.4, 3.0, 6.6)
+    blade = box(104, 120, 42, 80, 1, 16)
+    return shoe + rib + blade
+
+def pose_switch_gate(mode):
+    """'down' blocks branch B. 'up' parks the blade above both balls."""
+    gate = switch_gate()
+    if mode == 'down':
+        return gate
+    if mode == 'up':
+        return gate.translate([0, 0, 22])
+    raise ValueError(mode)
 
 def adapt_out():
-    """Collar that accepts the v1 chute keel and presents a standard male at J0.
-    Built from the published keel profile (same numbers that generate the v1 mesh)."""
-    # Open V channel ~24 mm long, heading +X locally (caller rotates).
-    path = [((-14.0, 0.0, 1.2), (1, 0)), ((12.0, 0.0, 0.0), (1, 0))]
-    man = P._track_body(path)
-    # keel clearance cavity (v1 keel loop, extra 0.45 mm)
-    keel_cut = []
-    for x in np.linspace(-14, 2, 8):
-        keel_cut.append(((x, 0.0, 1.2 - (x+14)*1.2/16), (-1, 0)))
-    loop = [(0, 1.3-0.45), (4.6, 6.2), (2.4, 6.2), (0, 3.5), (-2.4, 6.2), (-4.6, 6.2)]
-    # simpler box cavity for the keel
-    cav = box(-16, 4, -5.0, 5.0, 0.6, 6.5)
-    man = man - cav
-    man = man + P._tongue((12.0, 0.0, 0.0), (1, 0))
-    return man
+    """Thin retaining liner around the v1 exit keel, in the 12 mm wiped nest
+    (local +X = downstream into the first track). The keel itself follows the
+    chute's 7° slope (chute_center_z - VH), so this collar is swept on the
+    same slope. Cavity is an offset of the published keel hexagon
+    [(0,1.3),(4.2,5.8),(2.2,5.8),(0,3.5),(-2.2,5.8),(-4.2,5.8)]. Outer stays
+    inside the V (v >= |u|) and below the ball (v <= 6.4 < VH-RB = 7.25).
+    Place at J0 with the outgoing heading. This is the 48th inventory part."""
+    slope = math.tan(math.radians(7.0))
+    # v1 chute V-vertex at J0 is chute_center_z(-160)-VH+H_AXLE = 179.763,
+    # while the first-track V (V1_ZV_J0) is 180.96. The keel is modelled in
+    # the chute-V frame, so the collar (placed at track V) shifts down by
+    # that 1.197 mm and then follows the 7° chute slope.
+    chute_shift = -1.197
+    # Offset keel hexagon. Cavity tips sit above the outer so the subtract
+    # opens the top (no paper-thin roof).
+    outer = [(0.0, 0.30), (5.35, 6.4), (2.15, 6.4), (0.0, 2.25),
+             (-2.15, 6.4), (-5.35, 6.4)]
+    cavity = [(0.0, 0.85), (4.70, 6.55), (2.20, 6.55), (0.0, 3.05),
+              (-2.20, 6.55), (-4.70, 6.55)]
+    x0, x1 = 0.5, 12.0
+    def samples(loop):
+        return [((x, 0.0, chute_shift - slope * x), (1.0, 0.0), loop) for x in (x0, x1)]
+    from geom import sweep
+    return sweep(samples(outer)) - sweep(samples(cavity))
+
+def _slim_v(path, w2=23.5):
+    """Narrow V-channel that can enter the v1 front-plate hole (±24.5 mm)."""
+    vt = min(C.VT, w2 - 0.5)
+    loop_body = [(-w2, -C.BOT), (w2, -C.BOT), (w2, C.RIM), (-w2, C.RIM)]
+    loop_cut = [(0, -0.2), (vt, vt - 0.2), (vt, C.RIM + 8), (-vt, C.RIM + 8), (-vt, vt - 0.2)]
+    samples_b = [(o, t, loop_body) for o, t in path]
+    samples_c = [(o, t, loop_cut) for o, t in path]
+    from geom import sweep
+    return sweep(samples_b) - sweep(samples_c)
 
 def adapt_in(drop=None):
     """Low ramp from a standard female (no ball stack) down to the v1 front-plate inlet.
-    Length matches v1 INLET_L. Drop defaults to the catalog 23.2 mm witness;
-    layouts pass the actual remaining height. Always downhill. No ball socket."""
+    Wide V stops short of the plate; a 47 mm throat continues to the inner face
+    (not past it). No solid nose block in the ball path. Always downhill."""
     L = C.V1_INLET_L
     drop = 23.2 if drop is None else drop
     if drop < 1.0:
         raise ValueError('ADAPT_IN needs a positive drop')
-    n = 12
-    path = [((L*i/(n-1), 0.0, -drop*i/(n-1)), (1.0, 0.0)) for i in range(n)]
+    # plate outer is ~5.3 mm before L (5 mm plate + 0.3). Stop the 64 mm body 8 mm early.
+    L_wide = L - 8.0
+    # Hold V through the incoming tongue + female pocket so the 35 mm ball,
+    # which spans the joint, rides the V-tongue instead of dropping into it.
+    hold = C.TONGUE + 2.0
+    def z_at(s):
+        if s <= hold:
+            return 0.0
+        return -drop * (s - hold) / (L - hold)
+    n = 16
+    path = [((L_wide * i / (n - 1), 0.0, z_at(L_wide * i / (n - 1))), (1.0, 0.0))
+            for i in range(n)]
     man = P._track_body(path)
     man = man - P._female_cut(path[0][0], (1.0, 0.0))
-    # nose that meets the v1 front-plate opening (±24.5 mm wide)
-    nose = box(L - 8, L + 6, -24.0, 24.0, -drop - 8, -drop + 22)
-    man = man + nose
-    # NO ball socket — this is the low direct-rail adapter
+    throat = [((L_wide, 0.0, z_at(L_wide)), (1.0, 0.0)), ((L, 0.0, z_at(L)), (1.0, 0.0))]
+    man = man + _slim_v(throat, w2=23.5)
+    centers = [(s, 0.0, z_at(s) + C.VH) for s in np.linspace(0, L, 20)]
+    return P.carve_balls(man, centers)
+
+def low_mount(H_ball=55.0, heading=0.0):
+    """Fixed well-anchored post with an integrated keyed ball that seats in a
+    low rail's existing socket (Hraw < 70, below the short-class window).
+    Same BJ_R / CAP_TO_CENTER stack as ball_cap, so the rail V is at the
+    designed height and the hanging socket boss is the mating feature — a
+    yoke at the rail underside would collide with that boss. Extra, not one
+    of the 24 sleeve/post structures. Print one per needed height. heading
+    aligns the roll-key fin with the track (cardinal in the example layouts)."""
+    H = float(H_ball)
+    post_top = H - C.CAP_TO_CENTER
+    if post_top < 6.0:
+        raise ValueError(f'low_mount H_ball={H} too short for the cap stack')
+    pin = box(-8, 8, -8, 8, -C.EMBED, 4)
+    post = box(-8, 8, -8, 8, 0, post_top)
+    ball = M.sphere(C.BJ_R, 28).translate([0, 0, H])
+    neck = cyl(3.6, C.CAP_TO_CENTER - C.BJ_R + 2.0, 0, 0, post_top)
+    fin = box(-7.2, 7.2, -0.9, 0.9, H - 3.0, H + C.BJ_R + 2.4)
+    man = pin + post + ball + fin + neck
+    if abs(heading) > 1e-9:
+        man = man.rotate([0, 0, heading])
     return man
 
-def low_mount():
-    """Well pin + yoke that saddles a track underside. Extra, not one of the 24.
-    Covers rail underside heights roughly 36–68 mm via a short 4 mm rack."""
-    pin = box(-8, 8, -8, 8, -C.EMBED, 4)
-    post = box(-7, 7, -7, 7, 0, 52)
-    yoke = box(-36, 36, -10, 10, 48, 58)
-    inner = box(-22, 22, -12, 12, 50, 57)
-    return pin + post + yoke - inner
-
 def lift_mount_plate():
-    """Sits on two wells 160 mm apart, offers v1 teardrop/round sockets (r=10.2) for housing pegs."""
-    plate = box(-110, 110, -28, 28, 0, 8)
-    pins = box(-88, -72, -8, 8, -C.EMBED, 1) + box(72, 88, -8, 8, -C.EMBED, 1)
-    holes = cyl(10.2, 10, -80, 0, -1) + cyl(10.2, 10, 80, 0, -1)
-    return plate + pins - holes
+    """Two flush well inserts (not an above-tile bar). The v1 housing foot sits on
+    the tile at z=0; a raised plate would collide with that foot. Each insert fills
+    a 22.4 mm well and provides a r=10.2 hole for the teardrop peg (9.7 mm)."""
+    def insert(x):
+        body = box(x - 11.0, x + 11.0, -11.0, 11.0, -C.EMBED, 0.0)
+        hole = cyl(10.2, C.EMBED + 2.0, x, 0.0, -C.EMBED - 1.0)
+        return body - hole
+    return insert(-80.0) + insert(80.0)
 
 def part_catalog():
     cat = {

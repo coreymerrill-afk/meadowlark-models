@@ -395,7 +395,7 @@
       },
       {
         "name": "track_S160",
-        "volume": 174654.56595858518,
+        "volume": 179320.16899499457,
         "too_small": false,
         "extents": [
           164.2,
@@ -416,12 +416,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 328,
-        "faces": 660
+        "verts": 339,
+        "faces": 682
       },
       {
         "name": "track_S80",
-        "volume": 92771.1248699958,
+        "volume": 97881.76175753496,
         "too_small": false,
         "extents": [
           91.4,
@@ -442,12 +442,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 329,
-        "faces": 662
+        "verts": 343,
+        "faces": 690
       },
       {
         "name": "track_S40",
-        "volume": 43582.732618349255,
+        "volume": 48693.36951164475,
         "too_small": false,
         "extents": [
           51.4,
@@ -468,12 +468,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 203,
-        "faces": 406
+        "verts": 216,
+        "faces": 432
       },
       {
         "name": "track_CR90",
-        "volume": 140060.89201845508,
+        "volume": 144735.0855441948,
         "too_small": false,
         "extents": [
           119.6,
@@ -494,12 +494,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 861,
-        "faces": 1730
+        "verts": 878,
+        "faces": 1764
       },
       {
         "name": "track_CL90",
-        "volume": 140483.94514199026,
+        "volume": 145158.13866773,
         "too_small": false,
         "extents": [
           119.6,
@@ -520,12 +520,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 863,
-        "faces": 1734
+        "verts": 879,
+        "faces": 1766
       },
       {
         "name": "track_CR45",
-        "volume": 75065.1327115893,
+        "volume": 80150.99144608866,
         "too_small": false,
         "extents": [
           92.63,
@@ -546,12 +546,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 873,
-        "faces": 1758
+        "verts": 900,
+        "faces": 1816
       },
       {
         "name": "track_CL45",
-        "volume": 75139.55358942675,
+        "volume": 80225.41244111332,
         "too_small": false,
         "extents": [
           92.63,
@@ -572,12 +572,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 872,
-        "faces": 1756
+        "verts": 893,
+        "faces": 1802
       },
       {
         "name": "track_SPLIT_Y",
-        "volume": 319234.9154523001,
+        "volume": 329219.52228792844,
         "too_small": false,
         "extents": [
           167.9,
@@ -598,12 +598,12 @@
         "sliver_components": 2,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 1031,
-        "faces": 2058
+        "verts": 1037,
+        "faces": 2070
       },
       {
         "name": "track_MERGE_Y",
-        "volume": 307192.9285051632,
+        "volume": 312185.23104941176,
         "too_small": false,
         "extents": [
           167.9,
@@ -624,12 +624,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 904,
-        "faces": 1812
+        "verts": 907,
+        "faces": 1818
       },
       {
         "name": "track_FUNNEL",
-        "volume": 116322.23751510103,
+        "volume": 121314.54178799417,
         "too_small": false,
         "extents": [
           90.0,
@@ -650,12 +650,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 1106,
-        "faces": 2212
+        "verts": 1084,
+        "faces": 2168
       },
       {
         "name": "track_HX360",
-        "volume": 657076.0623148673,
+        "volume": 673813.2928669207,
         "too_small": false,
         "extents": [
           243.94,
@@ -673,15 +673,15 @@
           16.83
         ],
         "envelope_ok": true,
-        "sliver_components": 0,
+        "sliver_components": 2,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 1461,
-        "faces": 2930
+        "verts": 1797,
+        "faces": 3606
       },
       {
         "name": "track_DROP40",
-        "volume": 161151.12393474142,
+        "volume": 166143.6399754035,
         "too_small": false,
         "extents": [
           82.8,
@@ -702,12 +702,12 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 502,
-        "faces": 1004
+        "verts": 510,
+        "faces": 1020
       },
       {
         "name": "track_SPAN240",
-        "volume": 258579.69814300124,
+        "volume": 263248.7602321258,
         "too_small": false,
         "extents": [
           244.2,
@@ -728,17 +728,17 @@
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 345,
-        "faces": 694
+        "verts": 356,
+        "faces": 716
       },
       {
         "name": "track_TUN160",
-        "volume": 262189.79358369583,
+        "volume": 433917.71452046913,
         "too_small": false,
         "extents": [
           164.2,
           79.2,
-          62.0
+          90.0
         ],
         "bbox_min": [
           7.2,
@@ -748,18 +748,18 @@
         "bbox_max": [
           171.4,
           39.6,
-          28.0
+          56.0
         ],
         "envelope_ok": true,
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 346,
-        "faces": 700
+        "verts": 353,
+        "faces": 714
       },
       {
         "name": "track_SWITCH",
-        "volume": 305035.6253379584,
+        "volume": 315020.23217358673,
         "too_small": false,
         "extents": [
           167.9,
@@ -780,60 +780,60 @@
         "sliver_components": 2,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 1042,
-        "faces": 2088
+        "verts": 1048,
+        "faces": 2100
       },
       {
         "name": "ADAPT_OUT",
-        "volume": 30124.40774339117,
+        "volume": 83.21915274765855,
         "too_small": false,
         "extents": [
-          36.0,
-          64.0,
-          23.2
+          11.5,
+          10.7,
+          7.51
         ],
         "bbox_min": [
-          -14.0,
-          -32.0,
-          -4.0
+          0.5,
+          -5.35,
+          -2.37
         ],
         "bbox_max": [
-          22.0,
-          32.0,
-          19.2
+          12.0,
+          5.35,
+          5.14
         ],
         "envelope_ok": true,
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 37,
-        "faces": 70
+        "verts": 12,
+        "faces": 20
       },
       {
         "name": "ADAPT_IN",
-        "volume": 66509.60662223063,
+        "volume": 48072.910059662936,
         "too_small": false,
         "extents": [
-          62.42,
+          47.5,
           64.0,
-          44.77
+          44.96
         ],
         "bbox_min": [
-          2.28,
+          11.2,
           -32.0,
-          -31.2
+          -27.2
         ],
         "bbox_max": [
-          64.7,
+          58.7,
           32.0,
-          13.57
+          17.76
         ],
         "envelope_ok": true,
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 88,
-        "faces": 172
+        "verts": 107,
+        "faces": 210
       },
       {
         "name": "switch_gate",
@@ -863,55 +863,55 @@
       },
       {
         "name": "low_mount",
-        "volume": 20192.0,
+        "volume": 16105.882758892933,
         "too_small": false,
         "extents": [
-          72.0,
-          20.0,
-          67.0
+          16.0,
+          16.0,
+          74.4
         ],
         "bbox_min": [
-          -36.0,
-          -10.0,
+          -8.0,
+          -8.0,
           -9.0
         ],
         "bbox_max": [
-          36.0,
-          10.0,
-          58.0
+          8.0,
+          8.0,
+          65.4
         ],
         "envelope_ok": true,
         "sliver_components": 0,
         "components": 1,
         "watertight_kernel": true,
-        "verts": 32,
-        "faces": 64
+        "verts": 386,
+        "faces": 768
       },
       {
         "name": "lift_mount_plate",
-        "volume": 97445.23740851278,
+        "volume": 2838.122910784811,
         "too_small": false,
         "extents": [
-          220.0,
-          56.0,
-          17.0
+          182.0,
+          22.0,
+          9.0
         ],
         "bbox_min": [
-          -110.0,
-          -28.0,
+          -91.0,
+          -11.0,
           -9.0
         ],
         "bbox_max": [
-          110.0,
-          28.0,
-          8.0
+          91.0,
+          11.0,
+          0.0
         ],
         "envelope_ok": true,
         "sliver_components": 0,
-        "components": 1,
+        "components": 2,
         "watertight_kernel": true,
-        "verts": 312,
-        "faces": 652
+        "verts": 272,
+        "faces": 544
       },
       {
         "name": "fit_coupon",
@@ -1320,7 +1320,9 @@
             "well": [
               380.0,
               420.0
-            ]
+            ],
+            "heading": 0.0,
+            "H_ball": 66.96
           },
           {
             "x": 460.0,
@@ -1330,7 +1332,9 @@
             "well": [
               460.0,
               340.0
-            ]
+            ],
+            "heading": -90.0,
+            "H_ball": 51.96
           },
           {
             "x": 460.0,
@@ -1340,7 +1344,9 @@
             "well": [
               460.0,
               300.0
-            ]
+            ],
+            "heading": 270.0,
+            "H_ball": 46.46
           }
         ],
         "skipped": [
@@ -1435,7 +1441,7 @@
             "name": "ADAPT_OUT",
             "kind": "ADAPT_OUT",
             "origin": [
-              312.0,
+              300.0,
               100.0
             ],
             "hdg": 180.0,
@@ -1594,7 +1600,7 @@
           "ADAPT_IN": 1
         },
         "n_posts": 3,
-        "n_low_mounts": 4,
+        "n_low_mounts": 6,
         "n_skipped_sockets": 0,
         "posts": [
           {
@@ -1636,6 +1642,30 @@
         ],
         "low_mounts": [
           {
+            "x": 180.0,
+            "y": 140.0,
+            "Hraw": 157.52,
+            "V": 168.52,
+            "well": [
+              180.0,
+              140.0
+            ],
+            "heading": 124.0,
+            "H_ball": 157.52
+          },
+          {
+            "x": 340.0,
+            "y": 140.0,
+            "Hraw": 103.74,
+            "V": 114.74,
+            "well": [
+              340.0,
+              140.0
+            ],
+            "heading": -118.0,
+            "H_ball": 103.74
+          },
+          {
             "x": 220.0,
             "y": 260.0,
             "Hraw": 58.96,
@@ -1643,7 +1673,9 @@
             "well": [
               220.0,
               260.0
-            ]
+            ],
+            "heading": 0.0,
+            "H_ball": 58.96
           },
           {
             "x": 260.0,
@@ -1653,7 +1685,9 @@
             "well": [
               260.0,
               260.0
-            ]
+            ],
+            "heading": 0.0,
+            "H_ball": 50.96
           },
           {
             "x": 340.0,
@@ -1663,7 +1697,9 @@
             "well": [
               340.0,
               260.0
-            ]
+            ],
+            "heading": 0.0,
+            "H_ball": 45.46
           },
           {
             "x": 420.0,
@@ -1673,7 +1709,9 @@
             "well": [
               420.0,
               180.0
-            ]
+            ],
+            "heading": -90.0,
+            "H_ball": 27.46
           }
         ],
         "skipped": [],
@@ -1743,7 +1781,7 @@
             "name": "ADAPT_OUT",
             "kind": "ADAPT_OUT",
             "origin": [
-              272.0,
+              260.0,
               100.0
             ],
             "hdg": 180.0,

@@ -1,22 +1,7 @@
 {
   "name": "marble-system-v2",
-  "version": "0.3-full48",
-  "public_status": {
-    "state": "design-under-correction",
-    "layout_a_assembleable_as_claimed": false,
-    "do_not_print_full_kit": true,
-    "summary": "Design under correction — do not print full kit yet. Solid-geometry checks found lift-adapter clashes and track-joint obstructions; generic slicing did not establish assembly/rolling.",
-    "findings_mm3": {
-      "ADAPT_OUT_x_housing_back": 19651,
-      "lift_mount_plate_x_housing_back": 55132,
-      "ADAPT_IN_x_housing": 4699,
-      "joint_ball_collisions": "63-70",
-      "low_mount_clash": 3104
-    },
-    "cad_unchanged": true,
-    "kit_zip_regenerated": false
-  },
-  "generated": "2026-11-05T23:54:42-07:00",
+  "version": "0.5-layoutA",
+  "generated": "2026-11-06T00:59:28-07:00",
   "timezone": "America/Denver",
   "printer": {
     "model": "Bambu Lab H3C",
@@ -405,13 +390,13 @@
       "qty": 8,
       "bucket": "track48",
       "color": "#2E86DE",
-      "verts": 328,
-      "faces": 660,
-      "volume_mm3": 174654.56595858518,
+      "verts": 390,
+      "faces": 784,
+      "volume_mm3": 178648.75398707943,
       "extents_mm": [
         164.2,
         79.2,
-        50.6
+        50.5
       ],
       "watertight": true
     },
@@ -421,13 +406,13 @@
       "qty": 6,
       "bucket": "track48",
       "color": "#2E86DE",
-      "verts": 329,
-      "faces": 662,
-      "volume_mm3": 92771.1248699958,
+      "verts": 670,
+      "faces": 1344,
+      "volume_mm3": 96896.39231436262,
       "extents_mm": [
         91.4,
         79.2,
-        43.1
+        43.0
       ],
       "watertight": true
     },
@@ -437,13 +422,13 @@
       "qty": 4,
       "bucket": "track48",
       "color": "#54A0FF",
-      "verts": 203,
-      "faces": 406,
-      "volume_mm3": 43582.732618349255,
+      "verts": 486,
+      "faces": 972,
+      "volume_mm3": 47714.05514276068,
       "extents_mm": [
         51.4,
         79.2,
-        38.1
+        38.0
       ],
       "watertight": true
     },
@@ -453,13 +438,13 @@
       "qty": 5,
       "bucket": "track48",
       "color": "#10AC84",
-      "verts": 861,
-      "faces": 1730,
-      "volume_mm3": 140060.89201845508,
+      "verts": 1450,
+      "faces": 2908,
+      "volume_mm3": 143936.0161416301,
       "extents_mm": [
         119.6,
         122.84,
-        51.04
+        50.97
       ],
       "watertight": true
     },
@@ -469,13 +454,13 @@
       "qty": 5,
       "bucket": "track48",
       "color": "#10AC84",
-      "verts": 863,
-      "faces": 1734,
-      "volume_mm3": 140483.94514199026,
+      "verts": 1325,
+      "faces": 2658,
+      "volume_mm3": 144367.94751605138,
       "extents_mm": [
         119.6,
         122.84,
-        51.04
+        50.97
       ],
       "watertight": true
     },
@@ -485,13 +470,13 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#1DD1A1",
-      "verts": 873,
-      "faces": 1758,
-      "volume_mm3": 75065.1327115893,
+      "verts": 1645,
+      "faces": 3306,
+      "volume_mm3": 79368.17341782307,
       "extents_mm": [
         92.63,
         91.21,
-        45.72
+        45.63
       ],
       "watertight": true
     },
@@ -501,13 +486,13 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#1DD1A1",
-      "verts": 872,
-      "faces": 1756,
-      "volume_mm3": 75139.55358942675,
+      "verts": 1602,
+      "faces": 3220,
+      "volume_mm3": 79450.49937773737,
       "extents_mm": [
         92.63,
         91.21,
-        45.72
+        45.63
       ],
       "watertight": true
     },
@@ -517,13 +502,13 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#FF6B6B",
-      "verts": 1031,
-      "faces": 2058,
-      "volume_mm3": 319234.9154523001,
+      "verts": 2381,
+      "faces": 4758,
+      "volume_mm3": 307695.75214116037,
       "extents_mm": [
         167.9,
         144.0,
-        61.85
+        61.75
       ],
       "watertight": true
     },
@@ -533,13 +518,13 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#FF6B6B",
-      "verts": 904,
-      "faces": 1812,
-      "volume_mm3": 307192.9285051632,
+      "verts": 2238,
+      "faces": 4480,
+      "volume_mm3": 293858.9737961409,
       "extents_mm": [
         167.9,
         143.69,
-        65.35
+        65.23
       ],
       "watertight": true
     },
@@ -549,9 +534,9 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#F368E0",
-      "verts": 1106,
-      "faces": 2212,
-      "volume_mm3": 116322.23751510103,
+      "verts": 1084,
+      "faces": 2168,
+      "volume_mm3": 121314.54178799417,
       "extents_mm": [
         90.0,
         98.93,
@@ -565,13 +550,13 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#5F27CD",
-      "verts": 1461,
-      "faces": 2930,
-      "volume_mm3": 657076.0623148673,
+      "verts": 1781,
+      "faces": 3574,
+      "volume_mm3": 673043.8675159937,
       "extents_mm": [
         243.94,
         251.48,
-        115.83
+        115.74
       ],
       "watertight": true
     },
@@ -581,13 +566,13 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#EE5A24",
-      "verts": 502,
-      "faces": 1004,
-      "volume_mm3": 161151.12393474142,
+      "verts": 1654,
+      "faces": 3308,
+      "volume_mm3": 92611.61954170978,
       "extents_mm": [
-        82.8,
-        64.0,
-        77.6
+        90.0,
+        66.0,
+        67.03
       ],
       "watertight": true
     },
@@ -597,13 +582,13 @@
       "qty": 2,
       "bucket": "track48",
       "color": "#2E86DE",
-      "verts": 345,
-      "faces": 694,
-      "volume_mm3": 258579.69814300124,
+      "verts": 419,
+      "faces": 842,
+      "volume_mm3": 262643.1538982809,
       "extents_mm": [
         244.2,
         79.2,
-        60.6
+        60.5
       ],
       "watertight": true
     },
@@ -613,13 +598,13 @@
       "qty": 1,
       "bucket": "track48",
       "color": "#576574",
-      "verts": 346,
-      "faces": 700,
-      "volume_mm3": 262189.79358369583,
+      "verts": 404,
+      "faces": 816,
+      "volume_mm3": 433245.8990082943,
       "extents_mm": [
         164.2,
         79.2,
-        62.0
+        90.0
       ],
       "watertight": true
     },
@@ -629,13 +614,13 @@
       "qty": 1,
       "bucket": "track48",
       "color": "#FF9F43",
-      "verts": 1042,
-      "faces": 2088,
-      "volume_mm3": 305035.6253379584,
+      "verts": 2415,
+      "faces": 4826,
+      "volume_mm3": 304411.2765908782,
       "extents_mm": [
         167.9,
         144.0,
-        61.85
+        81.25
       ],
       "watertight": true
     },
@@ -645,13 +630,13 @@
       "qty": 1,
       "bucket": "track48",
       "color": "#FF9FF3",
-      "verts": 37,
-      "faces": 70,
-      "volume_mm3": 30124.40774339117,
+      "verts": 12,
+      "faces": 20,
+      "volume_mm3": 83.21915274765855,
       "extents_mm": [
-        36.0,
-        64.0,
-        23.2
+        11.5,
+        10.7,
+        7.51
       ],
       "watertight": true
     },
@@ -661,13 +646,13 @@
       "qty": 1,
       "bucket": "track48",
       "color": "#FF9FF3",
-      "verts": 88,
-      "faces": 172,
-      "volume_mm3": 66509.60662223063,
+      "verts": 619,
+      "faces": 1234,
+      "volume_mm3": 46546.7119861736,
       "extents_mm": [
-        62.42,
+        46.7,
         64.0,
-        44.77
+        44.78
       ],
       "watertight": true
     },
@@ -677,13 +662,13 @@
       "qty": 1,
       "bucket": "extra",
       "color": "#F79F1F",
-      "verts": 20,
+      "verts": 24,
       "faces": 36,
-      "volume_mm3": 21856.0,
+      "volume_mm3": 12526.08,
       "extents_mm": [
-        20.0,
-        42.0,
-        38.0
+        24.0,
+        59.2,
+        16.0
       ],
       "watertight": true
     },
@@ -693,13 +678,13 @@
       "qty": 6,
       "bucket": "extra",
       "color": "#A3CB38",
-      "verts": 32,
-      "faces": 64,
-      "volume_mm3": 20192.0,
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 16105.882758892933,
       "extents_mm": [
-        72.0,
-        20.0,
-        67.0
+        16.0,
+        16.0,
+        74.4
       ],
       "watertight": true
     },
@@ -709,13 +694,13 @@
       "qty": 1,
       "bucket": "extra",
       "color": "#84817A",
-      "verts": 312,
-      "faces": 652,
-      "volume_mm3": 97445.23740851278,
+      "verts": 272,
+      "faces": 544,
+      "volume_mm3": 2838.122910784811,
       "extents_mm": [
-        220.0,
-        56.0,
-        17.0
+        182.0,
+        22.0,
+        9.0
       ],
       "watertight": true
     },
@@ -734,6 +719,159 @@
         30.0
       ],
       "watertight": true
+    },
+    {
+      "name": "low_mount_h67",
+      "path": "stl/low_mount_h67.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 19167.64275889293,
+      "extents_mm": [
+        16.0,
+        16.0,
+        86.36
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=66.96 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h52",
+      "path": "stl/low_mount_h52.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 15327.642758892933,
+      "extents_mm": [
+        16.0,
+        16.0,
+        71.36
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=51.96 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h46",
+      "path": "stl/low_mount_h46.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 13919.642758892933,
+      "extents_mm": [
+        16.0,
+        16.0,
+        65.86
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=46.46 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h158",
+      "path": "stl/low_mount_h158.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 388,
+      "faces": 772,
+      "volume_mm3": 42351.00275889294,
+      "extents_mm": [
+        16.0,
+        16.0,
+        176.92
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=157.52 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h104",
+      "path": "stl/low_mount_h104.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 28583.322758892933,
+      "extents_mm": [
+        16.0,
+        16.0,
+        123.14
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=103.74 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h59",
+      "path": "stl/low_mount_h59.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 17119.642758892933,
+      "extents_mm": [
+        16.0,
+        16.0,
+        78.36
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=58.96 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h51",
+      "path": "stl/low_mount_h51.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 15071.642758892933,
+      "extents_mm": [
+        16.0,
+        16.0,
+        70.36
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=50.96 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h45",
+      "path": "stl/low_mount_h45.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 13663.642758892933,
+      "extents_mm": [
+        16.0,
+        16.0,
+        64.86
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=45.46 mm (rail Hraw)"
+    },
+    {
+      "name": "low_mount_h27",
+      "path": "stl/low_mount_h27.stl",
+      "qty": 1,
+      "bucket": "extra",
+      "color": "#A3CB38",
+      "verts": 386,
+      "faces": 768,
+      "volume_mm3": 9055.642758892933,
+      "extents_mm": [
+        16.0,
+        16.0,
+        46.86
+      ],
+      "watertight": true,
+      "note": "printed extra; assemble at H_ball=27.46 mm (rail Hraw)"
     }
   ],
   "layouts": [
@@ -747,7 +885,7 @@
         "S80": 1,
         "ADAPT_IN": 1
       },
-      "n_posts": 10,
+      "n_posts": 9,
       "n_low_mounts": 3,
       "n_skipped_sockets": 2,
       "posts": [
@@ -858,18 +996,6 @@
             260.0,
             420.0
           ]
-        },
-        {
-          "x": 340.0,
-          "y": 420.0,
-          "kind": "short",
-          "H": 75.0,
-          "Hraw": 74.96,
-          "V": 85.96,
-          "well": [
-            340.0,
-            420.0
-          ]
         }
       ],
       "low_mounts": [
@@ -881,7 +1007,9 @@
           "well": [
             380.0,
             420.0
-          ]
+          ],
+          "heading": 0.0,
+          "H_ball": 66.96
         },
         {
           "x": 460.0,
@@ -891,7 +1019,9 @@
           "well": [
             460.0,
             340.0
-          ]
+          ],
+          "heading": -90.0,
+          "H_ball": 51.96
         },
         {
           "x": 460.0,
@@ -901,7 +1031,9 @@
           "well": [
             460.0,
             300.0
-          ]
+          ],
+          "heading": 270.0,
+          "H_ball": 46.46
         }
       ],
       "skipped": [
@@ -922,6 +1054,7 @@
       ],
       "adapt_in_drop": 19.21,
       "adapt_in_slope_deg": 18.12,
+      "status": "default",
       "lift": {
         "axle": [
           460.0,
@@ -965,22 +1098,10 @@
         "S40": 1,
         "ADAPT_IN": 1
       },
-      "n_posts": 3,
-      "n_low_mounts": 4,
+      "n_posts": 2,
+      "n_low_mounts": 6,
       "n_skipped_sockets": 0,
       "posts": [
-        {
-          "x": 260.0,
-          "y": 100.0,
-          "kind": "tall",
-          "H": 170.0,
-          "Hraw": 169.96,
-          "V": 180.96,
-          "well": [
-            260.0,
-            100.0
-          ]
-        },
         {
           "x": 220.0,
           "y": 100.0,
@@ -1008,6 +1129,30 @@
       ],
       "low_mounts": [
         {
+          "x": 180.0,
+          "y": 140.0,
+          "Hraw": 157.52,
+          "V": 168.52,
+          "well": [
+            180.0,
+            140.0
+          ],
+          "heading": 124.0,
+          "H_ball": 157.52
+        },
+        {
+          "x": 340.0,
+          "y": 140.0,
+          "Hraw": 103.74,
+          "V": 114.74,
+          "well": [
+            340.0,
+            140.0
+          ],
+          "heading": -118.0,
+          "H_ball": 103.74
+        },
+        {
           "x": 220.0,
           "y": 260.0,
           "Hraw": 58.96,
@@ -1015,7 +1160,9 @@
           "well": [
             220.0,
             260.0
-          ]
+          ],
+          "heading": 0.0,
+          "H_ball": 58.96
         },
         {
           "x": 260.0,
@@ -1025,7 +1172,9 @@
           "well": [
             260.0,
             260.0
-          ]
+          ],
+          "heading": 0.0,
+          "H_ball": 50.96
         },
         {
           "x": 340.0,
@@ -1035,7 +1184,9 @@
           "well": [
             340.0,
             260.0
-          ]
+          ],
+          "heading": 0.0,
+          "H_ball": 45.46
         },
         {
           "x": 420.0,
@@ -1045,12 +1196,15 @@
           "well": [
             420.0,
             180.0
-          ]
+          ],
+          "heading": -90.0,
+          "H_ball": 27.46
         }
       ],
       "skipped": [],
       "adapt_in_drop": 15.21,
       "adapt_in_slope_deg": 14.53,
+      "status": "design_study",
       "lift": {
         "axle": [
           420.0,
@@ -1133,5 +1287,17 @@
     ],
     "note": "Retained demo coordinates after translating onto the exact 18x24 board; they already fit tile_00."
   },
-  "disclaimer": "Unprinted prototype. Computational checks only. Not a certified or kid-proof toy. Generic-profile slice is not an official H3C profile. v1 in /workspace/marble-factory is untouched."
+  "public_status": {
+    "state": "layout-a-clear-full-kit-held",
+    "layout_a_35mm_ball_clear": true,
+    "layout_a_ball_worst_mm3": 1.01,
+    "layout_b_working_route": false,
+    "layout_b_status": "design_study",
+    "layout_b_helix_x_housing_mm3": 10230.3,
+    "do_not_print_full_kit": true,
+    "full_48_play_kit": false,
+    "kit_zip_regenerated": true,
+    "physical_test": false
+  },
+  "disclaimer": "Layout A clears a 35 mm ball in computation (worst about 1 mm\u00b3). Layout B is a design study: the 80 mm helix meets the lift. Do not print the full kit. Not a certified toy. Snap force, creep, fatigue, and rolling were not tested. Generic slicing is not an H3C result. v1 marble-factory is unchanged."
 }
