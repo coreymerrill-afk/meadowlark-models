@@ -169,7 +169,7 @@
     var list = el('part-list');
     clear(list);
     var c = counts();
-    list.appendChild(text('p', c.track + ' track pieces are the inventory. Layout A installs ' + state.scenes.A.installedTracks + ' of them and ' + state.scenes.A.installedPosts + ' of 24 posts. Layout B installs ' + state.scenes.B.installedTracks + ' tracks and ' + state.scenes.B.installedPosts + ' posts. The two layouts are not on the board together. Branched parts (split, merge, funnel, switch) are in the box and not in A or B.', 'muted'));
+    list.appendChild(text('p', c.track + ' track pieces are the inventory count, not a release to print. Part downloads are held except the interface coupon. Layout A draws ' + state.scenes.A.installedTracks + ' track meshes and ' + state.scenes.A.installedPosts + ' posts. Layout B draws ' + state.scenes.B.installedTracks + ' track meshes and ' + state.scenes.B.installedPosts + ' posts. Neither layout is cleared as assembleable.', 'muted'));
     state.manifest.parts.forEach(function (part) {
       var row = document.createElement('div');
       row.className = 'part-row';
@@ -189,14 +189,18 @@
       body.appendChild(title);
       var size = part.extents_mm.map(function (n) { return String(n); }).join(' × ');
       body.appendChild(text('div', part.qty + ' ×  ·  ' + size + ' mm. ' + installedNote(part.name), 'detail'));
-      var link = document.createElement('a');
-      link.href = stlUrl(part.name);
-      link.setAttribute('download', part.name + '.stl');
-      link.className = 'qty';
-      link.textContent = 'STL';
       row.appendChild(swatch);
       row.appendChild(body);
-      row.appendChild(link);
+      if (part.name === 'fit_coupon') {
+        var link = document.createElement('a');
+        link.href = stlUrl(part.name);
+        link.setAttribute('download', part.name + '.stl');
+        link.className = 'qty';
+        link.textContent = 'Coupon';
+        row.appendChild(link);
+      } else {
+        row.appendChild(heldControl());
+      }
       function focusPart() {
         var placed = state.meshes.find(function (entry) {
           return entry.layout === state.layout && entry.instance.part === part.name;
@@ -237,6 +241,16 @@
     return 'In the box. Not placed in layout A or B.';
   }
 
+  function heldControl() {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'held';
+    button.disabled = true;
+    button.setAttribute('aria-disabled', 'true');
+    button.textContent = 'Held';
+    return button;
+  }
+
   function fileRow(kind, title, href, detail) {
     var row = document.createElement('div');
     row.className = 'dl-row';
@@ -252,6 +266,19 @@
     row.appendChild(badge);
     row.appendChild(body);
     row.appendChild(link);
+    return row;
+  }
+
+  function heldRow(title, detail) {
+    var row = document.createElement('div');
+    row.className = 'dl-row';
+    var badge = text('span', 'Held · not a print release', 'badge extra');
+    var body = document.createElement('div');
+    body.appendChild(text('strong', title));
+    body.appendChild(text('div', detail, 'detail'));
+    row.appendChild(badge);
+    row.appendChild(body);
+    row.appendChild(heldControl());
     return row;
   }
 
@@ -279,8 +306,8 @@
       '36 unique solids are single bodies inside the 330 × 320 × 325 mm envelope. Tiles are 304.8 × 228.6 × 12 mm, so the long side is the H3C 330 mm axis.',
       'Rest-state track joints in the report (S160×CL90, CL90×S80, S160×S160, and the consecutive rails in A and B) came back at about 0 mm³. That is the latched track joint, not the clip.',
       'Clip ears, the cap bulge, and the socket lip are labelled designed snaps. Overlap there is the snap model, not a clearance fit. Insertion force is untested.',
-      'ADAPT_OUT and ADAPT_IN were not boolean-checked against the v1 lift meshes. They follow the published keel and inlet numbers. Treat that joint as an untested interface.',
-      'Route slope is centreline geometry (V vertex plus the 35 mm ball centre offset). It is not a solid ball swept through the parts, and it is not a rolling test.',
+      'A later solid audit, with a full 35 mm ball and the real v1 housing, found Layout A is not assembleable as published. ADAPT_OUT meets the housing by about 19,651 mm³. The lift mount plate meets the housing by about 55,132 mm³. The inlet adapter meets the housing by about 4,699 mm³. Those files on this page are unchanged.',
+      'The same audit found repeated track-joint ball collisions of about 63–70 mm³, and a low-mount clash of about 3,104 mm³. Generic slicing did not establish assembly or rolling.',
       'Layout B holds the helix on the entry post and the exit post. Sag of that span is untested. A third post would fit inside the count of 24, and this CAD does not add one.',
       'Creep, fatigue, tile warp, and child use are untested. Positive pawls are the design response to friction preload, not a measured life.'
     ].forEach(function (line) { list.appendChild(text('li', line)); });
@@ -306,19 +333,19 @@
   function firstCard() {
     var card = document.createElement('article');
     card.className = 'card';
-    card.appendChild(text('h2', 'Coupon, then one short support'));
+    card.appendChild(text('h2', 'Interface coupon only'));
+    card.appendChild(text('p', 'This coupon is a witness of the well, rack, tongue, and ball cup. It is not a validated toy and it is not clearance to print the full kit or the layout.', 'muted'));
     var list = document.createElement('ol');
     [
-      'Print fit_coupon. It is the witness for the well, the rack, the tongue, and the ball cup.',
-      'Print one short support: sleeve_short, post_short, lock_clip_short, and ball_cap. PETG is the research pick for the clip and the cap. PLA is acceptable for the stiff sleeve and post on a first look.',
-      'Check that the sleeve seats, the pawl clicks on a 5 mm step, and the cap pulls off on purpose. If that fails, stop.',
-      'Only then print tiles, the rest of the supports, and track. The v1 ball_35 still needs supports. Re-slice everything in Bambu Studio on the H3C profile.'
+      'The fit coupon is the only print file offered while the design is under correction.',
+      'Do not print the full kit, the layout 3MF, or a full set of tracks from these files.',
+      'A corrected package is still in progress. These meshes are the ones the solid audit failed.'
     ].forEach(function (line) { list.appendChild(text('li', line)); });
     card.appendChild(list);
     var link = document.createElement('a');
     link.href = '/marble-system/stl/fit_coupon.stl';
     link.setAttribute('download', 'fit_coupon.stl');
-    link.textContent = 'Download the fit coupon STL';
+    link.textContent = 'Download the interface coupon only';
     card.appendChild(link);
     return card;
   }
@@ -327,11 +354,10 @@
     var card = document.createElement('article');
     card.className = 'card';
     card.appendChild(text('h2', 'Downloads'));
-    card.appendChild(text('p', '36 STL families. No G-code. The layout A 3MF is a colored assembly scene, not a sliced plate. Layout B is placed from the same STLs in the viewer. There is no layout B plate file.', 'muted'));
-    card.appendChild(fileRow('kit-zip', 'Kit ZIP', '/marble-system/marble-system-v2-kit.zip', 'STLs, README, manifest, assembly records, layout A 3MF, source, and the reports.'));
-    card.appendChild(fileRow('coupon', 'Fit coupon', '/marble-system/stl/fit_coupon.stl', 'stl/fit_coupon.stl'));
-    card.appendChild(fileRow('individual-stl', 'Short sleeve', '/marble-system/stl/sleeve_short.stl', 'First support, with the post, clip, and cap.'));
-    card.appendChild(fileRow('assembly-scene', 'Layout A 3MF', '/marble-system/kit/marble_system_v2_layoutA.3mf', 'Colored scene of layout A. Not a Bambu plate and not pre-sliced.'));
+    card.appendChild(text('p', 'The full kit ZIP and the layout A 3MF stay on the server and are not offered while the solids are under correction. No G-code was ever in the kit. Generic slicing did not establish assembly or rolling.', 'muted'));
+    card.appendChild(heldRow('Kit ZIP', 'Held. Do not print the full kit from this package.'));
+    card.appendChild(fileRow('coupon', 'Interface coupon', '/marble-system/stl/fit_coupon.stl', 'Interface witness only. Not a validated toy and not the full kit.'));
+    card.appendChild(heldRow('Layout A 3MF', 'Held. The colored scene is not an assembleable layout and is not a sliced plate.'));
     card.appendChild(fileRow('readme', 'README', '/marble-system/README.md', 'Inventory, height classes, and the limits of the computational checks.'));
     card.appendChild(fileRow('readme', 'Research brief', '/marble-system/RESEARCH_BRIEF.md', 'The interface note and its sources. An earlier grid in that draft is not the CAD that shipped.'));
     card.appendChild(fileRow('readme', 'Validation JSON', '/marble-system/reports/validation.json', 'The 0-fail report. Read the limits above before treating that count as a finished mechanism.'));
@@ -410,7 +436,7 @@
     }
     var title = state.layout === 'A' ? 'Layout A · simple loop' : 'Layout B · helix example';
     el('mode-title').textContent = title;
-    el('mode-copy').textContent = current.installedTracks + ' of 48 track pieces and ' + current.installedPosts + ' of 24 posts are installed, plus ' + current.lowMounts + ' low mounts and the v1 lift. ' + current.note + ' The crank is illustrative. Balls are not in this scene.';
+    el('mode-copy').textContent = 'Uncorrected model only. ' + current.installedTracks + ' track meshes and ' + current.installedPosts + ' posts are drawn, plus ' + current.lowMounts + ' low mounts and the v1 lift. This view is not a cleared assembly. The crank is illustrative. Balls stay out of the scene.';
   }
 
   function applyMode() {
