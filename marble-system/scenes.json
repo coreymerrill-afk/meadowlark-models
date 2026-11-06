@@ -1,0 +1,3701 @@
+{
+  "A": {
+    "name": "A_simple_loop",
+    "axle": [
+      460.0,
+      100.0,
+      136.0
+    ],
+    "installedTracks": 10,
+    "installedPosts": 10,
+    "lowMounts": 3,
+    "adaptInDrop": 19.21,
+    "adaptInSlope": 18.12,
+    "note": "Example assembly. Not every one of the 48 track pieces is installed. ADAPT_OUT and ADAPT_IN are placed from the published joint numbers. Their solid fit against the v1 lift was not in the 0-fail boolean report.",
+    "instances": [
+      {
+        "id": "tile_00",
+        "part": "tile_00",
+        "color": "#C8D6E5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            0.0
+          ],
+          [
+            0,
+            1,
+            0,
+            0.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "tile_10",
+        "part": "tile_10",
+        "color": "#B8C6D5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            304.8
+          ],
+          [
+            0,
+            1,
+            0,
+            0.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "tile_01",
+        "part": "tile_01",
+        "color": "#C8D6E5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            0.0
+          ],
+          [
+            0,
+            1,
+            0,
+            228.6
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "tile_11",
+        "part": "tile_11",
+        "color": "#B8C6D5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            304.8
+          ],
+          [
+            0,
+            1,
+            0,
+            228.6
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "ADAPT_OUT",
+        "part": "ADAPT_OUT",
+        "color": "#FF9FF3",
+        "role": "track",
+        "transform": [
+          [
+            -1.0,
+            0.0,
+            0.0,
+            312.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            180.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": true
+      },
+      {
+        "id": "S160_1",
+        "part": "track_S160",
+        "color": "#2E86DE",
+        "role": "track",
+        "transform": [
+          [
+            -1.0,
+            0.0,
+            0.0,
+            300.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            180.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "CR1",
+        "part": "track_CR90",
+        "color": "#10AC84",
+        "role": "track",
+        "transform": [
+          [
+            -1.0,
+            0.0,
+            0.0,
+            140.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            160.46
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "S160_2",
+        "part": "track_S160",
+        "color": "#2E86DE",
+        "role": "track",
+        "transform": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            60.0
+          ],
+          [
+            1.0,
+            -0.0,
+            0.0,
+            180.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            144.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "CR2",
+        "part": "track_CR90",
+        "color": "#10AC84",
+        "role": "track",
+        "transform": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            60.0
+          ],
+          [
+            1.0,
+            -0.0,
+            0.0,
+            340.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            124.46
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "S160_3",
+        "part": "track_S160",
+        "color": "#2E86DE",
+        "role": "track",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            140.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            420.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            108.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "S80_1",
+        "part": "track_S80",
+        "color": "#2E86DE",
+        "role": "track",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            300.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            420.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            88.46
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "CR3",
+        "part": "track_CR90",
+        "color": "#10AC84",
+        "role": "track",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            380.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            420.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            77.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "S160_4",
+        "part": "track_S160",
+        "color": "#2E86DE",
+        "role": "track",
+        "transform": [
+          [
+            -0.0,
+            -1.0,
+            0.0,
+            460.0
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0,
+            340.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            62.46
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "ADAPT_IN",
+        "part": "ADAPT_IN",
+        "color": "#FF9FF3",
+        "role": "track",
+        "transform": [
+          [
+            -0.0,
+            -1.0,
+            0.0,
+            460.0
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0,
+            180.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            41.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": true
+      },
+      {
+        "id": "h0-sleeve",
+        "part": "sleeve_tall",
+        "color": "#5F27CD",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            260.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 165.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": false
+      },
+      {
+        "id": "h0-post",
+        "part": "post_tall",
+        "color": "#A55EEA",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            260.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            20.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 165.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": true
+      },
+      {
+        "id": "h0-clip",
+        "part": "lock_clip_tall",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            260.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 165.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": false
+      },
+      {
+        "id": "h0-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            260.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            100.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            155.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 165.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": true
+      },
+      {
+        "id": "h1-sleeve",
+        "part": "sleeve_medium",
+        "color": "#2E86DE",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            180.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 155.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h1-post",
+        "part": "post_medium",
+        "color": "#54A0FF",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            180.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            55.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 155.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h1-clip",
+        "part": "lock_clip_medium",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            180.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 155.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h1-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            180.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            100.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            145.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 155.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h2-sleeve",
+        "part": "sleeve_medium",
+        "color": "#2E86DE",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            140.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 150.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h2-post",
+        "part": "post_medium",
+        "color": "#54A0FF",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            140.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            50.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 150.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h2-clip",
+        "part": "lock_clip_medium",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            140.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 150.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h2-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            140.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            100.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            140.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 150.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h3-sleeve",
+        "part": "sleeve_medium",
+        "color": "#2E86DE",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            60.0
+          ],
+          [
+            0,
+            1,
+            0,
+            180.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h3",
+        "H": 135.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h3-post",
+        "part": "post_medium",
+        "color": "#54A0FF",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            60.0
+          ],
+          [
+            0,
+            1,
+            0,
+            180.0
+          ],
+          [
+            0,
+            0,
+            1,
+            35.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h3",
+        "H": 135.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h3-clip",
+        "part": "lock_clip_medium",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            60.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            180.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h3",
+        "H": 135.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h3-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            60.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            180.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            125.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h3",
+        "H": 135.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h4-sleeve",
+        "part": "sleeve_medium",
+        "color": "#2E86DE",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            60.0
+          ],
+          [
+            0,
+            1,
+            0,
+            300.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h4",
+        "H": 120.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h4-post",
+        "part": "post_medium",
+        "color": "#54A0FF",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            60.0
+          ],
+          [
+            0,
+            1,
+            0,
+            300.0
+          ],
+          [
+            0,
+            0,
+            1,
+            20.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h4",
+        "H": 120.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h4-clip",
+        "part": "lock_clip_medium",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            60.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            300.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h4",
+        "H": 120.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h4-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            60.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            300.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            110.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h4",
+        "H": 120.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h5-sleeve",
+        "part": "sleeve_medium",
+        "color": "#2E86DE",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            60.0
+          ],
+          [
+            0,
+            1,
+            0,
+            340.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h5",
+        "H": 115.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h5-post",
+        "part": "post_medium",
+        "color": "#54A0FF",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            60.0
+          ],
+          [
+            0,
+            1,
+            0,
+            340.0
+          ],
+          [
+            0,
+            0,
+            1,
+            15.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h5",
+        "H": 115.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h5-clip",
+        "part": "lock_clip_medium",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            60.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            340.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h5",
+        "H": 115.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": false
+      },
+      {
+        "id": "h5-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            60.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            340.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            105.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h5",
+        "H": 115.0,
+        "Hmin": 100.0,
+        "Hmax": 155.0,
+        "kind": "medium",
+        "moves": true
+      },
+      {
+        "id": "h6-sleeve",
+        "part": "sleeve_short",
+        "color": "#10AC84",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            140.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h6",
+        "H": 100.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h6-post",
+        "part": "post_short",
+        "color": "#1DD1A1",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            140.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            30.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h6",
+        "H": 100.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h6-clip",
+        "part": "lock_clip_short",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            140.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            420.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h6",
+        "H": 100.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h6-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            140.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            420.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            90.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h6",
+        "H": 100.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h7-sleeve",
+        "part": "sleeve_short",
+        "color": "#10AC84",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            180.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h7",
+        "H": 95.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h7-post",
+        "part": "post_short",
+        "color": "#1DD1A1",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            180.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            25.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h7",
+        "H": 95.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h7-clip",
+        "part": "lock_clip_short",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            180.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            420.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h7",
+        "H": 95.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h7-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            180.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            420.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            85.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h7",
+        "H": 95.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h8-sleeve",
+        "part": "sleeve_short",
+        "color": "#10AC84",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            260.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h8",
+        "H": 85.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h8-post",
+        "part": "post_short",
+        "color": "#1DD1A1",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            260.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            15.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h8",
+        "H": 85.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h8-clip",
+        "part": "lock_clip_short",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            260.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            420.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h8",
+        "H": 85.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h8-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            260.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            420.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            75.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h8",
+        "H": 85.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h9-sleeve",
+        "part": "sleeve_short",
+        "color": "#10AC84",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            340.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h9",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h9-post",
+        "part": "post_short",
+        "color": "#1DD1A1",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            340.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            5.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h9",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h9-clip",
+        "part": "lock_clip_short",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            340.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            420.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h9",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h9-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            340.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            420.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            65.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h9",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "low-0",
+        "part": "low_mount",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            380.0
+          ],
+          [
+            0,
+            1,
+            0,
+            420.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 66.96
+      },
+      {
+        "id": "low-1",
+        "part": "low_mount",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            460.0
+          ],
+          [
+            0,
+            1,
+            0,
+            340.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 51.96
+      },
+      {
+        "id": "low-2",
+        "part": "low_mount",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            460.0
+          ],
+          [
+            0,
+            1,
+            0,
+            300.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 46.46
+      },
+      {
+        "id": "lift-plate",
+        "part": "lift_mount_plate",
+        "color": "#84817A",
+        "role": "plate",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            460.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "v1-lift_housing_back-0",
+        "part": "lift_housing_back",
+        "color": "#576574",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            435.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            74.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            124.25
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_housing_front-0",
+        "part": "lift_housing_front",
+        "color": "#48DBFB",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            449.220708
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            126.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            129.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_wheel_half-0",
+        "part": "lift_wheel_half",
+        "color": "#EE5253",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            460.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            100.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_wheel_half-1",
+        "part": "lift_wheel_half",
+        "color": "#EE5253",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            460.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            100.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_axle-0",
+        "part": "lift_axle",
+        "color": "#F5F6FA",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            460.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            149.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_crank-0",
+        "part": "lift_crank",
+        "color": "#FECA57",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            487.5
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            178.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_clip-0",
+        "part": "lift_clip",
+        "color": "#FF9F43",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            460.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            144.8
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            132.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_pawl-0",
+        "part": "lift_pawl",
+        "color": "#222F3E",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            340.449026
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            80.5
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            125.181221
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      }
+    ],
+    "computedAdaptDrop": 19.21
+  },
+  "B": {
+    "name": "B_helix",
+    "axle": [
+      420.0,
+      100.0,
+      136.0
+    ],
+    "installedTracks": 8,
+    "installedPosts": 3,
+    "lowMounts": 4,
+    "adaptInDrop": 15.21,
+    "adaptInSlope": 14.53,
+    "note": "Example assembly. Not every one of the 48 track pieces is installed. ADAPT_OUT and ADAPT_IN are placed from the published joint numbers. Their solid fit against the v1 lift was not in the 0-fail boolean report.",
+    "instances": [
+      {
+        "id": "tile_00",
+        "part": "tile_00",
+        "color": "#C8D6E5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            0.0
+          ],
+          [
+            0,
+            1,
+            0,
+            0.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "tile_10",
+        "part": "tile_10",
+        "color": "#B8C6D5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            304.8
+          ],
+          [
+            0,
+            1,
+            0,
+            0.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "tile_01",
+        "part": "tile_01",
+        "color": "#C8D6E5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            0.0
+          ],
+          [
+            0,
+            1,
+            0,
+            228.6
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "tile_11",
+        "part": "tile_11",
+        "color": "#B8C6D5",
+        "role": "base",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            304.8
+          ],
+          [
+            0,
+            1,
+            0,
+            228.6
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "ADAPT_OUT",
+        "part": "ADAPT_OUT",
+        "color": "#FF9FF3",
+        "role": "track",
+        "transform": [
+          [
+            -1.0,
+            0.0,
+            0.0,
+            272.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            180.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": true
+      },
+      {
+        "id": "HX1",
+        "part": "track_HX360",
+        "color": "#5F27CD",
+        "role": "track",
+        "transform": [
+          [
+            -1.0,
+            0.0,
+            0.0,
+            260.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            180.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "CR1",
+        "part": "track_CR90",
+        "color": "#10AC84",
+        "role": "track",
+        "transform": [
+          [
+            -1.0,
+            0.0,
+            0.0,
+            220.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            100.46
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "CR2",
+        "part": "track_CR90",
+        "color": "#10AC84",
+        "role": "track",
+        "transform": [
+          [
+            0.0,
+            1.0,
+            0.0,
+            140.0
+          ],
+          [
+            1.0,
+            -0.0,
+            0.0,
+            180.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            84.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "S80_1",
+        "part": "track_S80",
+        "color": "#2E86DE",
+        "role": "track",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            220.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            260.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            69.46
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "S40_1",
+        "part": "track_S40",
+        "color": "#54A0FF",
+        "role": "track",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            300.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            260.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            58.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "CR3",
+        "part": "track_CR90",
+        "color": "#10AC84",
+        "role": "track",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            340.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            260.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            53.46
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": false
+      },
+      {
+        "id": "ADAPT_IN",
+        "part": "ADAPT_IN",
+        "color": "#FF9FF3",
+        "role": "track",
+        "transform": [
+          [
+            -0.0,
+            -1.0,
+            0.0,
+            420.0
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0,
+            180.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            37.96
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "adapter": true
+      },
+      {
+        "id": "h0-sleeve",
+        "part": "sleeve_tall",
+        "color": "#5F27CD",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            260.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 170.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": false
+      },
+      {
+        "id": "h0-post",
+        "part": "post_tall",
+        "color": "#A55EEA",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            260.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            25.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 170.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": true
+      },
+      {
+        "id": "h0-clip",
+        "part": "lock_clip_tall",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            260.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 170.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": false
+      },
+      {
+        "id": "h0-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            260.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            100.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            160.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h0",
+        "H": 170.0,
+        "Hmin": 145.0,
+        "Hmax": 230.0,
+        "kind": "tall",
+        "moves": true
+      },
+      {
+        "id": "h1-sleeve",
+        "part": "sleeve_short",
+        "color": "#10AC84",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            220.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 90.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h1-post",
+        "part": "post_short",
+        "color": "#1DD1A1",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            220.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            20.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 90.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h1-clip",
+        "part": "lock_clip_short",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            220.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            100.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 90.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h1-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            220.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            100.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            80.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h1",
+        "H": 90.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h2-sleeve",
+        "part": "sleeve_short",
+        "color": "#10AC84",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            140.0
+          ],
+          [
+            0,
+            1,
+            0,
+            180.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h2-post",
+        "part": "post_short",
+        "color": "#1DD1A1",
+        "role": "support",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            140.0
+          ],
+          [
+            0,
+            1,
+            0,
+            180.0
+          ],
+          [
+            0,
+            0,
+            1,
+            5.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "h2-clip",
+        "part": "lock_clip_short",
+        "color": "#FF9F43",
+        "role": "support",
+        "transform": [
+          [
+            0.0,
+            0.0,
+            -1.0,
+            140.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            180.0
+          ],
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": false
+      },
+      {
+        "id": "h2-cap",
+        "part": "ball_cap",
+        "color": "#FECA57",
+        "role": "support",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            140.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            180.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            65.0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "heightId": "h2",
+        "H": 75.0,
+        "Hmin": 70.0,
+        "Hmax": 100.0,
+        "kind": "short",
+        "moves": true
+      },
+      {
+        "id": "low-0",
+        "part": "low_mount",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            220.0
+          ],
+          [
+            0,
+            1,
+            0,
+            260.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 58.96
+      },
+      {
+        "id": "low-1",
+        "part": "low_mount",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            260.0
+          ],
+          [
+            0,
+            1,
+            0,
+            260.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 50.96
+      },
+      {
+        "id": "low-2",
+        "part": "low_mount",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            340.0
+          ],
+          [
+            0,
+            1,
+            0,
+            260.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 45.46
+      },
+      {
+        "id": "low-3",
+        "part": "low_mount",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            420.0
+          ],
+          [
+            0,
+            1,
+            0,
+            180.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 27.46
+      },
+      {
+        "id": "lift-plate",
+        "part": "lift_mount_plate",
+        "color": "#84817A",
+        "role": "plate",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            420.0
+          ],
+          [
+            0,
+            1,
+            0,
+            100.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ]
+      },
+      {
+        "id": "v1-lift_housing_back-0",
+        "part": "lift_housing_back",
+        "color": "#576574",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            395.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            74.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            124.25
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_housing_front-0",
+        "part": "lift_housing_front",
+        "color": "#48DBFB",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            409.220708
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            126.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            129.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_wheel_half-0",
+        "part": "lift_wheel_half",
+        "color": "#EE5253",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            420.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            100.0
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_wheel_half-1",
+        "part": "lift_wheel_half",
+        "color": "#EE5253",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            420.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            100.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_axle-0",
+        "part": "lift_axle",
+        "color": "#F5F6FA",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            420.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            149.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_crank-0",
+        "part": "lift_crank",
+        "color": "#FECA57",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            447.5
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            178.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            136.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": true,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_clip-0",
+        "part": "lift_clip",
+        "color": "#FF9F43",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            420.0
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0,
+            144.8
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            132.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      },
+      {
+        "id": "v1-lift_pawl-0",
+        "part": "lift_pawl",
+        "color": "#222F3E",
+        "role": "lift",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            300.449026
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            80.5
+          ],
+          [
+            0.0,
+            -1.0,
+            0.0,
+            125.181221
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "spin": false,
+        "v1": true
+      }
+    ],
+    "computedAdaptDrop": 15.21
+  }
+}
