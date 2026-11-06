@@ -19,7 +19,7 @@ SUPPORTS = {'track_HX360', 'track_DROP40', 'track_SPLIT_Y', 'track_MERGE_Y',
             'track_SWITCH', 'track_FUNNEL', 'ADAPT_IN', 'ADAPT_OUT'}
 
 def settings_for(name):
-    if name in SUPPORTS:
+    if name in SUPPORTS or name.startswith('low_mount'):
         return SET / 'generic_0.4_pla_0.20_supports.ini'
     if name in BRIM:
         return SET / 'generic_0.4_pla_0.20_brim.ini'

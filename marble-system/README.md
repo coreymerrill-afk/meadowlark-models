@@ -1,13 +1,13 @@
-# Marble System v2 — full 48-piece CAD (prototype)
+# Marble System v2 — catalog plus one cleared default route
 
-**Design under correction — do not print the full kit yet.** Solid-geometry checks of this package found lift-adapter clashes and track-joint obstructions. Generic slicing did not establish assembly or rolling. `layout_A_assembleable_as_claimed` is **false** for the files here. ADAPT_OUT meets the v1 housing by about 19,651 mm³. The lift mount plate meets the housing by about 55,132 mm³. The inlet adapter meets the housing by about 4,699 mm³. Repeated joint ball collisions are about 63–70 mm³. A low mount clashes by about 3,104 mm³. The CAD in this tree is unchanged pending a corrected package. The kit ZIP was not regenerated.
+**Do not print the full kit.** Layout A clears a full 35 mm ball in computation: worst sample 1.01 mm³ against the tracks and both v1 housings, and no sample above 5 mm³. Consecutive Layout A rest joints are 0 mm³. Layout B is a **design study, not a working route**: the 80 mm helix does not cross itself, but the placed coil meets the lift housing by about 10,230 mm³. This is not a finished 48-piece play kit. Snap force, creep, fatigue, and rolling were not tested. The kit ZIP is not a print release.
 
-Version **0.3-full48**. Computational prototype of a modular gravity marble run that
+Version **0.5-layoutA**. Computational prototype of a modular gravity marble run that
 reuses the v1 hand-cranked paddle-wheel lift. **Not printed. Not certified. Not
 kid-proof.** Treat every snap, slope, and load number as untested until a
 physical kit exists.
 
-v1 in `/workspace/marble-factory` is **untouched**.
+v1 in `marble-factory` is **untouched**.
 
 ## What you get
 
@@ -21,7 +21,7 @@ v1 in `/workspace/marble-factory` is **untouched**.
   tile_11 = 35. Four distinct / mirrored well patterns.
 - **48 track pieces** (source of truth below) plus **24 support structures**
   (8 short / 10 medium / 6 tall) counted separately, plus disclosed extras.
-- Two complete example layouts on the same board, each using ≤ 24 posts.
+- Layout A is the default route and uses 9 posts (≤ 24). Layout B is a design study, not a second complete example.
   Not all 48 pieces are installed at once.
 
 ## 48-count track inventory
@@ -110,21 +110,18 @@ on two wells; the plate is one extra, not one of the 24.
 The two skipped sockets at y = 220 sit on the omitted seam row; neighboring
 supports still carry those S160s (160 mm span).
 
-### Layout B — helix
-- **B_helix**: 8 track pieces, 3 ball-joint posts (≤24), 4 low_mount extras.
+### Layout B — design study, not a working route
+- **B_helix**: the coil is the catalog helix (radius 90 mm, pitch 80 mm). Placed on this board it meets the lift. Do not treat it as an example to assemble.
 - ADAPT_IN drop 15.21 mm over 58.7 mm (14.53° downhill).
 - Lift axle [420.0, 100.0], pegs [[340.0, 100.0], [500.0, 100.0]].
 - Posts: (260,100) tall H=170.0, (220,100) short H=90.0, (140,180) short H=75.0
 - Low mounts (disclosed extras, H < 70): (220,260) Hraw=58.96, (260,260) Hraw=50.96, (340,260) Hraw=45.46, (420,180) Hraw=27.46
 
-The helix is a single connected printable guide (actual bbox about 244 × 252 ×
-116 mm, under the 320 mm bed). It is supported at its entry and exit balls; sag
-of a 244 mm spiral on two posts is **untested**. The 80 mm pitch clears the
-~41 mm section height, so the coil does not self-intersect.
+The helix part itself is one piece. At the 80 mm pitch the vertical air between passes is about 22 mm, so the rail does not cross itself. A shorter pitch was rejected because the section would meet the next pass. Sag between the coil sockets is untested. The assembled study meets the lift by about 10,230 mm³.
 
 ## Validation
 
-Report: `reports/validation.json`. This run: **0 fail(s)**. That count is not a solid-assembly clearance. A later boolean audit of these same files found the clashes named at the top of this file.
+Report: `reports/SOLIDS_AUDIT.md`. Layout A’s 35 mm sweep is the clearance that matters. An older “0 fail” count is not that sweep. No G-code is included.
 
 Checks included: single-body watertight solids inside the 330×320×325 envelope;
 sleeve/post sliding clearance; height-window overlap and no below-tile

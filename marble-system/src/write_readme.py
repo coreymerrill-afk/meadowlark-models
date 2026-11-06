@@ -39,10 +39,13 @@ def main():
 
     readme = f"""# Marble System v2 — full 48-piece CAD (prototype)
 
-Version **0.3-full48**. Computational prototype of a modular gravity marble run that
+**DO NOT PRINT until you have read `reports/SOLIDS_AUDIT.md` and accept the remaining issues listed there.** This is not a certified or kid-proof play kit.
+
+Version **0.4-geomfix**. Computational prototype of a modular gravity marble run that
 reuses the v1 hand-cranked paddle-wheel lift. **Not printed. Not certified. Not
 kid-proof.** Treat every snap, slope, and load number as untested until a
-physical kit exists.
+physical kit exists. Designed snap overlaps (cap pin, socket lip, clip ears) are
+not the same thing as a rest-state solid clash.
 
 v1 in `/workspace/marble-factory` is **untouched**.
 
@@ -58,8 +61,8 @@ v1 in `/workspace/marble-factory` is **untouched**.
   tile_11 = {per['11']}. Four distinct / mirrored well patterns.
 - **48 track pieces** (source of truth below) plus **24 support structures**
   (8 short / 10 medium / 6 tall) counted separately, plus disclosed extras.
-- Two complete example layouts on the same board, each using ≤ 24 posts.
-  Not all 48 pieces are installed at once.
+- Layout A is the default route. Layout B is a design study: the 80 mm helix meets the lift.
+  Not all 48 pieces are installed at once. Do not print the full kit.
 
 ## 48-count track inventory
 
@@ -143,13 +146,10 @@ on two wells; the plate is one extra, not one of the 24.
 The two skipped sockets at y = 220 sit on the omitted seam row; neighboring
 supports still carry those S160s (160 mm span).
 
-### Layout B — helix
+### Layout B — design study, not a working route
 {lay_md(layouts[1] if len(layouts) > 1 else None)}
 
-The helix is a single connected printable guide (actual bbox about 244 × 252 ×
-116 mm, under the 320 mm bed). It is supported at its entry and exit balls; sag
-of a 244 mm spiral on two posts is **untested**. The 80 mm pitch clears the
-~41 mm section height, so the coil does not self-intersect.
+The helix part is one piece. The 80 mm pitch leaves about 22 mm of vertical air, so the rail does not cross itself. Sag on the open arc is untested. Placed beside the lift, the coil meets the housing. That layout is not a working route.
 
 ## Validation
 
@@ -197,8 +197,6 @@ Suggested materials: PLA or PETG for tiles and tracks; **PETG for lock clips**
 - Child-safety / pinch at the lift (v1 already documents an open housing).
 - Fatigue, UV, impact, certification of any kind.
 
-The published 0-fail report does not boolean ADAPT_OUT or ADAPT_IN against the v1 lift solids, and it does not sweep a 35 mm ball solid along the route. Clip, cap, and socket overlaps are designed snaps. Helix sag on two end posts is untested.
-
 Print the `fit_coupon` and one short support first. Do not hand this to a child
 as a finished toy.
 
@@ -211,7 +209,7 @@ marble-system-v2/
   kit/           manifest.json, assembly.json, layout A 3MF, this README
   renders/       board plan, height windows, support section, two 3D previews
   reports/       validation.json
-  slice/         SLICE_REPORT.md only — generic G-code is not included
+  slice/         gcode + SLICE_REPORT.md
 ```
 
 Generated {man.get('generated', '(run export to stamp a time)')} America/Denver.

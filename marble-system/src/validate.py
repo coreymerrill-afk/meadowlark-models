@@ -87,7 +87,8 @@ def run():
             fails.append(f'{name} not a positive-volume solid')
         if not rep['envelope_ok']:
             fails.append(f'{name} exceeds H3C envelope {rep["extents"]}')
-        if rep['components'] not in (1, None):
+        MULTI_OK = {'lift_mount_plate'}  # two flush well inserts, by design
+        if rep['components'] not in (1, None) and name not in MULTI_OK:
             fails.append(f'{name} has {rep["components"]} components')
         if rep['too_small']:
             fails.append(f'{name} volume too small')

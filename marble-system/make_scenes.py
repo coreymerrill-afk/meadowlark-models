@@ -131,9 +131,7 @@ def layout_pieces(name):
             dict(id='CR3', part='track_CR90', origin=(340, 260), hdg=0, drop=15),
         ]
     seq, adapt_z, adapt_drop = chain(seq)
-    ht = (-1.0, 0.0)  # heading 180
-    ao = (j0[0] - 12.0 * ht[0], j0[1] - 12.0 * ht[1])
-    pieces = [dict(id='ADAPT_OUT', part='ADAPT_OUT', origin=ao, hdg=180, z0=ZV0)]
+    pieces = [dict(id='ADAPT_OUT', part='ADAPT_OUT', origin=j0, hdg=180, z0=ZV0)]
     pieces.extend(seq)
     pieces.append(dict(id='ADAPT_IN', part='ADAPT_IN', origin=j11, hdg=270, z0=adapt_z))
     return pieces, adapt_drop
@@ -169,7 +167,8 @@ def build(record):
         ))
     for i, low in enumerate(record['low_mounts']):
         x, y = low['well']
-        rows.append(inst('low-' + str(i), 'low_mount', trans(x, y, 0), 'low', Hraw=low['Hraw']))
+        hname = 'low_mount_h' + str(int(round(float(low['Hraw']))))
+        rows.append(inst('low-' + str(i), hname, trans(x, y, 0), 'low', Hraw=low['Hraw']))
     rows.append(inst('lift-plate', 'lift_mount_plate', trans(axle[0], axle[1], 0), 'plate'))
     shift = trans(axle[0] - 80.0, axle[1] - 0.0, 0.0)
     for src in V1['instances']:
@@ -191,10 +190,14 @@ def build(record):
         'lowMounts': record['n_low_mounts'],
         'adaptInDrop': record['adapt_in_drop'],
         'adaptInSlope': record['adapt_in_slope_deg'],
+        'status': record.get('status', 'default'),
         'note': (
-            'Example assembly. Not every one of the 48 track pieces is installed. '
-            'ADAPT_OUT and ADAPT_IN are placed from the published joint numbers. '
-            'Their solid fit against the v1 lift was not in the 0-fail boolean report.'
+            'Layout A is the default route. A 35 mm ball along it stays under 5 mm³ '
+            'against the track solids and the v1 housings. Layout B is a design study: '
+            'the 80 mm helix meets the lift. Not every catalog piece is installed. '
+            'Do not print the full kit.'
+            if record.get('status') != 'design_study'
+            else 'Design study. The 80 mm helix meets the lift housing. Not a working route.'
         ),
         'instances': rows,
         'computedAdaptDrop': round(adapt_drop, 2),

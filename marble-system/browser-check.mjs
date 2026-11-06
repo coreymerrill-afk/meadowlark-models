@@ -177,6 +177,8 @@ try {
     '/dollhouse/',
     '/workbench/'
   ];
+  const manifest = await fetch('http://127.0.0.1:' + port + '/marble-system/kit/manifest.json').then((r) => r.json());
+  const families = manifest.parts.length;
   const statuses = {};
   for (const link of links) statuses[link] = (await fetch('http://127.0.0.1:' + port + link)).status;
   const report = {
@@ -197,8 +199,8 @@ try {
   console.log(JSON.stringify(report, null, 2));
   const bad = Object.values(statuses).some((code) => code !== 200)
     || !desktop.sample.booted || !mobile.sample.booted
-    || desktop.sample.loadedParts !== 43
-    || mobile.sample.loadedParts !== 43
+    || desktop.sample.loadedParts !== families + 7
+    || mobile.sample.loadedParts !== families + 7
     || desktop.sample.errors.length || mobile.sample.errors.length
     || desktop.sample.error || mobile.sample.error
     || desktopFailures.length || mobileFailures.length
@@ -206,12 +208,13 @@ try {
     || motion.trackMoved > 1e-4
     || motion.height !== 170
     || motion.layout !== 'B'
-    || dom.rows !== 36
+    || dom.rows !== families
     || dom.hrefs.includes('/marble-system/marble-system-v2-kit.zip')
     || dom.hrefs.includes('/marble-system/kit/marble_system_v2_layoutA.3mf')
     || !dom.hrefs.includes('/marble-system/stl/fit_coupon.stl')
     || !/Held/.test(dom.text)
-    || !/do not print full kit yet/.test(desktop.sample.claim);
+    || !/Do not print the full kit/.test(desktop.sample.claim)
+    || !/design study/.test(desktop.sample.claim);
   if (bad) process.exitCode = 1;
 } finally {
   chrome.kill('SIGKILL');

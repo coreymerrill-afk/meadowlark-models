@@ -1,6 +1,6 @@
-# v2 full-48 slice report
+# v2 slice report — previous meshes only
 
-Official PrusaSlicer 2.7.4, generic 0.4 mm / 0.20 mm PLA. **Not** an official H3C profile. Re-slice in Bambu Studio before printing.
+This report is the older generic PrusaSlicer 2.7.4 run (0.4 mm / 0.20 mm PLA). **Not** an official H3C profile. It does **not** cover the STLs regenerated for the Layout A clearance. PrusaSlicer was not available when those meshes were written, so they were not re-sliced. Do not print from this report.
 
 - Brim profile: posts, caps, clips, latches, low_mount, switch_gate, fit_coupon.
 - Supports profile: helix, drop40, split, merge, switch, funnel, both adapters.

@@ -7,11 +7,12 @@
       136.0
     ],
     "installedTracks": 10,
-    "installedPosts": 10,
+    "installedPosts": 9,
     "lowMounts": 3,
     "adaptInDrop": 19.21,
     "adaptInSlope": 18.12,
-    "note": "Example assembly. Not every one of the 48 track pieces is installed. ADAPT_OUT and ADAPT_IN are placed from the published joint numbers. Their solid fit against the v1 lift was not in the 0-fail boolean report.",
+    "status": "default",
+    "note": "Layout A is the default route. A 35 mm ball along it stays under 5 mm\u00b3 against the track solids and the v1 housings. Layout B is a design study: the 80 mm helix meets the lift. Not every catalog piece is installed. Do not print the full kit.",
     "instances": [
       {
         "id": "tile_00",
@@ -151,7 +152,7 @@
             -1.0,
             0.0,
             0.0,
-            312.0
+            300.0
           ],
           [
             0.0,
@@ -1840,160 +1841,8 @@
         "moves": true
       },
       {
-        "id": "h9-sleeve",
-        "part": "sleeve_short",
-        "color": "#10AC84",
-        "role": "support",
-        "transform": [
-          [
-            1,
-            0,
-            0,
-            340.0
-          ],
-          [
-            0,
-            1,
-            0,
-            420.0
-          ],
-          [
-            0,
-            0,
-            1,
-            0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h9",
-        "H": 75.0,
-        "Hmin": 70.0,
-        "Hmax": 100.0,
-        "kind": "short",
-        "moves": false
-      },
-      {
-        "id": "h9-post",
-        "part": "post_short",
-        "color": "#1DD1A1",
-        "role": "support",
-        "transform": [
-          [
-            1,
-            0,
-            0,
-            340.0
-          ],
-          [
-            0,
-            1,
-            0,
-            420.0
-          ],
-          [
-            0,
-            0,
-            1,
-            5.0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h9",
-        "H": 75.0,
-        "Hmin": 70.0,
-        "Hmax": 100.0,
-        "kind": "short",
-        "moves": true
-      },
-      {
-        "id": "h9-clip",
-        "part": "lock_clip_short",
-        "color": "#FF9F43",
-        "role": "support",
-        "transform": [
-          [
-            0.0,
-            0.0,
-            -1.0,
-            340.0
-          ],
-          [
-            0.0,
-            1.0,
-            0.0,
-            420.0
-          ],
-          [
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h9",
-        "H": 75.0,
-        "Hmin": 70.0,
-        "Hmax": 100.0,
-        "kind": "short",
-        "moves": false
-      },
-      {
-        "id": "h9-cap",
-        "part": "ball_cap",
-        "color": "#FECA57",
-        "role": "support",
-        "transform": [
-          [
-            1.0,
-            0.0,
-            0.0,
-            340.0
-          ],
-          [
-            0.0,
-            0.0,
-            1.0,
-            420.0
-          ],
-          [
-            0.0,
-            -1.0,
-            0.0,
-            65.0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h9",
-        "H": 75.0,
-        "Hmin": 70.0,
-        "Hmax": 100.0,
-        "kind": "short",
-        "moves": true
-      },
-      {
         "id": "low-0",
-        "part": "low_mount",
+        "part": "low_mount_h67",
         "color": "#A3CB38",
         "role": "low",
         "transform": [
@@ -2026,7 +1875,7 @@
       },
       {
         "id": "low-1",
-        "part": "low_mount",
+        "part": "low_mount_h52",
         "color": "#A3CB38",
         "role": "low",
         "transform": [
@@ -2059,7 +1908,7 @@
       },
       {
         "id": "low-2",
-        "part": "low_mount",
+        "part": "low_mount_h46",
         "color": "#A3CB38",
         "role": "low",
         "transform": [
@@ -2405,11 +2254,12 @@
       136.0
     ],
     "installedTracks": 8,
-    "installedPosts": 3,
-    "lowMounts": 4,
+    "installedPosts": 2,
+    "lowMounts": 6,
     "adaptInDrop": 15.21,
     "adaptInSlope": 14.53,
-    "note": "Example assembly. Not every one of the 48 track pieces is installed. ADAPT_OUT and ADAPT_IN are placed from the published joint numbers. Their solid fit against the v1 lift was not in the 0-fail boolean report.",
+    "status": "design_study",
+    "note": "Design study. The 80 mm helix meets the lift housing. Not a working route.",
     "instances": [
       {
         "id": "tile_00",
@@ -2549,7 +2399,7 @@
             -1.0,
             0.0,
             0.0,
-            272.0
+            260.0
           ],
           [
             0.0,
@@ -2805,158 +2655,6 @@
       },
       {
         "id": "h0-sleeve",
-        "part": "sleeve_tall",
-        "color": "#5F27CD",
-        "role": "support",
-        "transform": [
-          [
-            1,
-            0,
-            0,
-            260.0
-          ],
-          [
-            0,
-            1,
-            0,
-            100.0
-          ],
-          [
-            0,
-            0,
-            1,
-            0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h0",
-        "H": 170.0,
-        "Hmin": 145.0,
-        "Hmax": 230.0,
-        "kind": "tall",
-        "moves": false
-      },
-      {
-        "id": "h0-post",
-        "part": "post_tall",
-        "color": "#A55EEA",
-        "role": "support",
-        "transform": [
-          [
-            1,
-            0,
-            0,
-            260.0
-          ],
-          [
-            0,
-            1,
-            0,
-            100.0
-          ],
-          [
-            0,
-            0,
-            1,
-            25.0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h0",
-        "H": 170.0,
-        "Hmin": 145.0,
-        "Hmax": 230.0,
-        "kind": "tall",
-        "moves": true
-      },
-      {
-        "id": "h0-clip",
-        "part": "lock_clip_tall",
-        "color": "#FF9F43",
-        "role": "support",
-        "transform": [
-          [
-            0.0,
-            0.0,
-            -1.0,
-            260.0
-          ],
-          [
-            0.0,
-            1.0,
-            0.0,
-            100.0
-          ],
-          [
-            1,
-            0,
-            0,
-            0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h0",
-        "H": 170.0,
-        "Hmin": 145.0,
-        "Hmax": 230.0,
-        "kind": "tall",
-        "moves": false
-      },
-      {
-        "id": "h0-cap",
-        "part": "ball_cap",
-        "color": "#FECA57",
-        "role": "support",
-        "transform": [
-          [
-            1.0,
-            0.0,
-            0.0,
-            260.0
-          ],
-          [
-            0.0,
-            0.0,
-            1.0,
-            100.0
-          ],
-          [
-            0.0,
-            -1.0,
-            0.0,
-            160.0
-          ],
-          [
-            0,
-            0,
-            0,
-            1
-          ]
-        ],
-        "heightId": "h0",
-        "H": 170.0,
-        "Hmin": 145.0,
-        "Hmax": 230.0,
-        "kind": "tall",
-        "moves": true
-      },
-      {
-        "id": "h1-sleeve",
         "part": "sleeve_short",
         "color": "#10AC84",
         "role": "support",
@@ -2986,7 +2684,7 @@
             1
           ]
         ],
-        "heightId": "h1",
+        "heightId": "h0",
         "H": 90.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -2994,7 +2692,7 @@
         "moves": false
       },
       {
-        "id": "h1-post",
+        "id": "h0-post",
         "part": "post_short",
         "color": "#1DD1A1",
         "role": "support",
@@ -3024,7 +2722,7 @@
             1
           ]
         ],
-        "heightId": "h1",
+        "heightId": "h0",
         "H": 90.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -3032,7 +2730,7 @@
         "moves": true
       },
       {
-        "id": "h1-clip",
+        "id": "h0-clip",
         "part": "lock_clip_short",
         "color": "#FF9F43",
         "role": "support",
@@ -3062,7 +2760,7 @@
             1
           ]
         ],
-        "heightId": "h1",
+        "heightId": "h0",
         "H": 90.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -3070,7 +2768,7 @@
         "moves": false
       },
       {
-        "id": "h1-cap",
+        "id": "h0-cap",
         "part": "ball_cap",
         "color": "#FECA57",
         "role": "support",
@@ -3100,7 +2798,7 @@
             1
           ]
         ],
-        "heightId": "h1",
+        "heightId": "h0",
         "H": 90.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -3108,7 +2806,7 @@
         "moves": true
       },
       {
-        "id": "h2-sleeve",
+        "id": "h1-sleeve",
         "part": "sleeve_short",
         "color": "#10AC84",
         "role": "support",
@@ -3138,7 +2836,7 @@
             1
           ]
         ],
-        "heightId": "h2",
+        "heightId": "h1",
         "H": 75.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -3146,7 +2844,7 @@
         "moves": false
       },
       {
-        "id": "h2-post",
+        "id": "h1-post",
         "part": "post_short",
         "color": "#1DD1A1",
         "role": "support",
@@ -3176,7 +2874,7 @@
             1
           ]
         ],
-        "heightId": "h2",
+        "heightId": "h1",
         "H": 75.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -3184,7 +2882,7 @@
         "moves": true
       },
       {
-        "id": "h2-clip",
+        "id": "h1-clip",
         "part": "lock_clip_short",
         "color": "#FF9F43",
         "role": "support",
@@ -3214,7 +2912,7 @@
             1
           ]
         ],
-        "heightId": "h2",
+        "heightId": "h1",
         "H": 75.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -3222,7 +2920,7 @@
         "moves": false
       },
       {
-        "id": "h2-cap",
+        "id": "h1-cap",
         "part": "ball_cap",
         "color": "#FECA57",
         "role": "support",
@@ -3252,7 +2950,7 @@
             1
           ]
         ],
-        "heightId": "h2",
+        "heightId": "h1",
         "H": 75.0,
         "Hmin": 70.0,
         "Hmax": 100.0,
@@ -3261,7 +2959,73 @@
       },
       {
         "id": "low-0",
-        "part": "low_mount",
+        "part": "low_mount_h158",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            180.0
+          ],
+          [
+            0,
+            1,
+            0,
+            140.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 157.52
+      },
+      {
+        "id": "low-1",
+        "part": "low_mount_h104",
+        "color": "#A3CB38",
+        "role": "low",
+        "transform": [
+          [
+            1,
+            0,
+            0,
+            340.0
+          ],
+          [
+            0,
+            1,
+            0,
+            140.0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "Hraw": 103.74
+      },
+      {
+        "id": "low-2",
+        "part": "low_mount_h59",
         "color": "#A3CB38",
         "role": "low",
         "transform": [
@@ -3293,8 +3057,8 @@
         "Hraw": 58.96
       },
       {
-        "id": "low-1",
-        "part": "low_mount",
+        "id": "low-3",
+        "part": "low_mount_h51",
         "color": "#A3CB38",
         "role": "low",
         "transform": [
@@ -3326,8 +3090,8 @@
         "Hraw": 50.96
       },
       {
-        "id": "low-2",
-        "part": "low_mount",
+        "id": "low-4",
+        "part": "low_mount_h45",
         "color": "#A3CB38",
         "role": "low",
         "transform": [
@@ -3359,8 +3123,8 @@
         "Hraw": 45.46
       },
       {
-        "id": "low-3",
-        "part": "low_mount",
+        "id": "low-5",
+        "part": "low_mount_h27",
         "color": "#A3CB38",
         "role": "low",
         "transform": [

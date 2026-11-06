@@ -137,23 +137,26 @@ def _extend_path(path, e):
     return [a] + list(path) + [b]
 
 def _tongue(path_end, heading):
-    """Male tongue continuing the V at the downstream end."""
+    """Male tongue that continues the V running surface (not a flat bar).
+    The ball must ride these 45° faces through the joint at the same VH
+    contact height; a rectangular bar at v=7.2 embedded the 35 mm sphere."""
     t = np.array(heading, float); t = t / np.hypot(*t)
     o = np.array(path_end, float)
     pts = []
     for s in (0.0, C.TONGUE):
         pts.append((tuple(o + np.array([t[0], t[1], 0]) * s), (t[0], t[1])))
-    w2 = 18.0
-    tw = 18.0 - C.TONGUE_CLR
-    loop = [(-tw, -C.BOT + 0.6), (tw, -C.BOT + 0.6), (tw, 7.2), (-tw, 7.2)]
-    return sweep([(p, th, loop) for p, th in pts])
+    w2 = 30.0
+    vt = 28.0
+    loop_body = [(-w2, -C.BOT + 0.4), (w2, -C.BOT + 0.4), (w2, C.RIM - 2.0), (-w2, C.RIM - 2.0)]
+    loop_cut = [(0, -0.2), (vt, vt - 0.2), (vt, C.RIM + 6), (-vt, C.RIM + 6), (-vt, vt - 0.2)]
+    return sweep([(p, th, loop_body) for p, th in pts]) - sweep([(p, th, loop_cut) for p, th in pts])
 
 def _female_cut(path_start, heading):
     """Pocket at the upstream end plus a 0.5 mm waterfall (deeper receiving floor)."""
     t = np.array(heading, float); t = t / np.hypot(*t)
     o = np.array(path_start, float)
     pts = []
-    for s in (-2.0, C.TONGUE + 1.2):
+    for s in (-2.0, C.TONGUE + 2.0):
         pts.append((tuple(o + np.array([t[0], t[1], 0.0]) * s), (t[0], t[1])))
     # Simple rectangular pocket that definitely removes receiving material.
     w2 = 34.0
@@ -286,6 +289,54 @@ def _reinforce_sockets(man, stations, tangents, slides=None):
         man = man - _socket_cut(o, (t[0], t[1]), sn, sp)
     return man
 
+def carve_balls(man, centers, gap=0.35):
+    """Open the channel so a world-vertical 35 mm sphere on these centres
+    does not occupy solid. gap is radial clearance beyond the 17.5 mm ball.
+    Designed cap/clip snaps are not carved here."""
+    r = C.RB + gap
+    cuts = [M.sphere(r, 24).translate([float(c[0]), float(c[1]), float(c[2])]) for c in centers]
+    if not cuts:
+        return man
+    cut = cuts[0]
+    step = 6
+    for i in range(1, len(cuts), step):
+        chunk = cuts[i:i + step]
+        block = chunk[0] if len(chunk) == 1 else union(chunk)
+        cut = cut + block
+    return man - cut
+
+
+def _ball_centers_straight(L, drop):
+    centers = []
+    for s in np.linspace(0, L, max(8, int(L / 6) + 1)):
+        centers.append((float(s), 0.0, -drop * float(s) / L + C.VH))
+    # Incoming ball is still on the sender floor (one waterfall above local 0).
+    for s in np.linspace(-6.0, C.TONGUE + 2.0, 6):
+        centers.append((float(s), 0.0, C.WATERFALL + C.VH))
+    # Tongue continues at the exit height, then down the steepest follower
+    # the catalogue actually uses: a 15 mm corner or a 20 mm / 160 mm straight,
+    # after the 0.5 mm waterfall. Both turn directions are carved so the tongue
+    # is not left standing in the next piece's ball.
+    for s in np.linspace(L, L + C.TONGUE + 4.0, 6):
+        centers.append((float(s), 0.0, -drop + C.VH))
+    arc_len = C.RC90 * math.pi / 2.0
+    for i in range(16):
+        a = math.radians(90.0 * i / 15.0)
+        arc = C.RC90 * a
+        if arc > 32.0:
+            break
+        dz = -(C.WATERFALL + C.DROP90 * (arc / arc_len))
+        z = -drop + C.VH + dz
+        lx = C.RC90 * math.sin(a)
+        ly = C.RC90 * (1.0 - math.cos(a))
+        centers.append((L + lx, ly, z))
+        centers.append((L + lx, -ly, z))
+    for s in np.linspace(0.0, 28.0, 8):
+        dz = -(C.WATERFALL + C.DROP160 * float(s) / C.S160)
+        centers.append((L + float(s), 0.0, -drop + C.VH + dz))
+    return centers
+
+
 def straight_track_r(L, drop):
     n = max(2, int(L / 20) + 1)
     path = [((L * i / (n - 1), 0.0, -drop * i / (n - 1)), (1.0, 0.0)) for i in range(n)]
@@ -296,7 +347,7 @@ def straight_track_r(L, drop):
     stations = [(s, 0.0, -drop * s / L) for s in _socket_stations_straight(L)]
     man = _reinforce_sockets(man, stations, [(1.0, 0.0)] * len(stations))
     man = man - _female_cut(path[0][0], (1.0, 0.0))
-    return man
+    return carve_balls(man, _ball_centers_straight(L, drop))
 
 def corner_track(turn='L', R=None, drop=None, ang=90.0):
     R = C.RC90 if R is None else R
@@ -320,7 +371,19 @@ def corner_track(turn='L', R=None, drop=None, ang=90.0):
     # grow sliding sockets only inward so bosses do not invade the next piece
     man = _reinforce_sockets(man, stations, tangents, slides=[(0.0, sl), (sl, 0.0)])
     man = man - _female_cut(path[0][0], path[0][1])
-    return man
+    centers = []
+    steps = 36
+    for i in range(steps):
+        a = math.radians(ang * i / (steps - 1))
+        arc = R * a
+        lx = R * math.sin(a)
+        ly = s * R * (1 - math.cos(a))
+        if arc <= C.TONGUE + 1.5:
+            z = C.WATERFALL
+        else:
+            z = -drop * i / (steps - 1)
+        centers.append((lx, ly, z + C.VH))
+    return carve_balls(man, centers)
 
 def fit_coupon():
     """One-piece coupon of every repeating interface."""
