@@ -133,15 +133,15 @@ try {
   })()`);
   await sleep(400);
   const shotB = await desktop.client.send('Page.captureScreenshot', { format: 'png' });
-  writeFileSync('/opt/cursor/artifacts/marble_v2_layout_b.png', Buffer.from(shotB.data, 'base64'));
+  writeFileSync('/opt/cursor/artifacts/marble_v2_hold_layout_b.png', Buffer.from(shotB.data, 'base64'));
   await evaluate(desktop.client, `window.__marble2.setLayout('A'); document.getElementById('btn-frame').click();`);
   await sleep(300);
   const shotA = await desktop.client.send('Page.captureScreenshot', { format: 'png' });
-  writeFileSync('/opt/cursor/artifacts/marble_v2_layout_a.png', Buffer.from(shotA.data, 'base64'));
+  writeFileSync('/opt/cursor/artifacts/marble_v2_hold_banner.png', Buffer.from(shotA.data, 'base64'));
   await evaluate(desktop.client, `document.getElementById('tab-print').click()`);
   await sleep(200);
   const shotP = await desktop.client.send('Page.captureScreenshot', { format: 'png' });
-  writeFileSync('/opt/cursor/artifacts/marble_v2_print.png', Buffer.from(shotP.data, 'base64'));
+  writeFileSync('/opt/cursor/artifacts/marble_v2_hold_downloads.png', Buffer.from(shotP.data, 'base64'));
   const dom = await evaluate(desktop.client, `({
     hrefs: Array.from(document.querySelectorAll('a')).map((a) => a.getAttribute('href')),
     text: document.getElementById('print-root').innerText,
@@ -179,7 +179,21 @@ try {
   ];
   const statuses = {};
   for (const link of links) statuses[link] = (await fetch('http://127.0.0.1:' + port + link)).status;
-  const report = { desktop: desktop.sample, motion, dom: { rows: dom.rows, hasZip: dom.hrefs.includes('/marble-system/marble-system-v2-kit.zip'), mentionsAdapter: /not boolean-checked/i.test(dom.text) }, desktopFailures, mobile: mobile.sample, mobileFailures, statuses };
+  const report = {
+    desktop: desktop.sample,
+    motion,
+    dom: {
+      rows: dom.rows,
+      hasZip: dom.hrefs.includes('/marble-system/marble-system-v2-kit.zip'),
+      has3mf: dom.hrefs.includes('/marble-system/kit/marble_system_v2_layoutA.3mf'),
+      hasCoupon: dom.hrefs.includes('/marble-system/stl/fit_coupon.stl'),
+      held: /Held/.test(dom.text)
+    },
+    desktopFailures,
+    mobile: mobile.sample,
+    mobileFailures,
+    statuses
+  };
   console.log(JSON.stringify(report, null, 2));
   const bad = Object.values(statuses).some((code) => code !== 200)
     || !desktop.sample.booted || !mobile.sample.booted
@@ -193,7 +207,11 @@ try {
     || motion.height !== 170
     || motion.layout !== 'B'
     || dom.rows !== 36
-    || !dom.hrefs.includes('/marble-system/marble-system-v2-kit.zip');
+    || dom.hrefs.includes('/marble-system/marble-system-v2-kit.zip')
+    || dom.hrefs.includes('/marble-system/kit/marble_system_v2_layoutA.3mf')
+    || !dom.hrefs.includes('/marble-system/stl/fit_coupon.stl')
+    || !/Held/.test(dom.text)
+    || !/do not print full kit yet/.test(desktop.sample.claim);
   if (bad) process.exitCode = 1;
 } finally {
   chrome.kill('SIGKILL');

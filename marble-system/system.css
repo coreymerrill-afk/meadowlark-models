@@ -46,6 +46,23 @@ h2 { font-size: 1.05rem; margin: 0 0 0.5rem; }
   padding: 0.65rem 0.9rem;
   margin: 0 0 1rem;
 }
+.claim.hold {
+  background: #2a1717;
+  border: 1px solid #6b3030;
+  border-left: 6px solid #f0a8a8;
+  color: #ffd7d7;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+button.held, .dl-row button[disabled] {
+  min-height: 44px;
+  background: var(--bg3);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  cursor: not-allowed;
+}
 .facts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));

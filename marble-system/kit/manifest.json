@@ -1,6 +1,21 @@
 {
   "name": "marble-system-v2",
   "version": "0.3-full48",
+  "public_status": {
+    "state": "design-under-correction",
+    "layout_a_assembleable_as_claimed": false,
+    "do_not_print_full_kit": true,
+    "summary": "Design under correction — do not print full kit yet. Solid-geometry checks found lift-adapter clashes and track-joint obstructions; generic slicing did not establish assembly/rolling.",
+    "findings_mm3": {
+      "ADAPT_OUT_x_housing_back": 19651,
+      "lift_mount_plate_x_housing_back": 55132,
+      "ADAPT_IN_x_housing": 4699,
+      "joint_ball_collisions": "63-70",
+      "low_mount_clash": 3104
+    },
+    "cad_unchanged": true,
+    "kit_zip_regenerated": false
+  },
   "generated": "2026-11-05T23:54:42-07:00",
   "timezone": "America/Denver",
   "printer": {

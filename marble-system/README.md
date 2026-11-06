@@ -1,5 +1,7 @@
 # Marble System v2 — full 48-piece CAD (prototype)
 
+**Design under correction — do not print the full kit yet.** Solid-geometry checks of this package found lift-adapter clashes and track-joint obstructions. Generic slicing did not establish assembly or rolling. `layout_A_assembleable_as_claimed` is **false** for the files here. ADAPT_OUT meets the v1 housing by about 19,651 mm³. The lift mount plate meets the housing by about 55,132 mm³. The inlet adapter meets the housing by about 4,699 mm³. Repeated joint ball collisions are about 63–70 mm³. A low mount clashes by about 3,104 mm³. The CAD in this tree is unchanged pending a corrected package. The kit ZIP was not regenerated.
+
 Version **0.3-full48**. Computational prototype of a modular gravity marble run that
 reuses the v1 hand-cranked paddle-wheel lift. **Not printed. Not certified. Not
 kid-proof.** Treat every snap, slope, and load number as untested until a
@@ -122,7 +124,7 @@ of a 244 mm spiral on two posts is **untested**. The 80 mm pitch clears the
 
 ## Validation
 
-Report: `reports/validation.json`. This run: **0 fail(s)**.
+Report: `reports/validation.json`. This run: **0 fail(s)**. That count is not a solid-assembly clearance. A later boolean audit of these same files found the clashes named at the top of this file.
 
 Checks included: single-body watertight solids inside the 330×320×325 envelope;
 sleeve/post sliding clearance; height-window overlap and no below-tile

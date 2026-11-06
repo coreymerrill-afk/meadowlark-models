@@ -98,7 +98,7 @@
   }
 
   function claimSentence() {
-    return 'Unprinted v2 prototype. Layouts A and B are computational examples, not a measured print and not a certified toy. Print the fit coupon and one short support before the rest of the kit. Creep, fatigue, rolling, and helix sag are untested.';
+    return 'Design under correction — do not print full kit yet. Solid-geometry checks found lift-adapter clashes and track-joint obstructions; generic slicing did not establish assembly/rolling.';
   }
 
   function fileKind(kind) {
