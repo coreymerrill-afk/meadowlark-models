@@ -27,8 +27,15 @@ assert(manifest.validation.forces_tested === false, 'forces flag');
 assert(manifest.validation.h3c_sliced === false, 'slice flag');
 assert(manifest.validation.cad_validated === true, 'cad flag');
 assert(manifest.legacy_interface.snap_compatible === false, 'snap claim');
-assert(manifest.legacy_interface.bay_width_over_measured_tile === 2, 'tile multiple');
-assert(manifest.legacy_interface.depth_matches_two_tiles === false, 'depth claim');
+assert(manifest.version === '2.0.0', 'version');
+assert(manifest.prior_version === 'archive/v1.0.0', 'v1 archive pointer');
+assert(manifest.magnet.status === 'NOMINAL_NOT_FIT_APPROVED', 'magnet status');
+assert(manifest.magnet.nominal_mm[0] === 5 && manifest.magnet.nominal_mm[1] === 2.8, 'magnet nominal');
+assert(manifest.magnet.holding_force_calculated === false, 'no force from size');
+assert(manifest.magnet.h3c_pause_profile === false, 'no pause profile');
+assert(manifest.validation.h3c_pause_profile === false, 'validation pause flag');
+assert(validation.roofs.every((roof) => roof.bearing_probe_mm3 > 80), 'every roof bears');
+assert(validation.roofs.every((roof) => roof.bodies === 1), 'one roof body');
 assert(manifest.instances.length === validation.instance_count, 'instance count');
 assert(manifest.parts.length === stls.size, 'part count matches stl directory');
 
@@ -46,7 +53,9 @@ manifest.parts.forEach((part) => {
 stls.forEach((name) => {
   assert(manifest.parts.some((part) => part.file === 'stl/' + name), 'unlisted stl ' + name);
 });
-assert(manifest.bom.find((row) => row.part === 'qa_coupon_socket_v1').qty === 1, 'coupon qty');
+assert(manifest.bom.find((row) => row.part === 'qa2_coupon_panel_v2').qty === 1, 'coupon panel');
+assert(manifest.bom.find((row) => row.part === 'qa2_retainer_v2').qty > 4, 'retainers');
+assert(read(here + 'archive/v1.0.0/README.md').includes('78 mm'), 'v1 defect note');
 
 assert(home.includes('href="/dollhouse/queen-anne/"'), 'home link');
 assert(home.includes('href="/dollhouse/"'), 'home still links the play kit');

@@ -135,9 +135,10 @@ mobile.ws.close();
 const links = [
   '/dollhouse/queen-anne/',
   '/dollhouse/queen-anne/manifest.json',
-  '/dollhouse/queen-anne/stl/qa_coupon_socket_v1.stl',
-  '/dollhouse/queen-anne/stl/qa_panel_front_glazed_v1.stl',
-  '/dollhouse/queen-anne/stl/qa_roof_tower_v1.stl',
+  '/dollhouse/queen-anne/stl/qa2_coupon_panel_v2.stl',
+  '/dollhouse/queen-anne/stl/qa2_panel_hall_l1_entry_v2.stl',
+  '/dollhouse/queen-anne/stl/qa2_roof_tower_v2.stl',
+  '/dollhouse/queen-anne/stl/qa2_retainer_v2.stl',
   '/dollhouse/',
   '/marble-factory/',
   '/marble-system/',
