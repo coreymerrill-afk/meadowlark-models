@@ -1,0 +1,146 @@
+{
+  "units": "mm",
+  "up": "Z",
+  "instances": [
+    {
+      "id": "floor",
+      "file": "models/dp_floor.stl",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ],
+      "note": "Floor boards and baseboards. Door gap is x 96 to 136."
+    },
+    {
+      "id": "door-frame",
+      "file": "models/dp_door-frame.stl",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ],
+      "note": "Left-hand passage. The opening is empty."
+    },
+    {
+      "id": "window-wall",
+      "file": "models/dp_window-wall.stl",
+      "placement_mm": [
+        24,
+        118,
+        2.6
+      ],
+      "note": "Back wall of the bay. Sits on the floor. Coplanar, no shared volume."
+    },
+    {
+      "id": "sash",
+      "file": "models/dp_sash.stl",
+      "placement_mm": [
+        24,
+        118,
+        2.6
+      ],
+      "note": "In the opening, 0.6 mm clear of the reveal."
+    },
+    {
+      "id": "sofa",
+      "file": "models/dp_sofa.stl",
+      "placement_mm": [
+        8,
+        28,
+        2.6
+      ],
+      "note": "Left side. Stops before the front door gap."
+    },
+    {
+      "id": "chair",
+      "file": "models/dp_chair.stl",
+      "placement_mm": [
+        108,
+        24,
+        2.6
+      ],
+      "note": "Right of the path, in front of the table."
+    },
+    {
+      "id": "table",
+      "file": "models/dp_table.stl",
+      "placement_mm": [
+        104,
+        52,
+        2.6
+      ],
+      "note": "Centre-right."
+    },
+    {
+      "id": "bookcase",
+      "file": "models/dp_bookcase.stl",
+      "placement_mm": [
+        8,
+        100,
+        2.6
+      ],
+      "note": "Back-left. Open shelves."
+    },
+    {
+      "id": "stair-sample",
+      "file": "models/dp_stair-sample.stl",
+      "placement_mm": [
+        132,
+        78,
+        2.6
+      ],
+      "note": "Back-right. Four rises. Clear of the window wall and the table."
+    },
+    {
+      "id": "light",
+      "file": "models/dp_light.stl",
+      "placement_mm": [
+        46,
+        78,
+        138
+      ],
+      "note": "Top is coplanar with the joist underside. Cavity faces down."
+    },
+    {
+      "id": "beam",
+      "file": "models/dp_beam.stl",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ],
+      "note": "Joist meets the window wall at y 118. Post meets the floor at z 2.6."
+    },
+    {
+      "id": "lace",
+      "file": "models/dp_lace.stl",
+      "placement_mm": [
+        196,
+        10,
+        2.6
+      ],
+      "note": "Bench. Through-pierced verge board."
+    },
+    {
+      "id": "bracket",
+      "file": "models/dp_bracket.stl",
+      "placement_mm": [
+        196,
+        50,
+        2.6
+      ],
+      "note": "Bench. Cyma bracket, hole through the spandrel."
+    },
+    {
+      "id": "shingle-sample",
+      "file": "models/dp_shingle-sample.stl",
+      "placement_mm": [
+        196,
+        80,
+        2.6
+      ],
+      "note": "Bench. Shallow courses on one cartridge."
+    }
+  ]
+}

@@ -105,17 +105,18 @@
       case 'closed':
       case 'front':
       case 'detail':
+      case 'rear':
       case 'plan':
       case 'lighting':
         return instance.transform;
       case 'attachment':
-        if (instance.id === 'side-l1' && motion && motion.pull) {
-          return mul(translate([motion.pull[0] * 0.45, motion.pull[1] * 0.45, 0]), instance.transform);
+        if (instance.id === 'rear' && motion && motion.pull) {
+          return mul(translate([0, motion.pull[1] * 0.55, 0]), instance.transform);
         }
         return instance.transform;
       case 'open':
       case 'stairs':
-        if (group === 'roof') return mul(translate(motionVector(motion, true)), instance.transform);
+      case 'attic':
         return instance.transform;
       case 'remove-panels':
         return instance.transform;
@@ -139,14 +140,15 @@
   function modeVisible(instance) {
     if (instance.role === 'coupon' && state.mode !== 'attachment') return false;
     var group = instance.motion ? instance.motion.group : '';
-    if ((state.mode === 'open' || state.mode === 'stairs') && group === 'end') return false;
+    if ((state.mode === 'open' || state.mode === 'stairs' || state.mode === 'attic') && group === 'back') return false;
+    if (state.mode === 'attic' && instance.id === 'roof-rear') return false;
     if (instance.role === 'service' && state.mode !== 'lighting' && state.mode !== 'explode') return false;
     if (state.mode === 'remove-panels') {
       var group = instance.motion ? instance.motion.group : '';
       return group !== 'front' && group !== 'end';
     }
     if (state.mode === 'attachment') {
-      return instance.id === 'side-l1' || instance.id === 'walls-l1' || instance.role === 'coupon';
+      return instance.id === 'rear' || instance.id === 'side' || instance.id === 'walls-l1' || instance.role === 'coupon';
     }
     if (state.mode === 'plan') {
       return instance.role !== 'roof' && instance.role !== 'facade' && instance.role !== 'panel' && instance.role !== 'coupon' && instance.role !== 'sample' && levelOf(instance) === state.storey;
@@ -165,8 +167,10 @@
         return 'Front elevation, matched to the approved picture’s closed view. Materials are colors on the real meshes.';
       case 'detail':
         return 'Porch detail. Turned columns, brackets, and the spindle rail are geometry, not a texture.';
+      case 'rear':
+        return 'Closed back. The one rear wall sits 0.45 mm off the jambs. That gap is the fit.';
       case 'open':
-        return 'Open from the side. The side shells are pulled straight off and the roofs are lifted. The porch stays, so play does not start by dismantling it.';
+        return 'Back off. The front, sides, porch, and roofs stay. This is the play opening.';
       case 'remove-panels':
         return 'Panels hidden. Frames, floors, stairs, and roofs stay. The hidden panels are the same STLs.';
       case 'roof':
@@ -176,9 +180,11 @@
       case 'plan':
         return 'Storey ' + state.storey + '. Roofs and facades are hidden so the rooms, stair, and doorways on this floor are visible. The drawing under the view uses the same coordinates.';
       case 'attachment':
-        return 'Side wall, the everyday opening, pulled straight out. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested. The porch is not part of this pull.';
+        return 'The back, pulled straight off. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested. The back is not what holds the house up.';
       case 'stairs':
         return 'Both flights. The lower run climbs from the entry to the first floor. The upper run climbs from that floor to the attic.';
+      case 'attic':
+        return 'Attic floor with the rear roof hidden so the cot and trunk are visible. Back off keeps that roof on and shows the soffit opening.';
       case 'lighting':
         return 'Ten fixtures on the fixed frame and the porch. The 6 × 6 × 3 mm cavity is not a measured LED. No fuse is selected.';
       default:
@@ -445,13 +451,13 @@
 
   function bootViewer(manifest, geometries) {
     var view = el('view');
-    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     if (THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.setClearColor(0x10141a, 1);
+    renderer.setClearColor(0x1c2228, 1);
     if (THREE.ACESFilmicToneMapping !== undefined) {
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.08;
+      renderer.toneMappingExposure = 0.92;
     }
     view.appendChild(renderer.domElement);
 
@@ -468,9 +474,20 @@
 
     var hemi = new THREE.HemisphereLight(0xfff6ee, 0x1a222c, 0.55);
     scene.add(hemi);
-    var key = new THREE.DirectionalLight(0xfff1e0, 1.55);
-    key.position.set(-280, -720, 640);
+    var key = new THREE.DirectionalLight(0xfff1e0, 2.4);
+    key.position.set(-420, -680, 720);
+    key.castShadow = true;
+    key.shadow.mapSize.width = 2048;
+    key.shadow.mapSize.height = 2048;
+    key.shadow.camera.near = 80;
+    key.shadow.camera.far = 2200;
+    key.shadow.camera.left = -500;
+    key.shadow.camera.right = 500;
+    key.shadow.camera.top = 500;
+    key.shadow.camera.bottom = -500;
     scene.add(key);
+    renderer.shadowMap.enabled = true;
+    if (THREE.PCFSoftShadowMap) renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     var fill = new THREE.DirectionalLight(0x9eb4c8, 0.28);
     fill.position.set(520, 180, 220);
     scene.add(fill);
@@ -486,13 +503,20 @@
       else if (instance.role === 'porch' || instance.role === 'trim') { rough = 0.4; metal = 0.04; }
       else if (instance.role === 'stair' || instance.role === 'furniture' || instance.role === 'floor') { rough = 0.55; metal = 0.03; }
       else if (instance.role === 'light') { rough = 0.32; metal = 0.28; }
+      var clay = location.search.indexOf('clay=1') >= 0;
+      if (clay) {
+        renderer.setClearColor(0x2a2826, 1);
+        if (renderer.toneMappingExposure !== undefined) renderer.toneMappingExposure = 1.0;
+      }
       var material = new THREE.MeshStandardMaterial({
-        color: instance.color,
-        roughness: rough,
-        metalness: metal,
+        color: clay ? 0x8a8680 : instance.color,
+        roughness: clay ? 0.86 : rough,
+        metalness: 0.0,
         side: THREE.DoubleSide
       });
       var mesh = new THREE.Mesh(geometry, material);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
       scene.add(mesh);
       state.entries.push({ instance: instance, mesh: mesh });
       state.triangles += geometry.attributes.position.count / 3;
@@ -501,6 +525,8 @@
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     state.camera = camera;
     state.controls = controls;
+    state.renderer = renderer;
+    state.scene = scene;
     controls.target.copy(center);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;

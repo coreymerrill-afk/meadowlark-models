@@ -1,0 +1,660 @@
+{
+  "nominal_disc_mm": [
+    5.0,
+    2.8
+  ],
+  "allowance": "0.30 mm each side of the diameter, 0.40 mm along the 2.8 mm thickness. Design numbers, not a measured fit.",
+  "coordinates": "center_mm is the assembled house, Z up. center_in_stl_mm is that point in the host STL, whose manifest transform is a translation.",
+  "stations": [
+    {
+      "station": 1,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          228.0,
+          298.45,
+          44.0
+        ],
+        "center_in_stl_mm": [
+          9.0,
+          3.0,
+          27.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_walls_l1_v5",
+        "center_mm": [
+          228.0,
+          292.0,
+          44.0
+        ],
+        "center_in_stl_mm": [
+          13.0,
+          172.0,
+          27.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 2,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          228.0,
+          298.45,
+          68.0
+        ],
+        "center_in_stl_mm": [
+          9.0,
+          3.0,
+          51.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_walls_l1_v5",
+        "center_mm": [
+          228.0,
+          292.0,
+          68.0
+        ],
+        "center_in_stl_mm": [
+          13.0,
+          172.0,
+          51.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 3,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          228.0,
+          298.45,
+          90.0
+        ],
+        "center_in_stl_mm": [
+          9.0,
+          3.0,
+          73.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_walls_l1_v5",
+        "center_mm": [
+          228.0,
+          292.0,
+          90.0
+        ],
+        "center_in_stl_mm": [
+          13.0,
+          172.0,
+          73.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 4,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          228.0,
+          298.45,
+          142.0
+        ],
+        "center_in_stl_mm": [
+          9.0,
+          3.0,
+          125.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_walls_l2_v5",
+        "center_mm": [
+          228.0,
+          292.0,
+          142.0
+        ],
+        "center_in_stl_mm": [
+          13.0,
+          172.0,
+          27.6
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 5,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          228.0,
+          298.45,
+          166.0
+        ],
+        "center_in_stl_mm": [
+          9.0,
+          3.0,
+          149.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_walls_l2_v5",
+        "center_mm": [
+          228.0,
+          292.0,
+          166.0
+        ],
+        "center_in_stl_mm": [
+          13.0,
+          172.0,
+          51.6
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 6,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          228.0,
+          298.45,
+          188.0
+        ],
+        "center_in_stl_mm": [
+          9.0,
+          3.0,
+          171.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_walls_l2_v5",
+        "center_mm": [
+          228.0,
+          292.0,
+          188.0
+        ],
+        "center_in_stl_mm": [
+          13.0,
+          172.0,
+          73.6
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 7,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          495.0,
+          298.45,
+          44.0
+        ],
+        "center_in_stl_mm": [
+          276.0,
+          3.0,
+          27.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_side_v5",
+        "center_mm": [
+          495.0,
+          292.0,
+          44.0
+        ],
+        "center_in_stl_mm": [
+          -1.0,
+          177.1,
+          27.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 8,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          495.0,
+          298.45,
+          68.0
+        ],
+        "center_in_stl_mm": [
+          276.0,
+          3.0,
+          51.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_side_v5",
+        "center_mm": [
+          495.0,
+          292.0,
+          68.0
+        ],
+        "center_in_stl_mm": [
+          -1.0,
+          177.1,
+          51.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 9,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          495.0,
+          298.45,
+          90.0
+        ],
+        "center_in_stl_mm": [
+          276.0,
+          3.0,
+          73.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_side_v5",
+        "center_mm": [
+          495.0,
+          292.0,
+          90.0
+        ],
+        "center_in_stl_mm": [
+          -1.0,
+          177.1,
+          73.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 10,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          495.0,
+          298.45,
+          142.0
+        ],
+        "center_in_stl_mm": [
+          276.0,
+          3.0,
+          125.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_side_v5",
+        "center_mm": [
+          495.0,
+          292.0,
+          142.0
+        ],
+        "center_in_stl_mm": [
+          -1.0,
+          177.1,
+          125.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 11,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          495.0,
+          298.45,
+          166.0
+        ],
+        "center_in_stl_mm": [
+          276.0,
+          3.0,
+          149.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_side_v5",
+        "center_mm": [
+          495.0,
+          292.0,
+          166.0
+        ],
+        "center_in_stl_mm": [
+          -1.0,
+          177.1,
+          149.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    },
+    {
+      "station": 12,
+      "panel": {
+        "host": "qa5_rear_v5",
+        "center_mm": [
+          495.0,
+          298.45,
+          188.0
+        ],
+        "center_in_stl_mm": [
+          276.0,
+          3.0,
+          171.55
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "mouth_opens": "+Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4,
+        "mating_face_y": 295.45,
+        "disc_zone_y": [
+          296.85,
+          300.05
+        ],
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
+      },
+      "jamb": {
+        "host": "qa5_side_v5",
+        "center_mm": [
+          495.0,
+          292.0,
+          188.0
+        ],
+        "center_in_stl_mm": [
+          -1.0,
+          177.1,
+          171.85
+        ],
+        "axis": [
+          0,
+          -1,
+          0
+        ],
+        "mouth_opens": "-Y",
+        "diameter_mm": 5.6,
+        "depth_mm": 3.2,
+        "skin_mm": 1.4
+      }
+    }
+  ],
+  "section": "Cut qa5_rear_v5 at local x = 9, which is assembled x = 228. The disc zone is assembled y 296.85 to 300.05.",
+  "retention": "Each rear strip slides down 3 mm onto two headed studs, then a recessed screw at z=110 stops it sliding back up. Jamb caps sit under a retainer bar held by one recessed screw. Adult assembly. Not a tested thread and not safety validated."
+}

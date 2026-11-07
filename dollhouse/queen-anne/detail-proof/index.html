@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Queen Anne detail proof</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #12161c; color: #ece6da; font: 15px/1.45 Georgia, serif; }
+  #view { position: absolute; inset: 0 280px 0 0; }
+  aside { position: absolute; top: 0; right: 0; bottom: 0; width: 280px; overflow: auto; padding: 16px 16px 32px; background: #1b211f; box-sizing: border-box; }
+  h1 { font-size: 20px; margin: 0 0 8px; }
+  p { margin: 0 0 10px; color: #c9c2b4; }
+  button { font: 14px/1.2 Georgia, serif; margin: 0 6px 6px 0; padding: 6px 8px; background: #2c3834; color: #f4efe6; border: 1px solid #8d9a90; }
+  button[aria-pressed="true"] { background: #efe6d4; color: #1b211f; }
+  #status { min-height: 2.4em; }
+</style>
+</head>
+<body>
+<div id="view"></div>
+<aside>
+  <h1>Detail proof</h1>
+  <p id="status">Loading the STLs.</p>
+  <p>One window, one pierced verge, one bracket, one shingle cartridge, one room. Not the whole house. The picture you were shown of the full house is not this model.</p>
+  <div>
+    <button type="button" data-shot="room" aria-pressed="true">Room</button>
+    <button type="button" data-shot="window">Window</button>
+    <button type="button" data-shot="lace">Lace</button>
+    <button type="button" data-shot="bracket">Bracket</button>
+    <button type="button" data-shot="shingles">Shingles</button>
+    <button type="button" data-shot="light">Light</button>
+    <button type="button" data-shot="neutral">Neutral</button>
+    <button type="button" data-shot="section">Section</button>
+  </div>
+  <p>Section cuts on Y = 119.2, through the window opening. Drag to orbit. Scroll to zoom.</p>
+</aside>
+<script src="vendor/three.min.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="viewer.js"></script>
+</body>
+</html>

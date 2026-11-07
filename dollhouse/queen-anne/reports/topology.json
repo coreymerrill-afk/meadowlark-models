@@ -1,0 +1,745 @@
+{
+  "ok": true,
+  "version": "6.5.1",
+  "parts": 105,
+  "failures": [],
+  "cutters_published": 0,
+  "bodies": [
+    {
+      "id": "qa5_foundation_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1088447.4
+    },
+    {
+      "id": "qa5_foundation_turret_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 392860.9
+    },
+    {
+      "id": "qa5_floor_l2_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 237173.5
+    },
+    {
+      "id": "qa5_floor_l3_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 237173.4
+    },
+    {
+      "id": "qa5_floor_turret_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 29936.1
+    },
+    {
+      "id": "qa5_walls_l1_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 505673.8
+    },
+    {
+      "id": "qa5_walls_l2_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 504524.6
+    },
+    {
+      "id": "qa5_attic_frame_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 66178.2
+    },
+    {
+      "id": "qa5_puck_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 329.2
+    },
+    {
+      "id": "qa5_front_ground_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 145509.3
+    },
+    {
+      "id": "qa5_door_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 3503.9
+    },
+    {
+      "id": "qa5_front_upper_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 124095.9
+    },
+    {
+      "id": "qa5_sash_upper_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1303.3
+    },
+    {
+      "id": "qa5_keeper_upper_l_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 573.7
+    },
+    {
+      "id": "qa5_pin_upper_l_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 20.9
+    },
+    {
+      "id": "qa5_keeper_upper_r_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 573.7
+    },
+    {
+      "id": "qa5_pin_upper_r_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 20.9
+    },
+    {
+      "id": "qa5_side_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 149284.8
+    },
+    {
+      "id": "qa5_rear_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 323899.4
+    },
+    {
+      "id": "qa5_cap_jla0_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 203.7
+    },
+    {
+      "id": "qa5_cap_jra0_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 143.4
+    },
+    {
+      "id": "qa5_cap_jla1_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 203.7
+    },
+    {
+      "id": "qa5_cap_jra1_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 143.4
+    },
+    {
+      "id": "qa5_cap_jla2_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 203.7
+    },
+    {
+      "id": "qa5_cap_jra2_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 143.4
+    },
+    {
+      "id": "qa5_cap_jlb0_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 203.7
+    },
+    {
+      "id": "qa5_cap_jrb0_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 143.4
+    },
+    {
+      "id": "qa5_cap_jlb1_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 203.7
+    },
+    {
+      "id": "qa5_cap_jrb1_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 143.4
+    },
+    {
+      "id": "qa5_cap_jlb2_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 203.7
+    },
+    {
+      "id": "qa5_cap_jrb2_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 143.4
+    },
+    {
+      "id": "qa5_roof_front_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 479818.7
+    },
+    {
+      "id": "qa5_gable_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 53582.5
+    },
+    {
+      "id": "qa5_roof_rear_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 285787.8
+    },
+    {
+      "id": "qa5_turret_cap_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 20705.8
+    },
+    {
+      "id": "qa5_roof_turret_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 322316.7
+    },
+    {
+      "id": "qa5_turret_loft_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 124705.3
+    },
+    {
+      "id": "qa5_turret_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 263769.1
+    },
+    {
+      "id": "qa5_porch_turret_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 43836.7
+    },
+    {
+      "id": "qa5_porch_front_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 98593.1
+    },
+    {
+      "id": "qa5_porch_roof_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 102659.8
+    },
+    {
+      "id": "qa5_porch_skirt_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 125307.4
+    },
+    {
+      "id": "qa5_lantern_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 901.0
+    },
+    {
+      "id": "qa5_stair_lower_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 40552.0
+    },
+    {
+      "id": "qa5_stair_upper_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 41986.7
+    },
+    {
+      "id": "qa5_cornice_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 27776.3
+    },
+    {
+      "id": "qa5_crown_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 939.0
+    },
+    {
+      "id": "qa5_bed_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 31534.5
+    },
+    {
+      "id": "qa5_stand_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 3664.4
+    },
+    {
+      "id": "qa5_bedrug_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 704.0
+    },
+    {
+      "id": "qa5_cabinet_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 41697.8
+    },
+    {
+      "id": "qa5_table_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2441.3
+    },
+    {
+      "id": "qa5_rug_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1641.6
+    },
+    {
+      "id": "qa5_sofa_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 19577.5
+    },
+    {
+      "id": "qa5_chair_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1695.3
+    },
+    {
+      "id": "qa5_trunk_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 9072.0
+    },
+    {
+      "id": "qa5_tub_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 6816.0
+    },
+    {
+      "id": "qa5_basin_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 921.7
+    },
+    {
+      "id": "qa5_cot_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 5584.0
+    },
+    {
+      "id": "qa5_service_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 215262.4
+    },
+    {
+      "id": "qa5_coupon_frame_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 4768.1
+    },
+    {
+      "id": "qa5_coupon_panel_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1241.2
+    },
+    {
+      "id": "qa5_retainer_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 491.8
+    },
+    {
+      "id": "qa5_polarity_v5",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 3538.0
+    },
+    {
+      "id": "qa65_gable_verge_left",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2484.4
+    },
+    {
+      "id": "qa65_gable_verge_right",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2490.7
+    },
+    {
+      "id": "qa65_gable_arched_casing",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 6263.9
+    },
+    {
+      "id": "qa65_gable_sash",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 846.3
+    },
+    {
+      "id": "qa65_gable_fan_kingpost",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1586.7
+    },
+    {
+      "id": "qa65_gable_cornice",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 6662.6
+    },
+    {
+      "id": "qa65_porch_frieze_1",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2162.1
+    },
+    {
+      "id": "qa65_porch_frieze_2",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2162.1
+    },
+    {
+      "id": "qa65_porch_frieze_3",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2123.2
+    },
+    {
+      "id": "qa65_porch_balustrade_1",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2667.1
+    },
+    {
+      "id": "qa65_porch_balustrade_2",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2665.5
+    },
+    {
+      "id": "qa65_porch_balustrade_3",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2636.4
+    },
+    {
+      "id": "qa65_turret_belt_45",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1014.9
+    },
+    {
+      "id": "qa65_turret_belt_90",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1014.9
+    },
+    {
+      "id": "qa65_turret_belt_135",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1014.9
+    },
+    {
+      "id": "qa65_turret_belt_180",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1014.9
+    },
+    {
+      "id": "qa65_turret_belt_225",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1014.9
+    },
+    {
+      "id": "qa65_turret_belt_270",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1014.9
+    },
+    {
+      "id": "qa65_turret_belt_315",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1014.9
+    },
+    {
+      "id": "qa65_turret_window_middle_180",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_turret_window_middle_225",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_turret_window_middle_270",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_turret_window_middle_315",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_turret_window_loft_180",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_turret_window_loft_225",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_turret_window_loft_270",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_turret_window_loft_315",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1887.4
+    },
+    {
+      "id": "qa65_roof_ridge_crest",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1249.4
+    },
+    {
+      "id": "qa65_cap_capture_left",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1967.1
+    },
+    {
+      "id": "qa65_cap_capture_right",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1967.0
+    },
+    {
+      "id": "qa65_adult_screw_back_l",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 20.8
+    },
+    {
+      "id": "qa65_adult_screw_back_r",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 20.8
+    },
+    {
+      "id": "qa65_retainer_jl1",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1688.7
+    },
+    {
+      "id": "qa65_adult_screw_jl1",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 29.9
+    },
+    {
+      "id": "qa65_retainer_jl2",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 1688.7
+    },
+    {
+      "id": "qa65_adult_screw_jl2",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 29.9
+    },
+    {
+      "id": "qa65_retainer_jr1",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2364.5
+    },
+    {
+      "id": "qa65_adult_screw_jr1",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 29.9
+    },
+    {
+      "id": "qa65_retainer_jr2",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 2364.5
+    },
+    {
+      "id": "qa65_adult_screw_jr2",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 29.9
+    },
+    {
+      "id": "qa65_m2_nut",
+      "watertight": true,
+      "positive_bodies": 1,
+      "nonmanifold_edges": 0,
+      "volume_mm3": 16.7
+    }
+  ],
+  "lace_toolpath": "not checked; a parser failed on the 1.3 mm webs"
+}

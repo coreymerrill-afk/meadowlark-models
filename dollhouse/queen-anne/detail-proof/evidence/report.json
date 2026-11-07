@@ -1,0 +1,508 @@
+{
+  "name": "Queen Anne detail proof",
+  "what_this_is": "One window, one pierced verge, one bracket, one shingle cartridge, one furnished bay. Not the whole house.",
+  "units": "mm",
+  "scale": "1:24",
+  "up": "Z",
+  "bed_mm": [
+    330.0,
+    320.0,
+    325.0
+  ],
+  "slicer": null,
+  "slicer_note": "No PrusaSlicer, Cura, or OrcaSlicer binary was on this machine. No toolpath was produced. A mesh section is not a slice.",
+  "minimum_web": "No single thickness. Each part records the dimension drawn for it. None of those webs has a coupon.",
+  "minimum_web_status": "UNTESTED_UNTIL_PHYSICAL_COUPON",
+  "nozzle_assumption": "0.4 mm is the structural default. 0.2 mm is available for ornament. Neither was run.",
+  "parts": {
+    "floor": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 60782.8,
+      "bounds_mm": [
+        168.0,
+        128.0,
+        9.2
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "door_gap_mm": [
+        96,
+        136
+      ],
+      "groove_depth_mm": 0.45,
+      "board_pitch_mm": 8.0,
+      "note": "Floor boards and baseboards. Door gap is x 96 to 136.",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ]
+    },
+    "door-frame": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 19317.8,
+      "bounds_mm": [
+        3.2,
+        112.0,
+        79.4
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "clear_opening_mm": [
+        40,
+        71.4
+      ],
+      "note": "Left-hand passage. The opening is empty.",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ]
+    },
+    "window-wall": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 68522.4,
+      "bounds_mm": [
+        110.0,
+        14.7,
+        148.0
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "clear_aperture_mm": [
+        50.0,
+        76.0
+      ],
+      "full_size_in": [
+        47.2,
+        71.8
+      ],
+      "note": "Back wall of the bay. Sits on the floor. Coplanar, no shared volume.",
+      "placement_mm": [
+        24,
+        118,
+        2.6
+      ]
+    },
+    "sash": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 2109.8,
+      "bounds_mm": [
+        48.8,
+        2.8,
+        74.8
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "perimeter_clearance_mm": 0.6,
+      "rail_mm": 2.0,
+      "muntin_mm": 1.5,
+      "panes": 6,
+      "glass": "none; the panes are openings",
+      "note": "In the opening, 0.6 mm clear of the reveal.",
+      "placement_mm": [
+        24,
+        118,
+        2.6
+      ]
+    },
+    "sofa": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 24748.4,
+      "bounds_mm": [
+        66.0,
+        26.0,
+        31.3
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "full_size_note": "about a 6 foot sofa at 1:24",
+      "note": "Left side. Stops before the front door gap.",
+      "placement_mm": [
+        8,
+        28,
+        2.6
+      ]
+    },
+    "chair": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 1586.4,
+      "bounds_mm": [
+        19.2,
+        17.67,
+        32.4
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "back": "crest rail and a centre splat",
+      "note": "Right of the path, in front of the table.",
+      "placement_mm": [
+        108,
+        24,
+        2.6
+      ]
+    },
+    "table": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 1953.5,
+      "bounds_mm": [
+        34.0,
+        22.0,
+        20.2
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "top_height_mm": 20.2,
+      "full_size_in": 19.1,
+      "note": "Centre-right.",
+      "placement_mm": [
+        104,
+        52,
+        2.6
+      ]
+    },
+    "bookcase": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 10901.7,
+      "bounds_mm": [
+        27.8,
+        13.2,
+        66.5
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "shelves": 3,
+      "front": "open",
+      "books": "part of this solid",
+      "note": "Back-left. Open shelves.",
+      "placement_mm": [
+        8,
+        100,
+        2.6
+      ]
+    },
+    "stair-sample": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 10958.5,
+      "bounds_mm": [
+        32.0,
+        37.48,
+        46.0
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "rises": 4,
+      "rise_mm": 7.2,
+      "rise_in_at_1_24": 6.8,
+      "tread_mm": 9.0,
+      "note": "Back-right. Four rises. Clear of the window wall and the table.",
+      "placement_mm": [
+        132,
+        78,
+        2.6
+      ]
+    },
+    "light": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 1182.2,
+      "bounds_mm": [
+        14.4,
+        14.4,
+        8.0
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "cavity_diameter_mm": 6.0,
+      "cavity_depth_mm": 3.0,
+      "cavity_status": "PROVISIONAL_NOT_FIT_VALIDATED",
+      "feedthrough_diameter_mm": 2.0,
+      "feed_opens": "top of the puck",
+      "wired_to_rear_closure": false,
+      "note": "Top is coplanar with the joist underside. Cavity faces down.",
+      "placement_mm": [
+        46,
+        78,
+        138
+      ]
+    },
+    "beam": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 14572.8,
+      "bounds_mm": [
+        32.0,
+        78.0,
+        147.4
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "light_seat": "underside at z 146, coplanar with the puck top. The post stands left of the casing.",
+      "note": "Joist meets the window wall at y 118. Post meets the floor at z 2.6.",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ]
+    },
+    "lace": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 4040.3,
+      "bounds_mm": [
+        108.0,
+        26.0,
+        1.7
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "plate_thickness_mm": 1.7,
+      "hole_diameter_mm": 3.6,
+      "designed_web_mm": 5.4,
+      "web_status": "UNTESTED_UNTIL_PHYSICAL_COUPON",
+      "interiors": 20,
+      "piercings": "through; no backing",
+      "note": "Bench. Through-pierced verge board.",
+      "placement_mm": [
+        196,
+        10,
+        2.6
+      ]
+    },
+    "bracket": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 1062.0,
+      "bounds_mm": [
+        22.5,
+        4.2,
+        28.0
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "thickness_mm": 4.2,
+      "opening": "through the spandrel, one connected plate",
+      "designed_rim_mm": 1.71,
+      "web_status": "UNTESTED_UNTIL_PHYSICAL_COUPON",
+      "note": "Bench. Cyma bracket, hole through the spandrel.",
+      "placement_mm": [
+        196,
+        50,
+        2.6
+      ]
+    },
+    "shingle-sample": {
+      "watertight": true,
+      "bodies": 1,
+      "volume_mm3": 5835.7,
+      "bounds_mm": [
+        52.0,
+        64.41,
+        19.44
+      ],
+      "fits_330x320x325_in_this_orientation": true,
+      "fits_if_rotated_to_smallest_axes": true,
+      "courses": 19,
+      "tile_thickness_mm": 0.42,
+      "designed_relief_mm": 0.24,
+      "relief_status": "MESH_DIMENSION_NOT_A_PRINT",
+      "note": "Bench. Shallow courses on one cartridge.",
+      "placement_mm": [
+        196,
+        80,
+        2.6
+      ]
+    }
+  },
+  "instances": [
+    {
+      "id": "floor",
+      "file": "models/dp_floor.stl",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ],
+      "note": "Floor boards and baseboards. Door gap is x 96 to 136."
+    },
+    {
+      "id": "door-frame",
+      "file": "models/dp_door-frame.stl",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ],
+      "note": "Left-hand passage. The opening is empty."
+    },
+    {
+      "id": "window-wall",
+      "file": "models/dp_window-wall.stl",
+      "placement_mm": [
+        24,
+        118,
+        2.6
+      ],
+      "note": "Back wall of the bay. Sits on the floor. Coplanar, no shared volume."
+    },
+    {
+      "id": "sash",
+      "file": "models/dp_sash.stl",
+      "placement_mm": [
+        24,
+        118,
+        2.6
+      ],
+      "note": "In the opening, 0.6 mm clear of the reveal."
+    },
+    {
+      "id": "sofa",
+      "file": "models/dp_sofa.stl",
+      "placement_mm": [
+        8,
+        28,
+        2.6
+      ],
+      "note": "Left side. Stops before the front door gap."
+    },
+    {
+      "id": "chair",
+      "file": "models/dp_chair.stl",
+      "placement_mm": [
+        108,
+        24,
+        2.6
+      ],
+      "note": "Right of the path, in front of the table."
+    },
+    {
+      "id": "table",
+      "file": "models/dp_table.stl",
+      "placement_mm": [
+        104,
+        52,
+        2.6
+      ],
+      "note": "Centre-right."
+    },
+    {
+      "id": "bookcase",
+      "file": "models/dp_bookcase.stl",
+      "placement_mm": [
+        8,
+        100,
+        2.6
+      ],
+      "note": "Back-left. Open shelves."
+    },
+    {
+      "id": "stair-sample",
+      "file": "models/dp_stair-sample.stl",
+      "placement_mm": [
+        132,
+        78,
+        2.6
+      ],
+      "note": "Back-right. Four rises. Clear of the window wall and the table."
+    },
+    {
+      "id": "light",
+      "file": "models/dp_light.stl",
+      "placement_mm": [
+        46,
+        78,
+        138
+      ],
+      "note": "Top is coplanar with the joist underside. Cavity faces down."
+    },
+    {
+      "id": "beam",
+      "file": "models/dp_beam.stl",
+      "placement_mm": [
+        0,
+        0,
+        0
+      ],
+      "note": "Joist meets the window wall at y 118. Post meets the floor at z 2.6."
+    },
+    {
+      "id": "lace",
+      "file": "models/dp_lace.stl",
+      "placement_mm": [
+        196,
+        10,
+        2.6
+      ],
+      "note": "Bench. Through-pierced verge board."
+    },
+    {
+      "id": "bracket",
+      "file": "models/dp_bracket.stl",
+      "placement_mm": [
+        196,
+        50,
+        2.6
+      ],
+      "note": "Bench. Cyma bracket, hole through the spandrel."
+    },
+    {
+      "id": "shingle-sample",
+      "file": "models/dp_shingle-sample.stl",
+      "placement_mm": [
+        196,
+        80,
+        2.6
+      ],
+      "note": "Bench. Shallow courses on one cartridge."
+    }
+  ],
+  "sections": [
+    {
+      "polygons": 1,
+      "holes": 1,
+      "file": "window-plan.png",
+      "plane": "Horizontal cut through the window. The white region is the opening."
+    },
+    {
+      "polygons": 1,
+      "holes": 20,
+      "file": "lace-plan.png",
+      "plane": "Cut through the verge board. White disks are through-holes."
+    },
+    {
+      "polygons": 2,
+      "holes": 0,
+      "file": "light-section.png",
+      "plane": "Vertical cut through the puck. Cavity below, feed through the top."
+    },
+    {
+      "polygons": 1,
+      "holes": 1,
+      "file": "bracket-section.png",
+      "plane": "Cut through the bracket. The hole is open."
+    }
+  ],
+  "shared_volume_mm3": [],
+  "shared_volume_ok": true,
+  "intentional_contacts": [
+    "Window wall rests on the floor. Faces meet. Volume shared is zero.",
+    "Sash is inside the opening with 0.6 mm clearance. It does not enter the wall.",
+    "Furniture rests on the floor. Faces meet. Volume shared is zero.",
+    "Lace, bracket, and the shingle cartridge are on the bench, not attached to the room."
+  ],
+  "not_claimed": [
+    "Not printed.",
+    "Magnet fit, strength, and any web smaller than a tested coupon are unproven.",
+    "The LED cavity is a reservation, not a measured diode.",
+    "This bay is not the finished house."
+  ]
+}

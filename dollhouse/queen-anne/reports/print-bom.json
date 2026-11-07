@@ -1,0 +1,45 @@
+{
+  "not_printed": [
+    "qa65_adult_screw_back_l",
+    "qa65_adult_screw_back_r",
+    "qa65_adult_screw_jl1",
+    "qa65_adult_screw_jl2",
+    "qa65_adult_screw_jr1",
+    "qa65_adult_screw_jr2",
+    "qa65_m2_nut"
+  ],
+  "print_part_count": 98,
+  "print_instance_count": 110,
+  "purchased_hardware": [
+    {
+      "item": "slotted pan head machine screw",
+      "standard_assumption": "ISO 1580 form, ISO 965 M2 pitch 0.4 mm. Driver is a flat screwdriver in the drawn slot.",
+      "count_back": 2,
+      "count_jamb": 4,
+      "drawn_overall_length_mm": {
+        "back": 5.1,
+        "jamb": 9.3
+      },
+      "drawn_head_height_mm": 1.6,
+      "drawn_under_head_length_mm": {
+        "back": 3.5,
+        "jamb": 7.7
+      },
+      "catalog_callout": "None. M2x3, M2x4, M2x6, M2x8 and M2x10 are under-head lengths and do not equal 3.5 or 7.7. The drawing is not labeled as those parts.",
+      "fit_assumption": "Shank major drawn 2.0 mm through a 2.5 mm lip hole. Not measured."
+    },
+    {
+      "item": "hex nut",
+      "standard_assumption": "ISO 4032 M2. Across flats 4.0 mm, thickness 1.6 mm, pitch 0.4 mm. The mesh across corners is 4.62 mm, which is that hex.",
+      "count": 6,
+      "fit_assumption": "0.2 mm pocket clearance around the nut. The lip hole is 2.5 mm, smaller than the nut, so the nut cannot pull out."
+    }
+  ],
+  "retention_physically_verified": false,
+  "zero_intersection_is_thread_proof": false,
+  "pocket_wall_from_nut_center_mm": {
+    "minus_x": 12.0,
+    "plus_x": 9.15
+  },
+  "pocket_wall_note": "Distance from the nut center to where the stile solid ends. The nut across-flats is 4.0 mm, so the wall outside the flats is this distance minus 2.0 mm. Not a measured print."
+}
