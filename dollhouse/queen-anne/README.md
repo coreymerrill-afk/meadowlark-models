@@ -1,61 +1,62 @@
-# Queen Anne Playhouse — v2.0.0
+# Queen Anne Playhouse — v3.0.0
 
-A separate 1:24 house. It is not Bramble Cottage and not one of the other five play-kit manors.
+One 1:24 house. The parlor, entry, and living room share the ground floor. A porch is the front of the entry, and the bay is the living room pushed forward. Stairs in the tower climb to a landing, then to the loft. v1 and v2 are in `archive/`.
 
-v1.0.0 is in `archive/v1.0.0/`. Its tower roof STL is four bodies. The cone starts about 78 mm above the seat, so that piece touches nothing in the closed view. v2 replaces that.
+Facades pull straight off. There is no sill hook, side groove, or slide-then-lift. Each stile has three nominal 5.0 × 2.8 mm magnet pairs. A capture bar closes the magnet channel. It does not fasten the panel. Holding force was not calculated. The coupon is the pull test.
+
+The frame may use posts, plates, and laps. Roofs sit on their own plates with a 0.45 mm seat gap. They are not locked against a lift.
 
 ## Rooms
 
-Not three identical cubes.
-
-| Room | Where | What you see |
-| --- | --- | --- |
-| Parlor | Tower, ground | Lower ceiling, bay window, window seat |
-| Entry | Hall, ground | Door panel and the stair |
-| Living and dining | Right wing, ground | Widest room, taller ceiling, sofa, table, dining bay |
-| Tower bedroom | Tower, second | Bed |
-| Landing | Hall, second | Stair arrives through an opening in the floor |
-| Bedroom and bath | Living, second | Bed and a tub |
-| Loft | Tower, third | Only the tower continues. A table under the tower roof |
-
-## Roofs
-
-Each roof is one positive solid. Shingle courses are ribs in that mesh. The seat sits 0.35 mm above its own plate. A probe into the top of that plate meets the frame:
-
-| Roof | Bearing probe |
+| Storey | Rooms |
 | --- | --- |
-| Tower | 1296 mm³ on the tower top frame |
-| Hall | 925 mm³ on the hall top frame |
-| Living | 1591 mm³ on the living top frame |
-| Tower bay | 266 mm³ on the bay |
-| Dining bay | 88 mm³ on the bay |
+| Ground | Parlor, entry, living room with bay, porch |
+| Second | Tower bedroom, upper hall, living bedroom |
+| Loft | Tower third floor, reached by the upper flight |
 
-That is a geometric seat, not a strength proof. No PLA modulus and no gravity or uplift case were calculated. Side cheeks on the free ends locate a roof sideways. The roofs are not locked against a straight lift. Open mode parks them up and back so that pose is not the closed house.
+Doorways connect parlor to entry, entry to living, the landing to the upper hall, and the upper hall to the bedroom. Clear samples in those openings do not intersect the walls. Each stair well is open, the last riser stops 0.45 mm below the floor, and an 78 mm headroom sample along both flights is clear.
 
-Siding courses, window sills, cornice steps, brick courses, and floorboard ribs are mesh, not a texture painted on in the viewer.
+## Lighting reservations
 
-## Magnets — nominal 5.0 × 2.8 mm
+This is not a buy list and not a finished circuit. The November 6, 2026 research note is the source. Prices and stock were a snapshot. Nothing here was purchased.
 
-Round discs, 5.0 mm diameter by 2.8 mm thick. The pocket is that size plus 0.25 mm per side and 0.20 mm on the thickness. Mating skin is 1.2 mm. This is a starting allowance for a 0.4 mm nozzle. It is **not a proven fit**.
+Recommended path: a regulated external nominal 5 V USB supply, then parallel warm-white **5–12 V DC** Evan Designs Chip/Nano LEDs, each with the resistor the maker supplies. Not the 3 V variant. No mains wiring inside the house. A regulated 12 V adapter is an alternative and needs protection rated for 12 V. An AA pack plus a boost converter is optional and is not the default; it is not modeled. No coin cells, loose lithium cells, or charging.
 
-No magnet grade is assumed. Holding force is **not** calculated from the diameter.
+This house has **17** fixtures: a ceiling puck and a sconce in each of seven rooms, plus two porch lanterns and one entry lantern. The research scenario of 24 LEDs at 20 mA (0.48 A) is not this count. Seventeen times 20 mA is 0.34 A, and 20 mA is a planning figure. Current at 5 V was not measured.
 
-The sill hook carries the panel. Two pocket heights on each stile, and the matching pockets in the posts, are opposing pairs of the same small disc. If the coupon feels weak, add another pair in the CAD. Do not jump to a larger magnet before that test.
+| Reservation | Size |
+| --- | --- |
+| Ceiling housing | 12 mm diameter × 7 mm deep |
+| Exterior housing | 8 × 8 × 12 mm |
+| LED cavity | 6 × 6 × 3 mm, provisional, not fit-validated |
+| Bare-lead feed | 2 mm diameter. A resistor or a plug does not pass |
+| Plate channel | 4 × 3 mm, open upward in the fixed plate |
+| Rear chase | 14 × 10 mm, added behind the rear wall. Corner posts are not hollowed |
+| Connector pocket | 30 × 20 × 12 mm |
+| Resistor pocket | 25 × 12 × 8 mm, in the channel, not inside the lamp |
+| Adult service bay | 150 × 90 × 30 mm clear, behind the hall |
 
-There is **no H3C pause-print profile**. Nothing was sliced.
+The harness stays on the fixed frame. Roofs have no lamps. Pulling a panel does not leave a wire hanging. Room circuits, the exterior group, and a master switch are planned in the adult bay. Covers are large service parts, not coin-sized lenses.
 
-### Install
+Protection is not selected. Littelfuse 1206L050 is a 6 V, 0.5 A hold candidate only. It is not sole protection for the unknown fine LED leads, and its resistance can drop a 5 V bus. A current-limited bench test is still required. Adafruit 501 is an out-of-stock voltage example, not a kit to order.
 
-1. Check the discs are the nominal 5.0 × 2.8 mm.
-2. On `qa2_polarity_fixture_v2`, set two discs in the shallow wells with the faces that should attract pointing across the raised gap. Flip one if they repel. Take them out. The fixture does not enclose them.
-3. Set a disc in each open channel, mating face toward the 1.2 mm skin.
-4. Slide `qa2_retainer_v2` in until the hook passes the ledge. The bar is the room-side wall. It is dovetailed. It is not glue, and it is not a cap the size of the magnet.
-5. Do the frame posts before that storey is set down.
-6. Seat the panel on the sill hook.
-7. On the coupon (`qa2_coupon_frame_v2` and `qa2_coupon_panel_v2`, same channel cutter as the house), try a straight pull, then lift and pull. Write down the feel. It is not predicted here.
+Research notes, not purchase approval:
 
-A broken bar can expose a magnet. That is a swallow hazard. This is not a child-safety certification. Retention has not been pull-tested.
+- Evan Designs Chip/Nano/Pico LEDs: https://evandesigns.com/products/chip-nano-pico-leds
+- Evan Designs LED sizes: https://evandesigns.com/pages/information-about-led-sizes
+- Evan Designs regulated 12 V adapter: https://evandesigns.com/products/regulated-12-volt-dc-output-adapter-transformer
+- Adafruit 501, 1620, 2697, 373, 1863, 261, 6180, 771, 1903: https://www.adafruit.com/
+- JST PH: https://www.jst-mfg.com/product/index.php?series=199
+- Littelfuse 1206L050: https://www.littelfuse.com/products/fuses-overcurrent-protection/polyswitch-resettable-pptc-devices/surface-mount-polyswitch-resettable-pptc-devices/1206l/1206l050
 
-## Files
+## What was checked
 
-Regenerate with `python3 cad/build_queen_anne_v2.py` from `dollhouse/queen-anne`.
+`python3 cad/build_queen_anne_v3.py` from `dollhouse/queen-anne` rebuilds the STLs, `manifest.json`, and `reports/validation.json`.
+
+The CAD check found no resting overlap, a bearing probe under every roof, clear stair wells and 78 mm headroom samples, open doorways, clear window panes with sills, empty LED cavities, and fixture bodies joined to the frame. A straight pull of every panel at 0, 10, 22, and 40 mm did not hit the fixed house. Part bounding boxes fit 310 × 300 × 315 mm.
+
+## What was not checked
+
+No slicer run, no print, no H3C test, no strength test, no magnet pull test, no electrical test. Zero overlap is not a proof that a roof or a panel stays put. The 5 × 2.8 mm pocket is nominal. The 6 × 6 × 3 mm cavity is a reservation. This is not a toy-safety certification and not an electrical approval.
+
+Regenerate with `python3 cad/build_queen_anne_v3.py`.
