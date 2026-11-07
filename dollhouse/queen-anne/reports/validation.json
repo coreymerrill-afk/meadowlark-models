@@ -1,0 +1,158 @@
+{
+  "ok": true,
+  "fit": {
+    "max_mm": [
+      310.0,
+      300.0,
+      315.0
+    ],
+    "all_parts_fit": true
+  },
+  "rest_intersections": {
+    "aabb_pairs_checked": 183,
+    "worst_mm3": 0.0,
+    "worst_pair": [
+      "B2-base",
+      "B3-base"
+    ],
+    "failures": []
+  },
+  "paths": {
+    "failures": []
+  },
+  "opening": {
+    "front_opening_mm": [
+      204.0,
+      109.6
+    ],
+    "end_opening_width_mm": 160.0,
+    "horizontal_reach_front_to_rear_inner_mm": 190.35,
+    "gauges": [
+      {
+        "part": "qa_furn_table_v1",
+        "extents_mm": [
+          78.0,
+          48.0,
+          31.0
+        ],
+        "fits_front_opening": true
+      },
+      {
+        "part": "qa_furn_chair_v1",
+        "extents_mm": [
+          30.0,
+          30.0,
+          44.0
+        ],
+        "fits_front_opening": true
+      },
+      {
+        "part": "qa_furn_bed_v1",
+        "extents_mm": [
+          86.0,
+          46.0,
+          32.0
+        ],
+        "fits_front_opening": true
+      },
+      {
+        "part": "qa_furn_sofa_v1",
+        "extents_mm": [
+          80.0,
+          34.0,
+          30.0
+        ],
+        "fits_front_opening": true
+      },
+      {
+        "part": "qa_furn_figure_v1",
+        "extents_mm": [
+          20.0,
+          16.0,
+          68.0
+        ],
+        "fits_front_opening": true
+      }
+    ],
+    "all_fit": true
+  },
+  "coupon": {
+    "engaged_intersection_mm3": 0.0,
+    "separated_20mm_intersection_mm3": 0.0,
+    "engages_without_penetration": true
+  },
+  "support": {
+    "seat_gap_mm": 0.3,
+    "failures": []
+  },
+  "legacy": {
+    "tile_file": "dollhouse/stl/floor_tile_v0.stl",
+    "post_file": "dollhouse/stl/snap_post_v0.stl",
+    "tile_bbox_mm": [
+      127.0,
+      127.0,
+      10.0
+    ],
+    "post_bbox_mm": [
+      9.0,
+      9.0,
+      9.0
+    ],
+    "tile_watertight": true,
+    "post_watertight": true,
+    "socket_grid_mm": [
+      15.875,
+      47.625,
+      79.375,
+      111.125
+    ],
+    "pitch_mm": 31.75,
+    "offset_mm": 15.875,
+    "peg_orientation": "tip down, flange underside on the deck (z translation +11 after a 180 degree X rotation)",
+    "intersection_mm3_at_16_sockets": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "intersection_mm3_shifted_10mm": 112.775,
+    "sockets_clear": true,
+    "bay_width_mm": 254.0,
+    "bay_width_over_measured_tile": 2.0,
+    "depth_mm": 210.0,
+    "depth_matches_two_tiles": false,
+    "peg_intersection_mm3_on_queen_anne_floor": 86.038,
+    "snap_compatible": false,
+    "conclusion": "The legacy floor tile STL is 127 x 127 x 10 mm. A tip-down snap_post_v0 intersects that tile by ~0 mm^3 at all 16 measured sockets and by a large volume 10 mm off the grid, so the \u00d86 peg / \u00d86.3 socket interface is real. One Queen Anne bay is exactly two measured tile-widths in X and is not two tile-depths in Y. The same peg intersects the Queen Anne floor, which has no \u00d86.3 socket. The kits share a 254 mm module width and do not share a joint."
+  },
+  "assembly_mm": {
+    "x": 788.0,
+    "y": 296.8,
+    "z": 661.8,
+    "min_mm": [
+      -10.0,
+      -78.0,
+      0.0
+    ],
+    "max_mm": [
+      778.0,
+      218.8,
+      661.8
+    ]
+  },
+  "instance_count": 96,
+  "unique_parts": 24,
+  "triangles": 5176
+}

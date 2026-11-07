@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Queen Anne Playhouse, a separate 1:24 dollhouse: tower, front gable, lift-out panels, and lift-off roofs. The viewer loads the CAD STLs. Unprinted. Not a toy-safety certification." />
+<link rel="icon" href="data:," />
+<title>Queen Anne Playhouse — Meadowlark Models</title>
+<link rel="stylesheet" href="/coreyhq-back.css" />
+<link rel="stylesheet" href="/dollhouse/queen-anne/queen-anne.css" />
+</head>
+<body>
+<a class="coreyhq-back" href="https://coreyhq.com/" title="Back to CoreyHQ">← CoreyHQ</a>
+<a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+<a class="kit-back" href="/dollhouse/" title="The six play-kit manors">← Play kit</a>
+<p class="claim" id="claim">Loading the CAD manifest…</p>
+<header>
+  <div class="rev" id="rev">Queen Anne</div>
+  <h1 id="title">Queen Anne Playhouse</h1>
+  <p class="meta" id="sub">1:24 · separate from the six play-kit manors</p>
+</header>
+<div class="facts" id="facts"></div>
+<div id="view" role="img" aria-label="Interactive view of the Queen Anne Playhouse">
+  <div class="view-status" id="view-status">
+    <strong>Loading the CAD meshes</strong>
+    <p>Each part is its STL, placed by the manifest. There is no stand-in mesh.</p>
+  </div>
+</div>
+<p class="hint">Drag to orbit. Pinch or scroll to zoom. Two fingers, or right-drag, to pan.</p>
+<nav class="modes" aria-label="House view">
+  <button type="button" data-mode="closed" aria-pressed="true">Closed</button>
+  <button type="button" data-mode="open" aria-pressed="false">Open</button>
+  <button type="button" data-mode="remove-panels" aria-pressed="false">Panels off</button>
+  <button type="button" data-mode="roof" aria-pressed="false">Roof off</button>
+  <button type="button" data-mode="explode" aria-pressed="false">Explode</button>
+</nav>
+<section class="card" id="readout">
+  <h2>This view</h2>
+  <p id="mode-copy" class="muted">Closed. Panels seated, roofs on.</p>
+</section>
+<section class="card">
+  <h2>Print order</h2>
+  <p class="muted">Print the coupon pair and one bay before the rest of the house. No slicer was run. This is not an H3C test and not a safety certification.</p>
+  <div id="print-root"></div>
+</section>
+<section class="card">
+  <h2>Parts</h2>
+  <div id="part-list"></div>
+</section>
+<p id="error" role="alert"></p>
+<noscript>This page needs JavaScript to load the manifest and the STL viewer.</noscript>
+<script src="/dollhouse/vendor/three.min.js"></script>
+<script src="/dollhouse/vendor/OrbitControls.js"></script>
+<script src="/dollhouse/queen-anne/viewer.js"></script>
+</body>
+</html>
