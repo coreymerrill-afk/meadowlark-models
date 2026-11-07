@@ -1,6 +1,6 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
   "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
@@ -742,13 +742,13 @@
       "id": "qa5_attic_frame_v5",
       "file": "stl/qa5_attic_frame_v5.stl",
       "note": "Eave plates the roof sits on.",
-      "triangles": 74,
-      "volume_mm3": 86979.6,
+      "triangles": 90,
+      "volume_mm3": 66178.2,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
         279.0,
-        170.0,
+        172.0,
         11.1
       ],
       "fits_brim_allowance": true
@@ -772,13 +772,13 @@
       "id": "qa5_front_ground_v5",
       "file": "stl/qa5_front_ground_v5.stl",
       "note": "Ground floor street wall. Fixed, because the porch is in front of it. Flower boxes and the door casing are in the mesh.",
-      "triangles": 3032,
-      "volume_mm3": 114653.7,
+      "triangles": 2730,
+      "volume_mm3": 145109.7,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
         282.6,
-        13.8,
+        23.2,
         97.6
       ],
       "fits_brim_allowance": true
@@ -802,8 +802,8 @@
       "id": "qa5_front_upper_v5",
       "file": "stl/qa5_front_upper_v5.stl",
       "note": "Upper street wall. Fixed. Big sash openings. It does not pull off.",
-      "triangles": 4202,
-      "volume_mm3": 126458.2,
+      "triangles": 4292,
+      "volume_mm3": 121570.0,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -847,8 +847,8 @@
       "id": "qa5_roof_front_v5",
       "file": "stl/qa5_roof_front_v5.stl",
       "note": "Front slope and the gable cheeks, with individual scalloped shingles.",
-      "triangles": 73350,
-      "volume_mm3": 449816.3,
+      "triangles": 92128,
+      "volume_mm3": 439070.0,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -877,8 +877,8 @@
       "id": "qa5_roof_rear_v5",
       "file": "stl/qa5_roof_rear_v5.stl",
       "note": "Rear slope, scalloped shingles, and the brick chimney.",
-      "triangles": 81718,
-      "volume_mm3": 370910.1,
+      "triangles": 117760,
+      "volume_mm3": 356137.6,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -907,8 +907,8 @@
       "id": "qa5_roof_turret_v5",
       "file": "stl/qa5_roof_turret_v5.stl",
       "note": "Octagonal cone with a course of scallops on each flat.",
-      "triangles": 9188,
-      "volume_mm3": 328135.4,
+      "triangles": 230458,
+      "volume_mm3": 322061.4,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -922,8 +922,8 @@
       "id": "qa5_turret_loft_v5",
       "file": "stl/qa5_turret_loft_v5.stl",
       "note": "Turret loft, with cased windows on the street flats.",
-      "triangles": 2714,
-      "volume_mm3": 135947.9,
+      "triangles": 2834,
+      "volume_mm3": 131071.1,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -937,8 +937,8 @@
       "id": "qa5_turret_v5",
       "file": "stl/qa5_turret_v5.stl",
       "note": "Octagonal turret, two storeys, clapboard, belt courses, and cased windows.",
-      "triangles": 5490,
-      "volume_mm3": 278524.3,
+      "triangles": 5776,
+      "volume_mm3": 268765.0,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -982,8 +982,8 @@
       "id": "qa5_porch_roof_v5",
       "file": "stl/qa5_porch_roof_v5.stl",
       "note": "Front porch roof with scalloped shingles. Bears on the beam.",
-      "triangles": 14898,
-      "volume_mm3": 105572.5,
+      "triangles": 22638,
+      "volume_mm3": 102726.3,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -1054,17 +1054,47 @@
       "fits_brim_allowance": true
     },
     {
-      "id": "qa5_bed_v5",
-      "file": "stl/qa5_bed_v5.stl",
-      "note": "Bed with pillows.",
-      "triangles": 80,
-      "volume_mm3": 54784.0,
+      "id": "qa5_cornice_v5",
+      "file": "stl/qa5_cornice_v5.stl",
+      "note": "Layered crown under the gable. Separate print, seated 0.4 mm off the siding.",
+      "triangles": 118,
+      "volume_mm3": 27663.7,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        271.0,
+        15.2,
+        11.4
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_crown_v5",
+      "file": "stl/qa5_crown_v5.stl",
+      "note": "Window crown. One print, placed over each upper sash.",
+      "triangles": 48,
+      "volume_mm3": 939.0,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
         48.0,
-        80.0,
-        28.0
+        3.2,
+        12.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_bed_v5",
+      "file": "stl/qa5_bed_v5.stl",
+      "note": "Bed with pillows.",
+      "triangles": 604,
+      "volume_mm3": 30766.8,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        44.0,
+        72.0,
+        38.0
       ],
       "fits_brim_allowance": true
     },
@@ -1291,6 +1321,11 @@
       "qty": 1
     },
     {
+      "part": "qa5_cornice_v5",
+      "file": "stl/qa5_cornice_v5.stl",
+      "qty": 1
+    },
+    {
       "part": "qa5_coupon_frame_v5",
       "file": "stl/qa5_coupon_frame_v5.stl",
       "qty": 1
@@ -1299,6 +1334,11 @@
       "part": "qa5_coupon_panel_v5",
       "file": "stl/qa5_coupon_panel_v5.stl",
       "qty": 1
+    },
+    {
+      "part": "qa5_crown_v5",
+      "file": "stl/qa5_crown_v5.stl",
+      "qty": 4
     },
     {
       "part": "qa5_door_v5",
@@ -2147,7 +2187,7 @@
           0,
           1,
           0,
-          104.0
+          95.0
         ],
         [
           0,
@@ -2955,6 +2995,196 @@
       ]
     },
     {
+      "id": "cornice",
+      "part": "qa5_cornice_v5",
+      "role": "trim",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          221.0
+        ],
+        [
+          0,
+          1,
+          0,
+          92.0
+        ],
+        [
+          0,
+          0,
+          1,
+          204.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "crown-0",
+      "part": "qa5_crown_v5",
+      "role": "trim",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          241.0
+        ],
+        [
+          0,
+          1,
+          0,
+          103.2
+        ],
+        [
+          0,
+          0,
+          1,
+          192.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "crown-1",
+      "part": "qa5_crown_v5",
+      "role": "trim",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        -6,
+        4
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          317.0
+        ],
+        [
+          0,
+          1,
+          0,
+          103.2
+        ],
+        [
+          0,
+          0,
+          1,
+          192.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "crown-2",
+      "part": "qa5_crown_v5",
+      "role": "trim",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        -6,
+        4
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          393.0
+        ],
+        [
+          0,
+          1,
+          0,
+          103.2
+        ],
+        [
+          0,
+          0,
+          1,
+          192.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "crown-3",
+      "part": "qa5_crown_v5",
+      "role": "trim",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        -6,
+        4
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          455.0
+        ],
+        [
+          0,
+          1,
+          0,
+          103.2
+        ],
+        [
+          0,
+          0,
+          1,
+          192.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
       "id": "bed",
       "part": "qa5_bed_v5",
       "role": "furniture",
@@ -2970,19 +3200,19 @@
           1,
           0,
           0,
-          236.0
+          238.0
         ],
         [
           0,
           1,
           0,
-          168.0
+          174.0
         ],
         [
           0,
           0,
           1,
-          122.6
+          114.6
         ],
         [
           0,

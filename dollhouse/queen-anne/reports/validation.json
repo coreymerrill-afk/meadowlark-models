@@ -1,7 +1,7 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 42,
+  "rest_pairs": 52,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
@@ -16,7 +16,7 @@
       "id": "roof-rear",
       "bodies": 1,
       "seat_gap_mm": 0.4,
-      "bearing_probe_mm3": 1004.5,
+      "bearing_probe_mm3": 345.8,
       "bearer": "attic-frame"
     },
     {
@@ -70,8 +70,34 @@
     ],
     "closed_transform": "identity placement of the STL; this gap is the closed position"
   },
-  "triangles": 231846,
-  "instance_count": 51,
+  "trim_seats": [
+    {
+      "id": "door",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "cornice",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-0",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-1",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-2",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-3",
+      "seat_gap_mm": 0.0
+    }
+  ],
+  "triangles": 516576,
+  "instance_count": 56,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,

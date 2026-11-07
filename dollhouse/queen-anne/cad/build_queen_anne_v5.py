@@ -184,12 +184,19 @@ def bracket_mesh():
 
 
 def scallop():
-    # One shingle. The nose is a real scallop, thick enough to read
-    # in a full-house view and still a 0.2 mm nozzle ornament.
-    body = sbox(-5.4, 0, 5.4, 7.4)
-    nose = Point(0, 7.0).buffer(5.2, resolution=6)
-    shape = body.union(nose).intersection(sbox(-5.8, 0, 5.8, 12.4))
-    return extrude(shape, 0.9)
+    """Main-roof shingle. Subtle relief, not a spike."""
+    body = sbox(-3.4, 0, 3.4, 4.2)
+    nose = Point(0, 4.0).buffer(3.2, resolution=5)
+    shape = body.union(nose).intersection(sbox(-3.7, 0, 3.7, 7.0))
+    return extrude(shape, 0.55)
+
+
+def tiny_scallop():
+    """Cone shingle. Small enough to read as slate, not armour."""
+    body = sbox(-1.55, 0, 1.55, 1.9)
+    nose = Point(0, 1.85).buffer(1.45, resolution=4)
+    shape = body.union(nose).intersection(sbox(-1.7, 0, 1.7, 3.2))
+    return extrude(shape, 0.38)
 
 
 def bargeboard(length=168.0):
@@ -213,14 +220,16 @@ def rake_board(x0, z0, x1, z1, y, into):
 
 
 SCALLOP = None
+TINY = None
 BRACKET = None
 SPINDLE = None
 
 
 def cached():
-    global SCALLOP, BRACKET, SPINDLE
+    global SCALLOP, TINY, BRACKET, SPINDLE
     if SCALLOP is None:
         SCALLOP = cleanup(scallop(), "scallop")
+        TINY = cleanup(tiny_scallop(), "tiny")
         BRACKET = cleanup(bracket_mesh(), "bracket")
         SPINDLE = cleanup(spindle(), "spindle")
 
@@ -257,11 +266,11 @@ def shingle_field(x0, x1, y0, z0, y1, z1):
     s = 1.5
     while s < length - 8:
         x = x0 + 2 + (4.6 if course % 2 else 0)
-        while x < x1 - 8:
-            origin = np.array([x, y0, z0], float) + slope * s - normal * 0.32
+        while x < x1 - 6:
+            origin = np.array([x, y0, z0], float) + slope * s - normal * 0.22
             pieces.append(_xform(SCALLOP, origin, across, slope, normal))
-            x += 11.2
-        s += 7.0
+            x += 7.2
+        s += 4.6
         course += 1
     return pieces
 
@@ -382,6 +391,7 @@ def build():
     roofs()
     porch()
     stairs()
+    ornament()
     rooms()
     service()
 
@@ -465,7 +475,9 @@ def fixed_walls():
     knee_z = EAVE - GAP
     knee = union([
         box_at(MX0 + 16, MY0 + 4, L3 + 0.5, MX1 - 10, MY0 + 10, knee_z),
-        box_at(MX0 + 16, MY1 - 16, L3 + 0.5, MX1 - 10, MY1 - 6, knee_z),
+        # Side pads only, so the attic center is open from the rear above the back wall.
+        box_at(MX0 + 16, MY1 - 14, L3 + 0.5, MX0 + 52, MY1 - 4, knee_z),
+        box_at(MX1 - 56, MY1 - 14, L3 + 0.5, MX1 - 16, MY1 - 4, knee_z),
         box_at(MX0 + 10, MY0 + 6, L3 + 0.5, MX0 + 22, MY1 - 6, knee_z),
         box_at(MX1 - 18, MY0 + 6, L3 + 0.5, MX1 - 8, MY1 - 6, knee_z),
     ])
@@ -581,7 +593,10 @@ def ground_front():
         box_at(x0 + 0.2, y1 - 6.4, z1 - 6.4, x1 - 0.2, y1 + 2.2, z1 - 3.2),
         box_at(x0, y1 - 4.2, z1 - 3.4, x1, y1 + 0.8, z1),
     ]
-    wins = [{"x": 250, "z": L1 + 28, "w": 30, "h": 56}, {"x": 455, "z": L1 + 28, "w": 30, "h": 56}]
+    # Projecting bay, welded to the street wall. Clears the porch posts.
+    bay = box_at(432, y1 - 16, L1 + 16, 488, y1 + 0.6, L1 + 84)
+    body.append(bay)
+    wins = [{"x": 248, "z": L1 + 24, "w": 34, "h": 60}]
     door = {"x": 368, "z": L1 + 1.2, "w": 34, "h": 76}
     cuts, trim = [], []
     for win in wins:
@@ -596,6 +611,10 @@ def ground_front():
         box_at(door["x"] - 6, y1 - 6, door["z"] + door["h"], door["x"] + door["w"] + 6, y1 + 0.8, door["z"] + door["h"] + 4),
     ]
     trim += pediment(door["x"] - 4, y1 - 1, door["z"] + door["h"] + 3.5, door["w"] + 8)
+    # baseboard on the room side of the street wall
+    trim.append(box_at(x0 + 6, y1 - 0.6, z0 + 0.4, x1 - 6, y1 + 2.6, z0 + 7.5))
+    cuts.append(box_at(442, y1 - 20, L1 + 30, 478, y1 + 2, L1 + 76))
+    trim += window_pack("-y", 442, y1 - 16, L1 + 30, 36, 46)
     mesh = cleanup(union([difference(union(body + skin + belt), cuts), *trim]), "ground front")
     publish("qa5_front_ground_v5", mesh,
             "Ground floor street wall. Fixed, because the porch is in front of it. Flower boxes and the door casing are in the mesh.",
@@ -615,7 +634,7 @@ def facades():
     ground_front()
     # Upper street wall is fixed. The 0.65 mm seam is the belt at the floor line.
     z0, z1 = L2 + 0.45, L3 + 10
-    wins = [{"x": x, "z": L2 + 22, "w": 30, "h": 56} for x in (252, 328, 404, 466)]
+    wins = [{"x": x, "z": L2 + 16, "w": 34, "h": 64} for x in (248, 324, 400, 462)]
     front = facade((MX0 + 4, MY0 - 4.4, z0, MX1 - 12, MY0 - 0.35, z1), "-y", wins, flowers=True)
     publish("qa5_front_upper_v5", front,
             "Upper street wall. Fixed. Big sash openings. It does not pull off.",
@@ -675,30 +694,32 @@ def rear_closure():
 
 
 def cone_courses():
-    """Scallops on the cone flats. Origin is inside the flat so the nose crosses it."""
+    """Small slate courses on the cone flats. Proud a fraction of a millimetre."""
     cached()
     pieces = []
     base_z = plate_top(L3) + GAP
-    for i in range(9):
-        z = base_z + 4 + i * 11
+    i = 0
+    z = base_z + 3
+    while z < base_z + CONE_H * 0.86:
         t = (z - base_z) / CONE_H
-        if t > 0.84:
-            break
         vert = (TR - 4) * (1.0 - t)
         ap = vert * math.cos(math.pi / 8)
         flat = 2 * vert * math.sin(math.pi / 8)
-        count = 3 if flat > 30 else 2
+        step = 3.4
+        count = max(1, int(flat / step))
         for k in range(8):
             ang = math.radians(45 + k * 45)
             normal = np.array([math.cos(ang), math.sin(ang), 0.0])
             tangent = np.array([-math.sin(ang), math.cos(ang), 0.0])
             for j in range(count):
-                off = (j - (count - 1) / 2.0) * 10.5 + (5.2 if i % 2 else 0.0)
-                if abs(off) > flat / 2 - 5:
+                off = (j - (count - 1) / 2.0) * step + (step * 0.5 if i % 2 else 0.0)
+                if abs(off) > flat / 2 - 1.4:
                     continue
-                origin = np.array([TX, TY, z]) + normal * (ap - 0.55) + tangent * off
+                origin = np.array([TX, TY, z]) + normal * (ap - 0.16) + tangent * off
                 up = np.cross(normal, tangent)
-                pieces.append(_xform(SCALLOP, origin, tangent, up, normal))
+                pieces.append(_xform(TINY, origin, tangent, up, normal))
+        z += 2.6
+        i += 1
     return pieces
 
 
@@ -826,7 +847,7 @@ def roofs():
     def turret_shell(z0, z1, wins, name):
         shell = prism(octagon(TX, TY, TR), z0, z1)
         holes = [prism(octagon(TX, TY, TR - 4.6), z0 - 1, z1 + 1), box_at(MX0 - 0.35, 0, z0 - 1, 900, 500, z1 + 1)]
-        holes += [facet_hole(ang, z, 16, 34) for ang, z in wins]
+        holes += [facet_hole(ang, z, 20, 42) for ang, z in wins]
         bands = []
         z = z0 + 5
         while z < z1 - 6:
@@ -836,7 +857,7 @@ def roofs():
             bands.append(prism(octagon(TX, TY, TR + 1.8), belt, belt + 3.6))
         trim = []
         for ang, wz in wins:
-            trim += facet_trim(ang, wz, 16, 34)
+            trim += facet_trim(ang, wz, 20, 42)
         mesh = difference(union([shell, *bands]), holes)
         return cleanup(union([mesh, *trim]), name)
 
@@ -1022,14 +1043,57 @@ def stairs():
             "Open stair, first floor to the attic, with a spindle rail.", "stair-upper", "stair", WOOD_D, explode=[16, 0, 14])
 
 
+def ornament():
+    """Fitted trim. Separate solids, 0.4 mm off the siding, not fused into it."""
+    length = (MX1 - 16) - (MX0 + 10)
+    courses = [
+        (0, -2.4, 0, 2.0),
+        (1.6, -4.8, -0.4, 4.2),
+        (3.8, -7.6, 0.2, 6.8),
+        (6.2, -10.6, 1.0, 9.4),
+        (8.8, -13.0, 2.2, 11.4),
+    ]
+    layers = [box_at(0, y0, z0, length, y1, z1) for z0, y0, y1, z1 in courses]
+    bar = cleanup(union(layers), "cornice")
+    # Back of the moulding is local y = 0. Siding stands just behind that.
+    publish("qa5_cornice_v5", move(bar, MX0 + 10, MY0 - 11.0, L3 - 8),
+            "Layered crown under the gable. Separate print, seated 0.4 mm off the siding.",
+            "cornice", "trim", IVORY)
+    w = 48.0
+    crown = cleanup(union([
+        box_at(0, -3.2, 0, w, 0, 2.6),
+        hull([
+            (1, 0, 2.2), (w - 1, 0, 2.2), (w / 2, 0, 12),
+            (1, -2.6, 2.2), (w - 1, -2.6, 2.2), (w / 2, -2.6, 12),
+        ]),
+        box_at(w * 0.2, -2.2, 4.5, w * 0.8, -0.4, 6.2),
+    ]), "crown")
+    for i, x in enumerate((248, 324, 400, 462)):
+        world = move(crown, x - 7, MY0 - 9.6, L2 + 78)
+        if i == 0:
+            publish("qa5_crown_v5", world, "Window crown. One print, placed over each upper sash.",
+                    "crown-0", "trim", IVORY)
+        else:
+            INSTANCES.append({
+                "id": f"crown-{i}", "part": "qa5_crown_v5", "role": "trim", "color": IVORY,
+                "motion": None, "explode_mm": [0, -6, 4], "world": world,
+                "place": [float(v) for v in world.bounds[0]], "extra": {},
+            })
+
+
 def rooms():
     def bed():
+        posts = []
+        for px, py in ((6, 10), (42, 10), (6, 70), (42, 70)):
+            posts.append(move(revolve([
+                [0, 0], [2.3, 0], [2.7, 2], [1.7, 8], [1.55, 30], [2.3, 36], [1.4, 38], [0, 38],
+            ], 10), px, py, 0))
         return cleanup(union([
-            box_at(0, 0, 8, 48, 78, 16),
-            box_at(0, 66, 10, 48, 80, 36),
-            box_at(4, 8, 16, 44, 70, 20),
-            box_at(6, 58, 20, 22, 68, 26),
-            box_at(26, 58, 20, 42, 68, 26),
+            box_at(4, 6, 8, 44, 72, 14),
+            box_at(2, 64, 12, 46, 78, 34),
+            box_at(8, 58, 14, 22, 70, 20),
+            box_at(26, 58, 14, 40, 70, 20),
+            *posts,
         ]), "bed")
     def cabinet():
         return cleanup(union([
@@ -1195,6 +1259,24 @@ def audits():
             fails.append({"well": iid})
         if clear < HEAD:
             fails.append({"headroom": iid})
+    seats = []
+    hosts = [i for i in house if i["role"] in ("structure", "roof", "porch", "back", "floor")]
+    for item in house:
+        if item["role"] != "trim":
+            continue
+        nearest = 99.0
+        for host in hosts:
+            gap = 0.0
+            for axis in range(3):
+                if item["world"].bounds[1][axis] < host["world"].bounds[0][axis]:
+                    gap = max(gap, float(host["world"].bounds[0][axis] - item["world"].bounds[1][axis]))
+                elif host["world"].bounds[1][axis] < item["world"].bounds[0][axis]:
+                    gap = max(gap, float(item["world"].bounds[0][axis] - host["world"].bounds[1][axis]))
+            nearest = min(nearest, gap)
+        seats.append({"id": item["id"], "seat_gap_mm": round(nearest, 3)})
+        if nearest > 1.2:
+            fails.append({"floating_trim": item["id"], "mm": round(nearest, 2)})
+    print("seats", seats, flush=True)
     rear = next(i for i in INSTANCES if i["id"] == "rear")
     rb = rear["world"].bounds
     gap = float(rb[0][1] - JAMB_BACK)
@@ -1215,7 +1297,7 @@ def audits():
         fails.append({"rear_intersection_mm3": round(touch, 2)})
     print("rest", n, pair, "roofs", roofs, "stairs", stairs, flush=True)
     return {"ok": not fails, "failures": fails[:16], "rest_pairs": n, "worst_mm3": round(worst, 2),
-            "worst_pair": pair, "roofs": roofs, "stairs": stairs, "rear_fit": rear_fit}
+            "worst_pair": pair, "roofs": roofs, "stairs": stairs, "rear_fit": rear_fit, "trim_seats": seats}
 
 
 def write_all(report):
@@ -1245,7 +1327,7 @@ def write_all(report):
     count = len(FIXTURES)
     manifest = {
         "name": "Queen Anne Playhouse",
-        "version": "6.0.0",
+        "version": "6.1.0",
         "prior_version": "archive/v4.0.0",
         "scale": "1:24",
         "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",

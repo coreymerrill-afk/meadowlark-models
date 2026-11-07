@@ -1,10 +1,10 @@
-# Queen Anne Playhouse — v6.0.0
+# Queen Anne Playhouse — v6.1.0
 
 A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 
 The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes, with rake bargeboards and an owl. The porch wraps the turret. Shingles are thin scallops in the mesh. The front and the right side are solid walls with clear sash openings.
 
-v4 is in `archive/v4.0.0/`. v5 put a removable shell on every room. Those shells sat off the house. They are gone.
+Shingles on the slopes and the cone are small scallops in the mesh, with a fraction of a millimetre of relief. A stepped crown and four window crowns are separate ivory prints, seated against the siding without occupying it. The ground floor has a projecting bay. The attic center, above the back wall, is open between two side pads so a hand can reach it from the rear; the upper stair is the route onto that floor, and the turret loft is the same level.
 
 ## How it is played
 
