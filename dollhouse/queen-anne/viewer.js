@@ -141,7 +141,6 @@
     if (instance.role === 'coupon' && state.mode !== 'attachment') return false;
     var group = instance.motion ? instance.motion.group : '';
     if ((state.mode === 'open' || state.mode === 'stairs' || state.mode === 'attic') && group === 'back') return false;
-    if (state.mode === 'attic' && instance.id === 'roof-rear') return false;
     if (instance.role === 'service' && state.mode !== 'lighting' && state.mode !== 'explode') return false;
     if (state.mode === 'remove-panels') {
       var group = instance.motion ? instance.motion.group : '';
@@ -184,7 +183,7 @@
       case 'stairs':
         return 'Both flights. The lower run climbs from the entry to the first floor. The upper run climbs from that floor to the attic.';
       case 'attic':
-        return 'Attic floor with the rear roof hidden so the cot and trunk are visible. Back off keeps that roof on and shows the soffit opening.';
+        return 'Attic through the open back. The roof stays on. The back is the only panel that comes off.';
       case 'lighting':
         return 'Ten fixtures on the fixed frame and the porch. The 6 × 6 × 3 mm cavity is not a measured LED. No fuse is selected.';
       default:
@@ -373,7 +372,7 @@
       throw new Error('manifest claims a test that was not run');
     }
     if (!flags.cad_validated) return 'CAD checks did not pass. Not printed.';
-    return 'CAD-checked, unprinted model. Forces, fatigue, and stability were not tested. Not a toy-safety certification and not an H3C slice.';
+    return 'Unprinted prototype. Version ' + manifest.version + ' development files. The back M2x3 tip still meets solid plastic in the capture strip. Forces, fit, and clearance were not physically tested. Not a toy-safety certification and not an H3C slice.';
   }
 
   function renderChrome(manifest) {
@@ -386,7 +385,8 @@
     var facts = [
       [size.x.toFixed(0) + ' × ' + size.y.toFixed(0) + ' × ' + size.z.toFixed(0), 'Assembly, mm'],
       [String(manifest.rooms.length), 'Different rooms'],
-      [String(manifest.parts.length), 'Printable parts'],
+      [String(manifest.parts.filter(function (item) { return !item.reference_only; }).length), 'Plastic parts'],
+      [String(manifest.parts.filter(function (item) { return item.reference_only; }).length) + ' not printed', 'Metal references'],
       [magnet.nominal_mm[0] + ' × ' + magnet.nominal_mm[1], 'Nominal magnet, mm'],
       [String((manifest.lighting && manifest.lighting.fixture_count) || 0), 'Light fixtures'],
       [magnet.status === 'NOMINAL_NOT_FIT_APPROVED' ? 'Not proven' : 'Check', 'Pocket fit']
@@ -564,6 +564,8 @@
     el('error').textContent = String(error && error.message ? error.message : error);
   }
 
+  var reset = document.getElementById('reset-view');
+  if (reset) reset.addEventListener('click', function () { look(); });
   document.querySelectorAll('.modes button[data-mode]').forEach(function (button) {
     button.addEventListener('click', function () {
       setMode(button.getAttribute('data-mode'));

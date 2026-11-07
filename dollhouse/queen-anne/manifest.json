@@ -484,6 +484,9 @@
     "Not a tested thread, not a wear test, and not a toy-safety certification."
   ],
   "limits": [
+    "Unprinted prototype. These STLs are development files, not a finished play kit.",
+    "Back screws are drawn as nominal M2x3. The tip is about 0.25 mm past the nut, and the capture strip is still solid at that tip, with about 1.35 mm of plastic beyond it. That clearance was not cut. Bottoming is a risk. Not measured.",
+    "Jamb screws are drawn as nominal M2x8. A CAD section put the nut on the screw with about 0.6 mm of empty bore past the tip. That was not a physical test.",
     "Not printed. No strength, tip-over, magnet, or electrical test.",
     "Roofs are gravity seated, not locked. They bear on the fixed shell with the back off.",
     "The back is a closure, not a structural brace. Magnets are not the house's support.",

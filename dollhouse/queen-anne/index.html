@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Queen Anne Playhouse, a separate 1:24 house: octagonal turret, street gable, wraparound porch. Side walls pull straight off. The viewer loads the CAD STLs. Unprinted. Not a safety certification." />
+<meta name="description" content="Queen Anne Playhouse v6.5.3, an unprinted prototype. The front, sides, and roof stay on. The full back pulls straight off. Development STLs. Not a toy-safety certification." />
 <link rel="icon" href="data:," />
 <title>Queen Anne Playhouse — Meadowlark Models</title>
 <link rel="stylesheet" href="/coreyhq-back.css" />
@@ -39,6 +39,7 @@
   <button type="button" data-mode="attachment" aria-pressed="false">Attachment</button>
   <button type="button" data-mode="lighting" aria-pressed="false">Lighting</button>
   <button type="button" data-mode="explode" aria-pressed="false">Explode</button>
+  <button type="button" id="reset-view">Reset</button>
 </nav>
 <section class="card" id="concept">
   <h2>Approved direction</h2>
@@ -68,7 +69,11 @@
 </section>
 <section class="card">
   <h2>Print order</h2>
-  <p class="muted">Print the coupon pair and one bay before the rest of the house. No slicer was run. This is not an H3C test and not a safety certification.</p>
+  <p><strong>Unprinted prototype.</strong> Version 6.5.3 development files. Not a finished play kit and not a toy-safety certification.</p>
+  <p class="muted">Known gap, not fixed in this publish: the two back screws are drawn as nominal M2×3. The tip is about 0.25 mm past the nut, and the capture strip is still solid at that tip, with about 1.35 mm of plastic beyond it. Clearance was not cut. Bottoming is a risk. This was not measured on a printed part.</p>
+  <p class="muted">The four jamb screws are drawn as nominal M2×8. A CAD section showed the nut on the screw and about 0.6 mm of empty bore past the tip. That was not a physical test. Metal reference meshes are not in the print pack.</p>
+  <p class="muted"><a href="/dollhouse/queen-anne/downloads/queen-anne-v653-unprinted-print-stls.zip">Plastic print STLs (zip)</a> · <a href="/dollhouse/queen-anne/reports/print-bom.json">Hardware BOM</a></p>
+  <p class="muted">Print the coupon pair and one bay before the rest of the house. No slicer was run. This is not an H3C test.</p>
   <div id="print-root"></div>
 </section>
 <section class="card">
