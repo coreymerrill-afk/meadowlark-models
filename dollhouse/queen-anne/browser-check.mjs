@@ -122,6 +122,8 @@ async function shot(client, mode, file) {
 
 const desktop = await open('http://127.0.0.1:' + port + '/dollhouse/queen-anne/', 1280, 900);
 const closed = await shot(desktop.client, 'closed', '/opt/cursor/artifacts/queen-anne-closed-desktop.png');
+const front = await shot(desktop.client, 'front', '/opt/cursor/artifacts/queen-anne-front-desktop.png');
+const detail = await shot(desktop.client, 'detail', '/opt/cursor/artifacts/queen-anne-detail-desktop.png');
 const opened = await shot(desktop.client, 'open', '/opt/cursor/artifacts/queen-anne-open-desktop.png');
 const stairs = await shot(desktop.client, 'stairs', '/opt/cursor/artifacts/queen-anne-stairs-desktop.png');
 const attachment = await shot(desktop.client, 'attachment', '/opt/cursor/artifacts/queen-anne-attachment-desktop.png');
@@ -147,9 +149,9 @@ mobile.ws.close();
 const links = [
   '/dollhouse/queen-anne/',
   '/dollhouse/queen-anne/manifest.json',
-  '/dollhouse/queen-anne/stl/qa4_roof_turret_v4.stl',
-  '/dollhouse/queen-anne/stl/qa4_facade_front_l1_v4.stl',
-  '/dollhouse/queen-anne/stl/qa4_stair_lower_v4.stl',
+  '/dollhouse/queen-anne/stl/qa5_roof_turret_v5.stl',
+  '/dollhouse/queen-anne/stl/qa5_facade_front_v5.stl',
+  '/dollhouse/queen-anne/stl/qa5_stair_lower_v5.stl',
   '/dollhouse/queen-anne/concept/approved-direction.jpg',
   '/dollhouse/',
   '/marble-factory/',
@@ -171,11 +173,11 @@ const home = await new Promise((resolve, reject) => {
 const kept = ['/dollhouse/', '/dollhouse/queen-anne/', '/marble-factory/', '/marble-system/', '/observatory/']
   .every((href) => home.includes('href="' + href + '"'));
 
-const report = { desktop: desktop.sample, closed, opened, stairs, attachment, mobile: mobile.sample, mobileClosed, mobileOpen, statuses, kept };
+const report = { desktop: desktop.sample, closed, front, detail, opened, stairs, attachment, mobile: mobile.sample, mobileClosed, mobileOpen, statuses, kept };
 console.log(JSON.stringify(report, null, 2));
 const badStatus = Object.entries(statuses).filter(([, code]) => code !== 200);
 const failed = !desktop.sample.booted || desktop.sample.errors.length || badStatus.length || !kept
-  || closed.mode !== 'closed' || opened.mode !== 'open' || stairs.mode !== 'stairs' || attachment.mode !== 'attachment'
+  || closed.mode !== 'closed' || front.mode !== 'front' || detail.mode !== 'detail' || opened.mode !== 'open' || stairs.mode !== 'stairs' || attachment.mode !== 'attachment'
   || mobileClosed.mode !== 'closed' || mobileOpen.mode !== 'open';
 server.kill();
 chrome.kill();

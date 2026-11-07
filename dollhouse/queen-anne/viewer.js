@@ -103,20 +103,19 @@
     var group = motion ? motion.group : '';
     switch (mode) {
       case 'closed':
+      case 'front':
+      case 'detail':
       case 'plan':
       case 'lighting':
         return instance.transform;
       case 'attachment':
-        if ((instance.id === 'front-l1' || instance.id === 'door') && motion && motion.pull) {
+        if (instance.id === 'side-l1' && motion && motion.pull) {
           return mul(translate([motion.pull[0] * 0.45, motion.pull[1] * 0.45, 0]), instance.transform);
         }
         return instance.transform;
       case 'open':
       case 'stairs':
-        if (group === 'front' || group === 'end') {
-          return mul(translate(motionVector(motion, false)), instance.transform);
-        }
-        if (group === 'roof' || group === 'porch') return mul(translate(motionVector(motion, true)), instance.transform);
+        if (group === 'roof') return mul(translate(motionVector(motion, true)), instance.transform);
         return instance.transform;
       case 'remove-panels':
         return instance.transform;
@@ -132,18 +131,22 @@
 
   function levelOf(instance) {
     var id = instance.id;
-    if (id.indexOf('l3') >= 0 || id === 'loft-chair') return 3;
-    if (id.indexOf('l2') >= 0 || id.indexOf('floor') >= 0 || id === 'stair-upper' || id.indexOf('bed') >= 0) return 2;
+    if (id.indexOf('l3') >= 0 || id === 'turret-loft' || id === 'trunk' || id === 'gable') return 3;
+    if (id.indexOf('l2') >= 0 || id.indexOf('floor') >= 0 || id === 'stair-upper' || id === 'bed') return 2;
     return 1;
   }
 
   function modeVisible(instance) {
+    if (instance.role === 'coupon' && state.mode !== 'attachment') return false;
+    var group = instance.motion ? instance.motion.group : '';
+    if ((state.mode === 'open' || state.mode === 'stairs') && group === 'end') return false;
+    if (instance.role === 'service' && state.mode !== 'lighting' && state.mode !== 'explode') return false;
     if (state.mode === 'remove-panels') {
       var group = instance.motion ? instance.motion.group : '';
       return group !== 'front' && group !== 'end';
     }
     if (state.mode === 'attachment') {
-      return instance.id === 'front-l1' || instance.id === 'door' || instance.id === 'walls-l1' || instance.role === 'coupon';
+      return instance.id === 'side-l1' || instance.id === 'walls-l1' || instance.role === 'coupon';
     }
     if (state.mode === 'plan') {
       return instance.role !== 'roof' && instance.role !== 'facade' && instance.role !== 'panel' && instance.role !== 'coupon' && instance.role !== 'sample' && levelOf(instance) === state.storey;
@@ -157,9 +160,13 @@
   function modeCopy(mode) {
     switch (mode) {
       case 'closed':
-        return 'Closed. Octagonal turret, pitched roof, wraparound porch. The picture lower on the page is the approved direction, not this CAD.';
+        return 'Closed. Broad front, octagonal turret, street gable, wraparound porch. The picture lower on the page is the approved direction, not this CAD.';
+      case 'front':
+        return 'Front elevation, matched to the approved picture’s closed view. Materials are colors on the real meshes.';
+      case 'detail':
+        return 'Porch detail. Turned columns, brackets, and the spindle rail are geometry, not a texture.';
       case 'open':
-        return 'Open. Front and side shells are pulled straight off. The porch and the roofs are lifted clear. No hooks.';
+        return 'Open from the side. The side shells are pulled straight off and the roofs are lifted. The porch stays, so play does not start by dismantling it.';
       case 'remove-panels':
         return 'Panels hidden. Frames, floors, stairs, and roofs stay. The hidden panels are the same STLs.';
       case 'roof':
@@ -169,7 +176,7 @@
       case 'plan':
         return 'Storey ' + state.storey + '. Roofs and facades are hidden so the rooms, stair, and doorways on this floor are visible. The drawing under the view uses the same coordinates.';
       case 'attachment':
-        return 'Ground-floor front shell and door, pulled straight out. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested.';
+        return 'Side wall, the everyday opening, pulled straight out. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested. The porch is not part of this pull.';
       case 'stairs':
         return 'Both flights. The lower run climbs from the entry to the first floor. The upper run climbs from that floor to the attic.';
       case 'lighting':
@@ -441,7 +448,11 @@
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     if (THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.setClearColor(0x14181e, 1);
+    renderer.setClearColor(0x10141a, 1);
+    if (THREE.ACESFilmicToneMapping !== undefined) {
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.08;
+    }
     view.appendChild(renderer.domElement);
 
     var scene = new THREE.Scene();
@@ -455,28 +466,30 @@
     camera.position.set(center.x + size.x * 0.85, center.y - size.y * 1.7, center.z + size.z * 0.55);
     camera.up.set(0, 0, 1);
 
-    var hemi = new THREE.HemisphereLight(0xf4f7fb, 0x2a313c, 0.85);
+    var hemi = new THREE.HemisphereLight(0xfff6ee, 0x1a222c, 0.55);
     scene.add(hemi);
-    var key = new THREE.DirectionalLight(0xfff4e8, 1.15);
-    key.position.set(400, -600, 900);
+    var key = new THREE.DirectionalLight(0xfff1e0, 1.55);
+    key.position.set(-280, -720, 640);
     scene.add(key);
-    var fill = new THREE.DirectionalLight(0xc5d4e8, 0.4);
-    fill.position.set(-500, 300, 200);
+    var fill = new THREE.DirectionalLight(0x9eb4c8, 0.28);
+    fill.position.set(520, 180, 220);
     scene.add(fill);
-
-    var ground = new THREE.Mesh(
-      new THREE.CircleGeometry(900, 48),
-      new THREE.MeshStandardMaterial({ color: 0x1c222b, roughness: 1, metalness: 0 })
-    );
-    ground.position.set(center.x, center.y, -0.4);
-    scene.add(ground);
+    var rim = new THREE.DirectionalLight(0xffe6c4, 0.35);
+    rim.position.set(200, 480, 300);
+    scene.add(rim);
 
     manifest.instances.forEach(function (instance) {
       var geometry = geometries[instance.part];
+      var rough = 0.84;
+      var metal = 0.02;
+      if (instance.role === 'roof') { rough = 0.74; metal = 0.06; }
+      else if (instance.role === 'porch' || instance.role === 'trim') { rough = 0.4; metal = 0.04; }
+      else if (instance.role === 'stair' || instance.role === 'furniture' || instance.role === 'floor') { rough = 0.55; metal = 0.03; }
+      else if (instance.role === 'light') { rough = 0.32; metal = 0.28; }
       var material = new THREE.MeshStandardMaterial({
         color: instance.color,
-        roughness: instance.role === 'roof' ? 0.62 : 0.78,
-        metalness: instance.role === 'roof' ? 0.08 : 0.03,
+        roughness: rough,
+        metalness: metal,
         side: THREE.DoubleSide
       });
       var mesh = new THREE.Mesh(geometry, material);
