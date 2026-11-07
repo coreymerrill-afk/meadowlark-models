@@ -1,0 +1,369 @@
+{
+  "ok": true,
+  "failures": [],
+  "rest_pairs": 33,
+  "worst_mm3": 0.0,
+  "worst_pair": null,
+  "roofs": [
+    {
+      "id": "tower-roof",
+      "bodies": 1,
+      "seat_gap_mm": 0.45,
+      "bearing_probe_mm3": 9857.0,
+      "bearer": "tower-l3-frame",
+      "straight_lift_mm3": 0.0
+    },
+    {
+      "id": "hall-roof",
+      "bodies": 1,
+      "seat_gap_mm": 0.45,
+      "bearing_probe_mm3": 6768.8,
+      "bearer": "hall-l2-frame",
+      "straight_lift_mm3": 0.0
+    },
+    {
+      "id": "living-roof",
+      "bodies": 1,
+      "seat_gap_mm": 0.45,
+      "bearing_probe_mm3": 9107.8,
+      "bearer": "living-l2-frame",
+      "straight_lift_mm3": 0.0
+    },
+    {
+      "id": "porch-roof",
+      "bodies": 1,
+      "seat_gap_mm": 0.45,
+      "bearing_probe_mm3": 1122.2,
+      "bearer": "hall-l1-frame",
+      "straight_lift_mm3": 0.0
+    },
+    {
+      "id": "bay-roof",
+      "bodies": 1,
+      "seat_gap_mm": 0.45,
+      "bearing_probe_mm3": 336.0,
+      "bearer": "living-l1-frame",
+      "straight_lift_mm3": 0.0
+    }
+  ],
+  "stairs": [
+    {
+      "id": "stair-lower",
+      "bottom_z": 16.95,
+      "top_z": 131.55,
+      "target_floor_z": 132.0,
+      "top_gap_mm": 0.45,
+      "well_blocked_mm3": 0.0,
+      "headroom_sample_mm": 78.0
+    },
+    {
+      "id": "stair-upper",
+      "bottom_z": 132.95,
+      "top_z": 247.55,
+      "target_floor_z": 248.0,
+      "top_gap_mm": 0.45,
+      "well_blocked_mm3": 0.0,
+      "headroom_sample_mm": 78.0
+    }
+  ],
+  "doors": [
+    {
+      "id": "parlor-entry",
+      "blocked_mm3": 0.0
+    },
+    {
+      "id": "entry-living",
+      "blocked_mm3": 0.0
+    },
+    {
+      "id": "landing-hall",
+      "blocked_mm3": 0.0
+    },
+    {
+      "id": "hall-bedroom",
+      "blocked_mm3": 0.0
+    }
+  ],
+  "panel_sweeps": [
+    {
+      "id": "tower-l1-front",
+      "pull": [
+        0,
+        -46.0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "tower-l1-west",
+      "pull": [
+        -46.0,
+        0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "tower-l2-front",
+      "pull": [
+        0,
+        -46.0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "tower-l2-west",
+      "pull": [
+        -46.0,
+        0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "tower-l3-front",
+      "pull": [
+        0,
+        -46.0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "tower-l3-west",
+      "pull": [
+        -46.0,
+        0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "hall-l1-front",
+      "pull": [
+        0,
+        -46.0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "hall-l2-front",
+      "pull": [
+        0,
+        -46.0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "living-l2-front",
+      "pull": [
+        0,
+        -46.0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "bay-front",
+      "pull": [
+        0,
+        -46.0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "living-l1-east",
+      "pull": [
+        46.0,
+        0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    },
+    {
+      "id": "living-l2-east",
+      "pull": [
+        46.0,
+        0,
+        0
+      ],
+      "slide": null,
+      "lift": null
+    }
+  ],
+  "windows": [
+    {
+      "id": "tower-l1-front",
+      "hole_mm3": 0.0,
+      "sill_mm3": 947.9
+    },
+    {
+      "id": "bay-front",
+      "hole_mm3": 0.0,
+      "sill_mm3": 1647.18
+    },
+    {
+      "id": "hall-l1-front",
+      "hole_mm3": 0.0,
+      "sill_mm3": 1485.28
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "tower-l1-ceiling",
+      "host": "tower-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.45
+    },
+    {
+      "id": "tower-l1-sconce",
+      "host": "tower-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "tower-l2-ceiling",
+      "host": "tower-l2-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.45
+    },
+    {
+      "id": "tower-l2-sconce",
+      "host": "tower-l2-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "tower-l3-ceiling",
+      "host": "tower-l3-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.45
+    },
+    {
+      "id": "tower-l3-sconce",
+      "host": "tower-l3-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "porch-lantern-w",
+      "host": "hall-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "entry-lantern",
+      "host": "hall-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "hall-l1-ceiling",
+      "host": "hall-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.45
+    },
+    {
+      "id": "hall-l1-sconce",
+      "host": "hall-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "hall-l2-ceiling",
+      "host": "hall-l2-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.45
+    },
+    {
+      "id": "hall-l2-sconce",
+      "host": "hall-l2-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "porch-lantern-e",
+      "host": "living-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "living-l1-ceiling",
+      "host": "living-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.45
+    },
+    {
+      "id": "living-l1-sconce",
+      "host": "living-l1-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    },
+    {
+      "id": "living-l2-ceiling",
+      "host": "living-l2-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.45
+    },
+    {
+      "id": "living-l2-sconce",
+      "host": "living-l2-frame",
+      "cavity_mm3": 0.0,
+      "shell_mm3": 0.34
+    }
+  ],
+  "magnet": {
+    "status": "NOMINAL_NOT_FIT_APPROVED",
+    "nominal_mm": [
+      5.0,
+      2.8
+    ],
+    "radial_clearance_per_side_mm": 0.25,
+    "axial_clearance_mm": 0.2,
+    "pocket_diameter_mm": 5.5,
+    "pocket_depth_mm": 3.0,
+    "mating_skin_mm": 1.2,
+    "seat_gap_mm": 0.5,
+    "nominal_disc_intersection_mm3": 0.0,
+    "one_mm_oversize_intersection_mm3": 8.788,
+    "holding_force_calculated": false,
+    "h3c_pause_profile": false,
+    "pairs_per_panel": 6,
+    "retention": "magnetic_only_straight_pull",
+    "capture_bar": "encapsulates the magnet only; it is not a panel hook, sill, or latch"
+  },
+  "assembly_mm": {
+    "x": 554.1,
+    "y": 384.0,
+    "z": 450.0,
+    "min_mm": [
+      -6.1,
+      -54.0,
+      0.0
+    ],
+    "max_mm": [
+      548.0,
+      330.0,
+      450.0
+    ]
+  },
+  "instance_count": 48,
+  "triangles": 25938,
+  "fixture_count": 17,
+  "lighting_budget_A": 0.34
+}
