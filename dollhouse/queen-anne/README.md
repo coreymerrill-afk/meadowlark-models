@@ -1,4 +1,4 @@
-# Queen Anne Playhouse — v6.3.0
+# Queen Anne Playhouse — v6.4.0
 
 A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 
@@ -22,7 +22,9 @@ Balusters, verge scrolls, and shingle edges are thin. A 0.2 mm nozzle is somethi
 
 ## Checked
 
-`python3 cad/build_queen_anne_v5.py` writes the STLs. Each part is one solid and fits the 310 × 300 × 315 mm allowance. The audit found no resting overlap above 2 mm³, a bearing probe under each roof, and open stair wells. The headroom probe clears 72 mm. The viewer loads these STLs.
+`python3 cad/build_queen_anne_v5.py` writes the STLs. Each reloaded STL is one watertight body. `reports/topology.json` is that count. `reports/validation.json` is the assembly check: shared volume 0 mm³, rear gap 0.45 mm, roofs bearing with the back off. The viewer loads these STLs.
+
+`reports/magnets.json` lists the twelve seat centers in assembled coordinates and in each host STL. `reports/magnet-section.png` is a section of the rear stile at assembled x = 228, with the cap. `reports/magnet-cutaway-seat.stl` and `reports/magnet-cutaway-cap.stl` are that seat and its cap in one frame. `stl/print/` lays the tall parts on their shortest axis. The caps are 1.6 mm thick on the bed, not 150 mm on edge. No slicer was run.
 
 ## Not checked
 

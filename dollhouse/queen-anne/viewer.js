@@ -116,6 +116,7 @@
         return instance.transform;
       case 'open':
       case 'stairs':
+      case 'attic':
         return instance.transform;
       case 'remove-panels':
         return instance.transform;
@@ -139,7 +140,8 @@
   function modeVisible(instance) {
     if (instance.role === 'coupon' && state.mode !== 'attachment') return false;
     var group = instance.motion ? instance.motion.group : '';
-    if ((state.mode === 'open' || state.mode === 'stairs') && group === 'back') return false;
+    if ((state.mode === 'open' || state.mode === 'stairs' || state.mode === 'attic') && group === 'back') return false;
+    if (state.mode === 'attic' && instance.id === 'roof-rear') return false;
     if (instance.role === 'service' && state.mode !== 'lighting' && state.mode !== 'explode') return false;
     if (state.mode === 'remove-panels') {
       var group = instance.motion ? instance.motion.group : '';
@@ -181,6 +183,8 @@
         return 'The back, pulled straight off. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested. The back is not what holds the house up.';
       case 'stairs':
         return 'Both flights. The lower run climbs from the entry to the first floor. The upper run climbs from that floor to the attic.';
+      case 'attic':
+        return 'Attic floor with the rear roof hidden so the cot and trunk are visible. Back off keeps that roof on and shows the soffit opening.';
       case 'lighting':
         return 'Ten fixtures on the fixed frame and the porch. The 6 × 6 × 3 mm cavity is not a measured LED. No fuse is selected.';
       default:
@@ -470,9 +474,20 @@
 
     var hemi = new THREE.HemisphereLight(0xfff6ee, 0x1a222c, 0.55);
     scene.add(hemi);
-    var key = new THREE.DirectionalLight(0xfff1e0, 1.55);
-    key.position.set(-280, -720, 640);
+    var key = new THREE.DirectionalLight(0xfff1e0, 2.4);
+    key.position.set(-420, -680, 720);
+    key.castShadow = true;
+    key.shadow.mapSize.width = 2048;
+    key.shadow.mapSize.height = 2048;
+    key.shadow.camera.near = 80;
+    key.shadow.camera.far = 2200;
+    key.shadow.camera.left = -500;
+    key.shadow.camera.right = 500;
+    key.shadow.camera.top = 500;
+    key.shadow.camera.bottom = -500;
     scene.add(key);
+    renderer.shadowMap.enabled = true;
+    if (THREE.PCFSoftShadowMap) renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     var fill = new THREE.DirectionalLight(0x9eb4c8, 0.28);
     fill.position.set(520, 180, 220);
     scene.add(fill);
@@ -490,16 +505,18 @@
       else if (instance.role === 'light') { rough = 0.32; metal = 0.28; }
       var clay = location.search.indexOf('clay=1') >= 0;
       if (clay) {
-        renderer.setClearColor(0xd7d2c8, 1);
-        if (renderer.toneMappingExposure !== undefined) renderer.toneMappingExposure = 1.05;
+        renderer.setClearColor(0x2a2826, 1);
+        if (renderer.toneMappingExposure !== undefined) renderer.toneMappingExposure = 1.0;
       }
       var material = new THREE.MeshStandardMaterial({
-        color: clay ? 0xb7b1a6 : instance.color,
-        roughness: clay ? 0.72 : rough,
-        metalness: clay ? 0.02 : metal,
+        color: clay ? 0x8a8680 : instance.color,
+        roughness: clay ? 0.86 : rough,
+        metalness: 0.0,
         side: THREE.DoubleSide
       });
       var mesh = new THREE.Mesh(geometry, material);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
       scene.add(mesh);
       state.entries.push({ instance: instance, mesh: mesh });
       state.triangles += geometry.attributes.position.count / 3;

@@ -1,7 +1,7 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 93,
+  "rest_pairs": 101,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
@@ -37,7 +37,7 @@
       "id": "porch-skirt",
       "bodies": 1,
       "seat_gap_mm": 0.4,
-      "bearing_probe_mm3": 554.6,
+      "bearing_probe_mm3": 485.0,
       "bearer": "turret"
     }
   ],
@@ -96,13 +96,13 @@
       "seat_gap_mm": 0.0
     }
   ],
-  "triangles": 435928,
-  "instance_count": 75,
+  "triangles": 407108,
+  "instance_count": 78,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,
     "y": 400.0,
-    "z": 416.0,
+    "z": 434.0,
     "min_mm": [
       58.1,
       2.0,
@@ -111,7 +111,7 @@
     "max_mm": [
       518.0,
       402.0,
-      416.0
+      434.0
     ]
   }
 }

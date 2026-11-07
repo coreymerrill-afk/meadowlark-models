@@ -21,6 +21,7 @@ import manifold3d as md
 from shapely.geometry import Point, Polygon, box as sbox, LineString
 from shapely.geometry.polygon import orient as orient_poly
 from shapely.ops import unary_union
+from PIL import Image, ImageDraw
 from trimesh.creation import box, cylinder
 from trimesh.transformations import rotation_matrix
 
@@ -1030,11 +1031,22 @@ def roofs():
     fascia = box_at(MX0 + 12, y_e - 1.2, z_e - 7, MX1 - 14, y_e + 3.5, z_e + 1.2)
     ridge = box_at(MX0 + 24, y_r - 16, z_r - 8, gx0 - 6, y_r - 3.4, z_r + 2.4)
     crest = [fascia, ridge, box_at(MX0 + 20, MY0 + 4, zc - 2.4, gx0 - 8, MY0 + 10, zc + 2.2)]
-    cx = MX0 + 28
-    while cx < gx0 - 14:
-        crest.append(move(SPINDLE, cx, MY0 + 7, zc - 1.6))
-        cx += 12
-    front_roof = cleanup(union([front, left, right, *crest, *shingles]), "front roof")
+    cx = MX0 + 40
+    while cx < gx0 - 20:
+        crest.append(move(spindle(18), cx, y_r - 8, z_r - 2))
+        cx += 16
+    crest.append(box_at(MX0 + 36, y_r - 12, z_r + 14, gx0 - 16, y_r - 6, z_r + 17))
+    # Small dormer on the slope left of the street gable. Its base enters the slab.
+    zd = z_at(150)
+    dormer = [
+        box_at(230, 144, zd - 8, 276, 176, zd + 26),
+        hull([
+            (228, 146, zd + 18), (278, 146, zd + 18), (253, 146, zd + 40),
+            (228, 174, zd + 16), (278, 174, zd + 16), (253, 174, zd + 36),
+        ]),
+    ]
+    dormer_win = box_at(244, 138, zd + 2, 262, 152, zd + 20)
+    front_roof = cleanup(difference(union([front, left, right, *crest, *shingles, *dormer]), [dormer_win]), "front roof")
     publish("qa5_roof_front_v5", front_roof,
             "Front slope and the gable cheeks. Fish-scale courses overlap and the noses stay proud.",
             "roof-front", "roof", SLATE, {"group": "roof", "lift": [0, 0, 48], "park": [0, -40, 28]},
@@ -1047,11 +1059,18 @@ def roofs():
     face = difference(face, [opening])
     gx, gz = xmid, gz0
     gable_trim = [
-        plate_xz(arch_band(gx - 20, gz + 76, 40, 12, 2.6), gy0 + 1.4, 2.6),
-        box_at(gx - 1.1, gy0 - 0.6, gz + 32, gx + 1.1, gy0 + 1.8, gz + 82),
-        box_at(gx - 13, gy0 - 0.6, gz + 52, gx + 13, gy0 + 1.8, gz + 54.6),
-        box_at(gx - 16, gy0 - 0.8, gz + 24, gx + 16, gy0 + 2.0, gz + 28),
+        plate_xz(arch_band(gx - 22, gz + 74, 44, 16, 3.2), gy0 + 1.6, 3.0),
+        box_at(gx - 18, gy0 - 1.2, gz + 70, gx + 18, gy0 + 2.2, gz + 76),
+        box_at(gx - 1.2, gy0 - 0.8, gz + 30, gx + 1.2, gy0 + 2.0, gz + 84),
+        box_at(gx - 14, gy0 - 0.8, gz + 50, gx + 14, gy0 + 2.0, gz + 53.2),
+        box_at(gx - 20, gy0 - 1.4, gz + 22, gx + 20, gy0 + 2.4, gz + 28),
     ]
+    for px in np.linspace(gx0 + 36, gx1 - 36, 7):
+        gable_trim.append(box_at(px - 3.2, gy0 - 7, gz0 - 10, px + 3.2, gy0 + 2.2, gz0 + 4))
+        gable_trim.append(box_at(px - 4.6, gy0 - 4, gz0 - 2, px + 4.6, gy0 + 1.6, gz0 + 3))
+    finial = revolve([[0, 0], [5.2, 0], [3.6, 4], [1.3, 16], [0.45, 26], [0, 28]], 16)
+    finial.apply_translation((xmid, gy0 + 2.2, gz1 - 10))
+    gable_trim.append(finial)
     board = bargeboard(gx1 - gx0 - 20)
     board.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
     board.apply_translation(-board.bounds[0])
@@ -1079,11 +1098,13 @@ def roofs():
         bz += 5.0
     chim = union([
         box_at(450, 216, RIDGE - 40, 482, 244, RIDGE + 24),
-        box_at(447, 213, RIDGE + 18, 485, 247, RIDGE + 28),
+        box_at(444, 210, RIDGE + 22, 488, 250, RIDGE + 32),
+        box_at(456, 222, RIDGE + 30, 468, 236, RIDGE + 52),
+        box_at(470, 224, RIDGE + 30, 482, 238, RIDGE + 46),
         *bricks,
     ])
-    # Center soffit cut so the attic opening and the upper stair read from the rear.
-    soffit = box_at(348, MY1 - 2, 150, 448, MY1 + 36, L3 + 18)
+    # Wide center opening so the attic floor and the upper stair are visible from the rear.
+    soffit = box_at(324, MY1 - 12, 120, 470, MY1 + 42, L3 + 40)
     rear_roof = cleanup(difference(union([rear, chim, *rear_sh]), [soffit]), "rear roof")
     publish("qa5_roof_rear_v5", rear_roof, "Rear slope, fish-scale courses, chimney. Center soffit is open over the attic.",
             "roof-rear", "roof", SLATE, {"group": "roof", "lift": [0, 0, 48], "park": [0, 28, 28]},
@@ -1094,7 +1115,9 @@ def roofs():
     cap = cleanup(prism(octagon(TX, TY, TR - 16), plate_top(L3) - 4, plate_top(L3) + 0.15), "cap")
     publish("qa5_turret_cap_v5", cap, "Plate under the cone.", "turret-cap", "structure", PLASTER, explode=[-8, 0, 20])
     scales = cone_courses()
-    publish("qa5_roof_turret_v5", cleanup(union([cone, *scales]), "cone"),
+    tip = revolve([[0, 0], [4.4, 0], [2.6, 6], [0.7, 18], [0, 22]], 16)
+    tip.apply_translation((TX, TY, plate_top(L3) + GAP + CONE_H - 4))
+    publish("qa5_roof_turret_v5", cleanup(union([cone, tip, *scales]), "cone"),
             "Octagonal cone with a course of scallops on each flat.", "roof-turret", "roof", SLATE,
             {"group": "roof", "lift": [0, 0, 56], "park": [-28, -20, 24]}, [-12, -16, 40],
             {"plate_top": plate_top(L3), "seat_z": plate_top(L3) + GAP})
@@ -1108,12 +1131,11 @@ def roofs():
         def add_belt(z_a, z_b, proud):
             for ang in (45, 90, 135, 180, 225, 270, 315):
                 bands.append(on_facet(ang, APO - 0.2, (z_a + z_b) / 2, width, proud + 1.4, z_b - z_a))
-        z = z0 + 5
-        while z < z1 - 6:
-            add_belt(z, z + 1.5, 0.9)
-            z += 4.2
-        add_belt(z0 + 1.2, z0 + 4.6, 1.8)
-        add_belt(z1 - 5.2, z1 - 1.4, 1.8)
+        # Three molded belts, not a stack of hairline rings.
+        add_belt(z0 + 6, z0 + 12, 1.5)
+        add_belt(z0 + 10.2, z0 + 13.0, 0.7)
+        add_belt(z1 - 14, z1 - 6, 1.6)
+        add_belt(z1 - 8.5, z1 - 5.2, 0.7)
         trim = []
         for ang, wz in wins:
             trim += facet_trim(ang, wz, 20, 42)
@@ -1206,6 +1228,7 @@ def porch():
         parts.append(place_bracket(x, y, z_beam - 16, -90))
     parts += rail_run(front_posts[0], front_posts[-1])
     parts.append(box_at(front_posts[0][0] - 4, 24, z_beam, front_posts[-1][0] + 6, 48, z_beam + 8))
+    parts.append(box_at(front_posts[0][0] - 2, 18, z_beam + 1, front_posts[-1][0] + 4, 30, z_beam + 6))
     dx = front_posts[0][0] + 14
     while dx < front_posts[-1][0] - 10:
         parts.append(box_at(dx, 30, z_beam - 4.2, dx + 3.4, 44, z_beam + 1.6))
@@ -1363,15 +1386,26 @@ def rooms():
             box_at(26, 58, 14, 40, 70, 20),
             *posts,
         ]), "bed")
-    def cabinet():
+    def basin():
+        bowl = cylinder(radius=5.5, height=3.2, sections=16)
+        bowl.apply_translation((7, 7, 18))
         return cleanup(union([
-            box_at(0, 0, 0, 64, 18, 32),
-            box_at(2, -0.8, 4, 30, 1.2, 28),
-            box_at(34, -0.8, 4, 62, 1.2, 28),
-            box_at(0, 8, 28, 64, 16, 52),
-            box_at(0, 0, 48, 64, 14, 78),
-            box_at(8, 2, 32, 28, 16, 36),
-        ]), "cabinet")
+            box_at(4, 4, 0, 10, 10, 17),
+            bowl,
+            box_at(2, 2, 16.2, 12, 12, 18.2),
+        ]), "basin")
+
+    def cabinet():
+        body = union([
+            box_at(0, 0, 0, 60, 18, 34),
+            box_at(2, -0.8, 4, 28, 1.2, 30),
+            box_at(32, -0.8, 4, 58, 1.2, 30),
+            box_at(0, 6, 30, 60, 16, 36),
+            box_at(40, 2, 34, 58, 14, 50),
+        ])
+        sink = cylinder(radius=5.2, height=8, sections=16)
+        sink.apply_translation((18, 9, 34))
+        return cleanup(difference(body, [sink]), "cabinet")
     def table():
         return cleanup(union([
             box_at(0, 0, 18, 40, 24, 20),
@@ -1443,7 +1477,16 @@ def rooms():
         ("qa5_rug_v5", rug(54, 38), "Parlor rug.", "rug", (242, 158, L1 + 0.3)),
         ("qa5_sofa_v5", sofa(), "Parlor sofa.", "sofa", (230, 220, L1 + 0.5)),
         ("qa5_chair_v5", chair(), "Parlor chair.", "chair", (320, 175, L1 + 0.5)),
-        ("qa5_trunk_v5", cleanup(box_at(0, 0, 0, 36, 18, 14), "trunk"), "Attic trunk.", "trunk", (320, 214, L3 + 0.8)),
+        ("qa5_trunk_v5", cleanup(box_at(0, 0, 0, 36, 18, 14), "trunk"), "Attic trunk.", "trunk", (300, 200, L3 + 0.8)),
+        ("qa5_tub_v5", cleanup(union([
+            box_at(0, 0, 0, 32, 16, 12),
+            box_at(2, 2, 8, 30, 14, 14),
+        ]), "tub"), "Bath tub.", "tub", (456, 132, L2 + 0.6)),
+        ("qa5_basin_v5", basin(), "Bath basin on a pedestal.", "basin", (478, 188, L2 + 0.6)),
+        ("qa5_cot_v5", cleanup(union([
+            box_at(2, 2, 6, 34, 18, 12),
+            box_at(0, 14, 8, 36, 20, 22),
+        ]), "cot"), "Attic cot, on the open side of the attic.", "cot", (340, 160, L3 + 0.8)),
     ]
     for name, mesh, note, iid, at in pieces:
         color = WINE if iid in ("rug", "bedrug") else WOOD
@@ -1654,7 +1697,7 @@ def write_all(report):
     count = len(FIXTURES)
     manifest = {
         "name": "Queen Anne Playhouse",
-        "version": "6.3.0",
+        "version": "6.4.0",
         "prior_version": "archive/v4.0.0",
         "scale": "1:24",
         "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
@@ -1745,12 +1788,13 @@ def write_all(report):
             "Not a toy-safety certification.",
         ],
         "cameras": {
-            "closed": {"position": [80, -480, 210], "target": [320, 180, 170]},
-            "front": {"position": [340, -520, 170], "target": [340, 180, 160]},
-            "rear": {"position": [360, 700, 150], "target": [360, 300, 120]},
-            "open": {"position": [390, 760, 260], "target": [390, 230, 210]},
-            "stairs": {"position": [520, 620, 250], "target": [400, 210, 190]},
-            "detail": {"position": [400, -160, 300], "target": [380, 90, 280]},
+            "closed": {"position": [60, -420, 200], "target": [330, 170, 180]},
+            "front": {"position": [360, -460, 180], "target": [360, 160, 180]},
+            "rear": {"position": [370, 640, 160], "target": [370, 280, 130]},
+            "open": {"position": [400, 780, 190], "target": [390, 220, 230]},
+            "stairs": {"position": [470, 640, 210], "target": [400, 190, 210]},
+            "attic": {"position": [470, 360, 250], "target": [360, 185, 226]},
+            "detail": {"position": [390, -40, 340], "target": [380, 70, 310]},
             "attachment": {"position": [640, 480, 110], "target": [420, 280, 90]},
             "plan": {"position": [cx, cy, maxs[2] + 280], "target": [cx, cy, 80]},
             "lighting": {"position": [cx + 40, mins[1] - 80, 160], "target": [cx, cy, 90]},
@@ -1796,10 +1840,214 @@ def legacy_interface():
             "snap_compatible": False, "note": "Measured on floor_tile_v0. This house does not use that socket."}
 
 
+def lay_on_bed(mesh):
+    """Put the shortest bounding axis on Z and the part's minimum corner at the origin."""
+    out = mesh.copy()
+    axis = int(np.argmin(out.extents))
+    if axis == 0:
+        out.apply_transform(rotation_matrix(-math.pi / 2, [0, 1, 0]))
+    elif axis == 1:
+        out.apply_transform(rotation_matrix(-math.pi / 2, [1, 0, 0]))
+    out.apply_translation(-out.bounds[0])
+    return out
+
+
+def _translation(instance):
+    return [float(instance["transform"][0][3]), float(instance["transform"][1][3]), float(instance["transform"][2][3])]
+
+
+def write_review_exports(manifest=None):
+    """Print poses, magnet centers, a real stile section, and a reloaded-STL topology count.
+
+    Reads the STLs already on disk. It does not rebuild the house.
+    """
+    if manifest is None:
+        with open(os.path.join(ROOT, "manifest.json"), encoding="utf8") as handle:
+            manifest = json.load(handle)
+    os.makedirs(os.path.join(STL, "print"), exist_ok=True)
+    os.makedirs(REPORT, exist_ok=True)
+    poses = {}
+    for part in manifest["parts"]:
+        name = part["id"] + ".stl"
+        mesh = tm.load(os.path.join(STL, name), force="mesh")
+        native = [round(float(v), 2) for v in mesh.extents]
+        shortest = float(np.min(mesh.extents))
+        if mesh.extents[2] > max(shortest * 1.05, shortest + 1.0) and mesh.extents[2] > 100.0:
+            flat = lay_on_bed(mesh)
+            flat.export(os.path.join(STL, "print", name))
+            extents = [round(float(v), 2) for v in flat.extents]
+            poses[name] = {
+                "pose": "shortest axis on Z, corner at the origin",
+                "native_extents_mm": native,
+                "print_extents_mm": extents,
+                "margin_to_310x300x315_mm": [round(310 - extents[0], 1), round(300 - extents[1], 1), round(315 - extents[2], 1)],
+            }
+        else:
+            poses[name] = {
+                "pose": "native STL, shortest axis already on Z" if mesh.extents[2] <= shortest + 1.0 else "native STL, already inside the height allowance",
+                "native_extents_mm": native,
+                "print_extents_mm": native,
+                "margin_to_310x300x315_mm": [round(310 - native[0], 1), round(300 - native[1], 1), round(315 - native[2], 1)],
+            }
+    with open(os.path.join(REPORT, "print-orientations.json"), "w", encoding="utf8") as handle:
+        json.dump({"envelope_mm": [310, 300, 315], "parts": poses,
+                   "note": "Margins are envelope minus the printed bounding box. A positive margin is unused bed. No slicer was run."},
+                  handle, indent=2)
+        handle.write("\n")
+
+    by_id = {item["id"]: item for item in manifest["instances"]}
+    rear_t = _translation(by_id["rear"])
+    jamb_host = {"l1": _translation(by_id["walls-l1"]), "l2": _translation(by_id["walls-l2"]), "side": _translation(by_id["side"])}
+    cap_t = {"qa5_cap_back-l_v5": _translation(by_id["cap-back-l"]), "qa5_cap_back-r_v5": _translation(by_id["cap-back-r"])}
+    zs = [L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74]
+    xs = [(MX0 + 17, "qa5_cap_back-l_v5", "l1"), (MX1 - 13, "qa5_cap_back-r_v5", "side")]
+    rear = tm.load(os.path.join(STL, "qa5_rear_v5.stl"), force="mesh")
+    stations = []
+    n = 0
+    for x, cap_name, right_host in xs:
+        for zc in zs:
+            n += 1
+            host_key = right_host if x > 400 else ("l1" if zc < L2 else "l2")
+            world = [x, round(JAMB_BACK + FIT_GAP + SKIN + POD_H / 2, 2), zc]
+            local = [round(world[i] - rear_t[i], 2) for i in range(3)]
+            skin = [local[0], round(SKIN / 2, 2), local[2]]
+            if rear.contains([local])[0]:
+                raise RuntimeError(f"station {n} disc center is solid in qa5_rear_v5 at {local}")
+            if not rear.contains([skin])[0]:
+                raise RuntimeError(f"station {n} skin is void in qa5_rear_v5 at {skin}")
+            jt = jamb_host[host_key]
+            jamb_world = [x, round(JAMB_BACK - SKIN - POD_H / 2, 2), zc]
+            stations.append({
+                "station": n,
+                "panel": {
+                    "host": "qa5_rear_v5",
+                    "center_mm": world,
+                    "center_in_stl_mm": local,
+                    "axis": [0, 1, 0],
+                    "mouth_opens": "+Y",
+                    "diameter_mm": round(POD_D, 2),
+                    "depth_mm": round(POD_H, 2),
+                    "skin_mm": SKIN,
+                    "mating_face_y": round(JAMB_BACK + FIT_GAP, 2),
+                    "disc_zone_y": [round(JAMB_BACK + FIT_GAP + SKIN, 2), round(JAMB_BACK + FIT_GAP + SKIN + POD_H, 2)],
+                    "cap": cap_name,
+                    "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed.",
+                },
+                "jamb": {
+                    "host": {"l1": "qa5_walls_l1_v5", "l2": "qa5_walls_l2_v5", "side": "qa5_side_v5"}[host_key],
+                    "center_mm": jamb_world,
+                    "center_in_stl_mm": [round(jamb_world[i] - jt[i], 2) for i in range(3)],
+                    "axis": [0, -1, 0],
+                    "mouth_opens": "-Y",
+                    "diameter_mm": round(POD_D, 2),
+                    "depth_mm": round(POD_H, 2),
+                    "skin_mm": SKIN,
+                },
+            })
+    magnets = {
+        "nominal_disc_mm": [MAG_D, MAG_T],
+        "allowance": "0.30 mm each side of the diameter, 0.40 mm along the 2.8 mm thickness. Design numbers, not a measured fit.",
+        "coordinates": "center_mm is the assembled house, Z up. center_in_stl_mm is that point in the host STL, whose manifest transform is a translation.",
+        "stations": stations,
+        "section": "Cut qa5_rear_v5 at local x = 9, which is assembled x = 228. The disc zone is assembled y 296.85 to 300.05.",
+    }
+    with open(os.path.join(REPORT, "magnets.json"), "w", encoding="utf8") as handle:
+        json.dump(magnets, handle, indent=2)
+        handle.write("\n")
+
+    crop = box_at(3.0, -0.2, 21.0, 15.0, 7.6, 34.0)
+    seat = tm.boolean.intersection([rear, crop], engine="manifold")
+    if seat is None or seat.is_empty or seat.volume < 10:
+        raise RuntimeError("magnet cutaway missed the rear stile")
+    cap = tm.load(os.path.join(STL, "qa5_cap_back-l_v5.stl"), force="mesh")
+    cap.apply_translation(cap_t["qa5_cap_back-l_v5"])
+    cap.apply_translation([-rear_t[0], -rear_t[1], -rear_t[2]])
+    cap.apply_translation([-crop.bounds[0][0], -crop.bounds[0][1], -crop.bounds[0][2]])
+    seat.apply_translation(-crop.bounds[0])
+    seat.export(os.path.join(REPORT, "magnet-cutaway-seat.stl"))
+    cap.export(os.path.join(REPORT, "magnet-cutaway-cap.stl"))
+    _section_png(rear, cap_t, rear_t, os.path.join(REPORT, "magnet-section.png"))
+
+    rows = []
+    bad = []
+    for part in manifest["parts"]:
+        mesh = tm.load(os.path.join(STL, part["id"] + ".stl"), force="mesh")
+        counts = np.bincount(mesh.edges_unique_inverse)
+        nbad = int(np.sum(counts != 2))
+        pieces = mesh.split(only_watertight=False)
+        positive = [p for p in pieces if p.volume > 1.0]
+        negative = [p for p in pieces if p.volume < -1.0]
+        row = {"id": part["id"], "watertight": bool(mesh.is_watertight), "positive_bodies": len(positive),
+               "negative_bodies": len(negative), "nonmanifold_edges": nbad, "volume_mm3": round(float(mesh.volume), 1)}
+        rows.append(row)
+        if len(positive) != 1 or negative or nbad or not mesh.is_watertight or mesh.volume <= 0:
+            bad.append(part["id"])
+    with open(os.path.join(REPORT, "topology.json"), "w", encoding="utf8") as handle:
+        json.dump({"ok": not bad, "parts": len(rows), "failures": bad,
+                   "rule": "Reloaded STL: one positive body, no negative body, every edge on exactly two faces.",
+                   "bodies": rows}, handle, indent=2)
+        handle.write("\n")
+    if bad:
+        raise RuntimeError("reloaded STL is not one clean solid: " + ", ".join(bad))
+    manifest.setdefault("cameras", {})["attic"] = {"position": [470.0, 360.0, 250.0], "target": [360.0, 185.0, 226.0]}
+    with open(os.path.join(ROOT, "manifest.json"), "w", encoding="utf8") as handle:
+        json.dump(manifest, handle, indent=2)
+        handle.write("\n")
+    print(json.dumps({"print_poses": sum(1 for p in poses.values() if p["pose"].startswith("shortest")),
+                      "stations": len(stations), "topology": len(rows)}))
+
+
+def _section_png(rear, cap_t, rear_t, path):
+    local_x = (MX0 + 17) - rear_t[0]
+    section = rear.section(plane_origin=[local_x, 0, 0], plane_normal=[1, 0, 0])
+    if section is None:
+        raise RuntimeError("rear stile section is empty")
+    cap = tm.load(os.path.join(STL, "qa5_cap_back-l_v5.stl"), force="mesh")
+    cap_local_x = (MX0 + 17) - cap_t["qa5_cap_back-l_v5"][0]
+    cap_section = cap.section(plane_origin=[cap_local_x, 0, 0], plane_normal=[1, 0, 0])
+    width, height = 980, 1280
+    image = Image.new("RGB", (width, height), (244, 241, 234))
+    draw = ImageDraw.Draw(image)
+    draw.text((24, 18), "Rear stile, assembled x = 228. Y is enlarged. Actual mesh section.", fill=(20, 24, 28))
+    draw.text((24, 44), "Nominal disc 5.0 x 2.8 mm. Seat 5.6 dia x 3.2 deep. Skin 1.4. Design allowance, not a measured fit.", fill=(20, 24, 28))
+
+    def strokes(path3d, origin, color, span):
+        if path3d is None:
+            return
+        y0, y1, z0, z1, px0, py0, px1, py1 = span
+        for poly in path3d.discrete:
+            pts = []
+            for x, y, z in poly:
+                wy, wz = y + origin[1], z + origin[2]
+                px = px0 + (wy - y0) / (y1 - y0) * (px1 - px0)
+                py = py0 + (z1 - wz) / (z1 - z0) * (py1 - py0)
+                pts.append((px, py))
+            if len(pts) > 1:
+                draw.line(pts, fill=color, width=2)
+
+    full = (294.5, 304.0, 10.0, 210.0, 70, 110, 430, 1220)
+    strokes(section, rear_t, (28, 64, 58), full)
+    strokes(cap_section, cap_t["qa5_cap_back-l_v5"], (140, 48, 48), full)
+    zoom = (294.8, 303.2, 36.0, 52.0, 500, 160, 940, 1180)
+    draw.rectangle((490, 140, 950, 1200), outline=(180, 176, 168))
+    draw.text((500, 120), "Station 1, z = 44", fill=(20, 24, 28))
+    strokes(section, rear_t, (28, 64, 58), zoom)
+    strokes(cap_section, cap_t["qa5_cap_back-l_v5"], (140, 48, 48), zoom)
+    seat_y = JAMB_BACK + FIT_GAP + SKIN + POD_H / 2
+    for zc in (L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74):
+        px = full[4] + (seat_y - full[0]) / (full[1] - full[0]) * (full[6] - full[4])
+        py = full[5] + (full[3] - zc) / (full[3] - full[2]) * (full[7] - full[5])
+        draw.ellipse((px - 5, py - 5, px + 5, py + 5), outline=(140, 48, 48))
+        draw.text((24, py - 8), f"z {zc:.0f}", fill=(40, 44, 48))
+    draw.text((500, 90), "Green: stile. Red: cap. Ring: disc center.", fill=(40, 44, 48))
+    image.save(path)
+
+
 def main():
     build()
     report = audits()
     manifest = write_all(report)
+    write_review_exports(manifest)
     print(json.dumps({"ok": report["ok"], "parts": len(manifest["parts"]), "fixtures": report["fixture_count"],
                       "size": manifest["assembled_size_mm"], "fails": report["failures"][:6]}))
     if not report["ok"]:
