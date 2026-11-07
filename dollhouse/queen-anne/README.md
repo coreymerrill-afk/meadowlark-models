@@ -1,73 +1,61 @@
-# Queen Anne Playhouse — v1.0.0
+# Queen Anne Playhouse — v2.0.0
 
-A separate 1:24 house for the Meadowlark dollhouse showcase. It is not Bramble Cottage and not one of the other five play-kit manors.
+A separate 1:24 house. It is not Bramble Cottage and not one of the other five play-kit manors.
 
-The public Real Good Toys Queen Anne kit is 1:12. This model keeps the asymmetric tower, the front gable, and the layered porch, with flatter trim and openings sized for hands. It does not reuse that kit's dimensions.
+v1.0.0 is in `archive/v1.0.0/`. Its tower roof STL is four bodies. The cone starts about 78 mm above the seat, so that piece touches nothing in the closed view. v2 replaces that.
 
-**CAD checks passed. Not printed. Not measured. Not sliced.** Forces, fatigue, layer adhesion, and tip-over were not tested. This is not a toy-safety certification and not an H3C print test.
+## Rooms
 
-The viewer at `/dollhouse/queen-anne/` loads these STLs. There is no separate beauty mesh.
+Not three identical cubes.
 
-## Size
+| Room | Where | What you see |
+| --- | --- | --- |
+| Parlor | Tower, ground | Lower ceiling, bay window, window seat |
+| Entry | Hall, ground | Door panel and the stair |
+| Living and dining | Right wing, ground | Widest room, taller ceiling, sofa, table, dining bay |
+| Tower bedroom | Tower, second | Bed |
+| Landing | Hall, second | Stair arrives through an opening in the floor |
+| Bedroom and bath | Living, second | Bed and a tub |
+| Loft | Tower, third | Only the tower continues. A table under the tower roof |
 
-Assembly bounds from the placed meshes: **788 × 297 × 662 mm**. Three bays, three storeys. A bay is **254 mm wide × 210 mm deep**. Clear storey height is **118 mm**. Front opening in the panel is **204 × 110 mm**. Reach from the front face to the inner face of the rear shear is **190 mm**.
+## Roofs
 
-Those are CAD numbers. They are not a hand-clearance trial.
+Each roof is one positive solid. Shingle courses are ribs in that mesh. The seat sits 0.35 mm above its own plate. A probe into the top of that plate meets the frame:
 
-## What carries the house
-
-Posts, plates, floors, and the rear shear carry the load. Front panels, end panels, roofs, the porch, the balcony, partitions, and furniture do not.
-
-- Posts drop into corner pockets with **0.40 mm** side clearance and a **0.30 mm** seat gap.
-- Each plate sits **0.30 mm** above the posts. The next floor sits **0.30 mm** above the plate.
-- The rear shear's tongues sit in the rear-post grooves, with a tab in the floor and a tab in the plate.
-- Bases and upper floors key to the next bay with a **16 mm** underside lap. Measured rest intersection of every contacting pair is **0 mm³**.
-- Interior sides between bays are open above the corner posts. A doll does not have to pass through another room's furniture to reach the next bay.
-
-## Panels and roofs
-
-Panels are lift-out. No hinges, magnets, or loose pins.
-
-1. Lift **8.6 mm**. That clears the lower hook and the head fin.
-2. Pull out along the wall normal, **48 mm**.
-
-The CAD sweep (rest, lift, 18 mm, and 48 mm) does not intersect the frame, the neighbour panels, the porch, or the balcony. The balcony rail sits beyond that pull. Roofs lift off a plug in the plate opening; a **16 mm** lift clears the plate in the same check.
-
-Square edges and the lift gap were not tried with fingers.
-
-## Legacy 127 mm grid
-
-Checked against the meshes, not against the arithmetic:
-
-| Check | Result |
+| Roof | Bearing probe |
 | --- | --- |
-| `floor_tile_v0.stl` | 127.0 × 127.0 × 10.0 mm, watertight |
-| `snap_post_v0.stl` | 9 × 9 × 9 mm, watertight |
-| Tip-down peg in all 16 sockets | **0 mm³** intersection |
-| Same peg shifted 10 mm | **113 mm³** intersection |
-| Bay width ÷ measured tile | **2.0** |
-| Bay depth vs two tiles | **No.** Depth is 210 mm |
-| Same peg on a Queen Anne floor | **86 mm³** intersection. There is no Ø6.3 socket |
+| Tower | 1296 mm³ on the tower top frame |
+| Hall | 925 mm³ on the hall top frame |
+| Living | 1591 mm³ on the living top frame |
+| Tower bay | 266 mm³ on the bay |
+| Dining bay | 88 mm³ on the bay |
 
-The kits share a 254 mm module width. They do not share a joint.
+That is a geometric seat, not a strength proof. No PLA modulus and no gravity or uplift case were calculated. Side cheeks on the free ends locate a roof sideways. The roofs are not locked against a straight lift. Open mode parks them up and back so that pose is not the closed house.
 
-## Print the coupon, then one bay
+Siding courses, window sills, cornice steps, brick courses, and floorboard ribs are mesh, not a texture painted on in the viewer.
 
-Largest part box is inside **310 × 300 × 315 mm**, which leaves 10 mm on each side of a 330 × 320 mm bed and 10 mm under a 325 mm height. That is a bounding-box allowance for a brim. No slicer ran. Nothing here was printed on an H3C.
+## Magnets — nominal 5.0 × 2.8 mm
 
-1. `qa_coupon_socket_v1` and `qa_coupon_plug_v1`. The tongue drops into the pocket (engaged intersection **0 mm³**). Two holes, Ø6.0 and Ø6.3, are a size gauge. There is no loose peg.
-2. One ground bay: base, two front posts, two rear posts, plate, rear shear, one front panel, one end panel.
-3. The other bays, the upper floors, roofs, porch, balcony, partitions, and furniture only after that bay seats.
+Round discs, 5.0 mm diameter by 2.8 mm thick. The pocket is that size plus 0.25 mm per side and 0.20 mm on the thickness. Mating skin is 1.2 mm. This is a starting allowance for a 0.4 mm nozzle. It is **not a proven fit**.
 
-Posts are exported lying on the 14 mm face. Panels are exported with the skin's features facing up. Roofs sit on their soffit. Every STL has its minimum corner at the origin. See `manifest.json` for each bbox.
+No magnet grade is assumed. Holding force is **not** calculated from the diameter.
+
+The sill hook carries the panel. Two pocket heights on each stile, and the matching pockets in the posts, are opposing pairs of the same small disc. If the coupon feels weak, add another pair in the CAD. Do not jump to a larger magnet before that test.
+
+There is **no H3C pause-print profile**. Nothing was sliced.
+
+### Install
+
+1. Check the discs are the nominal 5.0 × 2.8 mm.
+2. On `qa2_polarity_fixture_v2`, set two discs in the shallow wells with the faces that should attract pointing across the raised gap. Flip one if they repel. Take them out. The fixture does not enclose them.
+3. Set a disc in each open channel, mating face toward the 1.2 mm skin.
+4. Slide `qa2_retainer_v2` in until the hook passes the ledge. The bar is the room-side wall. It is dovetailed. It is not glue, and it is not a cap the size of the magnet.
+5. Do the frame posts before that storey is set down.
+6. Seat the panel on the sill hook.
+7. On the coupon (`qa2_coupon_frame_v2` and `qa2_coupon_panel_v2`, same channel cutter as the house), try a straight pull, then lift and pull. Write down the feel. It is not predicted here.
+
+A broken bar can expose a magnet. That is a swallow hazard. This is not a child-safety certification. Retention has not been pull-tested.
 
 ## Files
 
-| File | What it is |
-| --- | --- |
-| `cad/build_queen_anne.py` | Parametric source. Regenerates the STLs, the manifest, and `reports/validation.json`. |
-| `stl/*.stl` | One watertight mesh per part. Not a toolpath. |
-| `manifest.json` | BOM, colours, and the 4×4 placement of every instance. |
-| `reports/validation.json` | The CAD checks named above. |
-
-Regenerate with `python3 cad/build_queen_anne.py` from `dollhouse/queen-anne` (`trimesh`, `manifold3d`, `numpy`, `scipy`).
+Regenerate with `python3 cad/build_queen_anne_v2.py` from `dollhouse/queen-anne`.

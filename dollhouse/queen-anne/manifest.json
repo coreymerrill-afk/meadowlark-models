@@ -1,19 +1,54 @@
 {
   "name": "Queen Anne Playhouse",
-  "slug": "queen-anne",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "units": "mm",
   "scale": "1:24",
-  "up_axis": "Z",
   "route": "/dollhouse/queen-anne/",
-  "description": "A 1:24 Queen Anne playhouse with a tower, a front gable, lift-out panels, and lift-off roofs. The viewer places the CAD STLs.",
-  "distinct_from": [
-    "Bramble Cottage",
-    "Larkspur Grand Ranch",
-    "Pennywhistle Row House",
-    "Cloisterwick Manor",
-    "Cogsworth Works",
-    "Electrified Manor"
+  "prior_version": "archive/v1.0.0",
+  "description": "Asymmetric 1:24 Queen Anne: tower parlor, entry stair hall, and a taller living room. Roofs are single solids on their own plates. The viewer loads these STLs.",
+  "rooms": [
+    {
+      "id": "parlor",
+      "storey": 1,
+      "wing": "tower",
+      "note": "Bay window and window seat. Lower ceiling than the living room."
+    },
+    {
+      "id": "entry",
+      "storey": 1,
+      "wing": "hall",
+      "note": "Door, circulation, and the stair to the landing."
+    },
+    {
+      "id": "living",
+      "storey": 1,
+      "wing": "living",
+      "note": "Widest room. Sofa, dining table, and the right bay window."
+    },
+    {
+      "id": "tower-bedroom",
+      "storey": 2,
+      "wing": "tower",
+      "note": "Bed in the tower."
+    },
+    {
+      "id": "landing",
+      "storey": 2,
+      "wing": "hall",
+      "note": "Stair arrives here. The floor is open over the stair."
+    },
+    {
+      "id": "bedroom-bath",
+      "storey": 2,
+      "wing": "living",
+      "note": "Bed and a tub alcove. Taller storey below."
+    },
+    {
+      "id": "loft",
+      "storey": 3,
+      "wing": "tower",
+      "note": "Only the tower continues. Table under the tower roof."
+    }
   ],
   "target_printer": {
     "model": "Bambu Lab H3C",
@@ -22,45 +57,57 @@
       320.0,
       325.0
     ],
-    "bed_source": "Project brief envelope 330 x 320 x 325 mm. Not re-measured on a machine.",
-    "brim_allowance_mm": "Parts are limited to 310 x 300 x 315 so 10 mm remains on each XY side and 10 mm in Z.",
+    "brim_allowance_mm": "Parts limited to 310 x 300 x 315.",
     "nozzle_assumed_mm": 0.4,
-    "material_assumed": "PLA",
+    "material_assumed": "PLA, for perimeter count and clearance only. No modulus and no load case.",
     "sliced": false,
-    "h3c_profile_tested": false
+    "h3c_profile_tested": false,
+    "h3c_pause_profile": false
   },
   "assembled_size_mm": {
-    "x": 788.0,
-    "y": 296.8,
-    "z": 661.8,
+    "x": 749.38,
+    "y": 213.0,
+    "z": 500.05,
     "min_mm": [
-      -10.0,
-      -78.0,
+      -57.38,
+      -4.6,
       0.0
     ],
     "max_mm": [
-      778.0,
-      218.8,
-      661.8
+      692.0,
+      208.4,
+      500.05
     ]
   },
-  "module_mm": {
-    "bay_width": 254.0,
-    "bay_depth": 210.0,
-    "post": 14.0,
-    "clear_height": 118.0,
-    "levels": 3,
-    "bays": 3,
-    "seat_gap": 0.3,
-    "pocket_side_clearance": 0.4
+  "magnet": {
+    "status": "NOMINAL_NOT_FIT_APPROVED",
+    "nominal_mm": [
+      5.0,
+      2.8
+    ],
+    "radial_clearance_per_side_mm": 0.25,
+    "axial_clearance_mm": 0.2,
+    "pocket_diameter_mm": 5.5,
+    "pocket_depth_mm": 3.0,
+    "mating_skin_mm": 1.2,
+    "nominal_disc_intersection_mm3": 0.0,
+    "one_mm_oversize_intersection_mm3": 7.11,
+    "disc_vs_retainer_when_shifted_mm3": 52.22,
+    "disc_vs_panel_when_shifted_mm3": 0.0,
+    "grade_assumed": null,
+    "holding_force_calculated": false,
+    "h3c_pause_profile": false
   },
-  "mechanism": {
-    "panels": "Lift 8.6 mm to clear the lower hook and the head fin, then pull out along the wall normal. Removable. No hinges, magnets, or loose pins.",
-    "balcony": "Saddles over two ledges on the tower plate and lifts off upward. The rail sits beyond the panel pull, so the panel path stays clear.",
-    "roofs": "Gravity plug into the plate opening. Lift straight up.",
-    "rear_shear": "Tongued into the rear posts and captured by the floor and the plate. It is structure, not a play panel.",
-    "inter_bay": "Underside lap on each base and each upper floor, 16 mm long, 0.40 mm side clearance. Plates are located by the posts. Interior sides between bays are open above the corner posts."
-  },
+  "magnet_install_steps": [
+    "Confirm each disc is the nominal 5.0 mm by 2.8 mm. This pocket is that size plus 0.25 mm per side and 0.20 mm on the thickness. It is not a proven fit.",
+    "Do not infer pull force from the diameter. Grade is unknown. The coupon is the test.",
+    "On the polarity fixture, set two discs in the shallow wells with the faces that should attract pointing across the raised gap. Flip one if they repel. Take them out again. The fixture does not enclose them.",
+    "With the panel off the house, set a disc in each open stile channel, mating face toward the 1.2 mm skin that faces the post.",
+    "Slide a capture bar down that channel until the hook passes the ledge. The bar is the room-side wall. It is dovetailed, not glued, and it is not a cap the size of the magnet.",
+    "Do the same on the frame posts before that storey frame is set down. The bars enter from the top of the channel.",
+    "Seat the panel on the sill hook, then lower the head flange behind the fin. The hook carries the panel. The magnets only hold it against a straight pull.",
+    "On the coupon, try a straight pull, then the lift-and-pull. Write down what you feel. That result is not predicted here."
+  ],
   "validation": {
     "printed": false,
     "measured": false,
@@ -68,1125 +115,862 @@
     "forces_tested": false,
     "fatigue_tested": false,
     "stability_tested": false,
+    "magnet_retention_tested": false,
     "h3c_sliced": false,
+    "h3c_pause_profile": false,
     "cad_validated": true
   },
   "parts": [
     {
-      "id": "qa_base_v1",
-      "file": "stl/qa_base_v1.stl",
-      "note": "Base tile with ground floor, sill slots, and the inter-bay lap.",
-      "triangles": 1366,
-      "volume_mm3": 299311.2,
+      "id": "qa2_base_tower_v2",
+      "file": "stl/qa2_base_tower_v2.stl",
+      "note": "Tower masonry base. Brick courses are raised mesh.",
+      "triangles": 464,
+      "volume_mm3": 404804.8,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        270.0,
-        210.0,
-        12.0
-      ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        270.0,
-        210.0,
-        12.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
-    },
-    {
-      "id": "qa_floor_v1",
-      "file": "stl/qa_floor_v1.stl",
-      "note": "Upper floor. Corner pockets, sill slots, lap, partition sockets.",
-      "triangles": 1366,
-      "volume_mm3": 210796.4,
-      "watertight": true,
-      "bbox_mm": [
-        270.0,
-        210.0,
-        7.0
-      ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        270.0,
-        210.0,
-        7.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
-    },
-    {
-      "id": "qa_post_front_v1",
-      "file": "stl/qa_post_front_v1.stl",
-      "note": "Front post. Printed on its side so the 14 mm face is the first layer.",
-      "triangles": 12,
-      "volume_mm3": 23892.4,
-      "watertight": true,
-      "bbox_mm": [
-        121.9,
-        14.0,
+        209.85,
+        189.7,
         14.0
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        121.9,
-        14.0,
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_base_hall_v2",
+      "file": "stl/qa2_base_hall_v2.stl",
+      "note": "Hall base. Lap tuned to the shared Y overlap.",
+      "triangles": 420,
+      "volume_mm3": 275911.1,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        163.0,
+        167.7,
         14.0
       ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        90,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_post_rear_v1",
-      "file": "stl/qa_post_rear_v1.stl",
-      "note": "Rear post with the shear groove in the room-facing face. Printed on its side.",
-      "triangles": 28,
-      "volume_mm3": 18172.9,
+      "id": "qa2_base_living_v2",
+      "file": "stl/qa2_base_living_v2.stl",
+      "note": "Living base, with the mullion pocket.",
+      "triangles": 586,
+      "volume_mm3": 611558.5,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        121.9,
-        14.0,
+        280.85,
+        207.7,
         14.0
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        121.9,
-        14.0,
-        14.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        90,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_plate_v1",
-      "file": "stl/qa_plate_v1.stl",
-      "note": "Storey plate: headers, panel fins, and the rear shear groove.",
-      "triangles": 294,
-      "volume_mm3": 111553.0,
+      "id": "qa2_floor_tower_v2",
+      "file": "stl/qa2_floor_tower_v2.stl",
+      "note": "Tower upper floor. Board ribs are raised mesh.",
+      "triangles": 418,
+      "volume_mm3": 180136.4,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        254.0,
-        210.0,
-        21.2
+        200.0,
+        188.0,
+        7.7
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        254.0,
-        210.0,
-        21.2
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_plate_tower_v1",
-      "file": "stl/qa_plate_tower_v1.stl",
-      "note": "Tower plate with two integral balcony ledges.",
-      "triangles": 306,
-      "volume_mm3": 117842.3,
+      "id": "qa2_floor_hall_v2",
+      "file": "stl/qa2_floor_hall_v2.stl",
+      "note": "Hall floor with the stair opening.",
+      "triangles": 372,
+      "volume_mm3": 88591.7,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        254.0,
-        242.0,
-        21.2
+        154.0,
+        166.0,
+        7.7
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        254.0,
-        242.0,
-        21.2
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_panel_front_glazed_v1",
-      "file": "stl/qa_panel_front_glazed_v1.stl",
-      "note": "Front lift-out panel, two windows. Printed flat, hooks up.",
-      "triangles": 120,
-      "volume_mm3": 56682.9,
+      "id": "qa2_floor_living_v2",
+      "file": "stl/qa2_floor_living_v2.stl",
+      "note": "Living upper floor, with the mullion pocket.",
+      "triangles": 590,
+      "volume_mm3": 274401.3,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        204.0,
-        124.35,
-        26.7
+        280.0,
+        206.0,
+        7.7
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        204.0,
-        124.35,
-        26.7
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        90,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_panel_front_entry_v1",
-      "file": "stl/qa_panel_front_entry_v1.stl",
-      "note": "Front lift-out entry panel, open doorway. Printed flat, hooks up.",
-      "triangles": 140,
-      "volume_mm3": 57226.9,
+      "id": "qa2_frame_tower_l1_v2",
+      "file": "stl/qa2_frame_tower_l1_v2.stl",
+      "note": "tower storey 1 frame. Posts and plate are one solid. Plate prints on the bed.",
+      "triangles": 946,
+      "volume_mm3": 471743.1,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        204.0,
-        124.35,
-        26.7
+        200.0,
+        195.0,
+        130.85
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        204.0,
-        124.35,
-        26.7
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        90,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_panel_end_left_v1",
-      "file": "stl/qa_panel_end_left_v1.stl",
-      "note": "Left end lift-out panel. Printed flat.",
-      "triangles": 84,
-      "volume_mm3": 54192.0,
+      "id": "qa2_frame_tower_l2_v2",
+      "file": "stl/qa2_frame_tower_l2_v2.stl",
+      "note": "tower storey 2 frame. Posts and plate are one solid. Plate prints on the bed.",
+      "triangles": 908,
+      "volume_mm3": 375468.8,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        124.35,
-        160.0,
-        26.7
+        200.0,
+        195.0,
+        118.85
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        124.35,
-        160.0,
-        26.7
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        90,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_panel_end_right_v1",
-      "file": "stl/qa_panel_end_right_v1.stl",
-      "note": "Right end lift-out panel. Printed flat.",
-      "triangles": 84,
-      "volume_mm3": 54192.2,
+      "id": "qa2_frame_tower_l3_v2",
+      "file": "stl/qa2_frame_tower_l3_v2.stl",
+      "note": "tower storey 3 frame. Posts and plate are one solid. Plate prints on the bed.",
+      "triangles": 910,
+      "volume_mm3": 355437.6,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        124.35,
-        160.0,
-        26.7
+        200.0,
+        195.0,
+        108.85
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        124.35,
-        160.0,
-        26.7
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        90,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_rear_v1",
-      "file": "stl/qa_rear_v1.stl",
-      "note": "Fixed rear shear panel. Tongues engage the rear posts. Not a play panel.",
-      "triangles": 80,
-      "volume_mm3": 88058.9,
+      "id": "qa2_frame_hall_l1_v2",
+      "file": "stl/qa2_frame_hall_l1_v2.stl",
+      "note": "hall storey 1 frame. Posts and plate are one solid. Plate prints on the bed.",
+      "triangles": 948,
+      "volume_mm3": 414887.6,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        244.2,
-        124.5,
-        7.95
+        154.0,
+        173.0,
+        146.85
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        244.2,
-        124.5,
-        7.95
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        90,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_roof_tower_v1",
-      "file": "stl/qa_roof_tower_v1.stl",
-      "note": "Tower roof, octagonal shell, lift-off plug.",
-      "triangles": 156,
-      "volume_mm3": 964105.5,
+      "id": "qa2_frame_hall_l2_v2",
+      "file": "stl/qa2_frame_hall_l2_v2.stl",
+      "note": "hall storey 2 frame. Posts and plate are one solid. Plate prints on the bed.",
+      "triangles": 914,
+      "volume_mm3": 322517.8,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        262.0,
-        236.0,
-        244.2
+        154.0,
+        173.0,
+        122.85
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        262.0,
-        236.0,
-        244.2
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_roof_ridge_v1",
-      "file": "stl/qa_roof_ridge_v1.stl",
-      "note": "Centre ridge roof, lift-off.",
-      "triangles": 40,
-      "volume_mm3": 3945139.2,
+      "id": "qa2_frame_living_l1_v2",
+      "file": "stl/qa2_frame_living_l1_v2.stl",
+      "note": "living storey 1 frame. Posts and plate are one solid. Plate prints on the bed.",
+      "triangles": 934,
+      "volume_mm3": 606614.1,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        250.0,
-        222.0,
-        82.2
+        280.0,
+        213.0,
+        158.85
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        250.0,
-        222.0,
-        82.2
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_roof_gable_v1",
-      "file": "stl/qa_roof_gable_v1.stl",
-      "note": "Right front gable with an integral chimney. Lift-off.",
-      "triangles": 202,
-      "volume_mm3": 6023627.4,
+      "id": "qa2_frame_living_l2_v2",
+      "file": "stl/qa2_frame_living_l2_v2.stl",
+      "note": "living storey 2 frame. Posts and plate are one solid. Plate prints on the bed.",
+      "triangles": 934,
+      "volume_mm3": 534831.3,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        250.0,
-        236.0,
-        138.2
+        280.0,
+        213.0,
+        132.85
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        250.0,
-        236.0,
-        138.2
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_porch_v1",
-      "file": "stl/qa_porch_v1.stl",
-      "note": "Front stoop. Piers stand outside the panel pull path.",
-      "triangles": 92,
-      "volume_mm3": 185484.8,
+      "id": "qa2_panel_tower_l1_glazed_v2",
+      "file": "stl/qa2_panel_tower_l1_glazed_v2.stl",
+      "note": "Lift-out panel. Siding, sill, and casing are mesh relief. Magnet channels match the coupon.",
+      "triangles": 1224,
+      "volume_mm3": 81645.1,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        246.0,
-        83.2,
-        42.0
+        154.8,
+        118.55,
+        26.1
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        246.0,
-        83.2,
-        42.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_balcony_v1",
-      "file": "stl/qa_balcony_v1.stl",
-      "note": "Tower balcony. Lifts off the ledges before the panel behind it is pulled.",
-      "triangles": 128,
-      "volume_mm3": 171942.7,
+      "id": "qa2_panel_tower_l2_glazed_v2",
+      "file": "stl/qa2_panel_tower_l2_glazed_v2.stl",
+      "note": "Lift-out panel. Siding, sill, and casing are mesh relief. Magnet channels match the coupon.",
+      "triangles": 1176,
+      "volume_mm3": 75821.0,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        254.0,
-        77.0,
-        42.5
+        154.8,
+        106.55,
+        26.1
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        254.0,
-        77.0,
-        42.5
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_partition_v1",
-      "file": "stl/qa_partition_v1.stl",
-      "note": "Optional half-height divider. Feet drop into the floor sockets.",
-      "triangles": 44,
-      "volume_mm3": 32725.3,
+      "id": "qa2_panel_tower_l2_end_v2",
+      "file": "stl/qa2_panel_tower_l2_end_v2.stl",
+      "note": "End lift-out panel with the same seat and magnet capture.",
+      "triangles": 1162,
+      "volume_mm3": 72841.2,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        80.0,
-        6.4,
-        65.6
+        142.8,
+        106.55,
+        26.1
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        80.0,
-        6.4,
-        65.6
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_furn_table_v1",
-      "file": "stl/qa_furn_table_v1.stl",
-      "note": "Scale table, one piece.",
-      "triangles": 28,
-      "volume_mm3": 49296.0,
+      "id": "qa2_panel_tower_l3_glazed_v2",
+      "file": "stl/qa2_panel_tower_l3_glazed_v2.stl",
+      "note": "Lift-out panel. Siding, sill, and casing are mesh relief. Magnet channels match the coupon.",
+      "triangles": 1120,
+      "volume_mm3": 71075.1,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        78.0,
-        48.0,
-        31.0
+        154.8,
+        96.55,
+        26.1
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        78.0,
-        48.0,
-        31.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_furn_chair_v1",
-      "file": "stl/qa_furn_chair_v1.stl",
-      "note": "Scale chair, one piece.",
-      "triangles": 42,
-      "volume_mm3": 13464.0,
+      "id": "qa2_panel_tower_l3_end_v2",
+      "file": "stl/qa2_panel_tower_l3_end_v2.stl",
+      "note": "End lift-out panel with the same seat and magnet capture.",
+      "triangles": 1112,
+      "volume_mm3": 68088.4,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        30.0,
-        30.0,
-        44.0
+        142.8,
+        96.55,
+        26.1
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        30.0,
-        30.0,
-        44.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_furn_bed_v1",
-      "file": "stl/qa_furn_bed_v1.stl",
-      "note": "Scale bed, one piece.",
-      "triangles": 26,
-      "volume_mm3": 74304.0,
+      "id": "qa2_panel_hall_l1_entry_v2",
+      "file": "stl/qa2_panel_hall_l1_entry_v2.stl",
+      "note": "Lift-out panel. Siding, sill, and casing are mesh relief. Magnet channels match the coupon.",
+      "triangles": 1538,
+      "volume_mm3": 70314.8,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        86.0,
-        46.0,
-        32.0
+        108.8,
+        134.55,
+        26.1
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        86.0,
-        46.0,
-        32.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_furn_sofa_v1",
-      "file": "stl/qa_furn_sofa_v1.stl",
-      "note": "Scale sofa, one piece.",
-      "triangles": 50,
-      "volume_mm3": 55808.0,
+      "id": "qa2_panel_hall_l2_glazed_v2",
+      "file": "stl/qa2_panel_hall_l2_glazed_v2.stl",
+      "note": "Lift-out panel. Siding, sill, and casing are mesh relief. Magnet channels match the coupon.",
+      "triangles": 1200,
+      "volume_mm3": 66367.8,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        80.0,
-        34.0,
-        30.0
+        108.8,
+        110.55,
+        26.1
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        80.0,
-        34.0,
-        30.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_furn_figure_v1",
-      "file": "stl/qa_furn_figure_v1.stl",
-      "note": "1:24 adult-height gauge, one solid.",
+      "id": "qa2_panel_living_l1_glazed_v2",
+      "file": "stl/qa2_panel_living_l1_glazed_v2.stl",
+      "note": "Lift-out panel. Siding, sill, and casing are mesh relief. Magnet channels match the coupon.",
+      "triangles": 1298,
+      "volume_mm3": 89545.9,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        109.4,
+        146.55,
+        26.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_panel_living_l2_glazed_v2",
+      "file": "stl/qa2_panel_living_l2_glazed_v2.stl",
+      "note": "Lift-out panel. Siding, sill, and casing are mesh relief. Magnet channels match the coupon.",
+      "triangles": 1226,
+      "volume_mm3": 71323.9,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        109.4,
+        120.55,
+        26.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_panel_living_l2_end_v2",
+      "file": "stl/qa2_panel_living_l2_end_v2.stl",
+      "note": "End lift-out panel with the same seat and magnet capture.",
+      "triangles": 1234,
+      "volume_mm3": 84087.4,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        160.8,
+        120.55,
+        26.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_roof_tower_v2",
+      "file": "stl/qa2_roof_tower_v2.stl",
+      "note": "Tower roof, one solid. Shingle ribs are in the mesh. The seat bears on the tower plate.",
+      "triangles": 338,
+      "volume_mm3": 663604.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        203.8,
+        188.0,
+        141.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_roof_hall_v2",
+      "file": "stl/qa2_roof_hall_v2.stl",
+      "note": "Hall roof. The seat bears only on the hall plate.",
+      "triangles": 328,
+      "volume_mm3": 363422.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        154.0,
+        166.0,
+        68.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_roof_living_v2",
+      "file": "stl/qa2_roof_living_v2.stl",
+      "note": "Living front gable. The seat bears only on the living plate.",
+      "triangles": 364,
+      "volume_mm3": 824140.2,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        283.8,
+        206.0,
+        119.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_bay_tower_v2",
+      "file": "stl/qa2_bay_tower_v2.stl",
+      "note": "Tower bay window. Seat and posts are one solid.",
+      "triangles": 118,
+      "volume_mm3": 422867.2,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        52.0,
+        120.0,
+        104.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_bay_living_v2",
+      "file": "stl/qa2_bay_living_v2.stl",
+      "note": "Dining bay window.",
+      "triangles": 122,
+      "volume_mm3": 516403.2,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        56.0,
+        130.0,
+        116.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_roof_bay_v2",
+      "file": "stl/qa2_roof_bay_v2.stl",
+      "note": "Bay rooflet. Same bearing idea as the main roofs, smaller rise.",
+      "triangles": 328,
+      "volume_mm3": 106643.5,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        58.75,
+        120.0,
+        40.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_stair_v2",
+      "file": "stl/qa2_stair_v2.stl",
+      "note": "Hall stair. Not part of the roof load path.",
       "triangles": 108,
-      "volume_mm3": 13969.3,
+      "volume_mm3": 338286.6,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        20.0,
-        16.0,
-        68.0
+        84.0,
+        83.0,
+        132.35
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        20.0,
-        16.0,
-        68.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
     },
     {
-      "id": "qa_coupon_socket_v1",
-      "file": "stl/qa_coupon_socket_v1.stl",
-      "note": "Fit coupon, socket side. Print this first.",
-      "triangles": 352,
-      "volume_mm3": 52661.7,
-      "watertight": true,
-      "bbox_mm": [
-        96.0,
-        64.0,
-        10.0
-      ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        96.0,
-        64.0,
-        10.0
-      ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
-      ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
-      ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
-      ],
-      "min_z_mm": 0.0
-    },
-    {
-      "id": "qa_coupon_plug_v1",
-      "file": "stl/qa_coupon_plug_v1.stl",
-      "note": "Fit coupon, plug side. The tongue is integral.",
+      "id": "qa2_tub_v2",
+      "file": "stl/qa2_tub_v2.stl",
+      "note": "Bath tub, one hollow solid.",
       "triangles": 28,
-      "volume_mm3": 25221.9,
+      "volume_mm3": 42688.0,
       "watertight": true,
+      "bodies": 1,
       "bbox_mm": [
-        64.0,
+        70.0,
+        40.0,
+        28.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_sofa_v2",
+      "file": "stl/qa2_sofa_v2.stl",
+      "note": "Living sofa.",
+      "triangles": 58,
+      "volume_mm3": 77664.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        92.0,
+        36.0,
+        34.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_table_v2",
+      "file": "stl/qa2_table_v2.stl",
+      "note": "Dining table.",
+      "triangles": 28,
+      "volume_mm3": 51376.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        78.0,
         48.0,
-        11.35
+        30.0
       ],
-      "bbox_min_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "bbox_max_mm": [
-        64.0,
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_bed_v2",
+      "file": "stl/qa2_bed_v2.stl",
+      "note": "Bed.",
+      "triangles": 24,
+      "volume_mm3": 92160.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        90.0,
         48.0,
-        11.35
+        34.0
       ],
-      "fits_brim_allowance": true,
-      "fit_max_mm": [
-        310.0,
-        300.0,
-        315.0
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_chair_v2",
+      "file": "stl/qa2_chair_v2.stl",
+      "note": "Chair.",
+      "triangles": 44,
+      "volume_mm3": 11768.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        28.0,
+        28.0,
+        42.0
       ],
-      "bed_mm": [
-        330.0,
-        320.0,
-        325.0
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_figure_v2",
+      "file": "stl/qa2_figure_v2.stl",
+      "note": "1:24 figure, one solid.",
+      "triangles": 130,
+      "volume_mm3": 13776.1,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        20.0,
+        16.0,
+        64.0
       ],
-      "print_rotation_deg_xyz": [
-        0,
-        0,
-        0
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_retainer_v2",
+      "file": "stl/qa2_retainer_v2.stl",
+      "note": "Capture bar for one nominal 5.0 x 2.8 pocket. Dovetail and hook, not a tiny cap and not glue.",
+      "triangles": 44,
+      "volume_mm3": 774.1,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        4.05,
+        8.4,
+        36.0
       ],
-      "min_z_mm": 0.0
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_coupon_frame_v2",
+      "file": "stl/qa2_coupon_frame_v2.stl",
+      "note": "Retention coupon, frame half. Same channel cutter as the house posts.",
+      "triangles": 632,
+      "volume_mm3": 495748.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        150.0,
+        28.0,
+        120.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_coupon_panel_v2",
+      "file": "stl/qa2_coupon_panel_v2.stl",
+      "note": "Retention coupon, panel half. Same panel function as the house.",
+      "triangles": 1170,
+      "volume_mm3": 69662.7,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        130.0,
+        26.1,
+        106.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa2_polarity_fixture_v2",
+      "file": "stl/qa2_polarity_fixture_v2.stl",
+      "note": "Polarity aid. Shallow wells only. Do not leave discs in it.",
+      "triangles": 256,
+      "volume_mm3": 28302.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        84.0,
+        42.0,
+        11.0
+      ],
+      "fits_brim_allowance": true
     }
   ],
   "bom": [
     {
-      "part": "qa_base_v1",
-      "qty": 3,
-      "first_bay_print": true,
-      "file": "stl/qa_base_v1.stl"
-    },
-    {
-      "part": "qa_floor_v1",
-      "qty": 6,
-      "first_bay_print": false,
-      "file": "stl/qa_floor_v1.stl"
-    },
-    {
-      "part": "qa_post_front_v1",
-      "qty": 18,
-      "first_bay_print": true,
-      "file": "stl/qa_post_front_v1.stl"
-    },
-    {
-      "part": "qa_post_rear_v1",
-      "qty": 18,
-      "first_bay_print": true,
-      "file": "stl/qa_post_rear_v1.stl"
-    },
-    {
-      "part": "qa_plate_v1",
-      "qty": 8,
-      "first_bay_print": true,
-      "file": "stl/qa_plate_v1.stl"
-    },
-    {
-      "part": "qa_plate_tower_v1",
+      "part": "qa2_base_tower_v2",
       "qty": 1,
-      "first_bay_print": false,
-      "file": "stl/qa_plate_tower_v1.stl"
+      "file": "stl/qa2_base_tower_v2.stl"
     },
     {
-      "part": "qa_panel_front_glazed_v1",
-      "qty": 8,
-      "first_bay_print": true,
-      "file": "stl/qa_panel_front_glazed_v1.stl"
-    },
-    {
-      "part": "qa_panel_front_entry_v1",
+      "part": "qa2_base_hall_v2",
       "qty": 1,
-      "first_bay_print": false,
-      "file": "stl/qa_panel_front_entry_v1.stl"
+      "file": "stl/qa2_base_hall_v2.stl"
     },
     {
-      "part": "qa_panel_end_left_v1",
-      "qty": 3,
-      "first_bay_print": true,
-      "file": "stl/qa_panel_end_left_v1.stl"
-    },
-    {
-      "part": "qa_panel_end_right_v1",
-      "qty": 3,
-      "first_bay_print": false,
-      "file": "stl/qa_panel_end_right_v1.stl"
-    },
-    {
-      "part": "qa_rear_v1",
-      "qty": 9,
-      "first_bay_print": true,
-      "file": "stl/qa_rear_v1.stl"
-    },
-    {
-      "part": "qa_roof_tower_v1",
+      "part": "qa2_base_living_v2",
       "qty": 1,
-      "first_bay_print": false,
-      "file": "stl/qa_roof_tower_v1.stl"
+      "file": "stl/qa2_base_living_v2.stl"
     },
     {
-      "part": "qa_roof_ridge_v1",
-      "qty": 1,
-      "first_bay_print": false,
-      "file": "stl/qa_roof_ridge_v1.stl"
-    },
-    {
-      "part": "qa_roof_gable_v1",
-      "qty": 1,
-      "first_bay_print": false,
-      "file": "stl/qa_roof_gable_v1.stl"
-    },
-    {
-      "part": "qa_porch_v1",
+      "part": "qa2_floor_tower_v2",
       "qty": 2,
-      "first_bay_print": false,
-      "file": "stl/qa_porch_v1.stl"
+      "file": "stl/qa2_floor_tower_v2.stl"
     },
     {
-      "part": "qa_balcony_v1",
+      "part": "qa2_floor_hall_v2",
       "qty": 1,
-      "first_bay_print": false,
-      "file": "stl/qa_balcony_v1.stl"
+      "file": "stl/qa2_floor_hall_v2.stl"
     },
     {
-      "part": "qa_partition_v1",
-      "qty": 2,
-      "first_bay_print": false,
-      "file": "stl/qa_partition_v1.stl"
-    },
-    {
-      "part": "qa_furn_table_v1",
-      "qty": 3,
-      "first_bay_print": false,
-      "file": "stl/qa_furn_table_v1.stl"
-    },
-    {
-      "part": "qa_furn_chair_v1",
-      "qty": 2,
-      "first_bay_print": false,
-      "file": "stl/qa_furn_chair_v1.stl"
-    },
-    {
-      "part": "qa_furn_bed_v1",
-      "qty": 2,
-      "first_bay_print": false,
-      "file": "stl/qa_furn_bed_v1.stl"
-    },
-    {
-      "part": "qa_furn_sofa_v1",
+      "part": "qa2_floor_living_v2",
       "qty": 1,
-      "first_bay_print": false,
-      "file": "stl/qa_furn_sofa_v1.stl"
+      "file": "stl/qa2_floor_living_v2.stl"
     },
     {
-      "part": "qa_furn_figure_v1",
+      "part": "qa2_frame_tower_l1_v2",
+      "qty": 1,
+      "file": "stl/qa2_frame_tower_l1_v2.stl"
+    },
+    {
+      "part": "qa2_frame_tower_l2_v2",
+      "qty": 1,
+      "file": "stl/qa2_frame_tower_l2_v2.stl"
+    },
+    {
+      "part": "qa2_frame_tower_l3_v2",
+      "qty": 1,
+      "file": "stl/qa2_frame_tower_l3_v2.stl"
+    },
+    {
+      "part": "qa2_frame_hall_l1_v2",
+      "qty": 1,
+      "file": "stl/qa2_frame_hall_l1_v2.stl"
+    },
+    {
+      "part": "qa2_frame_hall_l2_v2",
+      "qty": 1,
+      "file": "stl/qa2_frame_hall_l2_v2.stl"
+    },
+    {
+      "part": "qa2_frame_living_l1_v2",
+      "qty": 1,
+      "file": "stl/qa2_frame_living_l1_v2.stl"
+    },
+    {
+      "part": "qa2_frame_living_l2_v2",
+      "qty": 1,
+      "file": "stl/qa2_frame_living_l2_v2.stl"
+    },
+    {
+      "part": "qa2_panel_tower_l1_glazed_v2",
+      "qty": 1,
+      "file": "stl/qa2_panel_tower_l1_glazed_v2.stl"
+    },
+    {
+      "part": "qa2_panel_tower_l2_glazed_v2",
+      "qty": 1,
+      "file": "stl/qa2_panel_tower_l2_glazed_v2.stl"
+    },
+    {
+      "part": "qa2_panel_tower_l2_end_v2",
+      "qty": 0,
+      "file": "stl/qa2_panel_tower_l2_end_v2.stl"
+    },
+    {
+      "part": "qa2_panel_tower_l3_glazed_v2",
+      "qty": 1,
+      "file": "stl/qa2_panel_tower_l3_glazed_v2.stl"
+    },
+    {
+      "part": "qa2_panel_tower_l3_end_v2",
+      "qty": 0,
+      "file": "stl/qa2_panel_tower_l3_end_v2.stl"
+    },
+    {
+      "part": "qa2_panel_hall_l1_entry_v2",
+      "qty": 1,
+      "file": "stl/qa2_panel_hall_l1_entry_v2.stl"
+    },
+    {
+      "part": "qa2_panel_hall_l2_glazed_v2",
+      "qty": 1,
+      "file": "stl/qa2_panel_hall_l2_glazed_v2.stl"
+    },
+    {
+      "part": "qa2_panel_living_l1_glazed_v2",
       "qty": 2,
-      "first_bay_print": false,
-      "file": "stl/qa_furn_figure_v1.stl"
+      "file": "stl/qa2_panel_living_l1_glazed_v2.stl"
     },
     {
-      "part": "qa_coupon_socket_v1",
-      "qty": 1,
-      "first_bay_print": true,
-      "file": "stl/qa_coupon_socket_v1.stl"
+      "part": "qa2_panel_living_l2_glazed_v2",
+      "qty": 2,
+      "file": "stl/qa2_panel_living_l2_glazed_v2.stl"
     },
     {
-      "part": "qa_coupon_plug_v1",
+      "part": "qa2_panel_living_l2_end_v2",
+      "qty": 0,
+      "file": "stl/qa2_panel_living_l2_end_v2.stl"
+    },
+    {
+      "part": "qa2_roof_tower_v2",
       "qty": 1,
-      "first_bay_print": true,
-      "file": "stl/qa_coupon_plug_v1.stl"
+      "file": "stl/qa2_roof_tower_v2.stl"
+    },
+    {
+      "part": "qa2_roof_hall_v2",
+      "qty": 1,
+      "file": "stl/qa2_roof_hall_v2.stl"
+    },
+    {
+      "part": "qa2_roof_living_v2",
+      "qty": 1,
+      "file": "stl/qa2_roof_living_v2.stl"
+    },
+    {
+      "part": "qa2_bay_tower_v2",
+      "qty": 1,
+      "file": "stl/qa2_bay_tower_v2.stl"
+    },
+    {
+      "part": "qa2_bay_living_v2",
+      "qty": 1,
+      "file": "stl/qa2_bay_living_v2.stl"
+    },
+    {
+      "part": "qa2_roof_bay_v2",
+      "qty": 2,
+      "file": "stl/qa2_roof_bay_v2.stl"
+    },
+    {
+      "part": "qa2_stair_v2",
+      "qty": 1,
+      "file": "stl/qa2_stair_v2.stl"
+    },
+    {
+      "part": "qa2_tub_v2",
+      "qty": 1,
+      "file": "stl/qa2_tub_v2.stl"
+    },
+    {
+      "part": "qa2_sofa_v2",
+      "qty": 1,
+      "file": "stl/qa2_sofa_v2.stl"
+    },
+    {
+      "part": "qa2_table_v2",
+      "qty": 2,
+      "file": "stl/qa2_table_v2.stl"
+    },
+    {
+      "part": "qa2_bed_v2",
+      "qty": 2,
+      "file": "stl/qa2_bed_v2.stl"
+    },
+    {
+      "part": "qa2_chair_v2",
+      "qty": 1,
+      "file": "stl/qa2_chair_v2.stl"
+    },
+    {
+      "part": "qa2_figure_v2",
+      "qty": 1,
+      "file": "stl/qa2_figure_v2.stl"
+    },
+    {
+      "part": "qa2_retainer_v2",
+      "qty": 72,
+      "file": "stl/qa2_retainer_v2.stl"
+    },
+    {
+      "part": "qa2_coupon_frame_v2",
+      "qty": 1,
+      "file": "stl/qa2_coupon_frame_v2.stl"
+    },
+    {
+      "part": "qa2_coupon_panel_v2",
+      "qty": 1,
+      "file": "stl/qa2_coupon_panel_v2.stl"
+    },
+    {
+      "part": "qa2_polarity_fixture_v2",
+      "qty": 1,
+      "file": "stl/qa2_polarity_fixture_v2.stl"
     }
   ],
   "instances": [
     {
-      "id": "B1-base",
-      "part": "qa_base_v1",
+      "id": "tower-base",
+      "part": "qa2_base_tower_v2",
       "role": "structure",
-      "color": "#e4d2b8",
-      "bay": 0,
-      "level": 0,
+      "color": "#6e6258",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.85
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.85
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -30
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "tower"
+      }
+    },
+    {
+      "id": "tower-l1-frame",
+      "part": "qa2_frame_tower_l1_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
       "transform": [
         [
           1.0,
@@ -1196,15 +980,15 @@
         ],
         [
           0.0,
-          1.0,
+          -1.0,
           0.0,
-          0.0
+          190.39999
         ],
         [
           0.0,
-          0.0,
-          1.0,
-          0.0
+          -0.0,
+          -1.0,
+          141.00001
         ],
         [
           0.0,
@@ -1216,3531 +1000,38 @@
       "explode_mm": [
         0,
         0,
-        -40
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B1-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          16.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B1-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          252.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B1-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          16.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B1-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          252.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B1-plate",
-      "part": "qa_plate_tower_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          -32.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          123.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        70
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B1-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          4.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          133.5
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        20
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B1-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          25.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          129.75
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
         40
       ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
+      "motion": null,
+      "extra": {
+        "wing": "tower",
+        "level": 0,
+        "plate_top": 141.0
       }
     },
     {
-      "id": "L1B1-end",
-      "part": "qa_panel_end_left_v1",
+      "id": "tower-l1-front",
+      "part": "qa2_panel_tower_l1_glazed_v2",
       "role": "panel",
-      "color": "#6e90a6",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          27.6
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          25.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          5.4
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -90,
-        0,
-        30
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          -48.0,
-          0,
-          0
-        ],
-        "group": "end"
-      }
-    },
-    {
-      "id": "L1B1-floor",
-      "part": "qa_floor_v1",
-      "role": "floor",
-      "color": "#e4d2b8",
-      "bay": 0,
-      "level": 0,
+      "color": "#7f9aaf",
       "transform": [
         [
           1.0,
           0.0,
           0.0,
-          0.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          20.0
         ],
         [
           0.0,
           0.0,
           1.0,
-          144.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        50
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          16.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          252.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          16.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          252.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          262.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        100
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          4.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
+          0.6
         ],
         [
           0.0,
           -1.0,
           0.0,
-          273.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        36
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          25.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          269.35
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        60
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "L2B1-end",
-      "part": "qa_panel_end_left_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          27.6
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          25.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          145.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -90,
-        0,
-        46
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          -48.0,
-          0,
-          0
-        ],
-        "group": "end"
-      }
-    },
-    {
-      "id": "L2B1-floor",
-      "part": "qa_floor_v1",
-      "role": "floor",
-      "color": "#e4d2b8",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          284.2
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        70
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B1-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          16.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B1-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          252.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B1-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          16.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B1-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          252.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B1-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          402.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        130
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B1-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          4.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          412.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        52
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B1-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          25.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          408.95
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        80
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "L3B1-end",
-      "part": "qa_panel_end_left_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 0,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          27.6
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          25.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          284.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -90,
-        0,
-        62
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          -48.0,
-          0,
-          0
-        ],
-        "group": "end"
-      }
-    },
-    {
-      "id": "B1-roof",
-      "part": "qa_roof_tower_v1",
-      "role": "roof",
-      "color": "#b87348",
-      "bay": 0,
-      "level": 3,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          -10.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          -17.200001
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          417.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -40,
-        160
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          16
-        ],
-        "pull": [
-          0,
-          0,
-          150
-        ],
-        "group": "roof"
-      }
-    },
-    {
-      "id": "B2-base",
-      "part": "qa_base_v1",
-      "role": "structure",
-      "color": "#e4d2b8",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          254.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        -60
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          270.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          506.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          270.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          506.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          254.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          123.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        70
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          258.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          133.5
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        20
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-front",
-      "part": "qa_panel_front_entry_v1",
-      "role": "panel",
-      "color": "#5f8498",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          279.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          129.75
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        40
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "L1B2-floor",
-      "part": "qa_floor_v1",
-      "role": "floor",
-      "color": "#e4d2b8",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          254.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          144.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        50
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          270.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          506.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          270.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          506.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          254.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          262.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        100
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          258.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          273.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        36
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          279.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          269.35
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        60
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "L2B2-floor",
-      "part": "qa_floor_v1",
-      "role": "floor",
-      "color": "#e4d2b8",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          254.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          284.2
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        70
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B2-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          270.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B2-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          506.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B2-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          270.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B2-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          506.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B2-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          254.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          402.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        130
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B2-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 1,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          258.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          412.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        52
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B2-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 1,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          279.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          408.95
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        80
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "B2-roof",
-      "part": "qa_roof_ridge_v1",
-      "role": "roof",
-      "color": "#c4845a",
-      "bay": 1,
-      "level": 3,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          256.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          -6.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          417.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        160
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          16
-        ],
-        "pull": [
-          0,
-          0,
-          150
-        ],
-        "group": "roof"
-      }
-    },
-    {
-      "id": "B3-base",
-      "part": "qa_base_v1",
-      "role": "structure",
-      "color": "#e4d2b8",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          508.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        -80
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          524.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          760.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          524.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          760.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          8.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        30
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          508.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          123.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        70
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          512.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          133.5
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        20
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          533.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          129.75
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        40
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "L1B3-end",
-      "part": "qa_panel_end_right_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          761.100006
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          25.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          5.4
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        90,
-        0,
-        30
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          48.0,
-          0,
-          0
-        ],
-        "group": "end"
-      }
-    },
-    {
-      "id": "L1B3-floor",
-      "part": "qa_floor_v1",
-      "role": "floor",
-      "color": "#e4d2b8",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          508.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          144.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        50
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          524.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          760.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          524.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          760.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          147.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        54
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          508.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          262.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        100
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          512.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          273.1
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        36
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          533.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          269.35
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        60
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "L2B3-end",
-      "part": "qa_panel_end_right_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          761.100006
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          25.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          145.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        90,
-        0,
-        46
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          48.0,
-          0,
-          0
-        ],
-        "group": "end"
-      }
-    },
-    {
-      "id": "L2B3-floor",
-      "part": "qa_floor_v1",
-      "role": "floor",
-      "color": "#e4d2b8",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          508.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          284.2
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        70
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-post-FL",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          524.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        -20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-post-FR",
-      "part": "qa_post_front_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          760.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          2.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        -20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-post-RL",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          524.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        -30,
-        20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-post-RR",
-      "part": "qa_post_rear_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          760.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          194.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          287.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        30,
-        20,
-        78
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-plate",
-      "part": "qa_plate_v1",
-      "role": "structure",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          508.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          402.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        130
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-rear",
-      "part": "qa_rear_v1",
-      "role": "shear",
-      "color": "#f3f0e7",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          512.9
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          190.350006
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          412.7
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        50,
-        52
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-front",
-      "part": "qa_panel_front_glazed_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          533.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.9
-        ],
-        [
-          0.0,
-          -1.0,
-          0.0,
-          408.95
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -90,
-        80
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          0,
-          -48.0,
-          0
-        ],
-        "group": "front"
-      }
-    },
-    {
-      "id": "L3B3-end",
-      "part": "qa_panel_end_right_v1",
-      "role": "panel",
-      "color": "#6e90a6",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          0.0,
-          0.0,
-          -1.0,
-          761.100006
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          25.0
-        ],
-        [
-          1.0,
-          0.0,
-          0.0,
-          284.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        90,
-        0,
-        62
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          8.6
-        ],
-        "pull": [
-          48.0,
-          0,
-          0
-        ],
-        "group": "end"
-      }
-    },
-    {
-      "id": "B3-roof",
-      "part": "qa_roof_gable_v1",
-      "role": "roof",
-      "color": "#c4845a",
-      "bay": 2,
-      "level": 3,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          510.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          -22.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          417.6
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        40,
-        160
-      ],
-      "motion": {
-        "lift": [
-          0,
-          0,
-          16
-        ],
-        "pull": [
-          0,
-          0,
-          150
-        ],
-        "group": "roof"
-      }
-    },
-    {
-      "id": "B1-porch",
-      "part": "qa_porch_v1",
-      "role": "porch",
-      "color": "#efe6d6",
-      "bay": 0,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          4.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          -74.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -70,
-        0
-      ],
-      "motion": null
-    },
-    {
-      "id": "B2-porch",
-      "part": "qa_porch_v1",
-      "role": "porch",
-      "color": "#efe6d6",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          258.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          -74.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          0.0
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        -70,
-        0
-      ],
-      "motion": null
-    },
-    {
-      "id": "B1-balcony",
-      "part": "qa_balcony_v1",
-      "role": "balcony",
-      "color": "#f7f4ee",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          0.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          -78.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          130.1
+          125.75
         ],
         [
           0.0,
@@ -4752,47 +1043,426 @@
       "explode_mm": [
         0,
         -80,
-        60
+        20
       ],
       "motion": {
         "lift": [
           0,
           0,
-          20
+          9.0
         ],
         "pull": [
           0,
-          -70,
-          30
+          -54.0,
+          0
         ],
-        "group": "balcony"
+        "group": "front"
+      },
+      "extra": {
+        "wing": "tower",
+        "level": 0
       }
     },
     {
-      "id": "L1B2-partition",
-      "part": "qa_partition_v1",
-      "role": "partition",
-      "color": "#d9d3c7",
-      "bay": 1,
-      "level": 0,
+      "id": "tower-l1-floor",
+      "part": "qa2_floor_tower_v2",
+      "role": "floor",
+      "color": "#d7c3a2",
       "transform": [
         [
           1.0,
           0.0,
           0.0,
-          341.0
+          0.0
         ],
         [
           0.0,
           1.0,
           0.0,
-          140.8
+          0.0
         ],
         [
           0.0,
           0.0,
           1.0,
-          10.0
+          141.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        28
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "tower"
+      }
+    },
+    {
+      "id": "tower-l2-frame",
+      "part": "qa2_frame_tower_l2_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          190.39999
+        ],
+        [
+          0.0,
+          -0.0,
+          -1.0,
+          263.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        64
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "tower",
+        "level": 1,
+        "plate_top": 263.35
+      }
+    },
+    {
+      "id": "tower-l2-front",
+      "part": "qa2_panel_tower_l2_glazed_v2",
+      "role": "panel",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          20.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          248.1
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "tower",
+        "level": 1
+      }
+    },
+    {
+      "id": "tower-l2-floor",
+      "part": "qa2_floor_tower_v2",
+      "role": "floor",
+      "color": "#d7c3a2",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          263.7
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        28
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "tower"
+      }
+    },
+    {
+      "id": "tower-l3-frame",
+      "part": "qa2_frame_tower_l3_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          190.39999
+        ],
+        [
+          0.0,
+          -0.0,
+          -1.0,
+          375.7
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        88
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "tower",
+        "level": 2,
+        "plate_top": 375.70000000000005
+      }
+    },
+    {
+      "id": "tower-l3-front",
+      "part": "qa2_panel_tower_l3_glazed_v2",
+      "role": "panel",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          20.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          360.45
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "tower",
+        "level": 2
+      }
+    },
+    {
+      "id": "tower-roof",
+      "part": "qa2_roof_tower_v2",
+      "role": "roof",
+      "color": "#b9835a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -3.8
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          359.05
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        40,
+        150
+      ],
+      "motion": {
+        "slide": [
+          0,
+          16.0,
+          0
+        ],
+        "lift": [
+          0,
+          0,
+          20.0
+        ],
+        "park": [
+          0,
+          90,
+          140
+        ],
+        "group": "roof"
+      },
+      "extra": {
+        "wing": "tower",
+        "plate_top": 375.70000000000005,
+        "seat_z": 376.05000000000007
+      }
+    },
+    {
+      "id": "hall-base",
+      "part": "qa2_base_hall_v2",
+      "role": "structure",
+      "color": "#6e6258",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          200.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          21.15
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -30
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "hall"
+      }
+    },
+    {
+      "id": "hall-l1-frame",
+      "part": "qa2_frame_hall_l1_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          200.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          190.39999
+        ],
+        [
+          0.0,
+          -0.0,
+          -1.0,
+          157.00001
         ],
         [
           0.0,
@@ -4806,33 +1476,969 @@
         0,
         40
       ],
-      "motion": null
+      "motion": null,
+      "extra": {
+        "wing": "hall",
+        "level": 0,
+        "plate_top": 157.0
+      }
     },
     {
-      "id": "L2B3-partition",
-      "part": "qa_partition_v1",
-      "role": "partition",
-      "color": "#d9d3c7",
-      "bay": 2,
-      "level": 1,
+      "id": "hall-l1-front",
+      "part": "qa2_panel_hall_l1_entry_v2",
+      "role": "panel",
+      "color": "#6e8b9f",
       "transform": [
         [
           1.0,
           0.0,
           0.0,
-          595.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          140.8
+          220.0
         ],
         [
           0.0,
           0.0,
           1.0,
-          149.6
+          22.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          141.75
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "hall",
+        "level": 0
+      }
+    },
+    {
+      "id": "hall-l1-floor",
+      "part": "qa2_floor_hall_v2",
+      "role": "floor",
+      "color": "#d7c3a2",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          200.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          22.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          157.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        28
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "hall"
+      }
+    },
+    {
+      "id": "hall-l2-frame",
+      "part": "qa2_frame_hall_l2_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          200.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          190.39999
+        ],
+        [
+          0.0,
+          -0.0,
+          -1.0,
+          283.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        64
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "hall",
+        "level": 1,
+        "plate_top": 283.35
+      }
+    },
+    {
+      "id": "hall-l2-front",
+      "part": "qa2_panel_hall_l2_glazed_v2",
+      "role": "panel",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          220.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          22.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          268.1
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "hall",
+        "level": 1
+      }
+    },
+    {
+      "id": "hall-roof",
+      "part": "qa2_roof_hall_v2",
+      "role": "roof",
+      "color": "#b9835a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          200.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          22.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          283.7
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        40,
+        150
+      ],
+      "motion": {
+        "slide": [
+          0,
+          16.0,
+          0
+        ],
+        "lift": [
+          0,
+          0,
+          20.0
+        ],
+        "park": [
+          0,
+          90,
+          140
+        ],
+        "group": "roof"
+      },
+      "extra": {
+        "wing": "hall",
+        "plate_top": 283.35,
+        "seat_z": 283.70000000000005
+      }
+    },
+    {
+      "id": "living-base",
+      "part": "qa2_base_living_v2",
+      "role": "structure",
+      "color": "#6e6258",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          354.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.85
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -30
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "living"
+      }
+    },
+    {
+      "id": "living-l1-frame",
+      "part": "qa2_frame_living_l1_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          354.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          208.39999
+        ],
+        [
+          0.0,
+          -0.0,
+          -1.0,
+          169.00001
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        40
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "living",
+        "level": 0,
+        "plate_top": 169.0
+      }
+    },
+    {
+      "id": "living-l1-front-a",
+      "part": "qa2_panel_living_l1_glazed_v2",
+      "role": "panel",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          376.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          153.75
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "living",
+        "level": 0
+      }
+    },
+    {
+      "id": "living-l1-front-b",
+      "part": "qa2_panel_living_l1_glazed_v2",
+      "role": "panel",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          503.2
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          153.75
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "living",
+        "level": 0
+      }
+    },
+    {
+      "id": "living-l1-floor",
+      "part": "qa2_floor_living_v2",
+      "role": "floor",
+      "color": "#d7c3a2",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          354.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          169.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        28
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "living"
+      }
+    },
+    {
+      "id": "living-l2-frame",
+      "part": "qa2_frame_living_l2_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          354.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          208.39999
+        ],
+        [
+          0.0,
+          -0.0,
+          -1.0,
+          305.35001
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        64
+      ],
+      "motion": null,
+      "extra": {
+        "wing": "living",
+        "level": 1,
+        "plate_top": 305.35
+      }
+    },
+    {
+      "id": "living-l2-front-a",
+      "part": "qa2_panel_living_l2_glazed_v2",
+      "role": "panel",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          376.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          290.1
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "living",
+        "level": 1
+      }
+    },
+    {
+      "id": "living-l2-front-b",
+      "part": "qa2_panel_living_l2_glazed_v2",
+      "role": "panel",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          503.2
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.6
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0,
+          290.1
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        -80,
+        20
+      ],
+      "motion": {
+        "lift": [
+          0,
+          0,
+          9.0
+        ],
+        "pull": [
+          0,
+          -54.0,
+          0
+        ],
+        "group": "front"
+      },
+      "extra": {
+        "wing": "living",
+        "level": 1
+      }
+    },
+    {
+      "id": "living-roof",
+      "part": "qa2_roof_living_v2",
+      "role": "roof",
+      "color": "#b9835a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          354.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          288.7
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        40,
+        150
+      ],
+      "motion": {
+        "slide": [
+          0,
+          16.0,
+          0
+        ],
+        "lift": [
+          0,
+          0,
+          20.0
+        ],
+        "park": [
+          0,
+          90,
+          140
+        ],
+        "group": "roof"
+      },
+      "extra": {
+        "wing": "living",
+        "plate_top": 305.35,
+        "seat_z": 305.70000000000005
+      }
+    },
+    {
+      "id": "tower-bay",
+      "part": "qa2_bay_tower_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -54.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          34.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        -40,
+        0,
+        10
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "tower-bay-roof",
+      "part": "qa2_roof_bay_v2",
+      "role": "roof",
+      "color": "#b9835a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -57.375
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          34.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          104.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        -40,
+        0,
+        80
+      ],
+      "motion": {
+        "slide": [
+          0,
+          16.0,
+          0
+        ],
+        "lift": [
+          0,
+          0,
+          20.0
+        ],
+        "park": [
+          -40,
+          40,
+          70
+        ],
+        "group": "roof"
+      },
+      "extra": {
+        "wing": "tower-bay",
+        "plate_top": 104,
+        "seat_z": 104.35
+      }
+    },
+    {
+      "id": "living-bay",
+      "part": "qa2_bay_living_v2",
+      "role": "structure",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          636.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          40.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        40,
+        0,
+        10
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "living-bay-roof",
+      "part": "qa2_roof_bay_v2",
+      "role": "roof",
+      "color": "#b9835a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          632.625
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          40.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          116.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        40,
+        0,
+        80
+      ],
+      "motion": {
+        "slide": [
+          0,
+          16.0,
+          0
+        ],
+        "lift": [
+          0,
+          0,
+          20.0
+        ],
+        "park": [
+          40,
+          40,
+          70
+        ],
+        "group": "roof"
+      },
+      "extra": {
+        "wing": "living-bay",
+        "plate_top": 116,
+        "seat_z": 116.35
+      }
+    },
+    {
+      "id": "hall-stair",
+      "part": "qa2_stair_v2",
+      "role": "furniture",
+      "color": "#d7c3a2",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          236.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          80.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        40
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "hall-figure",
+      "part": "qa2_figure_v2",
+      "role": "furniture",
+      "color": "#d28b78",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          268.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          50.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          15.0
         ],
         [
           0.0,
@@ -4846,33 +2452,32 @@
         0,
         50
       ],
-      "motion": null
+      "motion": null,
+      "extra": {}
     },
     {
-      "id": "L1B1-table",
-      "part": "qa_furn_table_v1",
+      "id": "living-sofa",
+      "part": "qa2_sofa_v2",
       "role": "furniture",
-      "color": "#c6a36a",
-      "bay": 0,
-      "level": 0,
+      "color": "#8ea48a",
       "transform": [
         [
           1.0,
           0.0,
           0.0,
-          36.0
+          390.0
         ],
         [
           0.0,
           1.0,
           0.0,
-          40.0
+          130.0
         ],
         [
           0.0,
           0.0,
           1.0,
-          12.3
+          15.0
         ],
         [
           0.0,
@@ -4884,23 +2489,61 @@
       "explode_mm": [
         0,
         0,
-        80
+        36
       ],
-      "motion": null
+      "motion": null,
+      "extra": {}
     },
     {
-      "id": "L1B1-chair",
-      "part": "qa_furn_chair_v1",
+      "id": "living-table",
+      "part": "qa2_table_v2",
       "role": "furniture",
       "color": "#c6a36a",
-      "bay": 0,
-      "level": 0,
       "transform": [
         [
           1.0,
           0.0,
           0.0,
-          58.0
+          504.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          46.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          15.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        30
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "living-chair",
+      "part": "qa2_chair_v2",
+      "role": "furniture",
+      "color": "#c6a36a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          522.0
         ],
         [
           0.0,
@@ -4912,7 +2555,7 @@
           0.0,
           0.0,
           1.0,
-          12.3
+          15.0
         ],
         [
           0.0,
@@ -4924,263 +2567,22 @@
       "explode_mm": [
         0,
         0,
-        90
+        34
       ],
-      "motion": null
+      "motion": null,
+      "extra": {}
     },
     {
-      "id": "L1B2-figure",
-      "part": "qa_furn_figure_v1",
+      "id": "living-bed",
+      "part": "qa2_bed_v2",
       "role": "furniture",
-      "color": "#d28b78",
-      "bay": 1,
-      "level": 0,
+      "color": "#8ea48a",
       "transform": [
         [
           1.0,
           0.0,
           0.0,
-          394.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          47.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          12.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        100
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B2-sofa",
-      "part": "qa_furn_sofa_v1",
-      "role": "furniture",
-      "color": "#8ea36f",
-      "bay": 1,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          294.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          36.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          12.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        85
-      ],
-      "motion": null
-    },
-    {
-      "id": "L1B3-table",
-      "part": "qa_furn_table_v1",
-      "role": "furniture",
-      "color": "#c6a36a",
-      "bay": 2,
-      "level": 0,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          556.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          48.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          12.3
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        80
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B1-bed",
-      "part": "qa_furn_bed_v1",
-      "role": "furniture",
-      "color": "#8ea36f",
-      "bay": 0,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          40.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          36.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          151.9
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        110
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B2-chair",
-      "part": "qa_furn_chair_v1",
-      "role": "furniture",
-      "color": "#c6a36a",
-      "bay": 1,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          344.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          60.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          151.9
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        100
-      ],
-      "motion": null
-    },
-    {
-      "id": "L2B3-figure",
-      "part": "qa_furn_figure_v1",
-      "role": "furniture",
-      "color": "#d28b78",
-      "bay": 2,
-      "level": 1,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          546.0
-        ],
-        [
-          0.0,
-          1.0,
-          0.0,
-          92.0
-        ],
-        [
-          0.0,
-          0.0,
-          1.0,
-          151.9
-        ],
-        [
-          0.0,
-          0.0,
-          0.0,
-          1.0
-        ]
-      ],
-      "explode_mm": [
-        0,
-        0,
-        120
-      ],
-      "motion": null
-    },
-    {
-      "id": "L3B3-bed",
-      "part": "qa_furn_bed_v1",
-      "role": "furniture",
-      "color": "#8ea36f",
-      "bay": 2,
-      "level": 2,
-      "transform": [
-        [
-          1.0,
-          0.0,
-          0.0,
-          552.0
+          384.0
         ],
         [
           0.0,
@@ -5192,7 +2594,7 @@
           0.0,
           0.0,
           1.0,
-          291.5
+          177.35
         ],
         [
           0.0,
@@ -5204,35 +2606,112 @@
       "explode_mm": [
         0,
         0,
-        140
+        46
       ],
-      "motion": null
+      "motion": null,
+      "extra": {}
     },
     {
-      "id": "L3B1-table",
-      "part": "qa_furn_table_v1",
+      "id": "living-tub",
+      "part": "qa2_tub_v2",
       "role": "furniture",
-      "color": "#c6a36a",
-      "bay": 0,
-      "level": 2,
+      "color": "#d5e2e4",
       "transform": [
         [
           1.0,
           0.0,
+          0.0,
+          544.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          150.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          177.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        40
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "tower-bed",
+      "part": "qa2_bed_v2",
+      "role": "furniture",
+      "color": "#c6a36a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          28.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          36.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          149.35
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        44
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "loft-table",
+      "part": "qa2_table_v2",
+      "role": "furniture",
+      "color": "#c6a36a",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          40.0
+        ],
+        [
+          0.0,
+          1.0,
           0.0,
           50.0
         ],
         [
           0.0,
-          1.0,
-          0.0,
-          55.0
-        ],
-        [
-          0.0,
           0.0,
           1.0,
-          291.5
+          271.7
         ],
         [
           0.0,
@@ -5244,81 +2723,185 @@
       "explode_mm": [
         0,
         0,
-        130
+        50
       ],
-      "motion": null
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "coupon-frame",
+      "part": "qa2_coupon_frame_v2",
+      "role": "coupon",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          720.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -20.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "coupon-panel",
+      "part": "qa2_coupon_panel_v2",
+      "role": "coupon",
+      "color": "#7f9aaf",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          720.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          18.4
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -6.8
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "coupon-retainer",
+      "part": "qa2_retainer_v2",
+      "role": "coupon",
+      "color": "#f4f0e6",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          698.65
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "motion": null,
+      "extra": {}
+    },
+    {
+      "id": "coupon-fixture",
+      "part": "qa2_polarity_fixture_v2",
+      "role": "coupon",
+      "color": "#d7dbe2",
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          820.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "motion": null,
+      "extra": {}
     }
   ],
-  "first_print": [
-    "qa_coupon_socket_v1",
-    "qa_coupon_plug_v1",
-    "qa_base_v1",
-    "qa_post_front_v1",
-    "qa_post_rear_v1",
-    "qa_plate_v1",
-    "qa_rear_v1",
-    "qa_panel_front_glazed_v1",
-    "qa_panel_end_left_v1"
-  ],
   "legacy_interface": {
-    "tile_file": "dollhouse/stl/floor_tile_v0.stl",
-    "post_file": "dollhouse/stl/snap_post_v0.stl",
     "tile_bbox_mm": [
       127.0,
       127.0,
       10.0
     ],
-    "post_bbox_mm": [
-      9.0,
-      9.0,
-      9.0
-    ],
-    "tile_watertight": true,
-    "post_watertight": true,
-    "socket_grid_mm": [
-      15.875,
-      47.625,
-      79.375,
-      111.125
-    ],
-    "pitch_mm": 31.75,
-    "offset_mm": 15.875,
-    "peg_orientation": "tip down, flange underside on the deck (z translation +11 after a 180 degree X rotation)",
-    "intersection_mm3_at_16_sockets": [
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "intersection_mm3_shifted_10mm": 112.775,
-    "sockets_clear": true,
-    "bay_width_mm": 254.0,
-    "bay_width_over_measured_tile": 2.0,
-    "depth_mm": 210.0,
-    "depth_matches_two_tiles": false,
-    "peg_intersection_mm3_on_queen_anne_floor": 86.038,
+    "seated_peg_mm3": 0.0,
     "snap_compatible": false,
-    "conclusion": "The legacy floor tile STL is 127 x 127 x 10 mm. A tip-down snap_post_v0 intersects that tile by ~0 mm^3 at all 16 measured sockets and by a large volume 10 mm off the grid, so the \u00d86 peg / \u00d86.3 socket interface is real. One Queen Anne bay is exactly two measured tile-widths in X and is not two tile-depths in Y. The same peg intersects the Queen Anne floor, which has no \u00d86.3 socket. The kits share a 254 mm module width and do not share a joint."
+    "note": "Bay widths are no longer 254 mm. The legacy peg still seats in floor_tile_v0. This house does not use that socket."
   },
   "limits": [
-    "Not printed. Clearances are CAD targets.",
-    "Forces, buckling, floor deflection, lap shear, fatigue, and tip-over were not calculated or tested.",
-    "No load rating and no toy-safety certification.",
-    "Do not treat the assembled house as a lifting handle.",
-    "Generic brim-allowance check only. No slicer was run. Not an H3C test.",
-    "Panel edges are square. Pinch gaps and finger comfort were not trialed.",
-    "The balcony must come off before the second-storey tower front panel is fully pulled."
+    "Not printed. Clearances are CAD allowances.",
+    "Zero overlap and a bearing probe are not a strength proof. No PLA modulus, no gravity case, no uplift case.",
+    "Magnet grade and holding force were not calculated from the 5.0 x 2.8 mm nominal size.",
+    "The 5.0 x 2.8 pocket is nominal. The coupon is how you find out whether it holds and releases.",
+    "No H3C pause-print profile was made. Install discs after printing, then slide the capture bars.",
+    "A broken capture bar can expose a magnet. Magnets are a swallow hazard. This is not a child-safety certification.",
+    "Roof cheeks locate the roof sideways. The rear hook stops a straight lift. Strength of that hook is untested."
   ]
 }

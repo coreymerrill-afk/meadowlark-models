@@ -86,22 +86,34 @@
     return o;
   }
 
+  function motionVector(motion, park) {
+    var v = [0, 0, 0];
+    if (!motion) return v;
+    if (motion.slide) v = addVec(v, motion.slide);
+    if (motion.lift) v = addVec(v, motion.lift);
+    if (motion.pull) v = addVec(v, motion.pull);
+    if (park && motion.park) v = addVec(v, motion.park);
+    return v;
+  }
+
   function modeMatrix(instance) {
     var mode = state.mode;
     var motion = instance.motion;
     var group = motion ? motion.group : '';
     switch (mode) {
       case 'closed':
+      case 'attachment':
         return instance.transform;
       case 'open':
-        if (group === 'front' || group === 'end' || group === 'balcony') {
-          return mul(translate(addVec(motion.lift, motion.pull)), instance.transform);
+        if (group === 'front' || group === 'end') {
+          return mul(translate(motionVector(motion, false)), instance.transform);
         }
+        if (group === 'roof') return mul(translate(motionVector(motion, true)), instance.transform);
         return instance.transform;
       case 'remove-panels':
         return instance.transform;
       case 'roof':
-        if (group === 'roof') return mul(translate(addVec(motion.lift, motion.pull)), instance.transform);
+        if (group === 'roof') return mul(translate(motionVector(motion, true)), instance.transform);
         return instance.transform;
       case 'explode':
         return mul(translate(instance.explode_mm), instance.transform);
@@ -111,23 +123,30 @@
   }
 
   function modeVisible(instance) {
-    if (state.mode !== 'remove-panels') return true;
-    var group = instance.motion ? instance.motion.group : '';
-    return group !== 'front' && group !== 'end' && group !== 'balcony';
+    if (state.mode === 'remove-panels') {
+      var group = instance.motion ? instance.motion.group : '';
+      return group !== 'front' && group !== 'end';
+    }
+    if (state.mode === 'attachment') {
+      return instance.id === 'hall-l1-front' || instance.id === 'hall-l1-frame' || instance.role === 'coupon';
+    }
+    return true;
   }
 
   function modeCopy(mode) {
     switch (mode) {
       case 'closed':
-        return 'Closed. Panels are seated and the roofs are on.';
+        return 'Closed. Every roof sits on its own plate. Panels are on their sill hooks. This is the resting assembly, not the open view.';
       case 'open':
-        return 'Open. Front and end panels are in the lifted-and-pulled pose. The balcony is off its ledges. Roofs stay on.';
+        return 'Open. Panels are lifted and pulled out. Roofs are slid, lifted, and parked up and back so they are obviously off their seats.';
       case 'remove-panels':
-        return 'Panels off. Front panels, end panels, and the balcony are hidden. The frames and rear shear stay. Those hidden meshes are the same STLs.';
+        return 'Panels hidden. The frames, floors, and roofs stay. The hidden panels are the same STLs.';
       case 'roof':
-        return 'Roof off. The three roof shells are lifted clear of the plates. Panels stay seated.';
+        return 'Roofs parked off their plates. Panels stay seated. Each roof is one solid that bears on its own frame.';
       case 'explode':
-        return 'Exploded. Every instance, including furniture, is shifted along its manifest vector.';
+        return 'Exploded along the manifest vectors, including furniture.';
+      case 'attachment':
+        return 'Attachment. The entry frame and its panel, plus the coupon parts. The sill hook carries the panel. Magnet pockets are the open channels in the stiles and posts. Slide a capture bar in after the disc. 5.0 × 2.8 mm is nominal, not a proven fit.';
       default:
         return assertNever(mode);
     }
@@ -164,12 +183,13 @@
     el('sub').textContent = manifest.scale + ' · ' + manifest.description;
     el('claim').textContent = claim(manifest);
     var size = manifest.assembled_size_mm;
+    var magnet = manifest.magnet || {};
     var facts = [
       [size.x.toFixed(0) + ' × ' + size.y.toFixed(0) + ' × ' + size.z.toFixed(0), 'Assembly, mm'],
+      [String(manifest.rooms.length), 'Different rooms'],
       [String(manifest.parts.length), 'Printable parts'],
-      [String(manifest.instances.length), 'Meshes in view'],
-      [manifest.module_mm.clear_height + ' mm', 'Clear storey'],
-      [Math.round(manifest.legacy_interface.depth_mm) + ' mm deep', 'Bay, not two tiles']
+      [magnet.nominal_mm[0] + ' × ' + magnet.nominal_mm[1], 'Nominal magnet, mm'],
+      [magnet.status === 'NOMINAL_NOT_FIT_APPROVED' ? 'Not proven' : 'Check', 'Pocket fit']
     ];
     var factsNode = el('facts');
     clear(factsNode);
@@ -184,20 +204,25 @@
     var printRoot = el('print-root');
     clear(printRoot);
     var order = document.createElement('ol');
-    order.appendChild(text('li', 'Print qa_coupon_socket_v1 and qa_coupon_plug_v1. The tongue should drop into the pocket. The two holes are a legacy size gauge, not a joint this house uses.'));
-    order.appendChild(text('li', 'Print one bay: base, two front posts, two rear posts, one plate, one rear shear, one front panel, one end panel. Seat the posts, plate, shear, and panel before printing the other eight bays.'));
-    order.appendChild(text('li', 'The rest of the kit is the same parts. Roofs, porch, balcony, partitions, and furniture come after a bay fits.'));
+    (manifest.magnet_install_steps || []).forEach(function (line) {
+      order.appendChild(text('li', line));
+    });
     printRoot.appendChild(order);
+    var rooms = document.createElement('ul');
+    (manifest.rooms || []).forEach(function (room) {
+      rooms.appendChild(text('li', room.id + ', storey ' + room.storey + ': ' + room.note));
+    });
+    printRoot.appendChild(rooms);
     var limits = document.createElement('ul');
     manifest.limits.forEach(function (line) {
       limits.appendChild(text('li', line));
     });
     printRoot.appendChild(limits);
-    printRoot.appendChild(text('p', manifest.legacy_interface.conclusion, 'muted'));
+    printRoot.appendChild(text('p', (manifest.legacy_interface && manifest.legacy_interface.note) || '', 'muted'));
 
     var table = document.createElement('table');
     var head = document.createElement('tr');
-    ['Part', 'Qty', 'Printed size, mm', 'First bay'].forEach(function (label) {
+    ['Part', 'Qty', 'Printed size, mm', 'Z, mm'].forEach(function (label) {
       head.appendChild(text('th', label));
     });
     var thead = document.createElement('thead');
@@ -215,7 +240,7 @@
       tr.appendChild(name);
       tr.appendChild(text('td', String(row.qty)));
       tr.appendChild(text('td', part.bbox_mm.map(function (value) { return Math.round(value); }).join(' × ')));
-      tr.appendChild(text('td', row.first_bay_print ? 'Yes' : ''));
+      tr.appendChild(text('td', part.bbox_mm[2] + ' tall'));
       body.appendChild(tr);
     });
     table.appendChild(body);
