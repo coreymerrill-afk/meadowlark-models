@@ -1,9 +1,9 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
-  "description": "Broad Queen Anne: large octagonal turret, street cross-gable, deep wraparound porch.",
+  "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
   "concept_image": "concept/approved-direction.jpg",
   "concept_note": "Approved picture. Not this CAD and not a measured survey.",
   "units": "mm",
@@ -468,22 +468,23 @@
     "fragile_ornament": "Balusters, bargeboard piercings, flower blossoms, and scallop edges are thin. A 0.2 mm nozzle is the ornament setting. They are not claimed durable or safe."
   },
   "departures_from_concept": [
-    "The picture is a render, not a survey. Width, turret, porch depth, and the street gable follow it. Mouldings are thicker than the render's hairlines.",
-    "The street gable is a separate sage wall in front of the slate slopes, with a hairline gap so the two parts do not occupy the same volume.",
-    "Routine play is the side wall, pulled straight off. The porch and the ground-floor street wall stay.",
-    "The turret drum is fixed. A wrapped octagon cannot slide off its floors in a straight line. The joint to the main block is a hairline, not a buried intersection.",
+    "The picture is a render, not a survey. The broad front, turret, porch, and street gable follow it. Mouldings are thicker than the render's hairlines.",
+    "Play access is the full back, one wall, pulled straight off. The front and both sides stay. The picture's open view is a side cutaway; this house opens at the back.",
+    "The back seats 0.45 mm off the jambs. That gap is the fit, not a missing wall. Magnets do not hold the house up. The back is not a brace.",
+    "The rear wall's measured bbox fits one print. It is not a 460 mm slab.",
     "Colors in the viewer are the intended palette. One printed part is one material until it is painted.",
     "Balusters, bargeboard piercings, blossoms, and scallop edges are thin. A 0.2 mm nozzle is the ornament setting. They are not claimed durable."
   ],
   "magnet_install_steps": [
-    "Print the coupon first. The slot matches the facade stiles.",
+    "Print the coupon first. The slot matches the back stiles and the jambs.",
     "An adult seats a nominal 5.0 x 2.8 mm disc and slides the capture bar in from the top.",
-    "The bar closes the magnet. It does not catch the frame. Holding force is untested.",
-    "The side walls are the everyday opening. They pull straight out. The porch does not have to come off."
+    "The bar closes the magnet. It does not catch the other wall. Holding force is untested.",
+    "The back pulls straight off toward the rear. The front, sides, porch, and roofs stay."
   ],
   "limits": [
     "Not printed. No strength, tip-over, magnet, or electrical test.",
-    "Roofs are gravity seated, not locked.",
+    "Roofs are gravity seated, not locked. They bear on the fixed shell with the back off.",
+    "The back is a closure, not a structural brace. Magnets are not the house's support.",
     "Thin ornament can break. That is not a safety claim.",
     "Not a toy-safety certification."
   ],
@@ -512,23 +513,35 @@
         130.0
       ]
     },
-    "open": {
+    "rear": {
       "position": [
-        920.0,
-        180.0,
-        200.0
+        360.0,
+        620.0,
+        130.0
       ],
       "target": [
         360.0,
-        190.0,
-        130.0
+        250.0,
+        110.0
+      ]
+    },
+    "open": {
+      "position": [
+        390.0,
+        720.0,
+        160.0
+      ],
+      "target": [
+        380.0,
+        180.0,
+        120.0
       ]
     },
     "stairs": {
       "position": [
-        820.0,
-        210.0,
-        140.0
+        560.0,
+        640.0,
+        150.0
       ],
       "target": [
         420.0,
@@ -550,14 +563,14 @@
     },
     "attachment": {
       "position": [
-        760.0,
-        180.0,
-        70.0
+        640.0,
+        480.0,
+        110.0
       ],
       "target": [
-        500.0,
-        200.0,
-        55.0
+        420.0,
+        280.0,
+        90.0
       ]
     },
     "plan": {
@@ -655,11 +668,11 @@
       "file": "stl/qa5_floor_l2_v5.stl",
       "note": "First floor. Opening is the lower stair.",
       "triangles": 544,
-      "volume_mm3": 245294.7,
+      "volume_mm3": 237216.7,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        285.0,
+        277.0,
         168.0,
         6.15
       ],
@@ -669,12 +682,12 @@
       "id": "qa5_floor_l3_v5",
       "file": "stl/qa5_floor_l3_v5.stl",
       "note": "Attic floor. Opening is the upper stair.",
-      "triangles": 540,
-      "volume_mm3": 245294.7,
+      "triangles": 542,
+      "volume_mm3": 237216.7,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        285.0,
+        277.0,
         168.0,
         6.15
       ],
@@ -698,14 +711,14 @@
     {
       "id": "qa5_walls_l1_v5",
       "file": "stl/qa5_walls_l1_v5.stl",
-      "note": "Fixed rear wall, hall partition, and ceiling plate.",
-      "triangles": 238,
-      "volume_mm3": 697147.8,
+      "note": "Fixed ceiling, hall wall, and the left rear jamb. The rear opening is clear.",
+      "triangles": 558,
+      "volume_mm3": 508808.1,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        285.0,
-        176.0,
+        281.0,
+        175.0,
         91.2
       ],
       "fits_brim_allowance": true
@@ -713,14 +726,14 @@
     {
       "id": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
-      "note": "Fixed rear wall and ceiling of the first floor.",
-      "triangles": 246,
-      "volume_mm3": 696683.8,
+      "note": "Fixed ceiling and hall wall of the first floor. The back is not this part.",
+      "triangles": 566,
+      "volume_mm3": 508228.1,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        285.0,
-        176.0,
+        281.0,
+        175.0,
         91.2
       ],
       "fits_brim_allowance": true
@@ -759,14 +772,14 @@
       "id": "qa5_front_ground_v5",
       "file": "stl/qa5_front_ground_v5.stl",
       "note": "Ground floor street wall. Fixed, because the porch is in front of it. Flower boxes and the door casing are in the mesh.",
-      "triangles": 3300,
-      "volume_mm3": 119607.7,
+      "triangles": 3032,
+      "volume_mm3": 114653.7,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        293.4,
+        282.6,
         13.8,
-        96.6
+        97.6
       ],
       "fits_brim_allowance": true
     },
@@ -786,47 +799,47 @@
       "fits_brim_allowance": true
     },
     {
-      "id": "qa5_facade_front_v5",
-      "file": "stl/qa5_facade_front_v5.stl",
-      "note": "Full-width upper front. Straight pull. Flower boxes are part of the shell.",
-      "triangles": 4374,
-      "volume_mm3": 126786.5,
+      "id": "qa5_front_upper_v5",
+      "file": "stl/qa5_front_upper_v5.stl",
+      "note": "Upper street wall. Fixed. Big sash openings. It does not pull off.",
+      "triangles": 4202,
+      "volume_mm3": 126458.2,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        296.2,
+        288.4,
         13.8,
-        102.0
+        107.55
       ],
       "fits_brim_allowance": true
     },
     {
-      "id": "qa5_facade_side_l1_v5",
-      "file": "stl/qa5_facade_side_l1_v5.stl",
-      "note": "Full-depth side wall. This is the play opening. Straight pull.",
-      "triangles": 2098,
-      "volume_mm3": 47149.6,
+      "id": "qa5_side_v5",
+      "file": "stl/qa5_side_v5.stl",
+      "note": "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
+      "triangles": 3784,
+      "volume_mm3": 144673.1,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        10.4,
-        170.0,
-        77.4
+        13.75,
+        180.1,
+        187.6
       ],
       "fits_brim_allowance": true
     },
     {
-      "id": "qa5_facade_side_l2_v5",
-      "file": "stl/qa5_facade_side_l2_v5.stl",
-      "note": "Full-depth side wall. This is the play opening. Straight pull.",
-      "triangles": 2084,
-      "volume_mm3": 47149.6,
+      "id": "qa5_rear_v5",
+      "file": "stl/qa5_rear_v5.stl",
+      "note": "Full back, one print, 0.45 mm off the jambs. Straight magnetic pull. Nominal 5 x 2.8 mm discs. Not a structural brace.",
+      "triangles": 2808,
+      "volume_mm3": 242264.1,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        10.4,
-        170.0,
-        77.4
+        285.0,
+        7.0,
+        188.7
       ],
       "fits_brim_allowance": true
     },
@@ -834,8 +847,8 @@
       "id": "qa5_roof_front_v5",
       "file": "stl/qa5_roof_front_v5.stl",
       "note": "Front slope and the gable cheeks, with individual scalloped shingles.",
-      "triangles": 72174,
-      "volume_mm3": 473567.4,
+      "triangles": 73350,
+      "volume_mm3": 449816.3,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -864,8 +877,8 @@
       "id": "qa5_roof_rear_v5",
       "file": "stl/qa5_roof_rear_v5.stl",
       "note": "Rear slope, scalloped shingles, and the brick chimney.",
-      "triangles": 76136,
-      "volume_mm3": 402450.4,
+      "triangles": 81718,
+      "volume_mm3": 370910.1,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -894,8 +907,8 @@
       "id": "qa5_roof_turret_v5",
       "file": "stl/qa5_roof_turret_v5.stl",
       "note": "Octagonal cone with a course of scallops on each flat.",
-      "triangles": 8922,
-      "volume_mm3": 337717.9,
+      "triangles": 9188,
+      "volume_mm3": 328135.4,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -969,8 +982,8 @@
       "id": "qa5_porch_roof_v5",
       "file": "stl/qa5_porch_roof_v5.stl",
       "note": "Front porch roof with scalloped shingles. Bears on the beam.",
-      "triangles": 17670,
-      "volume_mm3": 113690.5,
+      "triangles": 14898,
+      "volume_mm3": 105572.5,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -1293,21 +1306,6 @@
       "qty": 1
     },
     {
-      "part": "qa5_facade_front_v5",
-      "file": "stl/qa5_facade_front_v5.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa5_facade_side_l1_v5",
-      "file": "stl/qa5_facade_side_l1_v5.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa5_facade_side_l2_v5",
-      "file": "stl/qa5_facade_side_l2_v5.stl",
-      "qty": 1
-    },
-    {
       "part": "qa5_floor_l2_v5",
       "file": "stl/qa5_floor_l2_v5.stl",
       "qty": 1
@@ -1335,6 +1333,11 @@
     {
       "part": "qa5_front_ground_v5",
       "file": "stl/qa5_front_ground_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_front_upper_v5",
+      "file": "stl/qa5_front_upper_v5.stl",
       "qty": 1
     },
     {
@@ -1378,11 +1381,16 @@
       "qty": 8
     },
     {
+      "part": "qa5_rear_v5",
+      "file": "stl/qa5_rear_v5.stl",
+      "qty": 1
+    },
+    {
       "part": "qa5_retainer_v5",
       "file": "stl/qa5_retainer_v5.stl",
       "qty": 1,
-      "print_qty": 14,
-      "note": "One bar per stile, plus the coupon."
+      "print_qty": 26,
+      "note": "One bar per rear pocket and matching jamb pocket, plus the coupon. The bar closes the magnet only."
     },
     {
       "part": "qa5_roof_front_v5",
@@ -1407,6 +1415,11 @@
     {
       "part": "qa5_service_v5",
       "file": "stl/qa5_service_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_side_v5",
+      "file": "stl/qa5_side_v5.stl",
       "qty": 1
     },
     {
@@ -2190,21 +2203,14 @@
     },
     {
       "id": "front-upper",
-      "part": "qa5_facade_front_v5",
-      "role": "facade",
+      "part": "qa5_front_upper_v5",
+      "role": "structure",
       "color": "#6f917c",
-      "motion": {
-        "group": "front",
-        "pull": [
-          0,
-          -58.0,
-          0
-        ]
-      },
+      "motion": null,
       "explode_mm": [
         0,
-        -40,
-        8
+        0,
+        0
       ],
       "transform": [
         [
@@ -2223,7 +2229,7 @@
           0,
           0,
           1,
-          120.0
+          114.45
         ],
         [
           0,
@@ -2234,41 +2240,34 @@
       ]
     },
     {
-      "id": "side-l1",
-      "part": "qa5_facade_side_l1_v5",
-      "role": "facade",
+      "id": "side",
+      "part": "qa5_side_v5",
+      "role": "structure",
       "color": "#6f917c",
-      "motion": {
-        "group": "end",
-        "pull": [
-          58.0,
-          0,
-          0
-        ]
-      },
+      "motion": null,
       "explode_mm": [
-        36,
         0,
-        6
+        0,
+        0
       ],
       "transform": [
         [
           1,
           0,
           0,
-          504.1
+          497.0
         ],
         [
           0,
           1,
           0,
-          120.0
+          114.9
         ],
         [
           0,
           0,
           1,
-          19.0
+          17.0
         ],
         [
           0,
@@ -2279,41 +2278,41 @@
       ]
     },
     {
-      "id": "side-l2",
-      "part": "qa5_facade_side_l2_v5",
-      "role": "facade",
+      "id": "rear",
+      "part": "qa5_rear_v5",
+      "role": "back",
       "color": "#6f917c",
       "motion": {
-        "group": "end",
+        "group": "back",
         "pull": [
-          58.0,
           0,
+          70.0,
           0
         ]
       },
       "explode_mm": [
-        36,
         0,
-        6
+        56,
+        0
       ],
       "transform": [
         [
           1,
           0,
           0,
-          504.1
+          219.0
         ],
         [
           0,
           1,
           0,
-          120.0
+          295.45
         ],
         [
           0,
           0,
           1,
-          117.0
+          16.45
         ],
         [
           0,

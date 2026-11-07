@@ -1,16 +1,16 @@
-# Queen Anne Playhouse — v5.0.0
+# Queen Anne Playhouse — v6.0.0
 
-A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD.
+A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 
-The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes, with a scalloped base board, rake bargeboards, and an owl in the opening. The porch wraps the turret and runs across the ground floor: turned columns, cyma brackets, a spindle rail, and steps. Shingles are individual scallops. Clapboard, belt courses, casings, and flower boxes are in the meshes.
+The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes, with rake bargeboards and an owl. The porch wraps the turret. Shingles are thin scallops in the mesh. The front and the right side are solid walls with clear sash openings.
 
-v4 is in `archive/v4.0.0/`. It was a narrow stack with a flat porch and bar roofs.
+v4 is in `archive/v4.0.0/`. v5 put a removable shell on every room. Those shells sat off the house. They are gone.
 
 ## How it is played
 
-The side walls are the everyday opening. They are the full depth of the rooms and pull straight off. There is no sill hook and no slide channel. The porch stays, and so does the ground-floor street wall, because a straight pull of that wall would have to pass through the porch. The upper front, above the porch roof, pulls straight off. The turret drum stays: a wrapped octagon cannot slide off its floors. The joint between turret and main block is a hairline.
+One wall comes off: the full back. It is one print, 285 × 7 × 189 mm, under the 310 × 300 × 315 mm allowance. Closed, its inner face is 0.45 mm behind the jambs and it does not occupy their volume. It pulls straight off on nominal 5.0 × 2.8 mm discs. There is no sill hook. The front, sides, porch, floors, and roofs stay. The back is not a brace, and the magnets are not what holds the house up. The roof bears on the fixed plates with the back off.
 
-Two stair flights are in the mesh, with treads, risers, and a spindle rail. The lower flight climbs from the entry to the first floor. The upper flight climbs from that floor to the attic. The wells are open.
+Two stair flights have treads, risers, and a spindle rail. The lower flight climbs from the entry to the first floor. The upper flight climbs from that floor to the attic. The wells are open. The hall wall stops short of the rear opening.
 
 ## Lighting
 

@@ -1,7 +1,7 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 39,
+  "rest_pairs": 42,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
@@ -59,7 +59,18 @@
       "headroom_sample_mm": 72.0
     }
   ],
-  "triangles": 224982,
+  "rear_fit": {
+    "gap_y_mm": 0.45,
+    "target_gap_mm": 0.45,
+    "intersection_mm3": 0.0,
+    "panel_bbox_mm": [
+      285.0,
+      7.0,
+      188.7
+    ],
+    "closed_transform": "identity placement of the STL; this gap is the closed position"
+  },
+  "triangles": 231846,
   "instance_count": 51,
   "fixture_count": 10,
   "assembly_mm": {

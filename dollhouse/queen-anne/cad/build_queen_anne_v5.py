@@ -68,7 +68,9 @@ MAG_D, MAG_T = 5.0, 2.8
 SKIN, RAD, AX = 1.2, 0.25, 0.20
 POD_D = MAG_D + 2 * RAD
 POD_H = MAG_T + AX
-PULL = 58.0
+PULL = 70.0
+FIT_GAP = 0.45
+JAMB_BACK = MY1 - 1.0
 
 SAGE, IVORY, WINE = "#6f917c", "#f4ecdc", "#8d3038"
 SLATE, BRICK = "#2a3642", "#8b4e3c"
@@ -187,7 +189,7 @@ def scallop():
     body = sbox(-5.4, 0, 5.4, 7.4)
     nose = Point(0, 7.0).buffer(5.2, resolution=6)
     shape = body.union(nose).intersection(sbox(-5.8, 0, 5.8, 12.4))
-    return extrude(shape, 1.7)
+    return extrude(shape, 0.9)
 
 
 def bargeboard(length=168.0):
@@ -256,7 +258,7 @@ def shingle_field(x0, x1, y0, z0, y1, z1):
     while s < length - 8:
         x = x0 + 2 + (4.6 if course % 2 else 0)
         while x < x1 - 8:
-            origin = np.array([x, y0, z0], float) + slope * s - normal * 0.5
+            origin = np.array([x, y0, z0], float) + slope * s - normal * 0.32
             pieces.append(_xform(SCALLOP, origin, across, slope, normal))
             x += 11.2
         s += 7.0
@@ -407,11 +409,11 @@ def foundations():
 
 def floors():
     def slab(z, well):
-        mesh = box_at(MX0 + 6, MY0 + 6, z - FLOOR_T, MX1 - 6, MY1 - 6, z)
+        mesh = box_at(MX0 + 6, MY0 + 6, z - FLOOR_T, MX1 - 14, MY1 - 6, z)
         ribs = []
         y = MY0 + 14
         while y < MY1 - 12:
-            ribs.append(box_at(MX0 + 16, y, z - 0.55, MX1 - 16, y + 1.3, z + 0.15))
+            ribs.append(box_at(MX0 + 16, y, z - 0.55, MX1 - 20, y + 1.3, z + 0.15))
             y += 9
         mesh = union([mesh, *ribs])
         return cleanup(difference(mesh, [box_at(*well)]), "floor")
@@ -436,25 +438,30 @@ def fixed_walls():
         z0, z1 = floor + 0.4, plate_top(floor)
         zp = floor + CLEAR
         parts = [
-            box_at(MX0 + 8, MY1 - 8, z0, MX1 - 8, MY1, z1),
-            box_at(MX0 + 4, MY0 + 8, zp, MX1 - 8, MY1 - 6, z1),
-            box_at(MX0 + 12, MY0 + 4, zp - 9, MX1 - 12, MY0 + 12, z1),
-            box_at(348, MY0 + 16, z0, 356, MY1 - 6, z1),
+            # Ceiling plate reaches the rear edge so the roof bears with the back off.
+            box_at(MX0 + 4, MY0 + 8, zp, MX1 - 16, MY1 - 3, z1),
+            box_at(MX0 + 12, MY0 + 4, zp - 9, MX1 - 12, MY0 + 14, z1),
+            # Hall wall stops short of the rear opening.
+            box_at(348, MY0 + 16, z0, 356, MY1 - 28, z1),
+            # Left rear jamb. The right jamb is the side wall's return.
+            box_at(MX0 + 6, MY1 - 18, z0, MX0 + 18, MY1 - 1.0, z1),
         ]
-        # wainscot on the rear wall
-        parts.append(box_at(MX0 + 14, MY1 - 9.2, z0 + 2, MX1 - 14, MY1 - 7.4, z0 + 36))
-        for fx, fz in ((270, floor + 46), (430, floor + 50)):
-            parts.append(box_at(fx, MY1 - 10.6, fz, fx + 20, MY1 - 6.8, fz + 14))
-            parts.append(box_at(fx + 2.2, MY1 - 11.4, fz + 2, fx + 17.6, MY1 - 9.4, fz + 12))
+        parts.append(box_at(336, 208, floor + 40, 360, 226, floor + 56))
+        parts.append(box_at(336, 238, floor + 42, 360, 256, floor + 56))
         cuts = [box_at(344, 148, z0, 362, 196, floor + 76)]
+        for zc in (floor + 28, floor + 52, floor + 74):
+            cuts += mag_slots((MX0 + 12, JAMB_BACK), (0, -1), [zc])
         if name == "l1":
             cuts.append(box_at(S1["x0"] - 6, S1["y0"] - 6, zp - 1, S1["x1"] + 6, S1["y1"] + 10, z1 + 1))
         else:
             cuts.append(box_at(S2["x0"] - 6, S2["y0"] - 8, zp - 1, S2["x1"] + 6, S2["y1"] + 8, z1 + 1))
-        cuts.append(box_at(470, MY1 - 12, floor + 30, 510, MY1 + 2, floor + 78))
-        return cleanup(union([difference(union(parts), cuts), *window_pack("+y", 470, MY1, floor + 30, 40, 48)]), name)
-    publish("qa5_walls_l1_v5", shell(L1, "l1"), "Fixed rear wall, hall partition, and ceiling plate.", "walls-l1", "structure", PLASTER)
-    publish("qa5_walls_l2_v5", shell(L2, "l2"), "Fixed rear wall and ceiling of the first floor.", "walls-l2", "structure", PLASTER, explode=[0, 12, 8])
+        return cleanup(difference(union(parts), cuts), name)
+    publish("qa5_walls_l1_v5", shell(L1, "l1"),
+            "Fixed ceiling, hall wall, and the left rear jamb. The rear opening is clear.",
+            "walls-l1", "structure", PLASTER)
+    publish("qa5_walls_l2_v5", shell(L2, "l2"),
+            "Fixed ceiling and hall wall of the first floor. The back is not this part.",
+            "walls-l2", "structure", PLASTER, explode=[0, 12, 8])
     knee_z = EAVE - GAP
     knee = union([
         box_at(MX0 + 16, MY0 + 4, L3 + 0.5, MX1 - 10, MY0 + 10, knee_z),
@@ -560,9 +567,9 @@ def mag_slots(origin, into, zs):
 def ground_front():
     """Fixed street wall behind the porch. A straight pull would hit the porch,
     so everyday play is the side wall. The door sits in the opening."""
-    x0, x1 = MX0 + 2.4, MX1 - 1.2
+    x0, x1 = MX0 + 2.4, MX1 - 12
     y1 = MY0 - 0.4
-    z0, z1 = L1 + 1.0, L2 - 1.2
+    z0, z1 = L1 + 1.0, L2 - 0.2
     body = [
         box_at(x0, y1 - 3.6, z0, x1, y1, z1),
         box_at(x0, y1 - 8, z0, x0 + 14, y1, z1),
@@ -606,18 +613,65 @@ def ground_front():
 
 def facades():
     ground_front()
-    # Upper front, full width, above the porch roof so it can pull straight off.
-    z0, z1 = L2 + 6, L3 + 10
-    wins = [{"x": x, "z": L2 + 22, "w": 28, "h": 54} for x in (252, 332, 414, 468)]
-    front = facade((MX0 + 4, MY0 - 4.4, z0, MX1 - 0.8, MY0 - 0.35, z1), "-y", wins, flowers=True)
-    publish("qa5_facade_front_v5", front, "Full-width upper front. Straight pull. Flower boxes are part of the shell.",
-            "front-upper", "facade", SAGE, {"group": "front", "pull": [0, -PULL, 0]}, [0, -40, 8])
-    for i, floor in enumerate((L1, L2)):
-        z0, z1 = floor + 3, floor + CLEAR - 2
-        wins = [{"y": y, "z": floor + 24, "w": 32, "h": 54} for y in (150, 230)]
-        side = facade((MX1 + 0.5, MY0 + 6, z0, MX1 + 0.5 + 3.6, MY1 - 8, z1), "+x", wins)
-        publish(f"qa5_facade_side_l{i+1}_v5", side, "Full-depth side wall. This is the play opening. Straight pull.",
-                f"side-l{i+1}", "facade", SAGE, {"group": "end", "pull": [PULL, 0, 0]}, [36, 0, 6])
+    # Upper street wall is fixed. The 0.65 mm seam is the belt at the floor line.
+    z0, z1 = L2 + 0.45, L3 + 10
+    wins = [{"x": x, "z": L2 + 22, "w": 30, "h": 56} for x in (252, 328, 404, 466)]
+    front = facade((MX0 + 4, MY0 - 4.4, z0, MX1 - 12, MY0 - 0.35, z1), "-y", wins, flowers=True)
+    publish("qa5_front_upper_v5", front,
+            "Upper street wall. Fixed. Big sash openings. It does not pull off.",
+            "front-upper", "structure", SAGE)
+    wins = [{"y": y, "z": z, "w": 34, "h": 50} for z in (L1 + 26, L2 + 22) for y in (148, 220)]
+    side = facade((MX1 - 6.0, MY0 + 0.9, L1 + 1.2, MX1 + 0.35, MY1 - 12, plate_top(L2) - 1.2), "+x", wins)
+    jamb = box_at(MX1 - 11, MY1 - 20, L1 + 1.0, MX1 - 1.2, JAMB_BACK, plate_top(L2) - 1.0)
+    slots = []
+    for zc in (L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74):
+        slots += mag_slots((MX1 - 7, JAMB_BACK), (0, -1), [zc])
+    side = cleanup(union([side, difference(jamb, slots)]), "side")
+    publish("qa5_side_v5", side,
+            "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
+            "side", "structure", SAGE)
+    rear_closure()
+
+
+def rear_closure():
+    """The only wall that comes off. One print. Seats 0.45 mm behind the jambs."""
+    x0, x1 = MX0 + 8.0, MX1 - 4.0
+    y0 = JAMB_BACK + FIT_GAP
+    y1 = y0 + 4.6
+    z0 = L1 + FIT_GAP
+    z1 = plate_top(L2) - FIT_GAP
+    body = [
+        box_at(x0, y0, z0, x1, y1, z1),
+        box_at(x0, y0, z0, x0 + 12, y1 + 0.8, z1),
+        box_at(x1 - 12, y0, z0, x1, y1 + 0.8, z1),
+    ]
+    skin = clapboard(x0 + 14, y0, z0 + 6, x1 - 14, y1, z1 - 6, "+y")
+    wins = []
+    for z in (L1 + 28, L2 + 24):
+        wins.append({"x": x0 + 36, "z": z, "w": 42, "h": 50})
+        wins.append({"x": x0 + 150, "z": z, "w": 42, "h": 50})
+    cuts, trim = [], []
+    for win in wins:
+        cuts.append(box_at(win["x"], y0 - 2, win["z"], win["x"] + win["w"], y1 + 3, win["z"] + win["h"]))
+        trim += [
+            box_at(win["x"] - 3.2, y0 + 1.2, win["z"] - 3.4, win["x"] + win["w"] + 3.2, y1 + 2.2, win["z"] + 1.4),
+            box_at(win["x"] - 3.2, y0 + 1.2, win["z"] + win["h"] - 1.2, win["x"] + win["w"] + 3.2, y1 + 2.4, win["z"] + win["h"] + 3.2),
+            box_at(win["x"] - 3.4, y0 + 1.2, win["z"], win["x"] + 1.6, y1 + 2.0, win["z"] + win["h"]),
+            box_at(win["x"] + win["w"] - 1.6, y0 + 1.2, win["z"], win["x"] + win["w"] + 3.4, y1 + 2.0, win["z"] + win["h"]),
+            box_at(win["x"] + win["w"] * 0.46, y0 + 1.4, win["z"] - 0.4, win["x"] + win["w"] * 0.54, y1 + 1.6, win["z"] + win["h"] + 0.6),
+        ]
+    zs = [L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74]
+    for sx in (MX0 + 12, MX1 - 7):
+        for zc in zs:
+            pocket = cylinder(radius=POD_D / 2, height=2.6, sections=14)
+            pocket.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+            pocket.apply_translation((sx, y0 + 1.6, zc))
+            cuts.append(pocket)
+    mesh = cleanup(union([difference(union(body + skin), cuts), *trim]), "rear")
+    publish("qa5_rear_v5", mesh,
+            "Full back, one print, 0.45 mm off the jambs. Straight magnetic pull. Nominal 5 x 2.8 mm discs. Not a structural brace.",
+            "rear", "back", SAGE, {"group": "back", "pull": [0, PULL, 0]}, [0, 56, 0],
+            {"fit_gap_mm": FIT_GAP, "jamb_back_y": JAMB_BACK})
 
 
 def cone_courses():
@@ -1141,16 +1195,35 @@ def audits():
             fails.append({"well": iid})
         if clear < HEAD:
             fails.append({"headroom": iid})
+    rear = next(i for i in INSTANCES if i["id"] == "rear")
+    rb = rear["world"].bounds
+    gap = float(rb[0][1] - JAMB_BACK)
+    touch = 0.0
+    for other in house:
+        if other["id"] not in ("walls-l1", "walls-l2", "side", "attic-frame"):
+            continue
+        if overlap(rear["world"], other["world"]):
+            touch += ivol(rear["world"], other["world"])
+    rear_fit = {"gap_y_mm": round(gap, 3), "target_gap_mm": FIT_GAP,
+                "intersection_mm3": round(touch, 3),
+                "panel_bbox_mm": [round(float(v), 1) for v in (rb[1] - rb[0])],
+                "closed_transform": "identity placement of the STL; this gap is the closed position"}
+    print("rear fit", rear_fit, flush=True)
+    if not (0.25 <= gap <= 0.8):
+        fails.append({"rear_gap_mm": round(gap, 3)})
+    if touch > 2:
+        fails.append({"rear_intersection_mm3": round(touch, 2)})
     print("rest", n, pair, "roofs", roofs, "stairs", stairs, flush=True)
     return {"ok": not fails, "failures": fails[:16], "rest_pairs": n, "worst_mm3": round(worst, 2),
-            "worst_pair": pair, "roofs": roofs, "stairs": stairs}
+            "worst_pair": pair, "roofs": roofs, "stairs": stairs, "rear_fit": rear_fit}
 
 
 def write_all(report):
     os.makedirs(STL, exist_ok=True)
     os.makedirs(REPORT, exist_ok=True)
+    keep = set(CATALOG)
     for name in os.listdir(STL):
-        if name.endswith(".stl") and not name.startswith("qa5_"):
+        if name.endswith(".stl") and name[:-4] not in keep:
             os.remove(os.path.join(STL, name))
     for name, info in CATALOG.items():
         info["mesh"].export(os.path.join(STL, name + ".stl"))
@@ -1169,14 +1242,13 @@ def write_all(report):
             "motion": item["motion"], "explode_mm": item["explode_mm"],
             "transform": [[1, 0, 0, round(p[0], 3)], [0, 1, 0, round(p[1], 3)], [0, 0, 1, round(p[2], 3)], [0, 0, 0, 1]],
         })
-    n_facade = len([i for i in INSTANCES if i["role"] == "facade"])
     count = len(FIXTURES)
     manifest = {
         "name": "Queen Anne Playhouse",
-        "version": "5.0.0",
+        "version": "6.0.0",
         "prior_version": "archive/v4.0.0",
         "scale": "1:24",
-        "description": "Broad Queen Anne: large octagonal turret, street cross-gable, deep wraparound porch.",
+        "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
         "concept_image": "concept/approved-direction.jpg",
         "concept_note": "Approved picture. Not this CAD and not a measured survey.",
         "units": "mm", "up_axis": "Z",
@@ -1241,32 +1313,34 @@ def write_all(report):
             "fragile_ornament": "Balusters, bargeboard piercings, flower blossoms, and scallop edges are thin. A 0.2 mm nozzle is the ornament setting. They are not claimed durable or safe.",
         },
         "departures_from_concept": [
-            "The picture is a render, not a survey. Width, turret, porch depth, and the street gable follow it. Mouldings are thicker than the render's hairlines.",
-            "The street gable is a separate sage wall in front of the slate slopes, with a hairline gap so the two parts do not occupy the same volume.",
-            "Routine play is the side wall, pulled straight off. The porch and the ground-floor street wall stay.",
-            "The turret drum is fixed. A wrapped octagon cannot slide off its floors in a straight line. The joint to the main block is a hairline, not a buried intersection.",
+            "The picture is a render, not a survey. The broad front, turret, porch, and street gable follow it. Mouldings are thicker than the render's hairlines.",
+            "Play access is the full back, one wall, pulled straight off. The front and both sides stay. The picture's open view is a side cutaway; this house opens at the back.",
+            "The back seats 0.45 mm off the jambs. That gap is the fit, not a missing wall. Magnets do not hold the house up. The back is not a brace.",
+            "The rear wall's measured bbox fits one print. It is not a 460 mm slab.",
             "Colors in the viewer are the intended palette. One printed part is one material until it is painted.",
             "Balusters, bargeboard piercings, blossoms, and scallop edges are thin. A 0.2 mm nozzle is the ornament setting. They are not claimed durable.",
         ],
         "magnet_install_steps": [
-            "Print the coupon first. The slot matches the facade stiles.",
+            "Print the coupon first. The slot matches the back stiles and the jambs.",
             "An adult seats a nominal 5.0 x 2.8 mm disc and slides the capture bar in from the top.",
-            "The bar closes the magnet. It does not catch the frame. Holding force is untested.",
-            "The side walls are the everyday opening. They pull straight out. The porch does not have to come off.",
+            "The bar closes the magnet. It does not catch the other wall. Holding force is untested.",
+            "The back pulls straight off toward the rear. The front, sides, porch, and roofs stay.",
         ],
         "limits": [
             "Not printed. No strength, tip-over, magnet, or electrical test.",
-            "Roofs are gravity seated, not locked.",
+            "Roofs are gravity seated, not locked. They bear on the fixed shell with the back off.",
+            "The back is a closure, not a structural brace. Magnets are not the house's support.",
             "Thin ornament can break. That is not a safety claim.",
             "Not a toy-safety certification.",
         ],
         "cameras": {
             "closed": {"position": [-80, -620, 250], "target": [280, 150, 145]},
             "front": {"position": [300, -760, 190], "target": [310, 150, 130]},
-            "open": {"position": [920, 180, 200], "target": [360, 190, 130]},
-            "stairs": {"position": [820, 210, 140], "target": [420, 190, 110]},
+            "rear": {"position": [360, 620, 130], "target": [360, 250, 110]},
+            "open": {"position": [390, 720, 160], "target": [380, 180, 120]},
+            "stairs": {"position": [560, 640, 150], "target": [420, 190, 110]},
             "detail": {"position": [250, -30, 55], "target": [370, 55, 40]},
-            "attachment": {"position": [760, 180, 70], "target": [500, 200, 55]},
+            "attachment": {"position": [640, 480, 110], "target": [420, 280, 90]},
             "plan": {"position": [cx, cy, maxs[2] + 280], "target": [cx, cy, 80]},
             "lighting": {"position": [cx + 40, mins[1] - 80, 160], "target": [cx, cy, 90]},
             "explode": {"position": [cx - 80, mins[1] - 200, cz + 80], "target": [cx, cy, cz]},
@@ -1279,7 +1353,7 @@ def write_all(report):
         },
         "parts": [{"id": n, "file": f"stl/{n}.stl", "note": i["note"], "triangles": i["triangles"], "volume_mm3": i["volume"],
                    "watertight": True, "bodies": 1, "bbox_mm": i["extents"], "fits_brim_allowance": True} for n, i in CATALOG.items()],
-        "bom": [{"part": n, "file": f"stl/{n}.stl", "qty": q, **({"print_qty": n_facade * 4 + 2, "note": "One bar per stile, plus the coupon."} if n == "qa5_retainer_v5" else {})} for n, q in sorted(bom.items())],
+        "bom": [{"part": n, "file": f"stl/{n}.stl", "qty": q, **({"print_qty": 26, "note": "One bar per rear pocket and matching jamb pocket, plus the coupon. The bar closes the magnet only."} if n == "qa5_retainer_v5" else {})} for n, q in sorted(bom.items())],
         "instances": instances,
     }
     # cameras used python lists of numpy floats

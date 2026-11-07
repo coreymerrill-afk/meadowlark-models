@@ -27,7 +27,7 @@ assert(manifest.validation.forces_tested === false, 'forces flag');
 assert(manifest.validation.h3c_sliced === false, 'slice flag');
 assert(manifest.validation.cad_validated === true, 'cad flag');
 assert(manifest.legacy_interface.snap_compatible === false, 'snap claim');
-assert(manifest.version === '5.0.0', 'version');
+assert(manifest.version === '6.0.0', 'version');
 assert(manifest.prior_version === 'archive/v4.0.0', 'v4 archive pointer');
 assert(manifest.magnet.status === 'NOMINAL_NOT_FIT_APPROVED', 'magnet status');
 assert(manifest.magnet.nominal_mm[0] === 5 && manifest.magnet.nominal_mm[1] === 2.8, 'magnet nominal');
@@ -73,9 +73,12 @@ assert(read(here + 'archive/v1.0.0/README.md').includes('78 mm'), 'v1 defect not
 assert(read(here + 'archive/v3.0.0/README.md').includes('v3.0.0'), 'v3 archive note');
 assert(read(here + 'archive/v4.0.0/README.md').includes('narrow stack'), 'v4 archive note');
 assert(read(here + 'index.html').includes('approved-direction.jpg'), 'concept image on the page');
-manifest.instances.filter((instance) => instance.role === 'facade').forEach((instance) => {
-  assert(instance.motion && instance.motion.pull && !instance.motion.slide && !instance.motion.lift, 'facade motion ' + instance.id);
-});
+assert(!manifest.instances.some((instance) => instance.role === 'facade'), 'no room facades');
+const rear = manifest.instances.find((instance) => instance.id === 'rear');
+assert(rear && rear.motion && rear.motion.pull && rear.motion.pull[1] > 0 && !rear.motion.slide && !rear.motion.lift, 'rear pulls straight off');
+assert(validation.rear_fit && validation.rear_fit.gap_y_mm === 0.45, 'rear seats at 0.45 mm');
+assert(validation.rear_fit.intersection_mm3 === 0, 'rear does not occupy the jambs');
+assert(validation.rear_fit.panel_bbox_mm[0] < 310 && validation.rear_fit.panel_bbox_mm[2] < 315, 'rear fits the bed');
 
 assert(home.includes('href="/dollhouse/queen-anne/"'), 'home link');
 assert(home.includes('href="/dollhouse/"'), 'home still links the play kit');
@@ -89,6 +92,7 @@ assert(kit.includes('href="/dollhouse/queen-anne/"'), 'kit page link');
 assert(!grand.includes('queen-anne'), 'queen anne must stay out of the six-manor viewer');
 
 const page = read(here + 'index.html');
+assert(page.includes('data-mode="rear"'), 'rear control');
 assert(page.includes('data-mode="front"'), 'front control');
 assert(page.includes('data-mode="detail"'), 'detail control');
 assert(page.includes('data-mode="closed"'), 'closed control');

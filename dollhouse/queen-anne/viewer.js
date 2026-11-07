@@ -105,17 +105,17 @@
       case 'closed':
       case 'front':
       case 'detail':
+      case 'rear':
       case 'plan':
       case 'lighting':
         return instance.transform;
       case 'attachment':
-        if (instance.id === 'side-l1' && motion && motion.pull) {
-          return mul(translate([motion.pull[0] * 0.45, motion.pull[1] * 0.45, 0]), instance.transform);
+        if (instance.id === 'rear' && motion && motion.pull) {
+          return mul(translate([0, motion.pull[1] * 0.55, 0]), instance.transform);
         }
         return instance.transform;
       case 'open':
       case 'stairs':
-        if (group === 'roof') return mul(translate(motionVector(motion, true)), instance.transform);
         return instance.transform;
       case 'remove-panels':
         return instance.transform;
@@ -139,14 +139,14 @@
   function modeVisible(instance) {
     if (instance.role === 'coupon' && state.mode !== 'attachment') return false;
     var group = instance.motion ? instance.motion.group : '';
-    if ((state.mode === 'open' || state.mode === 'stairs') && group === 'end') return false;
+    if ((state.mode === 'open' || state.mode === 'stairs') && group === 'back') return false;
     if (instance.role === 'service' && state.mode !== 'lighting' && state.mode !== 'explode') return false;
     if (state.mode === 'remove-panels') {
       var group = instance.motion ? instance.motion.group : '';
       return group !== 'front' && group !== 'end';
     }
     if (state.mode === 'attachment') {
-      return instance.id === 'side-l1' || instance.id === 'walls-l1' || instance.role === 'coupon';
+      return instance.id === 'rear' || instance.id === 'side' || instance.id === 'walls-l1' || instance.role === 'coupon';
     }
     if (state.mode === 'plan') {
       return instance.role !== 'roof' && instance.role !== 'facade' && instance.role !== 'panel' && instance.role !== 'coupon' && instance.role !== 'sample' && levelOf(instance) === state.storey;
@@ -165,8 +165,10 @@
         return 'Front elevation, matched to the approved picture’s closed view. Materials are colors on the real meshes.';
       case 'detail':
         return 'Porch detail. Turned columns, brackets, and the spindle rail are geometry, not a texture.';
+      case 'rear':
+        return 'Closed back. The one rear wall sits 0.45 mm off the jambs. That gap is the fit.';
       case 'open':
-        return 'Open from the side. The side shells are pulled straight off and the roofs are lifted. The porch stays, so play does not start by dismantling it.';
+        return 'Back off. The front, sides, porch, and roofs stay. This is the play opening.';
       case 'remove-panels':
         return 'Panels hidden. Frames, floors, stairs, and roofs stay. The hidden panels are the same STLs.';
       case 'roof':
@@ -176,7 +178,7 @@
       case 'plan':
         return 'Storey ' + state.storey + '. Roofs and facades are hidden so the rooms, stair, and doorways on this floor are visible. The drawing under the view uses the same coordinates.';
       case 'attachment':
-        return 'Side wall, the everyday opening, pulled straight out. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested. The porch is not part of this pull.';
+        return 'The back, pulled straight off. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested. The back is not what holds the house up.';
       case 'stairs':
         return 'Both flights. The lower run climbs from the entry to the first floor. The upper run climbs from that floor to the attic.';
       case 'lighting':
