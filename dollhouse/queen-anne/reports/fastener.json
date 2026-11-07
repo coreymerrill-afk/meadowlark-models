@@ -35,7 +35,11 @@
       "lip_hole_mm": 2.5,
       "seated_screw_nut_mm3": 0.0,
       "pull_0_12mm_flank_mm3": 0.21,
-      "measured": false
+      "measured": false,
+      "catalog": "M2x3",
+      "under_head_mm": 3.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 3.15
     },
     {
       "screw": "adult-screw-back-r",
@@ -53,7 +57,11 @@
       "lip_hole_mm": 2.5,
       "seated_screw_nut_mm3": 0.0,
       "pull_0_12mm_flank_mm3": 0.21,
-      "measured": false
+      "measured": false,
+      "catalog": "M2x3",
+      "under_head_mm": 3.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 3.15
     },
     {
       "screw": "adult-screw-jl1",
@@ -71,7 +79,11 @@
       "lip_hole_mm": 2.5,
       "seated_screw_nut_mm3": 0.0,
       "pull_0_12mm_flank_mm3": 0.21,
-      "measured": false
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
     },
     {
       "screw": "adult-screw-jl2",
@@ -89,7 +101,11 @@
       "lip_hole_mm": 2.5,
       "seated_screw_nut_mm3": 0.0,
       "pull_0_12mm_flank_mm3": 0.21,
-      "measured": false
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
     },
     {
       "screw": "adult-screw-jr1",
@@ -107,7 +123,11 @@
       "lip_hole_mm": 2.5,
       "seated_screw_nut_mm3": 0.0,
       "pull_0_12mm_flank_mm3": 0.21,
-      "measured": false
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
     },
     {
       "screw": "adult-screw-jr2",
@@ -125,7 +145,12 @@
       "lip_hole_mm": 2.5,
       "seated_screw_nut_mm3": 0.0,
       "pull_0_12mm_flank_mm3": 0.21,
-      "measured": false
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
     }
-  ]
+  ],
+  "length_note": "Back catalog length is M2x3. Jamb catalog length is M2x8. Engagement is the overlap of the under-head interval and the nut interval. It is not a mesh-collision proxy. Not physically tested."
 }

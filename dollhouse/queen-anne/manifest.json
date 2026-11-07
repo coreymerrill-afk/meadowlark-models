@@ -1,6 +1,6 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "6.5.2",
+  "version": "6.5.3",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
   "description": "Solid Queen Anne. Front, sides, and roof stay on. The full back, extended up over the attic opening, is the one closure.",
@@ -732,8 +732,8 @@
       "id": "qa5_walls_l1_v5",
       "file": "stl/qa5_walls_l1_v5.stl",
       "note": "Fixed ceiling, hall wall, and the left rear jamb. The rear opening is clear.",
-      "triangles": 796,
-      "volume_mm3": 505687.6,
+      "triangles": 974,
+      "volume_mm3": 505661.4,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -748,8 +748,8 @@
       "id": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
       "note": "Fixed ceiling and hall wall of the first floor. The back is not this part.",
-      "triangles": 836,
-      "volume_mm3": 504538.4,
+      "triangles": 1014,
+      "volume_mm3": 504512.2,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -924,8 +924,8 @@
       "id": "qa5_side_v5",
       "file": "stl/qa5_side_v5.stl",
       "note": "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
-      "triangles": 3132,
-      "volume_mm3": 149326.8,
+      "triangles": 3524,
+      "volume_mm3": 149262.7,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -2155,16 +2155,16 @@
     {
       "id": "qa65_adult_screw_back_l",
       "file": "stl/qa65_adult_screw_back_l.stl",
-      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
-      "triangles": 182,
-      "volume_mm3": 27.3,
+      "note": "REFERENCE ONLY. Not a printed part. Nominal ISO 1580 M2x3, under-head 3.0 mm, head 3.8 x 1.6 mm, pitch 0.4 mm. Not measured. Not a safety certification.",
+      "triangles": 2286,
+      "volume_mm3": 19.9,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        4.4,
-        5.1,
-        4.27
+        3.8,
+        4.65,
+        3.69
       ],
       "fits_brim_allowance": true,
       "print": false,
@@ -2173,16 +2173,16 @@
     {
       "id": "qa65_adult_screw_back_r",
       "file": "stl/qa65_adult_screw_back_r.stl",
-      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
-      "triangles": 182,
-      "volume_mm3": 27.3,
+      "note": "REFERENCE ONLY. Not a printed part. Nominal ISO 1580 M2x3, under-head 3.0 mm, head 3.8 x 1.6 mm, pitch 0.4 mm. Not measured. Not a safety certification.",
+      "triangles": 2286,
+      "volume_mm3": 19.9,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        4.4,
-        5.1,
-        4.27
+        3.8,
+        4.65,
+        3.69
       ],
       "fits_brim_allowance": true,
       "print": false,
@@ -2207,16 +2207,16 @@
     {
       "id": "qa65_adult_screw_jl1",
       "file": "stl/qa65_adult_screw_jl1.stl",
-      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
-      "triangles": 182,
-      "volume_mm3": 40.3,
+      "note": "REFERENCE ONLY. Not a printed part. Nominal ISO 1580 M2x8, under-head 8.0 mm, head 3.8 x 1.6 mm, pitch 0.4 mm. Not measured. Not a safety certification.",
+      "triangles": 5698,
+      "volume_mm3": 30.5,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        4.4,
-        9.3,
-        4.27
+        3.8,
+        9.65,
+        3.69
       ],
       "fits_brim_allowance": true,
       "print": false,
@@ -2241,16 +2241,16 @@
     {
       "id": "qa65_adult_screw_jl2",
       "file": "stl/qa65_adult_screw_jl2.stl",
-      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
-      "triangles": 182,
-      "volume_mm3": 40.3,
+      "note": "REFERENCE ONLY. Not a printed part. Nominal ISO 1580 M2x8, under-head 8.0 mm, head 3.8 x 1.6 mm, pitch 0.4 mm. Not measured. Not a safety certification.",
+      "triangles": 5698,
+      "volume_mm3": 30.5,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        4.4,
-        9.3,
-        4.27
+        3.8,
+        9.65,
+        3.69
       ],
       "fits_brim_allowance": true,
       "print": false,
@@ -2275,16 +2275,16 @@
     {
       "id": "qa65_adult_screw_jr1",
       "file": "stl/qa65_adult_screw_jr1.stl",
-      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
-      "triangles": 182,
-      "volume_mm3": 40.3,
+      "note": "REFERENCE ONLY. Not a printed part. Nominal ISO 1580 M2x8, under-head 8.0 mm, head 3.8 x 1.6 mm, pitch 0.4 mm. Not measured. Not a safety certification.",
+      "triangles": 5698,
+      "volume_mm3": 30.5,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        4.4,
-        9.3,
-        4.27
+        3.8,
+        9.65,
+        3.69
       ],
       "fits_brim_allowance": true,
       "print": false,
@@ -2309,16 +2309,16 @@
     {
       "id": "qa65_adult_screw_jr2",
       "file": "stl/qa65_adult_screw_jr2.stl",
-      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
-      "triangles": 182,
-      "volume_mm3": 40.3,
+      "note": "REFERENCE ONLY. Not a printed part. Nominal ISO 1580 M2x8, under-head 8.0 mm, head 3.8 x 1.6 mm, pitch 0.4 mm. Not measured. Not a safety certification.",
+      "triangles": 5698,
+      "volume_mm3": 30.5,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        4.4,
-        9.3,
-        4.27
+        3.8,
+        9.65,
+        3.69
       ],
       "fits_brim_allowance": true,
       "print": false,
@@ -6985,7 +6985,7 @@
           0,
           1,
           0,
-          298.2
+          298.65
         ],
         [
           0,
@@ -7030,7 +7030,7 @@
           0,
           1,
           0,
-          298.2
+          298.65
         ],
         [
           0,
@@ -7462,7 +7462,7 @@
           0,
           1,
           0,
-          281.52
+          280.32
         ],
         [
           0,
@@ -7500,7 +7500,7 @@
           0,
           1,
           0,
-          281.52
+          280.32
         ],
         [
           0,
@@ -7538,7 +7538,7 @@
           0,
           1,
           0,
-          275.52
+          274.32
         ],
         [
           0,
@@ -7576,7 +7576,7 @@
           0,
           1,
           0,
-          275.52
+          274.32
         ],
         [
           0,

@@ -17,16 +17,168 @@
       "count_back": 2,
       "count_jamb": 4,
       "drawn_overall_length_mm": {
-        "back": 5.1,
-        "jamb": 9.3
+        "back": 4.6,
+        "jamb": 9.6
       },
       "drawn_head_height_mm": 1.6,
       "drawn_under_head_length_mm": {
-        "back": 3.5,
-        "jamb": 7.7
+        "back": 3.0,
+        "jamb": 8.0
       },
-      "catalog_callout": "None. M2x3, M2x4, M2x6, M2x8 and M2x10 are under-head lengths and do not equal 3.5 or 7.7. The drawing is not labeled as those parts.",
-      "fit_assumption": "Shank major drawn 2.0 mm through a 2.5 mm lip hole. Not measured."
+      "catalog_callout": "2 x M2x3 on the back and 4 x M2x8 on the jambs. Those are under-head lengths. Head drawn 3.8 mm diameter by 1.6 mm, flat driver slot. Not printed. Not a measured fit and not certified.",
+      "fit_assumption": "Shank major drawn 2.0 mm through a 2.5 mm lip hole. Not measured.",
+      "stations": [
+        {
+          "station": "adult-screw-back-l",
+          "catalog": "M2x3",
+          "under_head_mm": 3.0,
+          "overall_mm": 4.6,
+          "head_outer_y": 303.25,
+          "under_head_y": 301.65,
+          "tip_y": 298.65,
+          "nut_y": [
+            298.88,
+            300.48
+          ],
+          "nominal_engagement_mm": 1.6,
+          "full_nut": true,
+          "tip_past_nut_mm": 0.23,
+          "bore_end_y": 295.5,
+          "tip_clearance_mm": 3.15,
+          "bottoms": false,
+          "pull_0_12mm_flank_mm3": 0.21,
+          "nut_moved_mm": 0
+        },
+        {
+          "station": "adult-screw-back-r",
+          "catalog": "M2x3",
+          "under_head_mm": 3.0,
+          "overall_mm": 4.6,
+          "head_outer_y": 303.25,
+          "under_head_y": 301.65,
+          "tip_y": 298.65,
+          "nut_y": [
+            298.88,
+            300.48
+          ],
+          "nominal_engagement_mm": 1.6,
+          "full_nut": true,
+          "tip_past_nut_mm": 0.23,
+          "bore_end_y": 295.5,
+          "tip_clearance_mm": 3.15,
+          "bottoms": false,
+          "pull_0_12mm_flank_mm3": 0.21,
+          "nut_moved_mm": 0
+        },
+        {
+          "station": "adult-screw-jl1",
+          "host": "walls-l1",
+          "catalog": "M2x8",
+          "under_head_mm": 8.0,
+          "overall_mm": 9.6,
+          "head_outer_y": 274.75,
+          "under_head_y": 276.35,
+          "tip_y": 284.35,
+          "nut_y": [
+            280.32,
+            281.92
+          ],
+          "nut_moved_toward_head_mm": 1.2,
+          "nominal_engagement_mm": 1.6,
+          "full_nut": true,
+          "tip_past_nut_mm": 2.43,
+          "bore_end_y": 285.0,
+          "tip_clearance_mm": 0.65,
+          "bore_past_nut_mm": 3.08,
+          "skin_after_bore_mm": 10.0,
+          "side_slot_covered": true,
+          "cover_extended": false,
+          "pull_0_12mm_flank_mm3": 0.21,
+          "lip_hole_mm": 2.5,
+          "bottoms": false
+        },
+        {
+          "station": "adult-screw-jl2",
+          "host": "walls-l2",
+          "catalog": "M2x8",
+          "under_head_mm": 8.0,
+          "overall_mm": 9.6,
+          "head_outer_y": 274.75,
+          "under_head_y": 276.35,
+          "tip_y": 284.35,
+          "nut_y": [
+            280.32,
+            281.92
+          ],
+          "nut_moved_toward_head_mm": 1.2,
+          "nominal_engagement_mm": 1.6,
+          "full_nut": true,
+          "tip_past_nut_mm": 2.43,
+          "bore_end_y": 285.0,
+          "tip_clearance_mm": 0.65,
+          "bore_past_nut_mm": 3.08,
+          "skin_after_bore_mm": 10.0,
+          "side_slot_covered": true,
+          "cover_extended": false,
+          "pull_0_12mm_flank_mm3": 0.21,
+          "lip_hole_mm": 2.5,
+          "bottoms": false
+        },
+        {
+          "station": "adult-screw-jr1",
+          "host": "side",
+          "catalog": "M2x8",
+          "under_head_mm": 8.0,
+          "overall_mm": 9.6,
+          "head_outer_y": 268.75,
+          "under_head_y": 270.35,
+          "tip_y": 278.35,
+          "nut_y": [
+            274.32,
+            275.92
+          ],
+          "nut_moved_toward_head_mm": 1.2,
+          "nominal_engagement_mm": 1.6,
+          "full_nut": true,
+          "tip_past_nut_mm": 2.43,
+          "bore_end_y": 279.0,
+          "tip_clearance_mm": 0.65,
+          "bore_past_nut_mm": 3.08,
+          "skin_after_bore_mm": 16.05,
+          "side_slot_covered": true,
+          "cover_extended": false,
+          "pull_0_12mm_flank_mm3": 0.21,
+          "lip_hole_mm": 2.5,
+          "bottoms": false
+        },
+        {
+          "station": "adult-screw-jr2",
+          "host": "side",
+          "catalog": "M2x8",
+          "under_head_mm": 8.0,
+          "overall_mm": 9.6,
+          "head_outer_y": 268.75,
+          "under_head_y": 270.35,
+          "tip_y": 278.35,
+          "nut_y": [
+            274.32,
+            275.92
+          ],
+          "nut_moved_toward_head_mm": 1.2,
+          "nominal_engagement_mm": 1.6,
+          "full_nut": true,
+          "tip_past_nut_mm": 2.43,
+          "bore_end_y": 279.0,
+          "tip_clearance_mm": 0.65,
+          "bore_past_nut_mm": 3.08,
+          "skin_after_bore_mm": 16.0,
+          "side_slot_covered": true,
+          "cover_extended": false,
+          "pull_0_12mm_flank_mm3": 0.21,
+          "lip_hole_mm": 2.5,
+          "bottoms": false
+        }
+      ]
     },
     {
       "item": "hex nut",
@@ -41,5 +193,7 @@
     "minus_x": 12.0,
     "plus_x": 9.15
   },
-  "pocket_wall_note": "Distance from the nut center to where the stile solid ends. The nut across-flats is 4.0 mm, so the wall outside the flats is this distance minus 2.0 mm. Not a measured print."
+  "pocket_wall_note": "Distance from the nut center to where the stile solid ends. The nut across-flats is 4.0 mm, so the wall outside the flats is this distance minus 2.0 mm. Not a measured print.",
+  "head_driver_pocket": "Nominal pan head 3.8 x 1.6 mm and a flat driver slot. The recess is a design allowance for that head. Unprinted. Not certified.",
+  "version": "6.5.3"
 }
