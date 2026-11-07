@@ -495,8 +495,8 @@
     rim.position.set(200, 480, 300);
     scene.add(rim);
 
-    manifest.instances.forEach(function (instance) {
-      var geometry = geometries[instance.part];
+    function addInstance(instance, geometry) {
+      if (!geometry) return;
       var rough = 0.84;
       var metal = 0.02;
       if (instance.role === 'roof') { rough = 0.74; metal = 0.06; }
@@ -520,6 +520,39 @@
       scene.add(mesh);
       state.entries.push({ instance: instance, mesh: mesh });
       state.triangles += geometry.attributes.position.count / 3;
+    }
+    state.addInstance = addInstance;
+    manifest.instances.forEach(function (instance) {
+      addInstance(instance, geometries[instance.part]);
+    });
+    var raycaster = new THREE.Raycaster();
+    var pointer = new THREE.Vector2();
+    var press = null;
+    view.addEventListener('pointerdown', function (event) {
+      press = { x: event.clientX, y: event.clientY };
+    });
+    view.addEventListener('pointerup', function (event) {
+      if (!press) return;
+      var moved = (event.clientX - press.x) * (event.clientX - press.x) + (event.clientY - press.y) * (event.clientY - press.y);
+      press = null;
+      if (moved > 16) return;
+      var rect = view.getBoundingClientRect();
+      pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      var visible = state.entries.filter(function (entry) { return entry.mesh.visible; }).map(function (entry) { return entry.mesh; });
+      var hits = raycaster.intersectObjects(visible, false);
+      state.entries.forEach(function (entry) {
+        if (entry.mesh.material && entry.mesh.material.emissive) entry.mesh.material.emissive.setHex(0x000000);
+      });
+      var label = el('picked');
+      if (!hits.length) {
+        if (label) label.textContent = 'No part under the pointer.';
+        return;
+      }
+      var chosen = state.entries.filter(function (entry) { return entry.mesh === hits[0].object; })[0];
+      if (chosen && chosen.mesh.material && chosen.mesh.material.emissive) chosen.mesh.material.emissive.setHex(0x3a2a12);
+      if (label && chosen) label.textContent = chosen.instance.id + ' · ' + chosen.instance.part;
     });
 
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -553,15 +586,36 @@
       requestAnimationFrame(frame);
     }
     updatePoses();
+    look();
     frame();
-    var status = el('view-status');
-    if (status) status.remove();
     state.booted = true;
   }
 
   function fail(error) {
-    state.errors.push(String(error));
-    el('error').textContent = String(error && error.message ? error.message : error);
+    var message = String(error && error.message ? error.message : error);
+    state.errors.push(message);
+    var node = el('error');
+    if (node) node.textContent = message;
+    var status = el('view-status');
+    if (!status) {
+      status = document.createElement('div');
+      status.id = 'view-status';
+      status.className = 'view-status';
+      status.innerHTML = '<strong></strong><p></p>';
+      var view = el('view');
+      if (view) view.appendChild(status);
+    }
+    var title = status.querySelector('strong');
+    var copy = status.querySelector('p');
+    if (title) title.textContent = 'This file did not load';
+    if (copy) copy.textContent = message;
+    if (!status.querySelector('button')) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Retry';
+      button.addEventListener('click', function () { window.location.reload(); });
+      status.appendChild(button);
+    }
   }
 
   var reset = document.getElementById('reset-view');
@@ -588,35 +642,45 @@
 
   fetch('/dollhouse/queen-anne/manifest.json')
     .then(function (response) {
-      if (!response.ok) throw new Error('Manifest did not load');
+      if (!response.ok) throw new Error('manifest.json did not load (' + response.status + ')');
       return response.json();
     })
     .then(function (manifest) {
       state.manifest = manifest;
       renderChrome(manifest);
+      bootViewer(manifest, {});
       var ids = [];
       manifest.parts.forEach(function (part) {
         if (ids.indexOf(part.id) === -1) ids.push(part.id);
       });
-      var geometries = {};
-      var done = 0;
-      return Promise.all(ids.map(function (id) {
-        var part = manifest.parts.filter(function (item) { return item.id === id; })[0];
-        return fetch('/dollhouse/queen-anne/' + part.file).then(function (response) {
-          if (!response.ok) throw new Error(part.file + ' did not load');
-          return response.arrayBuffer();
-        }).then(function (buffer) {
-          var parsed = parseStl(buffer);
-          var geometry = new THREE.BufferGeometry();
-          geometry.setAttribute('position', new THREE.BufferAttribute(parsed.positions, 3));
-          geometry.computeVertexNormals();
-          geometries[id] = geometry;
-          done += 1;
-          var status = el('view-status');
-          if (status) status.querySelector('p').textContent = 'Loaded ' + done + ' of ' + ids.length + ' STLs.';
+      var chain = Promise.resolve();
+      ids.forEach(function (id, index) {
+        chain = chain.then(function () {
+          var part = manifest.parts.filter(function (item) { return item.id === id; })[0];
+          return fetch('/dollhouse/queen-anne/' + part.file).then(function (response) {
+            if (!response.ok) throw new Error(part.file + ' did not load (' + response.status + ')');
+            return response.arrayBuffer();
+          }).then(function (buffer) {
+            var parsed = parseStl(buffer);
+            var geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(parsed.positions, 3));
+            geometry.computeVertexNormals();
+            manifest.instances.forEach(function (instance) {
+              if (instance.part === part.id) state.addInstance(instance, geometry);
+            });
+            updatePoses();
+            var status = el('view-status');
+            if (status) {
+              var copy = status.querySelector('p');
+              if (copy) copy.textContent = 'Loaded ' + (index + 1) + ' of ' + ids.length + ' parts. Orbit works while the rest arrive.';
+            }
+            return new Promise(function (resolve) { setTimeout(resolve, 0); });
+          });
         });
-      })).then(function () {
-        bootViewer(manifest, geometries);
+      });
+      return chain.then(function () {
+        var status = el('view-status');
+        if (status) status.remove();
       });
     })
     .catch(fail);
