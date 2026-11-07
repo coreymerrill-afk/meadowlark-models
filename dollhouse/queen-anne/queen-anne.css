@@ -126,7 +126,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.84em;
 ul { margin: 0.3rem 0 0.6rem; padding-left: 1.15rem; }
 li { margin: 0.25rem 0; }
 #error { color: var(--danger); }
-#plan-svg, #light-svg { min-height: 220px; }
+#concept img { width: 100%; height: auto; border-radius: 10px; display: block; }
 #plan-svg svg, #light-svg svg { width: 100%; height: auto; display: block; border-radius: 10px; background: #1a1f27; }
 .card.is-focus { border-color: var(--accent); }
 .storeys { margin-top: 0.4rem; }

@@ -123,7 +123,8 @@ async function shot(client, mode, file) {
 const desktop = await open('http://127.0.0.1:' + port + '/dollhouse/queen-anne/', 1280, 900);
 const closed = await shot(desktop.client, 'closed', '/opt/cursor/artifacts/queen-anne-closed-desktop.png');
 const opened = await shot(desktop.client, 'open', '/opt/cursor/artifacts/queen-anne-open-desktop.png');
-const plan = await shot(desktop.client, 'plan', '/opt/cursor/artifacts/queen-anne-plan-desktop.png');
+const stairs = await shot(desktop.client, 'stairs', '/opt/cursor/artifacts/queen-anne-stairs-desktop.png');
+const attachment = await shot(desktop.client, 'attachment', '/opt/cursor/artifacts/queen-anne-attachment-desktop.png');
 await desktop.client.send('Runtime.evaluate', {
   expression: `document.getElementById('plan-card').scrollIntoView({block:'start'})`
 });
@@ -135,10 +136,6 @@ const planBox = await desktop.client.send('Runtime.evaluate', {
 const planClip = { x: planBox.result.value.x, y: planBox.result.value.y, width: planBox.result.value.width, height: planBox.result.value.height, scale: 1 };
 const full = await desktop.client.send('Page.captureScreenshot', { format: 'png' });
 writeFileSync('/opt/cursor/artifacts/queen-anne-floorplan-full.png', Buffer.from(full.data, 'base64'));
-const planCard = await desktop.client.send('Page.captureScreenshot', { format: 'png', clip: planClip });
-writeFileSync('/opt/cursor/artifacts/queen-anne-floorplan.png', Buffer.from(planCard.data, 'base64'));
-plan.svg = { children: planBox.result.value.children, svgChildren: planBox.result.value.svgChildren, sample: planBox.result.value.sample, top: planBox.result.value.top };
-const attachment = await shot(desktop.client, 'attachment', '/opt/cursor/artifacts/queen-anne-attachment-desktop.png');
 const lighting = await shot(desktop.client, 'lighting', '/opt/cursor/artifacts/queen-anne-lighting-desktop.png');
 desktop.ws.close();
 
@@ -150,11 +147,10 @@ mobile.ws.close();
 const links = [
   '/dollhouse/queen-anne/',
   '/dollhouse/queen-anne/manifest.json',
-  '/dollhouse/queen-anne/stl/qa3_coupon_panel_v3.stl',
-  '/dollhouse/queen-anne/stl/qa3_panel_hall_l1_front_v3.stl',
-  '/dollhouse/queen-anne/stl/qa3_roof_tower_v3.stl',
-  '/dollhouse/queen-anne/stl/qa3_retainer_v3.stl',
-  '/dollhouse/queen-anne/stl/qa3_fixture_section_v3.stl',
+  '/dollhouse/queen-anne/stl/qa4_roof_turret_v4.stl',
+  '/dollhouse/queen-anne/stl/qa4_facade_front_l1_v4.stl',
+  '/dollhouse/queen-anne/stl/qa4_stair_lower_v4.stl',
+  '/dollhouse/queen-anne/concept/approved-direction.jpg',
   '/dollhouse/',
   '/marble-factory/',
   '/marble-system/',
@@ -175,12 +171,11 @@ const home = await new Promise((resolve, reject) => {
 const kept = ['/dollhouse/', '/dollhouse/queen-anne/', '/marble-factory/', '/marble-system/', '/observatory/']
   .every((href) => home.includes('href="' + href + '"'));
 
-const report = { desktop: desktop.sample, closed, opened, plan, attachment, lighting, mobile: mobile.sample, mobileClosed, mobileOpen, statuses, kept };
+const report = { desktop: desktop.sample, closed, opened, stairs, attachment, mobile: mobile.sample, mobileClosed, mobileOpen, statuses, kept };
 console.log(JSON.stringify(report, null, 2));
 const badStatus = Object.entries(statuses).filter(([, code]) => code !== 200);
 const failed = !desktop.sample.booted || desktop.sample.errors.length || badStatus.length || !kept
-  || closed.mode !== 'closed' || opened.mode !== 'open' || plan.mode !== 'plan' || attachment.mode !== 'attachment'
-  || plan.visible >= closed.visible
+  || closed.mode !== 'closed' || opened.mode !== 'open' || stairs.mode !== 'stairs' || attachment.mode !== 'attachment'
   || mobileClosed.mode !== 'closed' || mobileOpen.mode !== 'open';
 server.kill();
 chrome.kill();

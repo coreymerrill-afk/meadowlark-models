@@ -107,20 +107,21 @@
       case 'lighting':
         return instance.transform;
       case 'attachment':
-        if (instance.id === 'hall-l1-front' && motion && motion.pull) {
-          return mul(translate([0, motion.pull[1] * 0.45, 0]), instance.transform);
+        if ((instance.id === 'front-l1' || instance.id === 'door') && motion && motion.pull) {
+          return mul(translate([motion.pull[0] * 0.45, motion.pull[1] * 0.45, 0]), instance.transform);
         }
         return instance.transform;
       case 'open':
+      case 'stairs':
         if (group === 'front' || group === 'end') {
           return mul(translate(motionVector(motion, false)), instance.transform);
         }
-        if (group === 'roof') return mul(translate(motionVector(motion, true)), instance.transform);
+        if (group === 'roof' || group === 'porch') return mul(translate(motionVector(motion, true)), instance.transform);
         return instance.transform;
       case 'remove-panels':
         return instance.transform;
       case 'roof':
-        if (group === 'roof') return mul(translate(motionVector(motion, true)), instance.transform);
+        if (group === 'roof' || group === 'porch') return mul(translate(motionVector(motion, true)), instance.transform);
         return instance.transform;
       case 'explode':
         return mul(translate(instance.explode_mm), instance.transform);
@@ -142,10 +143,10 @@
       return group !== 'front' && group !== 'end';
     }
     if (state.mode === 'attachment') {
-      return instance.id === 'hall-l1-front' || instance.id === 'hall-l1-frame' || instance.role === 'coupon';
+      return instance.id === 'front-l1' || instance.id === 'door' || instance.id === 'walls-l1' || instance.role === 'coupon';
     }
     if (state.mode === 'plan') {
-      return instance.role !== 'roof' && instance.role !== 'panel' && instance.role !== 'coupon' && instance.role !== 'sample' && levelOf(instance) === state.storey;
+      return instance.role !== 'roof' && instance.role !== 'facade' && instance.role !== 'panel' && instance.role !== 'coupon' && instance.role !== 'sample' && levelOf(instance) === state.storey;
     }
     if (state.mode === 'lighting') {
       return instance.role !== 'panel' && instance.role !== 'coupon';
@@ -156,9 +157,9 @@
   function modeCopy(mode) {
     switch (mode) {
       case 'closed':
-        return 'Closed. One house: parlor, entry, living room and bay, porch, bedrooms, and the tower loft. Roofs sit on their plates. Panels are seated on flat faces.';
+        return 'Closed. Octagonal turret, pitched roof, wraparound porch. The picture lower on the page is the approved direction, not this CAD.';
       case 'open':
-        return 'Open. Each facade has moved straight out along its normal. No hook and no slide. Roofs are lifted and parked clear of the plates.';
+        return 'Open. Front and side shells are pulled straight off. The porch and the roofs are lifted clear. No hooks.';
       case 'remove-panels':
         return 'Panels hidden. Frames, floors, stairs, and roofs stay. The hidden panels are the same STLs.';
       case 'roof':
@@ -168,9 +169,11 @@
       case 'plan':
         return 'Storey ' + state.storey + '. Roofs and facades are hidden so the rooms, stair, and doorways on this floor are visible. The drawing under the view uses the same coordinates.';
       case 'attachment':
-        return 'Attachment. The entry panel is pulled straight out. Nothing hooks it. The capture bars on the coupon close the magnet slots only. 5.0 × 2.8 mm is nominal, not a proven fit, and the holding force was not calculated.';
+        return 'Ground-floor front shell and door, pulled straight out. The capture bar closes the magnet only. 5.0 × 2.8 mm is nominal and untested.';
+      case 'stairs':
+        return 'Both flights. The lower run climbs from the entry to the first floor. The upper run climbs from that floor to the attic.';
       case 'lighting':
-        return 'Lighting. Fixtures stay on the fixed frame. The drawing shows the route from each lamp to the adult bay, and the cross section of the ceiling puck. The 6 × 6 × 3 mm cavity is not a measured LED.';
+        return 'Ten fixtures on the fixed frame and the porch. The 6 × 6 × 3 mm cavity is not a measured LED. No fuse is selected.';
       default:
         return assertNever(mode);
     }
@@ -205,6 +208,13 @@
     var cz = size.max_mm[2] * 0.42;
     var camera = state.camera;
     var controls = state.controls;
+    var shot = state.manifest.cameras && state.manifest.cameras[state.mode];
+    if (shot) {
+      camera.position.set(shot.position[0], shot.position[1], shot.position[2]);
+      controls.target.set(shot.target[0], shot.target[1], shot.target[2]);
+      controls.update();
+      return;
+    }
     if (state.mode === 'plan') {
       camera.position.set(cx, cy - size.y * 0.15, size.max_mm[2] + size.y * 0.95);
       controls.target.set(cx, cy, state.storey === 1 ? 20 : (state.storey === 2 ? 140 : 260));
