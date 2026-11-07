@@ -1,66 +1,80 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 24,
+  "rest_pairs": 37,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
     {
-      "id": "roof-main",
+      "id": "roof-front",
       "bodies": 1,
-      "seat_gap_mm": 0.45,
-      "bearing_probe_mm3": 1550.4,
+      "seat_gap_mm": 0.4,
+      "bearing_probe_mm3": 710.8,
+      "bearer": "attic-frame"
+    },
+    {
+      "id": "roof-rear",
+      "bodies": 1,
+      "seat_gap_mm": 0.4,
+      "bearing_probe_mm3": 1004.5,
       "bearer": "attic-frame"
     },
     {
       "id": "roof-turret",
       "bodies": 1,
-      "seat_gap_mm": 0.45,
-      "bearing_probe_mm3": 1954.9,
+      "seat_gap_mm": 0.4,
+      "bearing_probe_mm3": 1995.7,
       "bearer": "turret-cap"
     },
     {
       "id": "porch-roof",
       "bodies": 1,
-      "seat_gap_mm": 0.45,
-      "bearing_probe_mm3": 813.6,
-      "bearer": "porch"
+      "seat_gap_mm": 0.4,
+      "bearing_probe_mm3": 1310.4,
+      "bearer": "porch-front"
+    },
+    {
+      "id": "porch-skirt",
+      "bodies": 1,
+      "seat_gap_mm": 0.4,
+      "bearing_probe_mm3": 485.0,
+      "bearer": "turret"
     }
   ],
   "stairs": [
     {
       "id": "stair-lower",
-      "top_z": 131.55,
-      "target": 132.0,
-      "top_gap_mm": 0.45,
+      "top_z": 131.86,
+      "target": 114.0,
+      "top_gap_mm": -17.86,
       "well_blocked_mm3": 0,
-      "headroom_sample_mm": 76.0
+      "headroom_sample_mm": 72.0
     },
     {
       "id": "stair-upper",
-      "top_z": 245.55,
-      "target": 246.0,
-      "top_gap_mm": 0.45,
+      "top_z": 229.86,
+      "target": 212.0,
+      "top_gap_mm": -17.86,
       "well_blocked_mm3": 0,
-      "headroom_sample_mm": 76.0
+      "headroom_sample_mm": 72.0
     }
   ],
-  "triangles": 23938,
-  "instance_count": 45,
+  "triangles": 223370,
+  "instance_count": 49,
   "fixture_count": 10,
   "assembly_mm": {
-    "x": 360.5,
-    "y": 422.0,
-    "z": 472.0,
+    "x": 459.9,
+    "y": 400.0,
+    "z": 416.0,
     "min_mm": [
-      65.5,
-      -70.0,
+      58.1,
+      2.0,
       0.0
     ],
     "max_mm": [
-      426.0,
-      352.0,
-      472.0
+      518.0,
+      402.0,
+      416.0
     ]
   }
 }

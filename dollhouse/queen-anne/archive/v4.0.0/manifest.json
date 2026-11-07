@@ -1,0 +1,3133 @@
+{
+  "name": "Queen Anne Playhouse",
+  "version": "4.0.0",
+  "prior_version": "archive/v3.0.0",
+  "also_archived": [
+    "archive/v1.0.0",
+    "archive/v2.0.0",
+    "archive/v3.0.0"
+  ],
+  "scale": "1:24",
+  "description": "Octagonal turret, cross-gable, wraparound porch. Concept picture is the direction, not the CAD.",
+  "concept_image": "concept/approved-direction.jpg",
+  "concept_note": "Approved visual direction. Not engineered geometry and not a photograph of this CAD.",
+  "units": "mm",
+  "up_axis": "Z",
+  "printer_nominal_bed_mm": [
+    330.0,
+    320.0,
+    325.0
+  ],
+  "fit_envelope_mm": [
+    310.0,
+    300.0,
+    315.0
+  ],
+  "assembled_size_mm": {
+    "x": 360.5,
+    "y": 422.0,
+    "z": 472.0,
+    "min_mm": [
+      65.5,
+      -70.0,
+      0.0
+    ],
+    "max_mm": [
+      426.0,
+      352.0,
+      472.0
+    ]
+  },
+  "rooms": [
+    {
+      "id": "parlor",
+      "storey": 1,
+      "note": "Front-left, open to the turret alcove."
+    },
+    {
+      "id": "entry",
+      "storey": 1,
+      "note": "Hall at the burgundy door. The lower stair leaves from here."
+    },
+    {
+      "id": "kitchen",
+      "storey": 1,
+      "note": "Right of the entry, with the counter on the rear wall."
+    },
+    {
+      "id": "bedroom",
+      "storey": 2,
+      "note": "First floor, left of the stair."
+    },
+    {
+      "id": "bath",
+      "storey": 2,
+      "note": "First floor, right front."
+    },
+    {
+      "id": "landing",
+      "storey": 2,
+      "note": "The lower flight arrives here. The upper flight leaves toward the turret."
+    },
+    {
+      "id": "attic",
+      "storey": 3,
+      "note": "Under the cross-gable."
+    },
+    {
+      "id": "turret",
+      "storey": 3,
+      "note": "Same floor as the attic, through the turret opening."
+    }
+  ],
+  "plan": {
+    "storeys": [
+      {
+        "storey": 1,
+        "floor_z": 18.0,
+        "rooms": [
+          {
+            "id": "parlor",
+            "name": "Parlor",
+            "x0": 170,
+            "y0": 40,
+            "x1": 280,
+            "y1": 160
+          },
+          {
+            "id": "turret",
+            "name": "Turret",
+            "x0": 80,
+            "y0": 40,
+            "x1": 168,
+            "y1": 150
+          },
+          {
+            "id": "entry",
+            "name": "Entry",
+            "x0": 280,
+            "y0": 40,
+            "x1": 340,
+            "y1": 120
+          },
+          {
+            "id": "kitchen",
+            "name": "Kitchen",
+            "x0": 344,
+            "y0": 40,
+            "x1": 410,
+            "y1": 210
+          },
+          {
+            "id": "porch",
+            "name": "Porch",
+            "x0": 70,
+            "y0": -50,
+            "x1": 360,
+            "y1": 30
+          }
+        ],
+        "doors": [
+          {
+            "id": "entry-kitchen",
+            "x0": 328,
+            "y0": 78,
+            "x1": 344,
+            "y1": 132
+          }
+        ],
+        "stairs": [
+          {
+            "id": "lower",
+            "x0": 296.0,
+            "y0": 52.0,
+            "x1": 352.0,
+            "y1": 183.6
+          }
+        ],
+        "lights": [
+          {
+            "id": "parlor-ceiling",
+            "kind": "ceiling",
+            "room": "parlor",
+            "x": 230,
+            "y": 100,
+            "z": 107.25,
+            "storey": 1,
+            "circuit": "parlor"
+          },
+          {
+            "id": "entry-ceiling",
+            "kind": "ceiling",
+            "room": "entry",
+            "x": 250,
+            "y": 78,
+            "z": 107.25,
+            "storey": 1,
+            "circuit": "entry"
+          },
+          {
+            "id": "kitchen-ceiling",
+            "kind": "ceiling",
+            "room": "kitchen",
+            "x": 386,
+            "y": 150,
+            "z": 107.25,
+            "storey": 1,
+            "circuit": "kitchen"
+          },
+          {
+            "id": "lantern-w",
+            "kind": "lantern",
+            "room": "porch",
+            "x": 150,
+            "y": -48,
+            "z": 84.0,
+            "storey": 1,
+            "circuit": "exterior"
+          },
+          {
+            "id": "lantern-e",
+            "kind": "lantern",
+            "room": "porch",
+            "x": 340,
+            "y": -48,
+            "z": 84.0,
+            "storey": 1,
+            "circuit": "exterior"
+          }
+        ]
+      },
+      {
+        "storey": 2,
+        "floor_z": 132.0,
+        "rooms": [
+          {
+            "id": "bedroom",
+            "name": "Bedroom",
+            "x0": 170,
+            "y0": 40,
+            "x1": 300,
+            "y1": 200
+          },
+          {
+            "id": "bath",
+            "name": "Bath",
+            "x0": 340,
+            "y0": 40,
+            "x1": 410,
+            "y1": 120
+          },
+          {
+            "id": "landing",
+            "name": "Landing",
+            "x0": 250,
+            "y0": 180,
+            "x1": 340,
+            "y1": 220
+          }
+        ],
+        "doors": [],
+        "stairs": [
+          {
+            "id": "upper",
+            "x0": 214.0,
+            "y0": 50.0,
+            "x1": 272.0,
+            "y1": 183.6
+          },
+          {
+            "id": "lower-well",
+            "x0": 296.0,
+            "y0": 52.0,
+            "x1": 352.0,
+            "y1": 183.6
+          }
+        ],
+        "lights": [
+          {
+            "id": "bedroom-ceiling",
+            "kind": "ceiling",
+            "room": "bedroom",
+            "x": 190,
+            "y": 90,
+            "z": 221.25,
+            "storey": 2,
+            "circuit": "bedroom"
+          },
+          {
+            "id": "bath-ceiling",
+            "kind": "ceiling",
+            "room": "bath",
+            "x": 380,
+            "y": 70,
+            "z": 221.25,
+            "storey": 2,
+            "circuit": "bath"
+          },
+          {
+            "id": "landing-ceiling",
+            "kind": "ceiling",
+            "room": "landing",
+            "x": 300,
+            "y": 180,
+            "z": 221.25,
+            "storey": 2,
+            "circuit": "landing"
+          }
+        ]
+      },
+      {
+        "storey": 3,
+        "floor_z": 246.0,
+        "rooms": [
+          {
+            "id": "attic",
+            "name": "Attic",
+            "x0": 190,
+            "y0": 50,
+            "x1": 400,
+            "y1": 200
+          },
+          {
+            "id": "turret",
+            "name": "Turret loft",
+            "x0": 80,
+            "y0": 40,
+            "x1": 180,
+            "y1": 150
+          }
+        ],
+        "doors": [],
+        "stairs": [
+          {
+            "id": "upper-well",
+            "x0": 214.0,
+            "y0": 50.0,
+            "x1": 272.0,
+            "y1": 183.6
+          }
+        ],
+        "lights": [
+          {
+            "id": "attic-ceiling",
+            "kind": "ceiling",
+            "room": "attic",
+            "x": 300,
+            "y": 120,
+            "z": 335.25,
+            "storey": 3,
+            "circuit": "attic"
+          },
+          {
+            "id": "turret-ceiling",
+            "kind": "ceiling",
+            "room": "turret",
+            "x": 132.0,
+            "y": 92.0,
+            "z": 335.25,
+            "storey": 3,
+            "circuit": "turret"
+          }
+        ]
+      }
+    ]
+  },
+  "magnet": {
+    "status": "NOMINAL_NOT_FIT_APPROVED",
+    "nominal_mm": [
+      5.0,
+      2.8
+    ],
+    "radial_clearance_per_side_mm": 0.25,
+    "axial_clearance_mm": 0.2,
+    "pocket_diameter_mm": 5.5,
+    "pocket_depth_mm": 3.0,
+    "mating_skin_mm": 1.2,
+    "holding_force_calculated": false,
+    "h3c_pause_profile": false,
+    "retention": "magnetic_only_straight_pull",
+    "capture_bar": "encapsulates the magnet only"
+  },
+  "lighting": {
+    "architecture": "External regulated nominal 5V USB. Parallel warm-white 5-12V DC Chip/Nano LEDs, each with its own resistor.",
+    "cavity_mm": [
+      6.0,
+      6.0,
+      3.0
+    ],
+    "cavity_status": "PROVISIONAL_NOT_FIT_VALIDATED",
+    "ceiling_housing_mm": [
+      12.0,
+      7.0
+    ],
+    "exterior_housing_mm": [
+      8.0,
+      8.0,
+      12.0
+    ],
+    "feedthrough_diameter_mm": 2.0,
+    "local_channel_mm": [
+      4.0,
+      3.0
+    ],
+    "riser_clear_mm": [
+      14.0,
+      10.0
+    ],
+    "service_bay_clear_mm": [
+      150.0,
+      90.0,
+      30.0
+    ],
+    "fixture_count": 10,
+    "research_scenario_leds": 24,
+    "research_scenario_budget_A": 0.48,
+    "house_budget_A_at_20mA": 0.2,
+    "budget_is_measured": false,
+    "protection_finalized": false,
+    "electrically_tested": false,
+    "mains_inside": false,
+    "fuse_nominated": false,
+    "protection_note": "No fuse is selected. A 6V 0.5A PPTC is not sole protection and is not nominated from the LED count.",
+    "fixtures": [
+      {
+        "id": "parlor-ceiling",
+        "kind": "ceiling",
+        "room": "parlor",
+        "x": 230,
+        "y": 100,
+        "z": 107.25,
+        "storey": 1,
+        "circuit": "parlor"
+      },
+      {
+        "id": "entry-ceiling",
+        "kind": "ceiling",
+        "room": "entry",
+        "x": 250,
+        "y": 78,
+        "z": 107.25,
+        "storey": 1,
+        "circuit": "entry"
+      },
+      {
+        "id": "kitchen-ceiling",
+        "kind": "ceiling",
+        "room": "kitchen",
+        "x": 386,
+        "y": 150,
+        "z": 107.25,
+        "storey": 1,
+        "circuit": "kitchen"
+      },
+      {
+        "id": "bedroom-ceiling",
+        "kind": "ceiling",
+        "room": "bedroom",
+        "x": 190,
+        "y": 90,
+        "z": 221.25,
+        "storey": 2,
+        "circuit": "bedroom"
+      },
+      {
+        "id": "bath-ceiling",
+        "kind": "ceiling",
+        "room": "bath",
+        "x": 380,
+        "y": 70,
+        "z": 221.25,
+        "storey": 2,
+        "circuit": "bath"
+      },
+      {
+        "id": "landing-ceiling",
+        "kind": "ceiling",
+        "room": "landing",
+        "x": 300,
+        "y": 180,
+        "z": 221.25,
+        "storey": 2,
+        "circuit": "landing"
+      },
+      {
+        "id": "attic-ceiling",
+        "kind": "ceiling",
+        "room": "attic",
+        "x": 300,
+        "y": 120,
+        "z": 335.25,
+        "storey": 3,
+        "circuit": "attic"
+      },
+      {
+        "id": "turret-ceiling",
+        "kind": "ceiling",
+        "room": "turret",
+        "x": 132.0,
+        "y": 92.0,
+        "z": 335.25,
+        "storey": 3,
+        "circuit": "turret"
+      },
+      {
+        "id": "lantern-w",
+        "kind": "lantern",
+        "room": "porch",
+        "x": 150,
+        "y": -48,
+        "z": 84.0,
+        "storey": 1,
+        "circuit": "exterior"
+      },
+      {
+        "id": "lantern-e",
+        "kind": "lantern",
+        "room": "porch",
+        "x": 340,
+        "y": -48,
+        "z": 84.0,
+        "storey": 1,
+        "circuit": "exterior"
+      }
+    ],
+    "route": [
+      "Puck or lantern on the fixed plate or the porch, never on a magnetic facade",
+      "2 mm feed for bare leads only",
+      "Resistor stays in the cornice pocket, not in the lamp",
+      "Rear chase outside the corner posts, down to the adult bay"
+    ],
+    "supply_example": "Adafruit 501 is an out-of-stock example, not a kit to buy."
+  },
+  "departures_from_concept": [
+    "The picture is a render, not a measured drawing. Massing is matched; moulding profiles are thickened to about 1.2 mm so an FDM nozzle can make them.",
+    "The pictured cutaway does not show a complete path onto the turret loft. This model adds a second flight from the first-floor landing to that floor.",
+    "The porch stands in front of the ground-floor wall, so the porch lifts off before that wall is pulled straight out. The pull itself has no hook and no slide.",
+    "Viewer colors are the intended sage, ivory, burgundy, and slate. A single printed part is one material until it is painted.",
+    "Interior furnishings are a few wood pieces, not the fully dressed rooms in the picture."
+  ],
+  "magnet_install_steps": [
+    "Print the coupon and seat the discs before the house. The slot is the same cutter as the facade stiles.",
+    "An adult inserts a nominal 5.0 x 2.8 mm disc, then slides the capture bar in from the top of the stile.",
+    "The bar closes the magnet. It does not catch the frame. Holding force was not measured.",
+    "Polarity: use the shallow fixture, then take the discs out.",
+    "Lift the porch off before pulling the front wall. Side walls pull straight out with the porch still down."
+  ],
+  "limits": [
+    "Not printed. No slicer run, no strength test, no tip-over test, no magnet pull test, no electrical test.",
+    "Roof uplift is not locked. Porch and roofs are gravity seated.",
+    "Magnetic support of the facades is unverified.",
+    "LED cavity and 5 V current are unknown. No fuse was chosen from the milliamp sum.",
+    "Not a toy-safety certification."
+  ],
+  "cameras": {
+    "closed": {
+      "position": [
+        820,
+        -680,
+        360
+      ],
+      "target": [
+        230,
+        80,
+        190
+      ]
+    },
+    "open": {
+      "position": [
+        720,
+        20,
+        220
+      ],
+      "target": [
+        280,
+        130,
+        150
+      ]
+    },
+    "stairs": {
+      "position": [
+        240,
+        48,
+        70
+      ],
+      "target": [
+        320,
+        150,
+        100
+      ]
+    }
+  },
+  "legacy_interface": {
+    "tile_bbox_mm": [
+      127.0,
+      127.0,
+      10.0
+    ],
+    "seated_peg_mm3": 0.0,
+    "snap_compatible": false,
+    "note": "Measured on floor_tile_v0. This house does not use that socket."
+  },
+  "validation": {
+    "printed": false,
+    "measured": false,
+    "physically_verified": false,
+    "forces_tested": false,
+    "h3c_sliced": false,
+    "h3c_pause_profile": false,
+    "electrically_tested": false,
+    "protection_finalized": false,
+    "led_fit_validated": false,
+    "cad_validated": true
+  },
+  "parts": [
+    {
+      "id": "qa4_foundation_main_v4",
+      "file": "stl/qa4_foundation_main_v4.stl",
+      "note": "Masonry base and porch deck. Brick courses are in the mesh.",
+      "triangles": 250,
+      "volume_mm3": 849052.4,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        254.0,
+        254.0,
+        16.5
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_foundation_turret_v4",
+      "file": "stl/qa4_foundation_turret_v4.stl",
+      "note": "Octagonal masonry base of the turret.",
+      "triangles": 92,
+      "volume_mm3": 192362.1,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        98.52,
+        133.04,
+        18.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_floor_l2_v4",
+      "file": "stl/qa4_floor_l2_v4.stl",
+      "note": "First floor. The opening is the lower stair.",
+      "triangles": 428,
+      "volume_mm3": 223128.9,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        242.0,
+        184.0,
+        6.05
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_floor_l3_v4",
+      "file": "stl/qa4_floor_l3_v4.stl",
+      "note": "Attic floor. The opening is the upper stair.",
+      "triangles": 432,
+      "volume_mm3": 220852.1,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        242.0,
+        184.0,
+        6.05
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_floor_turret_v4",
+      "file": "stl/qa4_floor_turret_v4.stl",
+      "note": "Turret floor disc, used on the first floor and the loft.",
+      "triangles": 28,
+      "volume_mm3": 42594.2,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        85.24,
+        96.08,
+        6.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_walls_l1_v4",
+      "file": "stl/qa4_walls_l1_v4.stl",
+      "note": "Fixed rear wall, partition, and ceiling plate. Facades are separate.",
+      "triangles": 180,
+      "volume_mm3": 830029.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        244.0,
+        206.0,
+        107.2
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_walls_l2_v4",
+      "file": "stl/qa4_walls_l2_v4.stl",
+      "note": "Fixed rear wall, partition, and ceiling plate. Facades are separate.",
+      "triangles": 180,
+      "volume_mm3": 825858.4,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        244.0,
+        206.0,
+        107.2
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_attic_frame_v4",
+      "file": "stl/qa4_attic_frame_v4.stl",
+      "note": "Knee walls. The main roof sits on them.",
+      "triangles": 70,
+      "volume_mm3": 43209.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        210.0,
+        182.0,
+        5.6
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_turret_cap_v4",
+      "file": "stl/qa4_turret_cap_v4.stl",
+      "note": "Plate under the turret cone.",
+      "triangles": 28,
+      "volume_mm3": 26066.8,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        88.69,
+        88.69,
+        4.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_ceiling_puck_v4",
+      "file": "stl/qa4_ceiling_puck_v4.stl",
+      "note": "Rigid ceiling puck. 6 x 6 x 3 cavity is provisional, not a measured LED.",
+      "triangles": 286,
+      "volume_mm3": 833.9,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        18.0,
+        18.0,
+        8.4
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_facade_front_l1_v4",
+      "file": "stl/qa4_facade_front_l1_v4.stl",
+      "note": "Full-width facade shell. Straight pull. Magnets only.",
+      "triangles": 2620,
+      "volume_mm3": 72288.1,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        216.0,
+        8.0,
+        93.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_facade_side_l1_v4",
+      "file": "stl/qa4_facade_side_l1_v4.stl",
+      "note": "Full-width facade shell. Straight pull. Magnets only.",
+      "triangles": 1910,
+      "volume_mm3": 65258.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        9.05,
+        176.0,
+        93.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_facade_front_l2_v4",
+      "file": "stl/qa4_facade_front_l2_v4.stl",
+      "note": "Full-width facade shell. Straight pull. Magnets only.",
+      "triangles": 2244,
+      "volume_mm3": 74577.2,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        216.0,
+        8.0,
+        93.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_facade_side_l2_v4",
+      "file": "stl/qa4_facade_side_l2_v4.stl",
+      "note": "Full-width facade shell. Straight pull. Magnets only.",
+      "triangles": 1910,
+      "volume_mm3": 65258.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        9.05,
+        176.0,
+        93.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_facade_front_l3_v4",
+      "file": "stl/qa4_facade_front_l3_v4.stl",
+      "note": "Full-width facade shell. Straight pull. Magnets only.",
+      "triangles": 1384,
+      "volume_mm3": 55210.7,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        180.0,
+        8.0,
+        70.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_turret_shell_v4",
+      "file": "stl/qa4_turret_shell_v4.stl",
+      "note": "Street facets of the turret through the first floor.",
+      "triangles": 3582,
+      "volume_mm3": 69513.3,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        93.11,
+        116.22,
+        218.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_turret_loft_v4",
+      "file": "stl/qa4_turret_loft_v4.stl",
+      "note": "Turret loft drum under the cone.",
+      "triangles": 76,
+      "volume_mm3": 104771.8,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        92.28,
+        114.56,
+        105.75
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_roof_main_v4",
+      "file": "stl/qa4_roof_main_v4.stl",
+      "note": "Main roof and street cross-gable, one shell, shingle courses in the mesh.",
+      "triangles": 564,
+      "volume_mm3": 1288615.7,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        220.0,
+        220.0,
+        161.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_roof_turret_v4",
+      "file": "stl/qa4_roof_turret_v4.stl",
+      "note": "Octagonal drum and conical roof. Shingle rings are in the mesh.",
+      "triangles": 784,
+      "volume_mm3": 388873.3,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        116.5,
+        116.5,
+        118.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_porch_v4",
+      "file": "stl/qa4_porch_v4.stl",
+      "note": "Wraparound porch: turned posts, brackets, balusters, and steps. Lifts off before the front wall is pulled.",
+      "triangles": 3908,
+      "volume_mm3": 110445.4,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        230.0,
+        52.0,
+        116.15
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_porch_roof_v4",
+      "file": "stl/qa4_porch_roof_v4.stl",
+      "note": "Porch roof. Bears on the porch beam.",
+      "triangles": 116,
+      "volume_mm3": 88226.8,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        298.0,
+        43.5,
+        9.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_door_v4",
+      "file": "stl/qa4_door_v4.stl",
+      "note": "Front door. Pulls with the ground-floor facade. No hook.",
+      "triangles": 44,
+      "volume_mm3": 5649.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        20.0,
+        4.4,
+        71.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_lantern_v4",
+      "file": "stl/qa4_lantern_v4.stl",
+      "note": "Porch lantern. 8 x 8 x 12 housing. Cavity is provisional.",
+      "triangles": 28,
+      "volume_mm3": 791.5,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        8.0,
+        8.6,
+        12.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_stair_lower_v4",
+      "file": "stl/qa4_stair_lower_v4.stl",
+      "note": "Ground to the first floor. Fourteen rises, open to the side.",
+      "triangles": 174,
+      "volume_mm3": 554219.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        42.8,
+        122.2,
+        113.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_stair_upper_v4",
+      "file": "stl/qa4_stair_upper_v4.stl",
+      "note": "First floor to the attic and turret landing.",
+      "triangles": 174,
+      "volume_mm3": 554219.6,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        42.8,
+        122.2,
+        113.55
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_bed_v4",
+      "file": "stl/qa4_bed_v4.stl",
+      "note": "Bed.",
+      "triangles": 44,
+      "volume_mm3": 49976.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        42.0,
+        74.0,
+        30.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_table_v4",
+      "file": "stl/qa4_table_v4.stl",
+      "note": "Parlor table.",
+      "triangles": 76,
+      "volume_mm3": 2160.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        36.0,
+        22.0,
+        18.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_counter_v4",
+      "file": "stl/qa4_counter_v4.stl",
+      "note": "Kitchen counter.",
+      "triangles": 28,
+      "volume_mm3": 21904.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        46.0,
+        16.0,
+        34.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_tub_v4",
+      "file": "stl/qa4_tub_v4.stl",
+      "note": "Bath.",
+      "triangles": 28,
+      "volume_mm3": 7872.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        36.0,
+        22.0,
+        16.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_service_bay_v4",
+      "file": "stl/qa4_service_bay_v4.stl",
+      "note": "Adult service bay behind the house. Clear volume 150 x 90 x 30.",
+      "triangles": 64,
+      "volume_mm3": 293040.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        158.0,
+        104.0,
+        44.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_coupon_frame_v4",
+      "file": "stl/qa4_coupon_frame_v4.stl",
+      "note": "Straight-pull coupon, frame half. Same slot cutter. No hook.",
+      "triangles": 896,
+      "volume_mm3": 38218.4,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        40.0,
+        14.0,
+        72.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_coupon_panel_v4",
+      "file": "stl/qa4_coupon_panel_v4.stl",
+      "note": "Straight-pull coupon, panel half.",
+      "triangles": 902,
+      "volume_mm3": 10911.2,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        28.0,
+        7.6,
+        60.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_retainer_v4",
+      "file": "stl/qa4_retainer_v4.stl",
+      "note": "Magnet capture bar. It closes the disc. It does not fasten the facade.",
+      "triangles": 44,
+      "volume_mm3": 490.7,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        2.6,
+        8.8,
+        26.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_polarity_v4",
+      "file": "stl/qa4_polarity_v4.stl",
+      "note": "Polarity aid. Shallow wells only. Do not leave discs in it.",
+      "triangles": 144,
+      "volume_mm3": 5494.9,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        42.0,
+        22.0,
+        6.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_owl_v4",
+      "file": "stl/qa4_owl_v4.stl",
+      "note": "Small owl under the front gable. Fixed trim, not a loose piece.",
+      "triangles": 112,
+      "volume_mm3": 470.3,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        8.4,
+        7.99,
+        11.5
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa4_crescent_v4",
+      "file": "stl/qa4_crescent_v4.stl",
+      "note": "Crescent on the turret drum.",
+      "triangles": 108,
+      "volume_mm3": 164.7,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        13.52,
+        14.0,
+        2.2
+      ],
+      "fits_brim_allowance": true
+    }
+  ],
+  "bom": [
+    {
+      "part": "qa4_attic_frame_v4",
+      "file": "stl/qa4_attic_frame_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_bed_v4",
+      "file": "stl/qa4_bed_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_ceiling_puck_v4",
+      "file": "stl/qa4_ceiling_puck_v4.stl",
+      "qty": 8
+    },
+    {
+      "part": "qa4_counter_v4",
+      "file": "stl/qa4_counter_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_coupon_frame_v4",
+      "file": "stl/qa4_coupon_frame_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_coupon_panel_v4",
+      "file": "stl/qa4_coupon_panel_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_crescent_v4",
+      "file": "stl/qa4_crescent_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_door_v4",
+      "file": "stl/qa4_door_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_facade_front_l1_v4",
+      "file": "stl/qa4_facade_front_l1_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_facade_front_l2_v4",
+      "file": "stl/qa4_facade_front_l2_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_facade_front_l3_v4",
+      "file": "stl/qa4_facade_front_l3_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_facade_side_l1_v4",
+      "file": "stl/qa4_facade_side_l1_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_facade_side_l2_v4",
+      "file": "stl/qa4_facade_side_l2_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_floor_l2_v4",
+      "file": "stl/qa4_floor_l2_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_floor_l3_v4",
+      "file": "stl/qa4_floor_l3_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_floor_turret_v4",
+      "file": "stl/qa4_floor_turret_v4.stl",
+      "qty": 2
+    },
+    {
+      "part": "qa4_foundation_main_v4",
+      "file": "stl/qa4_foundation_main_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_foundation_turret_v4",
+      "file": "stl/qa4_foundation_turret_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_lantern_v4",
+      "file": "stl/qa4_lantern_v4.stl",
+      "qty": 2
+    },
+    {
+      "part": "qa4_owl_v4",
+      "file": "stl/qa4_owl_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_polarity_v4",
+      "file": "stl/qa4_polarity_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_porch_roof_v4",
+      "file": "stl/qa4_porch_roof_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_porch_v4",
+      "file": "stl/qa4_porch_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_retainer_v4",
+      "file": "stl/qa4_retainer_v4.stl",
+      "qty": 1,
+      "print_qty": 26,
+      "note": "Shown once on the coupon. Print one more for every stile, shell and frame."
+    },
+    {
+      "part": "qa4_roof_main_v4",
+      "file": "stl/qa4_roof_main_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_roof_turret_v4",
+      "file": "stl/qa4_roof_turret_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_service_bay_v4",
+      "file": "stl/qa4_service_bay_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_stair_lower_v4",
+      "file": "stl/qa4_stair_lower_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_stair_upper_v4",
+      "file": "stl/qa4_stair_upper_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_table_v4",
+      "file": "stl/qa4_table_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_tub_v4",
+      "file": "stl/qa4_tub_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_turret_cap_v4",
+      "file": "stl/qa4_turret_cap_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_turret_loft_v4",
+      "file": "stl/qa4_turret_loft_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_turret_shell_v4",
+      "file": "stl/qa4_turret_shell_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_walls_l1_v4",
+      "file": "stl/qa4_walls_l1_v4.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa4_walls_l2_v4",
+      "file": "stl/qa4_walls_l2_v4.stl",
+      "qty": 1
+    }
+  ],
+  "instances": [
+    {
+      "id": "foundation",
+      "part": "qa4_foundation_main_v4",
+      "role": "structure",
+      "color": "#8a4b3c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          166.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -24.0
+        ],
+        [
+          0,
+          0,
+          1,
+          1.5
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "turret-base",
+      "part": "qa4_foundation_turret_v4",
+      "role": "structure",
+      "color": "#8a4b3c",
+      "motion": null,
+      "explode_mm": [
+        -20,
+        -10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          65.481
+        ],
+        [
+          0,
+          1,
+          0,
+          25.481
+        ],
+        [
+          0,
+          0,
+          1,
+          0.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "floor-l2",
+      "part": "qa4_floor_l2_v4",
+      "role": "floor",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        12
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          172.0
+        ],
+        [
+          0,
+          1,
+          0,
+          40.0
+        ],
+        [
+          0,
+          0,
+          1,
+          126.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "floor-l3",
+      "part": "qa4_floor_l3_v4",
+      "role": "floor",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        24
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          172.0
+        ],
+        [
+          0,
+          1,
+          0,
+          40.0
+        ],
+        [
+          0,
+          0,
+          1,
+          240.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "turret-floor-l2",
+      "part": "qa4_floor_turret_v4",
+      "role": "floor",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        -12,
+        0,
+        12
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          83.958
+        ],
+        [
+          0,
+          1,
+          0,
+          43.958
+        ],
+        [
+          0,
+          0,
+          1,
+          126.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "turret-floor-l3",
+      "part": "qa4_floor_turret_v4",
+      "role": "floor",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        -12,
+        0,
+        24
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          83.958
+        ],
+        [
+          0,
+          1,
+          0,
+          43.958
+        ],
+        [
+          0,
+          0,
+          1,
+          240.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "walls-l1",
+      "part": "qa4_walls_l1_v4",
+      "role": "structure",
+      "color": "#f0e6d4",
+      "motion": null,
+      "explode_mm": [
+        0,
+        20,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          168.0
+        ],
+        [
+          0,
+          1,
+          0,
+          38.0
+        ],
+        [
+          0,
+          0,
+          1,
+          18.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "walls-l2",
+      "part": "qa4_walls_l2_v4",
+      "role": "structure",
+      "color": "#f0e6d4",
+      "motion": null,
+      "explode_mm": [
+        0,
+        20,
+        8
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          168.0
+        ],
+        [
+          0,
+          1,
+          0,
+          38.0
+        ],
+        [
+          0,
+          0,
+          1,
+          132.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "attic-frame",
+      "part": "qa4_attic_frame_v4",
+      "role": "structure",
+      "color": "#f0e6d4",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        30
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          200.0
+        ],
+        [
+          0,
+          1,
+          0,
+          42.0
+        ],
+        [
+          0,
+          0,
+          1,
+          246.4
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "turret-cap",
+      "part": "qa4_turret_cap_v4",
+      "role": "structure",
+      "color": "#f0e6d4",
+      "motion": null,
+      "explode_mm": [
+        -10,
+        0,
+        30
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          87.654
+        ],
+        [
+          0,
+          1,
+          0,
+          47.654
+        ],
+        [
+          0,
+          0,
+          1,
+          349.55
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "parlor-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          221.0
+        ],
+        [
+          0,
+          1,
+          0,
+          91.0
+        ],
+        [
+          0,
+          0,
+          1,
+          104.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "entry-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          241.0
+        ],
+        [
+          0,
+          1,
+          0,
+          69.0
+        ],
+        [
+          0,
+          0,
+          1,
+          104.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "kitchen-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          377.0
+        ],
+        [
+          0,
+          1,
+          0,
+          141.0
+        ],
+        [
+          0,
+          0,
+          1,
+          104.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "bedroom-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          181.0
+        ],
+        [
+          0,
+          1,
+          0,
+          81.0
+        ],
+        [
+          0,
+          0,
+          1,
+          218.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "bath-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          371.0
+        ],
+        [
+          0,
+          1,
+          0,
+          61.0
+        ],
+        [
+          0,
+          0,
+          1,
+          218.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "landing-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          291.0
+        ],
+        [
+          0,
+          1,
+          0,
+          171.0
+        ],
+        [
+          0,
+          0,
+          1,
+          218.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "attic-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          291.0
+        ],
+        [
+          0,
+          1,
+          0,
+          111.0
+        ],
+        [
+          0,
+          0,
+          1,
+          332.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "turret-ceiling",
+      "part": "qa4_ceiling_puck_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        18
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          123.0
+        ],
+        [
+          0,
+          1,
+          0,
+          83.0
+        ],
+        [
+          0,
+          0,
+          1,
+          332.35
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "front-l1",
+      "part": "qa4_facade_front_l1_v4",
+      "role": "facade",
+      "color": "#8ea396",
+      "motion": {
+        "group": "front",
+        "pull": [
+          0,
+          -64.0,
+          0
+        ]
+      },
+      "explode_mm": [
+        0.0,
+        -44.8,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          200.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -8.45
+        ],
+        [
+          0,
+          0,
+          1,
+          20.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "side-l1",
+      "part": "qa4_facade_side_l1_v4",
+      "role": "facade",
+      "color": "#8ea396",
+      "motion": {
+        "group": "end",
+        "pull": [
+          64.0,
+          0,
+          0
+        ]
+      },
+      "explode_mm": [
+        44.8,
+        0.0,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          414.05
+        ],
+        [
+          0,
+          1,
+          0,
+          44.0
+        ],
+        [
+          0,
+          0,
+          1,
+          20.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "front-l2",
+      "part": "qa4_facade_front_l2_v4",
+      "role": "facade",
+      "color": "#8ea396",
+      "motion": {
+        "group": "front",
+        "pull": [
+          0,
+          -64.0,
+          0
+        ]
+      },
+      "explode_mm": [
+        0.0,
+        -44.8,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          200.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -8.45
+        ],
+        [
+          0,
+          0,
+          1,
+          134.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "side-l2",
+      "part": "qa4_facade_side_l2_v4",
+      "role": "facade",
+      "color": "#8ea396",
+      "motion": {
+        "group": "end",
+        "pull": [
+          64.0,
+          0,
+          0
+        ]
+      },
+      "explode_mm": [
+        44.8,
+        0.0,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          414.05
+        ],
+        [
+          0,
+          1,
+          0,
+          44.0
+        ],
+        [
+          0,
+          0,
+          1,
+          134.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "front-l3",
+      "part": "qa4_facade_front_l3_v4",
+      "role": "facade",
+      "color": "#8ea396",
+      "motion": {
+        "group": "front",
+        "pull": [
+          0,
+          -64.0,
+          0
+        ]
+      },
+      "explode_mm": [
+        0.0,
+        -44.8,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          210.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -8.45
+        ],
+        [
+          0,
+          0,
+          1,
+          248.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "turret-shell",
+      "part": "qa4_turret_shell_v4",
+      "role": "structure",
+      "color": "#8ea396",
+      "motion": null,
+      "explode_mm": [
+        -16,
+        -10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          73.888
+        ],
+        [
+          0,
+          1,
+          0,
+          33.888
+        ],
+        [
+          0,
+          0,
+          1,
+          19.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "turret-loft",
+      "part": "qa4_turret_loft_v4",
+      "role": "structure",
+      "color": "#8ea396",
+      "motion": null,
+      "explode_mm": [
+        -16,
+        -8,
+        20
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          74.719
+        ],
+        [
+          0,
+          1,
+          0,
+          34.719
+        ],
+        [
+          0,
+          0,
+          1,
+          246.8
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "roof-main",
+      "part": "qa4_roof_main_v4",
+      "role": "roof",
+      "color": "#4c5660",
+      "motion": {
+        "group": "roof",
+        "lift": [
+          0,
+          0,
+          90
+        ],
+        "park": [
+          0,
+          -40,
+          150
+        ]
+      },
+      "explode_mm": [
+        0,
+        -20,
+        80
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          206.0
+        ],
+        [
+          0,
+          1,
+          0,
+          14.0
+        ],
+        [
+          0,
+          0,
+          1,
+          252.45
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "roof-turret",
+      "part": "qa4_roof_turret_v4",
+      "role": "roof",
+      "color": "#4c5660",
+      "motion": {
+        "group": "roof",
+        "lift": [
+          0,
+          0,
+          100
+        ],
+        "park": [
+          -30,
+          -80,
+          160
+        ]
+      },
+      "explode_mm": [
+        -20,
+        -30,
+        90
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          73.751
+        ],
+        [
+          0,
+          1,
+          0,
+          33.751
+        ],
+        [
+          0,
+          0,
+          1,
+          354.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "porch",
+      "part": "qa4_porch_v4",
+      "role": "porch",
+      "color": "#f3eee4",
+      "motion": {
+        "group": "porch",
+        "lift": [
+          0,
+          0,
+          130
+        ],
+        "park": [
+          0,
+          -90,
+          40
+        ]
+      },
+      "explode_mm": [
+        0,
+        -40,
+        20
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          130.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -70.0
+        ],
+        [
+          0,
+          0,
+          1,
+          0.4
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "porch-roof",
+      "part": "qa4_porch_roof_v4",
+      "role": "roof",
+      "color": "#4c5660",
+      "motion": {
+        "group": "roof",
+        "lift": [
+          0,
+          0,
+          80
+        ],
+        "park": [
+          0,
+          -70,
+          70
+        ]
+      },
+      "explode_mm": [
+        0,
+        -30,
+        40
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          66.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -38.0
+        ],
+        [
+          0,
+          0,
+          1,
+          117.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "door",
+      "part": "qa4_door_v4",
+      "role": "facade",
+      "color": "#7c2f38",
+      "motion": {
+        "group": "front",
+        "pull": [
+          0,
+          -64.0,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        -70,
+        6
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          294.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -12.0
+        ],
+        [
+          0,
+          0,
+          1,
+          21.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "lantern-w",
+      "part": "qa4_lantern_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": {
+        "group": "porch",
+        "lift": [
+          0,
+          0,
+          130
+        ]
+      },
+      "explode_mm": [
+        0,
+        -20,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          146.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -52.6
+        ],
+        [
+          0,
+          0,
+          1,
+          80.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "lantern-e",
+      "part": "qa4_lantern_v4",
+      "role": "light",
+      "color": "#e6d7b8",
+      "motion": {
+        "group": "porch",
+        "lift": [
+          0,
+          0,
+          130
+        ]
+      },
+      "explode_mm": [
+        0,
+        -20,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          336.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -52.6
+        ],
+        [
+          0,
+          0,
+          1,
+          80.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "stair-lower",
+      "part": "qa4_stair_lower_v4",
+      "role": "stair",
+      "color": "#8d5e3c",
+      "motion": null,
+      "explode_mm": [
+        30,
+        0,
+        8
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          300.6
+        ],
+        [
+          0,
+          1,
+          0,
+          58.0
+        ],
+        [
+          0,
+          0,
+          1,
+          18.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "stair-upper",
+      "part": "qa4_stair_upper_v4",
+      "role": "stair",
+      "color": "#8d5e3c",
+      "motion": null,
+      "explode_mm": [
+        20,
+        0,
+        20
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          220.6
+        ],
+        [
+          0,
+          1,
+          0,
+          56.0
+        ],
+        [
+          0,
+          0,
+          1,
+          132.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "bed",
+      "part": "qa4_bed_v4",
+      "role": "furniture",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        16
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          176.0
+        ],
+        [
+          0,
+          1,
+          0,
+          80.0
+        ],
+        [
+          0,
+          0,
+          1,
+          134.9
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "table",
+      "part": "qa4_table_v4",
+      "role": "furniture",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        16
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          200.0
+        ],
+        [
+          0,
+          1,
+          0,
+          70.0
+        ],
+        [
+          0,
+          0,
+          1,
+          18.8
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "counter",
+      "part": "qa4_counter_v4",
+      "role": "furniture",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        16
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          368.0
+        ],
+        [
+          0,
+          1,
+          0,
+          176.0
+        ],
+        [
+          0,
+          0,
+          1,
+          18.8
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "tub",
+      "part": "qa4_tub_v4",
+      "role": "furniture",
+      "color": "#c49a6c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        16
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          372.0
+        ],
+        [
+          0,
+          1,
+          0,
+          44.0
+        ],
+        [
+          0,
+          0,
+          1,
+          132.9
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "service-bay",
+      "part": "qa4_service_bay_v4",
+      "role": "service",
+      "color": "#3d4650",
+      "motion": null,
+      "explode_mm": [
+        0,
+        36,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          250.0
+        ],
+        [
+          0,
+          1,
+          0,
+          248.0
+        ],
+        [
+          0,
+          0,
+          1,
+          0.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "coupon-frame",
+      "part": "qa4_coupon_frame_v4",
+      "role": "coupon",
+      "color": "#f0e6d4",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          620
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "coupon-panel",
+      "part": "qa4_coupon_panel_v4",
+      "role": "coupon",
+      "color": "#8ea396",
+      "motion": {
+        "group": "coupon",
+        "pull": [
+          0,
+          -24,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          632.0
+        ],
+        [
+          0,
+          1,
+          0,
+          -16.0
+        ],
+        [
+          0,
+          0,
+          1,
+          12.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "retainer",
+      "part": "qa4_retainer_v4",
+      "role": "coupon",
+      "color": "#777777",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          640.2
+        ],
+        [
+          0,
+          1,
+          0,
+          2.8
+        ],
+        [
+          0,
+          0,
+          1,
+          20.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "polarity",
+      "part": "qa4_polarity_v4",
+      "role": "coupon",
+      "color": "#dddddd",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          680
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "owl",
+      "part": "qa4_owl_v4",
+      "role": "trim",
+      "color": "#8d5e3c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        -16,
+        10
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          295.8
+        ],
+        [
+          0,
+          1,
+          0,
+          4.006
+        ],
+        [
+          0,
+          0,
+          1,
+          364.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "crescent",
+      "part": "qa4_crescent_v4",
+      "role": "trim",
+      "color": "#f3eee4",
+      "motion": null,
+      "explode_mm": [
+        0,
+        -12,
+        8
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          105.0
+        ],
+        [
+          0,
+          1,
+          0,
+          17.0
+        ],
+        [
+          0,
+          0,
+          1,
+          152.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    }
+  ]
+}

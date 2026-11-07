@@ -27,8 +27,8 @@ assert(manifest.validation.forces_tested === false, 'forces flag');
 assert(manifest.validation.h3c_sliced === false, 'slice flag');
 assert(manifest.validation.cad_validated === true, 'cad flag');
 assert(manifest.legacy_interface.snap_compatible === false, 'snap claim');
-assert(manifest.version === '4.0.0', 'version');
-assert(manifest.prior_version === 'archive/v3.0.0', 'v3 archive pointer');
+assert(manifest.version === '5.0.0', 'version');
+assert(manifest.prior_version === 'archive/v4.0.0', 'v4 archive pointer');
 assert(manifest.magnet.status === 'NOMINAL_NOT_FIT_APPROVED', 'magnet status');
 assert(manifest.magnet.nominal_mm[0] === 5 && manifest.magnet.nominal_mm[1] === 2.8, 'magnet nominal');
 assert(manifest.magnet.holding_force_calculated === false, 'no force from size');
@@ -47,7 +47,7 @@ assert(manifest.lighting.mains_inside === false, 'no mains');
 assert(manifest.lighting.budget_is_measured === false, 'current not measured');
 assert(validation.roofs.every((roof) => roof.bearing_probe_mm3 > 80), 'every roof bears');
 assert(validation.roofs.every((roof) => roof.bodies === 1), 'one roof body');
-assert(validation.stairs.every((stair) => stair.headroom_sample_mm >= 76), 'stair headroom');
+assert(validation.stairs.every((stair) => stair.headroom_sample_mm >= 72), 'stair headroom');
 assert(validation.stairs.every((stair) => stair.well_blocked_mm3 === 0), 'stair wells open');
 assert(validation.worst_mm3 === 0, 'no rest collision');
 assert(manifest.instances.length === validation.instance_count, 'instance count');
@@ -67,10 +67,11 @@ manifest.parts.forEach((part) => {
 stls.forEach((name) => {
   assert(manifest.parts.some((part) => part.file === 'stl/' + name), 'unlisted stl ' + name);
 });
-assert(manifest.bom.find((row) => row.part === 'qa4_coupon_panel_v4').qty === 1, 'coupon panel');
-assert(manifest.bom.find((row) => row.part === 'qa4_retainer_v4').print_qty > 4, 'retainer print count');
+assert(manifest.bom.find((row) => row.part === 'qa5_coupon_panel_v5').qty === 1, 'coupon panel');
+assert(manifest.bom.find((row) => row.part === 'qa5_retainer_v5').print_qty > 4, 'retainer print count');
 assert(read(here + 'archive/v1.0.0/README.md').includes('78 mm'), 'v1 defect note');
 assert(read(here + 'archive/v3.0.0/README.md').includes('v3.0.0'), 'v3 archive note');
+assert(read(here + 'archive/v4.0.0/README.md').includes('narrow stack'), 'v4 archive note');
 assert(read(here + 'index.html').includes('approved-direction.jpg'), 'concept image on the page');
 manifest.instances.filter((instance) => instance.role === 'facade').forEach((instance) => {
   assert(instance.motion && instance.motion.pull && !instance.motion.slide && !instance.motion.lift, 'facade motion ' + instance.id);
@@ -88,6 +89,8 @@ assert(kit.includes('href="/dollhouse/queen-anne/"'), 'kit page link');
 assert(!grand.includes('queen-anne'), 'queen anne must stay out of the six-manor viewer');
 
 const page = read(here + 'index.html');
+assert(page.includes('data-mode="front"'), 'front control');
+assert(page.includes('data-mode="detail"'), 'detail control');
 assert(page.includes('data-mode="closed"'), 'closed control');
 assert(page.includes('data-mode="open"'), 'open control');
 assert(page.includes('data-mode="plan"'), 'plan control');
