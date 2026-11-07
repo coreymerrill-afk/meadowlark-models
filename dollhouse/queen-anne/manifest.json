@@ -1,6 +1,6 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
   "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
@@ -335,11 +335,11 @@
       5.0,
       2.8
     ],
-    "radial_clearance_per_side_mm": 0.25,
-    "axial_clearance_mm": 0.2,
-    "pocket_diameter_mm": 5.5,
-    "pocket_depth_mm": 3.0,
-    "mating_skin_mm": 1.2,
+    "radial_clearance_per_side_mm": 0.3,
+    "axial_clearance_mm": 0.4,
+    "pocket_diameter_mm": 5.6,
+    "pocket_depth_mm": 3.2,
+    "mating_skin_mm": 1.4,
     "holding_force_calculated": false,
     "h3c_pause_profile": false,
     "retention": "magnetic_only_straight_pull",
@@ -476,10 +476,11 @@
     "Balusters, bargeboard piercings, blossoms, and scallop edges are thin. A 0.2 mm nozzle is the ornament setting. They are not claimed durable."
   ],
   "magnet_install_steps": [
-    "Print the coupon first. The slot matches the back stiles and the jambs.",
-    "An adult seats a nominal 5.0 x 2.8 mm disc and slides the capture bar in from the top.",
-    "The bar closes the magnet. It does not catch the other wall. Holding force is untested.",
-    "The back pulls straight off toward the rear. The front, sides, porch, and roofs stay."
+    "Print the coupon first. Its bore is the same cross-section as the house seats.",
+    "A nominal 5.0 x 2.8 mm disc drops in the open mouth. The seat is 5.6 mm across and 3.2 mm deep. Those are design allowances of 0.30 mm radial and 0.40 mm axial, not a measured fit.",
+    "1.4 mm of plastic stays between the disc and the mating face. The cap boss stops at the seat and does not pinch the disc.",
+    "The cap pulls straight off. It does not fasten the back to the jamb. Holding force is untested.",
+    "The back pulls straight off toward the rear. Pins and the bottom ledge locate it. The front, sides, porch, and roofs stay."
   ],
   "limits": [
     "Not printed. No strength, tip-over, magnet, or electrical test.",
@@ -492,74 +493,74 @@
   "cameras": {
     "closed": {
       "position": [
-        -80.0,
-        -620.0,
-        250.0
+        80.0,
+        -480.0,
+        210.0
       ],
       "target": [
-        280.0,
-        150.0,
-        145.0
+        320.0,
+        180.0,
+        170.0
       ]
     },
     "front": {
       "position": [
-        300.0,
-        -760.0,
-        190.0
+        340.0,
+        -520.0,
+        170.0
       ],
       "target": [
-        310.0,
-        150.0,
-        130.0
+        340.0,
+        180.0,
+        160.0
       ]
     },
     "rear": {
       "position": [
         360.0,
-        620.0,
-        130.0
+        700.0,
+        150.0
       ],
       "target": [
         360.0,
-        250.0,
-        110.0
+        300.0,
+        120.0
       ]
     },
     "open": {
       "position": [
         390.0,
-        720.0,
-        160.0
+        760.0,
+        260.0
       ],
       "target": [
-        380.0,
-        180.0,
-        120.0
+        390.0,
+        230.0,
+        210.0
       ]
     },
     "stairs": {
       "position": [
-        560.0,
-        640.0,
-        150.0
+        520.0,
+        620.0,
+        250.0
       ],
       "target": [
-        420.0,
-        190.0,
-        110.0
+        400.0,
+        210.0,
+        190.0
       ]
     },
     "detail": {
       "position": [
-        250.0,
-        -30.0,
-        55.0
+        400.0,
+        -160.0,
+        300.0
       ],
       "target": [
-        370.0,
-        55.0,
-        40.0
+        380.0,
+        90.0,
+        280.0
       ]
     },
     "attachment": {
@@ -718,10 +719,10 @@
       "id": "qa5_walls_l1_v5",
       "file": "stl/qa5_walls_l1_v5.stl",
       "note": "Fixed ceiling, hall wall, and the left rear jamb. The rear opening is clear.",
-      "triangles": 924,
-      "volume_mm3": 505612.2,
+      "triangles": 726,
+      "volume_mm3": 505722.9,
       "watertight": true,
-      "bodies": 4,
+      "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
         281.0,
@@ -734,10 +735,10 @@
       "id": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
       "note": "Fixed ceiling and hall wall of the first floor. The back is not this part.",
-      "triangles": 964,
-      "volume_mm3": 504463.0,
+      "triangles": 766,
+      "volume_mm3": 504573.7,
       "watertight": true,
-      "bodies": 4,
+      "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
         281.0,
@@ -814,10 +815,10 @@
       "id": "qa5_front_upper_v5",
       "file": "stl/qa5_front_upper_v5.stl",
       "note": "Upper street wall. Fixed. Big sash openings. It does not pull off.",
-      "triangles": 10912,
-      "volume_mm3": 122247.5,
+      "triangles": 11402,
+      "volume_mm3": 124095.9,
       "watertight": true,
-      "bodies": 2,
+      "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
         288.4,
@@ -910,10 +911,10 @@
       "id": "qa5_side_v5",
       "file": "stl/qa5_side_v5.stl",
       "note": "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
-      "triangles": 4094,
-      "volume_mm3": 144851.7,
+      "triangles": 2952,
+      "volume_mm3": 149386.7,
       "watertight": true,
-      "bodies": 9,
+      "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
         14.75,
@@ -925,11 +926,11 @@
     {
       "id": "qa5_rear_v5",
       "file": "stl/qa5_rear_v5.stl",
-      "note": "Full back, one print, 0.45 mm off the jambs. Straight magnetic pull. Nominal 5 x 2.8 mm discs. Not a structural brace.",
-      "triangles": 3080,
-      "volume_mm3": 242061.6,
+      "note": "Full back, one print, 0.45 mm off the jambs. Magnet mouths open through the stile. Nominal 5.0 x 2.8 mm discs, seat depth 3.2 mm. Not a brace.",
+      "triangles": 4208,
+      "volume_mm3": 241549.0,
       "watertight": true,
-      "bodies": 13,
+      "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
         285.0,
@@ -939,11 +940,235 @@
       "fits_brim_allowance": true
     },
     {
+      "id": "qa5_cap_back-l_v5",
+      "file": "stl/qa5_cap_back-l_v5.stl",
+      "note": "Covers magnet mouths. The boss leaves the 3.2 mm seat clear. Pull the cap straight off to remove a disc. Untested.",
+      "triangles": 1180,
+      "volume_mm3": 310.5,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        1.6,
+        150.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_back-r_v5",
+      "file": "stl/qa5_cap_back-r_v5.stl",
+      "note": "Covers magnet mouths. The boss leaves the 3.2 mm seat clear. Pull the cap straight off to remove a disc. Untested.",
+      "triangles": 1180,
+      "volume_mm3": 310.5,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        1.6,
+        150.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jla0_v5",
+      "file": "stl/qa5_cap_jla0_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 203.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jra0_v5",
+      "file": "stl/qa5_cap_jra0_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 143.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jla1_v5",
+      "file": "stl/qa5_cap_jla1_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 203.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jra1_v5",
+      "file": "stl/qa5_cap_jra1_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 143.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jla2_v5",
+      "file": "stl/qa5_cap_jla2_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 203.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jra2_v5",
+      "file": "stl/qa5_cap_jra2_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 143.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jlb0_v5",
+      "file": "stl/qa5_cap_jlb0_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 203.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jrb0_v5",
+      "file": "stl/qa5_cap_jrb0_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 143.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jlb1_v5",
+      "file": "stl/qa5_cap_jlb1_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 203.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jrb1_v5",
+      "file": "stl/qa5_cap_jrb1_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 143.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jlb2_v5",
+      "file": "stl/qa5_cap_jlb2_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 203.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_cap_jrb2_v5",
+      "file": "stl/qa5_cap_jrb2_v5.stl",
+      "note": "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+      "triangles": 160,
+      "volume_mm3": 143.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
       "id": "qa5_roof_front_v5",
       "file": "stl/qa5_roof_front_v5.stl",
       "note": "Front slope and the gable cheeks. Fish-scale courses overlap and the noses stay proud.",
-      "triangles": 36414,
-      "volume_mm3": 440005.1,
+      "triangles": 37086,
+      "volume_mm3": 440030.4,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -957,9 +1182,9 @@
     {
       "id": "qa5_gable_v5",
       "file": "stl/qa5_gable_v5.stl",
-      "note": "Street gable. Scroll-pierced verge and rakes, and the owl. The piercings go through.",
-      "triangles": 8548,
-      "volume_mm3": 67232.9,
+      "note": "Street gable. Arched attic sash, scroll verge, owl. The piercings go through.",
+      "triangles": 9136,
+      "volume_mm3": 67849.8,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -973,14 +1198,14 @@
     {
       "id": "qa5_roof_rear_v5",
       "file": "stl/qa5_roof_rear_v5.stl",
-      "note": "Rear slope, scalloped shingles, and the brick chimney.",
-      "triangles": 112374,
-      "volume_mm3": 356096.3,
-      "watertight": false,
-      "bodies": 14,
-      "nonmanifold_edges": 25,
+      "note": "Rear slope, fish-scale courses, chimney. Center soffit is open over the attic.",
+      "triangles": 43072,
+      "volume_mm3": 338747.5,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        281.0,
+        281.7,
         105.5,
         172.0
       ],
@@ -1022,15 +1247,15 @@
       "id": "qa5_turret_loft_v5",
       "file": "stl/qa5_turret_loft_v5.stl",
       "note": "Turret loft, with cased windows on the street flats.",
-      "triangles": 2834,
-      "volume_mm3": 131071.1,
-      "watertight": false,
-      "bodies": 2,
-      "nonmanifold_edges": 2,
+      "triangles": 6908,
+      "volume_mm3": 132133.1,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        109.9,
-        110.5,
-        91.1
+        109.74,
+        110.08,
+        91.5
       ],
       "fits_brim_allowance": true
     },
@@ -1038,15 +1263,15 @@
       "id": "qa5_turret_v5",
       "file": "stl/qa5_turret_v5.stl",
       "note": "Octagonal turret, two storeys, clapboard, belt courses, and cased windows.",
-      "triangles": 5776,
-      "volume_mm3": 268765.0,
-      "watertight": false,
-      "bodies": 2,
-      "nonmanifold_edges": 2,
+      "triangles": 14500,
+      "volume_mm3": 280623.6,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        109.9,
-        110.5,
-        188.6
+        109.74,
+        110.08,
+        195.2
       ],
       "fits_brim_allowance": true
     },
@@ -1054,8 +1279,8 @@
       "id": "qa5_porch_turret_v5",
       "file": "stl/qa5_porch_turret_v5.stl",
       "note": "Octagonal corner porch. Turned columns, cyma brackets, spindle rail. It stays during play.",
-      "triangles": 5720,
-      "volume_mm3": 43318.7,
+      "triangles": 9702,
+      "volume_mm3": 43836.7,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1070,8 +1295,8 @@
       "id": "qa5_porch_front_v5",
       "file": "stl/qa5_porch_front_v5.stl",
       "note": "Front porch across the main block, with the steps. It stays during play.",
-      "triangles": 8134,
-      "volume_mm3": 100128.7,
+      "triangles": 13890,
+      "volume_mm3": 100625.8,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1134,8 +1359,8 @@
       "id": "qa5_stair_lower_v5",
       "file": "stl/qa5_stair_lower_v5.stl",
       "note": "Open stair, entry to the first floor, with a spindle rail.",
-      "triangles": 4082,
-      "volume_mm3": 36718.9,
+      "triangles": 6694,
+      "volume_mm3": 36747.1,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1150,8 +1375,8 @@
       "id": "qa5_stair_upper_v5",
       "file": "stl/qa5_stair_upper_v5.stl",
       "note": "Open stair, first floor to the attic, with a spindle rail.",
-      "triangles": 3582,
-      "volume_mm3": 39172.4,
+      "triangles": 6320,
+      "volume_mm3": 39246.9,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1357,32 +1582,32 @@
     {
       "id": "qa5_coupon_frame_v5",
       "file": "stl/qa5_coupon_frame_v5.stl",
-      "note": "Straight-pull coupon, frame half.",
-      "triangles": 732,
-      "volume_mm3": 25937.7,
+      "note": "Magnet coupon block. Mouth is open. Seat is 3.2 mm deep for a nominal 2.8 mm disc, with 1.4 mm skin. Not a measured fit.",
+      "triangles": 94,
+      "volume_mm3": 4768.1,
       "watertight": true,
-      "bodies": 3,
+      "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        36.0,
-        12.0,
-        64.0
+        28.0,
+        8.0,
+        22.0
       ],
       "fits_brim_allowance": true
     },
     {
       "id": "qa5_coupon_panel_v5",
       "file": "stl/qa5_coupon_panel_v5.stl",
-      "note": "Straight-pull coupon, panel half.",
-      "triangles": 742,
-      "volume_mm3": 8422.5,
+      "note": "Coupon cap. Boss stops at the disc seat. Same clearance as the house caps.",
+      "triangles": 94,
+      "volume_mm3": 1241.2,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        28.0,
-        6.6,
-        54.0
+        16.0,
+        9.32,
+        14.0
       ],
       "fits_brim_allowance": true
     },
@@ -1391,12 +1616,12 @@
       "file": "stl/qa5_retainer_v5.stl",
       "note": "Capture bar for the magnet. It does not fasten the wall.",
       "triangles": 44,
-      "volume_mm3": 454.3,
+      "volume_mm3": 491.8,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        2.6,
+        2.8,
         8.5,
         24.0
       ],
@@ -1438,6 +1663,76 @@
     {
       "part": "qa5_cabinet_v5",
       "file": "stl/qa5_cabinet_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_back-l_v5",
+      "file": "stl/qa5_cap_back-l_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_back-r_v5",
+      "file": "stl/qa5_cap_back-r_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jla0_v5",
+      "file": "stl/qa5_cap_jla0_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jla1_v5",
+      "file": "stl/qa5_cap_jla1_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jla2_v5",
+      "file": "stl/qa5_cap_jla2_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jlb0_v5",
+      "file": "stl/qa5_cap_jlb0_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jlb1_v5",
+      "file": "stl/qa5_cap_jlb1_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jlb2_v5",
+      "file": "stl/qa5_cap_jlb2_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jra0_v5",
+      "file": "stl/qa5_cap_jra0_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jra1_v5",
+      "file": "stl/qa5_cap_jra1_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jra2_v5",
+      "file": "stl/qa5_cap_jra2_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jrb0_v5",
+      "file": "stl/qa5_cap_jrb0_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jrb1_v5",
+      "file": "stl/qa5_cap_jrb1_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_cap_jrb2_v5",
+      "file": "stl/qa5_cap_jrb2_v5.stl",
       "qty": 1
     },
     {
@@ -2703,6 +2998,538 @@
       ]
     },
     {
+      "id": "cap-back-l",
+      "part": "qa5_cap_back-l_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        14,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          224.95
+        ],
+        [
+          0,
+          1,
+          0,
+          300.3
+        ],
+        [
+          0,
+          0,
+          1,
+          40.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-back-r",
+      "part": "qa5_cap_back-r_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        14,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          491.95
+        ],
+        [
+          0,
+          1,
+          0,
+          300.3
+        ],
+        [
+          0,
+          0,
+          1,
+          40.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jla0",
+      "part": "qa5_cap_jla0_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          224.95
+        ],
+        [
+          0,
+          1,
+          0,
+          275.85
+        ],
+        [
+          0,
+          0,
+          1,
+          40.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jra0",
+      "part": "qa5_cap_jra0_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          491.95
+        ],
+        [
+          0,
+          1,
+          0,
+          281.1
+        ],
+        [
+          0,
+          0,
+          1,
+          40.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jla1",
+      "part": "qa5_cap_jla1_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          224.95
+        ],
+        [
+          0,
+          1,
+          0,
+          275.85
+        ],
+        [
+          0,
+          0,
+          1,
+          64.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jra1",
+      "part": "qa5_cap_jra1_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          491.95
+        ],
+        [
+          0,
+          1,
+          0,
+          281.1
+        ],
+        [
+          0,
+          0,
+          1,
+          64.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jla2",
+      "part": "qa5_cap_jla2_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          224.95
+        ],
+        [
+          0,
+          1,
+          0,
+          275.85
+        ],
+        [
+          0,
+          0,
+          1,
+          86.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jra2",
+      "part": "qa5_cap_jra2_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          491.95
+        ],
+        [
+          0,
+          1,
+          0,
+          281.1
+        ],
+        [
+          0,
+          0,
+          1,
+          86.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jlb0",
+      "part": "qa5_cap_jlb0_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          224.95
+        ],
+        [
+          0,
+          1,
+          0,
+          275.85
+        ],
+        [
+          0,
+          0,
+          1,
+          138.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jrb0",
+      "part": "qa5_cap_jrb0_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          491.95
+        ],
+        [
+          0,
+          1,
+          0,
+          281.1
+        ],
+        [
+          0,
+          0,
+          1,
+          138.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jlb1",
+      "part": "qa5_cap_jlb1_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          224.95
+        ],
+        [
+          0,
+          1,
+          0,
+          275.85
+        ],
+        [
+          0,
+          0,
+          1,
+          162.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jrb1",
+      "part": "qa5_cap_jrb1_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          491.95
+        ],
+        [
+          0,
+          1,
+          0,
+          281.1
+        ],
+        [
+          0,
+          0,
+          1,
+          162.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jlb2",
+      "part": "qa5_cap_jlb2_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          224.95
+        ],
+        [
+          0,
+          1,
+          0,
+          275.85
+        ],
+        [
+          0,
+          0,
+          1,
+          184.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "cap-jrb2",
+      "part": "qa5_cap_jrb2_v5",
+      "role": "fastener",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        10,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          491.95
+        ],
+        [
+          0,
+          1,
+          0,
+          281.1
+        ],
+        [
+          0,
+          0,
+          1,
+          184.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
       "id": "roof-front",
       "part": "qa5_roof_front_v5",
       "role": "roof",
@@ -2830,7 +3657,7 @@
           1,
           0,
           0,
-          219.0
+          218.3
         ],
         [
           0,
@@ -2956,19 +3783,19 @@
           1,
           0,
           0,
-          100.752
+          100.915
         ],
         [
           0,
           1,
           0,
-          70.752
+          70.915
         ],
         [
           0,
           0,
           1,
-          212.6
+          212.2
         ],
         [
           0,
@@ -2994,13 +3821,13 @@
           1,
           0,
           0,
-          100.752
+          100.915
         ],
         [
           0,
           1,
           0,
-          70.752
+          70.915
         ],
         [
           0,
@@ -3946,12 +4773,12 @@
       "id": "coupon-panel",
       "part": "qa5_coupon_panel_v5",
       "role": "coupon",
-      "color": "#6f917c",
+      "color": "#f4ecdc",
       "motion": {
         "group": "coupon",
         "pull": [
           0,
-          -20,
+          16,
           0
         ]
       },
@@ -3965,19 +4792,19 @@
           1,
           0,
           0,
-          2208.0
+          2206.0
         ],
         [
           0,
           1,
           0,
-          -15.0
+          4.68
         ],
         [
           0,
           0,
           1,
-          8.0
+          4.0
         ],
         [
           0,

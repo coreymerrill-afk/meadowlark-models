@@ -1,4 +1,4 @@
-# Queen Anne Playhouse — v6.2.0
+# Queen Anne Playhouse — v6.3.0
 
 A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 

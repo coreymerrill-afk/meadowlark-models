@@ -27,7 +27,7 @@ assert(manifest.validation.forces_tested === false, 'forces flag');
 assert(manifest.validation.h3c_sliced === false, 'slice flag');
 assert(manifest.validation.cad_validated === true, 'cad flag');
 assert(manifest.legacy_interface.snap_compatible === false, 'snap claim');
-assert(manifest.version === '6.2.0', 'version');
+assert(manifest.version === '6.3.0', 'version');
 assert(manifest.prior_version === 'archive/v4.0.0', 'v4 archive pointer');
 assert(manifest.magnet.status === 'NOMINAL_NOT_FIT_APPROVED', 'magnet status');
 assert(manifest.magnet.nominal_mm[0] === 5 && manifest.magnet.nominal_mm[1] === 2.8, 'magnet nominal');

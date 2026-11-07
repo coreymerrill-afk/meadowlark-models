@@ -67,7 +67,10 @@ S1 = dict(x0=424.0, x1=470.0, y0=136.0, y1=136.0 + RUN, z=L1, up=1)
 S2 = dict(x0=366.0, x1=412.0, y0=248.0 - RUN, y1=248.0, z=L2, up=-1)
 
 MAG_D, MAG_T = 5.0, 2.8
-SKIN, RAD, AX = 1.2, 0.25, 0.20
+# Design allowances for a nominal disc. Not a measured fit.
+# 0.30 mm on each side of the diameter, 0.40 mm along the 2.8 mm thickness.
+# 1.4 mm of solid stays on the mating face so the disc cannot enter the closure gap.
+SKIN, RAD, AX = 1.4, 0.30, 0.40
 POD_D = MAG_D + 2 * RAD
 POD_H = MAG_T + AX
 PULL = 70.0
@@ -165,14 +168,14 @@ def spindle(h=26.0):
         [0, 0], [2.15, 0], [2.35, 1.2], [1.35, 3.2], [1.25, h * 0.38],
         [2.55, h * 0.52], [1.25, h * 0.68], [1.45, h - 2.4], [2.25, h - 0.8],
         [2.15, h], [0, h],
-    ], 12)
+    ], 24)
 
 
 def column(h):
     return revolve([
         [0, 0], [6.4, 0], [7.6, 2.2], [7.2, 5], [5.4, 8], [4.6, 14],
-        [4.35, h - 16], [5.1, h - 10], [7.4, h - 5], [7.8, h - 1.5], [6.8, h], [0, h],
-    ], 16)
+        [4.35, h - 16], [5.1, h - 10], [7.4, h - 5],         [7.8, h - 1.5], [6.8, h], [0, h],
+    ], 28)
 
 
 def bracket_mesh():
@@ -281,7 +284,7 @@ def slope_slab(x0, x1, y0, z0, y1, z1, thick=5.5):
     ])
 
 
-def shingle_field(x0, x1, y0, z0, y1, z1, kind="scallop"):
+def shingle_field(x0, x1, y0, z0, y1, z1, kind="scallop", skip=None):
     """Staggered shingles embedded in the slope. Fish scales point downhill."""
     cached()
     slope, normal = slope_frame(y0, z0, y1, z1)
@@ -300,6 +303,9 @@ def shingle_field(x0, x1, y0, z0, y1, z1, kind="scallop"):
         x = x0 + 2 + ((pitch_x * 0.5) if course % 2 else 0)
         while x < x1 - 6:
             origin = np.array([x, y0, z0], float) + slope * s - normal * embed
+            if skip is not None and skip(origin):
+                x += pitch_x
+                continue
             pieces.append(_xform(tile, origin, across, along, normal))
             x += pitch_x
         s += pitch_s
@@ -558,7 +564,9 @@ def fixed_walls():
         parts.append(box_at(336, 238, floor + 42, 360, 256, floor + 56))
         cuts = [box_at(344, 148, z0, 362, 196, floor + 76)]
         for zc in (floor + 28, floor + 52, floor + 74):
-            cuts += mag_slots((MX0 + 12, JAMB_BACK), (0, -1), [zc])
+            # Opens on the room face of the jamb. Skin of SKIN stays on the mating face.
+            cuts.append(along_y(MX0 + 17, JAMB_BACK - SKIN, MY1 - 18.6, zc, POD_D / 2))
+            cuts.append(along_y(MX0 + 17, MY1 - 20.4, MY1 - 18.2, zc, 4.3))
         if name == "l1":
             cuts.append(box_at(S1["x0"] - 6, S1["y0"] - 6, zp - 1, S1["x1"] + 6, S1["y1"] + 10, z1 + 1))
         else:
@@ -662,11 +670,8 @@ def facade(bounds, face, windows, flowers=False):
             for px in (230, 303, 379, 448):
                 socket = cylinder(radius=2.1, height=10, sections=12)
                 socket.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
-                socket.apply_translation((px, y1 - 1.2, L3 - 4))
+                socket.apply_translation((px, y1 - 3.8, L3 - 4))
                 cuts.append(socket)
-        zc = [z0 + (z1 - z0) * t for t in (0.25, 0.55, 0.82)]
-        for sx in (x0 + 6, x1 - 6):
-            cuts += mag_slots((sx, y1), (0, -1), zc)
         mesh = union([difference(union(body + skin + corn), cuts), *trim])
     else:
         body = [box_at(x1 - 3.4, y0, z0, x1, y1, z1),
@@ -681,11 +686,16 @@ def facade(bounds, face, windows, flowers=False):
         for win in windows:
             cuts.append(box_at(x1 - 8, win["y"], win["z"], x1 + 2, win["y"] + win["w"], win["z"] + win["h"]))
             trim += window_pack("+x", x1 - 3.4, win["y"], win["z"], win["w"], win["h"])
-        zc = [z0 + (z1 - z0) * t for t in (0.25, 0.55, 0.82)]
-        for sy in (y0 + 6, y1 - 6):
-            cuts += mag_slots((x1, sy), (-1, 0), zc)
         mesh = union([difference(union(body + skin + corn), cuts), *trim])
     return cleanup(mesh, face)
+
+
+def along_y(x, y_a, y_b, z, radius, sections=20):
+    """Cylinder spanning y_a to y_b. Used for pockets that must break a face."""
+    c = cylinder(radius=radius, height=abs(y_b - y_a), sections=sections)
+    c.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+    c.apply_translation((x, (y_a + y_b) / 2.0, z))
+    return c
 
 
 def mag_slots(origin, into, zs):
@@ -839,10 +849,11 @@ def facades():
     pin2 = cylinder(radius=1.35, height=10, sections=16)
     pin2.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
     pin2.apply_translation((MX1 - 8, JAMB_BACK + 1.5, L2 + 36))
-    slots = []
+    bores = []
     for zc in (L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74):
-        slots += mag_slots((MX1 - 7, JAMB_BACK), (0, -1), [zc])
-    side = cleanup(union([side, difference(jamb, slots), shelf, pin, pin2]), "side")
+        bores.append(along_y(MX1 - 13, JAMB_BACK - SKIN, MY1 - 12.6, zc, POD_D / 2))
+        bores.append(along_y(MX1 - 13, MY1 - 15.2, MY1 - 12.2, zc, 4.3))
+    side = cleanup(difference(union([side, jamb, shelf, pin, pin2]), bores), "side")
     publish("qa5_side_v5", side,
             "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
             "side", "structure", SAGE)
@@ -877,12 +888,11 @@ def rear_closure():
             box_at(win["x"] + win["w"] * 0.46, y0 + 1.4, win["z"] - 0.4, win["x"] + win["w"] * 0.54, y1 + 1.6, win["z"] + win["h"] + 0.6),
         ]
     zs = [L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74]
-    for sx in (MX0 + 12, MX1 - 7):
+    for sx in (MX0 + 17, MX1 - 13):
         for zc in zs:
-            pocket = cylinder(radius=POD_D / 2, height=2.6, sections=14)
-            pocket.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
-            pocket.apply_translation((sx, y0 + 1.6, zc))
-            cuts.append(pocket)
+            # Skin on the mating face, mouth through the outside of the stile.
+            cuts.append(along_y(sx, y0 + SKIN, y1 + 1.5, zc, POD_D / 2))
+            cuts.append(along_y(sx, y1 + 0.6, y1 + 2.2, zc, 4.3))
     for sx, zc in ((MX0 + 12, L1 + 36), (MX0 + 12, L2 + 36), (MX1 - 8, L1 + 36), (MX1 - 8, L2 + 36)):
         socket = cylinder(radius=1.75, height=9, sections=16)
         socket.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
@@ -890,9 +900,40 @@ def rear_closure():
         cuts.append(socket)
     mesh = cleanup(union([difference(union(body + skin), cuts), *trim]), "rear")
     publish("qa5_rear_v5", mesh,
-            "Full back, one print, 0.45 mm off the jambs. Straight magnetic pull. Nominal 5 x 2.8 mm discs. Not a structural brace.",
+            "Full back, one print, 0.45 mm off the jambs. Magnet mouths open through the stile. Nominal 5.0 x 2.8 mm discs, seat depth 3.2 mm. Not a brace.",
             "rear", "back", SAGE, {"group": "back", "pull": [0, PULL, 0]}, [0, 56, 0],
-            {"fit_gap_mm": FIT_GAP, "jamb_back_y": JAMB_BACK})
+            {"fit_gap_mm": FIT_GAP, "jamb_back_y": JAMB_BACK,
+             "magnet_seat_depth_mm": POD_H, "magnet_diameter_mm": POD_D, "mating_skin_mm": SKIN})
+    magnet_caps(y0, y1)
+
+
+def magnet_caps(y0, y1):
+    """Caps cover the open mouths. Bosses stop short of the 3.2 mm disc seat. Clearance, not a tested snap."""
+    zs = [L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74]
+    def cap(x, zs_here, y_boss0, y_boss1, y_plate0, y_plate1, tag):
+        bosses = [along_y(x, y_boss0, y_boss1, z, 2.05) for z in zs_here]
+        heads = [along_y(x, y_plate0, y_plate1, z, 3.05) for z in zs_here]
+        ya, yb = min(y_plate0, y_plate1), max(y_plate0, y_plate1)
+        spine = box_at(x - 1.1, ya + 0.25, min(zs_here) - 1, x + 1.1, yb - 0.25, max(zs_here) + 1)
+        publish(f"qa5_cap_{tag}_v5", cleanup(union([spine, *heads, *bosses]), "cap " + tag),
+                "Covers magnet mouths. The boss leaves the 3.2 mm seat clear. Pull the cap straight off to remove a disc. Untested.",
+                f"cap-{tag}", "fastener", IVORY, explode=[0, 14, 0])
+    # Panel caps sit outside the stile. Disc zone ends at y1.
+    cap(MX0 + 17, zs, y1 + 0.25, y1 + 1.15, y1 + 0.95, y1 + 1.85, "back-l")
+    cap(MX1 - 13, zs, y1 + 0.25, y1 + 1.15, y1 + 0.95, y1 + 1.85, "back-r")
+    # Jamb caps sit on the room face. Disc zone begins 3.2 mm before the skin.
+    disc = JAMB_BACK - SKIN - POD_H
+    mouth = MY1 - 18
+    def one(x, z, y_boss0, y_boss1, y_plate0, y_plate1, tag):
+        boss = along_y(x, y_boss0, y_boss1, z, 2.05)
+        head = along_y(x, y_plate0, y_plate1, z, 3.05)
+        publish(f"qa5_cap_{tag}_v5", cleanup(union([head, boss]), "cap " + tag),
+                "One magnet cap. Boss stops at the 3.2 mm seat. Clearance fit, untested.",
+                f"cap-{tag}", "fastener", IVORY, explode=[0, 10, 0])
+    for floor, side in ((L1, "a"), (L2, "b")):
+        for i, z in enumerate((floor + 28, floor + 52, floor + 74)):
+            one(MX0 + 17, z, disc - 0.2, mouth - 1.3, mouth - 2.15, mouth - 1.05, f"jl{side}{i}")
+            one(MX1 - 13, z, disc - 0.2, MY1 - 13.6, MY1 - 14.9, MY1 - 13.3, f"jr{side}{i}")
 
 
 def cone_courses():
@@ -939,7 +980,7 @@ APO = TR * math.cos(math.pi / 8)
 def facet_trim(angle, z, w, h):
     """Casing and pediment on one turret flat. The flat sits at the apothem, not the vertex radius."""
     sill = on_facet(angle, APO - 0.3, z - 2.2, w + 8, 3.6, 3.8)
-    head = on_facet(angle, APO - 0.3, z + h + 1.6, w + 8, 3.4, 3.2)
+    head = on_facet(angle, APO - 0.3, z + h + 0.7, w + 8, 3.6, 3.6)
     left = on_facet(angle, APO - 0.3, z + h / 2, 3.2, 3.4, h + 2, dt=-(w / 2 + 1.2))
     right = on_facet(angle, APO - 0.3, z + h / 2, 3.2, 3.4, h + 2, dt=(w / 2 + 1.2))
     a = math.radians(angle)
@@ -949,7 +990,7 @@ def facet_trim(angle, z, w, h):
         (-w / 2 - 2, 0.8, 0), (w / 2 + 2, 0.8, 0), (0, 0.8, 9),
         (-w / 2 - 2, -2.2, 0), (w / 2 + 2, -2.2, 0), (0, -2.2, 9),
     ])
-    origin = np.array([TX, TY, z + h + 3.2]) + n * APO
+    origin = np.array([TX, TY, z + h + 2.0]) + n * APO
     ped = _xform(peak, origin, t, n, np.array([0.0, 0.0, 1.0]))
     return [sill, head, left, right, ped]
 
@@ -1004,6 +1045,13 @@ def roofs():
     ])
     opening = box_at(xmid - 15, gy0 - 3, gz0 + 28, xmid + 15, gy0 + 8, gz0 + 86)
     face = difference(face, [opening])
+    gx, gz = xmid, gz0
+    gable_trim = [
+        plate_xz(arch_band(gx - 20, gz + 76, 40, 12, 2.6), gy0 + 1.4, 2.6),
+        box_at(gx - 1.1, gy0 - 0.6, gz + 32, gx + 1.1, gy0 + 1.8, gz + 82),
+        box_at(gx - 13, gy0 - 0.6, gz + 52, gx + 13, gy0 + 1.8, gz + 54.6),
+        box_at(gx - 16, gy0 - 0.8, gz + 24, gx + 16, gy0 + 2.0, gz + 28),
+    ]
     board = bargeboard(gx1 - gx0 - 20)
     board.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
     board.apply_translation(-board.bounds[0])
@@ -1011,12 +1059,14 @@ def roofs():
     bird = move(owl(), xmid, gy0 + 1.4, gz0 + 26)
     left_rake = rake_board(gx0 + 10, gz0 + 8, xmid - 6, gz1 - 10, gy0 - 0.8, 1)
     right_rake = rake_board(gx1 - 10, gz0 + 8, xmid + 6, gz1 - 10, gy0 - 0.8, -1)
-    publish("qa5_gable_v5", cleanup(union([face, board, bird, left_rake, right_rake]), "gable"),
-            "Street gable. Scroll-pierced verge and rakes, and the owl. The piercings go through.",
+    publish("qa5_gable_v5", cleanup(union([face, *gable_trim, board, bird, left_rake, right_rake]), "gable"),
+            "Street gable. Arched attic sash, scroll verge, owl. The piercings go through.",
             "gable", "structure", SAGE, {"group": "roof", "lift": [0, 0, 48], "park": [0, -46, 24]},
             [0, -30, 40])
     rear = slope_slab(MX0 + 8, MX1 - 8, MY1 + 14, EAVE - 16, y_r + 3.0, RIDGE)
-    rear_sh = shingle_field(MX0 + 16, MX1 - 16, MY1 + 8, EAVE - 12, y_r + 8, RIDGE - 10)
+    def skip_chimney(origin):
+        return 442.0 < origin[0] < 492.0 and 206.0 < origin[1] < 252.0
+    rear_sh = shingle_field(MX0 + 8, MX1 - 8, MY1 + 14, EAVE - 16, y_r + 3.0, RIDGE, "fish", skip_chimney)
     bricks = []
     bz = RIDGE - 36
     while bz < RIDGE + 18:
@@ -1032,8 +1082,10 @@ def roofs():
         box_at(447, 213, RIDGE + 18, 485, 247, RIDGE + 28),
         *bricks,
     ])
-    rear_roof = cleanup(union([rear, chim, *rear_sh]), "rear roof")
-    publish("qa5_roof_rear_v5", rear_roof, "Rear slope, scalloped shingles, and the brick chimney.",
+    # Center soffit cut so the attic opening and the upper stair read from the rear.
+    soffit = box_at(348, MY1 - 2, 150, 448, MY1 + 36, L3 + 18)
+    rear_roof = cleanup(difference(union([rear, chim, *rear_sh]), [soffit]), "rear roof")
+    publish("qa5_roof_rear_v5", rear_roof, "Rear slope, fish-scale courses, chimney. Center soffit is open over the attic.",
             "roof-rear", "roof", SLATE, {"group": "roof", "lift": [0, 0, 48], "park": [0, 28, 28]},
             [0, 20, 50], {"plate_top": EAVE - GAP, "seat_z": EAVE})
     cone = revolve([[0, 0], [TR - 4, 0], [1.8, CONE_H], [0, CONE_H]], 8)
@@ -1051,12 +1103,17 @@ def roofs():
         holes = [prism(octagon(TX, TY, TR - 4.6), z0 - 1, z1 + 1), box_at(MX0 - 0.35, 0, z0 - 1, 900, 500, z1 + 1)]
         holes += [facet_hole(ang, z, 20, 42) for ang, z in wins]
         bands = []
+        # Belts skip the flat against the house, so the cut there is not a shaved sliver.
+        width = 2 * TR * math.sin(math.pi / 8) + 1.2
+        def add_belt(z_a, z_b, proud):
+            for ang in (45, 90, 135, 180, 225, 270, 315):
+                bands.append(on_facet(ang, APO - 0.2, (z_a + z_b) / 2, width, proud + 1.4, z_b - z_a))
         z = z0 + 5
         while z < z1 - 6:
-            bands.append(prism(octagon(TX, TY, TR + 0.85), z, z + 1.35))
-            z += 4.1
-        for belt in (z0 + 2, z1 - 7):
-            bands.append(prism(octagon(TX, TY, TR + 1.8), belt, belt + 3.6))
+            add_belt(z, z + 1.5, 0.9)
+            z += 4.2
+        add_belt(z0 + 1.2, z0 + 4.6, 1.8)
+        add_belt(z1 - 5.2, z1 - 1.4, 1.8)
         trim = []
         for ang, wz in wins:
             trim += facet_trim(ang, wz, 20, 42)
@@ -1064,10 +1121,10 @@ def roofs():
         return cleanup(union([mesh, *trim]), name)
 
     street = (180, 225, 270, 315)
-    publish("qa5_turret_loft_v5", turret_shell(L3 + 0.6, plate_top(L3) + 0.1, [(a, L3 + 18) for a in street], "loft"),
+    publish("qa5_turret_loft_v5", turret_shell(L3 + 0.2, plate_top(L3) + 0.1, [(a, L3 + 18) for a in street], "loft"),
             "Turret loft, with cased windows on the street flats.", "turret-loft", "structure", SAGE, explode=[-10, -6, 16])
     lower_wins = [(a, L1 + 30) for a in street] + [(a, L2 + 18) for a in street]
-    publish("qa5_turret_v5", turret_shell(L1 + 0.6, plate_top(L2) - 0.4, lower_wins, "turret"),
+    publish("qa5_turret_v5", turret_shell(L1 + 0.6, L3 - 0.2, lower_wins, "turret"),
             "Octagonal turret, two storeys, clapboard, belt courses, and cased windows.",
             "turret", "structure", SAGE, explode=[-14, -10, 0])
 
@@ -1402,15 +1459,17 @@ def service():
     publish("qa5_service_v5", move(bay, 360, MY1 + 6, 0),
             "Adult bay behind the house. A port on this face meets the foundation chase. 0.3 mm gap. Not a play door.",
             "service", "service", "#3c4650", explode=[0, 24, 0])
-    frame = box_at(0, 0, 0, 36, 12, 64)
-    cuts = mag_slots((10, 0), (0, 1), [18, 32, 46]) + mag_slots((26, 0), (0, 1), [18, 32, 46])
-    frame = cleanup(difference(frame, cuts), "coupon frame")
-    panel = box_at(4, -7, 4, 32, -0.4, 58)
-    cuts = mag_slots((10, -0.4), (0, -1), [22, 36, 50]) + mag_slots((26, -0.4), (0, -1), [22, 36, 50])
-    panel = cleanup(difference(panel, cuts), "coupon panel")
-    publish("qa5_coupon_frame_v5", move(frame, 2200, 0, 0), "Straight-pull coupon, frame half.", "coupon-frame", "coupon", PLASTER)
-    publish("qa5_coupon_panel_v5", move(panel, 2204, -8, 4), "Straight-pull coupon, panel half.", "coupon-panel", "coupon", SAGE,
-            {"group": "coupon", "pull": [0, -20, 0]})
+    # Coupon uses the same seat as the house: skin 1.4, depth 3.2, mouth open.
+    frame = box_at(0, 0, 0, 28, 8, 22)
+    frame = cleanup(difference(frame, [along_y(14, SKIN, 8.6, 11, POD_D / 2)]), "coupon frame")
+    panel = box_at(6, 8.8, 4, 22, 14, 18)
+    panel = cleanup(union([panel, along_y(14, SKIN + POD_H + 0.08, 9.1, 11, 2.45)]), "coupon cap")
+    publish("qa5_coupon_frame_v5", move(frame, 2200, 0, 0),
+            "Magnet coupon block. Mouth is open. Seat is 3.2 mm deep for a nominal 2.8 mm disc, with 1.4 mm skin. Not a measured fit.",
+            "coupon-frame", "coupon", PLASTER)
+    publish("qa5_coupon_panel_v5", move(panel, 2200, 0, 0),
+            "Coupon cap. Boss stops at the disc seat. Same clearance as the house caps.",
+            "coupon-panel", "coupon", IVORY, {"group": "coupon", "pull": [0, 16, 0]})
     bar = cleanup(union([box_at(0.2, 0.2, 0, POD_H - 0.2, 6.0, 24), box_at(0.6, -1.1, 2, POD_H - 0.5, 7.4, 20)]), "bar")
     publish("qa5_retainer_v5", move(bar, 2260, 0, 10), "Capture bar for the magnet. It does not fasten the wall.", "retainer", "coupon", "#777777")
     w = box_at(0, 0, 0, 40, 18, 5)
@@ -1560,18 +1619,23 @@ def write_all(report):
         counts = np.bincount(mesh.edges_unique_inverse)
         nbad = int(np.sum(counts != 2))
         comps = len(mesh.split(only_watertight=False))
-        info["reloaded"] = {"watertight": bool(mesh.is_watertight), "components": comps, "nonmanifold_edges": nbad, "volume": round(float(mesh.volume), 1)}
-        positive = [p for p in mesh.split(only_watertight=False) if p.volume > 1.0]
-        if len(positive) != 1 or nbad:
+        parts = mesh.split(only_watertight=False)
+        positive = [p for p in parts if p.volume > 1.0]
+        negative = [p for p in parts if p.volume < -1.0]
+        info["reloaded"] = {
+            "watertight": bool(mesh.is_watertight),
+            "winding": bool(mesh.is_winding_consistent),
+            "components": comps,
+            "positive_bodies": len(positive),
+            "negative_bodies": len(negative),
+            "nonmanifold_edges": nbad,
+            "volume": round(float(mesh.volume), 1),
+        }
+        if len(positive) != 1 or negative or nbad or not mesh.is_watertight:
             bad.append(name)
-            print("topology", name, info["reloaded"], "positive", len(positive), flush=True)
+            print("topology", name, info["reloaded"], flush=True)
     if bad:
-        info_note = ", ".join(bad)
-        print("topology residue or open edges:", info_note, flush=True)
-        # Recorded on the manifest. A positive extra body still fails the build.
-        extra = [n for n in bad if any(p.volume > 1.0 for p in tm.load(os.path.join(STL, n + ".stl"), force="mesh").split(only_watertight=False)) and len([p for p in tm.load(os.path.join(STL, n + ".stl"), force="mesh").split(only_watertight=False) if p.volume > 1]) > 1]
-        if extra:
-            raise RuntimeError("more than one solid body: " + ", ".join(extra))
+        raise RuntimeError("reloaded STL is not one clean solid: " + ", ".join(bad))
     house = [i for i in INSTANCES if i["role"] != "coupon"]
     mins = np.min([i["world"].bounds[0] for i in house], axis=0)
     maxs = np.max([i["world"].bounds[1] for i in house], axis=0)
@@ -1590,7 +1654,7 @@ def write_all(report):
     count = len(FIXTURES)
     manifest = {
         "name": "Queen Anne Playhouse",
-        "version": "6.2.0",
+        "version": "6.3.0",
         "prior_version": "archive/v4.0.0",
         "scale": "1:24",
         "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
@@ -1666,10 +1730,11 @@ def write_all(report):
             "Balusters, bargeboard piercings, blossoms, and scallop edges are thin. A 0.2 mm nozzle is the ornament setting. They are not claimed durable.",
         ],
         "magnet_install_steps": [
-            "Print the coupon first. The slot matches the back stiles and the jambs.",
-            "An adult seats a nominal 5.0 x 2.8 mm disc and slides the capture bar in from the top.",
-            "The bar closes the magnet. It does not catch the other wall. Holding force is untested.",
-            "The back pulls straight off toward the rear. The front, sides, porch, and roofs stay.",
+            "Print the coupon first. Its bore is the same cross-section as the house seats.",
+            "A nominal 5.0 x 2.8 mm disc drops in the open mouth. The seat is 5.6 mm across and 3.2 mm deep. Those are design allowances of 0.30 mm radial and 0.40 mm axial, not a measured fit.",
+            "1.4 mm of plastic stays between the disc and the mating face. The cap boss stops at the seat and does not pinch the disc.",
+            "The cap pulls straight off. It does not fasten the back to the jamb. Holding force is untested.",
+            "The back pulls straight off toward the rear. Pins and the bottom ledge locate it. The front, sides, porch, and roofs stay.",
         ],
         "limits": [
             "Not printed. No strength, tip-over, magnet, or electrical test.",
@@ -1680,12 +1745,12 @@ def write_all(report):
             "Not a toy-safety certification.",
         ],
         "cameras": {
-            "closed": {"position": [-80, -620, 250], "target": [280, 150, 145]},
-            "front": {"position": [300, -760, 190], "target": [310, 150, 130]},
-            "rear": {"position": [360, 620, 130], "target": [360, 250, 110]},
-            "open": {"position": [390, 720, 160], "target": [380, 180, 120]},
-            "stairs": {"position": [560, 640, 150], "target": [420, 190, 110]},
-            "detail": {"position": [250, -30, 55], "target": [370, 55, 40]},
+            "closed": {"position": [80, -480, 210], "target": [320, 180, 170]},
+            "front": {"position": [340, -520, 170], "target": [340, 180, 160]},
+            "rear": {"position": [360, 700, 150], "target": [360, 300, 120]},
+            "open": {"position": [390, 760, 260], "target": [390, 230, 210]},
+            "stairs": {"position": [520, 620, 250], "target": [400, 210, 190]},
+            "detail": {"position": [400, -160, 300], "target": [380, 90, 280]},
             "attachment": {"position": [640, 480, 110], "target": [420, 280, 90]},
             "plan": {"position": [cx, cy, maxs[2] + 280], "target": [cx, cy, 80]},
             "lighting": {"position": [cx + 40, mins[1] - 80, 160], "target": [cx, cy, 90]},

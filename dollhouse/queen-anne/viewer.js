@@ -450,10 +450,10 @@
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     if (THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.setClearColor(0x10141a, 1);
+    renderer.setClearColor(0x1c2228, 1);
     if (THREE.ACESFilmicToneMapping !== undefined) {
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.08;
+      renderer.toneMappingExposure = 0.92;
     }
     view.appendChild(renderer.domElement);
 
@@ -488,10 +488,15 @@
       else if (instance.role === 'porch' || instance.role === 'trim') { rough = 0.4; metal = 0.04; }
       else if (instance.role === 'stair' || instance.role === 'furniture' || instance.role === 'floor') { rough = 0.55; metal = 0.03; }
       else if (instance.role === 'light') { rough = 0.32; metal = 0.28; }
+      var clay = location.search.indexOf('clay=1') >= 0;
+      if (clay) {
+        renderer.setClearColor(0xd7d2c8, 1);
+        if (renderer.toneMappingExposure !== undefined) renderer.toneMappingExposure = 1.05;
+      }
       var material = new THREE.MeshStandardMaterial({
-        color: instance.color,
-        roughness: rough,
-        metalness: metal,
+        color: clay ? 0xb7b1a6 : instance.color,
+        roughness: clay ? 0.72 : rough,
+        metalness: clay ? 0.02 : metal,
         side: THREE.DoubleSide
       });
       var mesh = new THREE.Mesh(geometry, material);

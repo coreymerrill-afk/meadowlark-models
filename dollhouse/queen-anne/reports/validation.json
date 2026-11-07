@@ -1,7 +1,7 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 67,
+  "rest_pairs": 93,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
@@ -16,7 +16,7 @@
       "id": "roof-rear",
       "bodies": 1,
       "seat_gap_mm": 0.4,
-      "bearing_probe_mm3": 345.8,
+      "bearing_probe_mm3": 364.7,
       "bearer": "attic-frame"
     },
     {
@@ -37,7 +37,7 @@
       "id": "porch-skirt",
       "bodies": 1,
       "seat_gap_mm": 0.4,
-      "bearing_probe_mm3": 485.0,
+      "bearing_probe_mm3": 554.6,
       "bearer": "turret"
     }
   ],
@@ -96,8 +96,8 @@
       "seat_gap_mm": 0.0
     }
   ],
-  "triangles": 473010,
-  "instance_count": 61,
+  "triangles": 435928,
+  "instance_count": 75,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,
