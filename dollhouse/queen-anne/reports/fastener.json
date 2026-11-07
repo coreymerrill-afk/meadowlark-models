@@ -1,0 +1,156 @@
+{
+  "class": "nominal M2, design assumption, not measured",
+  "bom": [
+    {
+      "part": "qa65_adult_screw_*",
+      "qty": 6,
+      "role": "nominal M2 screw"
+    },
+    {
+      "part": "qa65_m2_nut",
+      "qty": 6,
+      "role": "nominal M2 hex nut"
+    }
+  ],
+  "removal_order": [
+    "Turn the M2 screw out.",
+    "Remove the rear strip or the jamb retainer. That uncovers the side slot.",
+    "Slide the nut out of the slot."
+  ],
+  "safety_certification": false,
+  "stations": [
+    {
+      "screw": "adult-screw-back-l",
+      "host": "rear",
+      "cover": "cap-capture-left",
+      "nominal": "M2",
+      "major_mm": 2.0,
+      "pitch_mm": 0.4,
+      "head_mm": [
+        3.8,
+        1.6
+      ],
+      "nut_af_mm": 4.0,
+      "nut_thickness_mm": 1.6,
+      "lip_hole_mm": 2.5,
+      "seated_screw_nut_mm3": 0.0,
+      "pull_0_12mm_flank_mm3": 0.21,
+      "measured": false,
+      "catalog": "M2x3",
+      "under_head_mm": 3.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 3.15
+    },
+    {
+      "screw": "adult-screw-back-r",
+      "host": "rear",
+      "cover": "cap-capture-right",
+      "nominal": "M2",
+      "major_mm": 2.0,
+      "pitch_mm": 0.4,
+      "head_mm": [
+        3.8,
+        1.6
+      ],
+      "nut_af_mm": 4.0,
+      "nut_thickness_mm": 1.6,
+      "lip_hole_mm": 2.5,
+      "seated_screw_nut_mm3": 0.0,
+      "pull_0_12mm_flank_mm3": 0.21,
+      "measured": false,
+      "catalog": "M2x3",
+      "under_head_mm": 3.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 3.15
+    },
+    {
+      "screw": "adult-screw-jl1",
+      "host": "walls-l1",
+      "cover": "retainer-jl1",
+      "nominal": "M2",
+      "major_mm": 2.0,
+      "pitch_mm": 0.4,
+      "head_mm": [
+        3.8,
+        1.6
+      ],
+      "nut_af_mm": 4.0,
+      "nut_thickness_mm": 1.6,
+      "lip_hole_mm": 2.5,
+      "seated_screw_nut_mm3": 0.0,
+      "pull_0_12mm_flank_mm3": 0.21,
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
+    },
+    {
+      "screw": "adult-screw-jl2",
+      "host": "walls-l2",
+      "cover": "retainer-jl2",
+      "nominal": "M2",
+      "major_mm": 2.0,
+      "pitch_mm": 0.4,
+      "head_mm": [
+        3.8,
+        1.6
+      ],
+      "nut_af_mm": 4.0,
+      "nut_thickness_mm": 1.6,
+      "lip_hole_mm": 2.5,
+      "seated_screw_nut_mm3": 0.0,
+      "pull_0_12mm_flank_mm3": 0.21,
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
+    },
+    {
+      "screw": "adult-screw-jr1",
+      "host": "side",
+      "cover": "retainer-jr1",
+      "nominal": "M2",
+      "major_mm": 2.0,
+      "pitch_mm": 0.4,
+      "head_mm": [
+        3.8,
+        1.6
+      ],
+      "nut_af_mm": 4.0,
+      "nut_thickness_mm": 1.6,
+      "lip_hole_mm": 2.5,
+      "seated_screw_nut_mm3": 0.0,
+      "pull_0_12mm_flank_mm3": 0.21,
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
+    },
+    {
+      "screw": "adult-screw-jr2",
+      "host": "side",
+      "cover": "retainer-jr2",
+      "nominal": "M2",
+      "major_mm": 2.0,
+      "pitch_mm": 0.4,
+      "head_mm": [
+        3.8,
+        1.6
+      ],
+      "nut_af_mm": 4.0,
+      "nut_thickness_mm": 1.6,
+      "lip_hole_mm": 2.5,
+      "seated_screw_nut_mm3": 0.0,
+      "pull_0_12mm_flank_mm3": 0.21,
+      "measured": false,
+      "catalog": "M2x8",
+      "under_head_mm": 8.0,
+      "nominal_engagement_mm": 1.6,
+      "tip_clearance_mm": 0.65
+    }
+  ],
+  "length_note": "Back catalog length is M2x3. Jamb catalog length is M2x8. Engagement is the overlap of the under-head interval and the nut interval. It is not a mesh-collision proxy. Not physically tested."
+}

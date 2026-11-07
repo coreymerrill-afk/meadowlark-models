@@ -1,7 +1,7 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 39,
+  "rest_pairs": 101,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
@@ -16,7 +16,7 @@
       "id": "roof-rear",
       "bodies": 1,
       "seat_gap_mm": 0.4,
-      "bearing_probe_mm3": 1004.5,
+      "bearing_probe_mm3": 364.7,
       "bearer": "attic-frame"
     },
     {
@@ -59,13 +59,50 @@
       "headroom_sample_mm": 72.0
     }
   ],
-  "triangles": 224982,
-  "instance_count": 51,
+  "rear_fit": {
+    "gap_y_mm": 0.45,
+    "target_gap_mm": 0.45,
+    "intersection_mm3": 0.0,
+    "panel_bbox_mm": [
+      285.0,
+      7.0,
+      269.05
+    ],
+    "closed_transform": "identity placement of the STL; this gap is the closed position"
+  },
+  "trim_seats": [
+    {
+      "id": "door",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "cornice",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-0",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-1",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-2",
+      "seat_gap_mm": 0.0
+    },
+    {
+      "id": "crown-3",
+      "seat_gap_mm": 0.0
+    }
+  ],
+  "triangles": 407108,
+  "instance_count": 122,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,
     "y": 400.0,
-    "z": 416.0,
+    "z": 434.0,
     "min_mm": [
       58.1,
       2.0,
@@ -74,7 +111,8 @@
     "max_mm": [
       518.0,
       402.0,
-      416.0
+      434.0
     ]
-  }
+  },
+  "note": "Rear bbox is the flat back including the attic plug. top_gap_mm is the handrail above the floor target, not the tread-to-floor step. See reports/landings.json."
 }

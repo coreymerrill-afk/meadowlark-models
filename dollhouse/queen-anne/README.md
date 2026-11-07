@@ -1,16 +1,16 @@
-# Queen Anne Playhouse — v5.0.0
+# Queen Anne Playhouse — v6.5.3
 
-A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD.
+A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 
-The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes, with a scalloped base board, rake bargeboards, and an owl in the opening. The porch wraps the turret and runs across the ground floor: turned columns, cyma brackets, a spindle rail, and steps. Shingles are individual scallops. Clapboard, belt courses, casings, and flower boxes are in the meshes.
+The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes. The porch wraps the turret. The front slope carries overlapping fish-scale courses. The rear slope and the cone still use the smaller scallop. Street windows have curved hoods. One upper window has a pierced fan, a separate sash, room-side keepers, and headed pins. The other street windows keep a simpler arch. Side windows have no crown.
 
-v4 is in `archive/v4.0.0/`. It was a narrow stack with a flat porch and bar roofs.
+The ground floor has a projecting bay. The attic center, above the back wall, is open between two side pads. In v6.5.0 the same back continues up and closes that opening; it leaves with the back. The roof stays on. The upper stair is the route onto that floor. The gable has separate scroll verges, an arched sash, a fan, and a cornice. The porch front has three friezes and finer balusters. The turret loft is the same level. A covered chase runs in the fixed ceiling plates and the foundation to a port on the service bay. It does not enter the removable back. The joint gaps are 0.4 mm at the jamb-to-foundation step and 0.3 mm at the foundation-to-bay port.
 
 ## How it is played
 
-The side walls are the everyday opening. They are the full depth of the rooms and pull straight off. There is no sill hook and no slide channel. The porch stays, and so does the ground-floor street wall, because a straight pull of that wall would have to pass through the porch. The upper front, above the porch roof, pulls straight off. The turret drum stays: a wrapped octagon cannot slide off its floors. The joint between turret and main block is a hairline.
+One wall comes off: the full back. It is one print, 285 × 7 × 269 mm, under the 310 × 300 × 315 mm allowance. That height includes the attic plug. Closed, its inner face is 0.45 mm behind the jambs and it does not occupy their volume. It pulls straight off on nominal 5.0 × 2.8 mm discs. Each rear strip and each jamb retainer is drawn around a purchased slotted M2 screw and an ISO 4032 M2 nut. Those metal parts are reference geometry and are not in the print set. The back screws are nominal M2×3 and the jamb screws are nominal M2×8. Both figures are under-head lengths. The head is drawn 3.8 × 1.6 mm. An adult turns the screw out first. There is no sill hook. Retention was not physically tested. This is not a safety validation. The 1.3 mm lace webs were not toolpath-checked. The front, sides, porch, floors, and roofs stay. The back is not a brace, and the magnets are not what holds the house up. The roof bears on the fixed plates with the back off.
 
-Two stair flights are in the mesh, with treads, risers, and a spindle rail. The lower flight climbs from the entry to the first floor. The upper flight climbs from that floor to the attic. The wells are open.
+Two stair flights have treads, risers, and a spindle rail. The lower flight climbs from the entry to the first floor. The upper flight climbs from that floor to the attic. The wells are open. The hall wall stops short of the rear opening.
 
 ## Lighting
 
@@ -18,11 +18,13 @@ Ten fixtures: eight ceiling pucks and two porch lanterns, on the fixed frame or 
 
 ## Ornament
 
-Balusters, bargeboard piercings, blossoms, and scallop edges are thin. A 0.2 mm nozzle is the setting for that ornament. Structural walls are not held to that same minimum. None of it is claimed durable or safe.
+Balusters, verge scrolls, and shingle edges are thin. A 0.2 mm nozzle is something some machines can take. It is not confirmed as the nozzle on hand. Nozzle diameter, layer height, and extrusion width are different numbers. None of this is claimed durable or safe. The headed pin and the 1.7 mm verge webs are untested until a coupon is printed.
 
 ## Checked
 
-`python3 cad/build_queen_anne_v5.py` writes the STLs. Each part is one solid and fits the 310 × 300 × 315 mm allowance. The audit found no resting overlap above 2 mm³, a bearing probe under each roof, and open stair wells. The headroom probe clears 72 mm. The viewer loads these STLs.
+`python3 cad/build_queen_anne_v5.py` writes the STLs. Each reloaded STL is one watertight body. `reports/topology.json` is that count. `reports/validation.json` is the assembly check: shared volume 0 mm³, rear gap 0.45 mm, roofs bearing with the back off. The viewer loads these STLs.
+
+`reports/magnets.json` lists the twelve seat centers in assembled coordinates and in each host STL. `reports/magnet-section.png` is a section of the rear stile at assembled x = 228, with the cap. `reports/magnet-cutaway-seat.stl` and `reports/magnet-cutaway-cap.stl` are that seat and its cap in one frame. `stl/print/` lays the tall parts on their shortest axis. The caps are 1.6 mm thick on the bed, not 150 mm on edge. No slicer was run.
 
 ## Not checked
 

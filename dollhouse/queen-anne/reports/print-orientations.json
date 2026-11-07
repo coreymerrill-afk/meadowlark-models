@@ -1,0 +1,1788 @@
+{
+  "envelope_mm": [
+    310,
+    300,
+    315
+  ],
+  "parts": {
+    "qa5_foundation_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        300.0,
+        286.7,
+        14.8
+      ],
+      "print_extents_mm": [
+        300.0,
+        286.7,
+        14.8
+      ],
+      "margin_to_310x300x315_mm": [
+        10.0,
+        13.3,
+        300.2
+      ]
+    },
+    "qa5_foundation_turret_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        152.33,
+        195.86,
+        16.0
+      ],
+      "print_extents_mm": [
+        152.33,
+        195.86,
+        16.0
+      ],
+      "margin_to_310x300x315_mm": [
+        157.7,
+        104.1,
+        299.0
+      ]
+    },
+    "qa5_floor_l2_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        277.0,
+        168.0,
+        6.15
+      ],
+      "print_extents_mm": [
+        277.0,
+        168.0,
+        6.15
+      ],
+      "margin_to_310x300x315_mm": [
+        33.0,
+        132.0,
+        308.9
+      ]
+    },
+    "qa5_floor_l3_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        277.0,
+        168.0,
+        6.15
+      ],
+      "print_extents_mm": [
+        277.0,
+        168.0,
+        6.15
+      ],
+      "margin_to_310x300x315_mm": [
+        33.0,
+        132.0,
+        308.9
+      ]
+    },
+    "qa5_floor_turret_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        77.61,
+        77.61,
+        6.0
+      ],
+      "print_extents_mm": [
+        77.61,
+        77.61,
+        6.0
+      ],
+      "margin_to_310x300x315_mm": [
+        232.4,
+        222.4,
+        309.0
+      ]
+    },
+    "qa5_walls_l1_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        281.0,
+        181.5,
+        91.45
+      ],
+      "print_extents_mm": [
+        281.0,
+        181.5,
+        91.45
+      ],
+      "margin_to_310x300x315_mm": [
+        29.0,
+        118.5,
+        223.6
+      ]
+    },
+    "qa5_walls_l2_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        281.0,
+        181.5,
+        91.2
+      ],
+      "print_extents_mm": [
+        281.0,
+        181.5,
+        91.2
+      ],
+      "margin_to_310x300x315_mm": [
+        29.0,
+        118.5,
+        223.8
+      ]
+    },
+    "qa5_attic_frame_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        279.0,
+        172.0,
+        11.1
+      ],
+      "print_extents_mm": [
+        279.0,
+        172.0,
+        11.1
+      ],
+      "margin_to_310x300x315_mm": [
+        31.0,
+        128.0,
+        303.9
+      ]
+    },
+    "qa5_puck_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        12.4,
+        12.4,
+        6.4
+      ],
+      "print_extents_mm": [
+        12.4,
+        12.4,
+        6.4
+      ],
+      "margin_to_310x300x315_mm": [
+        297.6,
+        287.6,
+        308.6
+      ]
+    },
+    "qa5_front_ground_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        282.6,
+        23.2,
+        98.23
+      ],
+      "print_extents_mm": [
+        282.6,
+        98.23,
+        23.2
+      ],
+      "margin_to_310x300x315_mm": [
+        27.4,
+        201.8,
+        291.8
+      ]
+    },
+    "qa5_door_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        29.6,
+        2.4,
+        70.2
+      ],
+      "print_extents_mm": [
+        29.6,
+        70.2,
+        2.4
+      ],
+      "margin_to_310x300x315_mm": [
+        280.4,
+        229.8,
+        312.6
+      ]
+    },
+    "qa5_front_upper_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        288.4,
+        13.8,
+        107.55
+      ],
+      "print_extents_mm": [
+        288.4,
+        107.55,
+        13.8
+      ],
+      "margin_to_310x300x315_mm": [
+        21.6,
+        192.4,
+        301.2
+      ]
+    },
+    "qa5_sash_upper_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        30.6,
+        2.5,
+        60.6
+      ],
+      "print_extents_mm": [
+        30.6,
+        60.6,
+        2.5
+      ],
+      "margin_to_310x300x315_mm": [
+        279.4,
+        239.4,
+        312.5
+      ]
+    },
+    "qa5_keeper_upper_l_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.6,
+        2.65,
+        48.0
+      ],
+      "print_extents_mm": [
+        6.6,
+        48.0,
+        2.65
+      ],
+      "margin_to_310x300x315_mm": [
+        303.4,
+        252.0,
+        312.4
+      ]
+    },
+    "qa5_pin_upper_l_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        3.7,
+        6.43,
+        3.61
+      ],
+      "print_extents_mm": [
+        3.7,
+        6.43,
+        3.61
+      ],
+      "margin_to_310x300x315_mm": [
+        306.3,
+        293.6,
+        311.4
+      ]
+    },
+    "qa5_keeper_upper_r_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.6,
+        2.65,
+        48.0
+      ],
+      "print_extents_mm": [
+        6.6,
+        48.0,
+        2.65
+      ],
+      "margin_to_310x300x315_mm": [
+        303.4,
+        252.0,
+        312.4
+      ]
+    },
+    "qa5_pin_upper_r_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        3.7,
+        6.43,
+        3.61
+      ],
+      "print_extents_mm": [
+        3.7,
+        6.43,
+        3.61
+      ],
+      "margin_to_310x300x315_mm": [
+        306.3,
+        293.6,
+        311.4
+      ]
+    },
+    "qa5_side_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        14.75,
+        186.6,
+        188.45
+      ],
+      "print_extents_mm": [
+        188.45,
+        186.6,
+        14.75
+      ],
+      "margin_to_310x300x315_mm": [
+        121.6,
+        113.4,
+        300.2
+      ]
+    },
+    "qa5_rear_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        285.0,
+        7.0,
+        269.05
+      ],
+      "print_extents_mm": [
+        285.0,
+        269.05,
+        7.0
+      ],
+      "margin_to_310x300x315_mm": [
+        25.0,
+        30.9,
+        308.0
+      ]
+    },
+    "qa5_cap_jla0_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        285.6,
+        308.9
+      ]
+    },
+    "qa5_cap_jra0_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        290.9,
+        308.9
+      ]
+    },
+    "qa5_cap_jla1_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        285.6,
+        308.9
+      ]
+    },
+    "qa5_cap_jra1_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        290.9,
+        308.9
+      ]
+    },
+    "qa5_cap_jla2_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        285.6,
+        308.9
+      ]
+    },
+    "qa5_cap_jra2_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        290.9,
+        308.9
+      ]
+    },
+    "qa5_cap_jlb0_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        285.6,
+        308.9
+      ]
+    },
+    "qa5_cap_jrb0_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        290.9,
+        308.9
+      ]
+    },
+    "qa5_cap_jlb1_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        285.6,
+        308.9
+      ]
+    },
+    "qa5_cap_jrb1_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        290.9,
+        308.9
+      ]
+    },
+    "qa5_cap_jlb2_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        14.35,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        285.6,
+        308.9
+      ]
+    },
+    "qa5_cap_jrb2_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "print_extents_mm": [
+        6.1,
+        9.1,
+        6.1
+      ],
+      "margin_to_310x300x315_mm": [
+        303.9,
+        290.9,
+        308.9
+      ]
+    },
+    "qa5_roof_front_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        283.0,
+        127.27,
+        154.0
+      ],
+      "print_extents_mm": [
+        283.0,
+        154.0,
+        127.27
+      ],
+      "margin_to_310x300x315_mm": [
+        27.0,
+        146.0,
+        187.7
+      ]
+    },
+    "qa5_gable_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        168.0,
+        5.2,
+        160.0
+      ],
+      "print_extents_mm": [
+        168.0,
+        160.0,
+        5.2
+      ],
+      "margin_to_310x300x315_mm": [
+        142.0,
+        140.0,
+        309.8
+      ]
+    },
+    "qa5_roof_rear_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        281.7,
+        105.5,
+        196.0
+      ],
+      "print_extents_mm": [
+        281.7,
+        196.0,
+        105.5
+      ],
+      "margin_to_310x300x315_mm": [
+        28.3,
+        104.0,
+        209.5
+      ]
+    },
+    "qa5_turret_cap_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        77.61,
+        77.61,
+        4.15
+      ],
+      "print_extents_mm": [
+        77.61,
+        77.61,
+        4.15
+      ],
+      "margin_to_310x300x315_mm": [
+        232.4,
+        222.4,
+        310.9
+      ]
+    },
+    "qa5_roof_turret_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        99.78,
+        99.78,
+        130.0
+      ],
+      "print_extents_mm": [
+        130.0,
+        99.78,
+        99.78
+      ],
+      "margin_to_310x300x315_mm": [
+        180.0,
+        200.2,
+        215.2
+      ]
+    },
+    "qa5_turret_loft_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        109.58,
+        109.86,
+        91.5
+      ],
+      "print_extents_mm": [
+        109.58,
+        109.86,
+        91.5
+      ],
+      "margin_to_310x300x315_mm": [
+        200.4,
+        190.1,
+        223.5
+      ]
+    },
+    "qa5_turret_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        109.74,
+        110.01,
+        195.2
+      ],
+      "print_extents_mm": [
+        195.2,
+        110.01,
+        109.74
+      ],
+      "margin_to_310x300x315_mm": [
+        114.8,
+        190.0,
+        205.3
+      ]
+    },
+    "qa5_porch_turret_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        178.33,
+        73.6,
+        85.9
+      ],
+      "print_extents_mm": [
+        178.33,
+        85.9,
+        73.6
+      ],
+      "margin_to_310x300x315_mm": [
+        131.7,
+        214.1,
+        241.4
+      ]
+    },
+    "qa5_porch_front_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        253.6,
+        46.0,
+        87.6
+      ],
+      "print_extents_mm": [
+        253.6,
+        87.6,
+        46.0
+      ],
+      "margin_to_310x300x315_mm": [
+        56.4,
+        212.4,
+        269.0
+      ]
+    },
+    "qa5_porch_roof_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        254.0,
+        70.93,
+        17.42
+      ],
+      "print_extents_mm": [
+        254.0,
+        70.93,
+        17.42
+      ],
+      "margin_to_310x300x315_mm": [
+        56.0,
+        229.1,
+        297.6
+      ]
+    },
+    "qa5_porch_skirt_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        143.66,
+        173.69,
+        16.0
+      ],
+      "print_extents_mm": [
+        143.66,
+        173.69,
+        16.0
+      ],
+      "margin_to_310x300x315_mm": [
+        166.3,
+        126.3,
+        299.0
+      ]
+    },
+    "qa5_lantern_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        13.0,
+        13.0,
+        14.0
+      ],
+      "print_extents_mm": [
+        14.0,
+        13.0,
+        13.0
+      ],
+      "margin_to_310x300x315_mm": [
+        296.0,
+        287.0,
+        302.0
+      ]
+    },
+    "qa5_stair_lower_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        48.15,
+        137.7,
+        114.46
+      ],
+      "print_extents_mm": [
+        114.46,
+        137.7,
+        48.15
+      ],
+      "margin_to_310x300x315_mm": [
+        195.5,
+        162.3,
+        266.9
+      ]
+    },
+    "qa5_stair_upper_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        70.0,
+        121.2,
+        114.46
+      ],
+      "print_extents_mm": [
+        114.46,
+        121.2,
+        70.0
+      ],
+      "margin_to_310x300x315_mm": [
+        195.5,
+        178.8,
+        245.0
+      ]
+    },
+    "qa5_cornice_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        271.0,
+        20.1,
+        11.4
+      ],
+      "print_extents_mm": [
+        271.0,
+        20.1,
+        11.4
+      ],
+      "margin_to_310x300x315_mm": [
+        39.0,
+        279.9,
+        303.6
+      ]
+    },
+    "qa5_crown_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        48.0,
+        3.2,
+        12.0
+      ],
+      "print_extents_mm": [
+        48.0,
+        12.0,
+        3.2
+      ],
+      "margin_to_310x300x315_mm": [
+        262.0,
+        288.0,
+        311.8
+      ]
+    },
+    "qa5_bed_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        44.79,
+        72.0,
+        43.59
+      ],
+      "print_extents_mm": [
+        44.79,
+        72.0,
+        43.59
+      ],
+      "margin_to_310x300x315_mm": [
+        265.2,
+        228.0,
+        271.4
+      ]
+    },
+    "qa5_stand_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        16.0,
+        14.6,
+        16.0
+      ],
+      "print_extents_mm": [
+        16.0,
+        16.0,
+        14.6
+      ],
+      "margin_to_310x300x315_mm": [
+        294.0,
+        284.0,
+        300.4
+      ]
+    },
+    "qa5_bedrug_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        40.0,
+        22.0,
+        0.8
+      ],
+      "print_extents_mm": [
+        40.0,
+        22.0,
+        0.8
+      ],
+      "margin_to_310x300x315_mm": [
+        270.0,
+        278.0,
+        314.2
+      ]
+    },
+    "qa5_cabinet_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        60.0,
+        18.8,
+        50.0
+      ],
+      "print_extents_mm": [
+        60.0,
+        50.0,
+        18.8
+      ],
+      "margin_to_310x300x315_mm": [
+        250.0,
+        250.0,
+        296.2
+      ]
+    },
+    "qa5_table_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        40.0,
+        24.0,
+        20.0
+      ],
+      "print_extents_mm": [
+        40.0,
+        24.0,
+        20.0
+      ],
+      "margin_to_310x300x315_mm": [
+        270.0,
+        276.0,
+        295.0
+      ]
+    },
+    "qa5_rug_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        54.0,
+        38.0,
+        0.8
+      ],
+      "print_extents_mm": [
+        54.0,
+        38.0,
+        0.8
+      ],
+      "margin_to_310x300x315_mm": [
+        256.0,
+        262.0,
+        314.2
+      ]
+    },
+    "qa5_sofa_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        62.2,
+        22.3,
+        29.8
+      ],
+      "print_extents_mm": [
+        62.2,
+        29.8,
+        22.3
+      ],
+      "margin_to_310x300x315_mm": [
+        247.8,
+        270.2,
+        292.7
+      ]
+    },
+    "qa5_chair_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        19.5,
+        16.35,
+        39.19
+      ],
+      "print_extents_mm": [
+        19.5,
+        39.19,
+        16.35
+      ],
+      "margin_to_310x300x315_mm": [
+        290.5,
+        260.8,
+        298.6
+      ]
+    },
+    "qa5_trunk_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        36.0,
+        18.0,
+        14.0
+      ],
+      "print_extents_mm": [
+        36.0,
+        18.0,
+        14.0
+      ],
+      "margin_to_310x300x315_mm": [
+        274.0,
+        282.0,
+        301.0
+      ]
+    },
+    "qa5_tub_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        32.0,
+        16.0,
+        14.0
+      ],
+      "print_extents_mm": [
+        32.0,
+        16.0,
+        14.0
+      ],
+      "margin_to_310x300x315_mm": [
+        278.0,
+        284.0,
+        301.0
+      ]
+    },
+    "qa5_basin_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        11.0,
+        11.0,
+        19.6
+      ],
+      "print_extents_mm": [
+        19.6,
+        11.0,
+        11.0
+      ],
+      "margin_to_310x300x315_mm": [
+        290.4,
+        289.0,
+        304.0
+      ]
+    },
+    "qa5_cot_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        36.0,
+        18.0,
+        16.0
+      ],
+      "print_extents_mm": [
+        36.0,
+        18.0,
+        16.0
+      ],
+      "margin_to_310x300x315_mm": [
+        274.0,
+        282.0,
+        299.0
+      ]
+    },
+    "qa5_service_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        158.0,
+        100.0,
+        40.0
+      ],
+      "print_extents_mm": [
+        158.0,
+        100.0,
+        40.0
+      ],
+      "margin_to_310x300x315_mm": [
+        152.0,
+        200.0,
+        275.0
+      ]
+    },
+    "qa5_coupon_frame_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        28.0,
+        8.0,
+        22.0
+      ],
+      "print_extents_mm": [
+        28.0,
+        22.0,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        282.0,
+        278.0,
+        307.0
+      ]
+    },
+    "qa5_coupon_panel_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        16.0,
+        9.32,
+        14.0
+      ],
+      "print_extents_mm": [
+        16.0,
+        14.0,
+        9.32
+      ],
+      "margin_to_310x300x315_mm": [
+        294.0,
+        286.0,
+        305.7
+      ]
+    },
+    "qa5_retainer_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        2.8,
+        8.5,
+        24.0
+      ],
+      "print_extents_mm": [
+        24.0,
+        8.5,
+        2.8
+      ],
+      "margin_to_310x300x315_mm": [
+        286.0,
+        291.5,
+        312.2
+      ]
+    },
+    "qa5_polarity_v5.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        40.0,
+        18.0,
+        5.0
+      ],
+      "print_extents_mm": [
+        40.0,
+        18.0,
+        5.0
+      ],
+      "margin_to_310x300x315_mm": [
+        270.0,
+        282.0,
+        310.0
+      ]
+    },
+    "qa65_gable_verge_left.stl": {
+      "pose": "flat back on the bed, key tabs up, origin z=0",
+      "native_extents_mm": [
+        77.67,
+        148.46,
+        4.2
+      ],
+      "print_extents_mm": [
+        77.67,
+        148.46,
+        4.2
+      ],
+      "margin_to_310x300x315_mm": [
+        232.3,
+        151.5,
+        310.8
+      ],
+      "origin_z": 0
+    },
+    "qa65_gable_verge_right.stl": {
+      "pose": "flat back on the bed, key tabs up, origin z=0",
+      "native_extents_mm": [
+        77.67,
+        148.46,
+        4.2
+      ],
+      "print_extents_mm": [
+        77.67,
+        148.46,
+        4.2
+      ],
+      "margin_to_310x300x315_mm": [
+        232.3,
+        151.5,
+        310.8
+      ],
+      "origin_z": 0
+    },
+    "qa65_gable_arched_casing.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        66.0,
+        7.5,
+        84.59
+      ],
+      "print_extents_mm": [
+        66.0,
+        84.59,
+        7.5
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        215.4,
+        307.5
+      ]
+    },
+    "qa65_gable_sash.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        49.4,
+        2.5,
+        70.99
+      ],
+      "print_extents_mm": [
+        49.4,
+        70.99,
+        2.5
+      ],
+      "margin_to_310x300x315_mm": [
+        260.6,
+        229.0,
+        312.5
+      ]
+    },
+    "qa65_gable_fan_kingpost.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        41.6,
+        8.8,
+        57.2
+      ],
+      "print_extents_mm": [
+        41.6,
+        57.2,
+        8.8
+      ],
+      "margin_to_310x300x315_mm": [
+        268.4,
+        242.8,
+        306.2
+      ]
+    },
+    "qa65_gable_cornice.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        178.0,
+        9.6,
+        13.65
+      ],
+      "print_extents_mm": [
+        178.0,
+        13.65,
+        9.6
+      ],
+      "margin_to_310x300x315_mm": [
+        132.0,
+        286.4,
+        305.4
+      ]
+    },
+    "qa65_porch_frieze_1.stl": {
+      "pose": "flat back on the bed, key tabs up, origin z=0",
+      "native_extents_mm": [
+        66.0,
+        34.6,
+        4.4
+      ],
+      "print_extents_mm": [
+        66.0,
+        34.6,
+        4.4
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        265.4,
+        310.6
+      ],
+      "origin_z": 0
+    },
+    "qa65_porch_frieze_2.stl": {
+      "pose": "flat back on the bed, key tabs up, origin z=0",
+      "native_extents_mm": [
+        66.0,
+        34.6,
+        4.4
+      ],
+      "print_extents_mm": [
+        66.0,
+        34.6,
+        4.4
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        265.4,
+        310.6
+      ],
+      "origin_z": 0
+    },
+    "qa65_porch_frieze_3.stl": {
+      "pose": "flat back on the bed, key tabs up, origin z=0",
+      "native_extents_mm": [
+        64.0,
+        34.6,
+        4.4
+      ],
+      "print_extents_mm": [
+        64.0,
+        34.6,
+        4.4
+      ],
+      "margin_to_310x300x315_mm": [
+        246.0,
+        265.4,
+        310.6
+      ],
+      "origin_z": 0
+    },
+    "qa65_porch_balustrade_1.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        66.18,
+        8.43,
+        28.5
+      ],
+      "print_extents_mm": [
+        66.18,
+        28.5,
+        8.43
+      ],
+      "margin_to_310x300x315_mm": [
+        243.8,
+        271.5,
+        306.6
+      ]
+    },
+    "qa65_porch_balustrade_2.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        66.0,
+        5.2,
+        28.5
+      ],
+      "print_extents_mm": [
+        66.0,
+        28.5,
+        5.2
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        271.5,
+        309.8
+      ]
+    },
+    "qa65_porch_balustrade_3.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        64.18,
+        8.35,
+        28.5
+      ],
+      "print_extents_mm": [
+        64.18,
+        28.5,
+        8.35
+      ],
+      "margin_to_310x300x315_mm": [
+        245.8,
+        271.5,
+        306.6
+      ]
+    },
+    "qa65_turret_belt_45.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_90.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "print_extents_mm": [
+        44.39,
+        8.0,
+        5.2
+      ],
+      "margin_to_310x300x315_mm": [
+        265.6,
+        292.0,
+        309.8
+      ]
+    },
+    "qa65_turret_belt_135.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_180.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        5.2,
+        44.39,
+        8.0
+      ],
+      "print_extents_mm": [
+        8.0,
+        44.39,
+        5.2
+      ],
+      "margin_to_310x300x315_mm": [
+        302.0,
+        255.6,
+        309.8
+      ]
+    },
+    "qa65_turret_belt_225.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_270.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "print_extents_mm": [
+        44.39,
+        8.0,
+        5.2
+      ],
+      "margin_to_310x300x315_mm": [
+        265.6,
+        292.0,
+        309.8
+      ]
+    },
+    "qa65_turret_belt_315.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_window_middle_180.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "print_extents_mm": [
+        56.0,
+        32.0,
+        5.5
+      ],
+      "margin_to_310x300x315_mm": [
+        254.0,
+        268.0,
+        309.5
+      ]
+    },
+    "qa65_turret_window_middle_225.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "print_extents_mm": [
+        25.88,
+        56.0,
+        25.31
+      ],
+      "margin_to_310x300x315_mm": [
+        284.1,
+        244.0,
+        289.7
+      ]
+    },
+    "qa65_turret_window_middle_270.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "print_extents_mm": [
+        32.0,
+        56.0,
+        5.5
+      ],
+      "margin_to_310x300x315_mm": [
+        278.0,
+        244.0,
+        309.5
+      ]
+    },
+    "qa65_turret_window_middle_315.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "print_extents_mm": [
+        56.0,
+        25.88,
+        25.31
+      ],
+      "margin_to_310x300x315_mm": [
+        254.0,
+        274.1,
+        289.7
+      ]
+    },
+    "qa65_turret_window_loft_180.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "print_extents_mm": [
+        56.0,
+        32.0,
+        5.5
+      ],
+      "margin_to_310x300x315_mm": [
+        254.0,
+        268.0,
+        309.5
+      ]
+    },
+    "qa65_turret_window_loft_225.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "print_extents_mm": [
+        25.88,
+        56.0,
+        25.31
+      ],
+      "margin_to_310x300x315_mm": [
+        284.1,
+        244.0,
+        289.7
+      ]
+    },
+    "qa65_turret_window_loft_270.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "print_extents_mm": [
+        32.0,
+        56.0,
+        5.5
+      ],
+      "margin_to_310x300x315_mm": [
+        278.0,
+        244.0,
+        309.5
+      ]
+    },
+    "qa65_turret_window_loft_315.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "print_extents_mm": [
+        56.0,
+        25.88,
+        25.31
+      ],
+      "margin_to_310x300x315_mm": [
+        254.0,
+        274.1,
+        289.7
+      ]
+    },
+    "qa65_roof_ridge_crest.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        54.6,
+        4.4,
+        25.8
+      ],
+      "print_extents_mm": [
+        54.6,
+        25.8,
+        4.4
+      ],
+      "margin_to_310x300x315_mm": [
+        255.4,
+        274.2,
+        310.6
+      ]
+    },
+    "qa65_cap_capture_left.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        10.5,
+        5.6,
+        155.0
+      ],
+      "print_extents_mm": [
+        10.5,
+        155.0,
+        5.6
+      ],
+      "margin_to_310x300x315_mm": [
+        299.5,
+        145.0,
+        309.4
+      ]
+    },
+    "qa65_cap_capture_right.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        10.5,
+        5.6,
+        155.0
+      ],
+      "print_extents_mm": [
+        10.5,
+        155.0,
+        5.6
+      ],
+      "margin_to_310x300x315_mm": [
+        299.5,
+        145.0,
+        309.4
+      ]
+    },
+    "qa65_retainer_jl1.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        10.05,
+        8.02,
+        62.3
+      ],
+      "print_extents_mm": [
+        10.05,
+        62.3,
+        8.02
+      ],
+      "margin_to_310x300x315_mm": [
+        299.9,
+        237.7,
+        307.0
+      ]
+    },
+    "qa65_retainer_jl2.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        10.05,
+        8.02,
+        62.3
+      ],
+      "print_extents_mm": [
+        10.05,
+        62.3,
+        8.02
+      ],
+      "margin_to_310x300x315_mm": [
+        299.9,
+        237.7,
+        307.0
+      ]
+    },
+    "qa65_retainer_jr1.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        12.35,
+        8.02,
+        62.3
+      ],
+      "print_extents_mm": [
+        12.35,
+        62.3,
+        8.02
+      ],
+      "margin_to_310x300x315_mm": [
+        297.6,
+        237.7,
+        307.0
+      ]
+    },
+    "qa65_retainer_jr2.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        12.35,
+        8.02,
+        62.3
+      ],
+      "print_extents_mm": [
+        12.35,
+        62.3,
+        8.02
+      ],
+      "margin_to_310x300x315_mm": [
+        297.6,
+        237.7,
+        307.0
+      ]
+    }
+  },
+  "note": "Metal reference screws and the nut are not in this print set. Verge and frieze prints sit on the flat back. No slicer was run.",
+  "excluded_not_printed": [
+    "qa65_adult_screw_back_l",
+    "qa65_adult_screw_back_r",
+    "qa65_adult_screw_jl1",
+    "qa65_adult_screw_jl2",
+    "qa65_adult_screw_jr1",
+    "qa65_adult_screw_jr2",
+    "qa65_m2_nut"
+  ]
+}

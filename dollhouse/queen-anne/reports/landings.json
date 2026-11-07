@@ -1,0 +1,32 @@
+{
+  "version": "6.5.2",
+  "flights": [
+    {
+      "stair": "stair-lower",
+      "floor_top_z": 114.15,
+      "previous_tread_top_z": 107.86,
+      "previous_rise_to_floor_mm": 6.29,
+      "landing_reaches_opening_edge": true,
+      "plan_gap_after_mm": -8.0,
+      "nosing_bears_on_floor": true,
+      "shared_volume_with_floor_mm3": 0.0,
+      "rail_above_floor_mm": 17.71,
+      "note": "rail_above_floor_mm is the handrail, not a missed tread. The landing nosing is 1.2 mm above the floor so it stays a separate solid."
+    },
+    {
+      "stair": "stair-upper",
+      "floor_top_z": 212.15,
+      "previous_tread_top_z": 205.86,
+      "previous_rise_to_floor_mm": 6.29,
+      "landing_reaches_opening_edge": true,
+      "plan_gap_after_mm": -8.0,
+      "nosing_bears_on_floor": true,
+      "shared_volume_with_floor_mm3": 0.0,
+      "rail_above_floor_mm": 17.71,
+      "note": "v6.5.1 only put pads on the stringers. v6.5.2 adds a deck across the walking width. At x=389 the landing runs from y=123 to the flight and its top is z=213.5. Side nosings bear on the floor. Shared volume with the floor is 0. The handrail figure is not the tread.",
+      "center_probe_x_mm": 389,
+      "center_landing_y_min_mm": 123,
+      "center_landing_z_max_mm": 213.5
+    }
+  ]
+}
