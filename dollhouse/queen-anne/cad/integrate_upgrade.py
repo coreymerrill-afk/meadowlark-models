@@ -24,8 +24,10 @@ HOSTS = ("gable", "porch-front", "turret", "turret-loft", "roof-front", "rear", 
 
 
 def box(x0, y0, z0, x1, y1, z1):
-    mesh = tm.creation.box([x1 - x0, y1 - y0, z1 - z0])
-    mesh.apply_translation([(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2])
+    lo = [min(x0, x1), min(y0, y1), min(z0, z1)]
+    hi = [max(x0, x1), max(y0, y1), max(z0, z1)]
+    mesh = tm.creation.box([hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]])
+    mesh.apply_translation([(lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2])
     return mesh
 
 
@@ -67,19 +69,65 @@ def lay_flat(mesh):
     return out
 
 
+# Nominal M2, ISO-like design assumptions. Not a measured fastener and not a safety claim.
+M2_MAJOR = 2.0
+M2_PITCH = 0.4
+M2_HEAD_D = 3.8
+M2_HEAD_H = 1.6
+M2_NUT_AF = 4.0
+M2_NUT_T = 1.6
+
+
+def hex_y(x, y0, y1, z, radius):
+    mesh = tm.creation.cylinder(radius=radius, height=abs(y1 - y0), sections=6)
+    mesh.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+    mesh.apply_translation([x, (y0 + y1) / 2, z])
+    return mesh
+
+
+def _ridge(x, y, z, angle, r_in, r_out, length):
+    width = r_out - r_in
+    mesh = tm.creation.box([width, length, width * 0.85])
+    mesh.apply_translation([(r_in + r_out) / 2, 0, 0])
+    mesh.apply_transform(rotation_matrix(angle, [0, 1, 0]))
+    mesh.apply_translation([x, y, z])
+    return mesh
+
+
+def m2_screw(x, y_head, y_tip, z):
+    """Nominal M2 screw along Y. Square-thread ridges, pitch 0.4, major 2.0. Head is 3.8 x 1.6."""
+    inward = 1.0 if y_tip > y_head else -1.0
+    head = cyl_y(x, y_head, y_head + inward * M2_HEAD_H, z, M2_HEAD_D / 2)
+    core = cyl_y(x, y_head + inward * (M2_HEAD_H - 0.2), y_tip, z, 0.72)
+    ridges = []
+    y = y_head + inward * (M2_HEAD_H + 0.45)
+    step = M2_PITCH / 12
+    while (y_tip - y) * inward > 0.5:
+        for i in range(12):
+            ridges.append(_ridge(x, y + inward * i * step, z, i * math.pi / 6, 0.55, M2_MAJOR / 2, 0.18))
+        y += inward * M2_PITCH
+    slot = box(x - 0.35, y_head - 0.2 * inward, z - M2_HEAD_D / 2, x + 0.35, y_head + inward * (M2_HEAD_H + 0.2), z + M2_HEAD_D / 2)
+    return one_body(tm.boolean.difference([union([head, core, *ridges], "m2"), slot], engine="manifold"), "m2 screw")
+
+
+def m2_nut():
+    """Nominal M2 hex nut, AF 4.0, thickness 1.6. Internal ridges sit in the screw's thread gaps."""
+    outer = hex_y(0, 0, M2_NUT_T, 0, M2_NUT_AF / math.sqrt(3))
+    bore = cyl_y(0, -0.3, M2_NUT_T + 0.3, 0, M2_MAJOR / 2 + 0.08)
+    ridges = []
+    y = 0.20
+    step = M2_PITCH / 12
+    while y < M2_NUT_T - 0.22:
+        for i in range(12):
+            ridges.append(_ridge(0, y + i * step, 0, i * math.pi / 6, 0.78, M2_MAJOR / 2 + 0.04, 0.16))
+        y += M2_PITCH
+    body = diff(outer, [bore], "nut bore")
+    return union([body, *ridges], "nut thread")
+
+
 def screw_span(x, y_head, y_tip, z):
-    """Clearance screw. The head sits at y_head, the tip at y_tip. Slot is for an adult. Not a tested thread."""
-    y0, y1 = (y_head, y_tip) if y_head < y_tip else (y_tip, y_head)
-    # Head is the 1.4 mm nearest y_head. Shaft runs the rest of the way to the tip.
-    if y_head > y_tip:
-        head = cyl_y(x, y_head - 1.4, y_head, z, 2.2)
-        shaft = cyl_y(x, y_tip, y_head - 1.1, z, 1.0)
-        slot = box(x - 0.4, y_head - 1.55, z - 2.3, x + 0.4, y_head + 0.2, z + 2.3)
-    else:
-        head = cyl_y(x, y_head, y_head + 1.4, z, 2.2)
-        shaft = cyl_y(x, y_head + 1.1, y_tip, z, 1.0)
-        slot = box(x - 0.4, y_head - 0.2, z - 2.3, x + 0.4, y_head + 1.55, z + 2.3)
-    return one_body(tm.boolean.difference([tm.boolean.union([shaft, head], engine="manifold"), slot], engine="manifold"), "screw")
+    """Nominal M2 screw. Not a smooth pin."""
+    return m2_screw(x, y_head, y_tip, z)
 
 
 def diff(mesh, cutters, name):
@@ -102,16 +150,13 @@ def overlap(a, b):
 
 
 def save_print(name, mesh, poses):
+    """Lay every part on its shortest axis. Standing a 3 mm edge up is not a print pose."""
     native = [round(float(v), 2) for v in mesh.extents]
-    if mesh.extents[2] > 100 and mesh.extents[2] > float(np.min(mesh.extents)) + 1:
-        flat = lay_flat(mesh)
-        os.makedirs(os.path.join(STL, "print"), exist_ok=True)
-        flat.export(os.path.join(STL, "print", name))
-        extents = [round(float(v), 2) for v in flat.extents]
-        pose = "shortest axis on Z, corner at the origin"
-    else:
-        extents = native
-        pose = "native STL, already inside the height allowance"
+    flat = lay_flat(mesh)
+    os.makedirs(os.path.join(STL, "print"), exist_ok=True)
+    flat.export(os.path.join(STL, "print", name))
+    extents = [round(float(v), 2) for v in flat.extents]
+    pose = "shortest axis on Z, corner at the origin"
     poses[name] = {
         "pose": pose,
         "native_extents_mm": native,
@@ -165,7 +210,8 @@ def extend_back(modified):
     # Above the attic floor (about z 212) and open toward +Y so the back can slide out.
     opening = box(318, 250, 214, 462, 360, 286)
     roof = diff(roof, [opening], "roof-rear opening")
-    plug = box(324, 295.45, 198, 456, 302.45, 278)
+    # 0.5 mm inside the roof opening (x 318-462, z 214-286) so the one back closes it.
+    plug = box(318.5, 295.45, 198, 461.5, 302.45, 285.5)
     rear = union([rear, plug], "rear attic plug")
     modified["roof-rear"] = roof
     modified["rear"] = rear

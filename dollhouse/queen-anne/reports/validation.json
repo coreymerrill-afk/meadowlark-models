@@ -66,7 +66,7 @@
     "panel_bbox_mm": [
       285.0,
       7.0,
-      188.7
+      269.05
     ],
     "closed_transform": "identity placement of the STL; this gap is the closed position"
   },
@@ -97,7 +97,7 @@
     }
   ],
   "triangles": 407108,
-  "instance_count": 116,
+  "instance_count": 122,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,
@@ -114,5 +114,5 @@
       434.0
     ]
   },
-  "note": "Pairwise rest volumes in this file are from the v6.4.0 shell. v6.5.0 ornament was checked against its hosts separately; sampled intersections were 0 mm3. See reports/rear-access.json and reports/landings.json."
+  "note": "Rear bbox is the flat back including the attic plug. top_gap_mm is the handrail above the floor target, not the tread-to-floor step. See reports/landings.json."
 }

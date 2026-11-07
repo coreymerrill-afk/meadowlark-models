@@ -1,6 +1,6 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "6.5.0",
+  "version": "6.5.1",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
   "description": "Solid Queen Anne. Front, sides, and roof stay on. The full back, extended up over the attic opening, is the one closure.",
@@ -342,7 +342,7 @@
     "mating_skin_mm": 1.4,
     "holding_force_calculated": false,
     "h3c_pause_profile": false,
-    "retention": "bayonet_and_adult_screw_not_safety_validated",
+    "retention": "nominal_M2_screw_and_captive_nut_not_safety_validated",
     "capture_bar": "closes the magnet only"
   },
   "lighting": {
@@ -476,12 +476,12 @@
     "Balusters, bargeboard piercings, blossoms, and scallop edges are thin. A 0.2 mm nozzle is the ornament setting. They are not claimed durable."
   ],
   "magnet_install_steps": [
-    "Print the coupon first. Its bore is the same cross-section as the house seats.",
-    "A nominal 5.0 x 2.8 mm disc drops in the open mouth. The seat is 5.6 mm across and 3.2 mm deep. Those are design allowances of 0.30 mm radial and 0.40 mm axial, not a measured fit.",
-    "1.4 mm of plastic stays between the disc and the mating face.",
-    "The two rear strips slide down 3 mm onto headed studs. That lip resists a straight pull. Each strip is then held by a recessed screw so it cannot slide back up. An adult removes the screw first.",
-    "Each row of jamb caps is covered by a retainer bar and one recessed screw. The caps are clearance fits under that bar. They are not trapped once the bar is off.",
-    "Nothing here is a tested thread, a wear test, or a toy-safety validation."
+    "Nominal disc 5.0 x 2.8 mm. Seat 5.6 x 3.2 mm, skin 1.4 mm. Design allowances, not a measured fit.",
+    "Hardware is a nominal M2 screw (major 2.0, pitch 0.4, head 3.8 x 1.6) and a nominal M2 hex nut (AF 4.0, thickness 1.6). Those class dimensions are design assumptions, not measurements.",
+    "Slide the nut in from the side. The lip in front of it is a 2.5 mm hole, smaller than the nut, so the nut cannot pull out.",
+    "Turn the screw in. A 0.12 mm straight pull meets the thread flanks. The seated pair is a clearance fit.",
+    "With the strip or retainer on, the side slot is covered. Adult removal: turn the screw out, take the strip or retainer off, then slide the nut out.",
+    "Not a tested thread, not a wear test, and not a toy-safety certification."
   ],
   "limits": [
     "Not printed. No strength, tip-over, magnet, or electrical test.",
@@ -2155,7 +2155,7 @@
     {
       "id": "qa65_adult_screw_back_l",
       "file": "stl/qa65_adult_screw_back_l.stl",
-      "note": "Recessed clearance screw. Adult pulls it out along +Y before the cap strip can slide up. Not a tested thread. Not safety validated.",
+      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 27.3,
       "watertight": true,
@@ -2171,7 +2171,7 @@
     {
       "id": "qa65_adult_screw_back_r",
       "file": "stl/qa65_adult_screw_back_r.stl",
-      "note": "Recessed clearance screw. Adult pulls it out along +Y before the cap strip can slide up. Not a tested thread. Not safety validated.",
+      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 27.3,
       "watertight": true,
@@ -2203,7 +2203,7 @@
     {
       "id": "qa65_adult_screw_jl1",
       "file": "stl/qa65_adult_screw_jl1.stl",
-      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2235,7 +2235,7 @@
     {
       "id": "qa65_adult_screw_jl2",
       "file": "stl/qa65_adult_screw_jl2.stl",
-      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2267,7 +2267,7 @@
     {
       "id": "qa65_adult_screw_jr1",
       "file": "stl/qa65_adult_screw_jr1.stl",
-      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2299,7 +2299,7 @@
     {
       "id": "qa65_adult_screw_jr2",
       "file": "stl/qa65_adult_screw_jr2.stl",
-      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2309,6 +2309,22 @@
         4.4,
         9.3,
         4.27
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_m2_nut",
+      "file": "stl/qa65_m2_nut.stl",
+      "note": "Nominal M2 hex nut, AF 4.0 mm, thickness 1.6 mm. It sits behind a lip with a 2.5 mm hole, so it cannot pull out. The side slot is covered while the strip or retainer is on.",
+      "triangles": 536,
+      "volume_mm3": 16.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        4.62,
+        1.6,
+        4.0
       ],
       "fits_brim_allowance": true
     }
@@ -4937,7 +4953,7 @@
           1,
           0,
           0,
-          364.0
+          354.0
         ],
         [
           0,
@@ -6886,28 +6902,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          224.5
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          297.25
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          39.0
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -6931,28 +6947,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          488.0
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          297.25
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          39.0
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -6976,28 +6992,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          226.1
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          298.2
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          108.1554
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7021,28 +7037,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          493.1
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          298.2
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          108.1554
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7059,28 +7075,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          223.75
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          274.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          32.75
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7097,28 +7113,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          226.1
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          274.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          33.1054
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7135,28 +7151,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          223.75
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          274.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          130.75
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7173,28 +7189,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          226.1
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          274.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          131.1054
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7211,28 +7227,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          490.75
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          268.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          32.75
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7249,28 +7265,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          499.3
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          268.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          33.1054
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7287,28 +7303,28 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          490.75
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          268.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          130.75
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
         ]
       ]
     },
@@ -7325,28 +7341,270 @@
       ],
       "transform": [
         [
-          1.0,
-          0.0,
-          0.0,
-          0.0
+          1,
+          0,
+          0,
+          499.3
         ],
         [
-          0.0,
-          1.0,
-          0.0,
-          0.0
+          0,
+          1,
+          0,
+          268.7
         ],
         [
-          0.0,
-          0.0,
-          1.0,
-          0.0
+          0,
+          0,
+          1,
+          131.1054
         ],
         [
-          0.0,
-          0.0,
-          0.0,
-          1.0
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "nut-back-l",
+      "part": "qa65_m2_nut",
+      "role": "fastener",
+      "color": "#c6a15b",
+      "motion": {
+        "group": "back",
+        "pull": [
+          0,
+          70,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        8,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          225.6906
+        ],
+        [
+          0,
+          1,
+          0,
+          298.88
+        ],
+        [
+          0,
+          0,
+          1,
+          108.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "nut-back-r",
+      "part": "qa65_m2_nut",
+      "role": "fastener",
+      "color": "#c6a15b",
+      "motion": {
+        "group": "back",
+        "pull": [
+          0,
+          70,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        8,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          492.6906
+        ],
+        [
+          0,
+          1,
+          0,
+          298.88
+        ],
+        [
+          0,
+          0,
+          1,
+          108.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "nut-jl1",
+      "part": "qa65_m2_nut",
+      "role": "fastener",
+      "color": "#c6a15b",
+      "motion": null,
+      "explode_mm": [
+        0,
+        8,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          225.6906
+        ],
+        [
+          0,
+          1,
+          0,
+          281.52
+        ],
+        [
+          0,
+          0,
+          1,
+          32.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "nut-jl2",
+      "part": "qa65_m2_nut",
+      "role": "fastener",
+      "color": "#c6a15b",
+      "motion": null,
+      "explode_mm": [
+        0,
+        8,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          225.6906
+        ],
+        [
+          0,
+          1,
+          0,
+          281.52
+        ],
+        [
+          0,
+          0,
+          1,
+          130.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "nut-jr1",
+      "part": "qa65_m2_nut",
+      "role": "fastener",
+      "color": "#c6a15b",
+      "motion": null,
+      "explode_mm": [
+        0,
+        8,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          498.8906
+        ],
+        [
+          0,
+          1,
+          0,
+          275.52
+        ],
+        [
+          0,
+          0,
+          1,
+          32.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "nut-jr2",
+      "part": "qa65_m2_nut",
+      "role": "fastener",
+      "color": "#c6a15b",
+      "motion": null,
+      "explode_mm": [
+        0,
+        8,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          498.8906
+        ],
+        [
+          0,
+          1,
+          0,
+          275.52
+        ],
+        [
+          0,
+          0,
+          1,
+          130.95
+        ],
+        [
+          0,
+          0,
+          0,
+          1
         ]
       ]
     }
