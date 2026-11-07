@@ -123,8 +123,23 @@ async function shot(client, mode, file) {
 const desktop = await open('http://127.0.0.1:' + port + '/dollhouse/queen-anne/', 1280, 900);
 const closed = await shot(desktop.client, 'closed', '/opt/cursor/artifacts/queen-anne-closed-desktop.png');
 const opened = await shot(desktop.client, 'open', '/opt/cursor/artifacts/queen-anne-open-desktop.png');
-const panels = await shot(desktop.client, 'remove-panels', '/opt/cursor/artifacts/queen-anne-panels-desktop.png');
-const roof = await shot(desktop.client, 'roof', '/opt/cursor/artifacts/queen-anne-roof-desktop.png');
+const plan = await shot(desktop.client, 'plan', '/opt/cursor/artifacts/queen-anne-plan-desktop.png');
+await desktop.client.send('Runtime.evaluate', {
+  expression: `document.getElementById('plan-card').scrollIntoView({block:'start'})`
+});
+await sleep(400);
+const planBox = await desktop.client.send('Runtime.evaluate', {
+  expression: `(() => { const node = document.getElementById('plan-svg'); const svg = node.querySelector('svg'); const rect = node.getBoundingClientRect(); return {x: Math.max(0, rect.x), y: Math.max(0, rect.y), width: Math.max(1, rect.width), height: Math.max(1, Math.min(rect.height, 640)), scale: 1, children: node.childElementCount, svgChildren: svg ? svg.childElementCount : 0, sample: svg ? svg.innerHTML.slice(0, 180) : '', top: rect.top}; })()`,
+  returnByValue: true
+});
+const planClip = { x: planBox.result.value.x, y: planBox.result.value.y, width: planBox.result.value.width, height: planBox.result.value.height, scale: 1 };
+const full = await desktop.client.send('Page.captureScreenshot', { format: 'png' });
+writeFileSync('/opt/cursor/artifacts/queen-anne-floorplan-full.png', Buffer.from(full.data, 'base64'));
+const planCard = await desktop.client.send('Page.captureScreenshot', { format: 'png', clip: planClip });
+writeFileSync('/opt/cursor/artifacts/queen-anne-floorplan.png', Buffer.from(planCard.data, 'base64'));
+plan.svg = { children: planBox.result.value.children, svgChildren: planBox.result.value.svgChildren, sample: planBox.result.value.sample, top: planBox.result.value.top };
+const attachment = await shot(desktop.client, 'attachment', '/opt/cursor/artifacts/queen-anne-attachment-desktop.png');
+const lighting = await shot(desktop.client, 'lighting', '/opt/cursor/artifacts/queen-anne-lighting-desktop.png');
 desktop.ws.close();
 
 const mobile = await open('http://127.0.0.1:' + port + '/dollhouse/queen-anne/', 390, 844);
@@ -135,10 +150,11 @@ mobile.ws.close();
 const links = [
   '/dollhouse/queen-anne/',
   '/dollhouse/queen-anne/manifest.json',
-  '/dollhouse/queen-anne/stl/qa2_coupon_panel_v2.stl',
-  '/dollhouse/queen-anne/stl/qa2_panel_hall_l1_entry_v2.stl',
-  '/dollhouse/queen-anne/stl/qa2_roof_tower_v2.stl',
-  '/dollhouse/queen-anne/stl/qa2_retainer_v2.stl',
+  '/dollhouse/queen-anne/stl/qa3_coupon_panel_v3.stl',
+  '/dollhouse/queen-anne/stl/qa3_panel_hall_l1_front_v3.stl',
+  '/dollhouse/queen-anne/stl/qa3_roof_tower_v3.stl',
+  '/dollhouse/queen-anne/stl/qa3_retainer_v3.stl',
+  '/dollhouse/queen-anne/stl/qa3_fixture_section_v3.stl',
   '/dollhouse/',
   '/marble-factory/',
   '/marble-system/',
@@ -159,11 +175,12 @@ const home = await new Promise((resolve, reject) => {
 const kept = ['/dollhouse/', '/dollhouse/queen-anne/', '/marble-factory/', '/marble-system/', '/observatory/']
   .every((href) => home.includes('href="' + href + '"'));
 
-const report = { desktop: desktop.sample, closed, opened, panels, roof, mobile: mobile.sample, mobileClosed, mobileOpen, statuses, kept };
+const report = { desktop: desktop.sample, closed, opened, plan, attachment, lighting, mobile: mobile.sample, mobileClosed, mobileOpen, statuses, kept };
 console.log(JSON.stringify(report, null, 2));
 const badStatus = Object.entries(statuses).filter(([, code]) => code !== 200);
 const failed = !desktop.sample.booted || desktop.sample.errors.length || badStatus.length || !kept
-  || closed.mode !== 'closed' || opened.mode !== 'open' || panels.visible >= closed.visible
+  || closed.mode !== 'closed' || opened.mode !== 'open' || plan.mode !== 'plan' || attachment.mode !== 'attachment'
+  || plan.visible >= closed.visible
   || mobileClosed.mode !== 'closed' || mobileOpen.mode !== 'open';
 server.kill();
 chrome.kill();

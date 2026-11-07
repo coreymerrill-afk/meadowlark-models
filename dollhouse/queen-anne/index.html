@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="description" content="Queen Anne Playhouse, a separate 1:24 dollhouse: tower, front gable, lift-out panels, and lift-off roofs. The viewer loads the CAD STLs. Unprinted. Not a toy-safety certification." />
+<meta name="description" content="Queen Anne Playhouse, a separate 1:24 house: parlor, entry, living room, porch, bedrooms, and a tower loft. Facades pull straight off. The viewer loads the CAD STLs. Unprinted. Not a safety certification." />
 <link rel="icon" href="data:," />
 <title>Queen Anne Playhouse — Meadowlark Models</title>
 <link rel="stylesheet" href="/coreyhq-back.css" />
@@ -30,14 +30,33 @@
 <nav class="modes" aria-label="House view">
   <button type="button" data-mode="closed" aria-pressed="true">Closed</button>
   <button type="button" data-mode="open" aria-pressed="false">Open</button>
+  <button type="button" data-mode="plan" aria-pressed="false">Floor plan</button>
   <button type="button" data-mode="remove-panels" aria-pressed="false">Panels off</button>
   <button type="button" data-mode="roof" aria-pressed="false">Roof off</button>
-  <button type="button" data-mode="explode" aria-pressed="false">Explode</button>
   <button type="button" data-mode="attachment" aria-pressed="false">Attachment</button>
+  <button type="button" data-mode="lighting" aria-pressed="false">Lighting</button>
+  <button type="button" data-mode="explode" aria-pressed="false">Explode</button>
 </nav>
 <section class="card" id="readout">
   <h2>This view</h2>
   <p id="mode-copy" class="muted">Closed. Panels seated, roofs on.</p>
+</section>
+<section class="card" id="plan-card">
+  <h2>Floor plan</h2>
+  <div class="modes storeys" aria-label="Storey">
+    <button type="button" data-storey="1" aria-pressed="true">Ground</button>
+    <button type="button" data-storey="2" aria-pressed="false">Second</button>
+    <button type="button" data-storey="3" aria-pressed="false">Loft</button>
+  </div>
+  <div id="plan-svg"></div>
+  <p id="plan-copy" class="muted"></p>
+</section>
+<section class="card" id="light-card">
+  <h2>Lighting route</h2>
+  <p class="muted">Low-voltage LED reservations only. No mains in the house. The cavity is not a measured fit, and protection is not selected.</p>
+  <div id="light-svg"></div>
+  <p id="light-copy" class="muted"></p>
+  <ol id="light-routes"></ol>
 </section>
 <section class="card">
   <h2>Print order</h2>
