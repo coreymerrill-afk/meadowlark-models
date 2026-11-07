@@ -1,7 +1,7 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 37,
+  "rest_pairs": 39,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
@@ -59,8 +59,8 @@
       "headroom_sample_mm": 72.0
     }
   ],
-  "triangles": 223370,
-  "instance_count": 49,
+  "triangles": 224982,
+  "instance_count": 51,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,

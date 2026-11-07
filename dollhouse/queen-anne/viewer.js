@@ -448,7 +448,11 @@
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     if (THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.setClearColor(0x14181e, 1);
+    renderer.setClearColor(0x10141a, 1);
+    if (THREE.ACESFilmicToneMapping !== undefined) {
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.08;
+    }
     view.appendChild(renderer.domElement);
 
     var scene = new THREE.Scene();
@@ -462,21 +466,30 @@
     camera.position.set(center.x + size.x * 0.85, center.y - size.y * 1.7, center.z + size.z * 0.55);
     camera.up.set(0, 0, 1);
 
-    var hemi = new THREE.HemisphereLight(0xf4f7fb, 0x2a313c, 0.85);
+    var hemi = new THREE.HemisphereLight(0xfff6ee, 0x1a222c, 0.55);
     scene.add(hemi);
-    var key = new THREE.DirectionalLight(0xfff4e8, 1.15);
-    key.position.set(400, -600, 900);
+    var key = new THREE.DirectionalLight(0xfff1e0, 1.55);
+    key.position.set(-280, -720, 640);
     scene.add(key);
-    var fill = new THREE.DirectionalLight(0xc5d4e8, 0.4);
-    fill.position.set(-500, 300, 200);
+    var fill = new THREE.DirectionalLight(0x9eb4c8, 0.28);
+    fill.position.set(520, 180, 220);
     scene.add(fill);
+    var rim = new THREE.DirectionalLight(0xffe6c4, 0.35);
+    rim.position.set(200, 480, 300);
+    scene.add(rim);
 
     manifest.instances.forEach(function (instance) {
       var geometry = geometries[instance.part];
+      var rough = 0.84;
+      var metal = 0.02;
+      if (instance.role === 'roof') { rough = 0.74; metal = 0.06; }
+      else if (instance.role === 'porch' || instance.role === 'trim') { rough = 0.4; metal = 0.04; }
+      else if (instance.role === 'stair' || instance.role === 'furniture' || instance.role === 'floor') { rough = 0.55; metal = 0.03; }
+      else if (instance.role === 'light') { rough = 0.32; metal = 0.28; }
       var material = new THREE.MeshStandardMaterial({
         color: instance.color,
-        roughness: instance.role === 'roof' ? 0.62 : 0.78,
-        metalness: instance.role === 'roof' ? 0.08 : 0.03,
+        roughness: rough,
+        metalness: metal,
         side: THREE.DoubleSide
       });
       var mesh = new THREE.Mesh(geometry, material);

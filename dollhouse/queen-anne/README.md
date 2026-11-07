@@ -2,7 +2,7 @@
 
 A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD.
 
-The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes, with a scalloped bargeboard and an owl in the opening. The porch wraps the turret and runs across the ground floor: turned columns, cyma brackets, a spindle rail, and steps. Shingles are individual scallops. Clapboard, belt courses, casings, and flower boxes are in the meshes.
+The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes, with a scalloped base board, rake bargeboards, and an owl in the opening. The porch wraps the turret and runs across the ground floor: turned columns, cyma brackets, a spindle rail, and steps. Shingles are individual scallops. Clapboard, belt courses, casings, and flower boxes are in the meshes.
 
 v4 is in `archive/v4.0.0/`. It was a narrow stack with a flat porch and bar roofs.
 

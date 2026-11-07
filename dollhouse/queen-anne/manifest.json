@@ -699,8 +699,8 @@
       "id": "qa5_walls_l1_v5",
       "file": "stl/qa5_walls_l1_v5.stl",
       "note": "Fixed rear wall, hall partition, and ceiling plate.",
-      "triangles": 162,
-      "volume_mm3": 695445.4,
+      "triangles": 238,
+      "volume_mm3": 697147.8,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -714,8 +714,8 @@
       "id": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
       "note": "Fixed rear wall and ceiling of the first floor.",
-      "triangles": 170,
-      "volume_mm3": 694981.4,
+      "triangles": 246,
+      "volume_mm3": 696683.8,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -759,8 +759,8 @@
       "id": "qa5_front_ground_v5",
       "file": "stl/qa5_front_ground_v5.stl",
       "note": "Ground floor street wall. Fixed, because the porch is in front of it. Flower boxes and the door casing are in the mesh.",
-      "triangles": 3464,
-      "volume_mm3": 117235.9,
+      "triangles": 3300,
+      "volume_mm3": 119607.7,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -789,8 +789,8 @@
       "id": "qa5_facade_front_v5",
       "file": "stl/qa5_facade_front_v5.stl",
       "note": "Full-width upper front. Straight pull. Flower boxes are part of the shell.",
-      "triangles": 4940,
-      "volume_mm3": 122309.0,
+      "triangles": 4374,
+      "volume_mm3": 126786.5,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -804,8 +804,8 @@
       "id": "qa5_facade_side_l1_v5",
       "file": "stl/qa5_facade_side_l1_v5.stl",
       "note": "Full-depth side wall. This is the play opening. Straight pull.",
-      "triangles": 1962,
-      "volume_mm3": 46380.5,
+      "triangles": 2098,
+      "volume_mm3": 47149.6,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -819,8 +819,8 @@
       "id": "qa5_facade_side_l2_v5",
       "file": "stl/qa5_facade_side_l2_v5.stl",
       "note": "Full-depth side wall. This is the play opening. Straight pull.",
-      "triangles": 1954,
-      "volume_mm3": 46380.5,
+      "triangles": 2084,
+      "volume_mm3": 47149.6,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -834,8 +834,8 @@
       "id": "qa5_roof_front_v5",
       "file": "stl/qa5_roof_front_v5.stl",
       "note": "Front slope and the gable cheeks, with individual scalloped shingles.",
-      "triangles": 72954,
-      "volume_mm3": 459700.3,
+      "triangles": 72174,
+      "volume_mm3": 473567.4,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -848,15 +848,15 @@
     {
       "id": "qa5_gable_v5",
       "file": "stl/qa5_gable_v5.stl",
-      "note": "Street gable wall, scalloped bargeboard, and the owl. Sage, in front of the slate slope.",
-      "triangles": 1744,
-      "volume_mm3": 62077.6,
+      "note": "Street gable, base fretwork, rake bargeboards, and the owl. Piercings are thin ornament.",
+      "triangles": 4010,
+      "volume_mm3": 67062.6,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
-        168.0,
+        170.03,
         9.2,
-        161.0
+        162.4
       ],
       "fits_brim_allowance": true
     },
@@ -954,8 +954,8 @@
       "id": "qa5_porch_front_v5",
       "file": "stl/qa5_porch_front_v5.stl",
       "note": "Front porch across the main block, with the steps. It stays during play.",
-      "triangles": 7624,
-      "volume_mm3": 95833.6,
+      "triangles": 8022,
+      "volume_mm3": 100409.7,
       "watertight": true,
       "bodies": 1,
       "bbox_mm": [
@@ -1052,6 +1052,36 @@
         48.0,
         80.0,
         28.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_stand_v5",
+      "file": "stl/qa5_stand_v5.stl",
+      "note": "Nightstand beside the bed.",
+      "triangles": 28,
+      "volume_mm3": 3664.4,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        16.0,
+        14.6,
+        16.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_bedrug_v5",
+      "file": "stl/qa5_bedrug_v5.stl",
+      "note": "Rug at the foot of the bed.",
+      "triangles": 12,
+      "volume_mm3": 704.0,
+      "watertight": true,
+      "bodies": 1,
+      "bbox_mm": [
+        40.0,
+        22.0,
+        0.8
       ],
       "fits_brim_allowance": true
     },
@@ -1233,6 +1263,11 @@
       "qty": 1
     },
     {
+      "part": "qa5_bedrug_v5",
+      "file": "stl/qa5_bedrug_v5.stl",
+      "qty": 1
+    },
+    {
       "part": "qa5_cabinet_v5",
       "file": "stl/qa5_cabinet_v5.stl",
       "qty": 1
@@ -1390,6 +1425,11 @@
       "qty": 1
     },
     {
+      "part": "qa5_stand_v5",
+      "file": "stl/qa5_stand_v5.stl",
+      "qty": 1
+    },
+    {
       "part": "qa5_table_v5",
       "file": "stl/qa5_table_v5.stl",
       "qty": 1
@@ -1430,7 +1470,7 @@
       "id": "foundation",
       "part": "qa5_foundation_v5",
       "role": "structure",
-      "color": "#7a4338",
+      "color": "#8b4e3c",
       "motion": null,
       "explode_mm": [
         0,
@@ -1468,7 +1508,7 @@
       "id": "turret-base",
       "part": "qa5_foundation_turret_v5",
       "role": "structure",
-      "color": "#7a4338",
+      "color": "#8b4e3c",
       "motion": null,
       "explode_mm": [
         -18,
@@ -1506,7 +1546,7 @@
       "id": "floor-l2",
       "part": "qa5_floor_l2_v5",
       "role": "floor",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -1544,7 +1584,7 @@
       "id": "floor-l3",
       "part": "qa5_floor_l3_v5",
       "role": "floor",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -1582,7 +1622,7 @@
       "id": "turret-floor-l2",
       "part": "qa5_floor_turret_v5",
       "role": "floor",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         -8,
@@ -1620,7 +1660,7 @@
       "id": "turret-floor-l3",
       "part": "qa5_floor_turret_v5",
       "role": "floor",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         -8,
@@ -1658,7 +1698,7 @@
       "id": "walls-l1",
       "part": "qa5_walls_l1_v5",
       "role": "structure",
-      "color": "#f4ecdf",
+      "color": "#f6efe4",
       "motion": null,
       "explode_mm": [
         0,
@@ -1696,7 +1736,7 @@
       "id": "walls-l2",
       "part": "qa5_walls_l2_v5",
       "role": "structure",
-      "color": "#f4ecdf",
+      "color": "#f6efe4",
       "motion": null,
       "explode_mm": [
         0,
@@ -1734,7 +1774,7 @@
       "id": "attic-frame",
       "part": "qa5_attic_frame_v5",
       "role": "structure",
-      "color": "#f4ecdf",
+      "color": "#f6efe4",
       "motion": null,
       "explode_mm": [
         0,
@@ -1772,7 +1812,7 @@
       "id": "parlor-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -1810,7 +1850,7 @@
       "id": "entry-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -1848,7 +1888,7 @@
       "id": "kitchen-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -1886,7 +1926,7 @@
       "id": "bedroom-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -1924,7 +1964,7 @@
       "id": "bath-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -1962,7 +2002,7 @@
       "id": "landing-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -2000,7 +2040,7 @@
       "id": "attic-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -2038,7 +2078,7 @@
       "id": "turret-light",
       "part": "qa5_puck_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -2076,7 +2116,7 @@
       "id": "front-ground",
       "part": "qa5_front_ground_v5",
       "role": "structure",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": null,
       "explode_mm": [
         0,
@@ -2152,7 +2192,7 @@
       "id": "front-upper",
       "part": "qa5_facade_front_v5",
       "role": "facade",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": {
         "group": "front",
         "pull": [
@@ -2197,7 +2237,7 @@
       "id": "side-l1",
       "part": "qa5_facade_side_l1_v5",
       "role": "facade",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": {
         "group": "end",
         "pull": [
@@ -2242,7 +2282,7 @@
       "id": "side-l2",
       "part": "qa5_facade_side_l2_v5",
       "role": "facade",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": {
         "group": "end",
         "pull": [
@@ -2287,7 +2327,7 @@
       "id": "roof-front",
       "part": "qa5_roof_front_v5",
       "role": "roof",
-      "color": "#3d4b57",
+      "color": "#2a3642",
       "motion": {
         "group": "roof",
         "lift": [
@@ -2337,7 +2377,7 @@
       "id": "gable",
       "part": "qa5_gable_v5",
       "role": "structure",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": {
         "group": "roof",
         "lift": [
@@ -2361,7 +2401,7 @@
           1,
           0,
           0,
-          296.0
+          293.973
         ],
         [
           0,
@@ -2373,7 +2413,7 @@
           0,
           0,
           1,
-          215.0
+          213.599
         ],
         [
           0,
@@ -2387,7 +2427,7 @@
       "id": "roof-rear",
       "part": "qa5_roof_rear_v5",
       "role": "roof",
-      "color": "#3d4b57",
+      "color": "#2a3642",
       "motion": {
         "group": "roof",
         "lift": [
@@ -2437,7 +2477,7 @@
       "id": "turret-cap",
       "part": "qa5_turret_cap_v5",
       "role": "structure",
-      "color": "#f4ecdf",
+      "color": "#f6efe4",
       "motion": null,
       "explode_mm": [
         -8,
@@ -2475,7 +2515,7 @@
       "id": "roof-turret",
       "part": "qa5_roof_turret_v5",
       "role": "roof",
-      "color": "#3d4b57",
+      "color": "#2a3642",
       "motion": {
         "group": "roof",
         "lift": [
@@ -2525,7 +2565,7 @@
       "id": "turret-loft",
       "part": "qa5_turret_loft_v5",
       "role": "structure",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": null,
       "explode_mm": [
         -10,
@@ -2563,7 +2603,7 @@
       "id": "turret",
       "part": "qa5_turret_v5",
       "role": "structure",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": null,
       "explode_mm": [
         -14,
@@ -2601,7 +2641,7 @@
       "id": "porch-turret",
       "part": "qa5_porch_turret_v5",
       "role": "porch",
-      "color": "#f6f1e7",
+      "color": "#f4ecdc",
       "motion": null,
       "explode_mm": [
         -16,
@@ -2639,7 +2679,7 @@
       "id": "porch-front",
       "part": "qa5_porch_front_v5",
       "role": "porch",
-      "color": "#f6f1e7",
+      "color": "#f4ecdc",
       "motion": null,
       "explode_mm": [
         0,
@@ -2677,7 +2717,7 @@
       "id": "porch-roof",
       "part": "qa5_porch_roof_v5",
       "role": "roof",
-      "color": "#3d4b57",
+      "color": "#2a3642",
       "motion": {
         "group": "roof",
         "lift": [
@@ -2722,7 +2762,7 @@
       "id": "porch-skirt",
       "part": "qa5_porch_skirt_v5",
       "role": "roof",
-      "color": "#3d4b57",
+      "color": "#2a3642",
       "motion": {
         "group": "roof",
         "lift": [
@@ -2767,7 +2807,7 @@
       "id": "lantern-a",
       "part": "qa5_lantern_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -2805,7 +2845,7 @@
       "id": "lantern-b",
       "part": "qa5_lantern_v5",
       "role": "light",
-      "color": "#e7d7b4",
+      "color": "#e6c98a",
       "motion": null,
       "explode_mm": [
         0,
@@ -2843,7 +2883,7 @@
       "id": "stair-lower",
       "part": "qa5_stair_lower_v5",
       "role": "stair",
-      "color": "#6d4b32",
+      "color": "#6a432c",
       "motion": null,
       "explode_mm": [
         20,
@@ -2881,7 +2921,7 @@
       "id": "stair-upper",
       "part": "qa5_stair_upper_v5",
       "role": "stair",
-      "color": "#6d4b32",
+      "color": "#6a432c",
       "motion": null,
       "explode_mm": [
         16,
@@ -2919,7 +2959,7 @@
       "id": "bed",
       "part": "qa5_bed_v5",
       "role": "furniture",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -2954,10 +2994,86 @@
       ]
     },
     {
+      "id": "stand",
+      "part": "qa5_stand_v5",
+      "role": "furniture",
+      "color": "#c4894e",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        8
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          292.0
+        ],
+        [
+          0,
+          1,
+          0,
+          195.4
+        ],
+        [
+          0,
+          0,
+          1,
+          114.6
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "bedrug",
+      "part": "qa5_bedrug_v5",
+      "role": "furniture",
+      "color": "#8d3038",
+      "motion": null,
+      "explode_mm": [
+        0,
+        0,
+        8
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          242.0
+        ],
+        [
+          0,
+          1,
+          0,
+          146.0
+        ],
+        [
+          0,
+          0,
+          1,
+          114.4
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
       "id": "cabinet",
       "part": "qa5_cabinet_v5",
       "role": "furniture",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -2995,7 +3111,7 @@
       "id": "table",
       "part": "qa5_table_v5",
       "role": "furniture",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -3071,7 +3187,7 @@
       "id": "sofa",
       "part": "qa5_sofa_v5",
       "role": "furniture",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -3109,7 +3225,7 @@
       "id": "chair",
       "part": "qa5_chair_v5",
       "role": "furniture",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -3147,7 +3263,7 @@
       "id": "trunk",
       "part": "qa5_trunk_v5",
       "role": "furniture",
-      "color": "#c9a36e",
+      "color": "#c4894e",
       "motion": null,
       "explode_mm": [
         0,
@@ -3223,7 +3339,7 @@
       "id": "coupon-frame",
       "part": "qa5_coupon_frame_v5",
       "role": "coupon",
-      "color": "#f4ecdf",
+      "color": "#f6efe4",
       "motion": null,
       "explode_mm": [
         0,
@@ -3261,7 +3377,7 @@
       "id": "coupon-panel",
       "part": "qa5_coupon_panel_v5",
       "role": "coupon",
-      "color": "#8aa396",
+      "color": "#6f917c",
       "motion": {
         "group": "coupon",
         "pull": [

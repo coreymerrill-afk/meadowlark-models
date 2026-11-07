@@ -70,9 +70,9 @@ POD_D = MAG_D + 2 * RAD
 POD_H = MAG_T + AX
 PULL = 58.0
 
-SAGE, IVORY, WINE = "#8aa396", "#f6f1e7", "#8d3038"
-SLATE, BRICK = "#3d4b57", "#7a4338"
-WOOD, WOOD_D, PLASTER, BRASS = "#c9a36e", "#6d4b32", "#f4ecdf", "#e7d7b4"
+SAGE, IVORY, WINE = "#6f917c", "#f4ecdc", "#8d3038"
+SLATE, BRICK = "#2a3642", "#8b4e3c"
+WOOD, WOOD_D, PLASTER, BRASS = "#c4894e", "#6a432c", "#f6efe4", "#e6c98a"
 
 
 def box_at(a, b, c, d, e, f):
@@ -192,10 +192,22 @@ def scallop():
 
 def bargeboard(length=168.0):
     bar = sbox(0, 0, length, 16)
-    bites = [Point(x, 0).buffer(6.2, resolution=6) for x in np.arange(10, length - 4, 14)]
-    pierced = [Point(x, 9).buffer(2.3, resolution=6) for x in np.arange(18, length - 8, 16)]
+    bites = [Point(x, 0).buffer(5.4, resolution=5) for x in np.arange(9, length - 4, 13)]
+    pierced = [Point(x, 9).buffer(2.0, resolution=5) for x in np.arange(16, length - 8, 15)]
     shape = bar.difference(unary_union(bites + pierced))
-    return extrude(shape, 3.0)
+    return extrude(shape, 2.6)
+
+
+def rake_board(x0, z0, x1, z1, y, into):
+    """Scalloped barge along a gable rake. `into` is +1 or -1, toward the triangle."""
+    dx, dz = x1 - x0, z1 - z0
+    length = math.hypot(dx, dz)
+    board = bargeboard(max(24.0, length - 10))
+    board.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+    board.apply_translation(-board.bounds[0])
+    board.apply_transform(rotation_matrix(-math.atan2(dz, dx), [0, 1, 0]))
+    board.apply_translation((x0 + into * dz / length * 7, y, z0 + into * -dx / length * 7))
+    return board
 
 
 SCALLOP = None
@@ -301,6 +313,11 @@ def window_pack(face, x, y, z, w, h):
             box_at(x, y - 2.2, z + h * 0.47, x + w, y + 0.6, z + h * 0.47 + 1.8),
             box_at(x + w * 0.47, y - 2.0, z + 1.4, x + w * 0.53, y + 0.5, z + h * 0.47),
             box_at(x + w * 0.47, y - 2.0, z + h * 0.47 + 1.8, x + w * 0.53, y + 0.5, z + h - 1.2),
+            # outer architrave and a deeper sill nosing, overlapping the casing
+            box_at(x - 5.4, y - 4.6, z - 5.2, x + w + 5.4, y - 1.2, z - 2.0),
+            box_at(x - 5.2, y - 3.8, z - 1.2, x - 2.2, y + 0.2, z + h + 1.4),
+            box_at(x + w + 2.2, y - 3.8, z - 1.2, x + w + 5.2, y + 0.2, z + h + 1.4),
+            box_at(x - 4.6, y - 3.4, z + h + 1.0, x + w + 4.6, y + 0.2, z + h + 3.6),
         ]
         parts += pediment(x - 2, y, z + h + 3.0, w + 4)
     elif face == "+x":
@@ -310,6 +327,9 @@ def window_pack(face, x, y, z, w, h):
             box_at(x - 0.8, y - 3.2, z, x + 3.0, y + 1.5, z + h),
             box_at(x - 0.8, y + w - 1.5, z, x + 3.0, y + w + 3.2, z + h),
             box_at(x - 0.6, y, z + h * 0.47, x + 2.4, y + w, z + h * 0.47 + 1.8),
+            box_at(x - 1.6, y - 4.6, z - 5.0, x + 1.2, y + w + 4.6, z - 2.2),
+            box_at(x - 1.4, y - 4.4, z - 1, x + 1.0, y - 2.0, z + h),
+            box_at(x - 1.4, y + w + 2.0, z - 1, x + 1.0, y + w + 4.4, z + h),
         ]
     return [p for p in parts if p is not None]
 
@@ -423,6 +443,9 @@ def fixed_walls():
         ]
         # wainscot on the rear wall
         parts.append(box_at(MX0 + 14, MY1 - 9.2, z0 + 2, MX1 - 14, MY1 - 7.4, z0 + 36))
+        for fx, fz in ((270, floor + 46), (430, floor + 50)):
+            parts.append(box_at(fx, MY1 - 10.6, fz, fx + 20, MY1 - 6.8, fz + 14))
+            parts.append(box_at(fx + 2.2, MY1 - 11.4, fz + 2, fx + 17.6, MY1 - 9.4, fz + 12))
         cuts = [box_at(344, 148, z0, 362, 196, floor + 76)]
         if name == "l1":
             cuts.append(box_at(S1["x0"] - 6, S1["y0"] - 6, zp - 1, S1["x1"] + 6, S1["y1"] + 10, z1 + 1))
@@ -686,7 +709,9 @@ def roofs():
         t = (y - y_e) / (y_r - y_e)
         return z_e + t * (z_r - z_e)
     zc = z_at(MY0 + 8)
-    crest = [box_at(MX0 + 20, MY0 + 4, zc - 2.4, gx0 - 8, MY0 + 10, zc + 2.2)]
+    fascia = box_at(MX0 + 12, y_e - 1.2, z_e - 7, MX1 - 14, y_e + 3.5, z_e + 1.2)
+    ridge = box_at(MX0 + 24, y_r - 16, z_r - 8, gx0 - 6, y_r - 3.4, z_r + 2.4)
+    crest = [fascia, ridge, box_at(MX0 + 20, MY0 + 4, zc - 2.4, gx0 - 8, MY0 + 10, zc + 2.2)]
     cx = MX0 + 28
     while cx < gx0 - 14:
         crest.append(move(SPINDLE, cx, MY0 + 7, zc - 1.6))
@@ -707,8 +732,10 @@ def roofs():
     board.apply_translation(-board.bounds[0])
     board.apply_translation((gx0 + 10, gy0 - 0.4, gz0 - 1))
     bird = move(owl(), xmid, gy0 + 1.4, gz0 + 26)
-    publish("qa5_gable_v5", cleanup(union([face, board, bird]), "gable"),
-            "Street gable wall, scalloped bargeboard, and the owl. Sage, in front of the slate slope.",
+    left_rake = rake_board(gx0 + 10, gz0 + 8, xmid - 6, gz1 - 10, gy0 - 0.8, 1)
+    right_rake = rake_board(gx1 - 10, gz0 + 8, xmid + 6, gz1 - 10, gy0 - 0.8, -1)
+    publish("qa5_gable_v5", cleanup(union([face, board, bird, left_rake, right_rake]), "gable"),
+            "Street gable, base fretwork, rake bargeboards, and the owl. Piercings are thin ornament.",
             "gable", "structure", SAGE, {"group": "roof", "lift": [0, 0, 48], "park": [0, -46, 24]},
             [0, -30, 40])
     rear = slope_slab(MX0 + 8, MX1 - 8, MY1 + 14, EAVE - 16, y_r + 3.0, RIDGE)
@@ -845,6 +872,10 @@ def porch():
         parts.append(place_bracket(x, y, z_beam - 16, -90))
     parts += rail_run(front_posts[0], front_posts[-1])
     parts.append(box_at(front_posts[0][0] - 4, 24, z_beam, front_posts[-1][0] + 6, 48, z_beam + 8))
+    dx = front_posts[0][0] + 14
+    while dx < front_posts[-1][0] - 10:
+        parts.append(box_at(dx, 30, z_beam - 4.2, dx + 3.4, 44, z_beam + 1.6))
+        dx += 9.0
     # Steps reach the middle post so the flight is one solid with the porch.
     parts += [
         box_at(378, 2, BASE + 0.4, 442, 14, BASE + 6),
@@ -983,6 +1014,11 @@ def rooms():
         ]), "chair")
     pieces = [
         ("qa5_bed_v5", bed(), "Bed with pillows.", "bed", (236, 168, L2 + 0.6)),
+        ("qa5_stand_v5", cleanup(union([
+            box_at(0, 0, 0, 16, 14, 16),
+            box_at(1.2, -0.6, 3, 14.6, 1.2, 13),
+        ]), "stand"), "Nightstand beside the bed.", "stand", (292, 196, L2 + 0.6)),
+        ("qa5_bedrug_v5", rug(40, 22), "Rug at the foot of the bed.", "bedrug", (242, 146, L2 + 0.4)),
         ("qa5_cabinet_v5", cabinet(), "Kitchen cabinets and sink.", "cabinet", (430, 258, L1 + 0.5)),
         ("qa5_table_v5", table(), "Parlor table.", "table", (250, 168, L1 + 1.4)),
         ("qa5_rug_v5", rug(54, 38), "Parlor rug.", "rug", (242, 158, L1 + 0.3)),
@@ -991,7 +1027,7 @@ def rooms():
         ("qa5_trunk_v5", cleanup(box_at(0, 0, 0, 36, 18, 14), "trunk"), "Attic trunk.", "trunk", (320, 214, L3 + 0.8)),
     ]
     for name, mesh, note, iid, at in pieces:
-        color = WINE if iid == "rug" else WOOD
+        color = WINE if iid in ("rug", "bedrug") else WOOD
         publish(name, move(mesh, *at), note, iid, "furniture", color, explode=[0, 0, 8])
 
 
