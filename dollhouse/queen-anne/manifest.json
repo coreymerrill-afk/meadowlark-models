@@ -1,6 +1,6 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "6.5.1",
+  "version": "6.5.2",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
   "description": "Solid Queen Anne. Front, sides, and roof stay on. The full back, extended up over the attic opening, is the one closure.",
@@ -2155,7 +2155,7 @@
     {
       "id": "qa65_adult_screw_back_l",
       "file": "stl/qa65_adult_screw_back_l.stl",
-      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
+      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 27.3,
       "watertight": true,
@@ -2166,12 +2166,14 @@
         5.1,
         4.27
       ],
-      "fits_brim_allowance": true
+      "fits_brim_allowance": true,
+      "print": false,
+      "reference_only": true
     },
     {
       "id": "qa65_adult_screw_back_r",
       "file": "stl/qa65_adult_screw_back_r.stl",
-      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
+      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 27.3,
       "watertight": true,
@@ -2182,7 +2184,9 @@
         5.1,
         4.27
       ],
-      "fits_brim_allowance": true
+      "fits_brim_allowance": true,
+      "print": false,
+      "reference_only": true
     },
     {
       "id": "qa65_retainer_jl1",
@@ -2203,7 +2207,7 @@
     {
       "id": "qa65_adult_screw_jl1",
       "file": "stl/qa65_adult_screw_jl1.stl",
-      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
+      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2214,7 +2218,9 @@
         9.3,
         4.27
       ],
-      "fits_brim_allowance": true
+      "fits_brim_allowance": true,
+      "print": false,
+      "reference_only": true
     },
     {
       "id": "qa65_retainer_jl2",
@@ -2235,7 +2241,7 @@
     {
       "id": "qa65_adult_screw_jl2",
       "file": "stl/qa65_adult_screw_jl2.stl",
-      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
+      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2246,7 +2252,9 @@
         9.3,
         4.27
       ],
-      "fits_brim_allowance": true
+      "fits_brim_allowance": true,
+      "print": false,
+      "reference_only": true
     },
     {
       "id": "qa65_retainer_jr1",
@@ -2267,7 +2275,7 @@
     {
       "id": "qa65_adult_screw_jr1",
       "file": "stl/qa65_adult_screw_jr1.stl",
-      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
+      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2278,7 +2286,9 @@
         9.3,
         4.27
       ],
-      "fits_brim_allowance": true
+      "fits_brim_allowance": true,
+      "print": false,
+      "reference_only": true
     },
     {
       "id": "qa65_retainer_jr2",
@@ -2299,7 +2309,7 @@
     {
       "id": "qa65_adult_screw_jr2",
       "file": "stl/qa65_adult_screw_jr2.stl",
-      "note": "Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
+      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 screw, design assumption not a measured part. Major 2.0 mm, pitch 0.4 mm, head 3.8 x 1.6 mm. Removal is by turning. Not a safety certification.",
       "triangles": 182,
       "volume_mm3": 40.3,
       "watertight": true,
@@ -2310,12 +2320,14 @@
         9.3,
         4.27
       ],
-      "fits_brim_allowance": true
+      "fits_brim_allowance": true,
+      "print": false,
+      "reference_only": true
     },
     {
       "id": "qa65_m2_nut",
       "file": "stl/qa65_m2_nut.stl",
-      "note": "Nominal M2 hex nut, AF 4.0 mm, thickness 1.6 mm. It sits behind a lip with a 2.5 mm hole, so it cannot pull out. The side slot is covered while the strip or retainer is on.",
+      "note": "REFERENCE ONLY. Not a printed part. Nominal M2 hex nut, AF 4.0 mm, thickness 1.6 mm. It sits behind a lip with a 2.5 mm hole, so it cannot pull out. The side slot is covered while the strip or retainer is on.",
       "triangles": 536,
       "volume_mm3": 16.7,
       "watertight": true,
@@ -2326,7 +2338,9 @@
         1.6,
         4.0
       ],
-      "fits_brim_allowance": true
+      "fits_brim_allowance": true,
+      "print": false,
+      "reference_only": true
     }
   ],
   "bom": [
@@ -2650,36 +2664,6 @@
     {
       "part": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa65_adult_screw_back_l",
-      "file": "stl/qa65_adult_screw_back_l.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa65_adult_screw_back_r",
-      "file": "stl/qa65_adult_screw_back_r.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa65_adult_screw_jl1",
-      "file": "stl/qa65_adult_screw_jl1.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa65_adult_screw_jl2",
-      "file": "stl/qa65_adult_screw_jl2.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa65_adult_screw_jr1",
-      "file": "stl/qa65_adult_screw_jr1.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa65_adult_screw_jr2",
-      "file": "stl/qa65_adult_screw_jr2.stl",
       "qty": 1
     },
     {
@@ -4959,7 +4943,7 @@
           0,
           1,
           0,
-          128.0
+          123.0
         ],
         [
           0,

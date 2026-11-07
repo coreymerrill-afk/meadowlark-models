@@ -1,4 +1,4 @@
-# Queen Anne Playhouse — v6.5.1
+# Queen Anne Playhouse — v6.5.2
 
 A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 
@@ -8,7 +8,7 @@ The ground floor has a projecting bay. The attic center, above the back wall, is
 
 ## How it is played
 
-One wall comes off: the full back. It is one print, 285 × 7 × 269 mm, under the 310 × 300 × 315 mm allowance. That height includes the attic plug. Closed, its inner face is 0.45 mm behind the jambs and it does not occupy their volume. It pulls straight off on nominal 5.0 × 2.8 mm discs. Each rear strip and each jamb retainer is held by a nominal M2 screw and a hex nut behind a lip. An adult turns the screw out first. There is no sill hook. This is not a safety validation. The 1.3 mm lace webs were not toolpath-checked. The front, sides, porch, floors, and roofs stay. The back is not a brace, and the magnets are not what holds the house up. The roof bears on the fixed plates with the back off.
+One wall comes off: the full back. It is one print, 285 × 7 × 269 mm, under the 310 × 300 × 315 mm allowance. That height includes the attic plug. Closed, its inner face is 0.45 mm behind the jambs and it does not occupy their volume. It pulls straight off on nominal 5.0 × 2.8 mm discs. Each rear strip and each jamb retainer is drawn around a purchased slotted M2 screw and an ISO 4032 M2 nut. Those metal parts are reference geometry and are not in the print set. The drawn under-head lengths are 3.5 mm on the back and 7.7 mm on the jambs, so they are not catalog M2×5 or M2×10 screws. An adult turns the screw out first. There is no sill hook. Retention was not physically tested. This is not a safety validation. The 1.3 mm lace webs were not toolpath-checked. The front, sides, porch, floors, and roofs stay. The back is not a brace, and the magnets are not what holds the house up. The roof bears on the fixed plates with the back off.
 
 Two stair flights have treads, risers, and a spindle rail. The lower flight climbs from the entry to the first floor. The upper flight climbs from that floor to the attic. The wells are open. The hall wall stops short of the rear opening.
 
