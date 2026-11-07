@@ -34,8 +34,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-l_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_walls_l1_v5",
@@ -88,8 +88,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-l_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_walls_l1_v5",
@@ -142,8 +142,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-l_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_walls_l1_v5",
@@ -196,8 +196,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-l_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_walls_l2_v5",
@@ -250,8 +250,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-l_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_walls_l2_v5",
@@ -304,8 +304,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-l_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_left",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_walls_l2_v5",
@@ -358,8 +358,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-r_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_side_v5",
@@ -412,8 +412,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-r_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_side_v5",
@@ -466,8 +466,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-r_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_side_v5",
@@ -520,8 +520,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-r_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_side_v5",
@@ -574,8 +574,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-r_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_side_v5",
@@ -628,8 +628,8 @@
           296.85,
           300.05
         ],
-        "cap": "qa5_cap_back-r_v5",
-        "cap_retention": "Head sits in the counterbore. Boss stops at the disc zone. Clearance fit. Not printed."
+        "cap": "qa65_cap_capture_right",
+        "cap_retention": "Bayonet resists a straight pull. Screw at assembled z=110, same x, blocks the 3 mm upward release. Adult removes the screw along Y. Not safety validated."
       },
       "jamb": {
         "host": "qa5_side_v5",
@@ -655,5 +655,6 @@
       }
     }
   ],
-  "section": "Cut qa5_rear_v5 at local x = 9, which is assembled x = 228. The disc zone is assembled y 296.85 to 300.05."
+  "section": "Cut qa5_rear_v5 at local x = 9, which is assembled x = 228. The disc zone is assembled y 296.85 to 300.05.",
+  "retention": "Each rear strip slides down 3 mm onto two headed studs, then a recessed screw at z=110 stops it sliding back up. Jamb caps sit under a retainer bar held by one recessed screw. Adult assembly. Not a tested thread and not safety validated."
 }

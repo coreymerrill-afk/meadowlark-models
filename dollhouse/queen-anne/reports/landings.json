@@ -1,0 +1,25 @@
+{
+  "top_gap_meaning": "validation top_gap_mm = floor target z minus the stair mesh maximum z. Negative means the rail stands above the floor.",
+  "flights": [
+    {
+      "stair": "stair-lower",
+      "floor": "floor-l2",
+      "mesh_max_z": 131.86,
+      "floor_top_z": 114.15,
+      "rail_above_floor_mm": 17.71,
+      "highest_vertex_within_8mm_of_floor_z": 122.11,
+      "shared_volume_mm3": 0.0,
+      "meaning": "mesh_max_z is the handrail and stringer, which stand above the floor. top_gap in validation.json is floor target minus that rail, so a negative value is the rail height, not a dropped tread."
+    },
+    {
+      "stair": "stair-upper",
+      "floor": "floor-l3",
+      "mesh_max_z": 229.86,
+      "floor_top_z": 212.15,
+      "rail_above_floor_mm": 17.71,
+      "highest_vertex_within_8mm_of_floor_z": 219.92,
+      "shared_volume_mm3": 0.0,
+      "meaning": "mesh_max_z is the handrail and stringer, which stand above the floor. top_gap in validation.json is floor target minus that rail, so a negative value is the rail height, not a dropped tread."
+    }
+  ]
+}

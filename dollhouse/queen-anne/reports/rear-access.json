@@ -1,0 +1,34 @@
+{
+  "roof": "fixed, one solid, no lift-off panel",
+  "closure": "the full back, including the attic plug, is the only piece that comes off",
+  "opening_world_mm": {
+    "x": [
+      318,
+      462
+    ],
+    "y": [
+      250,
+      360
+    ],
+    "z": [
+      214,
+      286
+    ]
+  },
+  "plug_world_mm": {
+    "x": [
+      324,
+      456
+    ],
+    "y": [
+      295.45,
+      302.45
+    ],
+    "z": [
+      198,
+      278
+    ]
+  },
+  "rear_versus_roof_mm3": 0.0,
+  "how_to_reach": "Take the back off along +Y. The attic plug leaves with it. The fixed roof keeps a rear eave opening above the attic floor, about 144 mm wide, open toward the rear. Furniture under about 36 mm and a hand use that opening. No roof panel is removed."
+}

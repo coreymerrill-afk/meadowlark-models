@@ -1,9 +1,9 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "6.4.0",
+  "version": "6.5.0",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
-  "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
+  "description": "Solid Queen Anne. Front, sides, and roof stay on. The full back, extended up over the attic opening, is the one closure.",
   "concept_image": "concept/approved-direction.jpg",
   "concept_note": "Approved picture. Not this CAD and not a measured survey.",
   "units": "mm",
@@ -342,7 +342,7 @@
     "mating_skin_mm": 1.4,
     "holding_force_calculated": false,
     "h3c_pause_profile": false,
-    "retention": "magnetic_only_straight_pull",
+    "retention": "bayonet_and_adult_screw_not_safety_validated",
     "capture_bar": "closes the magnet only"
   },
   "lighting": {
@@ -478,9 +478,10 @@
   "magnet_install_steps": [
     "Print the coupon first. Its bore is the same cross-section as the house seats.",
     "A nominal 5.0 x 2.8 mm disc drops in the open mouth. The seat is 5.6 mm across and 3.2 mm deep. Those are design allowances of 0.30 mm radial and 0.40 mm axial, not a measured fit.",
-    "1.4 mm of plastic stays between the disc and the mating face. The cap boss stops at the seat and does not pinch the disc.",
-    "The cap pulls straight off. It does not fasten the back to the jamb. Holding force is untested.",
-    "The back pulls straight off toward the rear. Pins and the bottom ledge locate it. The front, sides, porch, and roofs stay."
+    "1.4 mm of plastic stays between the disc and the mating face.",
+    "The two rear strips slide down 3 mm onto headed studs. That lip resists a straight pull. Each strip is then held by a recessed screw so it cannot slide back up. An adult removes the screw first.",
+    "Each row of jamb caps is covered by a retainer bar and one recessed screw. The caps are clearance fits under that bar. They are not trapped once the bar is off.",
+    "Nothing here is a tested thread, a wear test, or a toy-safety validation."
   ],
   "limits": [
     "Not printed. No strength, tip-over, magnet, or electrical test.",
@@ -731,8 +732,8 @@
       "id": "qa5_walls_l1_v5",
       "file": "stl/qa5_walls_l1_v5.stl",
       "note": "Fixed ceiling, hall wall, and the left rear jamb. The rear opening is clear.",
-      "triangles": 726,
-      "volume_mm3": 505722.9,
+      "triangles": 796,
+      "volume_mm3": 505687.6,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -747,8 +748,8 @@
       "id": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
       "note": "Fixed ceiling and hall wall of the first floor. The back is not this part.",
-      "triangles": 766,
-      "volume_mm3": 504573.7,
+      "triangles": 836,
+      "volume_mm3": 504538.4,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -923,8 +924,8 @@
       "id": "qa5_side_v5",
       "file": "stl/qa5_side_v5.stl",
       "note": "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
-      "triangles": 2952,
-      "volume_mm3": 149386.7,
+      "triangles": 3132,
+      "volume_mm3": 149326.8,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -939,47 +940,15 @@
       "id": "qa5_rear_v5",
       "file": "stl/qa5_rear_v5.stl",
       "note": "Full back, one print, 0.45 mm off the jambs. Magnet mouths open through the stile. Nominal 5.0 x 2.8 mm discs, seat depth 3.2 mm. Not a brace.",
-      "triangles": 4208,
-      "volume_mm3": 241549.0,
+      "triangles": 4648,
+      "volume_mm3": 310706.6,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
         285.0,
         7.0,
-        188.7
-      ],
-      "fits_brim_allowance": true
-    },
-    {
-      "id": "qa5_cap_back-l_v5",
-      "file": "stl/qa5_cap_back-l_v5.stl",
-      "note": "Covers magnet mouths. The boss leaves the 3.2 mm seat clear. Pull the cap straight off to remove a disc. Untested.",
-      "triangles": 1180,
-      "volume_mm3": 310.5,
-      "watertight": true,
-      "bodies": 1,
-      "nonmanifold_edges": 0,
-      "bbox_mm": [
-        6.1,
-        1.6,
-        150.1
-      ],
-      "fits_brim_allowance": true
-    },
-    {
-      "id": "qa5_cap_back-r_v5",
-      "file": "stl/qa5_cap_back-r_v5.stl",
-      "note": "Covers magnet mouths. The boss leaves the 3.2 mm seat clear. Pull the cap straight off to remove a disc. Untested.",
-      "triangles": 1180,
-      "volume_mm3": 310.5,
-      "watertight": true,
-      "bodies": 1,
-      "nonmanifold_edges": 0,
-      "bbox_mm": [
-        6.1,
-        1.6,
-        150.1
+        261.55
       ],
       "fits_brim_allowance": true
     },
@@ -1179,8 +1148,8 @@
       "id": "qa5_roof_front_v5",
       "file": "stl/qa5_roof_front_v5.stl",
       "note": "Front slope and the gable cheeks. Fish-scale courses overlap and the noses stay proud.",
-      "triangles": 34340,
-      "volume_mm3": 480576.1,
+      "triangles": 33904,
+      "volume_mm3": 479818.7,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1195,15 +1164,15 @@
       "id": "qa5_gable_v5",
       "file": "stl/qa5_gable_v5.stl",
       "note": "Street gable. Arched attic sash, scroll verge, owl. The piercings go through.",
-      "triangles": 9386,
-      "volume_mm3": 74823.2,
+      "triangles": 496,
+      "volume_mm3": 53582.5,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        170.38,
-        14.4,
-        188.0
+        168.0,
+        5.2,
+        160.0
       ],
       "fits_brim_allowance": true
     },
@@ -1211,8 +1180,8 @@
       "id": "qa5_roof_rear_v5",
       "file": "stl/qa5_roof_rear_v5.stl",
       "note": "Rear slope, fish-scale courses, chimney. Center soffit is open over the attic.",
-      "triangles": 39898,
-      "volume_mm3": 325720.6,
+      "triangles": 32414,
+      "volume_mm3": 285787.8,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1259,14 +1228,14 @@
       "id": "qa5_turret_loft_v5",
       "file": "stl/qa5_turret_loft_v5.stl",
       "note": "Turret loft, with cased windows on the street flats.",
-      "triangles": 1318,
-      "volume_mm3": 127940.9,
+      "triangles": 1674,
+      "volume_mm3": 124705.3,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
       "bbox_mm": [
-        109.74,
-        110.01,
+        109.58,
+        109.86,
         91.5
       ],
       "fits_brim_allowance": true
@@ -1275,8 +1244,8 @@
       "id": "qa5_turret_v5",
       "file": "stl/qa5_turret_v5.stl",
       "note": "Octagonal turret, two storeys, clapboard, belt courses, and cased windows.",
-      "triangles": 1776,
-      "volume_mm3": 267438.4,
+      "triangles": 2462,
+      "volume_mm3": 263769.1,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1307,8 +1276,8 @@
       "id": "qa5_porch_front_v5",
       "file": "stl/qa5_porch_front_v5.stl",
       "note": "Front porch across the main block, with the steps. It stays during play.",
-      "triangles": 13908,
-      "volume_mm3": 107945.8,
+      "triangles": 9038,
+      "volume_mm3": 98593.1,
       "watertight": true,
       "bodies": 1,
       "nonmanifold_edges": 0,
@@ -1702,6 +1671,646 @@
         5.0
       ],
       "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_gable_verge_left",
+      "file": "stl/qa65_gable_verge_left.stl",
+      "note": "1.3 mm scroll webs, flowing enclosed curved voids",
+      "triangles": 7480,
+      "volume_mm3": 2484.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        77.67,
+        5.1,
+        148.46
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_gable_verge_right",
+      "file": "stl/qa65_gable_verge_right.stl",
+      "note": "1.3 mm scroll webs, flowing enclosed curved voids",
+      "triangles": 7470,
+      "volume_mm3": 2490.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        77.67,
+        5.1,
+        148.46
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_gable_arched_casing",
+      "file": "stl/qa65_gable_arched_casing.stl",
+      "note": "Opening 46 x 71 mm; casing 60 x 82 mm; elliptical arched head",
+      "triangles": 2186,
+      "volume_mm3": 6263.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        66.0,
+        7.5,
+        84.59
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_gable_sash",
+      "file": "stl/qa65_gable_sash.stl",
+      "note": "Tabs land in opening jamb; perimeter bead remains 1.6 mm",
+      "triangles": 644,
+      "volume_mm3": 846.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        49.4,
+        2.5,
+        70.99
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_gable_fan_kingpost",
+      "file": "stl/qa65_gable_fan_kingpost.stl",
+      "note": "Nine fan rays. Apex ends in a 3.6 mm ball, not a needle.",
+      "triangles": 1202,
+      "volume_mm3": 1586.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        41.6,
+        8.8,
+        57.2
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_gable_cornice",
+      "file": "stl/qa65_gable_cornice.stl",
+      "note": "7.6 mm projection, nine consoles, stepped rail",
+      "triangles": 1540,
+      "volume_mm3": 6662.6,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        178.0,
+        9.6,
+        13.65
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_porch_frieze_1",
+      "file": "stl/qa65_porch_frieze_1.stl",
+      "note": "Actual center spacing 80.000 mm; spindle neck 1.3 mm",
+      "triangles": 1052,
+      "volume_mm3": 2162.1,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        66.0,
+        4.4,
+        34.6
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_porch_frieze_2",
+      "file": "stl/qa65_porch_frieze_2.stl",
+      "note": "Actual center spacing 80.000 mm; spindle neck 1.3 mm",
+      "triangles": 1052,
+      "volume_mm3": 2162.1,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        66.0,
+        4.4,
+        34.6
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_porch_frieze_3",
+      "file": "stl/qa65_porch_frieze_3.stl",
+      "note": "Actual center spacing 78.000 mm; spindle neck 1.3 mm",
+      "triangles": 1128,
+      "volume_mm3": 2123.2,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        64.0,
+        4.4,
+        34.6
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_porch_balustrade_1",
+      "file": "stl/qa65_porch_balustrade_1.stl",
+      "note": "2 mm minimum baluster neck; flat profiled turned silhouette",
+      "triangles": 836,
+      "volume_mm3": 2667.1,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        66.18,
+        8.43,
+        28.5
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_porch_balustrade_2",
+      "file": "stl/qa65_porch_balustrade_2.stl",
+      "note": "2 mm minimum baluster neck; flat profiled turned silhouette",
+      "triangles": 836,
+      "volume_mm3": 2665.5,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        66.0,
+        5.2,
+        28.5
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_porch_balustrade_3",
+      "file": "stl/qa65_porch_balustrade_3.stl",
+      "note": "2 mm minimum baluster neck; flat profiled turned silhouette",
+      "triangles": 836,
+      "volume_mm3": 2636.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        64.18,
+        8.35,
+        28.5
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_belt_45",
+      "file": "stl/qa65_turret_belt_45.stl",
+      "note": "Molded band and raised rosettes. No through-holes. East facet omitted.",
+      "triangles": 1042,
+      "volume_mm3": 1014.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_belt_90",
+      "file": "stl/qa65_turret_belt_90.stl",
+      "note": "Molded band and raised rosettes. No through-holes. East facet omitted.",
+      "triangles": 1042,
+      "volume_mm3": 1014.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_belt_135",
+      "file": "stl/qa65_turret_belt_135.stl",
+      "note": "Molded band and raised rosettes. No through-holes. East facet omitted.",
+      "triangles": 1042,
+      "volume_mm3": 1014.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_belt_180",
+      "file": "stl/qa65_turret_belt_180.stl",
+      "note": "Molded band and raised rosettes. No through-holes. East facet omitted.",
+      "triangles": 1042,
+      "volume_mm3": 1014.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        5.2,
+        44.39,
+        8.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_belt_225",
+      "file": "stl/qa65_turret_belt_225.stl",
+      "note": "Molded band and raised rosettes. No through-holes. East facet omitted.",
+      "triangles": 1042,
+      "volume_mm3": 1014.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_belt_270",
+      "file": "stl/qa65_turret_belt_270.stl",
+      "note": "Molded band and raised rosettes. No through-holes. East facet omitted.",
+      "triangles": 1042,
+      "volume_mm3": 1014.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_belt_315",
+      "file": "stl/qa65_turret_belt_315.stl",
+      "note": "Molded band and raised rosettes. No through-holes. East facet omitted.",
+      "triangles": 1042,
+      "volume_mm3": 1014.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_middle_180",
+      "file": "stl/qa65_turret_window_middle_180.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_middle_225",
+      "file": "stl/qa65_turret_window_middle_225.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_middle_270",
+      "file": "stl/qa65_turret_window_middle_270.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_middle_315",
+      "file": "stl/qa65_turret_window_middle_315.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_loft_180",
+      "file": "stl/qa65_turret_window_loft_180.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_loft_225",
+      "file": "stl/qa65_turret_window_loft_225.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_loft_270",
+      "file": "stl/qa65_turret_window_loft_270.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_turret_window_loft_315",
+      "file": "stl/qa65_turret_window_loft_315.stl",
+      "note": "Existing 20 x 42 mm opening retained; layered rectangular ring with curved hood",
+      "triangles": 1044,
+      "volume_mm3": 1887.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_roof_ridge_crest",
+      "file": "stl/qa65_roof_ridge_crest.stl",
+      "note": "53 mm continuous open spindle crest; two terminal balls",
+      "triangles": 1212,
+      "volume_mm3": 1249.4,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        54.6,
+        4.4,
+        25.8
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_cap_capture_left",
+      "file": "stl/qa65_cap_capture_left.stl",
+      "note": "Enter at z+3, push toward back then slide down 3 mm; mushroom studs captive below 1.35 mm lip",
+      "triangles": 282,
+      "volume_mm3": 1825.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        10.5,
+        5.6,
+        155.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_cap_capture_right",
+      "file": "stl/qa65_cap_capture_right.stl",
+      "note": "Enter at z+3, push toward back then slide down 3 mm; mushroom studs captive below 1.35 mm lip",
+      "triangles": 282,
+      "volume_mm3": 1825.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        10.5,
+        5.6,
+        155.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_adult_screw_back_l",
+      "file": "stl/qa65_adult_screw_back_l.stl",
+      "note": "Recessed clearance screw. Adult pulls it out along +Y before the cap strip can slide up. Not a tested thread. Not safety validated.",
+      "triangles": 182,
+      "volume_mm3": 27.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        4.4,
+        5.1,
+        4.27
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_adult_screw_back_r",
+      "file": "stl/qa65_adult_screw_back_r.stl",
+      "note": "Recessed clearance screw. Adult pulls it out along +Y before the cap strip can slide up. Not a tested thread. Not safety validated.",
+      "triangles": 182,
+      "volume_mm3": 27.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        4.4,
+        5.1,
+        4.27
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_retainer_jl1",
+      "file": "stl/qa65_retainer_jl1.stl",
+      "note": "Covers one row of jamb magnet caps with 0.3 mm clearance. The caps stay put while this bar is screwed on. Adult assembly. Not safety validated.",
+      "triangles": 96,
+      "volume_mm3": 1516.8,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        8.5,
+        2.9,
+        62.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_adult_screw_jl1",
+      "file": "stl/qa65_adult_screw_jl1.stl",
+      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "triangles": 182,
+      "volume_mm3": 40.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_retainer_jl2",
+      "file": "stl/qa65_retainer_jl2.stl",
+      "note": "Covers one row of jamb magnet caps with 0.3 mm clearance. The caps stay put while this bar is screwed on. Adult assembly. Not safety validated.",
+      "triangles": 96,
+      "volume_mm3": 1516.8,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        8.5,
+        2.9,
+        62.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_adult_screw_jl2",
+      "file": "stl/qa65_adult_screw_jl2.stl",
+      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "triangles": 182,
+      "volume_mm3": 40.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_retainer_jr1",
+      "file": "stl/qa65_retainer_jr1.stl",
+      "note": "Covers one row of jamb magnet caps with 0.3 mm clearance. The caps stay put while this bar is screwed on. Adult assembly. Not safety validated.",
+      "triangles": 96,
+      "volume_mm3": 2210.1,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        12.35,
+        2.9,
+        62.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_adult_screw_jr1",
+      "file": "stl/qa65_adult_screw_jr1.stl",
+      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "triangles": 182,
+      "volume_mm3": 40.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_retainer_jr2",
+      "file": "stl/qa65_retainer_jr2.stl",
+      "note": "Covers one row of jamb magnet caps with 0.3 mm clearance. The caps stay put while this bar is screwed on. Adult assembly. Not safety validated.",
+      "triangles": 96,
+      "volume_mm3": 2210.1,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        12.35,
+        2.9,
+        62.1
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa65_adult_screw_jr2",
+      "file": "stl/qa65_adult_screw_jr2.stl",
+      "note": "Recessed clearance screw for one jamb retainer. Adult removal. Not a tested thread. Not safety validated.",
+      "triangles": 182,
+      "volume_mm3": 40.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "fits_brim_allowance": true
     }
   ],
   "bom": [
@@ -1728,16 +2337,6 @@
     {
       "part": "qa5_cabinet_v5",
       "file": "stl/qa5_cabinet_v5.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa5_cap_back-l_v5",
-      "file": "stl/qa5_cap_back-l_v5.stl",
-      "qty": 1
-    },
-    {
-      "part": "qa5_cap_back-r_v5",
-      "file": "stl/qa5_cap_back-r_v5.stl",
       "qty": 1
     },
     {
@@ -2035,6 +2634,206 @@
     {
       "part": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_adult_screw_back_l",
+      "file": "stl/qa65_adult_screw_back_l.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_adult_screw_back_r",
+      "file": "stl/qa65_adult_screw_back_r.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_adult_screw_jl1",
+      "file": "stl/qa65_adult_screw_jl1.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_adult_screw_jl2",
+      "file": "stl/qa65_adult_screw_jl2.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_adult_screw_jr1",
+      "file": "stl/qa65_adult_screw_jr1.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_adult_screw_jr2",
+      "file": "stl/qa65_adult_screw_jr2.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_cap_capture_left",
+      "file": "stl/qa65_cap_capture_left.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_cap_capture_right",
+      "file": "stl/qa65_cap_capture_right.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_gable_arched_casing",
+      "file": "stl/qa65_gable_arched_casing.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_gable_cornice",
+      "file": "stl/qa65_gable_cornice.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_gable_fan_kingpost",
+      "file": "stl/qa65_gable_fan_kingpost.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_gable_sash",
+      "file": "stl/qa65_gable_sash.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_gable_verge_left",
+      "file": "stl/qa65_gable_verge_left.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_gable_verge_right",
+      "file": "stl/qa65_gable_verge_right.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_porch_balustrade_1",
+      "file": "stl/qa65_porch_balustrade_1.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_porch_balustrade_2",
+      "file": "stl/qa65_porch_balustrade_2.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_porch_balustrade_3",
+      "file": "stl/qa65_porch_balustrade_3.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_porch_frieze_1",
+      "file": "stl/qa65_porch_frieze_1.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_porch_frieze_2",
+      "file": "stl/qa65_porch_frieze_2.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_porch_frieze_3",
+      "file": "stl/qa65_porch_frieze_3.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_retainer_jl1",
+      "file": "stl/qa65_retainer_jl1.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_retainer_jl2",
+      "file": "stl/qa65_retainer_jl2.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_retainer_jr1",
+      "file": "stl/qa65_retainer_jr1.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_retainer_jr2",
+      "file": "stl/qa65_retainer_jr2.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_roof_ridge_crest",
+      "file": "stl/qa65_roof_ridge_crest.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_belt_135",
+      "file": "stl/qa65_turret_belt_135.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_belt_180",
+      "file": "stl/qa65_turret_belt_180.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_belt_225",
+      "file": "stl/qa65_turret_belt_225.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_belt_270",
+      "file": "stl/qa65_turret_belt_270.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_belt_315",
+      "file": "stl/qa65_turret_belt_315.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_belt_45",
+      "file": "stl/qa65_turret_belt_45.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_belt_90",
+      "file": "stl/qa65_turret_belt_90.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_loft_180",
+      "file": "stl/qa65_turret_window_loft_180.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_loft_225",
+      "file": "stl/qa65_turret_window_loft_225.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_loft_270",
+      "file": "stl/qa65_turret_window_loft_270.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_loft_315",
+      "file": "stl/qa65_turret_window_loft_315.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_middle_180",
+      "file": "stl/qa65_turret_window_middle_180.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_middle_225",
+      "file": "stl/qa65_turret_window_middle_225.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_middle_270",
+      "file": "stl/qa65_turret_window_middle_270.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa65_turret_window_middle_315",
+      "file": "stl/qa65_turret_window_middle_315.stl",
       "qty": 1
     }
   ],
@@ -3063,82 +3862,6 @@
           0,
           1,
           16.45
-        ],
-        [
-          0,
-          0,
-          0,
-          1
-        ]
-      ]
-    },
-    {
-      "id": "cap-back-l",
-      "part": "qa5_cap_back-l_v5",
-      "role": "fastener",
-      "color": "#f4ecdc",
-      "motion": null,
-      "explode_mm": [
-        0,
-        14,
-        0
-      ],
-      "transform": [
-        [
-          1,
-          0,
-          0,
-          224.95
-        ],
-        [
-          0,
-          1,
-          0,
-          300.3
-        ],
-        [
-          0,
-          0,
-          1,
-          40.95
-        ],
-        [
-          0,
-          0,
-          0,
-          1
-        ]
-      ]
-    },
-    {
-      "id": "cap-back-r",
-      "part": "qa5_cap_back-r_v5",
-      "role": "fastener",
-      "color": "#f4ecdc",
-      "motion": null,
-      "explode_mm": [
-        0,
-        14,
-        0
-      ],
-      "transform": [
-        [
-          1,
-          0,
-          0,
-          491.95
-        ],
-        [
-          0,
-          1,
-          0,
-          300.3
-        ],
-        [
-          0,
-          0,
-          1,
-          40.95
         ],
         [
           0,
@@ -5076,6 +5799,1554 @@
           0,
           0,
           1
+        ]
+      ]
+    },
+    {
+      "id": "gable-verge-left",
+      "part": "qa65_gable_verge_left",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "gable-verge-right",
+      "part": "qa65_gable_verge_right",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "gable-arched-casing",
+      "part": "qa65_gable_arched_casing",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "gable-sash",
+      "part": "qa65_gable_sash",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "gable-fan-kingpost",
+      "part": "qa65_gable_fan_kingpost",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "gable-cornice",
+      "part": "qa65_gable_cornice",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "porch-frieze-1",
+      "part": "qa65_porch_frieze_1",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "porch-frieze-2",
+      "part": "qa65_porch_frieze_2",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "porch-frieze-3",
+      "part": "qa65_porch_frieze_3",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "porch-balustrade-1",
+      "part": "qa65_porch_balustrade_1",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "porch-balustrade-2",
+      "part": "qa65_porch_balustrade_2",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "porch-balustrade-3",
+      "part": "qa65_porch_balustrade_3",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-belt-45",
+      "part": "qa65_turret_belt_45",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-belt-90",
+      "part": "qa65_turret_belt_90",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-belt-135",
+      "part": "qa65_turret_belt_135",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-belt-180",
+      "part": "qa65_turret_belt_180",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-belt-225",
+      "part": "qa65_turret_belt_225",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-belt-270",
+      "part": "qa65_turret_belt_270",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-belt-315",
+      "part": "qa65_turret_belt_315",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-middle-180",
+      "part": "qa65_turret_window_middle_180",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-middle-225",
+      "part": "qa65_turret_window_middle_225",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-middle-270",
+      "part": "qa65_turret_window_middle_270",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-middle-315",
+      "part": "qa65_turret_window_middle_315",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-loft-180",
+      "part": "qa65_turret_window_loft_180",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-loft-225",
+      "part": "qa65_turret_window_loft_225",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-loft-270",
+      "part": "qa65_turret_window_loft_270",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "turret-window-loft-315",
+      "part": "qa65_turret_window_loft_315",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "roof-ridge-crest",
+      "part": "qa65_roof_ridge_crest",
+      "role": "trim",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "cap-capture-left",
+      "part": "qa65_cap_capture_left",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": {
+        "group": "back",
+        "pull": [
+          0,
+          70,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "cap-capture-right",
+      "part": "qa65_cap_capture_right",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": {
+        "group": "back",
+        "pull": [
+          0,
+          70,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "adult-screw-back-l",
+      "part": "qa65_adult_screw_back_l",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": {
+        "group": "back",
+        "pull": [
+          0,
+          70,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "adult-screw-back-r",
+      "part": "qa65_adult_screw_back_r",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": {
+        "group": "back",
+        "pull": [
+          0,
+          70,
+          0
+        ]
+      },
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "retainer-jl1",
+      "part": "qa65_retainer_jl1",
+      "role": "fastener",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "adult-screw-jl1",
+      "part": "qa65_adult_screw_jl1",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "retainer-jl2",
+      "part": "qa65_retainer_jl2",
+      "role": "fastener",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "adult-screw-jl2",
+      "part": "qa65_adult_screw_jl2",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "retainer-jr1",
+      "part": "qa65_retainer_jr1",
+      "role": "fastener",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "adult-screw-jr1",
+      "part": "qa65_adult_screw_jr1",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "retainer-jr2",
+      "part": "qa65_retainer_jr2",
+      "role": "fastener",
+      "color": "#efe1bf",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "adult-screw-jr2",
+      "part": "qa65_adult_screw_jr2",
+      "role": "fastener",
+      "color": "#c8b48a",
+      "motion": null,
+      "explode_mm": [
+        0,
+        12,
+        0
+      ],
+      "transform": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
         ]
       ]
     }

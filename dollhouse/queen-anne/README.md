@@ -1,14 +1,14 @@
-# Queen Anne Playhouse — v6.4.0
+# Queen Anne Playhouse — v6.5.0
 
 A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 
 The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes. The porch wraps the turret. The front slope carries overlapping fish-scale courses. The rear slope and the cone still use the smaller scallop. Street windows have curved hoods. One upper window has a pierced fan, a separate sash, room-side keepers, and headed pins. The other street windows keep a simpler arch. Side windows have no crown.
 
-The ground floor has a projecting bay. The attic center, above the back wall, is open between two side pads so a hand can reach it from the rear. The upper stair is the route onto that floor. The turret loft is the same level. A covered chase runs in the fixed ceiling plates and the foundation to a port on the service bay. It does not enter the removable back. The joint gaps are 0.4 mm at the jamb-to-foundation step and 0.3 mm at the foundation-to-bay port.
+The ground floor has a projecting bay. The attic center, above the back wall, is open between two side pads. In v6.5.0 the same back continues up and closes that opening; it leaves with the back. The roof stays on. The upper stair is the route onto that floor. The gable has separate scroll verges, an arched sash, a fan, and a cornice. The porch front has three friezes and finer balusters. The turret loft is the same level. A covered chase runs in the fixed ceiling plates and the foundation to a port on the service bay. It does not enter the removable back. The joint gaps are 0.4 mm at the jamb-to-foundation step and 0.3 mm at the foundation-to-bay port.
 
 ## How it is played
 
-One wall comes off: the full back. It is one print, 285 × 7 × 189 mm, under the 310 × 300 × 315 mm allowance. Closed, its inner face is 0.45 mm behind the jambs and it does not occupy their volume. It pulls straight off on nominal 5.0 × 2.8 mm discs. There is no sill hook. The front, sides, porch, floors, and roofs stay. The back is not a brace, and the magnets are not what holds the house up. The roof bears on the fixed plates with the back off.
+One wall comes off: the full back. It is one print, 285 × 7 × 189 mm, under the 310 × 300 × 315 mm allowance. Closed, its inner face is 0.45 mm behind the jambs and it does not occupy their volume. It pulls straight off on nominal 5.0 × 2.8 mm discs. The rear strips lock down with a screw an adult removes first. There is no sill hook. This is not a safety validation. The front, sides, porch, floors, and roofs stay. The back is not a brace, and the magnets are not what holds the house up. The roof bears on the fixed plates with the back off.
 
 Two stair flights have treads, risers, and a spindle rail. The lower flight climbs from the entry to the first floor. The upper flight climbs from that floor to the attic. The wells are open. The hall wall stops short of the rear opening.
 

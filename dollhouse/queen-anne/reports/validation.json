@@ -97,7 +97,7 @@
     }
   ],
   "triangles": 407108,
-  "instance_count": 78,
+  "instance_count": 116,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,
@@ -113,5 +113,6 @@
       402.0,
       434.0
     ]
-  }
+  },
+  "note": "Pairwise rest volumes in this file are from the v6.4.0 shell. v6.5.0 ornament was checked against its hosts separately; sampled intersections were 0 mm3. See reports/rear-access.json and reports/landings.json."
 }

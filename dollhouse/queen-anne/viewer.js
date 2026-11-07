@@ -451,7 +451,7 @@
 
   function bootViewer(manifest, geometries) {
     var view = el('view');
-    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     if (THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.setClearColor(0x1c2228, 1);
@@ -525,6 +525,8 @@
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     state.camera = camera;
     state.controls = controls;
+    state.renderer = renderer;
+    state.scene = scene;
     controls.target.copy(center);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;

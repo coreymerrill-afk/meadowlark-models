@@ -22,6 +22,7 @@ from shapely.geometry import Point, Polygon, box as sbox, LineString
 from shapely.geometry.polygon import orient as orient_poly
 from shapely.ops import unary_union
 from PIL import Image, ImageDraw
+from integrate_upgrade import main as integrate_upgrade
 from trimesh.creation import box, cylinder
 from trimesh.transformations import rotation_matrix
 
@@ -2048,6 +2049,8 @@ def main():
     report = audits()
     manifest = write_all(report)
     write_review_exports(manifest)
+    # Fresh STLs only. integrate_upgrade cuts hosts once and must not be run again on its own output.
+    integrate_upgrade()
     print(json.dumps({"ok": report["ok"], "parts": len(manifest["parts"]), "fixtures": report["fixture_count"],
                       "size": manifest["assembled_size_mm"], "fails": report["failures"][:6]}))
     if not report["ok"]:

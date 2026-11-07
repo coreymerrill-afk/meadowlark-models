@@ -96,7 +96,7 @@
       ]
     },
     "qa5_walls_l1_v5.stl": {
-      "pose": "native STL, shortest axis already on Z",
+      "pose": "native STL, already inside the height allowance",
       "native_extents_mm": [
         281.0,
         181.5,
@@ -114,7 +114,7 @@
       ]
     },
     "qa5_walls_l2_v5.stl": {
-      "pose": "native STL, shortest axis already on Z",
+      "pose": "native STL, already inside the height allowance",
       "native_extents_mm": [
         281.0,
         181.5,
@@ -334,16 +334,16 @@
       "native_extents_mm": [
         285.0,
         7.0,
-        188.7
+        261.55
       ],
       "print_extents_mm": [
         285.0,
-        188.7,
+        261.55,
         7.0
       ],
       "margin_to_310x300x315_mm": [
         25.0,
-        111.3,
+        38.4,
         308.0
       ]
     },
@@ -620,19 +620,19 @@
     "qa5_gable_v5.stl": {
       "pose": "shortest axis on Z, corner at the origin",
       "native_extents_mm": [
-        170.38,
-        14.4,
-        188.0
+        168.0,
+        5.2,
+        160.0
       ],
       "print_extents_mm": [
-        170.38,
-        188.0,
-        14.4
+        168.0,
+        160.0,
+        5.2
       ],
       "margin_to_310x300x315_mm": [
-        139.6,
-        112.0,
-        300.6
+        142.0,
+        140.0,
+        309.8
       ]
     },
     "qa5_roof_rear_v5.stl": {
@@ -690,20 +690,20 @@
       ]
     },
     "qa5_turret_loft_v5.stl": {
-      "pose": "native STL, shortest axis already on Z",
+      "pose": "native STL, already inside the height allowance",
       "native_extents_mm": [
-        109.74,
-        110.01,
+        109.58,
+        109.86,
         91.5
       ],
       "print_extents_mm": [
-        109.74,
-        110.01,
+        109.58,
+        109.86,
         91.5
       ],
       "margin_to_310x300x315_mm": [
-        200.3,
-        190.0,
+        200.4,
+        190.1,
         223.5
       ]
     },
@@ -1192,7 +1192,727 @@
         282.0,
         310.0
       ]
+    },
+    "qa65_gable_verge_left.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        77.67,
+        5.1,
+        148.46
+      ],
+      "print_extents_mm": [
+        77.67,
+        148.46,
+        5.1
+      ],
+      "margin_to_310x300x315_mm": [
+        232.3,
+        151.5,
+        309.9
+      ]
+    },
+    "qa65_gable_verge_right.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        77.67,
+        5.1,
+        148.46
+      ],
+      "print_extents_mm": [
+        77.67,
+        148.46,
+        5.1
+      ],
+      "margin_to_310x300x315_mm": [
+        232.3,
+        151.5,
+        309.9
+      ]
+    },
+    "qa65_gable_arched_casing.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        66.0,
+        7.5,
+        84.59
+      ],
+      "print_extents_mm": [
+        66.0,
+        7.5,
+        84.59
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        292.5,
+        230.4
+      ]
+    },
+    "qa65_gable_sash.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        49.4,
+        2.5,
+        70.99
+      ],
+      "print_extents_mm": [
+        49.4,
+        2.5,
+        70.99
+      ],
+      "margin_to_310x300x315_mm": [
+        260.6,
+        297.5,
+        244.0
+      ]
+    },
+    "qa65_gable_fan_kingpost.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        41.6,
+        8.8,
+        57.2
+      ],
+      "print_extents_mm": [
+        41.6,
+        8.8,
+        57.2
+      ],
+      "margin_to_310x300x315_mm": [
+        268.4,
+        291.2,
+        257.8
+      ]
+    },
+    "qa65_gable_cornice.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        178.0,
+        9.6,
+        13.65
+      ],
+      "print_extents_mm": [
+        178.0,
+        9.6,
+        13.65
+      ],
+      "margin_to_310x300x315_mm": [
+        132.0,
+        290.4,
+        301.4
+      ]
+    },
+    "qa65_porch_frieze_1.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        66.0,
+        4.4,
+        34.6
+      ],
+      "print_extents_mm": [
+        66.0,
+        4.4,
+        34.6
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        295.6,
+        280.4
+      ]
+    },
+    "qa65_porch_frieze_2.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        66.0,
+        4.4,
+        34.6
+      ],
+      "print_extents_mm": [
+        66.0,
+        4.4,
+        34.6
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        295.6,
+        280.4
+      ]
+    },
+    "qa65_porch_frieze_3.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        64.0,
+        4.4,
+        34.6
+      ],
+      "print_extents_mm": [
+        64.0,
+        4.4,
+        34.6
+      ],
+      "margin_to_310x300x315_mm": [
+        246.0,
+        295.6,
+        280.4
+      ]
+    },
+    "qa65_porch_balustrade_1.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        66.18,
+        8.43,
+        28.5
+      ],
+      "print_extents_mm": [
+        66.18,
+        8.43,
+        28.5
+      ],
+      "margin_to_310x300x315_mm": [
+        243.8,
+        291.6,
+        286.5
+      ]
+    },
+    "qa65_porch_balustrade_2.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        66.0,
+        5.2,
+        28.5
+      ],
+      "print_extents_mm": [
+        66.0,
+        5.2,
+        28.5
+      ],
+      "margin_to_310x300x315_mm": [
+        244.0,
+        294.8,
+        286.5
+      ]
+    },
+    "qa65_porch_balustrade_3.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        64.18,
+        8.35,
+        28.5
+      ],
+      "print_extents_mm": [
+        64.18,
+        8.35,
+        28.5
+      ],
+      "margin_to_310x300x315_mm": [
+        245.8,
+        291.6,
+        286.5
+      ]
+    },
+    "qa65_turret_belt_45.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_90.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "print_extents_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        265.6,
+        294.8,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_135.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_180.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        5.2,
+        44.39,
+        8.0
+      ],
+      "print_extents_mm": [
+        5.2,
+        44.39,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        304.8,
+        255.6,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_225.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_270.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "print_extents_mm": [
+        44.39,
+        5.2,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        265.6,
+        294.8,
+        307.0
+      ]
+    },
+    "qa65_turret_belt_315.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "print_extents_mm": [
+        33.51,
+        33.51,
+        8.0
+      ],
+      "margin_to_310x300x315_mm": [
+        276.5,
+        266.5,
+        307.0
+      ]
+    },
+    "qa65_turret_window_middle_180.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "print_extents_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        304.5,
+        268.0,
+        259.0
+      ]
+    },
+    "qa65_turret_window_middle_225.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "print_extents_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        284.1,
+        274.7,
+        259.0
+      ]
+    },
+    "qa65_turret_window_middle_270.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "print_extents_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        278.0,
+        294.5,
+        259.0
+      ]
+    },
+    "qa65_turret_window_middle_315.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "print_extents_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        284.7,
+        274.1,
+        259.0
+      ]
+    },
+    "qa65_turret_window_loft_180.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "print_extents_mm": [
+        5.5,
+        32.0,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        304.5,
+        268.0,
+        259.0
+      ]
+    },
+    "qa65_turret_window_loft_225.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "print_extents_mm": [
+        25.88,
+        25.31,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        284.1,
+        274.7,
+        259.0
+      ]
+    },
+    "qa65_turret_window_loft_270.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "print_extents_mm": [
+        32.0,
+        5.5,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        278.0,
+        294.5,
+        259.0
+      ]
+    },
+    "qa65_turret_window_loft_315.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "print_extents_mm": [
+        25.31,
+        25.88,
+        56.0
+      ],
+      "margin_to_310x300x315_mm": [
+        284.7,
+        274.1,
+        259.0
+      ]
+    },
+    "qa65_roof_ridge_crest.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        54.6,
+        4.4,
+        25.8
+      ],
+      "print_extents_mm": [
+        54.6,
+        4.4,
+        25.8
+      ],
+      "margin_to_310x300x315_mm": [
+        255.4,
+        295.6,
+        289.2
+      ]
+    },
+    "qa65_cap_capture_left.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        10.5,
+        5.6,
+        155.0
+      ],
+      "print_extents_mm": [
+        10.5,
+        155.0,
+        5.6
+      ],
+      "margin_to_310x300x315_mm": [
+        299.5,
+        145.0,
+        309.4
+      ]
+    },
+    "qa65_cap_capture_right.stl": {
+      "pose": "shortest axis on Z, corner at the origin",
+      "native_extents_mm": [
+        10.5,
+        5.6,
+        155.0
+      ],
+      "print_extents_mm": [
+        10.5,
+        155.0,
+        5.6
+      ],
+      "margin_to_310x300x315_mm": [
+        299.5,
+        145.0,
+        309.4
+      ]
+    },
+    "qa65_adult_screw_back_l.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        4.4,
+        5.1,
+        4.27
+      ],
+      "print_extents_mm": [
+        4.4,
+        5.1,
+        4.27
+      ],
+      "margin_to_310x300x315_mm": [
+        305.6,
+        294.9,
+        310.7
+      ]
+    },
+    "qa65_adult_screw_back_r.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        4.4,
+        5.1,
+        4.27
+      ],
+      "print_extents_mm": [
+        4.4,
+        5.1,
+        4.27
+      ],
+      "margin_to_310x300x315_mm": [
+        305.6,
+        294.9,
+        310.7
+      ]
+    },
+    "qa65_retainer_jl1.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        8.5,
+        2.9,
+        62.1
+      ],
+      "print_extents_mm": [
+        8.5,
+        2.9,
+        62.1
+      ],
+      "margin_to_310x300x315_mm": [
+        301.5,
+        297.1,
+        252.9
+      ]
+    },
+    "qa65_adult_screw_jl1.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "print_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "margin_to_310x300x315_mm": [
+        305.6,
+        290.7,
+        310.7
+      ]
+    },
+    "qa65_retainer_jl2.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        8.5,
+        2.9,
+        62.1
+      ],
+      "print_extents_mm": [
+        8.5,
+        2.9,
+        62.1
+      ],
+      "margin_to_310x300x315_mm": [
+        301.5,
+        297.1,
+        252.9
+      ]
+    },
+    "qa65_adult_screw_jl2.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "print_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "margin_to_310x300x315_mm": [
+        305.6,
+        290.7,
+        310.7
+      ]
+    },
+    "qa65_retainer_jr1.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        12.35,
+        2.9,
+        62.1
+      ],
+      "print_extents_mm": [
+        12.35,
+        2.9,
+        62.1
+      ],
+      "margin_to_310x300x315_mm": [
+        297.6,
+        297.1,
+        252.9
+      ]
+    },
+    "qa65_adult_screw_jr1.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "print_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "margin_to_310x300x315_mm": [
+        305.6,
+        290.7,
+        310.7
+      ]
+    },
+    "qa65_retainer_jr2.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        12.35,
+        2.9,
+        62.1
+      ],
+      "print_extents_mm": [
+        12.35,
+        2.9,
+        62.1
+      ],
+      "margin_to_310x300x315_mm": [
+        297.6,
+        297.1,
+        252.9
+      ]
+    },
+    "qa65_adult_screw_jr2.stl": {
+      "pose": "native STL, already inside the height allowance",
+      "native_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "print_extents_mm": [
+        4.4,
+        9.3,
+        4.27
+      ],
+      "margin_to_310x300x315_mm": [
+        305.6,
+        290.7,
+        310.7
+      ]
     }
   },
-  "note": "Margins are envelope minus the printed bounding box. A positive margin is unused bed. No slicer was run."
+  "note": "Margins are envelope minus the printed bounding box. Caps and strips are on their short axis. No slicer was run. The house is not a finished print kit."
 }
