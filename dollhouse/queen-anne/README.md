@@ -1,10 +1,10 @@
-# Queen Anne Playhouse — v6.1.0
+# Queen Anne Playhouse — v6.2.0
 
 A 1:24 house drawn from the approved picture at `concept/approved-direction.jpg`. That picture is the visual direction. It is not a measured survey and it is not a render of this CAD. The picture's open view is a side cutaway. This house opens at the back.
 
-The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes, with rake bargeboards and an owl. The porch wraps the turret. Shingles are thin scallops in the mesh. The front and the right side are solid walls with clear sash openings.
+The closed house is about as wide as the spire is tall. An octagonal turret stands on the left. A street gable, in sage, sits in front of the slate slopes. The porch wraps the turret. The front slope carries overlapping fish-scale courses. The rear slope and the cone still use the smaller scallop. Street windows have curved hoods. One upper window has a pierced fan, a separate sash, room-side keepers, and headed pins. The other street windows keep a simpler arch. Side windows have no crown.
 
-Shingles on the slopes and the cone are small scallops in the mesh, with a fraction of a millimetre of relief. A stepped crown and four window crowns are separate ivory prints, seated against the siding without occupying it. The ground floor has a projecting bay. The attic center, above the back wall, is open between two side pads so a hand can reach it from the rear; the upper stair is the route onto that floor, and the turret loft is the same level.
+The ground floor has a projecting bay. The attic center, above the back wall, is open between two side pads so a hand can reach it from the rear. The upper stair is the route onto that floor. The turret loft is the same level. A covered chase runs in the fixed ceiling plates and the foundation to a port on the service bay. It does not enter the removable back. The joint gaps are 0.4 mm at the jamb-to-foundation step and 0.3 mm at the foundation-to-bay port.
 
 ## How it is played
 
@@ -18,7 +18,7 @@ Ten fixtures: eight ceiling pucks and two porch lanterns, on the fixed frame or 
 
 ## Ornament
 
-Balusters, bargeboard piercings, blossoms, and scallop edges are thin. A 0.2 mm nozzle is the setting for that ornament. Structural walls are not held to that same minimum. None of it is claimed durable or safe.
+Balusters, verge scrolls, and shingle edges are thin. A 0.2 mm nozzle is something some machines can take. It is not confirmed as the nozzle on hand. Nozzle diameter, layer height, and extrusion width are different numbers. None of this is claimed durable or safe. The headed pin and the 1.7 mm verge webs are untested until a coupon is printed.
 
 ## Checked
 

@@ -1,7 +1,7 @@
 {
   "ok": true,
   "failures": [],
-  "rest_pairs": 52,
+  "rest_pairs": 67,
   "worst_mm3": 0.0,
   "worst_pair": null,
   "roofs": [
@@ -96,8 +96,8 @@
       "seat_gap_mm": 0.0
     }
   ],
-  "triangles": 516576,
-  "instance_count": 56,
+  "triangles": 473010,
+  "instance_count": 61,
   "fixture_count": 10,
   "assembly_mm": {
     "x": 459.9,

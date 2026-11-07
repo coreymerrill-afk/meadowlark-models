@@ -17,7 +17,9 @@ import os
 
 import numpy as np
 import trimesh as tm
-from shapely.geometry import Point, Polygon, box as sbox
+import manifold3d as md
+from shapely.geometry import Point, Polygon, box as sbox, LineString
+from shapely.geometry.polygon import orient as orient_poly
 from shapely.ops import unary_union
 from trimesh.creation import box, cylinder
 from trimesh.transformations import rotation_matrix
@@ -174,13 +176,26 @@ def column(h):
 
 
 def bracket_mesh():
-    # A cyma curve, extruded. This is the carved bracket, not an L of boxes.
+    """Cyma porch bracket. The spandrel opening goes through the plate."""
     pts = [(0, 0), (0, 20), (3.6, 20), (3.6, 15.5)]
     for i in range(8):
         t = i / 7
         pts.append((3.6 + 13 * (t ** 1.35), 15.2 - 12.4 * math.sin(t * math.pi / 2)))
     pts += [(16.2, 1.6), (16.2, 0)]
-    return extrude(Polygon(pts), 4.2)
+    plate = Polygon(pts)
+    opening = Polygon([(6.0, 2.2), (6.0, 7.0), (8.4, 5.4), (11.0, 3.5), (13.0, 2.4), (10.8, 2.2)])
+    shape = plate.difference(opening)
+    if shape.geom_type != "Polygon" or len(shape.interiors) != 1:
+        raise RuntimeError(f"bracket opening failed {shape.geom_type}")
+    return extrude(shape, 4.2)
+
+
+def fish_tile():
+    """One fish-scale. The round nose is the exposed butt."""
+    body = sbox(-2.7, 0.2, 2.7, 4.8)
+    nose = Point(0, 0.2).buffer(2.55, resolution=6)
+    shape = body.union(nose).intersection(sbox(-2.9, -0.15, 2.9, 5.4))
+    return extrude(shape, 1.05)
 
 
 def scallop():
@@ -200,11 +215,20 @@ def tiny_scallop():
 
 
 def bargeboard(length=168.0):
-    bar = sbox(0, 0, length, 16)
-    bites = [Point(x, 0).buffer(5.4, resolution=5) for x in np.arange(9, length - 4, 13)]
-    pierced = [Point(x, 9).buffer(2.0, resolution=5) for x in np.arange(16, length - 8, 15)]
-    shape = bar.difference(unary_union(bites + pierced))
-    return extrude(shape, 2.6)
+    """Connected verge. Scroll openings, not a row of drilled holes."""
+    bar = sbox(0, 1.6, length, 18)
+    holes = []
+    x = 12.0
+    while x < length - 18:
+        holes.append(Polygon([
+            (x, 6.4), (x + 3.4, 12.2), (x + 8.0, 10.6), (x + 6.4, 7.2), (x + 2.2, 6.6),
+        ]).buffer(0.65))
+        x += 16.5
+    bites = [Point(float(v), 1.6).buffer(3.2, resolution=6) for v in np.arange(8, length - 4, 14)]
+    shape = bar.difference(unary_union(holes + bites))
+    if shape.geom_type != "Polygon":
+        raise RuntimeError(f"verge split into {shape.geom_type}")
+    return extrude(shape, 2.4)
 
 
 def rake_board(x0, z0, x1, z1, y, into):
@@ -221,15 +245,17 @@ def rake_board(x0, z0, x1, z1, y, into):
 
 SCALLOP = None
 TINY = None
+FISH = None
 BRACKET = None
 SPINDLE = None
 
 
 def cached():
-    global SCALLOP, TINY, BRACKET, SPINDLE
+    global SCALLOP, TINY, FISH, BRACKET, SPINDLE
     if SCALLOP is None:
         SCALLOP = cleanup(scallop(), "scallop")
         TINY = cleanup(tiny_scallop(), "tiny")
+        FISH = cleanup(fish_tile(), "fish")
         BRACKET = cleanup(bracket_mesh(), "bracket")
         SPINDLE = cleanup(spindle(), "spindle")
 
@@ -255,22 +281,28 @@ def slope_slab(x0, x1, y0, z0, y1, z1, thick=5.5):
     ])
 
 
-def shingle_field(x0, x1, y0, z0, y1, z1):
-    """Individual staggered scallops lying on the slope, embedded into it."""
+def shingle_field(x0, x1, y0, z0, y1, z1, kind="scallop"):
+    """Staggered shingles embedded in the slope. Fish scales point downhill."""
     cached()
     slope, normal = slope_frame(y0, z0, y1, z1)
     length = float(np.linalg.norm([0, y1 - y0, z1 - z0]))
     across = np.array([1.0, 0.0, 0.0])
+    fish = kind == "fish"
+    tile = FISH if fish else SCALLOP
+    along = slope
+    embed = 0.40 if fish else 0.22
+    pitch_x = 9.0 if fish else 7.2
+    pitch_s = 4.4 if fish else 4.6
     pieces = []
     course = 0
-    s = 1.5
+    s = 2.0
     while s < length - 8:
-        x = x0 + 2 + (4.6 if course % 2 else 0)
+        x = x0 + 2 + ((pitch_x * 0.5) if course % 2 else 0)
         while x < x1 - 6:
-            origin = np.array([x, y0, z0], float) + slope * s - normal * 0.22
-            pieces.append(_xform(SCALLOP, origin, across, slope, normal))
-            x += 7.2
-        s += 4.6
+            origin = np.array([x, y0, z0], float) + slope * s - normal * embed
+            pieces.append(_xform(tile, origin, across, along, normal))
+            x += pitch_x
+        s += pitch_s
         course += 1
     return pieces
 
@@ -304,16 +336,65 @@ def brick_skin(x0, y0, x1, y1, z1):
     return [b for b in bands if b]
 
 
-def pediment(x, y, z, w):
-    peak = z + 8
-    return [
-        hull([(x, y, z), (x + w, y, z), (x + w / 2, y, peak), (x, y - 2.4, z), (x + w, y - 2.4, z), (x + w / 2, y - 2.4, peak)]),
-        box_at(x - 1.5, y - 2.8, z - 1.4, x + w + 1.5, y + 0.6, z + 1.2),
+def plate_xz(poly, y_face, depth):
+    """Extrude a profile drawn in XZ. Thickness grows toward -Y from y_face."""
+    poly = orient_poly(poly, 1)
+    if poly.geom_type != "Polygon":
+        raise RuntimeError(f"profile is {poly.geom_type}")
+    contours = [np.array(poly.exterior.coords)[:-1], *[np.array(ring.coords)[:-1] for ring in poly.interiors]]
+    raw = md.CrossSection(contours).extrude(depth).to_mesh()
+    mesh = tm.Trimesh(np.asarray(raw.vert_properties)[:, :3], np.asarray(raw.tri_verts), process=True)
+    verts = np.array(mesh.vertices)
+    mesh.vertices = np.column_stack([verts[:, 0], y_face - verts[:, 2], verts[:, 1]])
+    if mesh.volume < 0:
+        mesh.invert()
+    return mesh
+
+
+def arch_band(x, z, w, rise, width):
+    t = np.linspace(math.pi, 0.0, 40)
+    cx = x + w / 2.0
+    arc = np.column_stack([cx + (w * 0.52) * np.cos(t), z + rise * np.sin(t)])
+    return LineString(arc).buffer(width / 2.0, cap_style=2)
+
+
+def pediment(x, y, z, w, kind="arch"):
+    """Curved hood. kind=fan adds pierced lights and a short spindle rail."""
+    rise = max(8.0, min(14.0, w * 0.28))
+    parts = [
+        plate_xz(arch_band(x, z, w, rise, 2.8), y + 0.2, 3.4),
+        plate_xz(arch_band(x + 1.4, z + 1.6, w - 2.8, rise * 0.62, 1.35), y - 2.2, 1.7),
     ]
+    if kind == "fan" and w >= 28:
+        t = np.linspace(math.pi, 0.0, 42)
+        cx = x + w / 2.0
+        outer = np.column_stack([cx + (w * 0.46) * np.cos(t), z + 1.2 + rise * 0.78 * np.sin(t)])
+        fan = Polygon([(x + 1.5, z + 1.2), (x + w - 1.5, z + 1.2), *outer.tolist()]).buffer(0)
+        holes = []
+        for frac in (-0.64, -0.32, 0.0, 0.32, 0.64):
+            px = cx + frac * w * 0.34
+            span = max(0.08, 1.0 - (frac * 1.2) ** 2)
+            top = z + 2.4 + rise * 0.62 * math.sqrt(span)
+            holes.append(LineString([(px, z + 3.4), (cx * 0.82 + px * 0.18, top)]).buffer(0.85))
+        fan = fan.difference(unary_union(holes))
+        if fan.geom_type != "Polygon":
+            raise RuntimeError(f"fan hood split {fan.geom_type}")
+        parts.append(plate_xz(fan, y - 0.4, 2.2))
+        rail = z + rise + 1.2
+        parts.append(box_at(x - 1, y - 2.8, rail, x + w + 1, y + 0.8, rail + 2.0))
+        parts.append(box_at(x - 3, y - 4.2, rail + 8.2, x + w + 3, y + 0.6, rail + 10.6))
+        for px in np.linspace(x + 2.5, x + w - 2.5, 7):
+            sp = spindle(7.6)
+            sp.apply_translation((float(px), y - 1.2, rail + 1.0))
+            parts.append(sp)
+    return parts
 
 
-def window_pack(face, x, y, z, w, h):
-    """Layered casing, sill, hood, muntins. The pane itself is a hole in the wall."""
+def window_pack(face, x, y, z, w, h, hood="arch"):
+    """Layered casing, sill, and a curved hood. The pane is a hole already cut in the wall.
+    The front lip is added after that cut, so the cutter cannot erase it.
+    hood=fan is the one ornate street window. hood=plain is a side window with no crown.
+    """
     parts = []
     if face == "-y":
         parts += [
@@ -321,16 +402,24 @@ def window_pack(face, x, y, z, w, h):
             box_at(x - 3.4, y - 2.6, z + h - 1.2, x + w + 3.4, y + 0.8, z + h + 3.2),
             box_at(x - 3.2, y - 2.6, z, x + 1.5, y + 0.8, z + h),
             box_at(x + w - 1.5, y - 2.6, z, x + w + 3.2, y + 0.8, z + h),
-            box_at(x, y - 2.2, z + h * 0.47, x + w, y + 0.6, z + h * 0.47 + 1.8),
-            box_at(x + w * 0.47, y - 2.0, z + 1.4, x + w * 0.53, y + 0.5, z + h * 0.47),
-            box_at(x + w * 0.47, y - 2.0, z + h * 0.47 + 1.8, x + w * 0.53, y + 0.5, z + h - 1.2),
-            # outer architrave and a deeper sill nosing, overlapping the casing
             box_at(x - 5.4, y - 4.6, z - 5.2, x + w + 5.4, y - 1.2, z - 2.0),
             box_at(x - 5.2, y - 3.8, z - 1.2, x - 2.2, y + 0.2, z + h + 1.4),
             box_at(x + w + 2.2, y - 3.8, z - 1.2, x + w + 5.2, y + 0.2, z + h + 1.4),
             box_at(x - 4.6, y - 3.4, z + h + 1.0, x + w + 4.6, y + 0.2, z + h + 3.6),
+            # Front stop. It overlaps the opening and is not in the wall cutter.
+            box_at(x, y - 0.9, z, x + 1.15, y + 0.55, z + h),
+            box_at(x + w - 1.15, y - 0.9, z, x + w, y + 0.55, z + h),
+            box_at(x, y - 0.9, z + h - 1.15, x + w, y + 0.55, z + h),
+            box_at(x, y - 0.9, z, x + w, y + 0.55, z + 1.15),
         ]
-        parts += pediment(x - 2, y, z + h + 3.0, w + 4)
+        if hood != "fan":
+            parts += [
+                box_at(x, y - 2.2, z + h * 0.47, x + w, y + 0.6, z + h * 0.47 + 1.8),
+                box_at(x + w * 0.47, y - 2.0, z + 1.4, x + w * 0.53, y + 0.5, z + h * 0.47),
+                box_at(x + w * 0.47, y - 2.0, z + h * 0.47 + 1.8, x + w * 0.53, y + 0.5, z + h - 1.2),
+            ]
+        if hood != "plain":
+            parts += pediment(x - 2, y, z + h + 2.4, w + 4, "fan" if hood == "fan" else "arch")
     elif face == "+x":
         parts += [
             box_at(x - 0.8, y - 3.2, z - 3.4, x + 3.0, y + w + 3.2, z + 1.4),
@@ -400,6 +489,7 @@ def foundations():
     main = union([
         box_at(MX0, PORCH_FRONT, 3, MX1, MY1, BASE),
         box_at(MX0 + 0.8, PORCH_FRONT - 3, BASE - 5.5, MX1 + 3, MY1 + 3, BASE - 1.4),
+        box_at(394, 290, 8, 410, 301.7, 15.4),
         *brick_skin(MX0 + 2.2, PORCH_FRONT, MX1, MY1, BASE),
     ])
     deck = []
@@ -407,8 +497,14 @@ def foundations():
     while y < MY0 - 4:
         deck.append(box_at(MX0 + 8, y, BASE - 0.6, 400, y + 3.2, BASE - 0.15))
         y += 7
-    publish("qa5_foundation_v5", cleanup(union([main, *deck]), "foundation"),
-            "Brick base and the wood porch deck. Courses are in the mesh.", "foundation", "structure", BRICK)
+    chase = [
+        box_at(221.4, 278.4, 14.0, 224.6, 281.6, 16.3),
+        box_at(221.4, 278.4, 10.4, 402, 281.6, 13.2),
+        box_at(396.2, 278.4, 10.4, 403.6, 301.9, 13.2),
+    ]
+    publish("qa5_foundation_v5", cleanup(difference(union([main, *deck]), chase), "foundation"),
+            "Brick base, porch deck, and a covered chase to the service bay. The chase is a void in this solid.",
+            "foundation", "structure", BRICK)
     turret = union([
         prism(octagon(TX, TY, TR + 42), 0, BASE),
         prism(octagon(TX, TY, TR + 48), BASE - 5.5, BASE - 1.4),
@@ -426,7 +522,9 @@ def floors():
             ribs.append(box_at(MX0 + 16, y, z - 0.55, MX1 - 20, y + 1.3, z + 0.15))
             y += 9
         mesh = union([mesh, *ribs])
-        return cleanup(difference(mesh, [box_at(*well)]), "floor")
+        bore = cylinder(radius=1.55, height=FLOOR_T + 1.2, sections=12)
+        bore.apply_translation((223, 280, z - FLOOR_T / 2))
+        return cleanup(difference(mesh, [box_at(*well), bore]), "floor")
     well1 = (S1["x0"] - 4, S1["y0"] - 4, L2 - FLOOR_T - 1, S1["x1"] + 4, S1["y1"] + 8, L2 + 1)
     well2 = (S2["x0"] - 4, S2["y0"] - 6, L3 - FLOOR_T - 1, S2["x1"] + 4, S2["y1"] + 6, L3 + 1)
     publish("qa5_floor_l2_v5", slab(L2, well1), "First floor. Opening is the lower stair.", "floor-l2", "floor", WOOD, explode=[0, 0, 10])
@@ -465,6 +563,30 @@ def fixed_walls():
             cuts.append(box_at(S1["x0"] - 6, S1["y0"] - 6, zp - 1, S1["x1"] + 6, S1["y1"] + 10, z1 + 1))
         else:
             cuts.append(box_at(S2["x0"] - 6, S2["y0"] - 8, zp - 1, S2["x1"] + 6, S2["y1"] + 8, z1 + 1))
+        # Chase inside the plate, then down the left jamb. Opens on the jamb underside.
+        mid = zp + PLATE * 0.5
+        spots = [(280, 175), (390, 155)] if name == "l1" else [(290, 185), (470, 160), (400, 270)]
+        for x, y in spots:
+            bore = cylinder(radius=1.45, height=5.4, sections=12)
+            bore.apply_translation((x, y, zp + 2.4))
+            cuts.append(bore)
+            cuts.append(box_at(x - 1.3, min(y, 280), mid - 1.3, x + 1.3, max(y, 280), mid + 1.3))
+        cuts.append(box_at(221.7, 278.7, mid - 1.3, max(s[0] for s in spots) + 1.3, 281.3, mid + 1.3))
+        drop = cylinder(radius=1.45, height=mid - (floor + 0.15), sections=12)
+        drop.apply_translation((223, 280, (mid + floor + 0.15) / 2))
+        cuts.append(drop)
+        # Shelf and locating pin are part of this solid. They overlap the jamb.
+        # Bottom ledge only on the ground storey. The panel is one piece from that floor up,
+        # so a ledge at the upper floor would sit inside the panel.
+        if name == "l1":
+            parts.append(union([
+                box_at(MX0 + 7, JAMB_BACK - 4, floor + 0.15, MX0 + 17, JAMB_BACK + 0.3, floor + 6),
+                box_at(MX0 + 7, JAMB_BACK - 1, floor + 0.15, MX0 + 17, JAMB_BACK + 5.5, floor + FIT_GAP),
+            ]))
+        pin = cylinder(radius=1.35, height=10, sections=16)
+        pin.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+        pin.apply_translation((MX0 + 12, JAMB_BACK + 1.5, floor + 36))
+        parts.append(pin)
         return cleanup(difference(union(parts), cuts), name)
     publish("qa5_walls_l1_v5", shell(L1, "l1"),
             "Fixed ceiling, hall wall, and the left rear jamb. The rear opening is clear.",
@@ -488,19 +610,21 @@ def fixed_walls():
 
 
 def lights(floor, spots):
-    void = cylinder(radius=2.6, height=2.6, sections=12)
-    void.apply_translation((0, 0, 2.0))
+    void = cylinder(radius=2.6, height=3.2, sections=12)
+    void.apply_translation((0, 0, 1.6))
+    feed = cylinder(radius=1.15, height=4.4, sections=12)
+    feed.apply_translation((0, 0, 4.6))
     slot = box_at(-3, -0.5, -0.2, -0.6, 0.5, 1.3)
     housing = cleanup(difference(revolve([
         [0, 0], [6.2, 0], [6.2, 1.0], [4.6, 2.6], [2.4, 6.4], [0, 6.4],
-    ], 16), [void, slot, move(slot, 4.2, 0, 0)]), "puck")
+    ], 16), [void, feed, slot, move(slot, 4.2, 0, 0)]), "puck")
     name = "qa5_puck_v5"
     if name not in CATALOG:
         local = housing.copy()
         origin = local.bounds[0].copy()
         local.apply_translation(-origin)
-        add_part(name, local, "Ceiling puck on the fixed plate. 6 mm cavity is provisional, not a measured LED.")
-    top = floor + CLEAR - 0.45
+        add_part(name, local, "Ceiling puck. Cavity opens down. A 2.3 mm feed leaves the top. The diode is not measured.")
+    top = floor + CLEAR - 0.30
     storey = 1 if floor == L1 else (2 if floor == L2 else 3)
     for room, x, y in spots:
         world = move(housing, x, y, top - float(housing.bounds[1][2]))
@@ -529,9 +653,17 @@ def facade(bounds, face, windows, flowers=False):
         cuts, trim = [], []
         for win in windows:
             cuts.append(box_at(win["x"], y1 - 8, win["z"], win["x"] + win["w"], y1 + 2, win["z"] + win["h"]))
-            trim += window_pack("-y", win["x"], y1 - 3.4, win["z"], win["w"], win["h"])
+            if win.get("hood") == "fan":
+                cuts += screw_sockets(win["x"], y1 - 3.4, win["z"], win["w"], win["h"])
+            trim += window_pack("-y", win["x"], y1 - 3.4, win["z"], win["w"], win["h"], win.get("hood", "arch"))
             if flowers:
                 trim += flower_box(win["x"] + 2, y1 - 3.4, win["z"] - 12, win["w"] - 4)
+        if z1 > L3:
+            for px in (230, 303, 379, 448):
+                socket = cylinder(radius=2.1, height=10, sections=12)
+                socket.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+                socket.apply_translation((px, y1 - 1.2, L3 - 4))
+                cuts.append(socket)
         zc = [z0 + (z1 - z0) * t for t in (0.25, 0.55, 0.82)]
         for sx in (x0 + 6, x1 - 6):
             cuts += mag_slots((sx, y1), (0, -1), zc)
@@ -576,6 +708,60 @@ def mag_slots(origin, into, zs):
     return cuts
 
 
+def screw_sockets(x, y, z, w, h):
+    """Blind holes in the street wall for the headed pins. Axis is Y."""
+    cuts = []
+    for cx in (x - 1.0, x + w + 1.0):
+        hole = cylinder(radius=1.05, height=5.2, sections=12)
+        hole.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+        hole.apply_translation((cx, y + 2.6, z + h * 0.5))
+        cuts.append(hole)
+    return cuts
+
+
+def publish_capture(x, y, z, w, h, tag):
+    """Separate sash, two keepers, two headed pins. The head, not peg friction, stops withdrawal."""
+    def frame_box():
+        outer = box_at(x + 1.7, y + 0.95, z + 1.7, x + w - 1.7, y + 3.45, z + h - 1.7)
+        inner = box_at(x + 3.7, y + 0.4, z + 3.7, x + w - 3.7, y + 4.0, z + h - 3.7)
+        rails = [
+            box_at(x + 3.5, y + 0.95, z + h * 0.48, x + w - 3.5, y + 3.45, z + h * 0.48 + 2.2),
+            box_at(x + w * 0.33, y + 0.95, z + 3.5, x + w * 0.33 + 1.4, y + 3.45, z + h * 0.48),
+            box_at(x + w * 0.66, y + 0.95, z + 3.5, x + w * 0.66 + 1.4, y + 3.45, z + h - 3.5),
+        ]
+        return cleanup(union([difference(outer, [inner]), *rails]), "sash " + tag)
+
+    def keeper(side):
+        cx = x - 1.0 if side < 0 else x + w + 1.0
+        body = box_at(cx - 2.2, y + 4.7, z + 8, cx + 2.2, y + 6.5, z + h - 8)
+        lip_x0, lip_x1 = (cx, x + 3.4) if side < 0 else (x + w - 3.4, cx)
+        lip = box_at(lip_x0, y + 3.85, z + 8, lip_x1, y + 4.95, z + h - 8)
+        hole = cylinder(radius=1.35, height=5.4, sections=16)
+        hole.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+        hole.apply_translation((cx, y + 4.5, z + h * 0.5))
+        return cleanup(difference(union([body, lip]), [hole]), "keeper " + tag)
+
+    def pin(cx):
+        shaft = cylinder(radius=0.75, height=5.6, sections=12)
+        shaft.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+        shaft.apply_translation((cx, y + 4.3, z + h * 0.5))
+        head = cylinder(radius=1.85, height=1.15, sections=14)
+        head.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+        head.apply_translation((cx, y + 7.35, z + h * 0.5))
+        return cleanup(union([shaft, head]), "pin " + tag)
+
+    publish(f"qa5_sash_{tag}_v5", frame_box(),
+            "Removable sash. 0.4 mm behind the front stop. Clear lights, no glass.",
+            f"sash-{tag}", "sash", IVORY, explode=[0, -12, 0])
+    for side, name in ((-1, "l"), (1, "r")):
+        publish(f"qa5_keeper_{tag}_{name}_v5", keeper(side),
+                "Room-side keeper. The lip captures the sash. Pull the pin, then this bar, then the sash.",
+                f"keeper-{tag}-{name}", "fastener", WOOD_D, explode=[0, 16, 0])
+        publish(f"qa5_pin_{tag}_{name}_v5", pin(x - 1.0 if side < 0 else x + w + 1.0),
+                "Headed pin. The head is larger than the keeper hole. Friction of the shaft is not the lock. Untested.",
+                f"pin-{tag}-{name}", "fastener", BRASS, explode=[0, 24, 0])
+
+
 def ground_front():
     """Fixed street wall behind the porch. A straight pull would hit the porch,
     so everyday play is the side wall. The door sits in the opening."""
@@ -596,12 +782,12 @@ def ground_front():
     # Projecting bay, welded to the street wall. Clears the porch posts.
     bay = box_at(432, y1 - 16, L1 + 16, 488, y1 + 0.6, L1 + 84)
     body.append(bay)
-    wins = [{"x": 248, "z": L1 + 24, "w": 34, "h": 60}]
+    wins = [{"x": 248, "z": L1 + 24, "w": 34, "h": 60, "hood": "arch"}]
     door = {"x": 368, "z": L1 + 1.2, "w": 34, "h": 76}
     cuts, trim = [], []
     for win in wins:
         cuts.append(box_at(win["x"], y1 - 10, win["z"], win["x"] + win["w"], y1 + 2, win["z"] + win["h"]))
-        trim += window_pack("-y", win["x"], y1 - 3.6, win["z"], win["w"], win["h"])
+        trim += window_pack("-y", win["x"], y1 - 3.6, win["z"], win["w"], win["h"], win.get("hood", "arch"))
         trim += flower_box(win["x"] + 1, y1 - 3.6, win["z"] - 11, win["w"] - 2)
     cuts.append(box_at(door["x"], y1 - 10, door["z"], door["x"] + door["w"], y1 + 2, door["z"] + door["h"]))
     trim += [
@@ -610,11 +796,11 @@ def ground_front():
         box_at(door["x"] + door["w"] + 0.4, y1 - 4.6, door["z"], door["x"] + door["w"] + 3.4, y1 + 0.4, door["z"] + door["h"] + 2),
         box_at(door["x"] - 6, y1 - 6, door["z"] + door["h"], door["x"] + door["w"] + 6, y1 + 0.8, door["z"] + door["h"] + 4),
     ]
-    trim += pediment(door["x"] - 4, y1 - 1, door["z"] + door["h"] + 3.5, door["w"] + 8)
+    trim += pediment(door["x"] - 4, y1 - 1, door["z"] + door["h"] + 3.5, door["w"] + 8, "arch")
     # baseboard on the room side of the street wall
     trim.append(box_at(x0 + 6, y1 - 0.6, z0 + 0.4, x1 - 6, y1 + 2.6, z0 + 7.5))
     cuts.append(box_at(442, y1 - 20, L1 + 30, 478, y1 + 2, L1 + 76))
-    trim += window_pack("-y", 442, y1 - 16, L1 + 30, 36, 46)
+    trim += window_pack("-y", 442, y1 - 16, L1 + 30, 36, 46, "arch")
     mesh = cleanup(union([difference(union(body + skin + belt), cuts), *trim]), "ground front")
     publish("qa5_front_ground_v5", mesh,
             "Ground floor street wall. Fixed, because the porch is in front of it. Flower boxes and the door casing are in the mesh.",
@@ -634,18 +820,29 @@ def facades():
     ground_front()
     # Upper street wall is fixed. The 0.65 mm seam is the belt at the floor line.
     z0, z1 = L2 + 0.45, L3 + 10
-    wins = [{"x": x, "z": L2 + 16, "w": 34, "h": 64} for x in (248, 324, 400, 462)]
+    wins = [{"x": x, "z": L2 + 16, "w": 34, "h": 64, "hood": "fan" if x == 324 else "arch"} for x in (248, 324, 400, 462)]
     front = facade((MX0 + 4, MY0 - 4.4, z0, MX1 - 12, MY0 - 0.35, z1), "-y", wins, flowers=True)
     publish("qa5_front_upper_v5", front,
             "Upper street wall. Fixed. Big sash openings. It does not pull off.",
             "front-upper", "structure", SAGE)
+    publish_capture(324, MY0 - 3.75, L2 + 16, 34, 64, "upper")
     wins = [{"y": y, "z": z, "w": 34, "h": 50} for z in (L1 + 26, L2 + 22) for y in (148, 220)]
     side = facade((MX1 - 6.0, MY0 + 0.9, L1 + 1.2, MX1 + 0.35, MY1 - 12, plate_top(L2) - 1.2), "+x", wins)
     jamb = box_at(MX1 - 11, MY1 - 20, L1 + 1.0, MX1 - 1.2, JAMB_BACK, plate_top(L2) - 1.0)
+    shelf = union([
+        box_at(MX1 - 12, JAMB_BACK - 4, L1 + 0.15, MX1 - 3, JAMB_BACK + 0.3, L1 + 6),
+        box_at(MX1 - 12, JAMB_BACK - 1, L1 + 0.15, MX1 - 3, JAMB_BACK + 5.5, L1 + FIT_GAP),
+    ])
+    pin = cylinder(radius=1.35, height=10, sections=16)
+    pin.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+    pin.apply_translation((MX1 - 8, JAMB_BACK + 1.5, L1 + 36))
+    pin2 = cylinder(radius=1.35, height=10, sections=16)
+    pin2.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+    pin2.apply_translation((MX1 - 8, JAMB_BACK + 1.5, L2 + 36))
     slots = []
     for zc in (L1 + 28, L1 + 52, L1 + 74, L2 + 28, L2 + 52, L2 + 74):
         slots += mag_slots((MX1 - 7, JAMB_BACK), (0, -1), [zc])
-    side = cleanup(union([side, difference(jamb, slots)]), "side")
+    side = cleanup(union([side, difference(jamb, slots), shelf, pin, pin2]), "side")
     publish("qa5_side_v5", side,
             "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
             "side", "structure", SAGE)
@@ -686,6 +883,11 @@ def rear_closure():
             pocket.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
             pocket.apply_translation((sx, y0 + 1.6, zc))
             cuts.append(pocket)
+    for sx, zc in ((MX0 + 12, L1 + 36), (MX0 + 12, L2 + 36), (MX1 - 8, L1 + 36), (MX1 - 8, L2 + 36)):
+        socket = cylinder(radius=1.75, height=9, sections=16)
+        socket.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+        socket.apply_translation((sx, y0 + 3.4, zc))
+        cuts.append(socket)
     mesh = cleanup(union([difference(union(body + skin), cuts), *trim]), "rear")
     publish("qa5_rear_v5", mesh,
             "Full back, one print, 0.45 mm off the jambs. Straight magnetic pull. Nominal 5 x 2.8 mm discs. Not a structural brace.",
@@ -766,7 +968,7 @@ def roofs():
     gy0, gz0, gz1 = MY0 - 42, L3 + 4, RIDGE + 24
     xmid = (gx0 + gx1) / 2
     front = slope_slab(MX0 + 6, MX1 - 8, y_e, z_e, y_r - 3.0, z_r)
-    shingles = shingle_field(MX0 + 14, MX1 - 16, y_e + 3, z_e + 3, y_r - 12, z_r - 8)
+    shingles = shingle_field(MX0 + 14, MX1 - 16, y_e, z_e, y_r - 3.0, z_r, "fish")
     # Cheeks of the gable, running back into the main slope so they are one roof.
     left = hull([
         (gx0 + 2, gy0 + 6.2, gz0 + 4), (gx0 + 2, 150, z_e + 18),
@@ -793,7 +995,7 @@ def roofs():
         cx += 12
     front_roof = cleanup(union([front, left, right, *crest, *shingles]), "front roof")
     publish("qa5_roof_front_v5", front_roof,
-            "Front slope and the gable cheeks, with individual scalloped shingles.",
+            "Front slope and the gable cheeks. Fish-scale courses overlap and the noses stay proud.",
             "roof-front", "roof", SLATE, {"group": "roof", "lift": [0, 0, 48], "park": [0, -40, 28]},
             [0, -24, 50], {"plate_top": EAVE - GAP, "seat_z": EAVE})
     face = hull([
@@ -810,7 +1012,7 @@ def roofs():
     left_rake = rake_board(gx0 + 10, gz0 + 8, xmid - 6, gz1 - 10, gy0 - 0.8, 1)
     right_rake = rake_board(gx1 - 10, gz0 + 8, xmid + 6, gz1 - 10, gy0 - 0.8, -1)
     publish("qa5_gable_v5", cleanup(union([face, board, bird, left_rake, right_rake]), "gable"),
-            "Street gable, base fretwork, rake bargeboards, and the owl. Piercings are thin ornament.",
+            "Street gable. Scroll-pierced verge and rakes, and the owl. The piercings go through.",
             "gable", "structure", SAGE, {"group": "roof", "lift": [0, 0, 48], "park": [0, -46, 24]},
             [0, -30, 40])
     rear = slope_slab(MX0 + 8, MX1 - 8, MY1 + 14, EAVE - 16, y_r + 3.0, RIDGE)
@@ -1055,9 +1257,16 @@ def ornament():
     ]
     layers = [box_at(0, y0, z0, length, y1, z1) for z0, y0, y1, z1 in courses]
     bar = cleanup(union(layers), "cornice")
+    pegs = []
+    for px in (230, 303, 379, 448):
+        peg = cylinder(radius=1.15, height=7.4, sections=12)
+        peg.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+        peg.apply_translation((px - (MX0 + 10), 3.4, 4.0))
+        pegs.append(peg)
+    bar = cleanup(union([bar, *pegs]), "cornice")
     # Back of the moulding is local y = 0. Siding stands just behind that.
     publish("qa5_cornice_v5", move(bar, MX0 + 10, MY0 - 11.0, L3 - 8),
-            "Layered crown under the gable. Separate print, seated 0.4 mm off the siding.",
+            "Layered crown. Four pegs enter the sockets in the upper wall. Radial clearance is 0.45 mm. Untested.",
             "cornice", "trim", IVORY)
     w = 48.0
     crown = cleanup(union([
@@ -1088,9 +1297,11 @@ def rooms():
             posts.append(move(revolve([
                 [0, 0], [2.3, 0], [2.7, 2], [1.7, 8], [1.55, 30], [2.3, 36], [1.4, 38], [0, 38],
             ], 10), px, py, 0))
+        crest = plate_xz(arch_band(4, 30, 40, 12, 3.2), 74, 6)
         return cleanup(union([
             box_at(4, 6, 8, 44, 72, 14),
             box_at(2, 64, 12, 46, 78, 34),
+            crest,
             box_at(8, 58, 14, 22, 70, 20),
             box_at(26, 58, 14, 40, 70, 20),
             *posts,
@@ -1115,20 +1326,53 @@ def rooms():
     def rug(w, d):
         return cleanup(box_at(0, 0, 0, w, d, 0.8), "rug")
     def sofa():
-        return cleanup(union([
-            box_at(0, 0, 6, 62, 22, 16),
-            box_at(0, 14, 12, 62, 24, 32),
-            box_at(0, 0, 10, 6, 22, 26),
-            box_at(56, 0, 10, 62, 22, 26),
-            box_at(8, 2, 16, 28, 16, 20),
-            box_at(34, 2, 16, 54, 16, 20),
-        ]), "sofa")
+        parts = [box_at(3, 2, 0, 59, 22, 5)]
+        parts.append(hull([
+            (8, 3, 4.6), (54, 3, 4.6), (54, 16, 4.6), (8, 16, 4.6),
+            (10, 4, 12), (31, 4, 13.2), (52, 4, 12), (52, 15, 10.4), (10, 15, 10.4),
+        ]))
+        for x in (0.0, 56.0):
+            parts.append(box_at(x, 1, 4, x + 6, 20, 15))
+            roll = cylinder(radius=3.1, height=12, sections=14)
+            roll.apply_transform(rotation_matrix(math.pi / 2, [1, 0, 0]))
+            roll.apply_translation((x + 3, 6, 15))
+            parts.append(roll)
+        for t in np.linspace(0, 1, 6):
+            px = 6 + t * 50
+            parts.append(box_at(px - 5, 15.5, 8, px + 5, 22, 28))
+        crest = cylinder(radius=1.8, height=50, sections=12)
+        crest.apply_transform(rotation_matrix(math.pi / 2, [0, 1, 0]))
+        crest.apply_translation((31, 20.5, 28))
+        parts.append(crest)
+        return cleanup(union(parts), "sofa")
     def chair():
+        legs = []
+        for px, py in ((-8.2, -6.6), (8.2, -6.6), (-8.2, 6.6), (8.2, 6.6)):
+            legs.append(move(revolve([
+                [0, 0], [1.55, 0], [1.05, 1.2], [1.45, 2.4], [0.75, 8], [1.35, 11],
+                [0.7, 14], [1.15, 16.5], [0, 16.5],
+            ], 12), px, py, 0))
+        seat = hull([
+            (-9.5, -8, 16.2), (9.5, -8, 16.2), (9.5, 7.2, 16.2), (-9.5, 7.2, 16.2),
+            (-8.6, -7, 19.4), (8.6, -7, 19.4), (8.2, 6.4, 18.6), (-8.2, 6.4, 18.6),
+            (0, 0, 20.4),
+        ])
+        t = np.linspace(0, 2 * math.pi, 48)
+        oval = Polygon(np.column_stack([7.4 * np.cos(t), 30 + 9.2 * np.sin(t)]))
+        inner = Polygon(np.column_stack([5.6 * np.cos(t), 30 + 7.2 * np.sin(t)]))
+        back = plate_xz(oval.difference(inner), 8.2, 2.6)
+        cameo = plate_xz(inner.buffer(0.2), 7.6, 1.4)
+        posts = [
+            move(revolve([[0, 0], [1.15, 0], [0.85, 4], [1.2, 10], [0.7, 18], [1.05, 22], [0, 22]], 10), -8.2, 6.6, 16),
+            move(revolve([[0, 0], [1.15, 0], [0.85, 4], [1.2, 10], [0.7, 18], [1.05, 22], [0, 22]], 10), 8.2, 6.6, 16),
+        ]
+        rail = cylinder(radius=0.7, height=16.4, sections=10)
+        rail.apply_transform(rotation_matrix(math.pi / 2, [0, 1, 0]))
+        rail.apply_translation((0, -6.6, 7))
         return cleanup(union([
-            box_at(0, 0, 6, 20, 20, 14),
-            box_at(0, 12, 10, 20, 20, 30),
-            move(revolve([[0, 0], [1.5, 0], [1.5, 8], [0, 8]], 8), 3, 3, 0),
-            move(revolve([[0, 0], [1.5, 0], [1.5, 8], [0, 8]], 8), 16, 3, 0),
+            *legs, seat, back, cameo, *posts, rail,
+            box_at(-9, -7.4, 13.5, 9, -6.4, 17.2),
+            box_at(-9, 6.2, 13.5, 9, 7.4, 17.2),
         ]), "chair")
     pieces = [
         ("qa5_bed_v5", bed(), "Bed with pillows.", "bed", (236, 168, L2 + 0.6)),
@@ -1153,9 +1397,10 @@ def service():
     shell = box_at(0, 0, 0, 158, 100, 40)
     void = box_at(4, 6, 6, 154, 92, 36)
     mouth = box_at(8, 90, 8, 150, 102, 34)
-    bay = cleanup(difference(shell, [void, mouth]), "bay")
+    port = box_at(36, -0.2, 10.4, 48, 8, 13.2)
+    bay = cleanup(difference(shell, [void, mouth, port]), "bay")
     publish("qa5_service_v5", move(bay, 360, MY1 + 6, 0),
-            "Adult bay behind the house. 150 x 90 x 30 clear. Not a play door.",
+            "Adult bay behind the house. A port on this face meets the foundation chase. 0.3 mm gap. Not a play door.",
             "service", "service", "#3c4650", explode=[0, 24, 0])
     frame = box_at(0, 0, 0, 36, 12, 64)
     cuts = mag_slots((10, 0), (0, 1), [18, 32, 46]) + mag_slots((26, 0), (0, 1), [18, 32, 46])
@@ -1309,6 +1554,24 @@ def write_all(report):
             os.remove(os.path.join(STL, name))
     for name, info in CATALOG.items():
         info["mesh"].export(os.path.join(STL, name + ".stl"))
+    bad = []
+    for name, info in CATALOG.items():
+        mesh = tm.load(os.path.join(STL, name + ".stl"), force="mesh")
+        counts = np.bincount(mesh.edges_unique_inverse)
+        nbad = int(np.sum(counts != 2))
+        comps = len(mesh.split(only_watertight=False))
+        info["reloaded"] = {"watertight": bool(mesh.is_watertight), "components": comps, "nonmanifold_edges": nbad, "volume": round(float(mesh.volume), 1)}
+        positive = [p for p in mesh.split(only_watertight=False) if p.volume > 1.0]
+        if len(positive) != 1 or nbad:
+            bad.append(name)
+            print("topology", name, info["reloaded"], "positive", len(positive), flush=True)
+    if bad:
+        info_note = ", ".join(bad)
+        print("topology residue or open edges:", info_note, flush=True)
+        # Recorded on the manifest. A positive extra body still fails the build.
+        extra = [n for n in bad if any(p.volume > 1.0 for p in tm.load(os.path.join(STL, n + ".stl"), force="mesh").split(only_watertight=False)) and len([p for p in tm.load(os.path.join(STL, n + ".stl"), force="mesh").split(only_watertight=False) if p.volume > 1]) > 1]
+        if extra:
+            raise RuntimeError("more than one solid body: " + ", ".join(extra))
     house = [i for i in INSTANCES if i["role"] != "coupon"]
     mins = np.min([i["world"].bounds[0] for i in house], axis=0)
     maxs = np.max([i["world"].bounds[1] for i in house], axis=0)
@@ -1327,7 +1590,7 @@ def write_all(report):
     count = len(FIXTURES)
     manifest = {
         "name": "Queen Anne Playhouse",
-        "version": "6.1.0",
+        "version": "6.2.0",
         "prior_version": "archive/v4.0.0",
         "scale": "1:24",
         "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
@@ -1413,6 +1676,7 @@ def write_all(report):
             "Roofs are gravity seated, not locked. They bear on the fixed shell with the back off.",
             "The back is a closure, not a structural brace. Magnets are not the house's support.",
             "Thin ornament can break. That is not a safety claim.",
+            "A 0.2 mm nozzle is a machine some printers can take. It is not confirmed for this house. Nozzle diameter, layer height, and extrusion width are different numbers.",
             "Not a toy-safety certification.",
         ],
         "cameras": {
@@ -1433,8 +1697,10 @@ def write_all(report):
             "h3c_sliced": False, "h3c_pause_profile": False, "electrically_tested": False,
             "protection_finalized": False, "led_fit_validated": False, "cad_validated": report["ok"],
         },
-        "parts": [{"id": n, "file": f"stl/{n}.stl", "note": i["note"], "triangles": i["triangles"], "volume_mm3": i["volume"],
-                   "watertight": True, "bodies": 1, "bbox_mm": i["extents"], "fits_brim_allowance": True} for n, i in CATALOG.items()],
+        "parts": [{"id": n, "file": f"stl/{n}.stl", "note": i["note"], "triangles": i["triangles"], "volume_mm3": i["reloaded"]["volume"],
+                   "watertight": i["reloaded"]["watertight"], "bodies": i["reloaded"]["components"],
+                   "nonmanifold_edges": i["reloaded"]["nonmanifold_edges"],
+                   "bbox_mm": i["extents"], "fits_brim_allowance": True} for n, i in CATALOG.items()],
         "bom": [{"part": n, "file": f"stl/{n}.stl", "qty": q, **({"print_qty": 26, "note": "One bar per rear pocket and matching jamb pocket, plus the coupon. The bar closes the magnet only."} if n == "qa5_retainer_v5" else {})} for n, q in sorted(bom.items())],
         "instances": instances,
     }

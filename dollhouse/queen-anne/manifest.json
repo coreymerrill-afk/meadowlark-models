@@ -1,6 +1,6 @@
 {
   "name": "Queen Anne Playhouse",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "prior_version": "archive/v4.0.0",
   "scale": "1:24",
   "description": "Solid Queen Anne. Front and sides stay on. The full back is the one magnetic closure.",
@@ -148,7 +148,7 @@
             "room": "parlor",
             "x": 280,
             "y": 175,
-            "z": 90.14999999999999,
+            "z": 90.3,
             "storey": 1,
             "circuit": "parlor"
           },
@@ -158,7 +158,7 @@
             "room": "entry",
             "x": 390,
             "y": 155,
-            "z": 90.14999999999999,
+            "z": 90.3,
             "storey": 1,
             "circuit": "entry"
           },
@@ -168,7 +168,7 @@
             "room": "kitchen",
             "x": 492,
             "y": 240,
-            "z": 90.14999999999999,
+            "z": 90.3,
             "storey": 1,
             "circuit": "kitchen"
           },
@@ -247,7 +247,7 @@
             "room": "bedroom",
             "x": 290,
             "y": 185,
-            "z": 188.15,
+            "z": 188.29999999999998,
             "storey": 2,
             "circuit": "bedroom"
           },
@@ -257,7 +257,7 @@
             "room": "bath",
             "x": 470,
             "y": 160,
-            "z": 188.15,
+            "z": 188.29999999999998,
             "storey": 2,
             "circuit": "bath"
           },
@@ -267,7 +267,7 @@
             "room": "landing",
             "x": 400,
             "y": 270,
-            "z": 188.15,
+            "z": 188.29999999999998,
             "storey": 2,
             "circuit": "landing"
           }
@@ -311,7 +311,7 @@
             "room": "attic",
             "x": 400,
             "y": 190,
-            "z": 286.15000000000003,
+            "z": 286.3,
             "storey": 3,
             "circuit": "attic"
           },
@@ -321,7 +321,7 @@
             "room": "turret",
             "x": 156.0,
             "y": 126.0,
-            "z": 286.15000000000003,
+            "z": 286.3,
             "storey": 3,
             "circuit": "turret"
           }
@@ -370,7 +370,7 @@
         "room": "parlor",
         "x": 280,
         "y": 175,
-        "z": 90.14999999999999,
+        "z": 90.3,
         "storey": 1,
         "circuit": "parlor"
       },
@@ -380,7 +380,7 @@
         "room": "entry",
         "x": 390,
         "y": 155,
-        "z": 90.14999999999999,
+        "z": 90.3,
         "storey": 1,
         "circuit": "entry"
       },
@@ -390,7 +390,7 @@
         "room": "kitchen",
         "x": 492,
         "y": 240,
-        "z": 90.14999999999999,
+        "z": 90.3,
         "storey": 1,
         "circuit": "kitchen"
       },
@@ -400,7 +400,7 @@
         "room": "bedroom",
         "x": 290,
         "y": 185,
-        "z": 188.15,
+        "z": 188.29999999999998,
         "storey": 2,
         "circuit": "bedroom"
       },
@@ -410,7 +410,7 @@
         "room": "bath",
         "x": 470,
         "y": 160,
-        "z": 188.15,
+        "z": 188.29999999999998,
         "storey": 2,
         "circuit": "bath"
       },
@@ -420,7 +420,7 @@
         "room": "landing",
         "x": 400,
         "y": 270,
-        "z": 188.15,
+        "z": 188.29999999999998,
         "storey": 2,
         "circuit": "landing"
       },
@@ -430,7 +430,7 @@
         "room": "attic",
         "x": 400,
         "y": 190,
-        "z": 286.15000000000003,
+        "z": 286.3,
         "storey": 3,
         "circuit": "attic"
       },
@@ -440,7 +440,7 @@
         "room": "turret",
         "x": 156.0,
         "y": 126.0,
-        "z": 286.15000000000003,
+        "z": 286.3,
         "storey": 3,
         "circuit": "turret"
       },
@@ -486,6 +486,7 @@
     "Roofs are gravity seated, not locked. They bear on the fixed shell with the back off.",
     "The back is a closure, not a structural brace. Magnets are not the house's support.",
     "Thin ornament can break. That is not a safety claim.",
+    "A 0.2 mm nozzle is a machine some printers can take. It is not confirmed for this house. Nozzle diameter, layer height, and extrusion width are different numbers.",
     "Not a toy-safety certification."
   ],
   "cameras": {
@@ -636,14 +637,15 @@
     {
       "id": "qa5_foundation_v5",
       "file": "stl/qa5_foundation_v5.stl",
-      "note": "Brick base and the wood porch deck. Courses are in the mesh.",
-      "triangles": 180,
-      "volume_mm3": 1090044.3,
+      "note": "Brick base, porch deck, and a covered chase to the service bay. The chase is a void in this solid.",
+      "triangles": 270,
+      "volume_mm3": 1088447.4,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         300.0,
-        284.0,
+        286.7,
         14.8
       ],
       "fits_brim_allowance": true
@@ -656,6 +658,7 @@
       "volume_mm3": 392860.9,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         152.33,
         195.86,
@@ -667,10 +670,11 @@
       "id": "qa5_floor_l2_v5",
       "file": "stl/qa5_floor_l2_v5.stl",
       "note": "First floor. Opening is the lower stair.",
-      "triangles": 544,
-      "volume_mm3": 237216.7,
+      "triangles": 596,
+      "volume_mm3": 237173.5,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         277.0,
         168.0,
@@ -682,10 +686,11 @@
       "id": "qa5_floor_l3_v5",
       "file": "stl/qa5_floor_l3_v5.stl",
       "note": "Attic floor. Opening is the upper stair.",
-      "triangles": 542,
-      "volume_mm3": 237216.7,
+      "triangles": 594,
+      "volume_mm3": 237173.4,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         277.0,
         168.0,
@@ -701,6 +706,7 @@
       "volume_mm3": 29936.1,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         77.61,
         77.61,
@@ -712,14 +718,15 @@
       "id": "qa5_walls_l1_v5",
       "file": "stl/qa5_walls_l1_v5.stl",
       "note": "Fixed ceiling, hall wall, and the left rear jamb. The rear opening is clear.",
-      "triangles": 558,
-      "volume_mm3": 508808.1,
+      "triangles": 924,
+      "volume_mm3": 505612.2,
       "watertight": true,
-      "bodies": 1,
+      "bodies": 4,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         281.0,
-        175.0,
-        91.2
+        181.5,
+        91.45
       ],
       "fits_brim_allowance": true
     },
@@ -727,13 +734,14 @@
       "id": "qa5_walls_l2_v5",
       "file": "stl/qa5_walls_l2_v5.stl",
       "note": "Fixed ceiling and hall wall of the first floor. The back is not this part.",
-      "triangles": 566,
-      "volume_mm3": 508228.1,
+      "triangles": 964,
+      "volume_mm3": 504463.0,
       "watertight": true,
-      "bodies": 1,
+      "bodies": 4,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         281.0,
-        175.0,
+        181.5,
         91.2
       ],
       "fits_brim_allowance": true
@@ -746,6 +754,7 @@
       "volume_mm3": 66178.2,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         279.0,
         172.0,
@@ -756,11 +765,12 @@
     {
       "id": "qa5_puck_v5",
       "file": "stl/qa5_puck_v5.stl",
-      "note": "Ceiling puck on the fixed plate. 6 mm cavity is provisional, not a measured LED.",
-      "triangles": 232,
-      "volume_mm3": 351.8,
+      "note": "Ceiling puck. Cavity opens down. A 2.3 mm feed leaves the top. The diode is not measured.",
+      "triangles": 256,
+      "volume_mm3": 329.2,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         12.4,
         12.4,
@@ -772,14 +782,15 @@
       "id": "qa5_front_ground_v5",
       "file": "stl/qa5_front_ground_v5.stl",
       "note": "Ground floor street wall. Fixed, because the porch is in front of it. Flower boxes and the door casing are in the mesh.",
-      "triangles": 2730,
-      "volume_mm3": 145109.7,
+      "triangles": 5146,
+      "volume_mm3": 145509.3,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         282.6,
         23.2,
-        97.6
+        98.23
       ],
       "fits_brim_allowance": true
     },
@@ -791,6 +802,7 @@
       "volume_mm3": 3503.9,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         29.6,
         2.4,
@@ -802,10 +814,11 @@
       "id": "qa5_front_upper_v5",
       "file": "stl/qa5_front_upper_v5.stl",
       "note": "Upper street wall. Fixed. Big sash openings. It does not pull off.",
-      "triangles": 4292,
-      "volume_mm3": 121570.0,
+      "triangles": 10912,
+      "volume_mm3": 122247.5,
       "watertight": true,
-      "bodies": 1,
+      "bodies": 2,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         288.4,
         13.8,
@@ -814,17 +827,98 @@
       "fits_brim_allowance": true
     },
     {
+      "id": "qa5_sash_upper_v5",
+      "file": "stl/qa5_sash_upper_v5.stl",
+      "note": "Removable sash. 0.4 mm behind the front stop. Clear lights, no glass.",
+      "triangles": 128,
+      "volume_mm3": 1303.3,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        30.6,
+        2.5,
+        60.6
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_keeper_upper_l_v5",
+      "file": "stl/qa5_keeper_upper_l_v5.stl",
+      "note": "Room-side keeper. The lip captures the sash. Pull the pin, then this bar, then the sash.",
+      "triangles": 104,
+      "volume_mm3": 573.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.6,
+        2.65,
+        48.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_pin_upper_l_v5",
+      "file": "stl/qa5_pin_upper_l_v5.stl",
+      "note": "Headed pin. The head is larger than the keeper hole. Friction of the shaft is not the lock. Untested.",
+      "triangles": 104,
+      "volume_mm3": 20.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        3.7,
+        6.43,
+        3.61
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_keeper_upper_r_v5",
+      "file": "stl/qa5_keeper_upper_r_v5.stl",
+      "note": "Room-side keeper. The lip captures the sash. Pull the pin, then this bar, then the sash.",
+      "triangles": 104,
+      "volume_mm3": 573.7,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        6.6,
+        2.65,
+        48.0
+      ],
+      "fits_brim_allowance": true
+    },
+    {
+      "id": "qa5_pin_upper_r_v5",
+      "file": "stl/qa5_pin_upper_r_v5.stl",
+      "note": "Headed pin. The head is larger than the keeper hole. Friction of the shaft is not the lock. Untested.",
+      "triangles": 104,
+      "volume_mm3": 20.9,
+      "watertight": true,
+      "bodies": 1,
+      "nonmanifold_edges": 0,
+      "bbox_mm": [
+        3.7,
+        6.43,
+        3.61
+      ],
+      "fits_brim_allowance": true
+    },
+    {
       "id": "qa5_side_v5",
       "file": "stl/qa5_side_v5.stl",
       "note": "Right wall, fixed. The rear return is the right jamb. It does not pull off.",
-      "triangles": 3784,
-      "volume_mm3": 144673.1,
+      "triangles": 4094,
+      "volume_mm3": 144851.7,
       "watertight": true,
-      "bodies": 1,
+      "bodies": 9,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        13.75,
-        180.1,
-        187.6
+        14.75,
+        186.6,
+        188.45
       ],
       "fits_brim_allowance": true
     },
@@ -832,10 +926,11 @@
       "id": "qa5_rear_v5",
       "file": "stl/qa5_rear_v5.stl",
       "note": "Full back, one print, 0.45 mm off the jambs. Straight magnetic pull. Nominal 5 x 2.8 mm discs. Not a structural brace.",
-      "triangles": 2808,
-      "volume_mm3": 242264.1,
+      "triangles": 3080,
+      "volume_mm3": 242061.6,
       "watertight": true,
-      "bodies": 1,
+      "bodies": 13,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         285.0,
         7.0,
@@ -846,11 +941,12 @@
     {
       "id": "qa5_roof_front_v5",
       "file": "stl/qa5_roof_front_v5.stl",
-      "note": "Front slope and the gable cheeks, with individual scalloped shingles.",
-      "triangles": 92128,
-      "volume_mm3": 439070.0,
+      "note": "Front slope and the gable cheeks. Fish-scale courses overlap and the noses stay proud.",
+      "triangles": 36414,
+      "volume_mm3": 440005.1,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         283.0,
         127.27,
@@ -861,15 +957,16 @@
     {
       "id": "qa5_gable_v5",
       "file": "stl/qa5_gable_v5.stl",
-      "note": "Street gable, base fretwork, rake bargeboards, and the owl. Piercings are thin ornament.",
-      "triangles": 4010,
-      "volume_mm3": 67062.6,
+      "note": "Street gable. Scroll-pierced verge and rakes, and the owl. The piercings go through.",
+      "triangles": 8548,
+      "volume_mm3": 67232.9,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        170.03,
+        170.38,
         9.2,
-        162.4
+        162.58
       ],
       "fits_brim_allowance": true
     },
@@ -877,10 +974,11 @@
       "id": "qa5_roof_rear_v5",
       "file": "stl/qa5_roof_rear_v5.stl",
       "note": "Rear slope, scalloped shingles, and the brick chimney.",
-      "triangles": 117760,
-      "volume_mm3": 356137.6,
-      "watertight": true,
-      "bodies": 1,
+      "triangles": 112374,
+      "volume_mm3": 356096.3,
+      "watertight": false,
+      "bodies": 14,
+      "nonmanifold_edges": 25,
       "bbox_mm": [
         281.0,
         105.5,
@@ -896,6 +994,7 @@
       "volume_mm3": 20705.8,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         77.61,
         77.61,
@@ -911,6 +1010,7 @@
       "volume_mm3": 322061.4,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         99.78,
         99.78,
@@ -924,8 +1024,9 @@
       "note": "Turret loft, with cased windows on the street flats.",
       "triangles": 2834,
       "volume_mm3": 131071.1,
-      "watertight": true,
-      "bodies": 1,
+      "watertight": false,
+      "bodies": 2,
+      "nonmanifold_edges": 2,
       "bbox_mm": [
         109.9,
         110.5,
@@ -939,8 +1040,9 @@
       "note": "Octagonal turret, two storeys, clapboard, belt courses, and cased windows.",
       "triangles": 5776,
       "volume_mm3": 268765.0,
-      "watertight": true,
-      "bodies": 1,
+      "watertight": false,
+      "bodies": 2,
+      "nonmanifold_edges": 2,
       "bbox_mm": [
         109.9,
         110.5,
@@ -952,10 +1054,11 @@
       "id": "qa5_porch_turret_v5",
       "file": "stl/qa5_porch_turret_v5.stl",
       "note": "Octagonal corner porch. Turned columns, cyma brackets, spindle rail. It stays during play.",
-      "triangles": 5632,
-      "volume_mm3": 43599.7,
+      "triangles": 5720,
+      "volume_mm3": 43318.7,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         178.33,
         73.6,
@@ -967,10 +1070,11 @@
       "id": "qa5_porch_front_v5",
       "file": "stl/qa5_porch_front_v5.stl",
       "note": "Front porch across the main block, with the steps. It stays during play.",
-      "triangles": 8022,
-      "volume_mm3": 100409.7,
+      "triangles": 8134,
+      "volume_mm3": 100128.7,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         253.6,
         46.0,
@@ -982,10 +1086,11 @@
       "id": "qa5_porch_roof_v5",
       "file": "stl/qa5_porch_roof_v5.stl",
       "note": "Front porch roof with scalloped shingles. Bears on the beam.",
-      "triangles": 22638,
-      "volume_mm3": 102726.3,
+      "triangles": 21280,
+      "volume_mm3": 102659.8,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         254.0,
         70.93,
@@ -1001,6 +1106,7 @@
       "volume_mm3": 125307.4,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         143.66,
         173.69,
@@ -1016,6 +1122,7 @@
       "volume_mm3": 901.0,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         13.0,
         13.0,
@@ -1031,6 +1138,7 @@
       "volume_mm3": 36718.9,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         48.15,
         121.2,
@@ -1046,6 +1154,7 @@
       "volume_mm3": 39172.4,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         48.15,
         121.2,
@@ -1056,14 +1165,15 @@
     {
       "id": "qa5_cornice_v5",
       "file": "stl/qa5_cornice_v5.stl",
-      "note": "Layered crown under the gable. Separate print, seated 0.4 mm off the siding.",
-      "triangles": 118,
-      "volume_mm3": 27663.7,
+      "note": "Layered crown. Four pegs enter the sockets in the upper wall. Radial clearance is 0.45 mm. Untested.",
+      "triangles": 350,
+      "volume_mm3": 27776.3,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         271.0,
-        15.2,
+        20.1,
         11.4
       ],
       "fits_brim_allowance": true
@@ -1076,6 +1186,7 @@
       "volume_mm3": 939.0,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         48.0,
         3.2,
@@ -1087,14 +1198,15 @@
       "id": "qa5_bed_v5",
       "file": "stl/qa5_bed_v5.stl",
       "note": "Bed with pillows.",
-      "triangles": 604,
-      "volume_mm3": 30766.8,
+      "triangles": 1136,
+      "volume_mm3": 31534.5,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        44.0,
+        44.79,
         72.0,
-        38.0
+        43.59
       ],
       "fits_brim_allowance": true
     },
@@ -1106,6 +1218,7 @@
       "volume_mm3": 3664.4,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         16.0,
         14.6,
@@ -1121,6 +1234,7 @@
       "volume_mm3": 704.0,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         40.0,
         22.0,
@@ -1136,6 +1250,7 @@
       "volume_mm3": 74003.2,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         64.0,
         18.8,
@@ -1151,6 +1266,7 @@
       "volume_mm3": 2441.3,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         40.0,
         24.0,
@@ -1166,6 +1282,7 @@
       "volume_mm3": 1641.6,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         54.0,
         38.0,
@@ -1177,14 +1294,15 @@
       "id": "qa5_sofa_v5",
       "file": "stl/qa5_sofa_v5.stl",
       "note": "Parlor sofa.",
-      "triangles": 92,
-      "volume_mm3": 27656.0,
+      "triangles": 346,
+      "volume_mm3": 19577.5,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        62.0,
-        24.0,
-        26.0
+        62.2,
+        22.3,
+        29.8
       ],
       "fits_brim_allowance": true
     },
@@ -1192,14 +1310,15 @@
       "id": "qa5_chair_v5",
       "file": "stl/qa5_chair_v5.stl",
       "note": "Parlor chair.",
-      "triangles": 102,
-      "volume_mm3": 5836.4,
+      "triangles": 2074,
+      "volume_mm3": 1695.3,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
-        20.0,
-        20.0,
-        30.0
+        19.5,
+        16.35,
+        39.19
       ],
       "fits_brim_allowance": true
     },
@@ -1211,6 +1330,7 @@
       "volume_mm3": 9072.0,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         36.0,
         18.0,
@@ -1221,11 +1341,12 @@
     {
       "id": "qa5_service_v5",
       "file": "stl/qa5_service_v5.stl",
-      "note": "Adult bay behind the house. 150 x 90 x 30 clear. Not a play door.",
-      "triangles": 44,
-      "volume_mm3": 215464.0,
+      "note": "Adult bay behind the house. A port on this face meets the foundation chase. 0.3 mm gap. Not a play door.",
+      "triangles": 64,
+      "volume_mm3": 215262.4,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         158.0,
         100.0,
@@ -1240,7 +1361,8 @@
       "triangles": 732,
       "volume_mm3": 25937.7,
       "watertight": true,
-      "bodies": 1,
+      "bodies": 3,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         36.0,
         12.0,
@@ -1256,6 +1378,7 @@
       "volume_mm3": 8422.5,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         28.0,
         6.6,
@@ -1271,6 +1394,7 @@
       "volume_mm3": 454.3,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         2.6,
         8.5,
@@ -1286,6 +1410,7 @@
       "volume_mm3": 3538.0,
       "watertight": true,
       "bodies": 1,
+      "nonmanifold_edges": 0,
       "bbox_mm": [
         40.0,
         18.0,
@@ -1386,9 +1511,29 @@
       "qty": 1
     },
     {
+      "part": "qa5_keeper_upper_l_v5",
+      "file": "stl/qa5_keeper_upper_l_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_keeper_upper_r_v5",
+      "file": "stl/qa5_keeper_upper_r_v5.stl",
+      "qty": 1
+    },
+    {
       "part": "qa5_lantern_v5",
       "file": "stl/qa5_lantern_v5.stl",
       "qty": 2
+    },
+    {
+      "part": "qa5_pin_upper_l_v5",
+      "file": "stl/qa5_pin_upper_l_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_pin_upper_r_v5",
+      "file": "stl/qa5_pin_upper_r_v5.stl",
+      "qty": 1
     },
     {
       "part": "qa5_polarity_v5",
@@ -1450,6 +1595,11 @@
     {
       "part": "qa5_rug_v5",
       "file": "stl/qa5_rug_v5.stl",
+      "qty": 1
+    },
+    {
+      "part": "qa5_sash_upper_v5",
+      "file": "stl/qa5_sash_upper_v5.stl",
       "qty": 1
     },
     {
@@ -1775,7 +1925,7 @@
           0,
           0,
           1,
-          16.4
+          16.15
         ],
         [
           0,
@@ -1889,7 +2039,7 @@
           0,
           0,
           1,
-          90.75
+          90.9
         ],
         [
           0,
@@ -1927,7 +2077,7 @@
           0,
           0,
           1,
-          90.75
+          90.9
         ],
         [
           0,
@@ -1965,7 +2115,7 @@
           0,
           0,
           1,
-          90.75
+          90.9
         ],
         [
           0,
@@ -2003,7 +2153,7 @@
           0,
           0,
           1,
-          188.75
+          188.9
         ],
         [
           0,
@@ -2041,7 +2191,7 @@
           0,
           0,
           1,
-          188.75
+          188.9
         ],
         [
           0,
@@ -2079,7 +2229,7 @@
           0,
           0,
           1,
-          188.75
+          188.9
         ],
         [
           0,
@@ -2117,7 +2267,7 @@
           0,
           0,
           1,
-          286.75
+          286.9
         ],
         [
           0,
@@ -2155,7 +2305,7 @@
           0,
           0,
           1,
-          286.75
+          286.9
         ],
         [
           0,
@@ -2280,6 +2430,196 @@
       ]
     },
     {
+      "id": "sash-upper",
+      "part": "qa5_sash_upper_v5",
+      "role": "sash",
+      "color": "#f4ecdc",
+      "motion": null,
+      "explode_mm": [
+        0,
+        -12,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          325.7
+        ],
+        [
+          0,
+          1,
+          0,
+          113.2
+        ],
+        [
+          0,
+          0,
+          1,
+          131.7
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "keeper-upper-l",
+      "part": "qa5_keeper_upper_l_v5",
+      "role": "fastener",
+      "color": "#6a432c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        16,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          320.8
+        ],
+        [
+          0,
+          1,
+          0,
+          116.1
+        ],
+        [
+          0,
+          0,
+          1,
+          138.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "pin-upper-l",
+      "part": "qa5_pin_upper_l_v5",
+      "role": "fastener",
+      "color": "#e6c98a",
+      "motion": null,
+      "explode_mm": [
+        0,
+        24,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          321.15
+        ],
+        [
+          0,
+          1,
+          0,
+          113.75
+        ],
+        [
+          0,
+          0,
+          1,
+          160.196
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "keeper-upper-r",
+      "part": "qa5_keeper_upper_r_v5",
+      "role": "fastener",
+      "color": "#6a432c",
+      "motion": null,
+      "explode_mm": [
+        0,
+        16,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          354.6
+        ],
+        [
+          0,
+          1,
+          0,
+          116.1
+        ],
+        [
+          0,
+          0,
+          1,
+          138.0
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "pin-upper-r",
+      "part": "qa5_pin_upper_r_v5",
+      "role": "fastener",
+      "color": "#e6c98a",
+      "motion": null,
+      "explode_mm": [
+        0,
+        24,
+        0
+      ],
+      "transform": [
+        [
+          1,
+          0,
+          0,
+          357.15
+        ],
+        [
+          0,
+          1,
+          0,
+          113.75
+        ],
+        [
+          0,
+          0,
+          1,
+          160.196
+        ],
+        [
+          0,
+          0,
+          0,
+          1
+        ]
+      ]
+    },
+    {
       "id": "side",
       "part": "qa5_side_v5",
       "role": "structure",
@@ -2295,7 +2635,7 @@
           1,
           0,
           0,
-          497.0
+          496.0
         ],
         [
           0,
@@ -2307,7 +2647,7 @@
           0,
           0,
           1,
-          17.0
+          16.15
         ],
         [
           0,
@@ -2440,7 +2780,7 @@
           1,
           0,
           0,
-          293.973
+          293.616
         ],
         [
           0,
@@ -2452,7 +2792,7 @@
           0,
           0,
           1,
-          213.599
+          213.418
         ],
         [
           0,
@@ -3200,7 +3540,7 @@
           1,
           0,
           0,
-          238.0
+          237.604
         ],
         [
           0,
@@ -3428,7 +3768,7 @@
           1,
           0,
           0,
-          230.0
+          229.9
         ],
         [
           0,
@@ -3440,7 +3780,7 @@
           0,
           0,
           1,
-          22.5
+          16.5
         ],
         [
           0,
@@ -3466,13 +3806,13 @@
           1,
           0,
           0,
-          320.0
+          310.25
         ],
         [
           0,
           1,
           0,
-          175.0
+          166.85
         ],
         [
           0,
