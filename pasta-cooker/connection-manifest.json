@@ -1,0 +1,741 @@
+{
+  "units": "mm",
+  "ports": {
+    "tank.out": [
+      -180,
+      -45,
+      210
+    ],
+    "isolation.in": [
+      -170,
+      -45,
+      210
+    ],
+    "isolation.out": [
+      -150,
+      -45,
+      210
+    ],
+    "feed.in": [
+      -145,
+      -130,
+      220
+    ],
+    "feed.out": [
+      -115,
+      -130,
+      220
+    ],
+    "meter.in": [
+      -115,
+      -155,
+      230
+    ],
+    "meter.out": [
+      -115,
+      -155,
+      250
+    ],
+    "heater.in": [
+      -170,
+      -155,
+      270
+    ],
+    "heater.out": [
+      -170,
+      -155,
+      410
+    ],
+    "fill.nozzle": [
+      -75,
+      -25,
+      480
+    ],
+    "strainer.chamber": [
+      103,
+      0,
+      300
+    ],
+    "strainer.out": [
+      132,
+      0,
+      300
+    ],
+    "circulation.in": [
+      175,
+      0,
+      300
+    ],
+    "circulation.out": [
+      195,
+      0,
+      325
+    ],
+    "return.wall": [
+      132,
+      -10,
+      400
+    ],
+    "return.tee": [
+      110,
+      -10,
+      400
+    ],
+    "return.a": [
+      100,
+      -40,
+      400
+    ],
+    "return.b": [
+      100,
+      30,
+      400
+    ],
+    "chamber.low": [
+      20,
+      -65,
+      235
+    ],
+    "drain.in": [
+      20,
+      -110,
+      215
+    ],
+    "drain.out": [
+      20,
+      -110,
+      185
+    ],
+    "waste.coupling": [
+      150,
+      -140,
+      135
+    ],
+    "waste.internal": [
+      150,
+      -140,
+      120
+    ],
+    "waste.vent": [
+      245,
+      -140,
+      135
+    ],
+    "vent.out": [
+      245,
+      -90,
+      175
+    ],
+    "salt.out": [
+      -80,
+      60,
+      540
+    ],
+    "salt.nozzle": [
+      -70,
+      45,
+      480
+    ],
+    "steam.pickup": [
+      -45,
+      75,
+      440
+    ],
+    "steam.in": [
+      -45,
+      75,
+      465
+    ],
+    "steam.out": [
+      -100,
+      150,
+      525
+    ]
+  },
+  "edges": [
+    {
+      "id": "F01",
+      "from": "tank.out",
+      "to": "isolation.in",
+      "points": [
+        [
+          -180,
+          -45,
+          210
+        ],
+        [
+          -170,
+          -45,
+          210
+        ]
+      ],
+      "material": "water",
+      "radius_mm": 6
+    },
+    {
+      "id": "F02",
+      "from": "isolation.out",
+      "to": "feed.in",
+      "points": [
+        [
+          -150,
+          -45,
+          210
+        ],
+        [
+          -140,
+          -45,
+          210
+        ],
+        [
+          -140,
+          -100,
+          215
+        ],
+        [
+          -155,
+          -130,
+          220
+        ],
+        [
+          -145,
+          -130,
+          220
+        ]
+      ],
+      "material": "water",
+      "radius_mm": 6
+    },
+    {
+      "id": "F03",
+      "from": "feed.out",
+      "to": "meter.in",
+      "points": [
+        [
+          -115,
+          -130,
+          220
+        ],
+        [
+          -105,
+          -130,
+          220
+        ],
+        [
+          -105,
+          -155,
+          220
+        ],
+        [
+          -115,
+          -155,
+          220
+        ],
+        [
+          -115,
+          -155,
+          230
+        ]
+      ],
+      "material": "water",
+      "radius_mm": 6
+    },
+    {
+      "id": "F04",
+      "from": "meter.out",
+      "to": "heater.in",
+      "points": [
+        [
+          -115,
+          -155,
+          250
+        ],
+        [
+          -115,
+          -155,
+          255
+        ],
+        [
+          -115,
+          -185,
+          255
+        ],
+        [
+          -190,
+          -185,
+          255
+        ],
+        [
+          -190,
+          -155,
+          255
+        ],
+        [
+          -190,
+          -155,
+          270
+        ],
+        [
+          -170,
+          -155,
+          270
+        ]
+      ],
+      "material": "water",
+      "radius_mm": 6
+    },
+    {
+      "id": "H01",
+      "from": "heater.in",
+      "to": "heater.out",
+      "points": [
+        [
+          -170,
+          -155,
+          270
+        ],
+        [
+          -120,
+          -155,
+          270
+        ],
+        [
+          -120,
+          -155,
+          305
+        ],
+        [
+          -170,
+          -155,
+          305
+        ],
+        [
+          -170,
+          -155,
+          340
+        ],
+        [
+          -120,
+          -155,
+          340
+        ],
+        [
+          -120,
+          -155,
+          375
+        ],
+        [
+          -170,
+          -155,
+          375
+        ],
+        [
+          -170,
+          -155,
+          410
+        ]
+      ],
+      "material": "hot",
+      "radius_mm": 6
+    },
+    {
+      "id": "H02",
+      "from": "heater.out",
+      "to": "fill.nozzle",
+      "points": [
+        [
+          -170,
+          -155,
+          410
+        ],
+        [
+          -170,
+          -155,
+          495
+        ],
+        [
+          -75,
+          -155,
+          495
+        ],
+        [
+          -75,
+          -25,
+          495
+        ],
+        [
+          -75,
+          -25,
+          480
+        ]
+      ],
+      "material": "hot",
+      "radius_mm": 6
+    },
+    {
+      "id": "C00",
+      "from": "strainer.chamber",
+      "to": "strainer.out",
+      "points": [
+        [
+          103,
+          0,
+          300
+        ],
+        [
+          132,
+          0,
+          300
+        ]
+      ],
+      "material": "green",
+      "radius_mm": 12
+    },
+    {
+      "id": "C01",
+      "from": "strainer.out",
+      "to": "circulation.in",
+      "points": [
+        [
+          132,
+          0,
+          300
+        ],
+        [
+          175,
+          0,
+          300
+        ]
+      ],
+      "material": "green",
+      "radius_mm": 12
+    },
+    {
+      "id": "C02",
+      "from": "circulation.out",
+      "to": "return.wall",
+      "points": [
+        [
+          195,
+          0,
+          325
+        ],
+        [
+          195,
+          0,
+          350
+        ],
+        [
+          195,
+          -10,
+          375
+        ],
+        [
+          195,
+          -10,
+          400
+        ],
+        [
+          132,
+          -10,
+          400
+        ]
+      ],
+      "material": "green",
+      "radius_mm": 12
+    },
+    {
+      "id": "C03",
+      "from": "return.wall",
+      "to": "return.tee",
+      "points": [
+        [
+          132,
+          -10,
+          400
+        ],
+        [
+          110,
+          -10,
+          400
+        ]
+      ],
+      "material": "green",
+      "radius_mm": 12
+    },
+    {
+      "id": "C04",
+      "from": "return.tee",
+      "to": "return.a",
+      "points": [
+        [
+          110,
+          -10,
+          400
+        ],
+        [
+          110,
+          -40,
+          400
+        ],
+        [
+          100,
+          -40,
+          400
+        ]
+      ],
+      "material": "green",
+      "radius_mm": 9
+    },
+    {
+      "id": "C05",
+      "from": "return.tee",
+      "to": "return.b",
+      "points": [
+        [
+          110,
+          -10,
+          400
+        ],
+        [
+          110,
+          30,
+          400
+        ],
+        [
+          100,
+          30,
+          400
+        ]
+      ],
+      "material": "green",
+      "radius_mm": 9
+    },
+    {
+      "id": "D01",
+      "from": "chamber.low",
+      "to": "drain.in",
+      "points": [
+        [
+          20,
+          -65,
+          235
+        ],
+        [
+          20,
+          -65,
+          225
+        ],
+        [
+          20,
+          -110,
+          225
+        ],
+        [
+          20,
+          -110,
+          215
+        ]
+      ],
+      "material": "waste",
+      "radius_mm": 10
+    },
+    {
+      "id": "D02",
+      "from": "drain.out",
+      "to": "waste.coupling",
+      "points": [
+        [
+          20,
+          -110,
+          185
+        ],
+        [
+          20,
+          -110,
+          175
+        ],
+        [
+          20,
+          -140,
+          170
+        ],
+        [
+          100,
+          -140,
+          160
+        ],
+        [
+          150,
+          -140,
+          150
+        ],
+        [
+          150,
+          -140,
+          135
+        ]
+      ],
+      "material": "waste",
+      "radius_mm": 10
+    },
+    {
+      "id": "D03",
+      "from": "waste.coupling",
+      "to": "waste.internal",
+      "points": [
+        [
+          150,
+          -140,
+          135
+        ],
+        [
+          150,
+          -140,
+          120
+        ]
+      ],
+      "material": "waste",
+      "radius_mm": 10
+    },
+    {
+      "id": "V01",
+      "from": "waste.vent",
+      "to": "vent.out",
+      "points": [
+        [
+          245,
+          -140,
+          135
+        ],
+        [
+          245,
+          -140,
+          175
+        ],
+        [
+          245,
+          -90,
+          175
+        ]
+      ],
+      "material": "waste",
+      "radius_mm": 5
+    },
+    {
+      "id": "S01",
+      "from": "salt.out",
+      "to": "salt.nozzle",
+      "points": [
+        [
+          -80,
+          60,
+          540
+        ],
+        [
+          -80,
+          60,
+          515
+        ],
+        [
+          -70,
+          45,
+          490
+        ],
+        [
+          -70,
+          45,
+          480
+        ]
+      ],
+      "material": "salt",
+      "radius_mm": 8
+    },
+    {
+      "id": "ST01",
+      "from": "steam.in",
+      "to": "steam.out",
+      "points": [
+        [
+          -45,
+          75,
+          465
+        ],
+        [
+          -45,
+          75,
+          505
+        ],
+        [
+          -100,
+          150,
+          525
+        ]
+      ],
+      "material": "steel",
+      "radius_mm": 12
+    },
+    {
+      "id": "ST00",
+      "from": "steam.pickup",
+      "to": "steam.in",
+      "points": [
+        [
+          -45,
+          75,
+          440
+        ],
+        [
+          -45,
+          75,
+          465
+        ]
+      ],
+      "material": "steel",
+      "radius_mm": 12
+    }
+  ],
+  "internal_component_connections": [
+    {
+      "component": "Isolation/check cartridge",
+      "from": "isolation.in",
+      "to": "isolation.out"
+    },
+    {
+      "component": "Metering feed pump",
+      "from": "feed.in",
+      "to": "feed.out"
+    },
+    {
+      "component": "Flowmeter",
+      "from": "meter.in",
+      "to": "meter.out"
+    },
+    {
+      "component": "Recirculation pump",
+      "from": "circulation.in",
+      "to": "circulation.out"
+    },
+    {
+      "component": "Normally closed drain valve",
+      "from": "drain.in",
+      "to": "drain.out"
+    }
+  ],
+  "open_transfers": [
+    {
+      "from": "fill.nozzle",
+      "to": "chamber water surface",
+      "air_gap_mm": 60
+    },
+    {
+      "from": "salt.nozzle",
+      "to": "chamber",
+      "type": "gravity drop"
+    }
+  ],
+  "water_max_z": 420,
+  "waste_max_z": 95,
+  "waste_roof_z": 135,
+  "concept_only": true
+}

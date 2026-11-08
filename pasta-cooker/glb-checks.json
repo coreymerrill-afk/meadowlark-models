@@ -1,0 +1,23 @@
+{
+  "pasta-cooker-v2-cutaway.glb": {
+    "bytes": 4528932,
+    "nodes": 235,
+    "meshes": 215,
+    "embedded_buffers": true,
+    "named_feed_and_drain_present": true
+  },
+  "pasta-cooker-v2-exploded.glb": {
+    "bytes": 4590332,
+    "nodes": 238,
+    "meshes": 217,
+    "embedded_buffers": true,
+    "named_feed_and_drain_present": true
+  },
+  "pasta-cooker-v2-exterior.glb": {
+    "bytes": 4862636,
+    "nodes": 256,
+    "meshes": 231,
+    "embedded_buffers": true,
+    "named_feed_and_drain_present": true
+  }
+}

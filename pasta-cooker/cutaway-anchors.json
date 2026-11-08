@@ -1,1 +1,42 @@
-{"01 Clean water": [406, 529], "02 Salt dose": [1179, 407], "03 Heated channel": [992, 679], "04 Pasta basket": [759, 533], "05 Cooking vessel": [924, 580], "06 Base heater": [845, 806], "07 Guarded circulation": [1153, 640], "08 Drain / waste": [984, 978], "09 Lift + load cell": [1060, 361], "10 Electrical isolation": [977, 791]}
+{
+  "Unsalted clean tank": [
+    490,
+    687
+  ],
+  "Isolation / meter / pump": [
+    592,
+    959
+  ],
+  "Heated channel": [
+    554,
+    774
+  ],
+  "AIR GAP / max water": [
+    781,
+    509
+  ],
+  "Salt gravity chute": [
+    858,
+    421
+  ],
+  "Screened recirculation": [
+    1155,
+    866
+  ],
+  "LOW POINT + NC valve": [
+    837,
+    1036
+  ],
+  "DOWNHILL drain": [
+    918,
+    1157
+  ],
+  "Waste inlet / headspace": [
+    998,
+    1215
+  ],
+  "Dry bay / steam apart": [
+    1385,
+    568
+  ]
+}

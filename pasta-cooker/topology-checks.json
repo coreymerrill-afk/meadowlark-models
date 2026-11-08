@@ -1,0 +1,1551 @@
+{
+  "endpoint_checks": [
+    {
+      "edge": "F01",
+      "endpoint": "start",
+      "port": "tank.out",
+      "error_mm": 1.53e-05,
+      "pass": true
+    },
+    {
+      "edge": "F01",
+      "endpoint": "end",
+      "port": "isolation.in",
+      "error_mm": 2.16e-05,
+      "pass": true
+    },
+    {
+      "edge": "F02",
+      "endpoint": "start",
+      "port": "isolation.out",
+      "error_mm": 1.53e-05,
+      "pass": true
+    },
+    {
+      "edge": "F02",
+      "endpoint": "end",
+      "port": "feed.in",
+      "error_mm": 2.64e-05,
+      "pass": true
+    },
+    {
+      "edge": "F03",
+      "endpoint": "start",
+      "port": "feed.out",
+      "error_mm": 2.29e-05,
+      "pass": true
+    },
+    {
+      "edge": "F03",
+      "endpoint": "end",
+      "port": "meter.in",
+      "error_mm": 2.29e-05,
+      "pass": true
+    },
+    {
+      "edge": "F04",
+      "endpoint": "start",
+      "port": "meter.out",
+      "error_mm": 2.29e-05,
+      "pass": true
+    },
+    {
+      "edge": "F04",
+      "endpoint": "end",
+      "port": "heater.in",
+      "error_mm": 2.16e-05,
+      "pass": true
+    },
+    {
+      "edge": "H01",
+      "endpoint": "start",
+      "port": "heater.in",
+      "error_mm": 2.16e-05,
+      "pass": true
+    },
+    {
+      "edge": "H01",
+      "endpoint": "end",
+      "port": "heater.out",
+      "error_mm": 3.74e-05,
+      "pass": true
+    },
+    {
+      "edge": "H02",
+      "endpoint": "start",
+      "port": "heater.out",
+      "error_mm": 3.74e-05,
+      "pass": true
+    },
+    {
+      "edge": "H02",
+      "endpoint": "end",
+      "port": "fill.nozzle",
+      "error_mm": 3.06e-05,
+      "pass": true
+    },
+    {
+      "edge": "C00",
+      "endpoint": "start",
+      "port": "strainer.chamber",
+      "error_mm": 7.6e-06,
+      "pass": true
+    },
+    {
+      "edge": "C00",
+      "endpoint": "end",
+      "port": "strainer.out",
+      "error_mm": 1.53e-05,
+      "pass": true
+    },
+    {
+      "edge": "C01",
+      "endpoint": "start",
+      "port": "strainer.out",
+      "error_mm": 1.53e-05,
+      "pass": true
+    },
+    {
+      "edge": "C01",
+      "endpoint": "end",
+      "port": "circulation.in",
+      "error_mm": 1.53e-05,
+      "pass": true
+    },
+    {
+      "edge": "C02",
+      "endpoint": "start",
+      "port": "circulation.out",
+      "error_mm": 3.41e-05,
+      "pass": true
+    },
+    {
+      "edge": "C02",
+      "endpoint": "end",
+      "port": "return.wall",
+      "error_mm": 3.41e-05,
+      "pass": true
+    },
+    {
+      "edge": "C03",
+      "endpoint": "start",
+      "port": "return.wall",
+      "error_mm": 3.41e-05,
+      "pass": true
+    },
+    {
+      "edge": "C03",
+      "endpoint": "end",
+      "port": "return.tee",
+      "error_mm": 3.15e-05,
+      "pass": true
+    },
+    {
+      "edge": "C04",
+      "endpoint": "start",
+      "port": "return.tee",
+      "error_mm": 3.15e-05,
+      "pass": true
+    },
+    {
+      "edge": "C04",
+      "endpoint": "end",
+      "port": "return.a",
+      "error_mm": 3.17e-05,
+      "pass": true
+    },
+    {
+      "edge": "C05",
+      "endpoint": "start",
+      "port": "return.tee",
+      "error_mm": 3.15e-05,
+      "pass": true
+    },
+    {
+      "edge": "C05",
+      "endpoint": "end",
+      "port": "return.b",
+      "error_mm": 3.15e-05,
+      "pass": true
+    },
+    {
+      "edge": "D01",
+      "endpoint": "start",
+      "port": "chamber.low",
+      "error_mm": 1.72e-05,
+      "pass": true
+    },
+    {
+      "edge": "D01",
+      "endpoint": "end",
+      "port": "drain.in",
+      "error_mm": 1.72e-05,
+      "pass": true
+    },
+    {
+      "edge": "D02",
+      "endpoint": "start",
+      "port": "drain.out",
+      "error_mm": 1.72e-05,
+      "pass": true
+    },
+    {
+      "edge": "D02",
+      "endpoint": "end",
+      "port": "waste.coupling",
+      "error_mm": 1.53e-05,
+      "pass": true
+    },
+    {
+      "edge": "D03",
+      "endpoint": "start",
+      "port": "waste.coupling",
+      "error_mm": 1.53e-05,
+      "pass": true
+    },
+    {
+      "edge": "D03",
+      "endpoint": "end",
+      "port": "waste.internal",
+      "error_mm": 1.71e-05,
+      "pass": true
+    },
+    {
+      "edge": "V01",
+      "endpoint": "start",
+      "port": "waste.vent",
+      "error_mm": 2.16e-05,
+      "pass": true
+    },
+    {
+      "edge": "V01",
+      "endpoint": "end",
+      "port": "vent.out",
+      "error_mm": 2.16e-05,
+      "pass": true
+    },
+    {
+      "edge": "S01",
+      "endpoint": "start",
+      "port": "salt.out",
+      "error_mm": 8.5e-06,
+      "pass": true
+    },
+    {
+      "edge": "S01",
+      "endpoint": "end",
+      "port": "salt.nozzle",
+      "error_mm": 3.15e-05,
+      "pass": true
+    },
+    {
+      "edge": "ST01",
+      "endpoint": "start",
+      "port": "steam.in",
+      "error_mm": 3.05e-05,
+      "pass": true
+    },
+    {
+      "edge": "ST01",
+      "endpoint": "end",
+      "port": "steam.out",
+      "error_mm": 6.15e-05,
+      "pass": true
+    },
+    {
+      "edge": "ST00",
+      "endpoint": "start",
+      "port": "steam.pickup",
+      "error_mm": 3.05e-05,
+      "pass": true
+    },
+    {
+      "edge": "ST00",
+      "endpoint": "end",
+      "port": "steam.in",
+      "error_mm": 3.05e-05,
+      "pass": true
+    }
+  ],
+  "endpoint_passed": true,
+  "interference_scope": "Tube radius padded sampled AABB against unrelated clean tank, waste and dry bay only; not full mesh/manufacturing validation",
+  "unrelated_box_interferences": [],
+  "drain_nonincreasing_z": true,
+  "air_gap_to_maxwater_mm": 60,
+  "basket_raised_bottom_mm": 470,
+  "vessel_rim_mm": 455,
+  "basket_clearance_above_rim_mm": 15,
+  "basket_radial_gap_to_strainer_mm": 5,
+  "steam_out_to_dry_bay_nearest_mm": 325.07691397575434,
+  "all_pass": true,
+  "basket_sweep_nozzle_radial_clearance_mm": {
+    "fill.nozzle": 10.234,
+    "salt.nozzle": 10.623,
+    "steam.in": 5.247
+  },
+  "lift_sweep_check_pass": true,
+  "distinct_circuit_segment_clearances": [
+    {
+      "edges": [
+        "F01",
+        "C00"
+      ],
+      "surface_gap_mm": 272.954,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "C01"
+      ],
+      "surface_gap_mm": 300.322,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "C02"
+      ],
+      "surface_gap_mm": 340.509,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "C03"
+      ],
+      "surface_gap_mm": 322.184,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "C04"
+      ],
+      "surface_gap_mm": 315.189,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "C05"
+      ],
+      "surface_gap_mm": 323.563,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "D01"
+      ],
+      "surface_gap_mm": 175.638,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "D02"
+      ],
+      "surface_gap_mm": 186.361,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "D03"
+      ],
+      "surface_gap_mm": 326.126,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "V01"
+      ],
+      "surface_gap_mm": 407.897,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "S01"
+      ],
+      "surface_gap_mm": 287.662,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "ST01"
+      ],
+      "surface_gap_mm": 290.302,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F01",
+        "ST00"
+      ],
+      "surface_gap_mm": 269.967,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "C00"
+      ],
+      "surface_gap_mm": 245.01,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "C01"
+      ],
+      "surface_gap_mm": 272.016,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "C02"
+      ],
+      "surface_gap_mm": 315.63,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "C03"
+      ],
+      "surface_gap_mm": 297.951,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "C04"
+      ],
+      "surface_gap_mm": 290.901,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "C05"
+      ],
+      "surface_gap_mm": 300.159,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "D01"
+      ],
+      "surface_gap_mm": 144.312,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "D02"
+      ],
+      "surface_gap_mm": 147.095,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "D03"
+      ],
+      "surface_gap_mm": 287.48,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "V01"
+      ],
+      "surface_gap_mm": 375.963,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "S01"
+      ],
+      "surface_gap_mm": 279.087,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "ST01"
+      ],
+      "surface_gap_mm": 279.405,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F02",
+        "ST00"
+      ],
+      "surface_gap_mm": 258.27,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "C00"
+      ],
+      "surface_gap_mm": 240.0,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "C01"
+      ],
+      "surface_gap_mm": 263.902,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "C02"
+      ],
+      "surface_gap_mm": 302.888,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "C03"
+      ],
+      "surface_gap_mm": 287.0,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "C04"
+      ],
+      "surface_gap_mm": 272.272,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "C05"
+      ],
+      "surface_gap_mm": 290.0,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "D01"
+      ],
+      "surface_gap_mm": 110.59,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "D02"
+      ],
+      "surface_gap_mm": 115.339,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "D03"
+      ],
+      "surface_gap_mm": 252.794,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "V01"
+      ],
+      "surface_gap_mm": 341.881,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "S01"
+      ],
+      "surface_gap_mm": 301.357,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "ST01"
+      ],
+      "surface_gap_mm": 307.038,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F03",
+        "ST00"
+      ],
+      "surface_gap_mm": 288.635,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "C00"
+      ],
+      "surface_gap_mm": 253.245,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "C01"
+      ],
+      "surface_gap_mm": 277.058,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "C02"
+      ],
+      "surface_gap_mm": 303.028,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "C03"
+      ],
+      "surface_gap_mm": 286.426,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "C04"
+      ],
+      "surface_gap_mm": 268.681,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "C05"
+      ],
+      "surface_gap_mm": 289.426,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "D01"
+      ],
+      "surface_gap_mm": 128.482,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "D02"
+      ],
+      "surface_gap_mm": 140.445,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "D03"
+      ],
+      "surface_gap_mm": 273.266,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "V01"
+      ],
+      "surface_gap_mm": 357.035,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "S01"
+      ],
+      "surface_gap_mm": 290.385,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "ST01"
+      ],
+      "surface_gap_mm": 301.218,
+      "pass": true
+    },
+    {
+      "edges": [
+        "F04",
+        "ST00"
+      ],
+      "surface_gap_mm": 285.356,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "C00"
+      ],
+      "surface_gap_mm": 253.577,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "C01"
+      ],
+      "surface_gap_mm": 277.853,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "C02"
+      ],
+      "surface_gap_mm": 273.812,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "C03"
+      ],
+      "surface_gap_mm": 255.038,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "C04"
+      ],
+      "surface_gap_mm": 234.499,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "C05"
+      ],
+      "surface_gap_mm": 258.038,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "D01"
+      ],
+      "surface_gap_mm": 137.786,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "D02"
+      ],
+      "surface_gap_mm": 153.853,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "D03"
+      ],
+      "surface_gap_mm": 286.242,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "V01"
+      ],
+      "surface_gap_mm": 366.459,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "S01"
+      ],
+      "surface_gap_mm": 217.355,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "ST01"
+      ],
+      "surface_gap_mm": 240.118,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H01",
+        "ST00"
+      ],
+      "surface_gap_mm": 232.5,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "C00"
+      ],
+      "surface_gap_mm": 236.38,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "C01"
+      ],
+      "surface_gap_mm": 257.452,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "C02"
+      ],
+      "surface_gap_mm": 204.428,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "C03"
+      ],
+      "surface_gap_mm": 184.114,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "C04"
+      ],
+      "surface_gap_mm": 178.003,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "C05"
+      ],
+      "surface_gap_mm": 185.125,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "D01"
+      ],
+      "surface_gap_mm": 249.801,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "D02"
+      ],
+      "surface_gap_mm": 281.909,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "D03"
+      ],
+      "surface_gap_mm": 406.197,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "V01"
+      ],
+      "surface_gap_mm": 435.822,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "S01"
+      ],
+      "surface_gap_mm": 56.178,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "ST01"
+      ],
+      "surface_gap_mm": 86.403,
+      "pass": true
+    },
+    {
+      "edges": [
+        "H02",
+        "ST00"
+      ],
+      "surface_gap_mm": 87.475,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C00",
+        "D01"
+      ],
+      "surface_gap_mm": 101.851,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C00",
+        "D02"
+      ],
+      "surface_gap_mm": 157.483,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C00",
+        "D03"
+      ],
+      "surface_gap_mm": 195.138,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C00",
+        "V01"
+      ],
+      "surface_gap_mm": 174.034,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C00",
+        "S01"
+      ],
+      "surface_gap_mm": 233.681,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C00",
+        "ST01"
+      ],
+      "surface_gap_mm": 209.996,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C00",
+        "ST00"
+      ],
+      "surface_gap_mm": 193.092,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C01",
+        "D01"
+      ],
+      "surface_gap_mm": 122.893,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C01",
+        "D02"
+      ],
+      "surface_gap_mm": 172.6,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C01",
+        "D03"
+      ],
+      "surface_gap_mm": 194.391,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C01",
+        "V01"
+      ],
+      "surface_gap_mm": 152.189,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C01",
+        "S01"
+      ],
+      "surface_gap_mm": 254.279,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C01",
+        "ST01"
+      ],
+      "surface_gap_mm": 229.336,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C01",
+        "ST00"
+      ],
+      "surface_gap_mm": 213.811,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C02",
+        "D01"
+      ],
+      "surface_gap_mm": 184.867,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C02",
+        "D02"
+      ],
+      "surface_gap_mm": 206.583,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C02",
+        "D03"
+      ],
+      "surface_gap_mm": 218.26,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C02",
+        "V01"
+      ],
+      "surface_gap_mm": 164.934,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C02",
+        "S01"
+      ],
+      "surface_gap_mm": 204.118,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C02",
+        "ST01"
+      ],
+      "surface_gap_mm": 182.831,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C02",
+        "ST00"
+      ],
+      "surface_gap_mm": 176.385,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C03",
+        "D01"
+      ],
+      "surface_gap_mm": 173.832,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C03",
+        "D02"
+      ],
+      "surface_gap_mm": 231.624,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C03",
+        "D03"
+      ],
+      "surface_gap_mm": 273.718,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C03",
+        "V01"
+      ],
+      "surface_gap_mm": 247.186,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C03",
+        "S01"
+      ],
+      "surface_gap_mm": 184.512,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C03",
+        "ST01"
+      ],
+      "surface_gap_mm": 164.348,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C03",
+        "ST00"
+      ],
+      "surface_gap_mm": 157.246,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C04",
+        "D01"
+      ],
+      "surface_gap_mm": 166.068,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C04",
+        "D02"
+      ],
+      "surface_gap_mm": 220.844,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C04",
+        "D03"
+      ],
+      "surface_gap_mm": 267.051,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C04",
+        "V01"
+      ],
+      "surface_gap_mm": 253.114,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C04",
+        "S01"
+      ],
+      "surface_gap_mm": 187.512,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C04",
+        "ST01"
+      ],
+      "surface_gap_mm": 167.348,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C04",
+        "ST00"
+      ],
+      "surface_gap_mm": 160.246,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C05",
+        "D01"
+      ],
+      "surface_gap_mm": 176.832,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C05",
+        "D02"
+      ],
+      "surface_gap_mm": 234.624,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C05",
+        "D03"
+      ],
+      "surface_gap_mm": 278.867,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C05",
+        "V01"
+      ],
+      "surface_gap_mm": 260.317,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C05",
+        "S01"
+      ],
+      "surface_gap_mm": 171.481,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C05",
+        "ST01"
+      ],
+      "surface_gap_mm": 144.151,
+      "pass": true
+    },
+    {
+      "edges": [
+        "C05",
+        "ST00"
+      ],
+      "surface_gap_mm": 136.003,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D01",
+        "S01"
+      ],
+      "surface_gap_mm": 265.24,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D01",
+        "ST01"
+      ],
+      "surface_gap_mm": 254.993,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D01",
+        "ST00"
+      ],
+      "surface_gap_mm": 234.613,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D02",
+        "S01"
+      ],
+      "surface_gap_mm": 327.181,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D02",
+        "ST01"
+      ],
+      "surface_gap_mm": 319.833,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D02",
+        "ST00"
+      ],
+      "surface_gap_mm": 299.675,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D03",
+        "S01"
+      ],
+      "surface_gap_mm": 431.055,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D03",
+        "ST01"
+      ],
+      "surface_gap_mm": 417.488,
+      "pass": true
+    },
+    {
+      "edges": [
+        "D03",
+        "ST00"
+      ],
+      "surface_gap_mm": 399.04,
+      "pass": true
+    },
+    {
+      "edges": [
+        "V01",
+        "S01"
+      ],
+      "surface_gap_mm": 445.776,
+      "pass": true
+    },
+    {
+      "edges": [
+        "V01",
+        "ST01"
+      ],
+      "surface_gap_mm": 425.069,
+      "pass": true
+    },
+    {
+      "edges": [
+        "V01",
+        "ST00"
+      ],
+      "surface_gap_mm": 409.087,
+      "pass": true
+    },
+    {
+      "edges": [
+        "S01",
+        "ST01"
+      ],
+      "surface_gap_mm": 17.377,
+      "pass": true
+    },
+    {
+      "edges": [
+        "S01",
+        "ST00"
+      ],
+      "surface_gap_mm": 21.833,
+      "pass": true
+    }
+  ],
+  "distinct_circuit_clearance_pass": true,
+  "port_tangent_checks": [
+    {
+      "edge": "F01",
+      "port": "tank.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "F01",
+      "port": "isolation.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "F02",
+      "port": "isolation.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "F02",
+      "port": "feed.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "F03",
+      "port": "feed.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "F03",
+      "port": "meter.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "F04",
+      "port": "meter.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "F04",
+      "port": "heater.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "H01",
+      "port": "heater.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "H01",
+      "port": "heater.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "H02",
+      "port": "heater.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "H02",
+      "port": "fill.nozzle",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "C00",
+      "port": "strainer.chamber",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "C00",
+      "port": "strainer.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "C01",
+      "port": "strainer.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "C01",
+      "port": "circulation.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "C02",
+      "port": "circulation.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "C02",
+      "port": "return.wall",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "C03",
+      "port": "return.wall",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "D01",
+      "port": "chamber.low",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "D01",
+      "port": "drain.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "D02",
+      "port": "drain.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "D02",
+      "port": "waste.coupling",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "D03",
+      "port": "waste.coupling",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "D03",
+      "port": "waste.internal",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "V01",
+      "port": "waste.vent",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "S01",
+      "port": "salt.out",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "S01",
+      "port": "salt.nozzle",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "ST01",
+      "port": "steam.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "ST00",
+      "port": "steam.pickup",
+      "axis_alignment": 1.0,
+      "pass": true
+    },
+    {
+      "edge": "ST00",
+      "port": "steam.in",
+      "axis_alignment": 1.0,
+      "pass": true
+    }
+  ],
+  "port_tangent_pass": true
+}

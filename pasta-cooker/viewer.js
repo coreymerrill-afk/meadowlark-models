@@ -1,7 +1,7 @@
 /* Pasta cooker viewer.
    Loads the Blender 4.2.9 glTF binaries in this folder. No stand-in geometry.
-   The files are a small glTF subset: triangles, tightly packed float attributes,
-   uint16 indices, node translation/rotation, and PBR factors without textures.
+   V2 files are a glTF subset: triangles, tightly packed float attributes,
+   uint16 indices, nested node translation/rotation, and PBR factors without textures.
    Anything outside that subset stops the load instead of drawing a guess. */
 (function () {
   "use strict";
@@ -10,30 +10,30 @@
   var VIEWS = {
     exterior: {
       id: "exterior",
-      file: "pasta-cooker-assembled.glb",
-      meshes: 115,
-      vertices: 35948,
+      file: "pasta-cooker-v2-exterior.glb",
+      meshes: 231,
+      vertices: 141169,
       label: "Exterior",
-      note: "Full case from pasta-cooker-assembled.glb. Interior parts are inside the shell.",
-      labels: ["lid", "ui", "water", "drain"]
+      note: "pasta-cooker-v2-exterior.glb. Guards sit around the routes. Clean feed stays on the left and does not enter the waste tank.",
+      labels: ["water", "meter", "heat", "gap", "salt", "circ", "valve", "downhill", "waste", "dry"]
     },
     cutaway: {
       id: "cutaway",
-      file: "pasta-cooker-cutaway.glb",
-      meshes: 95,
-      vertices: 26632,
+      file: "pasta-cooker-v2-cutaway.glb",
+      meshes: 215,
+      vertices: 132550,
       label: "Cutaway",
-      note: "Case and lid are hidden in pasta-cooker-cutaway.glb. The vessel wall is sectioned so the basket and plumbing can be read.",
-      labels: ["water", "salt", "channel", "basket", "vessel", "base", "circ", "drain", "lift", "elec"]
+      note: "pasta-cooker-v2-cutaway.glb hides the front tank, chamber, and waste walls, the lid, and the dry exterior guards. The open floor low point, strainer, waterline, and waste coupling stay in the file.",
+      labels: ["water", "meter", "heat", "gap", "salt", "circ", "valve", "downhill", "waste", "dry"]
     },
     exploded: {
       id: "exploded",
-      file: "pasta-cooker-exploded.glb",
-      meshes: 102,
-      vertices: 28709,
+      file: "pasta-cooker-v2-exploded.glb",
+      meshes: 217,
+      vertices: 134123,
       label: "Exploded",
-      note: "Modules are moved apart in pasta-cooker-exploded.glb. Plumbing stays in the assembled reference position. This is not a connected working configuration.",
-      labels: ["basket", "lid", "water", "salt", "channel", "drain", "elec"]
+      note: "pasta-cooker-v2-exploded.glb raises the basket and carriage 190 mm and sets the lid aside. No plumbed module is moved, so the tank, heater, valve, and waste connections stay attached.",
+      labels: ["basket", "lid", "water", "circ", "valve", "downhill", "waste", "dry"]
     }
   };
 
@@ -42,135 +42,179 @@
       id: "water",
       path: "water",
       swatch: "#3aa0c8",
-      title: "Clean water",
-      callout: { exterior: "Clean water tank", cutaway: "01 Clean water", exploded: "Water reservoir" },
-      prefer: ["Clean tank viewing strip", "01 Clean water removable tank"],
-      about: "Removable clean-water tank, fill cap, carry handle, and level marks. The blue route continues through a metering pump and a cold-feed pipe into the heated channel. Metering sensors, valve internals, and backflow compliance are not designed."
+      title: "Unsalted clean tank",
+      callout: { exterior: "Unsalted clean tank", cutaway: "Unsalted clean tank", exploded: "Clean feed stays left" },
+      prefer: ["Tank left wall", "Unsalted clean water visual"],
+      about: "Hollow removable unsalted tank with a side bore. The clean route leaves that bore and never enters the waste solid. V1 ran 88.5 mm of clean-feed centerline through the waste tank; that intersection is gone in this file."
+    },
+    {
+      id: "meter",
+      path: "water",
+      swatch: "#3aa0c8",
+      title: "Isolation / meter / pump",
+      callout: { exterior: "Isolation / meter / pump", cutaway: "Isolation / meter / pump", exploded: "Isolation / meter / pump" },
+      prefer: ["Metering feed pump", "Flowmeter", "Isolation check cartridge"],
+      about: "Named ports: tank outlet, isolation/check cartridge, metering pump, and flowmeter. The mechanisms inside those bodies are not simulated. Feed joins the first heater inlet, not a midpoint along the channel."
+    },
+    {
+      id: "heat",
+      path: "heat",
+      swatch: "#e25a32",
+      title: "Heated channel",
+      callout: { exterior: "Heated channel", cutaway: "Heated channel", exploded: "Heated channel" },
+      prefer: ["H01 heater.in -> heater.out", "Heater dry back enclosure"],
+      about: "Isolated heater channel with a ceramic separator and a dry back enclosure. The inlet collar is the declared heater.in port. This is not a pressure cooker, and no flow rate or heat-up time is validated."
+    },
+    {
+      id: "gap",
+      path: "heat",
+      swatch: "#e25a32",
+      title: "Air gap / max water",
+      callout: { exterior: "AIR GAP / max water", cutaway: "AIR GAP / max water", exploded: "AIR GAP / max water" },
+      prefer: ["Air gap water drop 450", "MAX WATER 420mm", "PORT fill.nozzle"],
+      about: "The hot nozzle ends at z480 mm. The geometric maximum waterline is z420 mm, a 60 mm gap. The dotted beads are free-falling water, not a pipe across the gap. The waterline is not a portion recipe or a thermal budget."
+    },
+    {
+      id: "mantle",
+      path: "heat",
+      swatch: "#e25a32",
+      title: "Vessel mantle heater",
+      callout: { exterior: "Vessel mantle heater", cutaway: "Vessel mantle heater", exploded: "Vessel mantle heater" },
+      prefer: ["Optional direct vessel mantle heater"],
+      about: "Optional direct vessel heat, kept as a second input beside the channel. Two heaters still have to share one household supply. Neither arrangement has a validated cook time."
     },
     {
       id: "salt",
       path: "salt",
       swatch: "#d9d0b4",
-      title: "Salt dose",
-      callout: { exterior: "Salt dose", cutaway: "02 Salt dose", exploded: "Salt dosing module" },
-      prefer: ["02 Separate salt hopper", "Salt auger dosing chute"],
-      about: "Separate hopper, funnel, and an illustrative auger chute dose into the vessel so salt stays out of the clean-water and heater path. Feed rate, bridging, and moisture sealing need testing."
+      title: "Salt gravity chute",
+      callout: { exterior: "Salt gravity chute", cutaway: "Salt gravity chute", exploded: "Salt gravity chute" },
+      prefer: ["S01 salt.out -> salt.nozzle", "Salt open funnel"],
+      about: "Dry salt cartridge and metering gate. The chute falls from z540 mm to the chamber annulus at z480 mm. It does not climb. Bridging, moisture sealing, and a real auger are not in the model. Clean water upstream stays unsalted."
     },
     {
-      id: "channel",
-      path: "heat",
-      swatch: "#e25a32",
-      title: "Heated channel",
-      callout: { exterior: "Heated channel", cutaway: "03 Heated channel", exploded: "Channel heater module" },
-      prefer: ["Heated channel serpentine", "03 Flow through heater block"],
-      about: "Orange serpentine flow-through channel, then an elevated rim outlet and air-gap concept into the vessel. Pressure drop, scale, dry-fire, and service access are not solved. This is not a pressure cooker."
+      id: "circ",
+      path: "circ",
+      swatch: "#1faf78",
+      title: "Screened recirculation",
+      callout: { exterior: "Screened recirculation", cutaway: "Screened recirculation", exploded: "Recirculation stays attached" },
+      prefer: ["C00 strainer.chamber -> strainer.out", "Strainer service union"],
+      about: "A separate chamber loop: bar-screen cartridge inside the vessel, bored wall port, service union, pump placeholder, return port, and a tee into the same chamber. Only that tee is a branch. Screening, starch, and seals are unvalidated. In the exploded file this loop stays connected."
+    },
+    {
+      id: "valve",
+      path: "drain",
+      swatch: "#b58362",
+      title: "Low point + NC valve",
+      callout: { exterior: "LOW POINT + NC valve", cutaway: "LOW POINT + NC valve", exploded: "Valve accessible" },
+      prefer: ["Normally closed drain valve body", "Sloped floor with open low point"],
+      about: "The sloped floor ends in an open 24 mm low point at z235 mm. The pipe meets the normally closed valve vertically at z215 mm and leaves at z185 mm. The default gate is closed. That is a geometric state, not a finished drain control."
+    },
+    {
+      id: "downhill",
+      path: "drain",
+      swatch: "#b58362",
+      title: "Downhill drain",
+      callout: { exterior: "DOWNHILL drain", cutaway: "DOWNHILL drain", exploded: "Drain stays attached" },
+      prefer: ["D02 drain.out -> waste.coupling"],
+      about: "After the valve the centerline does not rise. V1 climbed 65 mm with no drain pump. This route stays level or downhill to the receiving coupling at z135 mm. Exploded view does not pull this pipe off its ports."
+    },
+    {
+      id: "waste",
+      path: "drain",
+      swatch: "#b58362",
+      title: "Waste inlet / headspace",
+      callout: { exterior: "Waste inlet / headspace", cutaway: "Waste inlet / headspace", exploded: "Waste stays BELOW floor" },
+      prefer: ["Removable drain dry break coupling", "Waste maximum fill level"],
+      about: "A stub continues to z120 mm inside the waste headspace. The geometric max fill is z95 mm. The reservoir sits below the floor, with its own vent, inlet coupling, and drip tray. Max fill is a line in the model, not a sensor."
+    },
+    {
+      id: "steam",
+      path: "steam",
+      swatch: "#d7e4ea",
+      title: "Steam standpipe",
+      callout: { exterior: "Steam standpipe", cutaway: "Steam standpipe", exploded: "Steam standpipe" },
+      prefer: ["ST00 steam.pickup -> steam.in", "Steam standpipe rim bracket"],
+      about: "Rim-supported headspace standpipe. It is not attached to the removable lid. Steam leaves toward the rear-left, away from the rear-right dry bay. That separation is not a condensation or ingress test."
+    },
+    {
+      id: "dry",
+      path: "dry",
+      swatch: "#8d98a0",
+      title: "Dry bay",
+      callout: { exterior: "Dry bay / steam apart", cutaway: "Dry bay / steam apart", exploded: "Dry bay is separate" },
+      prefer: ["Dry electronics compartment", "Wet dry barrier"],
+      about: "Rear-right dry compartment and a wet/dry barrier. Packaging intent only. It does not prove grounding, leak sensing, or electrical compliance."
     },
     {
       id: "basket",
       path: "cook",
       swatch: "#c5ced1",
       title: "Pasta basket",
-      callout: { exterior: "Pasta basket", cutaway: "04 Pasta basket", exploded: "Lift / drain basket" },
-      prefer: ["04 Basket top rim", "Dry pasta illustrative 00"],
-      about: "Removable basket. Ribs and hoops stand in for perforations; they are not a manufacturable screen. The pasta strands are illustrative. No actuator, limit switch, lock, or motion is in the file."
+      callout: { exterior: "Pasta basket", cutaway: "Pasta basket", exploded: "Basket clears rim 15mm" },
+      prefer: ["Basket rim 440", "Basket bridge"],
+      about: "Basket bottom sits at z280 mm and, in the exploded file, rises to z470 mm. The vessel rim is z455 mm, so the raised bottom clears it by 15 mm. Mesh spacing is not a manufacturable screen. Nozzle and steam collars stay outside the radial lift sweep. The smallest nominal collar clearance is 5.247 mm, with no tolerance allowance."
+    },
+    {
+      id: "lift",
+      path: "cook",
+      swatch: "#8d98a0",
+      title: "Lift carriage",
+      callout: { exterior: "Lift carriage", cutaway: "Lift carriage", exploded: "Lift carriage" },
+      prefer: ["Lift load cell carriage", "Lift drive mast"],
+      about: "Mast, rails, and a load-cell carriage. The exploded file moves this carriage with the basket. No actuator sizing, interlock, or motion limit is engineered."
     },
     {
       id: "vessel",
       path: "cook",
       swatch: "#9aa7ad",
       title: "Cooking vessel",
-      callout: { exterior: "Cooking vessel", cutaway: "05 Cooking vessel", exploded: "Cooking vessel" },
-      prefer: ["05 Vessel section wall", "Vessel rolled rim"],
-      about: "Stainless-colored vessel. The wall is sectioned in the model so the inside can be seen. The nominal exterior envelope, about 480 × 360 × 410 mm, is indicative only. Coordinates in the GLB are meters."
-    },
-    {
-      id: "base",
-      path: "heat",
-      swatch: "#e25a32",
-      title: "Base heater",
-      callout: { exterior: "Base heater", cutaway: "06 Base heater", exploded: "Base heater" },
-      prefer: ["06 Direct vessel heater plate"],
-      about: "Orange plate under the vessel. A second heat input, kept in addition to the heated channel. Splitting a household circuit does not create extra energy. No power arbitration, sensor, or thermal cutout is implemented."
-    },
-    {
-      id: "circ",
-      path: "circ",
-      swatch: "#1faf78",
-      title: "Guarded circulation",
-      callout: { exterior: "Guarded circulation", cutaway: "07 Guarded circulation", exploded: "Guarded circulation" },
-      prefer: ["Gentle broad return loop", "07 Recirculation pump"],
-      about: "Green loop: side suction outside the basket, recirculation pump, and a broad tangential return. No pasta through the pump is the intent. The ribbed guard is a visual placeholder. Flow and starch behavior are unvalidated."
-    },
-    {
-      id: "drain",
-      path: "drain",
-      swatch: "#b58362",
-      title: "Drain / waste",
-      callout: { exterior: "Removable waste drawer", cutaway: "08 Drain / waste", exploded: "Waste drawer" },
-      prefer: ["Waste access drawer face", "08 Removable waste drawer"],
-      about: "Brown vessel-bottom drain, a valve-actuator concept, and a removable drawer. No safe drain timing, venting, or full-tank sensing is implemented."
-    },
-    {
-      id: "lift",
-      path: "lift",
-      swatch: "#8d98a0",
-      title: "Lift + load cell",
-      callout: { exterior: "Lift + load cell", cutaway: "09 Lift + load cell", exploded: "Lift + load cell" },
-      prefer: ["09 Lift rail tower", "Portion load cell concept"],
-      about: "Lift rail, carriage, and basket bridge indicate an automated lift and drain. The green block is a conceptual load cell. No actuator sizing, switches, or locking is in the model."
-    },
-    {
-      id: "elec",
-      path: "elec",
-      swatch: "#5c6b73",
-      title: "Electrical isolation",
-      callout: { exterior: "Electrical isolation", cutaway: "10 Electrics (rear)", exploded: "Wet / dry separation" },
-      prefer: ["10 Sealed electrical concept bay", "Wet dry isolation barrier"],
-      about: "Rear low compartment and a separating wall show intended wet/dry segregation. They are packaging intent only: not proof of waterproofing, grounding, leak sensing, or electrical compliance."
+      callout: { exterior: "Cooking vessel", cutaway: "Cooking vessel", exploded: "Cooking vessel" },
+      prefer: ["Chamber rolled rim", "Vessel rear half"],
+      about: "Chamber and rolled rim. The cutaway removes the front shell so the sloped floor opening can be seen. Chassis envelope is about 660 by 480 mm, with the lift mast near 715 mm. Indicative layout, not a compact appliance package."
     },
     {
       id: "lid",
       path: "steam",
       swatch: "#f4f1ea",
-      title: "Vented lid",
-      callout: { exterior: "Lift-off vented lid", cutaway: "Lift-off vented lid", exploded: "Removable lid" },
-      prefer: ["Steam guarded lid", "Rear steam vent 0"],
-      about: "Removable lid with rear-facing steam vents and a cool-touch grip concept. Not an interlock, and not a demonstrated safe vent direction."
-    },
-    {
-      id: "ui",
-      path: "ui",
-      swatch: "#7dcec4",
-      title: "Shape + portion",
-      callout: { exterior: "Shape + portion control", cutaway: "Shape + portion control", exploded: "Shape + portion control" },
-      prefer: ["Shape and portion display", "Shape setting rotary dial"],
-      about: "Dial and screen represent a shape and portion selection. There is no weighing or control implementation. The load cell is the separate block on the lift."
+      title: "Removable lid",
+      callout: { exterior: "Removable lid", cutaway: "Removable lid", exploded: "Lid removed / service" },
+      prefer: ["Removable chamber lid", "Cool touch lid handle"],
+      about: "The lid has separate apertures around the fixed fill nozzle, salt nozzle, and standpipe. The steam pickup is not part of the lid. Cutaway omits the lid. Exploded sets it aside without moving the pipes."
     },
     {
       id: "case",
       path: "case",
       swatch: "#e7e4dc",
-      title: "Exterior case",
-      callout: { exterior: "Exterior case", cutaway: "Exterior case", exploded: "Exterior case" },
-      prefer: ["Exterior front fascia", "Top deck"],
-      about: "Ivory case, graphite top deck, drip tray, and feet. Hidden in the cutaway file. The exploded file keeps the tray and feet and moves some modules off them."
+      title: "Guards and chassis",
+      callout: { exterior: "Guards and chassis", cutaway: "Guards and chassis", exploded: "Guards and chassis" },
+      prefer: ["Chassis drip containment base", "Control console"],
+      about: "Drip base, cradle, feet, and outer guards. Paths are left readable instead of buried in a solid box. Not a tested enclosure."
     }
   ];
 
+  function starts(name, prefix) {
+    return name.indexOf(prefix) === 0;
+  }
+
   var RULES = [
-    ["lift", function (n) { return n.indexOf("09 ") === 0 || n.indexOf("Lift ") === 0 || n.indexOf("Portion load") === 0 || n.indexOf("Basket lift") === 0; }],
-    ["basket", function (n) { return n.indexOf("04 ") === 0 || n.indexOf("Basket ") === 0 || n.indexOf("Dry pasta") === 0; }],
-    ["water", function (n) { return n.indexOf("01 ") === 0 || n.indexOf("Clean tank") === 0 || n.indexOf("Tank level") === 0 || n === "Metering pump" || n.indexOf("A Clean") === 0 || n.indexOf("B Metered") === 0; }],
-    ["channel", function (n) { return n.indexOf("03 ") === 0 || n.indexOf("Heated channel") === 0 || n.indexOf("C Heated") === 0; }],
-    ["base", function (n) { return n.indexOf("06 ") === 0; }],
-    ["salt", function (n) { return n.indexOf("02 ") === 0 || n.indexOf("Salt ") === 0; }],
-    ["circ", function (n) { return n.indexOf("07 ") === 0 || n.indexOf("Guarded ") === 0 || n.indexOf("Gentle ") === 0 || n.indexOf("Suction ") === 0 || n.indexOf("Broad ") === 0; }],
-    ["drain", function (n) { return n.indexOf("08 ") === 0 || n.indexOf("Waste ") === 0 || n.indexOf("D Vessel") === 0 || n.indexOf("Drain valve") === 0; }],
-    ["lid", function (n) { return n.indexOf("Steam ") === 0 || n.indexOf("Cool touch") === 0 || n.indexOf("Rear steam") === 0; }],
-    ["ui", function (n) { return n.indexOf("Shape") === 0 || n === "PASTA / 01" || n.indexOf("SHAPE") === 0 || n === "LIFT + DRAIN"; }],
-    ["elec", function (n) { return n.indexOf("10 ") === 0 || n.indexOf("Wet dry") === 0; }],
-    ["case", function (n) { return n.indexOf("Exterior ") === 0 || n === "Top deck" || n.indexOf("Structural ") === 0 || n.indexOf("Isolated foot") === 0; }],
-    ["vessel", function (n) { return n.indexOf("05 ") === 0 || n.indexOf("Vessel ") === 0; }]
+    ["valve", function (n) { return n === "NC" || starts(n, "NC ") || starts(n, "Normally closed") || starts(n, "Valve actuator") || starts(n, "PORT drain") || starts(n, "PORT chamber.low") || starts(n, "D01"); }],
+    ["downhill", function (n) { return starts(n, "D02"); }],
+    ["waste", function (n) { return starts(n, "D03") || starts(n, "V0") || starts(n, "PORT waste") || starts(n, "PORT vent") || starts(n, "Waste ") || starts(n, "Removable drain") || n === "DRAIN" || n === "WASTE"; }],
+    ["meter", function (n) { return starts(n, "Flowmeter") || starts(n, "Isolation ") || starts(n, "Metering feed") || starts(n, "PORT isolation") || starts(n, "PORT feed") || starts(n, "PORT meter") || starts(n, "F02") || starts(n, "F03") || starts(n, "F04"); }],
+    ["water", function (n) { return starts(n, "F0") || starts(n, "PORT tank") || starts(n, "Tank ") || starts(n, "Unsalted") || n === "CLEAN / UNSALTED" || starts(n, "Left tank"); }],
+    ["mantle", function (n) { return starts(n, "Optional direct"); }],
+    ["gap", function (n) { return starts(n, "Air gap") || starts(n, "PORT fill") || n === "FILL" || starts(n, "MAX WATER") || starts(n, "H02"); }],
+    ["heat", function (n) { return starts(n, "H0") || starts(n, "PORT heater") || starts(n, "Heater "); }],
+    ["salt", function (n) { return starts(n, "S0") || starts(n, "PORT salt") || starts(n, "Salt ") || n === "SALT"; }],
+    ["circ", function (n) { return starts(n, "C0") || starts(n, "PORT circulation") || starts(n, "PORT return") || starts(n, "PORT strainer") || starts(n, "Strainer ") || starts(n, "Intake ") || starts(n, "Removable strainer") || starts(n, "Service union") || starts(n, "Circulation ") || starts(n, "Heat compatible") || n === "RECIRC"; }],
+    ["steam", function (n) { return starts(n, "ST") || starts(n, "PORT steam") || starts(n, "Steam "); }],
+    ["basket", function (n) { return starts(n, "Basket ") || starts(n, "Lift fork"); }],
+    ["lift", function (n) { return starts(n, "Lift ") || starts(n, "Mast lower"); }],
+    ["lid", function (n) { return starts(n, "Cool touch") || starts(n, "Removable chamber lid"); }],
+    ["dry", function (n) { return n === "DRY BAY" || starts(n, "Dry ") || starts(n, "Wet dry"); }],
+    ["vessel", function (n) { return starts(n, "Chamber ") || starts(n, "Sloped ") || starts(n, "Vessel "); }],
+    ["case", function (n) { return starts(n, "Anti slip") || starts(n, "Chassis") || starts(n, "Cradle") || starts(n, "Front guard") || starts(n, "Rear outer") || starts(n, "Right outer") || starts(n, "Control console") || starts(n, "Portion dial") || n === "PASTA / 02" || n === "SHAPE + MASS" || starts(n, "Shape display"); }]
   ];
 
   function matchPart(name) {
@@ -336,27 +380,35 @@
     var unmatched = [];
     var meshCount = 0;
     var vertexCount = 0;
-    sceneDef.nodes.forEach(function (nodeIndex) {
+    function addNode(nodeIndex, parent) {
       var node = json.nodes[nodeIndex];
-      if (!node || node.mesh === undefined) throw new Error("A scene node has no mesh");
-      if (node.children && node.children.length) throw new Error("Nested nodes are not in these files");
+      if (!node) throw new Error("Missing node " + nodeIndex);
       if (node.matrix) throw new Error("Matrix transforms are not in these files");
-      var group = meshes[node.mesh];
+      var group = new THREE.Group();
       group.name = node.name || "";
       if (node.translation) group.position.fromArray(node.translation);
       if (node.rotation) group.quaternion.fromArray(node.rotation);
       if (node.scale) group.scale.fromArray(node.scale);
-      var partId = matchPart(group.name);
-      if (!partId) unmatched.push(group.name || "(unnamed)");
-      group.traverse(function (child) {
-        if (!child.isMesh) return;
-        child.name = group.name;
-        child.userData.partId = partId;
-        child.userData.baseMaterial = child.material;
-        meshCount += 1;
-        vertexCount += child.geometry.getAttribute("position").count;
+      if (node.mesh !== undefined) {
+        var partId = matchPart(group.name);
+        if (!partId) unmatched.push(group.name || "(unnamed)");
+        meshes[node.mesh].traverse(function (child) {
+          if (!child.isMesh) return;
+          child.name = group.name;
+          child.userData.partId = partId;
+          child.userData.baseMaterial = child.material;
+          meshCount += 1;
+          vertexCount += child.geometry.getAttribute("position").count;
+        });
+        group.add(meshes[node.mesh]);
+      }
+      (node.children || []).forEach(function (childIndex) {
+        addNode(childIndex, group);
       });
-      object.add(group);
+      parent.add(group);
+    }
+    sceneDef.nodes.forEach(function (nodeIndex) {
+      addNode(nodeIndex, object);
     });
     object.userData.meshCount = meshCount;
     object.userData.vertexCount = vertexCount;
