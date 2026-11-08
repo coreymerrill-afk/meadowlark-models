@@ -2,6 +2,7 @@
 
 Run `python3 make_egg_crate.py` with numpy, ezdxf, shapely>=2, matplotlib and mapbox-earcut installed.
 
+- ONE blade profile × 48 and ONE rib profile × 14. Rib pitch 180 mm = 15 tooth pitches, with symmetric 60 mm end insets. Every blade slot is centered on the same tooth-valley phase (0 mm modulo 12 mm). Parts reverse end-for-end and face-for-face; they are not invertible top-to-bottom: teeth stay up, blade slots down, rib slots up. No indexed placement or left/right variants.
 - Two 1200 × 1200 mm panels; each 24 blades and 7 ribs, 3.18 mm steel.
 - Blade tips 38 mm above the plate; valleys and rib tops 34 mm. No rib material may exceed 34 mm in assembled mode. Tooth tips alone support stock.
 - Opposing slots exactly 17 mm deep (half 34 mm rib height). Finished slot width 3.4 mm, including 0.22 mm clearance. Supplier applies kerf compensation ONCE, to finished-part outlines, not by modifying the nominal width. Test a mating coupon before ordering a full bed.

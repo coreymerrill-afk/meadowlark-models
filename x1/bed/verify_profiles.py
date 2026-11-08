@@ -37,3 +37,21 @@ for a,b in zip(c.blade_y,c.blade_y[1:]):
 log=[];bed.verify(c,log)
 print(*log,sep='\n')
 print('PASS: identical HTML copies, rectangular channels, seam reliefs, half laps, height envelope')
+
+# Every exported nested piece must be a translated copy of ONE of two profiles.
+from shapely.affinity import translate, scale
+assert c.rib_pitch == 180 and c.rib_x[0] == 60 and c.rib_x[-1] == 1140
+assert all(abs((x % c.tooth_p)) < 1e-7 for x in c.rib_x)
+for pg, width in ((B,c.L),(R,c.W)):
+    assert pg.symmetric_difference(scale(pg,xfact=-1,yfact=1,origin=(width/2,0))).area < 1e-7
+for filename, expected in [('nest_one_panel_4x8.dxf',[24,7]),('nest_full_bed_4x8.dxf',[48,14]),('nest_full_bed_60x120.dxf',[48,14])]:
+    counts=[0,0]
+    for entity in ezdxf.readfile(root/filename).modelspace().query('LWPOLYLINE[layer=="CUT"]'):
+        pg=Polygon(entity.get_points('xy'));x0,y0,_,_=pg.bounds
+        pg=translate(pg,-x0,-y0)
+        matches=[i for i,part in enumerate((B,R)) if pg.symmetric_difference(part).area < 1e-6]
+        assert len(matches)==1, (filename,'variant profile detected')
+        counts[matches[0]]+=1
+    assert counts==expected,(filename,counts)
+    print(filename+': all parts identical by direction; counts '+str(counts))
+print('PASS: phase constant at tooth valleys; two unique reversible part profiles only')
