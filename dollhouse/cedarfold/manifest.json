@@ -1,0 +1,591 @@
+{
+  "name": "Cedarfold Playhouse",
+  "version": "1.0.0",
+  "scale": "1:24",
+  "status": "UNPRINTED PROTOTYPE",
+  "units": "mm",
+  "up_axis": "Z",
+  "nozzle_basis_mm": 0.4,
+  "nozzle_0_2_mm": "not confirmed; this CAD is for a 0.4 mm nozzle",
+  "printer_nominal_bed_mm": [
+    330.0,
+    320.0,
+    325.0
+  ],
+  "fit_envelope_mm": [
+    310.0,
+    300.0,
+    315.0
+  ],
+  "hinge": {
+    "axis": [
+      0,
+      0,
+      1
+    ],
+    "origin_mm": [
+      0,
+      0,
+      0
+    ],
+    "open_deg": 0,
+    "closed_deg": -180,
+    "moving_wing": "garden",
+    "pin_diameter_mm": 4.0,
+    "bore_flat_radius_mm": 2.35,
+    "radial_clearance_to_flats_mm": 0.35,
+    "axial_knuckle_gap_mm": 0.5,
+    "segments": 32
+  },
+  "drawer": {
+    "travel_mm": 51.55,
+    "axis_open_pose": [
+      0,
+      1,
+      0
+    ],
+    "capture": "Runners ride in side grooves. A front stop meets the runner at full travel. The front of the groove is taller, so the drawer lifts out only when it is fully extended."
+  },
+  "stairs": {
+    "walking_width_mm": 42.0,
+    "risers_per_flight": 12,
+    "rise_mm": 8.167,
+    "tread_mm": 7.5,
+    "floor_to_floor_mm": 98.0,
+    "landing_depth_mm": 44.0,
+    "landing": "Back hall of each upper floor. The hall is the full room width and at least the stair width in the direction of travel. The flight opens through that floor; the landing is solid and continuous with the room floor."
+  },
+  "keys": {
+    "tenon_mm": [
+      7.6,
+      7.6,
+      3.5
+    ],
+    "socket_mm": [
+      8.6,
+      8.6,
+      4.6
+    ],
+    "side_clearance_mm": 0.5,
+    "end_clearance_mm": 1.1,
+    "magnets": "None. Stacking is the rectangular keys. Magnets are not the attachment."
+  },
+  "lighting": {
+    "voltage": "5 V provisional empty grooves",
+    "section_mm": [
+      5.0,
+      1.7
+    ],
+    "loop": "Each base has a rear pocket beside the hinge for a slack loop. No wire is included. The groove is on the fixed stile, not a loose lead on the swinging front."
+  },
+  "casters": {
+    "count": 8,
+    "brake_count": 4,
+    "assumption": "Nominal 25 mm wheel plate caster, about 26 mm plate, 18 mm hole spacing, M4 screws. The mesh is a schematic, not a measured catalog part. Brake holding force was not tested."
+  },
+  "open_size_mm": {
+    "min_mm": [
+      -216.2,
+      -7.2,
+      -30.0
+    ],
+    "max_mm": [
+      188.8,
+      173.6,
+      352.4
+    ]
+  },
+  "rooms": [
+    {
+      "id": "hearth-kitchen",
+      "storey": 1,
+      "note": "Outer counter, sink, stove, table. Stair to the bedroom is on the inner side."
+    },
+    {
+      "id": "hearth-bedroom",
+      "storey": 2,
+      "note": "Bed and lamp. Hall at the back is the landing."
+    },
+    {
+      "id": "hearth-attic",
+      "storey": 3,
+      "note": "Gable attic, cot, balcony door on the outer wall."
+    },
+    {
+      "id": "garden-parlor",
+      "storey": 1,
+      "note": "Sofa, table, floor lamp."
+    },
+    {
+      "id": "garden-bath",
+      "storey": 2,
+      "note": "Tub, basin, toilet."
+    },
+    {
+      "id": "garden-terrace",
+      "storey": 3,
+      "note": "Open front terrace under a rear shed roof."
+    }
+  ],
+  "instances": [
+    {
+      "id": "cf_hearth_base",
+      "part": "cf_hearth_base",
+      "name": "Hearth base, drawer rails, and hinge seat",
+      "wing": "hearth",
+      "role": "base",
+      "color": "#8d6844",
+      "print": true,
+      "file": "stl/assembly/cf_hearth_base.stl",
+      "explode_mm": [
+        0,
+        -20,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_hearth_drawer",
+      "part": "cf_hearth_drawer",
+      "name": "Hearth drawer",
+      "wing": "hearth",
+      "role": "drawer",
+      "color": "#8d877c",
+      "print": true,
+      "file": "stl/assembly/cf_hearth_drawer.stl",
+      "explode_mm": [
+        0,
+        70,
+        0
+      ],
+      "drawer_travel_mm": 51.55
+    },
+    {
+      "id": "cf_hearth_ground",
+      "part": "cf_hearth_ground",
+      "name": "Hearth kitchen storey and lower stair",
+      "wing": "hearth",
+      "role": "storey",
+      "color": "#c4a06a",
+      "print": true,
+      "file": "stl/assembly/cf_hearth_ground.stl",
+      "explode_mm": [
+        0,
+        0,
+        28
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_hearth_upper",
+      "part": "cf_hearth_upper",
+      "name": "Hearth bedroom storey and upper stair",
+      "wing": "hearth",
+      "role": "storey",
+      "color": "#c4a06a",
+      "print": true,
+      "file": "stl/assembly/cf_hearth_upper.stl",
+      "explode_mm": [
+        0,
+        0,
+        64
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_hearth_attic",
+      "part": "cf_hearth_attic",
+      "name": "Hearth attic, gable roof, and balcony",
+      "wing": "hearth",
+      "role": "roof",
+      "color": "#9a7548",
+      "print": true,
+      "file": "stl/assembly/cf_hearth_attic.stl",
+      "explode_mm": [
+        0,
+        0,
+        110
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_garden_base",
+      "part": "cf_garden_base",
+      "name": "Garden base and drawer rails",
+      "wing": "garden",
+      "role": "base",
+      "color": "#8d6844",
+      "print": true,
+      "file": "stl/assembly/cf_garden_base.stl",
+      "explode_mm": [
+        0,
+        -20,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_garden_drawer",
+      "part": "cf_garden_drawer",
+      "name": "Garden drawer",
+      "wing": "garden",
+      "role": "drawer",
+      "color": "#8d877c",
+      "print": true,
+      "file": "stl/assembly/cf_garden_drawer.stl",
+      "explode_mm": [
+        0,
+        70,
+        0
+      ],
+      "drawer_travel_mm": 51.55
+    },
+    {
+      "id": "cf_garden_ground",
+      "part": "cf_garden_ground",
+      "name": "Garden parlor storey and lower stair",
+      "wing": "garden",
+      "role": "storey",
+      "color": "#f4ecdf",
+      "print": true,
+      "file": "stl/assembly/cf_garden_ground.stl",
+      "explode_mm": [
+        0,
+        0,
+        28
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_garden_upper",
+      "part": "cf_garden_upper",
+      "name": "Garden bath storey and upper stair",
+      "wing": "garden",
+      "role": "storey",
+      "color": "#f4ecdf",
+      "print": true,
+      "file": "stl/assembly/cf_garden_upper.stl",
+      "explode_mm": [
+        0,
+        0,
+        64
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_garden_loft",
+      "part": "cf_garden_loft",
+      "name": "Garden terrace loft and shed roof",
+      "wing": "garden",
+      "role": "roof",
+      "color": "#9a7548",
+      "print": true,
+      "file": "stl/assembly/cf_garden_loft.stl",
+      "explode_mm": [
+        0,
+        0,
+        110
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_hinge_cap",
+      "part": "cf_hinge_cap",
+      "name": "Hinge cap (spring-pin cross hole)",
+      "wing": null,
+      "role": "hardware-plastic",
+      "color": "#c9845a",
+      "print": true,
+      "file": "stl/assembly/cf_hinge_cap.stl",
+      "explode_mm": [
+        20,
+        -30,
+        40
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_coupon_hinge_a",
+      "part": "cf_coupon_hinge_a",
+      "name": "cf coupon hinge a",
+      "wing": null,
+      "role": "coupon",
+      "color": "#7f947c",
+      "print": true,
+      "file": "stl/assembly/cf_coupon_hinge_a.stl",
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_coupon_hinge_b",
+      "part": "cf_coupon_hinge_b",
+      "name": "cf coupon hinge b",
+      "wing": null,
+      "role": "coupon",
+      "color": "#7f947c",
+      "print": true,
+      "file": "stl/assembly/cf_coupon_hinge_b.stl",
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_coupon_drawer_rail",
+      "part": "cf_coupon_drawer_rail",
+      "name": "cf coupon drawer rail",
+      "wing": null,
+      "role": "coupon",
+      "color": "#7f947c",
+      "print": true,
+      "file": "stl/assembly/cf_coupon_drawer_rail.stl",
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_coupon_drawer_rider",
+      "part": "cf_coupon_drawer_rider",
+      "name": "cf coupon drawer rider",
+      "wing": null,
+      "role": "coupon",
+      "color": "#7f947c",
+      "print": true,
+      "file": "stl/assembly/cf_coupon_drawer_rider.stl",
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_ref_pin",
+      "part": "cf_ref_pin",
+      "name": "Catalog \u00d84 mm hinge rod \u2014 not printed",
+      "wing": null,
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_pin.stl",
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "cf_ref_spring_pin",
+      "part": "cf_ref_spring_pin",
+      "name": "Catalog \u00d82\u00d716 mm spring pin \u2014 not printed",
+      "wing": null,
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_spring_pin.stl",
+      "explode_mm": [
+        0,
+        0,
+        0
+      ],
+      "drawer_travel_mm": 0
+    },
+    {
+      "id": "caster-hearth-0",
+      "part": "cf_ref_caster",
+      "name": "Hearth caster (brake, catalog, not printed)",
+      "wing": "hearth",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        -26.0,
+        28.0,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": true
+    },
+    {
+      "id": "caster-hearth-1",
+      "part": "cf_ref_caster",
+      "name": "Hearth caster (brake, catalog, not printed)",
+      "wing": "hearth",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        -175.8,
+        28.0,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": true
+    },
+    {
+      "id": "caster-hearth-2",
+      "part": "cf_ref_caster",
+      "name": "Hearth caster (free, catalog, not printed)",
+      "wing": "hearth",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        -26.0,
+        134.4,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": false
+    },
+    {
+      "id": "caster-hearth-3",
+      "part": "cf_ref_caster",
+      "name": "Hearth caster (free, catalog, not printed)",
+      "wing": "hearth",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        -175.8,
+        134.4,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": false
+    },
+    {
+      "id": "caster-garden-0",
+      "part": "cf_ref_caster",
+      "name": "Garden caster (brake, catalog, not printed)",
+      "wing": "garden",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        26.0,
+        28.0,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": true
+    },
+    {
+      "id": "caster-garden-1",
+      "part": "cf_ref_caster",
+      "name": "Garden caster (brake, catalog, not printed)",
+      "wing": "garden",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        175.8,
+        28.0,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": true
+    },
+    {
+      "id": "caster-garden-2",
+      "part": "cf_ref_caster",
+      "name": "Garden caster (free, catalog, not printed)",
+      "wing": "garden",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        26.0,
+        134.4,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": false
+    },
+    {
+      "id": "caster-garden-3",
+      "part": "cf_ref_caster",
+      "name": "Garden caster (free, catalog, not printed)",
+      "wing": "garden",
+      "role": "catalog",
+      "color": "#8e99a4",
+      "print": false,
+      "file": "stl/reference/cf_ref_caster.stl",
+      "translate_mm": [
+        175.8,
+        134.4,
+        0.0
+      ],
+      "explode_mm": [
+        0,
+        0,
+        -24
+      ],
+      "drawer_travel_mm": 0,
+      "brake": false
+    }
+  ],
+  "limits": [
+    "UNPRINTED PROTOTYPE. No physical print, fit, pinch, tip, drawer-ejection, or caster-brake test was run.",
+    "Not a finished print kit and not a child-safe toy. Hinge pinch, tipping, a drawer coming free, and wheel locks are unproven.",
+    "Clearances in this manifest are CAD design allowances.",
+    "No slicer was run. Supports for the back-on-bed pose were not generated.",
+    "Metal rod, spring pin, casters, and screws are catalog assumptions. They are not in the plastic zip.",
+    "The 5 V lighting is an empty groove and a rear slack pocket. No wire, LED, or supply is specified as a tested circuit.",
+    "0.4 mm nozzle basis. A 0.2 mm nozzle is not confirmed.",
+    "Story joints are rectangular keys. There are no magnets.",
+    "Queen Anne is a different model and is not changed by this one."
+  ]
+}

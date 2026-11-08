@@ -1,0 +1,11 @@
+Cedarfold Playhouse v1.0.0
+UNPRINTED PROTOTYPE. Plastic print STLs only.
+Not a toy-safety certification. Not a finished kit.
+No slicer was run. Clearances are CAD allowances.
+Orient each shell with the broad back on the bed.
+Keys sit below the lace (cornice) on the plate.
+Do not stand a shell on its shortest axis.
+Metal rod, spring pin, casters, and screws are not in this zip.
+Print cf_coupon_hinge_a/b and the drawer coupon before the house.
+Drawer CAD travel 51.5 mm.
+Hinge pin Ø4 mm, bore flat clearance 0.35 mm.

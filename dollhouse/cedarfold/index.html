@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Cedarfold Playhouse v1.0.0, an unprinted 1:24 folding cottage. Original CAD for the Bambu H3C. Not a toy-safety certification." />
+<link rel="icon" href="data:," />
+<title>Cedarfold Playhouse — Meadowlark Models</title>
+<link rel="stylesheet" href="/coreyhq-back.css" />
+<link rel="stylesheet" href="/dollhouse/cedarfold/cedarfold.css" />
+</head>
+<body>
+<a class="coreyhq-back" href="https://coreyhq.com/" title="Back to CoreyHQ">← CoreyHQ</a>
+<a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+<a class="kit-back" href="/dollhouse/" title="Play kit and Queen Anne">← Dollhouse hub</a>
+<p class="claim">UNPRINTED PROTOTYPE. Cedarfold v1.0.0 development files. Not a finished print kit and not a toy-safety certification. Hinge pinch, tipping, a drawer coming free, and caster brakes were not tested.</p>
+<header>
+  <div class="rev">Unprinted · v1.0.0</div>
+  <h1>Cedarfold Playhouse</h1>
+  <p class="meta">Original 1:24 folding cottage · separate from the Queen Anne and the six play-kit manors · printed plastic, not wood</p>
+</header>
+<div class="facts">
+  <div class="fact"><b>1:24</b><span>Doll scale. Not the 1:6 size in the style references.</span></div>
+  <div class="fact"><b>Two wings</b><span>Hearth stays put. Garden folds 180° on one vertical pin.</span></div>
+  <div class="fact"><b>0.4 mm</b><span>Nozzle basis. A 0.2 mm nozzle is not confirmed.</span></div>
+  <div class="fact"><b>310 × 300 × 315</b><span>Preferred print margin. Nominal bed is 330 × 320 × 325.</span></div>
+</div>
+
+<section class="card">
+  <h2>Before you print</h2>
+  <ul>
+    <li>This is a digital publication of an unprinted prototype. Missing a physical test does not block the page. The gaps below stay on the page.</li>
+    <li>Clearances are CAD design allowances, including a 0.01 mm mesh snap used so each STL reloads as one closed body. They are not measurements from a print.</li>
+    <li>No slicer was run. Supports for the back-on-bed pose were not generated.</li>
+    <li>The plastic zip has print STLs only. The Ø4 mm rod, Ø2 mm spring pin, eight plate casters, and M4 screws are catalog assumptions and are not in the zip.</li>
+    <li>There are no magnets. Storeys locate on rectangular keys: tenon 7.6 mm, socket 8.6 mm, 0.5 mm side clearance, 1.1 mm end clearance.</li>
+    <li>The 5 V lighting is an empty groove on the back wall and a rear slack pocket beside the hinge. No wire, LED, or supply is included.</li>
+    <li>Each wing has its own stair, 42 mm wide, 12 risers, 8.167 mm rise, 7.5 mm tread, 98 mm floor to floor. The landing is the back hall, 44 mm deep, solid, and continuous with that floor. The flight is a real opening in the floor above it.</li>
+    <li>Drawer travel in CAD is 51.55 mm. Runners stay in the side grooves. A stop is 0.45 mm past full travel. The drawer lifts out only when it is fully extended. That was checked as geometry, not on a printer.</li>
+    <li>Hinge pin Ø4 mm. Bore flats are drawn at 2.35 mm radius, 0.35 mm radial clearance, 32 sides. Knuckles have a 0.5 mm axial gap. A partial rear shroud is drawn around the knuckles. Pinch protection was not tested.</li>
+    <li>Do not treat this as a child-safe toy. Ages of the people who might handle it are not known. Guarding, locks, and a low wheelbase are drawn. They are not proof.</li>
+  </ul>
+  <p><a href="/dollhouse/cedarfold/downloads/cedarfold-v1.0.0-plastic-print.zip">Plastic print STLs (zip)</a> · <a href="/dollhouse/cedarfold/reports/print-bom.json">Hardware BOM</a> · <a href="/dollhouse/cedarfold/reports/clearances.json">Clearance report</a> · <a href="/dollhouse/cedarfold/reports/motion.json">Fold sweep</a></p>
+</section>
+
+<img class="thumb" src="/dollhouse/cedarfold/previews/open-three-quarter.png" alt="CAD render of Cedarfold open, three-quarter view" />
+
+<div id="view" role="img" aria-label="Interactive view of the Cedarfold Playhouse">
+  <div class="view-status" id="view-status">
+    <strong>Loading the CAD meshes</strong>
+    <p>Orbit works while parts arrive. Open puts both fronts toward you. Closed folds the garden wing behind the hearth.</p>
+  </div>
+</div>
+<p class="hint">Drag to orbit. Pinch or scroll to zoom. Two fingers, or right-drag, to pan.</p>
+<p id="picked">Click a part to name it.</p>
+<div class="modes" aria-label="Camera">
+  <button type="button" data-look="outside" aria-pressed="true">Outside</button>
+  <button type="button" data-look="hearth">Hearth rooms</button>
+  <button type="button" data-look="garden">Garden rooms</button>
+  <button type="button" data-look="stairs">Stairs</button>
+  <button type="button" data-look="drawers">Drawers</button>
+  <button type="button" data-look="hinge">Hinge</button>
+  <button type="button" id="reset-view">Reset</button>
+</div>
+<div class="controls" aria-label="Mechanisms">
+  <button type="button" data-hinge="0" aria-pressed="true">Open</button>
+  <button type="button" data-hinge="90">Half</button>
+  <button type="button" data-hinge="180">Closed</button>
+  <button type="button" id="explode" aria-pressed="false">Explode</button>
+  <button type="button" id="coupons" aria-pressed="false">Fit coupons</button>
+</div>
+<label class="slider">Fold <input id="hinge" type="range" min="0" max="180" value="0" aria-label="Garden wing fold angle" /> <span id="hinge-readout">Garden wing 0° from open</span></label>
+<label class="slider">Drawers <input id="drawer" type="range" min="0" max="100" value="0" aria-label="Drawer travel" /> <span id="drawer-readout">Drawers 0 mm out</span></label>
+
+<section class="card">
+  <h2>What the mechanisms are</h2>
+  <p>Open is the play pose: both fronts face you, wings side by side. Closed rotates only the garden wing −180° about the vertical pin at the shared rear corner. The CAD sweep at 20° steps, including both drawers fully out, found no wing-to-wing intersection. Minimum approach in that sweep was the 0.5 mm knuckle gap. That is a design allowance, not a physical proof.</p>
+  <p>Each wing has its own base and its own drawer, so the drawer does not bridge the hinge. Casters are four per base, schematic 25 mm wheels in printed pockets. The house keys onto those bases. The casters are not printed and were not load-tested. Four of the eight are drawn as the brake pair, at the rear of each wing. Brake holding force is unknown.</p>
+  <p class="muted">The partial shroud sits on the rear of each knuckle. It is not a tested finger guard. The pin rests on a printed seat and is meant to be kept by a catalog spring pin through the cap. Retention was not tested.</p>
+</section>
+
+<section class="card">
+  <h2>Floor plan</h2>
+  <p class="muted">These drawings are the CAD plan, not a photograph. Front is toward the bottom of the open plan. Each wing’s lower stair is the inner flight. The upper stair is beside it and starts on the floor that the lower stair reaches.</p>
+  <div class="plans">
+    <figure>
+      <img src="/dollhouse/cedarfold/plan-open.svg" alt="Open floor plan, hearth and garden side by side" />
+      <figcaption>Open</figcaption>
+    </figure>
+    <figure>
+      <img src="/dollhouse/cedarfold/plan-closed.svg" alt="Closed floor plan, garden wing folded behind the hearth" />
+      <figcaption>Closed</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Rooms</h2>
+  <ul>
+    <li>Hearth, ground: kitchen counter, sink, stove, table, lower stair.</li>
+    <li>Hearth, upper: bed, lamp, upper stair, back hall landing.</li>
+    <li>Hearth, attic: cot, trunk, gable roof, outer balcony with a door.</li>
+    <li>Garden, ground: sofa, table, floor lamp, lower stair.</li>
+    <li>Garden, upper: tub, basin, toilet, upper stair.</li>
+    <li>Garden, loft: open front terrace, rear shed roof, planter and bench.</li>
+  </ul>
+  <p class="muted">Furniture is fused into the storey meshes so each STL is one body. It is not loose doll furniture.</p>
+</section>
+
+<section class="card">
+  <h2>Assembly</h2>
+  <ol>
+    <li>Print the hinge coupons and the drawer coupon first. The coupon is the fit check. The house clearances were not printed.</li>
+    <li>Print each STL in the orientation in the file. The broad back is already on Z. Do not stand a shell on its shortest axis. Keys are toward print −Y and the cornice lace is toward print +Y.</li>
+    <li>Suggested material is PLA. Colors in the viewer are warm wood, cream, and a muted drawer tone. The plastic is not wood.</li>
+    <li>Stack each wing on its base with the corner keys. Order: base, ground storey, upper storey, attic or loft.</li>
+    <li>Seat the Ø4 mm rod on the hearth pin seat, through both wings, and fit the printed cap. A Ø2 × 16 mm spring pin is the intended retainer. Drill the rod to suit. That hole is not in a print file.</li>
+    <li>Screw the catalog casters into the pockets with M4 × 12 screws, four per caster. Put the brake casters at the rear pair of each wing.</li>
+    <li>Insert a drawer fully extended and lifted, drop the runners into the grooves, then slide it in. Pulling past the stop is blocked in CAD by 0.45 mm of travel.</li>
+    <li>Fold the garden wing on the pin. Do not force it past the open pose in the other direction; that sweep was not the designed motion.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <h2>Plastic parts</h2>
+  <p class="muted">Individual print files. The zip is the full plastic set.</p>
+  <ul>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_coupon_hinge_a.stl">cf_coupon_hinge_a.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_coupon_hinge_b.stl">cf_coupon_hinge_b.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_coupon_drawer_rail.stl">cf_coupon_drawer_rail.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_coupon_drawer_rider.stl">cf_coupon_drawer_rider.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_hearth_base.stl">cf_hearth_base.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_hearth_drawer.stl">cf_hearth_drawer.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_hearth_ground.stl">cf_hearth_ground.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_hearth_upper.stl">cf_hearth_upper.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_hearth_attic.stl">cf_hearth_attic.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_garden_base.stl">cf_garden_base.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_garden_drawer.stl">cf_garden_drawer.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_garden_ground.stl">cf_garden_ground.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_garden_upper.stl">cf_garden_upper.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_garden_loft.stl">cf_garden_loft.stl</a></li>
+    <li><a href="/dollhouse/cedarfold/stl/print/cf_hinge_cap.stl">cf_hinge_cap.stl</a></li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Catalog hardware, not printed</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Nominal</th><th>Qty</th></tr></thead>
+    <tbody>
+      <tr><td>Steel dowel pin</td><td>Ø4 mm × about 286 mm</td><td>1</td></tr>
+      <tr><td>Spring pin</td><td>Ø2 mm × 16 mm</td><td>1</td></tr>
+      <tr><td>Plate caster</td><td>25 mm wheel, about 26 mm plate</td><td>4</td></tr>
+      <tr><td>Plate caster with brake</td><td>Same plate, brake</td><td>4</td></tr>
+      <tr><td>Pan head screw</td><td>M4 × 12 mm</td><td>32</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">The viewer shows schematic caster, rod, and spring-pin meshes so the assembly can be inspected. Those files live under <code>stl/reference/</code> and are excluded from the plastic zip.</p>
+</section>
+
+<section class="card">
+  <h2>CAD views</h2>
+  <div class="gallery">
+    <figure><img src="/dollhouse/cedarfold/previews/open-three-quarter.png" alt="Open three-quarter CAD view" /><figcaption>Open, three-quarter</figcaption></figure>
+    <figure><img src="/dollhouse/cedarfold/previews/closed-three-quarter.png" alt="Closed three-quarter CAD view" /><figcaption>Closed, three-quarter</figcaption></figure>
+    <figure><img src="/dollhouse/cedarfold/previews/half-fold.png" alt="Halfway fold CAD view" /><figcaption>Halfway, 90°</figcaption></figure>
+    <figure><img src="/dollhouse/cedarfold/previews/drawers-out.png" alt="Drawers extended CAD view" /><figcaption>Drawers at CAD travel</figcaption></figure>
+    <figure><img src="/dollhouse/cedarfold/previews/hearth-interior.png" alt="Hearth interior CAD view" /><figcaption>Hearth interior</figcaption></figure>
+    <figure><img src="/dollhouse/cedarfold/previews/hinge-bases.png" alt="Hinge and base CAD view" /><figcaption>Hinge bases</figcaption></figure>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Parts in the view</h2>
+  <div class="part-list" id="part-list"></div>
+</section>
+<p id="error" role="alert"></p>
+<noscript>This page needs JavaScript for the 3D view. The limitations, plan, and download links above are in the page itself.</noscript>
+<script src="/dollhouse/vendor/three.min.js"></script>
+<script src="/dollhouse/vendor/OrbitControls.js"></script>
+<script src="/dollhouse/cedarfold/viewer.js?v=3"></script>
+</body>
+</html>

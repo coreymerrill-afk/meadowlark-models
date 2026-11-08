@@ -1,0 +1,102 @@
+{
+  "cf_hearth_base": {
+    "watertight": true,
+    "volume_mm3": 365542.4,
+    "triangles": 2254,
+    "assembly_file": "stl/assembly/cf_hearth_base.stl"
+  },
+  "cf_hearth_drawer": {
+    "watertight": true,
+    "volume_mm3": 296622.6,
+    "triangles": 92,
+    "assembly_file": "stl/assembly/cf_hearth_drawer.stl"
+  },
+  "cf_hearth_ground": {
+    "watertight": true,
+    "volume_mm3": 701738.4,
+    "triangles": 5372,
+    "assembly_file": "stl/assembly/cf_hearth_ground.stl"
+  },
+  "cf_hearth_upper": {
+    "watertight": true,
+    "volume_mm3": 603513.8,
+    "triangles": 4600,
+    "assembly_file": "stl/assembly/cf_hearth_upper.stl"
+  },
+  "cf_hearth_attic": {
+    "watertight": true,
+    "volume_mm3": 452844.6,
+    "triangles": 2698,
+    "assembly_file": "stl/assembly/cf_hearth_attic.stl"
+  },
+  "cf_garden_base": {
+    "watertight": true,
+    "volume_mm3": 365301.8,
+    "triangles": 2214,
+    "assembly_file": "stl/assembly/cf_garden_base.stl"
+  },
+  "cf_garden_drawer": {
+    "watertight": true,
+    "volume_mm3": 296622.6,
+    "triangles": 92,
+    "assembly_file": "stl/assembly/cf_garden_drawer.stl"
+  },
+  "cf_garden_ground": {
+    "watertight": true,
+    "volume_mm3": 561325.6,
+    "triangles": 4802,
+    "assembly_file": "stl/assembly/cf_garden_ground.stl"
+  },
+  "cf_garden_upper": {
+    "watertight": true,
+    "volume_mm3": 569308.9,
+    "triangles": 5672,
+    "assembly_file": "stl/assembly/cf_garden_upper.stl"
+  },
+  "cf_garden_loft": {
+    "watertight": true,
+    "volume_mm3": 234158.0,
+    "triangles": 2248,
+    "assembly_file": "stl/assembly/cf_garden_loft.stl"
+  },
+  "cf_hinge_cap": {
+    "watertight": true,
+    "volume_mm3": 1127.8,
+    "triangles": 428,
+    "assembly_file": "stl/assembly/cf_hinge_cap.stl"
+  },
+  "cf_coupon_hinge_a": {
+    "watertight": true,
+    "volume_mm3": 4340.3,
+    "triangles": 196,
+    "assembly_file": "stl/assembly/cf_coupon_hinge_a.stl"
+  },
+  "cf_coupon_hinge_b": {
+    "watertight": true,
+    "volume_mm3": 4340.3,
+    "triangles": 196,
+    "assembly_file": "stl/assembly/cf_coupon_hinge_b.stl"
+  },
+  "cf_coupon_drawer_rail": {
+    "watertight": true,
+    "volume_mm3": 16284.0,
+    "triangles": 28,
+    "assembly_file": "stl/assembly/cf_coupon_drawer_rail.stl"
+  },
+  "cf_coupon_drawer_rider": {
+    "watertight": true,
+    "volume_mm3": 1382.4,
+    "triangles": 36,
+    "assembly_file": "stl/assembly/cf_coupon_drawer_rider.stl"
+  },
+  "cf_ref_pin": {
+    "watertight": true,
+    "volume_mm3": 3550.4,
+    "triangles": 92
+  },
+  "cf_ref_spring_pin": {
+    "watertight": true,
+    "volume_mm3": 48.2,
+    "triangles": 44
+  }
+}

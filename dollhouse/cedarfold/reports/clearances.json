@@ -1,0 +1,61 @@
+{
+  "hinge_radial_to_bore_flats_mm": 0.35,
+  "hinge_axial_gap_mm": 0.5,
+  "key_side_mm": 0.5,
+  "key_end_mm": 1.1,
+  "drawer_closed": {
+    "intersection_mm3": 0.0,
+    "min_gap_mm": 0.55
+  },
+  "drawer_open": {
+    "intersection_mm3": 0.0,
+    "min_gap_mm": 0.45
+  },
+  "drawer_past_stop": {
+    "intersection_mm3": 19.278,
+    "min_gap_mm": 0.0
+  },
+  "drawer_lift_closed": {
+    "intersection_mm3": 376.32,
+    "min_gap_mm": 0.0
+  },
+  "drawer_lift_open": {
+    "intersection_mm3": 0.0,
+    "min_gap_mm": 0.45
+  },
+  "stack_nominal": {
+    "intersection_mm3": -0.0,
+    "min_gap_mm": 0.0
+  },
+  "stack_pressed_2mm": {
+    "intersection_mm3": 41435.059,
+    "min_gap_mm": 0.0
+  },
+  "pin": {
+    "intersection_mm3": 0.0,
+    "min_gap_mm": 0.2
+  },
+  "cap": {
+    "intersection_mm3": 0.0,
+    "min_gap_mm": 0.242
+  },
+  "casters": [
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.2
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.2
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.2
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.2
+    }
+  ],
+  "source": "CAD design allowance. Not a physical measurement."
+}

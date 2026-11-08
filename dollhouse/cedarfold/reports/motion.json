@@ -1,0 +1,83 @@
+{
+  "samples": [
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": 0,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -20,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -40,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -60,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -80,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -100,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -120,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -140,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -160,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -180,
+      "drawers": "closed"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": 0,
+      "drawers": "full travel"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -90,
+      "drawers": "full travel"
+    },
+    {
+      "intersection_mm3": 0.0,
+      "min_gap_mm": 0.5,
+      "angle_deg": -180,
+      "drawers": "full travel"
+    }
+  ],
+  "drawer_travel_mm": 51.55
+}
