@@ -1,0 +1,327 @@
+{
+  "version": "1.0.0",
+  "plastic": [
+    {
+      "id": "cf_hearth_base",
+      "name": "Hearth base, drawer rails, and hinge seat",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_hearth_base.stl",
+      "assembly_stl": "stl/assembly/cf_hearth_base.stl",
+      "print_extents_mm": [
+        193.9,
+        36.0,
+        165.9
+      ],
+      "margin_mm": [
+        116.1,
+        264.0,
+        149.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_hearth_drawer",
+      "name": "Hearth drawer",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_hearth_drawer.stl",
+      "assembly_stl": "stl/assembly/cf_hearth_drawer.stl",
+      "print_extents_mm": [
+        143.6,
+        17.5,
+        127.6
+      ],
+      "margin_mm": [
+        166.4,
+        282.5,
+        187.4
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_hearth_ground",
+      "name": "Hearth kitchen storey and lower stair",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_hearth_ground.stl",
+      "assembly_stl": "stl/assembly/cf_hearth_ground.stl",
+      "print_extents_mm": [
+        195.1,
+        101.5,
+        165.9
+      ],
+      "margin_mm": [
+        114.9,
+        198.5,
+        149.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_hearth_upper",
+      "name": "Hearth bedroom storey and upper stair",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_hearth_upper.stl",
+      "assembly_stl": "stl/assembly/cf_hearth_upper.stl",
+      "print_extents_mm": [
+        195.1,
+        101.5,
+        165.9
+      ],
+      "margin_mm": [
+        114.9,
+        198.5,
+        149.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_hearth_attic",
+      "name": "Hearth attic, gable roof, and balcony",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_hearth_attic.stl",
+      "assembly_stl": "stl/assembly/cf_hearth_attic.stl",
+      "print_extents_mm": [
+        222.5,
+        123.9,
+        171.9
+      ],
+      "margin_mm": [
+        87.5,
+        176.1,
+        143.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_garden_base",
+      "name": "Garden base and drawer rails",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_garden_base.stl",
+      "assembly_stl": "stl/assembly/cf_garden_base.stl",
+      "print_extents_mm": [
+        193.9,
+        36.0,
+        165.9
+      ],
+      "margin_mm": [
+        116.1,
+        264.0,
+        149.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_garden_drawer",
+      "name": "Garden drawer",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_garden_drawer.stl",
+      "assembly_stl": "stl/assembly/cf_garden_drawer.stl",
+      "print_extents_mm": [
+        143.6,
+        17.5,
+        127.6
+      ],
+      "margin_mm": [
+        166.4,
+        282.5,
+        187.4
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_garden_ground",
+      "name": "Garden parlor storey and lower stair",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_garden_ground.stl",
+      "assembly_stl": "stl/assembly/cf_garden_ground.stl",
+      "print_extents_mm": [
+        195.1,
+        101.5,
+        165.9
+      ],
+      "margin_mm": [
+        114.9,
+        198.5,
+        149.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_garden_upper",
+      "name": "Garden bath storey and upper stair",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_garden_upper.stl",
+      "assembly_stl": "stl/assembly/cf_garden_upper.stl",
+      "print_extents_mm": [
+        195.1,
+        101.5,
+        165.9
+      ],
+      "margin_mm": [
+        114.9,
+        198.5,
+        149.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_garden_loft",
+      "name": "Garden terrace loft and shed roof",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_garden_loft.stl",
+      "assembly_stl": "stl/assembly/cf_garden_loft.stl",
+      "print_extents_mm": [
+        195.1,
+        87.5,
+        165.9
+      ],
+      "margin_mm": [
+        114.9,
+        212.5,
+        149.1
+      ],
+      "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z."
+    },
+    {
+      "id": "cf_hinge_cap",
+      "name": "Hinge cap (spring-pin cross hole)",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_hinge_cap.stl",
+      "assembly_stl": "stl/assembly/cf_hinge_cap.stl",
+      "print_extents_mm": [
+        8.0,
+        14.4,
+        14.4
+      ],
+      "margin_mm": [
+        302.0,
+        285.6,
+        300.6
+      ],
+      "pose": "Cap lies on its side. Print Z is the diameter, not the short axis."
+    },
+    {
+      "id": "cf_coupon_hinge_a",
+      "name": "cf coupon hinge a",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_coupon_hinge_a.stl",
+      "assembly_stl": "stl/assembly/cf_coupon_hinge_a.stl",
+      "print_extents_mm": [
+        34.0,
+        18.0,
+        8.0
+      ],
+      "margin_mm": [
+        276.0,
+        282.0,
+        307.0
+      ],
+      "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin."
+    },
+    {
+      "id": "cf_coupon_hinge_b",
+      "name": "cf coupon hinge b",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_coupon_hinge_b.stl",
+      "assembly_stl": "stl/assembly/cf_coupon_hinge_b.stl",
+      "print_extents_mm": [
+        34.0,
+        18.0,
+        8.0
+      ],
+      "margin_mm": [
+        276.0,
+        282.0,
+        307.0
+      ],
+      "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin."
+    },
+    {
+      "id": "cf_coupon_drawer_rail",
+      "name": "cf coupon drawer rail",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_coupon_drawer_rail.stl",
+      "assembly_stl": "stl/assembly/cf_coupon_drawer_rail.stl",
+      "print_extents_mm": [
+        22.0,
+        48.0,
+        16.0
+      ],
+      "margin_mm": [
+        288.0,
+        252.0,
+        299.0
+      ],
+      "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin."
+    },
+    {
+      "id": "cf_coupon_drawer_rider",
+      "name": "cf coupon drawer rider",
+      "qty": 1,
+      "material": "PLA",
+      "print_stl": "stl/print/cf_coupon_drawer_rider.stl",
+      "assembly_stl": "stl/assembly/cf_coupon_drawer_rider.stl",
+      "print_extents_mm": [
+        15.4,
+        18.0,
+        6.5
+      ],
+      "margin_mm": [
+        294.6,
+        282.0,
+        308.5
+      ],
+      "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin."
+    }
+  ],
+  "catalog_metal_and_hardware": [
+    {
+      "item": "Steel dowel pin",
+      "nominal": "\u00d84 mm \u00d7 286 mm",
+      "qty": 1,
+      "role": "Hinge pin. Rests on the printed seat. Retained by the spring pin through the cap. Not printed."
+    },
+    {
+      "item": "Spring pin",
+      "nominal": "\u00d82 mm \u00d7 16 mm",
+      "qty": 1,
+      "role": "Cross pin through the printed cap. The rod is assumed drilled to suit. Not printed."
+    },
+    {
+      "item": "Plate caster",
+      "nominal": "25 mm wheel, ~26 mm plate, 18 mm hole pattern",
+      "qty": 4,
+      "role": "Free swivel. Schematic mesh only."
+    },
+    {
+      "item": "Plate caster with brake",
+      "nominal": "25 mm wheel, ~26 mm plate, brake",
+      "qty": 4,
+      "role": "The rear pair on each wing. Brake force was not tested."
+    },
+    {
+      "item": "Pan head screw",
+      "nominal": "M4 \u00d7 12 mm",
+      "qty": 32,
+      "role": "Caster plates, four screws each. Not printed."
+    }
+  ],
+  "notes": [
+    "Plastic is modeled as PLA. Suggested colors are warm wood, cream, and a muted drawer tone. The material is printed plastic, not wood.",
+    "A 0.4 mm nozzle is the CAD basis. A later independent generic PrusaSlicer 2.7.4 audit used 0.12 mm layers on two coupons only. That is not an H3C profile and not a tested house profile. See PRINTING LIMITATIONS in PRINT.txt.",
+    "Print the hinge coupon and the drawer coupon before the house."
+  ]
+}

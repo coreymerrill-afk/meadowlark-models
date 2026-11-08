@@ -1,0 +1,602 @@
+{
+  "cf_hearth_base": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      193.9,
+      165.9,
+      36.0
+    ],
+    "print_extents_mm": [
+      193.9,
+      36.0,
+      165.9
+    ],
+    "margin_to_310x300x315_mm": [
+      116.1,
+      264.0,
+      149.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -6.3,
+      0.0,
+      -6.3
+    ]
+  },
+  "cf_hearth_drawer": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      143.6,
+      127.6,
+      17.5
+    ],
+    "print_extents_mm": [
+      143.6,
+      17.5,
+      127.6
+    ],
+    "margin_to_310x300x315_mm": [
+      166.4,
+      282.5,
+      187.4
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      29.2,
+      8.9,
+      46.0
+    ]
+  },
+  "cf_hearth_ground": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      195.1,
+      165.9,
+      101.5
+    ],
+    "print_extents_mm": [
+      195.1,
+      101.5,
+      165.9
+    ],
+    "margin_to_310x300x315_mm": [
+      114.9,
+      198.5,
+      149.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -6.3,
+      32.5,
+      -6.3
+    ]
+  },
+  "cf_hearth_upper": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      195.1,
+      165.9,
+      101.5
+    ],
+    "print_extents_mm": [
+      195.1,
+      101.5,
+      165.9
+    ],
+    "margin_to_310x300x315_mm": [
+      114.9,
+      198.5,
+      149.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -6.3,
+      130.5,
+      -6.3
+    ]
+  },
+  "cf_hearth_attic": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      222.5,
+      171.9,
+      123.9
+    ],
+    "print_extents_mm": [
+      222.5,
+      123.9,
+      171.9
+    ],
+    "margin_to_310x300x315_mm": [
+      87.5,
+      176.1,
+      143.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -6.3,
+      228.5,
+      -6.3
+    ]
+  },
+  "cf_garden_base": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      193.9,
+      165.9,
+      36.0
+    ],
+    "print_extents_mm": [
+      193.9,
+      36.0,
+      165.9
+    ],
+    "margin_to_310x300x315_mm": [
+      116.1,
+      264.0,
+      149.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -187.6,
+      0.0,
+      -6.3
+    ]
+  },
+  "cf_garden_drawer": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      143.6,
+      127.6,
+      17.5
+    ],
+    "print_extents_mm": [
+      143.6,
+      17.5,
+      127.6
+    ],
+    "margin_to_310x300x315_mm": [
+      166.4,
+      282.5,
+      187.4
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -172.8,
+      8.9,
+      46.0
+    ]
+  },
+  "cf_garden_ground": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      195.1,
+      165.9,
+      101.5
+    ],
+    "print_extents_mm": [
+      195.1,
+      101.5,
+      165.9
+    ],
+    "margin_to_310x300x315_mm": [
+      114.9,
+      198.5,
+      149.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -188.8,
+      32.5,
+      -6.3
+    ]
+  },
+  "cf_garden_upper": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      195.1,
+      165.9,
+      101.5
+    ],
+    "print_extents_mm": [
+      195.1,
+      101.5,
+      165.9
+    ],
+    "margin_to_310x300x315_mm": [
+      114.9,
+      198.5,
+      149.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -188.8,
+      130.5,
+      -6.3
+    ]
+  },
+  "cf_garden_loft": {
+    "pose": "Broad back on the bed. Assembly up (lace, cornice) points to print +Y, so the keys sit below the lace on the plate. Not shortest-axis-on-Z.",
+    "assembly_extents_mm": [
+      195.1,
+      165.9,
+      87.5
+    ],
+    "print_extents_mm": [
+      195.1,
+      87.5,
+      165.9
+    ],
+    "margin_to_310x300x315_mm": [
+      114.9,
+      212.5,
+      149.1
+    ],
+    "linear_assembly_to_print": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      -188.8,
+      228.5,
+      -6.3
+    ]
+  },
+  "cf_hinge_cap": {
+    "pose": "Cap lies on its side. Print Z is the diameter, not the short axis.",
+    "assembly_extents_mm": [
+      14.4,
+      14.4,
+      8.0
+    ],
+    "print_extents_mm": [
+      8.0,
+      14.4,
+      14.4
+    ],
+    "margin_to_310x300x315_mm": [
+      302.0,
+      285.6,
+      300.6
+    ],
+    "linear_assembly_to_print": [
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      288.8,
+      -7.2,
+      -7.2
+    ]
+  },
+  "cf_coupon_hinge_a": {
+    "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin.",
+    "assembly_extents_mm": [
+      34.0,
+      18.0,
+      8.0
+    ],
+    "print_extents_mm": [
+      34.0,
+      18.0,
+      8.0
+    ],
+    "margin_to_310x300x315_mm": [
+      276.0,
+      282.0,
+      307.0
+    ],
+    "linear_assembly_to_print": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "cf_coupon_hinge_b": {
+    "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin.",
+    "assembly_extents_mm": [
+      34.0,
+      18.0,
+      8.0
+    ],
+    "print_extents_mm": [
+      34.0,
+      18.0,
+      8.0
+    ],
+    "margin_to_310x300x315_mm": [
+      276.0,
+      282.0,
+      307.0
+    ],
+    "linear_assembly_to_print": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      2.0,
+      0.0,
+      8.6
+    ]
+  },
+  "cf_coupon_drawer_rail": {
+    "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin.",
+    "assembly_extents_mm": [
+      22.0,
+      48.0,
+      16.0
+    ],
+    "print_extents_mm": [
+      22.0,
+      48.0,
+      16.0
+    ],
+    "margin_to_310x300x315_mm": [
+      288.0,
+      252.0,
+      299.0
+    ],
+    "linear_assembly_to_print": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "cf_coupon_drawer_rider": {
+    "pose": "Coupon already has its broad face toward -Z in its own frame. Translated onto the origin.",
+    "assembly_extents_mm": [
+      15.4,
+      18.0,
+      6.5
+    ],
+    "print_extents_mm": [
+      15.4,
+      18.0,
+      6.5
+    ],
+    "margin_to_310x300x315_mm": [
+      294.6,
+      282.0,
+      308.5
+    ],
+    "linear_assembly_to_print": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "assembly_min_after_linear_mm": [
+      1.2,
+      8.0,
+      6.7
+    ]
+  }
+}
