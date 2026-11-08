@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="Conceptual unbuilt pasta cooker. The viewer loads the Blender 4.2.9 exterior, cutaway, and exploded models. Fifteen minutes dry-to-cooked is an unvalidated design goal, not a performance claim." />
+<link rel="icon" href="data:," />
+<title>Pasta cooker — Meadowlark Models</title>
+<link rel="stylesheet" href="/coreyhq-back.css" />
+<link rel="stylesheet" href="/pasta-cooker/pasta.css" />
+</head>
+<body>
+<a class="coreyhq-back" href="https://coreyhq.com/" title="Back to CoreyHQ">← CoreyHQ</a>
+<a class="hub-back" href="/" title="All models">← Meadowlark Models</a>
+<div class="claim">
+  <strong>Conceptual packaging. Unbuilt. Not manufacture-ready.</strong>
+  <p>About 15 minutes dry-to-cooked is an unvalidated design goal, not a performance promise. No thermal, flow, food-contact, electrical, or mechanism test is claimed. This is not a pressure cooker and not a buy list.</p>
+</div>
+<header>
+  <span class="rev">Pasta / 01</span>
+  <span class="rev warn">Concept</span>
+  <h1>Pasta cooker</h1>
+  <p class="meta">Onboard clean water, a separate salt dose, heated-channel feed plus vessel heat, gentle circulation, basket lift and drain, and a waste drawer. The viewer loads the Blender 4.2.9 GLBs. Orbit, zoom, and switch Exterior, Cutaway, and Exploded.</p>
+</header>
+<div class="stage">
+  <div>
+    <div class="toolbar" role="group" aria-label="Model file">
+      <button type="button" data-view="exterior" aria-pressed="true">Exterior</button>
+      <button type="button" data-view="cutaway" aria-pressed="false">Cutaway</button>
+      <button type="button" data-view="exploded" aria-pressed="false">Exploded</button>
+      <button type="button" id="btn-frame">Frame</button>
+      <button type="button" id="btn-in" aria-label="Zoom in">Zoom in</button>
+      <button type="button" id="btn-out" aria-label="Zoom out">Zoom out</button>
+    </div>
+    <div class="paths" role="group" aria-label="Water and heat paths">
+      <button type="button" data-path="all" aria-pressed="true">All paths</button>
+      <button type="button" data-path="water" aria-pressed="false">Clean water</button>
+      <button type="button" data-path="heat" aria-pressed="false">Heat</button>
+      <button type="button" data-path="salt" aria-pressed="false">Salt</button>
+      <button type="button" data-path="circ" aria-pressed="false">Circulation</button>
+      <button type="button" data-path="drain" aria-pressed="false">Drain</button>
+    </div>
+    <div id="view" role="img" aria-label="Interactive Blender model of the conceptual pasta cooker">
+      <svg id="leaders" class="leaders" aria-hidden="true"></svg>
+      <div id="name-layer" class="name-layer"></div>
+      <div class="legend" aria-hidden="true">
+        <span><i style="background:#3aa0c8"></i>Blue: clean feed</span>
+        <span><i style="background:#e25a32"></i>Orange: heat</span>
+        <span><i style="background:#1faf78"></i>Green: circulation</span>
+        <span><i style="background:#b58362"></i>Brown: drain</span>
+      </div>
+      <div class="view-status" id="load-status">
+        <strong>Loading the Blender model</strong>
+        <p id="load-status-text">pasta-cooker-assembled.glb. There is no stand-in.</p>
+      </div>
+    </div>
+    <p class="hint" id="view-note">Drag to orbit · scroll or pinch to zoom · two fingers to pan.</p>
+  </div>
+  <aside class="side">
+    <h2 id="part-title">Named parts</h2>
+    <div id="part-list" class="part-list"></div>
+    <p id="part-about">Names follow the labeled Blender plates. Ribs and hoops are grouped.</p>
+  </aside>
+</div>
+<nav class="tabs" role="tablist" aria-label="Concept notes">
+  <button type="button" role="tab" id="tab-paths" aria-selected="true" aria-controls="panel-paths">Paths</button>
+  <button type="button" role="tab" id="tab-heat" aria-selected="false" aria-controls="panel-heat" tabindex="-1">Heat</button>
+  <button type="button" role="tab" id="tab-limits" aria-selected="false" aria-controls="panel-limits" tabindex="-1">Limits</button>
+  <button type="button" role="tab" id="tab-files" aria-selected="false" aria-controls="panel-files" tabindex="-1">Files</button>
+</nav>
+<section id="panel-paths" class="panel" role="tabpanel" aria-labelledby="tab-paths">
+  <div class="card">
+    <h2>What the geometry shows</h2>
+    <p class="muted">Read from the Blender file. These are routes in the model, not measured performance.</p>
+    <ol>
+      <li>Blue removable clean-water tank, metering pump, cold-feed pipe, orange serpentine heated channel, then an elevated rim outlet and air-gap concept into the vessel. Metering sensors, valve internals, and backflow compliance are not designed.</li>
+      <li>A separate salt hopper and illustrative auger chute dose into the vessel, keeping salt out of the upstream clean-water and heater path. Feed rate, bridging, and moisture sealing need testing.</li>
+      <li>The shape and portion dial and screen represent a selection UI. A load-cell block sits at the lift support. No weighing or control implementation.</li>
+      <li>Dry pasta sits in a removable basket inside the vessel. The lift rail, carriage, and basket bridge indicate lift and drain. No actuator sizing, limit switches, locking, or animated mechanism.</li>
+      <li>The orange base plate is direct vessel heating, a second heat input. It does not replace the heated channel.</li>
+      <li>Green loop: side suction outside the basket, recirculation pump, broad tangential return. No pasta through the pump is the intent. The ribbed guard is a placeholder. Flow and starch behavior are unvalidated.</li>
+      <li>Brown vessel-bottom drain, a valve concept, and a removable waste drawer. No safe drain timing, venting, or full-tank sensing.</li>
+      <li>A rear low electrical compartment and a separating wall indicate intended wet/dry segregation. They are not proof of waterproofing or electrical compliance. Steam vents are rear-facing on the removable lid.</li>
+    </ol>
+  </div>
+  <div class="plates">
+    <figure>
+      <img src="/pasta-cooker/exterior.png" alt="Labeled Blender render of the pasta cooker exterior. Banner reads concept, unbuilt, and that the 15 minute target is unvalidated." width="1600" height="1200" />
+      <figcaption>Exterior plate. Same model as Exterior in the viewer.</figcaption>
+    </figure>
+    <figure>
+      <img src="/pasta-cooker/cutaway.png" alt="Labeled Blender cutaway of the pasta cooker showing water, salt, heated channel, basket, vessel, base heater, circulation, drain, lift, and electrical bay." width="1600" height="1200" />
+      <figcaption>Cutaway plate. Case and lid hidden in that file.</figcaption>
+    </figure>
+    <figure>
+      <img src="/pasta-cooker/exploded.png" alt="Labeled Blender exploded view of the pasta cooker modules. Plumbing is not a connected working configuration." width="1600" height="1200" />
+      <figcaption>Exploded plate. Modules moved apart. Pipes stay on the assembled route.</figcaption>
+    </figure>
+  </div>
+</section>
+<section id="panel-heat" class="panel" role="tabpanel" aria-labelledby="tab-heat" hidden>
+  <div class="split">
+    <article>
+      <h3>Channel plus vessel heater</h3>
+      <p>This is the arrangement in the model. It may stage a hot fill and vessel recovery. It also adds pressure drop, scale, dry-fire, and service issues. Two heaters cannot simply run together at unrestricted rated power. A real machine would need power arbitration, flow and temperature sensing, thermal cutouts, anti-scald design, and pressure analysis. No flow rates or heating times have been validated.</p>
+    </article>
+    <article>
+      <h3>Vessel-only alternative</h3>
+      <p>Not modeled as a separate file. Bypass or remove the channel block and feed cold water through a safe rim inlet, and keep the direct heater plate. Fewer narrow hot passages and simpler descaling. The full vessel and water mass still have to be heated before or during cooking. On a constrained outlet this could be equally or more practical. No claim that either arrangement reaches 15 minutes.</p>
+    </article>
+  </div>
+  <div class="card">
+    <h2>A lower bound, not a simulation</h2>
+    <p>Heating 1 kg of water from 20 °C to 100 °C takes roughly 334 kJ. At an illustrative 1.5 kW that is 223 seconds at an impossible 100% system efficiency, before vessel losses and before the pasta cooks. Household supply, portion, shape, water volume, recovery, and the control algorithm have to be measured. Neither model is a pressure cooker.</p>
+  </div>
+</section>
+<section id="panel-limits" class="panel" role="tabpanel" aria-labelledby="tab-limits" hidden>
+  <div class="card">
+    <h2>Open before any build</h2>
+    <ul>
+      <li><strong>Steam and scald.</strong> An interlocked lid and basket motion, a safe vent direction, cool-touch gripping, splash control, drain temperature, and obstruction and full-waste detection would be required. The lid vents and grip in the model are not those controls.</li>
+      <li><strong>Cleaning.</strong> The intent is tool-free removal of the tank, basket, vessel, waste drawer, and a serviceable pump guard, plus drained low points and accessible descaling. The concept does not prove complete drainability or dishwasher suitability.</li>
+      <li><strong>Starch.</strong> Foaming, strainer fouling, channel scale, pump cavitation, and drain blockage are untested. The heated channel is meant to see clean water only. Any starch-bearing recirculation path would need a flush. Broad circulation is a design intent, not an anti-sticking guarantee.</li>
+      <li><strong>Water and electricity.</strong> Secondary containment, leak sensing, strain relief, grounding, rated components, splash ingress, and thermal-fault testing are still required. The depicted wall is packaging intent only.</li>
+    </ul>
+    <p>No thermal or CFD study, structural check, food-contact material, hygiene review, certification, tolerance stack, power budget, or mechanism validation. No bill of materials, wiring, or fabrication instructions.</p>
+  </div>
+</section>
+<section id="panel-files" class="panel" role="tabpanel" aria-labelledby="tab-files" hidden>
+  <div class="card">
+    <h2>Blender 4.2.9 files</h2>
+    <p class="muted">Generated locally with Blender’s Python and the built-in glTF exporter. Cycles CPU, 24 samples. No downloaded product meshes. Concept geometry, not a fabrication package.</p>
+    <div class="dl"><a href="/pasta-cooker/pasta-cooker-assembled.glb">pasta-cooker-assembled.glb</a><span>Exterior viewer file · 115 meshes</span></div>
+    <div class="dl"><a href="/pasta-cooker/pasta-cooker-cutaway.glb">pasta-cooker-cutaway.glb</a><span>Cutaway viewer file · 95 meshes</span></div>
+    <div class="dl"><a href="/pasta-cooker/pasta-cooker-exploded.glb">pasta-cooker-exploded.glb</a><span>Exploded viewer file · 102 meshes</span></div>
+    <div class="dl"><a href="/pasta-cooker/pasta-cooker-assembled.blend">pasta-cooker-assembled.blend</a><span>Editable exterior</span></div>
+    <div class="dl"><a href="/pasta-cooker/pasta-cooker-cutaway.blend">pasta-cooker-cutaway.blend</a><span>Editable cutaway</span></div>
+    <div class="dl"><a href="/pasta-cooker/pasta-cooker-exploded.blend">pasta-cooker-exploded.blend</a><span>Editable exploded</span></div>
+    <div class="dl"><a href="/pasta-cooker/exterior.png">exterior.png</a><span>Labeled render</span></div>
+    <div class="dl"><a href="/pasta-cooker/cutaway.png">cutaway.png</a><span>Labeled render</span></div>
+    <div class="dl"><a href="/pasta-cooker/exploded.png">exploded.png</a><span>Labeled render</span></div>
+    <div class="dl"><a href="/pasta-cooker/generate.py">generate.py</a><span>Modeling and export script</span></div>
+    <div class="dl"><a href="/pasta-cooker/annotate.py">annotate.py</a><span>Plate annotation script</span></div>
+    <div class="dl"><a href="/pasta-cooker/README.md">README.md</a><span>Handoff note and limits</span></div>
+    <div class="dl"><a href="/pasta-cooker/asset-check.json">asset-check.json</a><span>Node and mesh counts</span></div>
+    <p class="muted">Reproduce from the scripts with Blender 4.2.9: <code>blender -b -t 6 --python generate.py</code>, then <code>python3 annotate.py</code>. Raw renders and the build log stayed with the generation record and are not republished.</p>
+  </div>
+</section>
+<p id="error" role="alert"></p>
+<noscript>This page needs JavaScript to load the Blender GLB viewer.</noscript>
+<script src="/dollhouse/vendor/three.min.js"></script>
+<script src="/dollhouse/vendor/OrbitControls.js"></script>
+<script src="/pasta-cooker/viewer.js"></script>
+</body>
+</html>
