@@ -1,0 +1,22 @@
+[
+  {
+    "part": "body-F1-M1-1",
+    "unchanged_3mf_mesh_xml": true,
+    "sha256": "f232a46e87f85c102abd815dee7f132be0b281478da27d8bf08d1a2b81bcf50c"
+  },
+  {
+    "part": "body-F2-M3-1",
+    "unchanged_3mf_mesh_xml": true,
+    "sha256": "7b581176e75fe3b496768178e64d0f9c47e17bfeab733049eacb32ca79b5e48b"
+  },
+  {
+    "part": "body-F3-M1-1",
+    "unchanged_3mf_mesh_xml": true,
+    "sha256": "3b38b37cd703b93e683fbb2a338e5b51c149c75696c47f07a7af0b3f83e6ee0b"
+  },
+  {
+    "part": "body-F4-M1-1",
+    "unchanged_3mf_mesh_xml": true,
+    "sha256": "0d4661c9656c7759754bda9e5499b21c73430b6b27c426063c31923cadc7d97d"
+  }
+]

@@ -1,0 +1,3 @@
+Authoritative working source and cached original geometry: C:\Users\Corey\Documents\Codex\agent-bridge\dollhouse-3d-handoff\exterior-corrections
+Portable signed slicer: C:\Users\Corey\Documents\Codex\agent-bridge\dollhouse-3d-handoff\slicer-tools\BambuStudio-2.9.1
+No printer dispatch performed. Frozen demo remains commit 6488f8d.

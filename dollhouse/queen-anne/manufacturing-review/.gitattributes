@@ -1,0 +1,5 @@
+*.pdf -text
+*.3mf -text
+*.zip -text
+*.jpg -text
+*.png -text

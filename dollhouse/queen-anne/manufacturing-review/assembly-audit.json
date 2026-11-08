@@ -1,0 +1,23 @@
+{
+  "major_assembly_collisions": [],
+  "drawer_sample_collisions": [],
+  "drawer_sampling_mm": 5,
+  "continuous_drawer_clearance": [
+    {
+      "drawer": "drawer-left",
+      "continuous_travel_mm": 170,
+      "extra_clearance_mm": 0.3,
+      "collision_mm3": 0.0
+    },
+    {
+      "drawer": "drawer-right",
+      "continuous_travel_mm": 170,
+      "extra_clearance_mm": 0.3,
+      "collision_mm3": 0.0
+    }
+  ],
+  "limitations": [
+    "Rear screw retention and dowel joint strength require physical fit coupons",
+    "Physical fit and slicer verification outstanding"
+  ]
+}
