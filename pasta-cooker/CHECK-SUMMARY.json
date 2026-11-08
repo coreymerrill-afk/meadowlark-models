@@ -1,0 +1,17 @@
+{
+  "all_pass": true,
+  "drain_nonincreasing_z": true,
+  "air_gap_to_maxwater_mm": 60,
+  "basket_clearance_above_rim_mm": 15,
+  "basket_sweep_nozzle_radial_clearance_mm": {
+    "fill.nozzle": 10.234,
+    "salt.nozzle": 10.623,
+    "steam.in": 5.247
+  },
+  "endpoint_checks": 38,
+  "max_endpoint_error_mm": 6.15e-05,
+  "tangent_checks": 31,
+  "cross_circuit_checks": 134,
+  "min_cross_circuit_pipe_gap_mm": 17.377,
+  "unrelated_box_collisions": 0
+}

@@ -1,1 +1,34 @@
-{"Lift / drain basket": [825, 390], "Removable lid": [825, 199], "Water reservoir": [559, 651], "Salt dosing module": [1098, 518], "Channel heater module": [1026, 793], "Waste drawer": [965, 1020], "Wet / dry separation": [618, 926]}
+{
+  "Basket clears rim 15mm": [
+    926,
+    641
+  ],
+  "Lid removed / service": [
+    874,
+    170
+  ],
+  "Clean feed stays left": [
+    585,
+    848
+  ],
+  "Recirculation stays attached": [
+    1149,
+    864
+  ],
+  "Drain stays attached": [
+    904,
+    1180
+  ],
+  "Waste stays BELOW floor": [
+    975,
+    1325
+  ],
+  "Dry bay is separate": [
+    1311,
+    664
+  ],
+  "Valve accessible": [
+    874,
+    1086
+  ]
+}

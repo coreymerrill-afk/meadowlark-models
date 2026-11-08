@@ -1,52 +1,59 @@
 # Published copy
 
-Viewer route: `/pasta-cooker/`. The note below is the Blender 4.2.9 handoff, kept for the limits and the file list. Its closing line — target repo not verified, not integrated — described the asset drop before this page. It is not a performance claim. No validation was added with the page.
+Viewer route: `/pasta-cooker/`. This page replaces the rejected v1 geometry. The note below is the Blender 4.2.9 v2 handoff. Its line that no website change was performed described the asset drop before this page. No hydraulic, thermal, or safety validation was added with the page. About 15 minutes dry-to-cooked remains unvalidated.
 
-# PASTA / 01 — automatic pasta cooker concept
+# PASTA / 02 — topology-first replacement concept
 
-**CONCEPTUAL / UNBUILT. Roughly 15 minutes dry-to-cooked is an unvalidated design goal, NOT a performance promise.**
+**UNBUILT / NOT FABRICATION-READY. The approximately 15-minute dry-to-cooked goal is not validated.**
 
-## Actual deliverables / provenance
-Procedural editable Blender geometry generated locally with Blender **4.2.9 LTS**, built-in Python/bpy, Cycles CPU rendering (24 samples), built-in glTF exporter. PNG annotation uses Python Pillow 13.0.0. No Shapecast or Meshy was used: parent connector search found no matching connector. No paid generation, purchases, credentials, or external uploads. All geometry is newly created from primitives, mesh walls, curves and rings; no downloaded product meshes or reference-image tracing.
+## What was actually wrong
+Corey's objection was justified. V1's clean feed actually penetrated the waste solid; its drain had an unpumped 65 mm uphill leg and no chamber-floor opening. The heater inlet joined the wrong vertex, circulation ports were implied rather than modeled, and exploded module translations disconnected pipes. See `AUDIT-V1.md` for coordinates, dimensions and exact causes. This is not repaired by labels: v2 uses new geometry and a new port-defined plumbing graph. V1 is untouched.
 
-- `pasta-cooker-assembled.blend` and `.glb`: full exterior and internal components.
-- `pasta-cooker-cutaway.blend` and `.glb`: casing and lid hidden, sectioned vessel wall shows basket and plumbing.
-- `pasta-cooker-exploded.blend` and `.glb`: selected modules translated apart, plumbing stays in assembled reference position (not a connected working configuration).
-- `exterior.png`, `cutaway.png`, `exploded.png`: annotated actual Blender renders.
-- `*-raw.png`: original renders; `*-anchors.json`: camera-projected annotation points.
-- `generate.py`: complete modeling/render/export source. `annotate.py`: annotation source.
-- `build.log`: execution evidence.
+## Read the replacement
+- `pasta-cooker-v2-exterior.blend` / `.glb`: exterior guards built around the routes; paths deliberately exposed rather than buried in an opaque decorative box.
+- `pasta-cooker-v2-cutaway.blend` / `.glb`: front tank/chamber/waste walls, lid and dry exterior guards removed. Actual sloped floor opening, strainer, waterline, waste headspace and receiving connection can be inspected.
+- `pasta-cooker-v2-exploded.blend` / `.glb`: service/lift view. Basket/carriage raised 190 mm, lid removed vertically/aside. **No plumbed module is displaced**, so tank/heater/valve/waste connections remain real and consistent. This intentionally avoids v1's disconnected “explosion.”
+- `exterior.png`, `cutaway.png`, `exploded.png`: annotated actual Blender renders; flow-arrow meshes lie on actual route segments.
+- `plumbing-graph.png`: graph with same-chamber aliases clearly identified; schematic, not physical layout.
+- `connection-manifest.json`: authored node ports, component internals, all routed edge control points, units/radii, intended free-fall transfers.
+- `topology-checks.json`: endpoint, tangent, gravity, selected spatial/clearance test results. `view-topology-checks.json` separately compares actual curve endpoints with actual port-collar world positions in every saved state. `CHECK-SUMMARY.json` provides the lean result.
+- `generate.py`: complete procedural Blender source; `presentation.py`: annotated renders/graph source.
 
-Reproduce: `blender -b -t 6 --python generate.py` then `python3 annotate.py`.
+All dimensions in manifest/script are millimetres; Blender and GLB are metres. Overall chassis about 660 x 480 mm, with lift mast reaching approximately 715 mm. This is a deliberately larger proof-of-layout concept, not an optimized compact countertop package.
 
-## Architecture and path reading
-Nominal exterior envelope about **480 x 360 x 410 mm**, indicative only; Blender coordinates and GLB are meters. Individual named geometry remains editable; mesh basket ribs/hoops visually represent perforations, not manufacturable screen sizing.
+## Actual circuits and interfaces
+**Clean feed:** hollow removable unsalted tank side bore → isolation/check cartridge provision → metering pump → flowmeter → isolated heater channel (ceramic separator and dry back enclosure) → elevated nozzle. The hot nozzle ends at z480; max chamber waterline is z420. Dotted beads are free-falling water, not a pipe bridging the air gap. Clean routes stay left; no clean line enters, traverses or connects to waste.
 
-1. Blue removable clean-water tank -> metering pump -> blue cold-feed pipe -> orange serpentine flow-through heated channel -> elevated rim outlet/air-gap concept into vessel. This is the actual depicted geometric route; metering sensors, valve internals and backflow compliance are not designed.
-2. Separate salt hopper/funnel and illustrative auger chute dose into vessel, keeping salt out of upstream clean-water/heater path. Salt feed rate, bridging and moisture sealing need testing.
-3. Shape/portion dial and screen represent the selection UI. A conceptual load-cell block sits at lift support. No weighing/control implementation.
-4. Dry pasta sits in removable wire/perforated basket within stainless sectioned vessel. Tall lift rail/carriage and basket bridge indicate automated lift/drain; no actuator sizing, limit switches, locking or animated mechanism.
-5. Orange base plate denotes **direct vessel heating**, a distinct optional heat input. The heated-channel path is not replaced by it.
-6. Green loop: screened side suction outside basket -> recirculation pump -> broad tangential return manifold. No pasta through pump intended. Ribbed guard is only a visual placeholder; flow and starch behavior unvalidated.
-7. Brown vessel-bottom drain -> actuator/valve concept -> removable waste drawer. No safe drain timing, venting or full-tank sensing implemented.
-8. Rear low electrical compartment and separating wall indicate intended wet/dry segregation, not proof of waterproofing or electrical compliance. Steam vents are rear-facing on removable lid.
+**Chamber circulation:** broad open bar-screen cartridge lies inside the vessel, outside the basket's radial envelope. Its hood connects to a bored wall port, a service union, a heat-compatible pump placeholder, a separate return wall port, and a tee feeding broad outlets into the same chamber. Only the tee is a branch. Screen spacing, pump compatibility, flow, anti-sticking, service seals and starch performance are unvalidated. Service union is accessible after isolation/cooling; removal sequence needs engineering. No pasta is intended to enter pump, but screening is not proven.
 
-## Heat strategy comparison — no invented validation
-**Channel + vessel heater:** may stage hot fill and vessel recovery, but adds pressure/drop, scale, dry-fire and service issues. Splitting a household circuit's finite power does not create extra energy; two heaters cannot simply be run at unrestricted rated power together. Requires power arbitration, flow/temperature sensing, thermal cutouts, anti-scald design and pressure analysis. No flow rates or heating times have been validated.
+**Drain:** sloped chamber floor converges to a genuine open off-axis low point at z235. Pipe meets top of NC valve vertically at z215; output z185; downstream route stays level/downhill to a vertical removable receiving coupling at z135. A receiving stub extends to z120 inside waste headspace; maxfill is z95. Waste reservoir lies below the entire floor, not beside/above it. Valve body has a bore and an explicitly **closed default gate**, with actuator/stem beside its bore. This is not a claim that drain control has been engineered. Waste has its own vent, an inlet coupling and a local drip tray. Tube elbows meet bores axially instead of ending obliquely on a tank lid.
 
-**Vessel-only alternative:** bypass/remove channel block and feed cold water via a safe rim inlet; retain direct heater plate. Fewer narrow hot passages, simpler descaling, but must heat full vessel/water mass before or during cooking. Could be equally or more practical on a constrained outlet. No claim that either reaches the target.
+**Salt/steam/lift:** dry salt cartridge and metering gate have a genuinely downhill chute into the chamber annulus; clean upstream water remains unsalted. Salt fill outlet, hot fill outlet and rim-supported steam standpipe are outside the basket's full radial lift sweep, including port collars. Basket bottom rises from z280 to z470, clearing z455 vessel rim by 15 mm and remaining directly over chamber. No lateral discharge position is shown. Lid has actual separate apertures around fixed nozzles/standpipe; the steam pickup is a rim-supported headspace standpipe, NOT attached to the removable lid. Steam exits rear-left, away from the rear-right segregated dry bay. Neither steam routing nor bay barrier proves safe condensation/ingress performance.
 
-Useful lower-bound check, NOT a simulation: heating 1 kg water from 20 to 100 C requires roughly 334 kJ; at an illustrative 1.5 kW that is 223 seconds at impossible 100% system efficiency, before vessel losses and pasta cooking. Actual household supply, portion, shape, water volume, recovery and algorithm must be measured. Neither model is a pressure cooker.
+## Tests — narrow, explicit scope
+The generator tests actual Blender curve endpoint coordinates against named port coordinates with <0.01 mm tolerance, and checks endpoint tangents against declared component bore axes. It also checks:
+- nonascending drain centerline, including valve and receiving stub;
+- tube-radius-padded sampling against unrelated clean-tank, waste and dry-bay AABBs;
+- exact segment-to-segment centerline distances minus tube radii between distinct hydraulic circuits;
+- basket lift height and radial nozzle/steam collar clearance;
+- geometric air gap and waste maxfill/headspace relationships.
 
-## Safety and cleaning requirements before engineering
-- Steam/scald: interlocked lid and basket motion, safe vent direction, cool-touch gripping, splash control, drain temperature controls, obstruction and full-waste detection. No user access during hazardous motion/hot drain.
-- Cleanability: tool-free removable tank, basket, vessel, waste drawer and serviceable pump guard; drain low points, eliminate dead legs, accessible descaling and seals. The concept does not prove complete drainability or dishwasher suitability.
-- Starch clogging: test foaming, strainer fouling, channel scale, pump cavitation and drain blockage. Prefer clean-water-only upstream heated channels; flush/clean any starch-bearing recirculation path. Broad circulation is a design intent, not an anti-sticking guarantee.
-- Water/electrical segregation: secondary containment, leak sensing, strain relief, grounding, rated components, splash ingress and thermal fault testing needed. Depicted wall is packaging intent only.
-- No thermal/CFD, structural, food-contact materials, hygiene, certification, tolerance, power-budget or mechanism validation. No BOM, wiring or fabrication instructions.
+Ports deliberately connect to component bores; internal pump/check/meter mechanisms are abstracted, not simulated. Selected clearance checks are **not** a complete solid interference, swept-volume, tolerance, structural or manufacturability analysis. Same-circuit self-clearance, hidden wiring, thermal expansion, screen fouling, all couplers and full service disassembly require further engineering. Named assemblies and ports are preserved in editable Blender files. Curves/meshes are real geometry, not images posing as a model.
 
-## Website handoff
-GLBs use embedded PBR materials, named nodes and concept metadata. No remote textures or services required. Three static states; no working simulation/animation. PNGs are ready as poster images. Asset work only: target repo/domain not verified here; **not integrated or live**. Website owner should choose model-viewer/Three.js integration, set camera/framing, preserve conceptual disclaimer, and run browser/mobile load checks before publishing.
+## Before a physical design
+Need food-contact material selection, water/electric separation and fault testing, leak containment, dry-fire/overtemperature and flow protection, power arbitration, pressure/scale analysis, safe venting/condensate handling, guarded/interlocked hot lift motion, verified drain temperature/overflow/full-waste shutdown, anti-siphon/backflow compliance, cleanable dead-leg-free details and starch/descaling tests. Waste maxfill is a geometric line only, not a sensor. No emergency overflow pipe is silently added: fail-closed feed plus independent high-level/waste-full detection and a safe containment/overflow strategy remain engineering requirements.
 
-## Method references
-Official Blender scripting/export documentation: https://docs.blender.org/api/current/bpy.ops.export_scene.html and https://docs.blender.org/manual/en/latest/advanced/command_line/arguments.html . Bounded public search also checked “Grok Bot Blender” X posts; social posts were not used as engineering or safety evidence.
+Channel-plus-vessel heating versus vessel-only remains unresolved: two heaters must share the available household power, not invent extra power. Channels can stage hot fill but add scale/flow/service faults; vessel-only reduces those passages but heats the vessel/water mass directly. No validated thermal advantage, cook time, efficiency, hydraulic performance or electrical safety is asserted.
+
+## Provenance and reproduction
+Local Blender 4.2.9 LTS / bpy / Cycles CPU, 24 samples. Pillow 13.0.0 annotates Blender renders and draws the clearly separate graph. No Meshy/Shapecast, paid generation, purchase, credentials, external uploads, repo edits or deployment.
+
+Run `blender -b -t 6 --python generate.py`, then `python3 presentation.py`. `build.log` records execution. `pasta-cooker-v2-assets.zip` contains handoff assets, code, graph, manifest/checks and documentation; raw renders/logs remain alongside but need not be carried to the website.
+
+**Website readiness:** static GLBs/posters for a replacement handoff only. No website change, upload, browser integration or live verification performed. Keep the conceptual disclaimer wherever displayed.
+
+Final generator checks: 38 authored endpoint checks, 31 bore-axis tangent checks, 134 distinct-circuit segment clearance checks, no sampled unrelated tank/waste/dry-bay collisions; monotone gravity drain, 60 mm air gap, 15 mm basket-over-rim lift clearance. Minimum nozzle/steam collar-to-basket radial clearance is 5.247 mm nominal, without tolerance allowance. These checks do not certify safety or manufacturability.
+
+`validate_saved.py` independently reopens all three final .blend files and compares actual routed endpoints to actual port-collar world positions; `final-saved-geometry-checks.json` records the final saved-state evidence. Minor rear cradle radial ties were added to connect the structural uprights to the support ring; they are included in the canonical generator.
+
+The waterline is a geometric upper limit, not a validated portion recipe or water-volume/thermal budget. Salt bridging/moisture sealing, condensate management and all real component ratings remain unengineered.

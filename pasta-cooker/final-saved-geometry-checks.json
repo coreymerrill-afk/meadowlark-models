@@ -1,0 +1,710 @@
+{
+  "exterior": {
+    "endpoint_checks": [
+      {
+        "edge": "F01",
+        "port": "tank.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F01",
+        "port": "isolation.in",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F02",
+        "port": "isolation.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F02",
+        "port": "feed.in",
+        "error_mm": 2.5809568279517847e-05,
+        "pass": true
+      },
+      {
+        "edge": "F03",
+        "port": "feed.out",
+        "error_mm": 2.1073424255447017e-05,
+        "pass": true
+      },
+      {
+        "edge": "F03",
+        "port": "meter.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "F04",
+        "port": "meter.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "F04",
+        "port": "heater.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "H01",
+        "port": "heater.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "H01",
+        "port": "heater.out",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "H02",
+        "port": "heater.out",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "H02",
+        "port": "fill.nozzle",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "C00",
+        "port": "strainer.chamber",
+        "error_mm": 7.450580596923828e-06,
+        "pass": true
+      },
+      {
+        "edge": "C00",
+        "port": "strainer.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "C01",
+        "port": "strainer.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "C01",
+        "port": "circulation.in",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "C02",
+        "port": "circulation.out",
+        "error_mm": 3.332000937312528e-05,
+        "pass": true
+      },
+      {
+        "edge": "C02",
+        "port": "return.wall",
+        "error_mm": 9.313225746154785e-07,
+        "pass": true
+      },
+      {
+        "edge": "C03",
+        "port": "return.wall",
+        "error_mm": 9.313225746154785e-07,
+        "pass": true
+      },
+      {
+        "edge": "C03",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C04",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C04",
+        "port": "return.a",
+        "error_mm": 3.725290298461914e-06,
+        "pass": true
+      },
+      {
+        "edge": "C05",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C05",
+        "port": "return.b",
+        "error_mm": 1.862645149230957e-06,
+        "pass": true
+      },
+      {
+        "edge": "D01",
+        "port": "chamber.low",
+        "error_mm": 1.6763806343078613e-05,
+        "pass": true
+      },
+      {
+        "edge": "D01",
+        "port": "drain.in",
+        "error_mm": 7.679882693323606e-06,
+        "pass": true
+      },
+      {
+        "edge": "D02",
+        "port": "drain.out",
+        "error_mm": 7.679882693323606e-06,
+        "pass": true
+      },
+      {
+        "edge": "D02",
+        "port": "waste.coupling",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "D03",
+        "port": "waste.coupling",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "D03",
+        "port": "waste.internal",
+        "error_mm": 7.450580596923828e-06,
+        "pass": true
+      },
+      {
+        "edge": "V01",
+        "port": "waste.vent",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "V01",
+        "port": "vent.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "S01",
+        "port": "salt.out",
+        "error_mm": 8.33000234328132e-06,
+        "pass": true
+      },
+      {
+        "edge": "S01",
+        "port": "salt.nozzle",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST01",
+        "port": "steam.in",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST01",
+        "port": "steam.out",
+        "error_mm": 5.9604644775390625e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST00",
+        "port": "steam.pickup",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST00",
+        "port": "steam.in",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      }
+    ],
+    "all_pass": true,
+    "max_error_mm": 5.9604644775390625e-05,
+    "basket_bottom_mm": 280.0000011920929,
+    "cradle_ties_present": true
+  },
+  "cutaway": {
+    "endpoint_checks": [
+      {
+        "edge": "F01",
+        "port": "tank.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F01",
+        "port": "isolation.in",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F02",
+        "port": "isolation.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F02",
+        "port": "feed.in",
+        "error_mm": 2.5809568279517847e-05,
+        "pass": true
+      },
+      {
+        "edge": "F03",
+        "port": "feed.out",
+        "error_mm": 2.1073424255447017e-05,
+        "pass": true
+      },
+      {
+        "edge": "F03",
+        "port": "meter.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "F04",
+        "port": "meter.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "F04",
+        "port": "heater.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "H01",
+        "port": "heater.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "H01",
+        "port": "heater.out",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "H02",
+        "port": "heater.out",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "H02",
+        "port": "fill.nozzle",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "C00",
+        "port": "strainer.chamber",
+        "error_mm": 7.450580596923828e-06,
+        "pass": true
+      },
+      {
+        "edge": "C00",
+        "port": "strainer.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "C01",
+        "port": "strainer.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "C01",
+        "port": "circulation.in",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "C02",
+        "port": "circulation.out",
+        "error_mm": 3.332000937312528e-05,
+        "pass": true
+      },
+      {
+        "edge": "C02",
+        "port": "return.wall",
+        "error_mm": 9.313225746154785e-07,
+        "pass": true
+      },
+      {
+        "edge": "C03",
+        "port": "return.wall",
+        "error_mm": 9.313225746154785e-07,
+        "pass": true
+      },
+      {
+        "edge": "C03",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C04",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C04",
+        "port": "return.a",
+        "error_mm": 3.725290298461914e-06,
+        "pass": true
+      },
+      {
+        "edge": "C05",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C05",
+        "port": "return.b",
+        "error_mm": 1.862645149230957e-06,
+        "pass": true
+      },
+      {
+        "edge": "D01",
+        "port": "chamber.low",
+        "error_mm": 1.6763806343078613e-05,
+        "pass": true
+      },
+      {
+        "edge": "D01",
+        "port": "drain.in",
+        "error_mm": 7.679882693323606e-06,
+        "pass": true
+      },
+      {
+        "edge": "D02",
+        "port": "drain.out",
+        "error_mm": 7.679882693323606e-06,
+        "pass": true
+      },
+      {
+        "edge": "D02",
+        "port": "waste.coupling",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "D03",
+        "port": "waste.coupling",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "D03",
+        "port": "waste.internal",
+        "error_mm": 7.450580596923828e-06,
+        "pass": true
+      },
+      {
+        "edge": "V01",
+        "port": "waste.vent",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "V01",
+        "port": "vent.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "S01",
+        "port": "salt.out",
+        "error_mm": 8.33000234328132e-06,
+        "pass": true
+      },
+      {
+        "edge": "S01",
+        "port": "salt.nozzle",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST01",
+        "port": "steam.in",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST01",
+        "port": "steam.out",
+        "error_mm": 5.9604644775390625e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST00",
+        "port": "steam.pickup",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST00",
+        "port": "steam.in",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      }
+    ],
+    "all_pass": true,
+    "max_error_mm": 5.9604644775390625e-05,
+    "basket_bottom_mm": 280.0000011920929,
+    "cradle_ties_present": true
+  },
+  "exploded": {
+    "endpoint_checks": [
+      {
+        "edge": "F01",
+        "port": "tank.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F01",
+        "port": "isolation.in",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F02",
+        "port": "isolation.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "F02",
+        "port": "feed.in",
+        "error_mm": 2.5809568279517847e-05,
+        "pass": true
+      },
+      {
+        "edge": "F03",
+        "port": "feed.out",
+        "error_mm": 2.1073424255447017e-05,
+        "pass": true
+      },
+      {
+        "edge": "F03",
+        "port": "meter.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "F04",
+        "port": "meter.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "F04",
+        "port": "heater.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "H01",
+        "port": "heater.in",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "H01",
+        "port": "heater.out",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "H02",
+        "port": "heater.out",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "H02",
+        "port": "fill.nozzle",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "C00",
+        "port": "strainer.chamber",
+        "error_mm": 7.450580596923828e-06,
+        "pass": true
+      },
+      {
+        "edge": "C00",
+        "port": "strainer.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "C01",
+        "port": "strainer.out",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "C01",
+        "port": "circulation.in",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "C02",
+        "port": "circulation.out",
+        "error_mm": 3.332000937312528e-05,
+        "pass": true
+      },
+      {
+        "edge": "C02",
+        "port": "return.wall",
+        "error_mm": 9.313225746154785e-07,
+        "pass": true
+      },
+      {
+        "edge": "C03",
+        "port": "return.wall",
+        "error_mm": 9.313225746154785e-07,
+        "pass": true
+      },
+      {
+        "edge": "C03",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C04",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C04",
+        "port": "return.a",
+        "error_mm": 3.725290298461914e-06,
+        "pass": true
+      },
+      {
+        "edge": "C05",
+        "port": "return.tee",
+        "error_mm": 7.508562643358995e-06,
+        "pass": true
+      },
+      {
+        "edge": "C05",
+        "port": "return.b",
+        "error_mm": 1.862645149230957e-06,
+        "pass": true
+      },
+      {
+        "edge": "D01",
+        "port": "chamber.low",
+        "error_mm": 1.6763806343078613e-05,
+        "pass": true
+      },
+      {
+        "edge": "D01",
+        "port": "drain.in",
+        "error_mm": 7.679882693323606e-06,
+        "pass": true
+      },
+      {
+        "edge": "D02",
+        "port": "drain.out",
+        "error_mm": 7.679882693323606e-06,
+        "pass": true
+      },
+      {
+        "edge": "D02",
+        "port": "waste.coupling",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "D03",
+        "port": "waste.coupling",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "D03",
+        "port": "waste.internal",
+        "error_mm": 7.450580596923828e-06,
+        "pass": true
+      },
+      {
+        "edge": "V01",
+        "port": "waste.vent",
+        "error_mm": 0.0,
+        "pass": true
+      },
+      {
+        "edge": "V01",
+        "port": "vent.out",
+        "error_mm": 1.4901161193847656e-05,
+        "pass": true
+      },
+      {
+        "edge": "S01",
+        "port": "salt.out",
+        "error_mm": 8.33000234328132e-06,
+        "pass": true
+      },
+      {
+        "edge": "S01",
+        "port": "salt.nozzle",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST01",
+        "port": "steam.in",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST01",
+        "port": "steam.out",
+        "error_mm": 5.9604644775390625e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST00",
+        "port": "steam.pickup",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      },
+      {
+        "edge": "ST00",
+        "port": "steam.in",
+        "error_mm": 2.9802322387695312e-05,
+        "pass": true
+      }
+    ],
+    "all_pass": true,
+    "max_error_mm": 5.9604644775390625e-05,
+    "basket_bottom_mm": 469.9999988079071,
+    "cradle_ties_present": true
+  }
+}

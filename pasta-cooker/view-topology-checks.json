@@ -1,0 +1,20 @@
+{
+  "exterior": {
+    "actual_port_endpoint_max_error_mm": 5.9604644775390625e-05,
+    "endpoint_count": 38,
+    "pass": true,
+    "basket_bottom_z_mm": 280.0000011920929
+  },
+  "cutaway": {
+    "actual_port_endpoint_max_error_mm": 5.9604644775390625e-05,
+    "endpoint_count": 38,
+    "pass": true,
+    "basket_bottom_z_mm": 280.0000011920929
+  },
+  "exploded": {
+    "actual_port_endpoint_max_error_mm": 5.9604644775390625e-05,
+    "endpoint_count": 38,
+    "pass": true,
+    "basket_bottom_z_mm": 469.9999988079071
+  }
+}

@@ -1,1 +1,42 @@
-{"Lift-off vented lid": [853, 245], "Shape + portion control": [580, 620], "Clean water tank": [406, 623], "Removable waste drawer": [887, 1029]}
+{
+  "Unsalted clean tank": [
+    490,
+    687
+  ],
+  "Isolation / meter / pump": [
+    592,
+    959
+  ],
+  "Heated channel": [
+    554,
+    774
+  ],
+  "AIR GAP / max water": [
+    781,
+    509
+  ],
+  "Salt gravity chute": [
+    858,
+    421
+  ],
+  "Screened recirculation": [
+    1155,
+    866
+  ],
+  "LOW POINT + NC valve": [
+    837,
+    1036
+  ],
+  "DOWNHILL drain": [
+    918,
+    1157
+  ],
+  "Waste inlet / headspace": [
+    998,
+    1215
+  ],
+  "Dry bay / steam apart": [
+    1385,
+    568
+  ]
+}
