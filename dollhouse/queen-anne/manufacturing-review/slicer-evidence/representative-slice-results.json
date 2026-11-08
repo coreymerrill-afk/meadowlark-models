@@ -1,0 +1,126 @@
+[
+  {
+    "part": "cabinet-F0-M3-1",
+    "exit_code": 0,
+    "elapsed_seconds": 2.92,
+    "output": "cabinet-F0-M3-1-sliced.3mf",
+    "exists": true,
+    "gcode_plates": 1,
+    "plates": [
+      {
+        "index": "1",
+        "extruder_type": "0",
+        "nozzle_volume_type": "0",
+        "printer_model_id": "",
+        "nozzle_diameters": "0.4",
+        "timelapse_type": "0",
+        "prediction": "28301",
+        "weight": "218.41",
+        "pause_count": "0",
+        "first_layer_time": "0.000000",
+        "outside": "false",
+        "support_used": "true",
+        "label_object_enabled": "false",
+        "support_material_on_wipe_tower": "false",
+        "enable_filament_dynamic_map": "false",
+        "has_filament_switcher": "false",
+        "multi_nozzle_diameter_mode": "0",
+        "filament_maps": "1",
+        "limit_filament_maps": "0"
+      }
+    ]
+  },
+  {
+    "part": "cabinet-top-F0-M1-1",
+    "exit_code": 0,
+    "elapsed_seconds": 1.99,
+    "output": "cabinet-top-F0-M1-1-sliced.3mf",
+    "exists": true,
+    "gcode_plates": 1,
+    "plates": [
+      {
+        "index": "1",
+        "extruder_type": "0",
+        "nozzle_volume_type": "0",
+        "printer_model_id": "",
+        "nozzle_diameters": "0.4",
+        "timelapse_type": "0",
+        "prediction": "19167",
+        "weight": "169.60",
+        "pause_count": "0",
+        "first_layer_time": "0.000000",
+        "outside": "false",
+        "support_used": "true",
+        "label_object_enabled": "false",
+        "support_material_on_wipe_tower": "false",
+        "enable_filament_dynamic_map": "false",
+        "has_filament_switcher": "false",
+        "multi_nozzle_diameter_mode": "0",
+        "filament_maps": "1",
+        "limit_filament_maps": "0"
+      }
+    ]
+  },
+  {
+    "part": "drawer-left-F0-M2-1",
+    "exit_code": 0,
+    "elapsed_seconds": 2.04,
+    "output": "drawer-left-F0-M2-1-sliced.3mf",
+    "exists": true,
+    "gcode_plates": 1,
+    "plates": [
+      {
+        "index": "1",
+        "extruder_type": "0",
+        "nozzle_volume_type": "0",
+        "printer_model_id": "",
+        "nozzle_diameters": "0.4",
+        "timelapse_type": "0",
+        "prediction": "22684",
+        "weight": "175.29",
+        "pause_count": "0",
+        "first_layer_time": "1125786344074420225572864.000000",
+        "outside": "false",
+        "support_used": "true",
+        "label_object_enabled": "false",
+        "support_material_on_wipe_tower": "false",
+        "enable_filament_dynamic_map": "false",
+        "has_filament_switcher": "false",
+        "multi_nozzle_diameter_mode": "0",
+        "filament_maps": "1",
+        "limit_filament_maps": "0"
+      }
+    ]
+  },
+  {
+    "part": "rear-F1-M4-1",
+    "exit_code": 0,
+    "elapsed_seconds": 1.06,
+    "output": "rear-F1-M4-1-sliced.3mf",
+    "exists": true,
+    "gcode_plates": 1,
+    "plates": [
+      {
+        "index": "1",
+        "extruder_type": "0",
+        "nozzle_volume_type": "0",
+        "printer_model_id": "",
+        "nozzle_diameters": "0.4",
+        "timelapse_type": "0",
+        "prediction": "9059",
+        "weight": "79.88",
+        "pause_count": "0",
+        "first_layer_time": "0.000000",
+        "outside": "false",
+        "support_used": "true",
+        "label_object_enabled": "false",
+        "support_material_on_wipe_tower": "false",
+        "enable_filament_dynamic_map": "false",
+        "has_filament_switcher": "false",
+        "multi_nozzle_diameter_mode": "0",
+        "filament_maps": "1",
+        "limit_filament_maps": "0"
+      }
+    ]
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "source": "Reloaded actual exported 3MF material meshes, reconstructed using stored assembly transforms",
+  "parts_checked": 77,
+  "collisions_over_0_1_mm3": [],
+  "limitations": [
+    "No slicer or physical assembly validation",
+    "Surface finish and unsupported features still require visual inspection"
+  ]
+}

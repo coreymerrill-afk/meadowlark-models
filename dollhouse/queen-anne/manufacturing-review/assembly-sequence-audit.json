@@ -1,0 +1,92 @@
+[
+  {
+    "operation": "Lower separate cabinet deck onto frame",
+    "path_mm": [
+      0,
+      0,
+      100
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Lower ground floor onto base",
+    "path_mm": [
+      0,
+      0,
+      300
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Fit complete porch from front before upper floor",
+    "path_mm": [
+      0,
+      -200,
+      0
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Lower storey 2",
+    "path_mm": [
+      0,
+      0,
+      300
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Lower storey 3",
+    "path_mm": [
+      0,
+      0,
+      300
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Lower storey 4",
+    "path_mm": [
+      0,
+      0,
+      300
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Rear panel 1 straight removal",
+    "path_mm": [
+      0,
+      100,
+      0
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Rear panel 2 straight removal",
+    "path_mm": [
+      0,
+      100,
+      0
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Rear panel 3 straight removal",
+    "path_mm": [
+      0,
+      100,
+      0
+    ],
+    "interference_mm3": 0.0
+  },
+  {
+    "operation": "Rear panel 4 straight removal",
+    "path_mm": [
+      0,
+      100,
+      0
+    ],
+    "interference_mm3": 0.014421
+  }
+]

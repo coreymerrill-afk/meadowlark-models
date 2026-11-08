@@ -1,0 +1,115 @@
+{
+  "status": "small-test-kit-ready-for-user-slicing; whole-house-not-print-approved",
+  "test_pieces": 11,
+  "test_plate_seconds": 3883,
+  "test_plate_grams": 22.88,
+  "slicer": "Official signed Bambu Studio 2.9.1.70 portable",
+  "printer_profile": "Bambu Lab H3C 0.4 nozzle",
+  "layer_height_mm": 0.16,
+  "material": "Generic PLA",
+  "plate_used_for_estimate": "Cool Plate - user must select actual plate",
+  "representative_sections_sliced": 9,
+  "initial_porch_tree_support": "crashed; replaced by successful normal-support slice",
+  "original_cabinet_tree_slice": "cancelled; revised as open frame plus separate deck, both sliced successfully",
+  "exported_parts_checked": 77,
+  "fit_coupons_in_house_manifest": 6,
+  "total_house_sections": 83,
+  "exported_overlaps_above_0_1_mm3": 0,
+  "assembly_paths": [
+    {
+      "operation": "Lower separate cabinet deck onto frame",
+      "path_mm": [
+        0,
+        0,
+        100
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Lower ground floor onto base",
+      "path_mm": [
+        0,
+        0,
+        300
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Fit complete porch from front before upper floor",
+      "path_mm": [
+        0,
+        -200,
+        0
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Lower storey 2",
+      "path_mm": [
+        0,
+        0,
+        300
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Lower storey 3",
+      "path_mm": [
+        0,
+        0,
+        300
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Lower storey 4",
+      "path_mm": [
+        0,
+        0,
+        300
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Rear panel 1 straight removal",
+      "path_mm": [
+        0,
+        100,
+        0
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Rear panel 2 straight removal",
+      "path_mm": [
+        0,
+        100,
+        0
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Rear panel 3 straight removal",
+      "path_mm": [
+        0,
+        100,
+        0
+      ],
+      "interference_mm3": 0.0
+    },
+    {
+      "operation": "Rear panel 4 straight removal",
+      "path_mm": [
+        0,
+        100,
+        0
+      ],
+      "interference_mm3": 0.014421
+    }
+  ],
+  "physical_tests": false,
+  "printer_sent": false,
+  "multi_color_tool_mapping_verified": false,
+  "frozen_demo": "6488f8d; separate deployment handed to Grok, awaiting Coreys instruction",
+  "desktop_test_kit": "C:\\Users\\Corey\\Desktop\\Dollhouse Test Kit 2026-11-08"
+}
