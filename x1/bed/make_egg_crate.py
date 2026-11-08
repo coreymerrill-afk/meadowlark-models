@@ -39,7 +39,7 @@ N_PANELS        = 2            # panels end to end along the machine's long axis
 BLADE_H         = 38.0         # blade height INCLUDING tooth tips (1.5 in)
 BLADE_PITCH     = 50.0         # blade centre-to-centre (2 in)
 RIB_PITCH_MAX   = 200.0        # max spacing between cross-ribs along the blades (150-250 sensible)
-RIB_END_INSET   = 50.0         # first/last rib centre distance from blade end
+RIB_END_INSET   = 60.0         # first/last rib centre distance from blade end
 SERRATED        = True         # serrated (triangle teeth) blade tops; ribs are always straight
 NOTCH_W         = 120.0        # airflow vent cut in the bottom edge of each blade, centred between ribs
 NOTCH_H         = 20.0         # vent height (blade bottom edge)
@@ -88,6 +88,8 @@ def build_cfg(material=None):
     span = c.L - 2 * RIB_END_INSET
     c.n_ribs = int(math.ceil(span / RIB_PITCH_MAX - 1e-9)) + 1
     c.rib_pitch = span / (c.n_ribs - 1)
+    assert abs(c.rib_pitch / c.tooth_p - round(c.rib_pitch / c.tooth_p)) < 1e-9, "rib pitch must be an integer tooth pitch"
+    assert abs(RIB_END_INSET / c.tooth_p - round(RIB_END_INSET / c.tooth_p)) < 1e-9, "slots must center on tooth valleys"
     c.rib_x = [RIB_END_INSET + j * c.rib_pitch for j in range(c.n_ribs)]  # rib centre lines along panel length
     # half-slots: both cut to half the RIB height (+ extra); blade slot from bottom, rib slot from top
     c.dr = c.RH / 2.0 + SLOT_DEPTH_EXTRA        # rib slot depth (from top)
@@ -163,6 +165,15 @@ def verify(c, log):
     t, s = c.t, c.slot
     B = sg.Polygon(dedupe(blade_poly(c))); R = sg.Polygon(dedupe(rib_poly(c)))
     assert B.is_valid and R.is_valid
+    from shapely.affinity import scale
+    for shape, width in ((B, c.L), (R, c.W)):
+        assert shape.symmetric_difference(scale(shape, xfact=-1, yfact=1, origin=(width/2, 0))).area < 1e-7, "part not end-for-end reversible"
+    assert all(abs(x/c.tooth_p-round(x/c.tooth_p)) < 1e-9 for x in c.rib_x), "inconsistent tooth phase"
+    parts = part_list(c, c.n_panels)
+    for kind in ("BLADE", "RIB"):
+        profiles = [pts for _, k, pts in parts if k == kind]
+        assert all(pts == profiles[0] for pts in profiles), "nonidentical parts"
+    log.append("Repeatability: ONE blade part (48 identical), ONE rib part (14 identical); reversible ends; 180 mm rib pitch = 15 teeth; every slot at valley phase 0 mm.")
     # (a) slot positions read back from the actual polygons
     bp = dedupe(blade_poly(c)); rp = dedupe(rib_poly(c))
     bslots = sorted({round((x1 + x2) / 2, 3) for (x1, y1), (x2, y2) in zip(bp, bp[1:] + bp[:1])
@@ -580,7 +591,7 @@ def make_pdf(c, path, st, png_path, nest_info, log):
         dim_line(ax, (c.L, c.blade_y[0]), (c.L, c.blade_y[1]), f"{c.pitch:g}", off=40, horizontal=False, fs=7.5)
         ax.text(c.L * 0.5, c.W * 0.5, "24 blades @ 50 pitch" if c.n_blades == 24 else f"{c.n_blades} blades @ {c.pitch:g} pitch", ha="center", fontsize=10, bbox=dict(fc="white", ec="none", alpha=.85))
         ax.text(c.L * 1.5, c.W * 0.5, f"{c.n_ribs} cross-ribs per panel", ha="center", fontsize=10, bbox=dict(fc="white", ec="none", alpha=.85))
-        ax.text(c.L, -230, "Panel 1 / Panel 2 butt together at the seam (blades line up end to end).  Ribs run across the blades.", ha="center", fontsize=8.5)
+        ax.text(c.L, -230, "ONE blade + ONE rib design. Reverse either end: teeth up, blade slots down, rib slots up. Seam channels align.", ha="center", fontsize=8.5)
         ax.set_xlim(-130, 2 * c.L + 80); ax.set_ylim(-260, c.W + 190)
         # end elevation + crossing detail
         ax = fig.add_axes([0.54, 0.52, 0.44, 0.40]); ax.set_aspect("equal"); ax.axis("off")
@@ -698,12 +709,12 @@ def make_pdf(c, path, st, png_path, nest_info, log):
                  "4. Deburr all edges, remove dross; leave bare steel (light oil). If coated, add",
                  "   coating thickness to slot width.",
                  f"5. Qty: {c.n_blades*c.n_panels} x A, {c.n_ribs*c.n_panels} x B.   Two panels of {c.L:g} x {c.W:g}.",
-                 "6. Dimensions to be confirmed after measuring the machine inside opening."]
+                 "6. One identical blade part and one identical rib part. Rib pitch 180 = 15 teeth; slots at valleys. Symmetric ends. Measure opening before ordering."]
         sheet_text(ax, lines, fs=8.6, dy=0.105)
         for lx, ly in [(0.03, 0.065)]:
             pass
         ax = fig.add_axes([0.03, 0.02, 0.62, 0.06]); ax.axis("off")
-        ax.text(0, 0.9, "ASSEMBLY CHECK (computed): " + log[0], fontsize=8.3, va="top", wrap=True)
+        ax.text(0, 0.9, "ASSEMBLY CHECK (computed): " + log[-1], fontsize=8.3, va="top", wrap=True)
         pdf.savefig(fig); plt.close(fig)
 
 

@@ -434,7 +434,7 @@
   <div class="view3d-wrap" id="bed-view">
     <aside id="sidebar-bed">
       <h2>Steel egg-crate bed</h2>
-      <p class="bed-count">Each panel is 24 blades and 7 ribs. The bed is two panels, 48 blades and 14 ribs. Blades and ribs are the same 1/8 in steel. Two greys keep the crossings easy to see.</p>
+      <p class="bed-count">One tooth-blade part and one rib part, repeated throughout. Each panel is 24 identical blades and 7 identical ribs. The bed is two panels, 48 blades and 14 ribs. All blade slots meet ribs at tooth valleys: 180 mm rib pitch is exactly 15 of the 12 mm tooth pitches. Both parts reverse end-for-end or face-for-face; keep teeth up, blade slots down and rib slots up. Blades and ribs are the same 1/8 in steel. Two greys keep the crossings easy to see.</p>
       <p>The two panels sit on the deck, inside the opening, 2400 × 1200 mm together. The work rests on the tooth tips. Vents in the bottom edge, 20 mm tall and 120 mm wide with square corners, let air and debris pass between cells. Two 1.5 mm steel plates sit under the panels. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
       <p class="hint-3d" id="bed-hint"></p>
       <h3>Bed files</h3>
@@ -455,7 +455,7 @@
         <summary>Slot and tooth sizes</summary>
         <ul>
           <li>Blades run the long way, 50 mm apart, 38 mm tall including the teeth. Teeth are 4 mm tall on a 12 mm pitch.</li>
-          <li>Ribs run across, 183.3 mm apart, the first and last 50 mm in from the blade ends. A rib is 34 mm tall, so only the teeth touch the work.</li>
+          <li>Ribs run across, 180 mm apart (15 tooth pitches), the first and last 60 mm in from the blade ends. A rib is 34 mm tall, so only the teeth touch the work.</li>
           <li>Slots are 3.4 mm wide and 17 mm deep (half the 34 mm rib height). The steel is 1/8 in, 3.18 mm, so the 3.4 mm finished slot includes 0.22 mm clearance. Vendor applies kerf compensation once; these outlines are not toolpaths. Ribs stay at the 34 mm tooth-valley height, below the 38 mm tips.</li>
           <li>Each blade has six vents in the bottom edge, 120 mm wide and 20 mm tall, rectangular, centered between the ribs. Both blade ends have 25 × 20 mm reliefs, creating a continuous 50 × 20 mm opening across the panel seam. Ribs have 30 × 12 mm rectangular vents between blades.</li>
         </ul>
@@ -2365,8 +2365,8 @@
     const bladeY = [];
     for (let i = 0; i < nBlades; i++) bladeY.push(first + i * pitch);
     const nRibs = 7;
-    const ribPitch = (1200 - 100) / (nRibs - 1) * inch;
-    const rib0 = 50 * inch;
+    const ribPitch = 180 * inch; // 15 tooth pitches; identical valley phase at every slot.
+    const rib0 = 60 * inch; // five tooth pitches, symmetric 60 mm end margins.
     const ribX = [];
     for (let j = 0; j < nRibs; j++) ribX.push(rib0 + j * ribPitch);
     return {
