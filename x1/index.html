@@ -435,11 +435,11 @@
     <aside id="sidebar-bed">
       <h2>Steel egg-crate bed</h2>
       <p class="bed-count">Each panel is 24 blades and 7 ribs. The bed is two panels, 48 blades and 14 ribs. Blades and ribs are the same 1/8 in steel. Two greys keep the crossings easy to see.</p>
-      <p>The two panels sit on the deck, inside the opening, 2400 × 1200 mm together. The work rests on the tooth tips. Vents in the bottom edge, 20 mm tall and 120 mm wide with rounded corners, let air and debris pass between cells. Two 1.5 mm steel plates sit under the panels. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
+      <p>The two panels sit on the deck, inside the opening, 2400 × 1200 mm together. The work rests on the tooth tips. Vents in the bottom edge, 20 mm tall and 120 mm wide with square corners, let air and debris pass between cells. Two 1.5 mm steel plates sit under the panels. Steel takes diode, infrared, and CNC use. Blades notch up from the bottom, ribs notch down from the top, and they drop together. No bolts and no welds. Confirm the size after the inside opening is measured.</p>
       <p class="hint-3d" id="bed-hint"></p>
       <h3>Bed files</h3>
       <div class="bed-files">
-        <a class="bed-file" href="/x1/bed/egg_crate_bed.dxf" download="egg_crate_bed.dxf"><strong>Blade and rib, DXF</strong><span>One blade and one cross-rib, in millimetres, including the six bottom vents, 20 mm tall with rounded corners. Layers CUT and LABELS. This is the laser file for a single part of each.</span></a>
+        <a class="bed-file" href="/x1/bed/egg_crate_bed.dxf" download="egg_crate_bed.dxf"><strong>Blade and rib, DXF</strong><span>One blade and one cross-rib, in millimetres, including the six bottom vents, 20 mm tall with square corners. Layers CUT and LABELS. This is the laser file for a single part of each.</span></a>
         <a class="bed-file" href="/x1/bed/nest_one_panel_4x8.dxf" download="nest_one_panel_4x8.dxf"><strong>One panel on a 4×8, DXF</strong><span>All 31 parts of one panel, nested on a 1220 × 2440 mm sheet.</span></a>
         <a class="bed-file" href="/x1/bed/egg_crate_drawing.pdf" download="egg_crate_drawing.pdf"><strong>Dimensioned drawing, PDF</strong><span>Two pages. The corner, the slot, the top view, and the part list.</span></a>
         <a class="bed-file" href="/x1/bed/egg_crate_assembly.png" download="egg_crate_assembly.png"><strong>Assembly picture, PNG</strong><span>How the blades and the ribs drop together. Both are the same steel. The drawing uses two line colours so the parts are easy to tell apart.</span></a>
@@ -456,8 +456,8 @@
         <ul>
           <li>Blades run the long way, 50 mm apart, 38 mm tall including the teeth. Teeth are 4 mm tall on a 12 mm pitch.</li>
           <li>Ribs run across, 183.3 mm apart, the first and last 50 mm in from the blade ends. A rib is 34 mm tall, so only the teeth touch the work.</li>
-          <li>Slots are 3.4 mm wide and 17.3 mm deep. The steel is 1/8 in, 3.18 mm, so a slot is the thickness plus 0.2 mm.</li>
-          <li>Each blade has six vents in the bottom edge, 120 mm wide and 20 mm tall, with rounded corners about 6 mm across, centered between the ribs.</li>
+          <li>Slots are 3.4 mm wide and 17 mm deep (half the 34 mm rib height). The steel is 1/8 in, 3.18 mm, so the 3.4 mm finished slot includes 0.22 mm clearance. Vendor applies kerf compensation once; these outlines are not toolpaths. Ribs stay at the 34 mm tooth-valley height, below the 38 mm tips.</li>
+          <li>Each blade has six vents in the bottom edge, 120 mm wide and 20 mm tall, rectangular, centered between the ribs. Both blade ends have 25 × 20 mm reliefs, creating a continuous 50 × 20 mm opening across the panel seam. Ribs have 30 × 12 mm rectangular vents between blades.</li>
         </ul>
       </details>
     </aside>
@@ -865,7 +865,7 @@
           'The stack is about 40 mm: 38 mm of egg-crate on the 1.5 mm plate. Z travel is about 80 mm. It is not yet known whether focus height is measured from the machine bottom, so a way to raise or lower the machine may be needed. That question is still open with ACMER.'
         ],
         done: 'Both panels sit on the plates, meet at the center, and are fastened only from below or with clips. The stack is about 40 mm.',
-        details: 'Vents in the bottom edge of each blade are 20 mm tall and 120 mm wide, with rounded corners. The panels come off for CNC and for cleaning.',
+        details: 'Vents in the bottom edge of each blade are 20 mm tall and 120 mm wide, with square corners. The panels come off for CNC and for cleaning.',
         focus: ['egg-crate'] },
       { day: 3, title: 'Assemble the machine in place on the finished deck',
         goal: 'The ring is together, centered on the plywood. You never lift it as one piece.',
@@ -1896,7 +1896,9 @@
     const inch = 1 / 25.4;
     if (Math.abs(BED.ventH - 20 * inch) > 1e-9) fails.push('vent height');
     if (Math.abs(BED.ventW - 120 * inch) > 1e-9) fails.push('vent width');
-    if (Math.abs(BED.ventR - 6 * inch) > 1e-9) fails.push('vent radius');
+    if (BED.ventR !== 0) fails.push('vent radius');
+    if (Math.abs(BED.depth * 2 - BED.rh) > 1e-9) fails.push('half lap depth');
+    if (BED.rh > BED.Hv) fails.push('rib above tooth valleys');
     if (Math.abs(BED.plateT - FIRE_T) > 1e-9) fails.push('plate thickness');
     function check(len, ribs, expect) {
       const pts = bladeProfile(len, ribs);
@@ -1907,12 +1909,8 @@
         const x1 = c + BED.ventW / 2;
         if (!(x0 > 0.02 && x1 < len - 0.02)) continue;
         n += 1;
-        const r = BED.ventR;
         const h = BED.ventH;
-        if (nearPt(pts, x0, 0) || nearPt(pts, x1, 0) || nearPt(pts, x0, h) || nearPt(pts, x1, h)) fails.push('sharp vent');
-        if (!nearPt(pts, x0 + r, 0) || !nearPt(pts, x0, r) || !nearPt(pts, x0 + r, h) || !nearPt(pts, x1 - r, h) || !nearPt(pts, x1, h - r) || !nearPt(pts, x1 - r, 0)) fails.push('vent arc');
-        const mid = -3 * Math.PI / 4;
-        if (!nearPt(pts, x0 + r + r * Math.cos(mid), r + r * Math.sin(mid))) fails.push('vent round');
+        if (![ [x0, 0], [x1, 0], [x0, h], [x1, h] ].every(function(p) { return nearPt(pts, p[0], p[1]); })) fails.push('nonrectangular vent');
       }
       if (n !== expect) fails.push('vent count ' + n);
     }
@@ -2360,7 +2358,7 @@
     const toothP = 12 * inch;
     const Hv = H - toothH;
     const rh = Hv;
-    const depth = 17.3 * inch;
+    const depth = rh / 2;
     const nBlades = 24;
     const first = (1200 - (nBlades - 1) * 50) / 2 * inch;
     const pitch = 50 * inch;
@@ -2375,7 +2373,7 @@
       t: t, slot: slot, panel: panel, span: panel * 2, halfW: panel / 2,
       H: H, Hv: Hv, rh: rh, toothP: toothP, depth: depth,
       bladeY: bladeY, ribX: ribX, nBlades: nBlades, nRibs: nRibs,
-      ventW: 120 * inch, ventH: 20 * inch, ventR: 6 * inch, plateT: 1.5 * inch
+      ventW: 120 * inch, ventH: 20 * inch, ventR: 0, plateT: 1.5 * inch
     };
   })();
 
@@ -2422,12 +2420,16 @@
       const c = (ribs[j] + ribs[j + 1]) / 2;
       const x0 = c - BED.ventW / 2;
       const x1 = c + BED.ventW / 2;
-      if (x0 > 0.02 && x1 < len - 0.02) features.push({ x0: x0, x1: x1, h: BED.ventH, round: true, r: BED.ventR });
+      if (x0 > 0.02 && x1 < len - 0.02) features.push({ x0: x0, x1: x1, h: BED.ventH, round: false });
     }
     features.sort(function (a, b) { return a.x0 - b.x0; });
-    const pts = [[0, 0]];
+    // End reliefs align across the two-panel seam (50 x 20 mm overall).
+    const pts = [[0, BED.ventH], [25 / 25.4, BED.ventH], [25 / 25.4, 0]];
     features.forEach(function (f) { appendNotch(pts, f); });
-    pts.push([len, 0], [len, Hv]);
+    if (Math.abs(len - BED.panel) < 1e-6) {
+      pts.push([len - 25 / 25.4, 0], [len - 25 / 25.4, BED.ventH], [len, BED.ventH]);
+    } else pts.push([len, 0]);
+    pts.push([len, Hv]);
     const n = Math.round(len / tp);
     const p = len / n;
     for (let k = n; k > 0; k--) pts.push([(k - 0.5) * p, H], [(k - 1) * p, Hv]);
@@ -2435,7 +2437,12 @@
   }
   function ribProfile(width, blades) {
     const s = BED.slot, rh = BED.rh, dr = BED.depth;
-    const pts = [[0, 0], [width, 0], [width, rh]];
+    const pts = [[0, 0]];
+    for (let i = 0; i < blades.length - 1; i++) {
+      const mid = (blades[i] + blades[i + 1]) / 2;
+      appendNotch(pts, { x0: mid - 15 / 25.4, x1: mid + 15 / 25.4, h: 12 / 25.4 });
+    }
+    pts.push([width, 0], [width, rh]);
     for (let i = blades.length - 1; i >= 0; i--) {
       const y = blades[i];
       pts.push([y + s / 2, rh], [y + s / 2, rh - dr], [y - s / 2, rh - dr], [y - s / 2, rh]);
@@ -2672,7 +2679,7 @@
     if (bedPlatesFull) bedPlatesFull.visible = machine || bedView === 'full';
   }
   function bedCopy(mode) {
-    const ventLine = 'Vents in the bottom edge, 20 mm tall and 120 mm wide with rounded corners, let air and debris pass between cells.';
+    const ventLine = 'Vents in the bottom edge, 20 mm tall and 120 mm wide with square corners, let air and debris pass between cells.';
     if (mode === 'corner') {
       return {
         title: 'Corner cutaway',
