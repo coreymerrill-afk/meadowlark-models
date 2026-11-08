@@ -321,7 +321,7 @@
   ],
   "notes": [
     "Plastic is modeled as PLA. Suggested colors are warm wood, cream, and a muted drawer tone. The material is printed plastic, not wood.",
-    "A 0.4 mm nozzle is the basis. Layer height is not a tested profile.",
+    "A 0.4 mm nozzle is the CAD basis. A later independent generic PrusaSlicer 2.7.4 audit used 0.12 mm layers on two coupons only. That is not an H3C profile and not a tested house profile. See PRINTING LIMITATIONS in PRINT.txt.",
     "Print the hinge coupon and the drawer coupon before the house."
   ]
 }
